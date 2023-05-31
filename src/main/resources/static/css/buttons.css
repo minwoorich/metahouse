@@ -1,0 +1,81 @@
+.button--small {
+    /* 수정 영역 */
+    padding: 12.8834px 25.7669px;
+    gap: 6.44px;
+    width: 105px;
+    height: 41.77px;
+
+    /* 공통영역 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: var(--bright-purple);
+    box-shadow: var(--shade-button);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button--xsmall {
+    /* 수정 영역 */
+    padding: 12.8834px 25.7669px;
+    gap: 6.44px;
+
+    /* 공통영역 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bright-purple);
+    box-shadow: var(--shade-button);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button--large{    
+    /* 수정영역 */
+    padding: 20px 40px;
+    gap: 10px;
+    width: 163px;
+    height: 57px;
+
+    /* 공통영역 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bright-purple);
+    box-shadow: var(--shade-button);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button--xlarge{
+    /* 수정 영역 */
+    width: 400px;
+    height: 57px;
+    padding: 20px 40px;
+    gap: 10px;
+
+    /* 공통영역 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bright-purple);
+    box-shadow: var(--shade-button);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
