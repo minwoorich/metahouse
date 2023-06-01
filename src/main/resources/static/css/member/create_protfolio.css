@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+.creat_portfolio_title{
+	font-size: 24px;
+	font-weight: bolder;
+	margin: 10px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	color: #8D72E1;
+	
+}
+
+.creat_portfolio_subtitle{
+	font-size: 14px;
+	font-weight: bolder;
+	margin-top: 20px;
+	margin-left: 10px;
+	color: #8D72E1;
+}
+
+.create_portfolio_input_img{
+	height:240px;
+	background-color:#FAFAFC;
+	display: flex;
+	padding: 20px;
+	margin: 10px;
+	border: solid 1px #6C4AB6;
+	border-radius: 6px;
+}
+
+.create_portfolio_img{
+	width: 160px;
+	height:200px;
+	background-color:#E6E6FA;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-align: center;
+	line-height: 200px;
+	cursor: pointer;
+	box-shadow: 2px 2px 2px 2px #E6E6FA;
+	
+}
+
+#portfolio_img_insert {
+	display: none;
+}
+
+.create_portfolio_input_text{
+	height:460px;
+	background-color:white;
+	padding: 10px;
+}
+
+.create_portfolio_input_content{
+	height:80px;
+	background-color:white;
+}
+
+.create_portfolio_text_area{
+	height: 400px;
+}
+
+.ck-content{
+	height: 400px;
+}
+
+.create_portfolio_input{
+	margin-left:10px;
+	font-size: 14px;
+	color: #8D72E1;
+}
+.portfolio_content{
+	margin-left: 10px;
+}
+
+.create_portfolio_submit{
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+
+.button--small{
+	padding: 12.8834px 20.7669px;
+}

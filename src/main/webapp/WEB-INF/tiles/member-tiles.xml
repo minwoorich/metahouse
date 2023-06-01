@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="mypage/profile" extends="mainTemplate">
+		<put-attribute name="menu" value="/WEB-INF/views/menu/mypage_menu.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/member/profile.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="join" extends="indexTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/member/join.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="signup" extends="indexTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/member/signup.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="login" extends="indexTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/member/login.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="mypage/create/portfolio" extends="mainTemplate">
+		<put-attribute name="menu" value="/WEB-INF/views/menu/mypage_menu.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/member/create_portfolio.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="mypage/delete/account" extends="mainTemplate">
+		<put-attribute name="menu" value="/WEB-INF/views/menu/mypage_menu.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/member/delete_account.jsp"></put-attribute>	
+	</definition>
+	
+	<definition name="mypage/setting" extends="mainTemplate">
+		<put-attribute name="menu" value="/WEB-INF/views/menu/mypage_menu.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/member/setting.jsp"></put-attribute>	
+	</definition>
+</tiles-definitions>
