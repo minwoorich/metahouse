@@ -8,7 +8,7 @@
 		<put-attribute name="content" value="/WEB-INF/views/include/mainContent.jsp"/>
 	</definition>
 	<definition name="mainTemplate" template="/WEB-INF/views/layout/mainLayout.jsp">
-		<put-attribute name="top" value="/WEB-INF/views/include/.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/include/.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/views/menu/.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/.jsp"/>
 	</definition>

@@ -7,13 +7,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="/erp/resources/common/css/main.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 	/* Remove the navbar's default margin-bottom and rounded borders */
-	.container{
+	*{
+	    margin: 0;
+	    padding: 0;
+	    box-sizing: border-box;
+	}
+	body{
+		color: black;
+	}
+	.row{
 		display: flex;
 		justify-content: center;
 	}
@@ -24,13 +31,23 @@
 	<div style="background-color:#DDA0DD;padding:20px;height: 100px" id="top">
 		<tiles:insertAttribute name="top"/>
 	</div>
-	<div class="container">
-		<div class="col-sm-8" style="padding: 20px;" id="main">	
-			<tiles:insertAttribute name="content"/>
-		</div>
+	<div class="row" style="margin-left: auto;margin-right:auto;">
+	 	<div class="col-sm-2">
+	 		 <div style="border-color:black;" class="sidebar">
+				<tiles:insertAttribute name="menu"/>
+			</div>
+	 	</div>
+	 	<div class="col-sm-6"> 
+	 		<tiles:insertAttribute name="content"/>	
+	 	</div>
 	</div>
 	<div style="background-color:#DDA0DD;padding:20px;height: 100px" id="footer">
 		<tiles:insertAttribute name="footer"/>
 	</div>
+	
 </body>
 </html>
+
+
+
+

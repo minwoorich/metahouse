@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Main Layout</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link th:href="@{css/style.css}" rel="stylesheet">
+	<link th:href="@{css/buttons.css}" rel="stylesheet">
+	<link th:href="@{css/header.css}" rel="stylesheet">
+	<link th:href="@{css/footer.css}" rel="stylesheet">
+	<link th:href="@{css/statistics.css}" rel="stylesheet" th:if="${tab=='statistics'}" />
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<!-- header -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+	
+	<!-- sidebar -->
+	<!-- <th:block th:replace="fragments/sidebar :: sidebarFragment"></th:block> -->
+	
+	<!-- content -->
+	<div th:include="${'Thymeleaf/' + tab }" class="container"></div>
+	
+	<!-- footer -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</body>
+</html>
