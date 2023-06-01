@@ -4,19 +4,16 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="indexTemplate" template="/WEB-INF/views/layout/index.jsp">
-		<put-attribute name="top" value="/WEB-INF/views/include/top.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/include/mainContent.jsp"/>
+		<put-attribute name="top" value="/WEB-INF/views/layout/top.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/member/join.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp"></put-attribute>
 	</definition>
 	<definition name="mainTemplate" template="/WEB-INF/views/layout/mainLayout.jsp">
-		<put-attribute name="top" value="/WEB-INF/views/include/.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/menu/.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/.jsp"/>
+		<put-attribute name="top" value="/WEB-INF/views/layout/top.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/menu/mypage_menu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/member/profile.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp"/>
 	</definition>
 	
-	<definition name="index" extends="indexTemplate">
-	</definition>
-	
-	<definition name="login" extends="mainTemplate">
-	</definition>
 	
 </tiles-definitions>
