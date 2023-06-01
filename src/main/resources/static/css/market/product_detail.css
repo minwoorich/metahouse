@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.content {
+	margin: 0 auto;
+	text-align: center;
+	border: 1px solid;
+	display: flex;
+}
+
+#select_product_box {
+	width: 30%;
+	border: 1px solid;
+}
+
+#product_detail {
+	width: 70%;
+	border: 1px solid;
+}
+/* 선택상품 보여주기 */
+#select_product {
+	margin: 5% auto;
+	width: 80%;
+	border: 1px solid;
+}
+
+#represent_img {
+	width: 100%;
+}
+/* 판매자 프로필 */
+#seller_profile {
+	margin: 5% auto;
+	width: 80%;
+	border: 1px solid;
+	display: flex;
+}
+
+#seller_img_box {
+	width: 25%;
+	height: 25%;
+	border-radius: 70%;
+	overflow: hidden;
+}
+
+#seller_img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#seller_info {
+	margin: 3%;
+	width:70%;
+	font-size: 12pt;
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+.seller_name {
+	margin: 3%;
+}
