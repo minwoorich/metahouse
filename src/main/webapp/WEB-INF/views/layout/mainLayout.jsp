@@ -29,9 +29,7 @@
 	</div>
 	<div class="row">
 	 	<div class="col-sm-2">
-	 		 <div style="border-color:black;" class="sidebar">
-				<tiles:insertAttribute name="menu"/>
-			</div>
+			<tiles:insertAttribute name="menu"/>
 	 	</div>
 	 	<div class="col-sm-6"> 
 	 		<tiles:insertAttribute name="content"/>	

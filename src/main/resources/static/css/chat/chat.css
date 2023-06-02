@@ -1,0 +1,98 @@
+.chat-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+.chat-sidebar,
+.chat-main,
+.chat-info {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 400px;
+    overflow-y: auto;
+}
+
+
+.chat-sidebar button {
+    padding: 5px 10px;
+    width: 80px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #4CAF50;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+
+.chat-bottom button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.chat-sidebar button:hover,
+.chat-bottom button:hover {
+    background-color: #45a049;
+}
+
+.chat-bottom {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.chat-bottom textarea {
+    width: 70%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+
+.chat-main p {
+    margin-bottom: 10px;
+}
+.user-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-actions img {
+    margin-right: 10px; /* 이미지와 버튼 사이의 간격 */
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.user-actions img {
+    width: 50px;  /* 이미지의 너비를 50px로 조정 */
+    height: 50px; /* 이미지의 높이를 50px로 조정 */
+    border-radius: 50%; /* 이미지를 원형으로 만듬 */
+    object-fit: cover; /* 이미지의 비율을 유지하면서, 지정한 너비와 높이에 맞게 조정 */
+    margin-right: 10px; /* 이미지와 버튼 사이의 간격 */
+}

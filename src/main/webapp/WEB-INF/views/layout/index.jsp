@@ -17,7 +17,7 @@
 	    margin: 0;
 	    padding: 0;
 	}
-	.container{
+	.index_container{
 		display: flex;
 		justify-content: center;
 	}
@@ -28,7 +28,7 @@
 	<div>
 		<tiles:insertAttribute name="top"/>
 	</div>
-	<div class="container">
+	<div class="index_container">
 		<div class="col-sm-8" style="padding: 20px;" id="main">	
 			<tiles:insertAttribute name="content"/>
 		</div>
