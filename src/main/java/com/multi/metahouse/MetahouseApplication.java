@@ -9,5 +9,5 @@ public class MetahouseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MetahouseApplication.class, args);
 	}
-
+	
 }

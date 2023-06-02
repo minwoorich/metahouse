@@ -1,0 +1,55 @@
+@charset "UTF-8";
+nav{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	align-content: stretch;
+	margin: 5px;
+
+}
+/* combobox */
+select {
+	width: 180px;
+	padding:8px;
+	border:1px solid #999;
+	font-family:'Nanumgothic';
+	background:url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+	border-radius:4px;
+	appearance : none;
+	flex: 0 0 16em;
+}
+select::-ms-expand {
+  display: none;
+}
+
+/* search bar */
+.search_bar {
+	display: flex;
+	align-items: flex-end;
+	margin: 0;
+	padding: 0;
+	flex: 0 0 16em;
+}
+
+.search_content {
+	border-width: 0px 0px 2px 0px;
+	font-size: 16pt;
+}
+
+.search_content:focus {
+	outline: none;
+}
+
+.search_btn {
+	width: 4em;
+	background-color: white;
+	border: 0px;
+	cursor: pointer;
+}
+
+.btn_image {
+	width: 100%;
+}
+
