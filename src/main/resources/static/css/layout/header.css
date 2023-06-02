@@ -1,56 +1,32 @@
-header {
-    background-color: white;
-    padding: 20px;
-    border-bottom: solid 1px #11009E;
+.custom-primary {
+    color: #6C4AB6;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+}
+.navbar-right {
+    margin-right: 0px;
+    margin-top: 0px;
 }
 
-.header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-row>h1 h2 {
-    color: #11009E;
-    margin-bottom: 20px;
-}
-
-.top-nav>ul, .bottom-nav>ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.top-nav>ul>li, .bottom-nav>ul>li {
-    display: inline;
-    margin-right: 20px;
-}
-
-.top-nav ul li {
-    float: none;
-}
-
-.bottom-nav ul li {
-    float: left;
-}
-
-.top-nav ul li a {
-    text-decoration: none;
-    color: #11009E;
-}
-
-.bottom-nav ul li a {
-    text-decoration: none;
-    color: #11009E;
-}
-
-.top-nav ul li a:hover {
+.custom-primary:hover {
     color: #0056b3;
 }
 
-.bottom-nav ul li a:hover {
-    color: #0056b3;
+.input-group {
+    margin-left: -180px;
+    margin-top: 60px;
+}
+.form-control {
+    border-radius: 30px;
 }
 
-.inner {
-    padding: 20px 150px;
-}  
+.btn-default {
+    border-radius: 30px;
+}
+.nav.navbar-nav {
+    font-weight: bold;
+}
+.custom-primaryimg {
+    margin-top: 40px;
+    margin-left: 30px;
+}
