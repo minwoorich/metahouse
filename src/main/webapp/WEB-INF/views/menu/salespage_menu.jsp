@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/mh/js/menu/menu.js"></script>
 </head>
 <body>
-	<div style="border-color:black;height: 800px;" class="sidebar">
+	<div style="border-color:black;" class="sidebar">
 		<div class="menu_list">
 			<div class="menu_title">마이 페이지</div>
 			<div class="menu_list_title">크리에이터 마켓</div>

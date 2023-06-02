@@ -3,12 +3,14 @@
 	box-sizing: border-box;
 }
 
-.sidebar{
+.col-sm-2{
 	display: flex;
 	justify-content: center;
+	background-clip: content-box;
 	background-color:#8D72E1;
-	margin-right:10px;
-	height: 1000px;
+	opacity: 0.9;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
 .menu_list{

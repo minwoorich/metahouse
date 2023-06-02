@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="/mh/css/menu/menu.css">
 </head>
 <body>
-	<div style="border-color:black;height: 800px;" class="sidebar">
 		<div class="menu_list">
 			<div class="menu_title">마이 페이지</div>
 			<div class="menu_list_title">내 정보 관리</div>
@@ -33,6 +32,5 @@
 				<li>판매관리</li>
 			</ul>
 		</div>
-	</div>
 </body>
 </html>
