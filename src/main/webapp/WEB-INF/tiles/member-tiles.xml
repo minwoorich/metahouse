@@ -34,4 +34,8 @@
 		<put-attribute name="menu" value="/WEB-INF/views/menu/mypage_menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/member/setting.jsp"></put-attribute>	
 	</definition>
+	
+	<definition name="user/profile" extends="indexTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/member/profile_other.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
