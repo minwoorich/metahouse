@@ -1,0 +1,191 @@
+@import "../components/header.css";
+@import "../components/buttons.css";
+@import "../components/progress_bar.css";
+
+
+/* 구인관리 삭제 모달 */
+.modal-content{
+    padding: 30px;
+}
+.modal-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+
+.form{
+    width: 920px;
+    height: fit-content;
+    padding-inline: 40px;
+    padding-block: 40px;
+}
+
+.form-wrapper{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+}
+
+.form-item{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: fit-content;
+    padding-inline : 40px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border: 1px solid var(--medium-purple);
+    border-radius: var(--radius-weak);
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+
+.form-item-column01{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+.form-item-column02{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+/* .form-item-title */
+.form-item-title{
+    flex:1;
+    line-height: 160%;
+}
+.form-item-title>span:nth-child(1){
+    color: var(--gray);
+}
+.form-item-title>span:nth-child(2){
+    color: var(--red);
+}
+
+/* .form-item-description */
+.form-item-description-wrapper{
+    flex:5.6;
+    display: flex;
+    flex-direction: column;
+}
+.label{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.form-item-description{
+    flex:5.6;
+    line-height: 160%;
+    border: none;
+}
+.form-item-description:first-child{
+    margin-bottom: 40px;
+}
+
+.form-item-description input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    background-color: var(--light-gray);
+    border: none;
+    border-radius: var(--radius-weak);
+    padding-inline: 20px;
+
+}
+
+
+
+/* form-item-file */
+.form-item-file{
+    flex:5.6;
+}
+.form-item-file label{
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
+
+.image-add{
+    width: 190px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-gray);
+    cursor: pointer;
+}
+.full{
+    display: none;
+}
+
+.image-add:hover{
+    background-color: var(--gray);
+    transition: 0.5s;
+}
+
+.form-item-images-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.image-frame{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 190px;
+    height: 160px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+.image-frame:hover{
+    cursor: pointer;
+    background-color:var(--light-gray);
+}
+.image-frame img{
+    width: 100%;
+    height: 100%;
+}
+.image-frame div{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    color: var(--gray);
+    font-size: 12px;
+}
+
+
+/* .form-item-counter */
+.form-item-counter{
+    color: var(--gray);
+}
+.max-length{
+    color: red;
+}
+
+/* 버튼 파트 */
+.form-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-buttons-cancel{
+    border: none;
+    background-color: white;
+    font-weight: bold;
+    color: var(--red) ;
+    cursor: pointer;
+    font-weight: bold;
+}
+.form-buttons-submit{
+    margin-left: 30px;
+    font-weight: 500;
+}
+
+

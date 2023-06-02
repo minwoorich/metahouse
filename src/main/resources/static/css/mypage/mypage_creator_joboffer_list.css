@@ -1,0 +1,257 @@
+@import "../components/header.css";
+@import "../components/mypage_menu.css";
+@import "../components/buttons.css";
+
+
+/* 구인관리 삭제 모달 */
+.modal-content{
+    padding: 30px;
+}
+.modal-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+/* ////////////////////// */
+
+.main-contents{
+    height: fit-content;
+    padding-inline: 90px;
+    padding-block: 70px;
+}
+.minwoo_wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.job-offer-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: fit-content;
+}
+
+/* '내 구인 목록' 제목 */
+.mypage-title{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 160%;
+    margin-bottom: 10px;
+}
+
+/* 카드 리스트 출력 부분 */
+.job-offer-list{
+    width: auto;
+    height: fit-content;
+}
+
+.job-offer-list:hover{
+    cursor: pointer;
+}
+
+.job-offer-card{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 180px;
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--light-gray);
+    margin-bottom: 20px;
+}
+.job-offer-image{
+    display: flex;
+    box-sizing: border-box;
+    width: 180px;
+    height: 120px;
+    flex: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.job-offer-image img{
+    flex:1;
+    object-fit: cover;
+}
+.job-offer-contents{
+    display: flex;
+    flex-direction: column;
+    flex: 3.2;
+    box-sizing: border-box;
+    height: 100%;
+}
+.job-offer-contents-row01{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.job-offer-contents-row02{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.job-offer-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    cursor: pointer;
+    position: relative;
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.job-offer-option > ul{
+    display: none;
+    z-index: 999;
+    position: absolute;
+    top : 20px;
+    right:10px; 
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    padding-inline: 20px;
+    padding-block: 15px;
+    box-shadow: var(--shade-dropdown);
+}
+.job-offer-option ul > :not(:last-child){
+    margin-bottom: 10px;
+}
+
+.job-offer-option ul > li{
+    color: black;
+    font-size: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+}
+
+.job-offer-option ul > li:hover{
+    font-weight: bold;
+    color: black;
+}
+.job-offer-option ul > li > button{
+    width: 100%;
+    width: 90px;
+}
+
+.job-offer-title{
+    font-size: 16px;
+    font-weight: 500;
+    height: fit-content;
+}
+
+.job-offer-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.job-offer-body-price span:nth-child(1){
+    font-size: 16px;
+    margin-right: 10px;
+}
+.job-offer-body-price span:nth-child(2){
+    font-size: 20px;
+    font-weight: bold;
+}
+.job-offer-body-price span:nth-child(3){
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.my-dropdown{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.my-dropdown span{
+    color: black;
+    font-weight: 500;
+}
+
+.my-dropdown button{
+    text-align: end;
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
+.my-dropdown-contents{
+    z-index: 999;
+    background-color: white;
+    position: absolute;
+    top:25px;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    max-height: 370px;
+    height: fit-content;
+    padding-block: 20px;
+    padding-inline: 20px;
+    box-shadow: var(--shade-dropdown);
+    overflow-y: auto;
+}
+.closed{
+    display: none;
+}
+.my-dropdown-contents li{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+}
+
+.my-dropdown-contents > :not(:last-child){
+    margin-bottom: 20px;
+}
+.my-dropdown-contents-img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 999px;
+    margin-right: 15px;
+}
+.my-dropdown-contents-text{
+    width: 100%;
+}
+.my-dropdown-contents-text a{
+    color: black;
+}
+.text-row01{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-row01 span{
+    font-size: 14px;
+    color: var(--gray);
+    margin-right: 4px;
+}
+.text-row01 div{
+    display: flex;
+    align-items: center;
+}
+
+.text-row02{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+
+
+
