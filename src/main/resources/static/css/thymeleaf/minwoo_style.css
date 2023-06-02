@@ -1,0 +1,72 @@
+/* css파일 import */
+@import "reset.css";
+
+.minwoo_body{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.minwoo_container{
+    height: fit-content;
+    margin-block:100px;
+}
+/* 너비 설정 */
+.w-fullview{
+    width: 100vw;
+}
+.w1320{
+    width: 1320px;
+}
+.w1000{
+    width: 1000px;
+}
+.w1020{
+    width: 1020px;
+}
+
+.my-dropdown-contents::-webkit-scrollbar{
+    width: 5px
+}
+.my-dropdown-contents::-webkit-scrollbar-thumb{
+    background-color: var(--light-purple);  /* rgb(141,158,255) */
+}
+.my-dropdown-contents::-webkit-scrollbar-track{
+    background-color: rgba(141,158,255,0.2);
+}
+
+a{
+	color: black;
+	text-decoration: none;
+}
+
+input[type="date"]:hover{
+    cursor: pointer;
+}
+input[type="date"]{
+    background-color: var(--light-purple);
+}
+
+/* 입력폼 경계선 + 배경 빨개짐 */
+.alert-style{
+    border: 1px solid rgba(255,0,0,0.5) !important; 
+    background-color: rgba(255,0,0,0.1) !important;
+}
+
+/* //입력 잘못하면 경고 메시지 밑에 뜨는거 */
+.alert-msg{
+    color : red;
+    font-size: 16px;
+}
+/* //사진에 hover했을때 삭제 효과 */
+.delete-cover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,0,0,0.1);
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+}

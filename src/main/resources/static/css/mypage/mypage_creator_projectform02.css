@@ -1,0 +1,344 @@
+@import "../components/header.css";
+@import "../components/buttons.css";
+@import "../components/form_box.css";
+@import "../components/progress_bar.css";
+
+.package-switch{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    width: 100%;
+}
+
+
+/* 3단 패키지 */
+.triple-package{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+/* triple-package-row01 */
+.triple-package-row01{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex:1;
+}
+.triple-package-row01 span{
+    font-size: 18px;
+    color: var(--gray);
+}
+
+.triple-package-row-wrapper{
+    padding-top: 100px;
+}
+.triple-package-row01-col01{
+    margin-bottom: 110px;
+}
+
+.triple-package-row02{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex:9;
+}
+
+.triple-package-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    flex: 1;
+}
+
+/* 패키지타입 영역 */
+.triple-package-type{
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--gray);
+    margin-bottom: 50px;
+}
+
+/* 패키지 '제목' 입력 영역 */
+.triple-package-title{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 79px;
+    background-color: var(--light-gray);
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.triple-package-title-col01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.triple-package-title-col01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+.triple-package-title-col01 textarea::placeholder{
+    color: var(--gray);
+    font-size: 16px;
+}
+.triple-package-title-col02{
+    display: flex;
+    width: auto;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--gray);
+    flex:1;
+}
+
+/* 패키지 '내용' 입력 영역 */
+.triple-package-description{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 79px;
+    background-color: var(--light-gray);
+    padding: 10px;
+}
+.triple-package-description-col01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.triple-package-description-col01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+.triple-package-description-col01 textarea::placeholder{
+    color: var(--gray);
+    font-size: 16px;
+}
+.triple-package-description-col02{
+    display: flex;
+    width: auto;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--gray);
+    flex:1;
+}
+
+
+/* 추가옵션 파트 */
+.add-option{
+    padding-inline: 40px;
+    padding-block: 30px;
+    border: 1px solid var(--medium-purple);
+    border-radius: var(--radius-weak);
+    margin-bottom: 40px;
+}
+
+/* 추가옵션 1열 */
+.options-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.add-option-row01{
+    flex:1;
+}
+.add-option-row01 span{
+    font-size: 18px;
+    color: var(--gray);
+}
+
+/* 추가옵션 2열 */
+.add-option-row02{
+    flex:4.6;
+}
+.option-box{
+    padding: 20px;
+    border: 1px solid var(--medium-purple);
+    border-radius: var(--radius-weak);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+/* 추가옵션 2열 1행 */
+.option-box-col01{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.option-box-col01 input{
+    width: 20px;
+    height: 20px;
+    accent-color: var(--bright-purple);
+}
+
+/* 추가옵션 2열 2행 (체크박스 활성화 된경우)*/
+.option-box-col02{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    height: 60px;
+    padding-inline:20px ;
+    background-color: var(--light-gray);
+    border-radius: var(--radius-weak);
+    margin-top: 10px;
+}
+
+.option-box-col02 input{
+    background-color: rgba(0,0,0,0);
+}
+
+.option-box-col02 select{
+    margin-left: 50px;
+    width: 100px;
+    border: none;
+    border-radius: var(--radius-weak);
+    background-color: rgba(0,0,0,0);
+}
+/* ////////////////////////////////////////////////////////// */
+/* 단일 패키지 */
+.single-package{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+/* single-package-row01 */
+.single-package-row01{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex:1;
+}
+.single-package-row01 span{
+    font-size: 18px;
+    color: var(--gray);
+}
+
+.single-package-row-wrapper{
+    padding-top: 100px;
+}
+.single-package-row01-col01{
+    margin-bottom: 110px;
+}
+
+.single-package-row02{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex:9;
+}
+
+.single-package-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    flex: 1;
+}
+
+/* 패키지타입 영역 */
+.single-package-type{
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--gray);
+    margin-bottom: 50px;
+}
+
+/* 패키지 '제목' 입력 영역 */
+.single-package-title{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 79px;
+    background-color: var(--light-gray);
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.single-package-title-col01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.single-package-title-col01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+.single-package-title-col01 textarea::placeholder{
+    color: var(--gray);
+    font-size: 16px;
+}
+.single-package-title-col02{
+    display: flex;
+    width: auto;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--gray);
+    flex:1;
+}
+
+/* 패키지 '내용' 입력 영역 */
+.single-package-description{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 79px;
+    background-color: var(--light-gray);
+    padding: 10px;
+}
+.single-package-description-col01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.single-package-description-col01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+.single-package-description-col01 textarea::placeholder{
+    color: var(--gray);
+    font-size: 16px;
+}
+.single-package-description-col02{
+    display: flex;
+    width: auto;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--gray);
+    flex:1;
+}
+/* //////////////////////////////////////////////////////////// */
+
+/* 버튼 파트 */
+.form-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-buttons div{
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+
+
+
+
