@@ -11,24 +11,23 @@
 <link href="/mh/css/market/product_detail_img.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
 	<div class="content">		
 		<!-- product detail -->
 		<div id="product_detail">
-			<div id="main_title">제패토 옷 팝니다.</div>
-			<div>ASSET &rang; 카테고리1 &rang; 카테고리2</div>
+			<div id="main_title">메타버스 맵 제작해 주실분 구합니다~.</div>
+			<div>GIGS-GATHER &rang; 카테고리1 &rang; 카테고리2</div>
 			<!-- 이미지 갤러리 -->
 			<div id="photo_container">
 				<div id="main_photo_box">
-					<img src="/mh/images/item.png" alt="photo" id="photo">
+					<img src="/mh/images/test_img2.png" alt="photo" id="photo">
 				</div>
 				<ul id="gallery">
-					<li><img src="/mh/images/item.png" alt="thumbnail"></li>
-					<li><img src="/mh/images/item2.png" alt="thumbnail"></li>
-					<li><img src="/mh/images/item.png" alt="thumbnail"></li>
 					<li><img src="/mh/images/test_img2.png" alt="thumbnail"></li>
 					<li><img src="/mh/images/mincraft.jpg" alt="thumbnail"></li>
+					<li><img src="/mh/images/plus.png" alt="thumbnail"></li>
 					<li><img src="/mh/images/test_img2.png" alt="thumbnail"></li>
+					<li><img src="/mh/images/mincraft.jpg" alt="thumbnail"></li>
+					<li><img src="/mh/images/plus.png" alt="thumbnail"></li>
 				</ul>
 			</div>
 			<div class="sub_title" id="product_explain">서비스 설명</div>
@@ -47,10 +46,10 @@
 		<div id="select_product_box">
 			<!-- select product -->
 			<div id="select_product">
-				<img alt="상품대표이미지" src="/mh/images/item.png" id="represent_img">
-				<div class="product_title">제패토 옷 팝니다.</div>
+				<img alt="상품대표이미지" src="/mh/images/test_img2.png" id="represent_img">
+				<div class="product_title">메타버스 맵 제작해 주실분 구합니다~.</div>
 				<div class="product_info" id="product_date">작성일자: 2023-6-30</div>
-				<div class="product_info" id="product_price">30000원</div>
+				<div class="product_info" id="product_price">~30000원</div>
 			</div>
 			<!-- seller profile -->
 			<div id="seller_profile">
