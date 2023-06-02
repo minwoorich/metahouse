@@ -87,3 +87,8 @@
 	cursor: pointer;
 }
 	
+.join_email>a{
+	text-decoration: none;
+	font-size: 16px;
+	color: #6C4AB6;
+}

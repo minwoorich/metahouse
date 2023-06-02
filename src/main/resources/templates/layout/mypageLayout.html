@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/mh/css/menu/menu.css">
+  <link rel="stylesheet" href="/mh/css/layout/footer.css">
+  <link rel="stylesheet" href="/mh/css/layout/header.css">
+  <link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
+  <link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
+<style>
+	/* Remove the navbar's default margin-bottom and rounded borders */
+	*{
+	    margin: 0;
+	    padding: 0;
+	}
+	.row{
+		display: flex;
+		justify-content: center;
+	}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<th:block th:replace="includes/header :: header"></th:block>
+	</div>
+	<div class="row">
+	 	<div class="col-sm-2">
+			<th:block th:replace="includes/mypage_menu :: menu"></th:block>
+	 	</div>
+	 	<div class="col-sm-6"> 
+	 		<th:block layout:fragment="content"></th:block>	
+	 	</div>
+	</div>
+	<div>
+		<th:block th:replace="includes/footer :: footer"></th:block>
+	</div>
+	
+</body>
+</html>
