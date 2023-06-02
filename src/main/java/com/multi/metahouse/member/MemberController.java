@@ -8,41 +8,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 	@RequestMapping("mypage/profile")
 	public String profile() {
-		return "mypage/profile";
+		return "member/profile";
 	}
 	
 	@RequestMapping("join")
 	public String join() {
-		return "join";
+		return "member/join";
 	}
 	
 	@GetMapping("signup")
 	public String signup() {
-		return "signup";
+		return "member/signup";
 	}
 	
 	@GetMapping("login")
 	public String login() {
-		return "login";
+		return "member/login";
 	}
 	
 	@GetMapping("mypage/delete/account")
 	public String deleteAccount() {
-		return "mypage/delete/account";
+		return "member/delete_account";
 	}
 	
 	@GetMapping("mypage/create/portfolio")
 	public String createPortfolio() {
-		return "mypage/create/portfolio";
+		return "member/create_portfolio";
 	}
 	
 	@GetMapping("mypage/setting")
 	public String setting() {
-		return "mypage/setting";
+		return "member/setting";
 	}
 	
 	@GetMapping("user/profile")
 	public String otherProfile() {
-		return "user/profile";
+		return "member/profile_other";
 	}
 }

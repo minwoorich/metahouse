@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/nonsideLayout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/mh/css/member/profile_other.css">
 </head>
 <body>
-<div class="profile_page_css">
+<div layout:fragment="content" class="profile_page_css">
 	<div class="profile_page_title">
 		판매자 정보
 	</div>

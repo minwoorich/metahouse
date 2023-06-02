@@ -23,11 +23,24 @@
 	flex-direction: column;
 }
 
+.menu_li{
+	font-size: 18px;
+	margin-bottom: 5px;
+	color: white;
+	cursor:pointer;
+	
+}
 .menu_ul>li{
 	font-size: 18px;
 	margin-bottom: 5px;
 	color: white;
 	cursor:pointer;
+}
+
+.menu_li>a{
+	text-decoration: none;
+	font-size: 18px;
+	color: white;
 }
 
 .menu_title{

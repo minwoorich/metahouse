@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/nonsideLayout}">
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/mh/css/member/join.css">
 </head>
 <body>
-	<div class="join_container" style="background-color:white">
+	<div layout:fragment="content" class="join_container">
 		<div class="join_content_box">
 			<div class="join_logo">
 				metahouse
@@ -28,7 +28,9 @@
 				</div>
 				<hr>
 				<div class="join_email">
-				이메일로 가입하기
+					<a href="/mh/signup">
+						<div>이메일로 가입하기</div>
+					</a>
 				</div>
 			</div>
 		</div>

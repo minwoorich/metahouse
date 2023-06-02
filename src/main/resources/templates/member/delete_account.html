@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mypageLayout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/mh/css/member/delete_account.css">
 </head>
 <body>
-	<div class="membership_withdrawal">
+	<div layout:fragment="content" class="membership_withdrawal">
 		<div class="membership_withdrawal_title">회원 탈퇴</div>
 		<div class="membership_withdrawal_box">
 			<form>
