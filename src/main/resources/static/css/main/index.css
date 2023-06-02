@@ -1,0 +1,166 @@
+.section-visual {
+    height: 400px;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    border-radius: 0px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.section-visual .inner {
+    position: relative;
+    z-index: 1; /* .inner를 MP4 동영상 위로 올림 */
+}
+
+.section-visual .chat-box input[type="text"] {
+    width: 100%;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid white;
+    opacity: 50%;
+    border-radius: 30px;
+}
+.chat-box input{
+ 
+ margin-right: 100px;
+ 
+}
+.section-visual video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-visual2 video {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+/* 배너 영역 */
+#banner-section{
+    width: 1200px;
+    
+    margin: 0 auto;
+}
+
+
+/* 타이틀 */
+.banner-title-wrap{
+    display: flex;
+    padding:25px;
+}
+
+/*폰트 */
+.myfont-1{
+    font-size: 24px;
+    font-weight: bold;
+}
+.myfont-2{
+    font-size: 18px;
+    margin: 10px 0;
+}
+.myfont-3{
+    margin: 10px 0;
+    font-size: 14px;
+    color:rgb(158, 158, 158);
+    font-weight: bold;
+}
+.myfont-4{
+    font-size: 16px;
+}
+
+.myfont-5{
+    font-size: 16px;
+}
+
+.ml-auto{
+    margin-left: auto;
+}
+
+.banner-slider-wrap{
+    position: relative;
+}
+.slider-outter{
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 슬라이더 아이템 리스트 */
+.banner-slider-list{
+    position: relative;
+    display: flex;
+    padding: 0 1%;
+    left:0;
+    transition: left 1s;
+}
+
+/* 슬라이더 아이템 */
+.banner-slider-item{
+    width: 25%;
+    flex-shrink:0;
+    padding:2%;
+    box-sizing: border-box;
+}
+.item-img-warp{
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+}
+.banner-slider-item:nth-child(odd) .item-img-warp{
+    
+        background-image: url("./1.JPG");
+        background-size: cover; /* 이미지를 요소에 맞게 조절 */
+        background-position: center; /* 이미지를 가운데로 정렬 */
+    
+}
+.banner-slider-item:nth-child(even) .item-img-warp{
+    background-image: url("./2.JPG");
+        background-size: cover; /* 이미지를 요소에 맞게 조절 */
+        background-position: center; /* 이미지를 가운데로 정렬 */
+}
+.banner-slider-item span{
+    display: block;
+}
+
+
+/* 슬라이더 버튼 */
+.btn-shape{
+    position: absolute;
+    top:50%;
+    transform: translate(-100%,-150%);
+
+    z-index: 2;
+    align-self: center;
+    cursor: pointer;
+    color: rgb(174, 174, 174);
+    
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+
+    border-radius: 50%;
+    box-shadow: 3px 5px 5px rgb(163, 163, 163);
+}
+
+.nextbtn{
+    left:100%;
+    transform: translate(0%,-150%);
+}
+
