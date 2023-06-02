@@ -40,4 +40,9 @@ public class MemberController {
 	public String setting() {
 		return "mypage/setting";
 	}
+	
+	@GetMapping("user/profile")
+	public String otherProfile() {
+		return "user/profile";
+	}
 }

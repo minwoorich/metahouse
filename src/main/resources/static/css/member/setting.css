@@ -29,8 +29,8 @@
 	width: 240px;
 	height: 260px;
 	padding-top: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 18px;
+	padding-right: 18px;
 	margin-top:20px;
 	margin-left: 20px;
 	margin-right: 20px;
@@ -47,7 +47,7 @@
 	overflow: hidden;
 }
 .profile_text_change{
-	width: 700px;
+	width: 550px;
 	margin: 20px;
 	border: solid 1px white;
 	background-color:white;
@@ -59,7 +59,7 @@
 }
 
 .profile_text_change>textarea{
-	width: 620px;
+	width: 500px;
 	height: 218px;
 	resize: none;
 	padding: 10px;
