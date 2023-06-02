@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/salesLayout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/mh/css/style.css">
+<link href="/mh/css/thymeleaf/style.css" rel="stylesheet" >
 <link href="/mh/css/market/Product_grid.css" rel="stylesheet" type="text/css" />
 <link href="/mh/css/market/nav.css" rel="stylesheet" type="text/css" />
 <link href="/mh/css/market/page_bar.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<div layout:fragment="content">
 	<!-- Main view -->
 	<div class="view">
 		<nav>
@@ -219,8 +220,8 @@
 				<a class="arrow nnext" href="#">&rang;&rang;</a>
 			</div>
 		</div>
-
 	</div>
+	</div><!-- layout:fragment -->	
 
 </body>
 </html>
