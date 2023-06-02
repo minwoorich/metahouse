@@ -1,43 +1,88 @@
 @charset "UTF-8";
 
 .content {
-	margin: 0 auto;
-	text-align: center;
-	border: 1px solid;
-	display: flex;
+	margin: 0;
+	padding: 0;
+	display: inline-flex;
+	justify-content: space-between;
+	width: 100%;
 }
-
-#select_product_box {
-	width: 30%;
-	border: 1px solid;
-}
-
 #product_detail {
+	margin: 1rem;
+	margin-right: 5rem;
 	width: 70%;
-	border: 1px solid;
 }
-/* 선택상품 보여주기 */
+#main_title{
+	font-size: 26px;
+	font-weight: bold;
+}
+.sub_title{
+	margin-top: 1.5rem;
+	padding: 1rem;
+	border-top: 1px solid;
+	font-size: 14pt;
+	font-weight: bold;
+}
+.sub_content{
+	padding: 1rem;
+}
+
+/* 선택상품 사이드바 */
+#select_product_box {
+	top : 1.5rem;
+	position: sticky;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	width: 30%;
+	height: 80%;
+	border: 2px solid var(--bright-purple);
+	border-color: medium-purple;
+	border-radius: 8px;
+}
+
+/* 선택상품 사이드바 img,제목,날짜 가격 */
 #select_product {
 	margin: 5% auto;
+	display: flex;
+	flex-direction: column;
 	width: 80%;
-	border: 1px solid;
 }
 
 #represent_img {
 	width: 100%;
 }
+.product_title{
+	margin-top: 0.5red;
+	font-size: 16pt;
+	font-weight: bold;
+	overflow:hidden;
+    word-wrap:break-word;
+}
+.product_info{
+	margin-bottom: 0.5rem;
+}
+
+#product_price{
+	font-size:14pt;
+	font-weight: bold;
+}
 /* 판매자 프로필 */
 #seller_profile {
-	margin: 5% auto;
+	margin-bottom: 1.5rem;
+	padding: 3%;
 	width: 80%;
-	border: 1px solid;
-	display: flex;
+	display: inline-flex;
+	align-items: center;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
 }
 
 #seller_img_box {
-	width: 25%;
-	height: 25%;
-	border-radius: 70%;
+	width: 5rem;
+	height: 5rem;
+	border-radius: 50%;
 	overflow: hidden;
 }
 
@@ -46,15 +91,22 @@
 	height: 100%;
 	object-fit: cover;
 }
-
 #seller_info {
 	margin: 3%;
 	width:70%;
-	font-size: 12pt;
-	font-weight: bold;
-	font-size: 12pt;
+	font-size: 8pt;
 }
 
 .seller_name {
 	margin: 3%;
+}
+/* 버튼 */
+#btn{
+	margin-bottom: 2rem;
+	display: inline-flex;
+	justify-content: space-around;
+	width: 80%;
+}
+.btn_custom{
+	font-size: 14px;
 }
