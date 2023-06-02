@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashboard/layout/dashboardLayout}">
+<div class="content" layout:fragment="content">
+	<h1>통계</h1>
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">일일 방문자수</h5>
+					<canvas id="dailyVisitorsChart"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">월별 방문자수</h5>
+					<canvas id="monthlyVisitorsChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">일별 수익 (전체사용자)</h5>
+					<canvas id="dailyRevenueChart"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">월별 수익 (전체사용자)</h5>
+					<canvas id="monthlyRevenueChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">연령별 분포도</h5>
+					<canvas id="distributionByAgeChart"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">성별 분포도</h5>
+					<canvas id="distributionByGenderChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<link rel="stylesheet" th:href="@{/css/thymeleaf/dashboard_statistics.css}" />
+	<script type="text/javascript" th:src=@{/js/dashboard/statistics.js}></script>
+</div>
+</html>

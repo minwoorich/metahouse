@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashboard/layout/dashboardLayout}">
+<body>
+<div class="content" layout:fragment="content">
+	<div class="row">
+		<h1>유저관리</h1>
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">유저 목록</h5>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>아이디</th>
+								<th>이메일</th>
+								<th>사용자이름</th>
+								<th>전화번호</th>
+								<th>성별</th>
+								<th>생년월일</th>
+								<th>가입일자</th>
+								<th>등급</th>
+								<th>포인트</th>
+								<th>상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>greatkim</td>
+								<td>greatkim@gmail.com</td>
+								<td>김하나</td>
+								<td>010-1111-1111</td>
+								<td>여</td>
+								<td>911111</td>
+								<td>2023/01/11</td>
+								<td>일반</td>
+								<td>56100</td>
+								<td>정상</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

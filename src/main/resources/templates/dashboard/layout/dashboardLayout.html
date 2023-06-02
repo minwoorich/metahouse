@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- global config -->
+<th:block th:replace="dashboard/fragments/config :: configFragment"></th:block>
+<body>
+	<!-- header -->
+	<th:block th:replace="dashboard/fragments/header :: headerFragment"></th:block>
+	<div style="padding: 20px; height: 800px">
+		<div class="row" style="display:flex; flex-direction: row; margin-left: auto; margin-right: auto;">
+		
+			<!-- sidebar -->
+			<th:block th:replace="dashboard/fragments/sidebar :: sidebarFragment"></th:block>
+			
+			<!-- content -->
+			<th:block layout:fragment="content"></th:block>
+			
+		</div>
+	</div>
+	<!-- footer -->
+	<th:block th:replace="dashboard/fragments/footer :: footerFragment"></th:block>
+</body>
+</html>
