@@ -13,6 +13,11 @@ public class DashboardController {
 		return "dashboard/content/index";
 	}
 	
+	@GetMapping("/")
+	public String viewDashboardMain(Model model) {
+		return "dashboard/content/dash_statistics";
+	}
+	
 	@GetMapping("/management")
 	public String viewManagement(Model model) {
 		return "dashboard/content/member_management";
