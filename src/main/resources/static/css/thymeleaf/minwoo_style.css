@@ -2,17 +2,12 @@
 @import "reset.css";
 
 .minwoo_body{
-    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.minwoo_container{
-    height: fit-content;
-    margin-block:100px;
-}
 /* 너비 설정 */
 .w-fullview{
     width: 100vw;
