@@ -21,6 +21,7 @@
 	list-style: none;
 	display: flex;
 	flex-direction: column;
+	padding-inline-start: 0px;
 }
 
 .menu_ul>li {
