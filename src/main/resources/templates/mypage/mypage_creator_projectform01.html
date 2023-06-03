@@ -1,195 +1,233 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/nonsideLayout}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>크리에이터-판매등록01</title>
-     <!-- 민우's style css [무조건 맨위에 와야함]-->
-    <link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
-    <!-- 부트스트랩 css -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- style css -->
-    <link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
-    <!-- 버튼 컴포넌트 css -->
-    <link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
-    <!-- 페이지 전용 css -->
-    <link rel="stylesheet" href="/mh/css/mypage/mypage_creator_projectform01.css">
-    
-    <!-- 제이쿼리 js -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>크리에이터-판매등록01</title>
+<!-- 민우's style css [무조건 맨위에 와야함]-->
+<link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+<!-- 부트스트랩 css -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
+<!-- 버튼 컴포넌트 css -->
+<link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
+<!-- 페이지 전용 css -->
+<link rel="stylesheet"
+	href="/mh/css/mypage/mypage_creator_projectform01.css">
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+<!-- 부트스트랩 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- 제이쿼리 js -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 내 js코드 -->
+<script src="/mh/js/mypage/mypage_creator_projectform01.js"></script>
 </head>
 
 <body>
-    <!-- 내가 설정한 body -->
-    <main class="minwoo_body">
-        <div class="minwoo_container w1000">
-            <!-- 진행 상태 바 -->
-            <div class="progress-bar">
-                <div class="progress-bar-wrapper">
-                    <!-- 1.서비스 설정 -->
-                    <div class="progress-bar-item current">
-                        <i class="fa-sharp fa-circle-1 fa-2xl"></i>
-                        <span class="progress-bar-text">서비스 설정</span>
-                    </div>
-                    <!-- 첫번째 화살표 -->
-                    <i class="fa-solid fa-chevron-right fa-xl" style="color:var(--gray)"></i>
-                    <!-- 2. 가격설정 -->
-                    <div class="progress-bar-item">
-                        <i class="fa-sharp fa-circle-2 fa-2xl"></i>
-                        <span class="progress-bar-text">가격 설정</span>
-                    </div>
-                    <!-- 두번째 화살표 -->
-                    <i class="fa-solid fa-chevron-right fa-xl" style="color:var(--gray)"></i>
-                    <!-- 3. 서비스 등록 -->
-                    <div class="progress-bar-item">
-                        <i class="fa-sharp fa-circle-3 fa-2xl"></i>
-                        <span class="progress-bar-text">서비스 등록</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 등록서 작성 파트 -->
-            <div class="form">
-                <div class="form-wrapper">
-                    <!-- 제목 입력-->
-                    <div class="form-item texttype">
-                        <div class="form-item-column01">
-                            <div class="form-item-title">
-                                <span>제목</span>
-                                <span>*</span>
-                            </div>
-                            <input class="form-item-description" maxlength="30" type="search" placeholder="제목을 입력하세요" value="" name=""
-                                 onfocus="this.placeholder = ''" onblur="this.placeholder = '제목을 입력하세요'" required/>
-                        </div>
-                        <div class="form-item-column02">
-                            <div class="form-item-counter">
-                                <span>0</span>
-                                <span>/</span>
-                                <span>30</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 카테고리 선택 -->
-                    <div class="form-item selecttype">
-                        <div class="form-item-column01">
-                            <div class="form-item-title">
-                                <span>카테고리</span>
-                                <span>*</span>
-                            </div>
-                            <div class="form-item-description">
-                                <select name="">
-                                    <option value="maps">메타버스 맵</option>
-                                    <option value="assets">메타버스 에셋</option>
-                                </select>
-                            </div>
-                        </div>
 
-                    </div>
-                    <!-- 서비스 설명 입력 -->
-                    <div class="form-item texttype">
-                        <div class="form-item-column01">
-                            <div class="form-item-title">
-                                <span>서비스 설명</span>
-                                <span>*</span>
-                            </div>
-                            <textarea class="form-item-description" name="" value="" maxlength="1500"
-                                placeholder="당신의 서비스를 설명해주세요" required></textarea>
-                        </div>
-                        <div class="form-item-column02">
-                            <div class="form-item-counter">
-                                <span>478</span>
-                                <span>/</span>
-                                <span>1500</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 대표 사진 첨부 -->
-                    <div class="form-item filetype">
-                        <!-- **
+	<!-- 내가 설정한 body -->
+	<main layout:fragment="content" class="minwoo_body">
+		<!-- Modal -->
+		<div id="delete-img-Modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"
+							style="font-weight: bold; font-size: 24px;">사진 삭제</h4>
+					</div>
+					<div class="modal-body" style="font-weight: 600; font-size: 16px;">
+						<p>사진을 삭제 하시겠습니까?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button--xsmall" data-dismiss="modal">삭제</button>
+						<!-- <button>네, 삭제 하겠습니다</button> 빨간 글씨 버전-->
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="minwoo_container">
+			<!-- 등록서 작성 파트 -->
+			<div class="form">
+				<div class="form-wrapper">
+					<!-- 진행 상태 바 -->
+					<div class="progress-bar">
+						<div class="progress-bar-wrapper">
+							<!-- 1.서비스 설정 -->
+							<div class="progress-bar-item current">
+								<i class="fa-sharp fa-circle-1 fa-2xl"></i> <span
+									class="progress-bar-text">서비스 설정</span>
+							</div>
+							<!-- 첫번째 화살표 -->
+							<i class="fa-solid fa-chevron-right fa-xl"
+								style="color: var(--gray)"></i>
+							<!-- 2. 가격설정 -->
+							<div class="progress-bar-item">
+								<i class="fa-sharp fa-circle-2 fa-2xl"></i> <span
+									class="progress-bar-text">가격 설정</span>
+							</div>
+							<!-- 두번째 화살표 -->
+							<i class="fa-solid fa-chevron-right fa-xl"
+								style="color: var(--gray)"></i>
+							<!-- 3. 서비스 등록 -->
+							<div class="progress-bar-item">
+								<i class="fa-sharp fa-circle-3 fa-2xl"></i> <span
+									class="progress-bar-text">서비스 등록</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- 제목 입력-->
+					<div class="form-item texttype">
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>제목</span> <span>*</span>
+							</div>
+							<input class="form-item-description" maxlength="30" type="search"
+								placeholder="제목을 입력하세요" value="" name=""
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '제목을 입력하세요'" required />
+						</div>
+						<div class="form-item-column02">
+							<div class="form-item-counter">
+								<span class="counter">0</span> <span>/</span> <span>30</span>
+							</div>
+						</div>
+					</div>
+					<!-- 카테고리 선택 -->
+					<div class="form-item selecttype">
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>카테고리</span> <span>*</span>
+							</div>
+							<div class="form-item-description">
+								<select name="">
+									<option value="maps">메타버스 맵</option>
+									<option value="assets">메타버스 에셋</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+					<!-- 서비스 설명 입력 -->
+					<div class="form-item texttype">
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>서비스 설명</span> <span>*</span>
+							</div>
+							<textarea class="form-item-description" name="" value=""
+								maxlength="1500" placeholder="당신의 서비스를 설명해주세요" 
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '당신의 서비스를 설명해주세요'"required></textarea>
+						</div>
+						<div class="form-item-column02">
+							<div class="form-item-counter">
+								<span class="counter">0</span> <span>/</span> <span>1500</span>
+							</div>
+						</div>
+					</div>
+					<!-- 대표 사진 첨부 -->
+					<div class="form-item filetype">
+						<!-- **
                         empty : 아직 아무 사진도 등록 안한 경우
                         full : max까지 전부 등록 경우-->
-                        <div class="form-item-column01">
-                            <div class="form-item-title">
-                                <span>대표 사진</span>
-                                <span>*</span>
-                            </div>
-                            <div class="form-item-file">
-                                 <!-- 미리보기 이미지-->
-                                <div class="image-frame">
-                                    <img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
-                                    <div>test01.jpeg</div>
-                                </div>
-                                <!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
-                                <label for="thumbnail">
-                                    <div class="image-add">
-                                        <i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
-                                    </div>
-                                </label>
-                                <input id="thumbnail" name="" value="" type="file" required style="display: none" />
-                            </div>
-                        </div>
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>대표 사진</span> <span>*</span>
+							</div>
+							<div class="form-item-file">
+								<!-- 미리보기 이미지-->
+								<div class="image-frame thumbnail-img">
+									<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
+								</div>
+								<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
+								<label for="thumbnail">
+									<div class="image-add thumbnail-add">
+										<i class="fa-sharp fa-solid fa-plus fa-2xl"
+											style="color: #ffffff;"></i>
+									</div>
+								</label> <input id="thumbnail" name="" value="" type="file" required
+									style="display: none" />
+							</div>
+						</div>
+						<div class="form-item-column02">
+							<div class="form-item-counter">
+								<span class="thumbnail-img-counter">0</span> <span>/</span> <span>1</span>
+							</div>
+						</div>
 
-                    </div>
-                    <!-- 상세 사진 첨부 -->
-                    <div class="form-item filetype">
-                        <div class="form-item-column01">
-                            <div class="form-item-title">
-                                <span>상세 사진</span>
-                            </div>
-                            <div class="form-item-file">
-                                <div class="form-item-images-wrapper">
-                                    <!-- 미리보기 이미지들 -->
-                                    <div class="image-frame">
-                                        <img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-                                        <div>test02.jpeg</div>
-                                    </div>
-                                    <div class="image-frame">
-                                        <img src="/mh/images/test_images/test03.jpeg" alt="상세 사진">
-                                        <div>test03.jpeg</div>
-                                    </div>
-                                    <div class="image-frame">
-                                        <img src="/mh/images/test_images/test04.jpeg" alt="상세 사진">
-                                        <div>test04.jpeg</div>
-                                    </div>
-                                    <div class="image-frame">
-                                        <img src="/mh/images/test_images/test05.jpeg" alt="상세 사진">
-                                        <div>test05.jpeg</div>
-                                    </div>
-                                    <!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
-                                    <label for="optional">
-                                        <div class="image-add">
-                                            <i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
-                                        </div>
-                                    </label>
-                                    <input id="optional" name="" value="" type="file" required style="display: none" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-item-column02">
-                            <div class="form-item-counter">
-                                <span>3</span>
-                                <span>/</span>
-                                <span>6</span>
-                            </div>
-                        </div>
-                    </div>
+					</div>
+					<!-- 상세 사진 첨부 -->
+					<div class="form-item filetype">
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>상세 사진</span>
+							</div>
+							<div class="form-item-file">
+								<div class="form-item-images-wrapper">
+									<!-- 미리보기 이미지들 -->
+									<div class="image-frame optional-img">
+										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
+				
+									</div>
+									<div class="image-frame optional-img">
+										<img src="/mh/images/test_images/test03.jpeg" alt="상세 사진">
+		
+									</div>
+									<div class="image-frame optional-img">
+										<img src="/mh/images/test_images/test04.jpeg" alt="상세 사진">
+										
+									</div>
+									<div class="image-frame optional-img">
+										<img src="/mh/images/test_images/test05.jpeg" alt="상세 사진">
+					
+									</div>
+									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
+									<label for="optional">
+										<div class="image-add optional-add">
+											<i class="fa-sharp fa-solid fa-plus fa-2xl"
+												style="color: #ffffff;"></i>
+										</div>
+									</label> <input id="optional" name="" value="" type="file" required
+										style="display: none" />
+								</div>
+							</div>
+						</div>
+						<div class="form-item-column02">
+							<div class="form-item-counter ">
+								<span class="optional-img-counter">0</span> <span>/</span> <span>6</span>
+							</div>
+						</div>
+					</div>
 
-                    <!-- 버튼 파트 -->
-                    <div class="form-buttons first">
-                        <!-- 
+					<!-- 버튼 파트 -->
+					<div class="form-buttons first">
+						<!-- 
                         first : 첫째장
                         last : 마지막장 -->
-                        <button type="button" onclick="" value="cancel" class="form-buttons-cancel">취소</button>
-                        <button type="button" onclick="location.href='/mh/mypage/project-form-02'"  value="next" class="form-buttons-next button--small">다음</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- 폰트어썸 -->
-    <script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
+						<button type="button" onclick="" value="cancel"
+							class="form-buttons-cancel">취소</button>
+						<button type="button"
+							onclick="location.href='/mh/mypage/project-form-02'" value="next"
+							class="form-buttons-next button--small">다음</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
 
 </html>

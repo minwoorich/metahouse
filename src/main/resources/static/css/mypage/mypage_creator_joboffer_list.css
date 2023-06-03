@@ -12,21 +12,15 @@
 }
 /* ////////////////////// */
 
-.main-contents{
-    height: fit-content;
-    padding-inline: 90px;
-    padding-block: 70px;
+.minwoo_body{
+	align-items:start;
 }
 
-.minwoo_wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-}
+
 .job-offer-wrapper{
     display: flex;
     flex-direction: column;
-    width: auto;
+    width: 100%;
     height: fit-content;
 }
 
@@ -52,18 +46,22 @@
     display: flex;
     flex-direction: row;
     width: auto;
-    height: 180px;
+    height: 220px;
     padding: 30px;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid var(--light-gray);
     margin-bottom: 20px;
 }
+.job-offer-card:hover{
+    background-color: var(--light-gray);
+    transition:0.5s;
+}
 .job-offer-image{
     display: flex;
     box-sizing: border-box;
-    width: 180px;
-    height: 120px;
+    width: fit-content;
+    height: fit-content;
     flex: 1;
     border-radius: 6px;
     overflow: hidden;
@@ -71,7 +69,9 @@
 }
 .job-offer-image img{
     flex:1;
-    object-fit: cover;
+    width:220px;
+    height:160px;
+    object-fit: contain;
 }
 .job-offer-contents{
     display: flex;

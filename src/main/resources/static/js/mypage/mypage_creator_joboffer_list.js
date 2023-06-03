@@ -19,7 +19,7 @@ $(document).ready(function () {
     });
 
     //카드 호버
-    $(".job-offer-card").mouseover(function (event) {
+    /*$(".job-offer-card").mouseover(function (event) {
         event.stopPropagation();
         var target = $(event.target); // 이벤트가 발생한 요소
         $(target).css({
@@ -32,7 +32,7 @@ $(document).ready(function () {
         var target = $(event.target); // 이벤트가 발생한 요소
         $(target).css("background-color", ""); // 원래 상태로 돌아가는 예시 (배경색 제거)
 
-    });
+    });*/
 
 
     //카드 클릭 -> 상세보기 페이지로 이동

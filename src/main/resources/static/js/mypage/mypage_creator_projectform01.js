@@ -25,40 +25,22 @@ $(document).ready(function () {
     $(".form-item-description").on("input", function (event) {
         const $target = $(event.target); //이벤트 발생한 요소
         const $counter = $target.parent().siblings().find(".counter");
-        const $cousin = $target.parent().siblings().children().children();
+        
         const $maxLength = parseInt($target.attr("maxlength")); //최대입력수
 
         const $length = $(this).val().length;
         $counter.text($length);
-        // console.log($length+ "맥스 : "+$maxLength);
         if ($length == $maxLength) {
-            $counter.addClass("max-length");
+            $counter.css("color","red");
         } else {
-            $counter.removeClass("max-length");
-        }
-    });
-
-
-    // 작업기간 입력폼에 0~90 까지만 입력 가능하게 하는 코드
-
-    $('input[type="number"]').on('input', function (event) {
-        const value = $(this).val();
-        const alertMsg = $("<div>0~90 만 입력해주세요</div>").attr("class", "alert-msg");
-
-        if (value < 0 || value > 90) {
-            $(this).addClass("alert-style");
-            $(this).after(alertMsg);
-        } else {
-            $(this).removeClass("alert-style");
-            $(this).next(".alert-msg").remove();
+            $counter.css("color","var(--gray)");
         }
     });
 
 
     // 사진 호버하면 삭제 표시
-
-
     $(".image-frame").hover(
+    	//마우스 진입
         function () {
             const coverImage =
                 $("<button type='button' data-toggle='modal' data-target='#delete-img-Modal'>" +
@@ -68,6 +50,7 @@ $(document).ready(function () {
                     "</button>").attr("class", "delete-cover");
             $(this).append(coverImage);
         },
+        //마우스 아웃
         function () {
             $(this).find(".delete-cover").remove();
         }
@@ -75,7 +58,6 @@ $(document).ready(function () {
 
 
     //사진 누르면 삭제 모달뜨고 버튼 누르면 삭제완료됨
-
     const deleteBtn = $("#delete-img-Modal").find("button");
     //삭제할 사진을 누르면 해당 사진 객체 저장 + 모달 뜸
     $(".image-frame").on("click", function (event) {
