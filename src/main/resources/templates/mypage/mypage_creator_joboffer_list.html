@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/minwoo_style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/components/buttons.css">
-    <link rel="stylesheet" href="css/screen/mypage_creator_joboffer_list.css">
-    <!-- 제이쿼리 -->
+    <!-- 민우's style css [무조건 맨위에 와야함]-->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
+    <!-- 부트스트랩 css -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- 버튼 컴포넌트 css -->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
+    <!-- 페이지 전용 css -->
+    <link rel="stylesheet" href="/mh/css/mypage/mypage_creator_joboffer_list.css">
+    
+	
+    <!-- 제이쿼리 js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- 내 js코드 -->
-    <script src="js/mypage_creator_joboffer_list.js"></script>
+    <script src="/mh/js/mypage/mypage_creator_joboffer_list.js"></script>
     <title>크리에이터-구인관리</title>
 </head>
 
@@ -53,7 +61,7 @@
                         <ul class="job-offer-list">
                             <li onclick="" class="job-offer-card">
                                 <div class="job-offer-image">
-                                    <img src="images/test_images/test05.jpeg" alt="thumbnail">
+                                    <img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
                                 </div>
                                 <div class="job-offer-contents">
                                     <div class="job-offer-contents-row01">
@@ -88,7 +96,7 @@
                                                 <ul class="my-dropdown-contents closed">
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -104,7 +112,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -120,7 +128,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -136,7 +144,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -152,7 +160,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -168,7 +176,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -184,7 +192,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -200,7 +208,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -223,7 +231,7 @@
                             </li>
                             <li onclick="" class="job-offer-card">
                                 <div class="job-offer-image">
-                                    <img src="images/test_images/test05.jpeg" alt="thumbnail">
+                                    <img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
                                 </div>
                                 <div class="job-offer-contents">
                                     <div class="job-offer-contents-row01">
@@ -258,7 +266,7 @@
                                                 <ul class="my-dropdown-contents closed">
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -274,7 +282,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -290,7 +298,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -306,7 +314,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -322,7 +330,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -338,7 +346,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -354,7 +362,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -370,7 +378,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -393,7 +401,7 @@
                             </li>
                             <li onclick="" class="job-offer-card">
                                 <div class="job-offer-image">
-                                    <img src="images/test_images/test05.jpeg" alt="thumbnail">
+                                    <img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
                                 </div>
                                 <div class="job-offer-contents">
                                     <div class="job-offer-contents-row01">
@@ -428,7 +436,7 @@
                                                 <ul class="my-dropdown-contents closed">
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -444,7 +452,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -460,7 +468,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -476,7 +484,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -492,7 +500,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -508,7 +516,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -524,7 +532,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>
@@ -540,7 +548,7 @@
                                                     </li>
                                                     <li>
                                                         <img class="my-dropdown-contents-img"
-                                                            src="images/test_images/test03.jpeg" alt="프로필">
+                                                            src="/mh/images/test_images/test03.jpeg" alt="프로필">
                                                         <div class="my-dropdown-contents-text">
                                                             <div class="text-row01">
                                                                 <a href="#">kjk1241</a>

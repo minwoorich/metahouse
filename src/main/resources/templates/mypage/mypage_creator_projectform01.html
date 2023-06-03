@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>크리에이터-판매등록01</title>
-    <link rel="stylesheet" href="css/minwoo_style.css">
-    <link rel="stylesheet" href="css/screen/mypage_creator_projectform01.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+     <!-- 민우's style css [무조건 맨위에 와야함]-->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+    <!-- 부트스트랩 css -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
+    <!-- 버튼 컴포넌트 css -->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
+    <!-- 페이지 전용 css -->
+    <link rel="stylesheet" href="/mh/css/mypage/mypage_creator_projectform01.css">
+    
+    <!-- 제이쿼리 js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -111,7 +117,7 @@
                             <div class="form-item-file">
                                  <!-- 미리보기 이미지-->
                                 <div class="image-frame">
-                                    <img src="images/test_images/test01.jpeg" alt="대표 사진">
+                                    <img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
                                     <div>test01.jpeg</div>
                                 </div>
                                 <!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
@@ -135,19 +141,19 @@
                                 <div class="form-item-images-wrapper">
                                     <!-- 미리보기 이미지들 -->
                                     <div class="image-frame">
-                                        <img src="images/test_images/test02.jpeg" alt="상세 사진">
+                                        <img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
                                         <div>test02.jpeg</div>
                                     </div>
                                     <div class="image-frame">
-                                        <img src="images/test_images/test03.jpeg" alt="상세 사진">
+                                        <img src="/mh/images/test_images/test03.jpeg" alt="상세 사진">
                                         <div>test03.jpeg</div>
                                     </div>
                                     <div class="image-frame">
-                                        <img src="images/test_images/test04.jpeg" alt="상세 사진">
+                                        <img src="/mh/images/test_images/test04.jpeg" alt="상세 사진">
                                         <div>test04.jpeg</div>
                                     </div>
                                     <div class="image-frame">
-                                        <img src="images/test_images/test05.jpeg" alt="상세 사진">
+                                        <img src="/mh/images/test_images/test05.jpeg" alt="상세 사진">
                                         <div>test05.jpeg</div>
                                     </div>
                                     <!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
@@ -175,7 +181,7 @@
                         first : 첫째장
                         last : 마지막장 -->
                         <button type="button" onclick="" value="cancel" class="form-buttons-cancel">취소</button>
-                        <button type="button" onclick=""  value="next" class="form-buttons-next button--small">다음</button>
+                        <button type="button" onclick="location.href='/mh/mypage/project-form-02'"  value="next" class="form-buttons-next button--small">다음</button>
                     </div>
                 </div>
             </div>

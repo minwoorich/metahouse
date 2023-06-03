@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>크리에이터-판매등록02</title>
-    <link rel="stylesheet" href="css/minwoo_style.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/screen/mypage_creator_projectform02.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+     <!-- 부트스트랩 css -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- 민우's style css [무조건 맨위에 와야함]-->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+   
+    <!-- style css -->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
+    <!-- 버튼 컴포넌트 css -->
+    <link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
+    <!-- 페이지 전용 css -->
+    <link rel="stylesheet" href="/mh/css/mypage/mypage_creator_projectform02.css">
+    
+    <!-- 제이쿼리 js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -292,11 +299,11 @@
                         <!-- 
                             first : 첫째장
                             last : 마지막장 -->
-                        <button type="button" onclick="" value="prev"
+                        <button type="button" onclick="location.href='/mh/mypage/project-form-01'" value="prev"
                             class="form-buttons-prev button--small">이전</button>
                         <div>
                             <button type="button" onclick="" value="cancel" class="form-buttons-cancel">취소</button>
-                            <button type="button" onclick="" value="next"
+                            <button type="button" onclick="location.href='/mh/mypage/project-form-03'" value="next"
                                 class="form-buttons-next button--small">다음</button>
                         </div>
                     </div>
