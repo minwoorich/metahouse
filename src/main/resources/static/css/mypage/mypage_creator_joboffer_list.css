@@ -1,9 +1,7 @@
-@import "../components/header.css";
-@import "../components/mypage_menu.css";
-@import "../components/buttons.css";
 
 
-/* 구인관리 삭제 모달 */
+
+/* 援ъ씤愿�由� �궘�젣 紐⑤떖 */
 .modal-content{
     padding: 30px;
 }
@@ -19,9 +17,11 @@
     padding-inline: 90px;
     padding-block: 70px;
 }
+
 .minwoo_wrapper{
     display: flex;
     flex-direction: row;
+    justify-content:center;
 }
 .job-offer-wrapper{
     display: flex;
@@ -30,7 +30,7 @@
     height: fit-content;
 }
 
-/* '내 구인 목록' 제목 */
+/* '�궡 援ъ씤 紐⑸줉' �젣紐� */
 .mypage-title{
     font-size: 24px;
     font-weight: bold;
@@ -38,7 +38,7 @@
     margin-bottom: 10px;
 }
 
-/* 카드 리스트 출력 부분 */
+/* 移대뱶 由ъ뒪�듃 異쒕젰 遺�遺� */
 .job-offer-list{
     width: auto;
     height: fit-content;

@@ -1,9 +1,7 @@
-@import "../components/header.css";
-@import "../components/buttons.css";
-@import "../components/progress_bar.css";
+@import "progress_bar.css";
 
 
-/* 구인관리 삭제 모달 */
+/* 援ъ씤愿�由� �궘�젣 紐⑤떖 */
 .modal-content{
     padding: 30px;
 }
@@ -168,7 +166,7 @@
     color: red;
 }
 
-/* 버튼 파트 */
+/* 踰꾪듉 �뙆�듃 */
 .form-buttons{
     display: flex;
     flex-direction: row;

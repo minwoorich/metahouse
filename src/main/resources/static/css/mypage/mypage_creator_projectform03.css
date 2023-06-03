@@ -1,8 +1,11 @@
-@import "../components/header.css";
-@import "../components/buttons.css";
-@import "../components/progress_bar.css";
+@import "progress_bar.css";
 
-/* form-box 시작 */
+/* form-box �떆�옉 */
+.minwoo_container{
+	display:flex;
+	flex-direction : column;
+	align-items:center;
+}
 .form{
     width: 920px;
     height: fit-content;
@@ -110,7 +113,7 @@
     color: var(--gray);
 }
 
-/* 버튼 파트 */
+/* 踰꾪듉 �뙆�듃 */
 .form-buttons{
     display: flex;
     flex-direction: row;
@@ -129,9 +132,9 @@
     font-weight: bold;
 }
 
-/* ////////form-box 끝//////////////////////// */
+/* ////////form-box �걹//////////////////////// */
 
-/* 3단 패키지 */
+/* 3�떒 �뙣�궎吏� */
 .triple-package{
     width: 100%;
     height: fit-content;
@@ -173,7 +176,7 @@
     flex: 1;
 }
 
-/* 패키지타입 영역 */
+/* �뙣�궎吏����엯 �쁺�뿭 */
 .triple-package-type{
     font-size: 24px;
     font-weight: bold;
@@ -182,7 +185,7 @@
     margin-bottom: 50px;
 }
 
-/* 패키지 '제목' 입력 영역 */
+/* �뙣�궎吏� '�젣紐�' �엯�젰 �쁺�뿭 */
 .triple-package-title{
     display: flex;
     flex-direction: column;
@@ -203,7 +206,7 @@
     font-size: 16px;
 }
 
-/* 패키지 '내용' 입력 영역 */
+/* �뙣�궎吏� '�궡�슜' �엯�젰 �쁺�뿭 */
 .triple-package-description{
     display: flex;
     flex-direction: column;
@@ -224,7 +227,7 @@
 }
 
 /* ////////////////////////////////////////////////////////// */
-/* 단일 패키지 */
+/* �떒�씪 �뙣�궎吏� */
 .single-package{
     width: 100%;
     height: fit-content;
@@ -251,7 +254,7 @@
     flex: 1;
 }
 
-/* 패키지타입 영역 */
+/* �뙣�궎吏����엯 �쁺�뿭 */
 .single-package-type{
     font-size: 24px;
     font-weight: bold;
@@ -259,12 +262,8 @@
     border-bottom: 1px solid var(--gray);
     margin-bottom: 50px;
 }
-.label{
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-/* 패키지 '제목' 입력 영역 */
+
+/* �뙣�궎吏� '�젣紐�' �엯�젰 �쁺�뿭 */
 .single-package-title{
     display: flex;
     flex-direction: column;
@@ -293,7 +292,7 @@
     flex:1;
 }
 
-/* 패키지 '내용' 입력 영역 */
+/* �뙣�궎吏� '�궡�슜' �엯�젰 �쁺�뿭 */
 .single-package-description{
     display: flex;
     flex-direction: column;
@@ -314,7 +313,7 @@
 }
 /* //////////////////////////////////////////////////////////// */
 
-/* 추가옵션 파트 */
+/* 異붽��샃�뀡 �뙆�듃 */
 .add-option{
     padding-inline: 40px;
     padding-block: 30px;
@@ -322,7 +321,7 @@
 }
 
 
-/* 추가옵션 2열 */
+/* 異붽��샃�뀡 2�뿴 */
 .option-box{
     padding: 20px;
     display: flex;
@@ -330,7 +329,7 @@
     margin-bottom: 20px;
 }
 
-/* 추가옵션 2열 1행 */
+/* 異붽��샃�뀡 2�뿴 1�뻾 */
 .option-box-col01{
     width: 100%;
     display: flex;
@@ -343,7 +342,7 @@
     accent-color: var(--bright-purple);
 }
 
-/* 추가옵션 2열 2행 (체크박스 활성화 된경우)*/
+/* 異붽��샃�뀡 2�뿴 2�뻾 (泥댄겕諛뺤뒪 �솢�꽦�솕 �맂寃쎌슦)*/
 .option-box-col02{
     display: flex;
     flex-direction: row;
@@ -367,7 +366,7 @@
     border-radius: var(--radius-weak);
     background-color: rgba(0,0,0,0);
 }
-/* 버튼 파트 */
+/* 踰꾪듉 �뙆�듃 */
 .form-buttons{
     display: flex;
     flex-direction: row;
@@ -385,5 +384,12 @@
 .form-buttons div{
     display: flex;
     flex-direction: row;
-
+}
+.label{
+	/* text-align:start;
+	padding:0px; */
+	color:black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
