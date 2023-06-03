@@ -1,17 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="footer.css">
-  <title>Document</title>
- 
- </head>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
-  <footer class="footer">
+  <footer class="footer" th:fragment="footerFragment">
     <div class="container">
       <div class="row">
         <div class="col-md-3">
@@ -64,7 +55,6 @@
         </div>
       </div>
     </div>
-    <hr/>
     <hr/>
     <div class="footer-end text-center">
       (주)메타하우스|서울시 강동구155,3층|대표:이창훈|개인정보관리책임자:이창훈|사업자등록번호"613-00-00000
