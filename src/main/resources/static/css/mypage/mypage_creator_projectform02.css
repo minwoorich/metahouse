@@ -1,14 +1,7 @@
 @import "form_box.css";
 @import "progress_bar.css";
 
-textarea::placeholder{
-	color:var(--gray);
-	font-size:16px;
-}
-input::placeholder{
-	color:var(--gray);
-	font-size:16px;
-}
+
 .switch{
     display: flex;
     flex-direction: column;

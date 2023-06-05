@@ -6,7 +6,7 @@
     height: fit-content;
     flex-direction: row;
     justify-content: center;
-    border-bottom: 1px solid var(--gray);
+    /* border-bottom: 1px solid var(--bright-purple); */
     margin-bottom: 40px;
     background-color: transparent!important;
 }
