@@ -83,11 +83,31 @@ $(document).ready(function () {
         });
     });
 
-
+    // 필수 사항 입력 안 한 채로 "다음" 버튼 누른경우
+    $(".form-buttons-next").on("click",function(){
+    	let isValid = true;
+    	const alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
+    	$('textarea[required]').each(function() {
+			  if ($(this).val().trim() === '') {
+				  $(this).parent().parent().addClass('alert-style');
+				  isValid=false;
+			  }
+    	});
+    	if(isValid){
+    		location.href='/mh/mypage/project-form-02';
+    	}else{
+    		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
+    	}
+  	});
+    
+    //textarea에 값을 입력하면 alert-style 사라짐
+    $("textarea").on("input",function(){
+    	if($(this).val()!==""){
+    		$(this).parent().parent().removeClass("alert-style");
+    	}
+    });
     
 
-
-    
 
 });
 

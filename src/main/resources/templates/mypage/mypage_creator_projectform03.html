@@ -33,6 +33,27 @@
 	<!-- 내가 설정한 body -->
 	<main layout:fragment="content" class="minwoo_body">
 		<div class="minwoo_container">
+		<!-- 취소 Modal -->
+		<div id="cancel" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"
+							style="font-weight: bold; font-size: 24px;">서비스 등록 취소</h4>
+					</div>
+					<div class="modal-body" style="font-weight: 500; font-size: 16px;">
+						<p>지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br/><br/>그래도 취소 하시겠습니까?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button--xsmall" data-dismiss="modal">취소하기</button>
+						
+					</div>
+				</div>
+
+			</div>
+		</div>
 			<!-- form -->
 			<div class="form">
 				<div class="form-wrapper">
@@ -102,7 +123,7 @@
 								<div class="miwnoo_label">대표 사진</div>
 								<div class="image-frame">
 									<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
-									<div>test01.jpeg</div>
+			
 								</div>
 							</div>
 						</div>
@@ -117,19 +138,19 @@
 									<!-- 미리보기 이미지들 -->
 									<div class="image-frame">
 										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-										<div>test02.jpeg</div>
+										
 									</div>
 									<div class="image-frame">
 										<img src="/mh/images/test_images/test03.jpeg" alt="상세 사진">
-										<div>test03.jpeg</div>
+										
 									</div>
 									<div class="image-frame">
 										<img src="/mh/images/test_images/test04.jpeg" alt="상세 사진">
-										<div>test04.jpeg</div>
+										
 									</div>
 									<div class="image-frame">
 										<img src="/mh/images/test_images/test05.jpeg" alt="상세 사진">
-										<div>test05.jpeg</div>
+										
 									</div>
 								</div>
 							</div>
@@ -138,7 +159,6 @@
 
 					<!-- 단일 패키지 -->
 					<div class="single-package">
-
 						<!-- 패키지 2열 - 실제 작성할 입력 칸 -->
 						<div class="single-package-row02">
 							<div class="single-package-wrapper">
@@ -274,7 +294,7 @@
 							onclick="location.href='/mh/mypage/project-form-02'" value="prev"
 							class="form-buttons-prev button--small">이전</button>
 						<div>
-							<button type="button" onclick="" value="cancel"
+							<button type="button" data-toggle='modal' data-target='#cancel' value="cancel"
 								class="form-buttons-cancel">취소</button>
 							<button type="button" onclick="" value="next"
 								class="form-buttons-submit button--small">등록</button>
