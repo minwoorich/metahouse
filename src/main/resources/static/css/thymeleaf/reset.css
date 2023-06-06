@@ -48,6 +48,7 @@ table {
 	border-spacing: 0;
 }
 textarea{
+	background-color:rgba(1,1,1,0);
 	resize: none;
 	border: none;
 }
@@ -57,6 +58,7 @@ textarea{
 
 input{
 	border: none;
+	background-color:rgba(1,1,1,0);
 }
 button{
 	background-color: white;

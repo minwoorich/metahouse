@@ -1,322 +1,376 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/nonsideLayout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/nonsideLayout}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>크리에이터-판매등록02</title>
-     
-    <!-- 민우's style css [무조건 맨위에 와야함]-->
-    <link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
-   <!-- 부트스트랩 css -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- style css -->
-    <link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
-    <!-- 버튼 컴포넌트 css -->
-    <link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
-    <!-- 페이지 전용 css -->
-    <link rel="stylesheet" href="/mh/css/mypage/mypage_creator_projectform02.css">
-    
-    
-	<!-- 폰트어썸 -->
-    <script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
-    <!-- 제이쿼리 js -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>크리에이터-판매등록02</title>
+
+<!-- 민우's style css [무조건 맨위에 와야함]-->
+<link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+<!-- 부트스트랩 css -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- 페이지 전용 css -->
+<link rel="stylesheet"
+	href="/mh/css/mypage/mypage_creator_projectform02.css">
+
+
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+<!-- 제이쿼리 js -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 내 js코드 -->
+<script src="/mh/js/mypage/mypage_creator_projectform02.js"></script>
 </head>
 
 <body>
-    <!-- 내가 설정한 body -->
-    <main layout:fragment="content"  class="minwoo_body">
-            <!-- form -->
-            <div class="form">
-                <div class="form-wrapper">
-                    <!-- 진행 상태 바 -->
-                    <div class="progress-bar">
-                        <div class="progress-bar-wrapper">
-                            <!-- 1.서비스 설정 -->
-                            <div class="progress-bar-item ">
-                                <i class="fa-sharp fa-circle-1 fa-2xl"></i>
-                                <span class="progress-bar-text">서비스 설정</span>
-                            </div>
-                            <!-- 첫번째 화살표 -->
-                            <i class="fa-solid fa-chevron-right fa-xl" style="color:var(--gray)"></i>
-                            <!-- 2. 가격설정 -->
-                            <div class="progress-bar-item current">
-                                <i class="fa-sharp fa-circle-2 fa-2xl"></i>
-                                <span class="progress-bar-text">가격 설정</span>
-                            </div>
-                            <!-- 두번째 화살표 -->
-                            <i class="fa-solid fa-chevron-right fa-xl" style="color:var(--gray)"></i>
-                            <!-- 3. 서비스 등록 -->
-                            <div class="progress-bar-item">
-                                <i class="fa-sharp fa-circle-3 fa-2xl"></i>
-                                <span class="progress-bar-text">서비스 등록</span>
-                            </div>
-                        </div>
-                    </div>
+	<!-- 내가 설정한 body -->
+	<main layout:fragment="content" class="minwoo_body">
+	
+		<!-- 취소 Modal -->
+		<div id="cancel" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"
+							style="font-weight: bold; font-size: 24px;">서비스 등록 취소</h4>
+					</div>
+					<div class="modal-body" style="font-weight: 500; font-size: 16px;">
+						<p>지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br/><br/>그래도 취소 하시겠습니까?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button--xsmall" data-dismiss="modal">취소하기</button>
+						
+					</div>
+				</div>
 
-                    <!-- 패키지 스위치 -->
-                    <div class="package-switch">
-                        <i class="fa-solid fa-toggle-on fa-2xl" style="color: #c4b0ff;"></i>
-                        <i class="fa-solid fa-toggle-off fa-2xl" style="color: #c4b0ff;"></i>
-                    </div>
-                    <!-- 단일 패키지 -->
-                    <div class="single-package">
-                        <!-- 패키지 1열 - 작성할 카테고리 -->
-                        <div class="single-package-row01">
-                            <div class="single-package-row-wrapper">
-                                <!-- 패키지 1열 1행 -->
-                                <div class="single-package-row01-col01">
-                                    <span>제목</span>
-                                    <span style="color: var(--red);">*</span>
-                                </div>
-                                <!-- 패키지 1열 2행 -->
-                                <div class="single-package-row01-col02">
-                                    <span>설명</span>
-                                    <span style="color: var(--red);">*</span>
-                                </div>
-                            </div>
+			</div>
+		</div>
+		
+		<!-- 유효성 Modal -->
+		<div id="validChk" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-body" style="font-weight: 600; font-size: 16px;">
+						<p>필수 항목들을 전부 채워주세요</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button--xsmall" data-dismiss="modal">확인</button>
+						
+					</div>
+				</div>
 
-                        </div>
-                        <!-- 패키지 2열 - 실제 작성할 입력 칸 -->
-                        <div class="single-package-row02">
-                            <div class="single-package-wrapper">
-                                <!-- 패키지 타입 => BASIC -->
-                                <div class="single-package-type">
-                                    <span>BASIC</span>
-                                </div>
-                                <!-- 제목(BASIC)  -->
-                                <div class="single-package-title">
-                                    <div class="single-package-title-col01">
-                                        <textarea type="text" name="" placeholder="제목을 입력 하세요" maxlength="20"
-                                            required></textarea>
-                                    </div>
-                                    <div class="single-package-title-col02">
-                                        <div class="single-package-counter">
-                                            <span>0</span>
-                                            <span>/</span>
-                                            <span>20</span>
-                                        </div>
-                                    </div>
-                                </div>
+			</div>
+		</div>
+		<!-- form -->
+		<div class="form">
+			<div class="form-wrapper">
+				<!-- 진행 상태 바 -->
+				<div class="progress-bar">
+					<div class="progress-bar-wrapper">
+						<!-- 1.서비스 설정 -->
+						<div class="progress-bar-item ">
+							<i class="fa-sharp fa-regular fa-circle-1 fa-2xl" style="color: #aaaaaa;"></i> <span
+								class="progress-bar-text">서비스 설정</span>
+						</div>
+						<!-- 첫번째 화살표 -->
+						<i class="fa-solid fa-chevron-right fa-xl"
+							style="color: var(--gray)"></i>
+						<!-- 2. 가격설정 -->
+						<div class="progress-bar-item current">
+							<i class="fa-sharp fa-circle-2 fa-2xl"></i> <span
+								class="progress-bar-text">가격 설정</span>
+						</div>
+						<!-- 두번째 화살표 -->
+						<i class="fa-solid fa-chevron-right fa-xl"
+							style="color: var(--gray)"></i>
+						<!-- 3. 서비스 등록 -->
+						<div class="progress-bar-item">
+							<i class="fa-sharp fa-regular fa-circle-3 fa-2xl" style="color: #aaaaaa;"></i> <span
+								class="progress-bar-text">서비스 등록</span>
+						</div>
+					</div>
+				</div>
 
-                                <!-- 설명(BASIC) -->
-                                <div class="single-package-description">
-                                    <div class="single-package-description-col01">
-                                        <textarea name="" placeholder="설명을 입력해주세요" value="" maxlength="60"
-                                            required></textarea>
-                                    </div>
-                                    <div class="single-package-description-col02">
-                                        <div class="single-package-counter">
-                                            <span>60</span>
-                                            <span>/</span>
-                                            <span>60</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 단일패키지 끝 -->
+				<!-- 패키지 스위치 -->
+				<div class="switch">
+				<label for="switch">패키지 스위치</label>
+					<div class="switch-outer">
+						<div class="switch-inner"></div>
+					</div>
+				</div>
+				<!-- 단일 패키지 -->
+				<div class="single-package">
+					<!-- 단일 패키지 1열- 작성할 카테고리 -->
+					<div class="single-package-col01">
+						<div class="single-package-col01-wrapper">
+							<!-- 패키지 1열 1행 (제목)-->
+							<div class="single-package-col01-row01">
+								<span>제목</span> <span style="color: var(--red);">*</span>
+							</div>
+							<!-- 패키지 1열 2행 (설명)-->
+							<div class="single-package-col01-row02">
+								<span>설명</span> <span style="color: var(--red);">*</span>
+							</div>
+							<!-- 패키지 1열 3행 (가격)-->
+							<div class="single-package-col01-row03">
+								<span>가격</span> <span style="color: var(--red);">*</span>
+							</div>
+						</div>
+					</div>
+					<!-- 단일 패키지 2열 - 실제 작성할 입력 칸 -->
+					<div class="single-package-col02">
+						<div class="single-package-col02-wrapper">
+							<!-- 패키지 타입 => BASIC -->
+							<div class="single-package-type">
+								<span>BASIC</span>
+							</div>
+							<!-- 단일, 제목(BASIC)  -->
+							<div class="single-package-title">
+								<div class="single-package-title-row01">
+									<textarea class="single-textarea-title" type="text" name="" placeholder="제목을 입력하세요"
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20" required></textarea>
+								</div>
+								<div class="single-package-title-row02">
+									<div class="single-package-counter">
+										<span class="counter">0</span> <span>/</span> <span>20</span>
+									</div>
+								</div>
+							</div>
 
-                    <!-- 3단 패키지 -->
-                    <div class="triple-package activate">
-                        <!-- 패키지 1열 - 작성할 카테고리 -->
-                        <div class="triple-package-row01">
-                            <div class="triple-package-row-wrapper">
-                                <!-- 패키지 1열 1행 -->
-                                <div class="triple-package-row01-col01">
-                                    <span>제목</span>
-                                    <span style="color: var(--red);">*</span>
-                                </div>
-                                <!-- 패키지 1열 2행 -->
-                                <div class="triple-package-row01-col02">
-                                    <span>설명</span>
-                                    <span style="color: var(--red);">*</span>
-                                </div>
-                            </div>
+							<!-- 단일, 설명(BASIC) -->
+							<div class="single-package-description">
+								<div class="single-package-description-row01">
+									<textarea class="single-textarea-description" name="" placeholder="설명을 입력하세요" value=""
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60" required></textarea>
+								</div>
+								<div class="single-package-description-row02">
+									<div class="single-package-counter">
+										<span class="counter">0</span> <span>/</span> <span>60</span>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 단일, 가격 설정(BASIC) -->
+							<div class="single-package-cost">
+								<input type="number" placeholder="최소 5000원 이상을 입력하세요" value="" name="" required onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '최소 5000원 이상을 입력하세요'" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><span>원</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 단일패키지 끝 -->
 
-                        </div>
-                        <!-- 패키지 2열 - 실제 작성할 입력 칸 -->
-                        <div class="triple-package-row02">
-                            <div class="triple-package-wrapper">
-                                <!-- 패키지 타입 => BASIC -->
-                                <div class="triple-package-type">
-                                    <span>BASIC</span>
-                                </div>
-                                <!-- 제목(BASIC)  -->
-                                <div class="triple-package-title">
-                                    <div class="triple-package-title-col01">
-                                        <textarea type="text" name="" placeholder="제목을 입력 하세요" maxlength="20"
-                                            required></textarea>
-                                    </div>
-                                    <div class="triple-package-title-col02">
-                                        <div class="triple-package-counter">
-                                            <span>0</span>
-                                            <span>/</span>
-                                            <span>20</span>
-                                        </div>
-                                    </div>
-                                </div>
+				<!-- 3단 패키지 -->
+				<div class="triple-package deactivate">
+					<!-- 패키지 1열 - 작성할 카테고리 -->
+					<div class="triple-package-col01">
+						<div class="triple-package-col-wrapper">
+							<!-- 패키지 1열 1행 -->
+							<div class="triple-package-col01-row01">
+								<span>제목</span> <span style="color: var(--red);">*</span>
+							</div>
+							<!-- 패키지 1열 2행 -->
+							<div class="triple-package-col01-row02">
+								<span>설명</span> <span style="color: var(--red);">*</span>
+							</div>
+							<!-- 패키지 1열 3행 -->
+							<div class="triple-package-col01-row03">
+								<span>가격</span> <span style="color: var(--red);">*</span>
+							</div>
+						</div>
+					</div>
+					<!-- 패키지 2열 - 실제 작성할 입력 칸 -->
+					<div class="triple-package-col02">
+						<div class="triple-package-wrapper">
+							<!-- 패키지 타입 => BASIC -->
+							<div class="triple-package-type">
+								<span>BASIC</span>
+							</div>
+							<!-- 제목(BASIC)  -->
+							<div class="triple-package-title">
+								<div class="triple-package-title-row01">
+									<textarea class="triple-textarea-title" type="text" name="" placeholder="제목을 입력하세요"
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20" required></textarea>
+								</div>
+								<div class="triple-package-title-row02">
+									<div class="triple-package-counter">
+										<span class="counter">0</span> <span>/</span> <span>20</span>
+									</div>
+								</div>
+							</div>
 
-                                <!-- 설명(BASIC) -->
-                                <div class="triple-package-description">
-                                    <div class="triple-package-description-col01">
-                                        <textarea name="" placeholder="설명을 입력해주세요" value="" maxlength="60"
-                                            required></textarea>
-                                    </div>
-                                    <div class="triple-package-description-col02">
-                                        <div class="triple-package-counter">
-                                            <span>60</span>
-                                            <span>/</span>
-                                            <span>60</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 패키지 타입 => ECONOMY -->
-                            <div class="triple-package-wrapper">
-                                <div class="triple-package-type">
-                                    <span>ECONOMY</span>
-                                </div>
-                                <!-- 제목(ECONOMY)  -->
-                                <div class="triple-package-title">
-                                    <div class="triple-package-title-col01">
-                                        <textarea type="text" name="" placeholder="제목을 입력 하세요" maxlength="20"
-                                            required></textarea>
-                                    </div>
-                                    <div class="triple-package-title-col02">
-                                        <div class="triple-package-counter">
-                                            <span>0</span>
-                                            <span>/</span>
-                                            <span>20</span>
-                                        </div>
-                                    </div>
-                                </div>
+							<!-- 설명(BASIC) -->
+							<div class="triple-package-description">
+								<div class="triple-package-description-row01">
+									<textarea class="triple-textarea-description" name="" placeholder="설명을 입력하세요" value=""
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60" required></textarea>
+								</div>
+								<div class="triple-package-description-row02">
+									<div class="triple-package-counter">
+										<span class="counter">0</span> 
+										<span>/</span> 
+										<span>60</span>
+									</div>
+								</div>
+							</div>
+							<!-- 가격(BASIC) -->
+							<div class="triple-package-cost">
+								<input type="number" placeholder="최소 5000원 이상" value="" name="" required onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '최소 5000원 이상'" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><span>원</span>
+							</div>
+						</div>
+						<!-- 패키지 타입 => ECONOMY -->
+						<div class="triple-package-wrapper">
+							<div class="triple-package-type">
+								<span>ECONOMY</span>
+							</div>
+							<!-- 제목(ECONOMY)  -->
+							<div class="triple-package-title">
+								<div class="triple-package-title-row01">
+									<textarea class="triple-textarea-title" type="text" name="" placeholder="제목을 입력하세요"
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20" required></textarea>
+								</div>
+								<div class="triple-package-title-row02">
+									<div class="triple-package-counter">
+										<span class="counter">0</span> <span>/</span> <span>20</span>
+									</div>
+								</div>
+							</div>
 
-                                <!-- 설명(ECONOMY) -->
-                                <div class="triple-package-description">
-                                    <div class="triple-package-description-col01">
-                                        <textarea name="" placeholder="설명을 입력해주세요" value="" maxlength="60"
-                                            required></textarea>
-                                    </div>
-                                    <div class="triple-package-description-col02">
-                                        <div class="triple-package-counter">
-                                            <span>60</span>
-                                            <span>/</span>
-                                            <span>60</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 패키지 타입 => PREMIUM -->
-                            <div class="triple-package-wrapper">
-                                <div class="triple-package-type">
-                                    <span>PREMIUM</span>
-                                </div>
-                                <!-- 제목(PREMIUM)  -->
-                                <div class="triple-package-title">
-                                    <div class="triple-package-title-col01">
-                                        <textarea type="text" name="" placeholder="제목을 입력 하세요" maxlength="20"
-                                            required></textarea>
-                                    </div>
-                                    <div class="triple-package-title-col02">
-                                        <div class="triple-package-counter">
-                                            <span>0</span>
-                                            <span>/</span>
-                                            <span>20</span>
-                                        </div>
-                                    </div>
-                                </div>
+							<!-- 설명(ECONOMY) -->
+							<div class="triple-package-description">
+								<div class="triple-package-description-row01">
+									<textarea class="triple-textarea-description" name="" placeholder="설명을 입력하세요" value=""
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60" required></textarea>
+								</div>
+								<div class="triple-package-description-row02">
+									<div class="triple-package-counter">
+										<span class="counter">60</span> <span>/</span> <span>60</span>
+									</div>
+								</div>
+							</div>
+							<!-- 가격(ECONOMY) -->
+							<div class="triple-package-cost">
+								<input type="number" placeholder="최소 5000원 이상" value="" name="" required onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '최소 5000원 이상'" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><span>원</span>
+							</div>
+						</div>
+						<!-- 패키지 타입 => PREMIUM -->
+						<div class="triple-package-wrapper">
+							<div class="triple-package-type">
+								<span>PREMIUM</span>
+							</div>
+							<!-- 제목(PREMIUM)  -->
+							<div class="triple-package-title">
+								<div class="triple-package-title-row01">
+									<textarea class="triple-textarea-title" type="text" name="" placeholder="제목을 입력하세요"
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20" required></textarea>
+								</div>
+								<div class="triple-package-title-row02">
+									<div class="triple-package-counter">
+										<span class="counter">0</span> <span>/</span> <span>20</span>
+									</div>
+								</div>
+							</div>
 
-                                <!-- 설명(PREMIUM) -->
-                                <div class="triple-package-description">
-                                    <div class="triple-package-description-col01">
-                                        <textarea name="" placeholder="설명을 입력해주세요" value="" maxlength="60"
-                                            required></textarea>
-                                    </div>
-                                    <div class="triple-package-description-col02">
-                                        <div class="triple-package-counter">
-                                            <span>60</span>
-                                            <span>/</span>
-                                            <span>60</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 3단 패키지 끝 -->
+							<!-- 설명(PREMIUM) -->
+							<div class="triple-package-description">
+								<div class="triple-package-description-row01">
+									<textarea class="triple-textarea-description" name="" placeholder="설명을 입력하세요" value=""
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60" required></textarea>
+								</div>
+								<div class="triple-package-description-row02">
+									<div class="triple-package-counter">
+										<span class="counter">0</span> <span>/</span> <span>60</span>
+									</div>
+								</div>
+							</div>
+							<!-- 가격(PREMIUM) -->
+							<div class="triple-package-cost">
+								<input type="number" placeholder="최소 5000원 이상" value="" name="" required onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '최소 5000원 이상'" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><span>원</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 3단 패키지 끝 -->
 
-                    <!-- 추가 옵션 -->
-                    <div class="add-option">
-                        <div class="options-wrapper">
-                            <div class="add-option-row01">
-                                <span>추가 옵션</span>
-                                <span style="color:var(--red)">*</span>
-                            </div>
-                            <div class="add-option-row02">
-                                <!-- 옵션이 선택된 된 후 -->
-                                <div class="option-box selected">
-                                    <div class="option-box-wrapper">
-                                        <label class="option-box-col01">
-                                            <span>빠른 작업</span>
-                                            <input type="checkbox" name="" value="">
-                                        </label>
-                                        <div class="option-box-col02">
-                                            <input type="text" placeholder="금액 입력" value="" name="" />
-                                            <span>원 추가</span>
-                                            <select name="">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                            </select>
-                                            <span>일 단축</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 옵션이 선택 되기 전 -->
-                                <div class="option-box">
-                                    <div class="option-box-wrapper">
-                                        <label class="option-box-col01">
-                                            <span>추가 수정</span>
-                                            <input type="checkbox" name="" value="">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+				<!-- 추가 옵션 -->
+				<div class="add-option">
+					<div class="options-wrapper">
+						<div class="add-option-col01">
+							<span>추가 옵션</span>
+						</div>
+						<div class="add-option-col02">
+							<div class="option-box">
+								<div class="option-box-wrapper">
+									<label class="option-box-row01"> <span>빠른 작업</span> 
+										<input type="checkbox" name="" value="">
+									</label>
+									<div class="option-box-row02 deactivate">
+										<span style="margin-right:30px;">1일 단축 당</span>
+										<input type="number" placeholder="금액 입력" value="5000" name=""  onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '금액 입력'" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/> 
+										<span>원 추가</span>
+									</div>
+								</div>
+							</div>
+							<div class="option-box">
+								<div class="option-box-wrapper">
+									<label class="option-box-row01"> <span>추가 수정</span> 
+										<input type="checkbox" name="" value="">
+									</label>
+									<div class="option-box-row02 deactivate">
+										<span style="margin-right:30px;">1회 수정 당</span>
+										<input type="number" placeholder="금액 입력" value="5000" name="" onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '금액 입력'" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/> 
+										<span>원 추가</span> 
+										
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
 
-                    <!-- 버튼 파트 -->
-                    <div class="form-buttons">
-                        <!-- 
+				<!-- 버튼 파트 -->
+				<div class="form-buttons">
+					<!-- 
                             first : 첫째장
                             last : 마지막장 -->
-                        <button type="button" onclick="location.href='/mh/mypage/project-form-01'" value="prev"
-                            class="form-buttons-prev button--small">이전</button>
-                        <div>
-                            <button type="button" onclick="" value="cancel" class="form-buttons-cancel">취소</button>
-                            <button type="button" onclick="location.href='/mh/mypage/project-form-03'" value="next"
-                                class="form-buttons-next button--small">다음</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </main>
-
-    
+					<button type="button"
+						onclick="location.href='/mh/mypage/project-form-01'" value="prev"
+						class="form-buttons-prev button--small">이전</button>
+					<div>
+						<button type="button" data-toggle='modal' data-target='#cancel' 
+							class="form-buttons-cancel">취소</button>
+						<button type="button"
+							 value="next"
+							class="form-buttons-next button--small">다음</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
-
 </html>

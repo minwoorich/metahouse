@@ -11,18 +11,12 @@
 <!-- 부트스트랩 css -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- style css -->
-<link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
-<!-- 버튼 컴포넌트 css -->
-<link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
+
 <!-- 페이지 전용 css -->
 <link rel="stylesheet" href="/mh/css/mypage/mypage_creator_jobform.css">
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/123626a3b2.js"
 	crossorigin="anonymous"></script>
-<!-- 부트스트랩 -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- 제이쿼리 js -->
 <script
@@ -37,7 +31,31 @@
 
 	<!-- 내가 설정한 body -->
 	<main layout:fragment="content" class="minwoo_body">
-		<!-- Modal -->
+		<!-- 취소 Modal -->
+		<div id="cancel" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"
+							style="font-weight: bold; font-size: 24px;">서비스 등록 취소</h4>
+					</div>
+					<div class="modal-body" style="font-weight: 500; font-size: 16px;">
+						<p>
+							지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br />
+							<br />그래도 취소 하시겠습니까?
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button--xsmall" data-dismiss="modal">취소하기</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- 이미지 삭제 Modal -->
 		<div id="delete-img-Modal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<!-- Modal content-->
@@ -55,7 +73,6 @@
 						<!-- <button>네, 삭제 하겠습니다</button> 빨간 글씨 버전-->
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<div class="minwoo_container">
@@ -69,7 +86,7 @@
 					</div>
 					<!-- 첫번째 화살표 -->
 					<i class="fa-solid fa-chevron-right fa-xl"
-						style="color: var(--gray)"></i>
+						style="color: var(- -gray)"></i>
 					<!-- 2. 가격설정 -->
 					<div class="progress-bar-item">
 						<i class="fa-sharp fa-circle-2 fa-2xl"></i> <span
@@ -77,7 +94,7 @@
 					</div>
 					<!-- 두번째 화살표 -->
 					<i class="fa-solid fa-chevron-right fa-xl"
-						style="color: var(--gray)"></i>
+						style="color: var(- -gray)"></i>
 					<!-- 3. 서비스 등록 -->
 					<div class="progress-bar-item">
 						<i class="fa-sharp fa-circle-3 fa-2xl"></i> <span
@@ -94,10 +111,10 @@
 							<div class="form-item-title">
 								<span>제목</span> <span>*</span>
 							</div>
-							<input class="form-item-description" type="text" maxlength="30"
+							<textarea class="form-item-description" type="text" maxlength="30"
 								placeholder="제목을 입력하세요" value="" name="" required
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '제목을 입력하세요'" />
+								onblur="this.placeholder = '제목을 입력하세요'" ></textarea>
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -131,7 +148,7 @@
 							<div class="form-item-description-wrapper">
 								<div class="form-item-description">
 									<div class="label">모집 마감 날짜</div>
-									<input type="date" name="" />
+									<input type="date" name="" required/>
 								</div>
 								<div class="form-item-description">
 									<div class="label">프로젝트 작업 기간</div>
@@ -159,7 +176,7 @@
 								<!-- 미리보기 이미지-->
 								<div class="image-frame thumbnail-img">
 									<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
-									<div>test01.jpeg</div>
+
 								</div>
 								<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
 								<label for="thumbnail">
@@ -188,27 +205,27 @@
 									<!-- 미리보기 이미지들 -->
 									<div class="image-frame optional-img">
 										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-										<div>test02.jpeg</div>
+
 									</div>
 									<div class="image-frame optional-img">
 										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-										<div>test02.jpeg</div>
+
 									</div>
 									<div class="image-frame optional-img">
 										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-										<div>test02.jpeg</div>
+
 									</div>
 									<div class="image-frame optional-img">
 										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-										<div>test02.jpeg</div>
+
 									</div>
 									<div class="image-frame optional-img">
 										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-										<div>test02.jpeg</div>
+
 									</div>
 									<div class="image-frame optional-img">
 										<img src="/mh/images/test_images/test02.jpeg" alt="상세 사진">
-										<div>test02.jpeg</div>
+
 									</div>
 
 
@@ -219,7 +236,7 @@
 											<i class="fa-sharp fa-solid fa-plus fa-2xl"
 												style="color: #ffffff;"></i>
 										</div>
-									</label> <input id="optional" name="" value="" type="file" required
+									</label> <input id="optional" name="" value="" type="file"
 										style="display: none" />
 								</div>
 							</div>
@@ -236,11 +253,9 @@
 						<!-- 
                         first : 첫째장
                         last : 마지막장 -->
-						<button type="button"
-							onclick="location.href='/mh/mypage/job-offerlist'" value="cancel"
-							class="form-buttons-cancel">취소</button>
-						<button type="button"
-							onclick="location.href='/mh/mypage/job-offerlist'" value="next"
+						<button type="button" data-toggle='modal' data-target='#cancel'
+							value="cancel" class="form-buttons-cancel">취소</button>
+						<button type="button" value="next"
 							class="form-buttons-submit button--small">등록</button>
 					</div>
 				</div>

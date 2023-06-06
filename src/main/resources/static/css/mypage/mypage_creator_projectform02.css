@@ -1,15 +1,186 @@
 @import "form_box.css";
 @import "progress_bar.css";
 
-.package-switch{
+
+.switch{
     display: flex;
-    flex-direction: row;
-    justify-content: end;
+    flex-direction: column;
+    align-items:end;
     width: 100%;
 }
 
+.switch-outer{
+	display:flex;
+	flex-direction:row;
+	padding:4px;
+	align-items:center;
+	width:45px;
+	height:26px;
+	border-radius:40px;
+	border:2px solid var(--medium-purple);
+	background-color:white;
+	transiton:0.5s;
+}
+.switch-outer:hover{
+	cursor:pointer;
+}
+.switch-inner{
+	width:14px;
+	height:14px;
+	background-color:var(--medium-purple);
+	border-radius:100%;
+	transition:0.5s;
+}
 
-/* 3�떒 �뙣�궎吏� */
+.on-outer{
+	background-color:var(--medium-purple);
+	display:flex;
+	justify-content:end;
+	transition:0.5s;
+}
+.on-inner{
+	background-color:white;
+	transition:0.5s;
+}
+
+/******** single패키지 시작 ********/
+.single-package{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+/* 단일 패키지 1열 (라벨 영역) */
+.single-package-col01{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex:1;
+}
+.single-package-col01 span{
+    font-size: 18px;
+    color: var(--gray);
+}
+
+.single-package-col01-wrapper{
+    padding-top: 105px;
+}
+.single-package-col01-row01{
+    margin-bottom: 86px;
+}
+.single-package-col01-row02{
+    margin-bottom: 210px;
+}
+
+
+/* 단일패키지 2열 (실제 입력칸) */
+.single-package-col02{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex:9;
+}
+
+.single-package-col02-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    flex: 1;
+}
+
+/* 단일패키지 실제 입력 칸 */
+.single-package-type{
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--gray);
+    margin-bottom: 50px;
+}
+
+/* 단일 패키지 - 제목 입력 */
+.single-package-title{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    min-height: 80px;
+    height:fit-content;
+    background-color: rgb(141,114,225,0.1);
+    border-radius:8px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.single-package-title-row01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.single-package-title-row01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+
+.single-package-title-row02{
+    display: flex;
+    width: auto;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--gray);
+    flex:1;
+}
+
+/* 단일패키지 - 설명 입력 */
+.single-package-description{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height:200px;
+    background-color: rgb(141,114,225,0.1);
+    border-radius:8px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.single-package-description-row01{
+    display: flex;
+    width: auto;
+    flex:8;
+}
+.single-package-description-row01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    font-size: 16px;
+    overflow:auto;
+}
+.single-package-description-row02{
+    display: flex;
+    width: auto;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--gray);
+    flex:1;
+}
+/* 단일패키지 - 가격 입력 */
+.single-package-cost{
+	display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items:center;
+    width: auto;
+    height:fit-content;
+    background-color: rgb(141,114,225,0.1);
+    border-radius:8px;
+    padding: 10px;
+}
+.single-package-cost input{
+	background-color : rgba(1,1,1,0);
+	width:80%;
+}
+/******** single패키지 끝 ********/
+
+/**** 3단 패키지 시작 *****/
 .triple-package{
     width: 100%;
     height: fit-content;
@@ -17,26 +188,30 @@
     flex-direction: row;
     margin-bottom: 40px;
 }
-/* triple-package-row01 */
-.triple-package-row01{
+
+/* triple-package-col01 */
+.triple-package-col01{
     width: fit-content;
     display: flex;
     flex-direction: column;
     flex:1;
 }
-.triple-package-row01 span{
+.triple-package-col01 span{
     font-size: 18px;
     color: var(--gray);
 }
 
-.triple-package-row-wrapper{
-    padding-top: 100px;
+.triple-package-col-wrapper{
+    padding-top: 105px;
 }
-.triple-package-row01-col01{
-    margin-bottom: 110px;
+.triple-package-col01-row01{
+    margin-bottom: 86px;
+}
+.triple-package-col01-row02{
+    margin-bottom: 210px;;
 }
 
-.triple-package-row02{
+.triple-package-col02{
     width: fit-content;
     display: flex;
     flex-direction: row;
@@ -50,6 +225,12 @@
     height: fit-content;
     flex: 1;
 }
+.triple-package-wrapper:nth-child(1){
+	margin-right:4px;
+}
+.triple-package-wrapper:nth-child(2){
+	margin-right:4px;
+}
 
 /* �뙣�궎吏����엯 �쁺�뿭 */
 .triple-package-type{
@@ -60,32 +241,32 @@
     margin-bottom: 50px;
 }
 
-/* �뙣�궎吏� '�젣紐�' �엯�젰 �쁺�뿭 */
+/* 3단 패키지 - 제목 입력 */
 .triple-package-title{
     display: flex;
     flex-direction: column;
     width: auto;
-    height: 79px;
-    background-color: var(--light-gray);
+    min-height:80px;
+    height:fit-content;
+    background-color: rgb(141,114,225,0.1);
+    border-radius:8px;
     padding: 10px;
     margin-bottom: 30px;
 }
-.triple-package-title-col01{
+.triple-package-title-row01{
     display: flex;
     width: auto;
-    flex:4;
+    flex:8;
 }
-.triple-package-title-col01 textarea{
+.triple-package-title-row01 textarea{
+	font-size: 16px;
     background-color: rgba(0,0,0,0);
     width: 100%;
     height: auto;
-    font-size: 16px;
+    resize: none;
+  	overflow: hidden;
 }
-.triple-package-title-col01 textarea::placeholder{
-    color: var(--gray);
-    font-size: 16px;
-}
-.triple-package-title-col02{
+.triple-package-title-row02{
     display: flex;
     width: auto;
     font-size: 12px;
@@ -94,31 +275,31 @@
     flex:1;
 }
 
-/* �뙣�궎吏� '�궡�슜' �엯�젰 �쁺�뿭 */
+/* 3단패키지 - 설명 입력*/
 .triple-package-description{
     display: flex;
     flex-direction: column;
     width: auto;
-    height: 79px;
-    background-color: var(--light-gray);
+    min-height:200px;
+    height:fit-content;
+    background-color: rgb(141,114,225,0.1);
+    border-radius:8px;
     padding: 10px;
+    margin-bottom: 30px;
 }
-.triple-package-description-col01{
+.triple-package-description-row01{
     display: flex;
     width: auto;
-    flex:4;
+    flex:8;
 }
-.triple-package-description-col01 textarea{
+.triple-package-description-row01 textarea{
     background-color: rgba(0,0,0,0);
     width: 100%;
     height: auto;
     font-size: 16px;
 }
-.triple-package-description-col01 textarea::placeholder{
-    color: var(--gray);
-    font-size: 16px;
-}
-.triple-package-description-col02{
+
+.triple-package-description-row02{
     display: flex;
     width: auto;
     font-size: 12px;
@@ -126,9 +307,26 @@
     color: var(--gray);
     flex:1;
 }
+/* 3단패키지 - 가격 입력*/
+.triple-package-cost{
+	display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items:center;
+    width: auto;
+    height:fit-content;
+    background-color: rgb(141,114,225,0.1);
+    border-radius:8px;
+    padding: 10px;
+}
+.triple-package-cost input{
+	background-color : rgba(1,1,1,0);
+	width:80%;
+}
 
 
-/* 異붽��샃�뀡 �뙆�듃 */
+
+/* 추가 옵션 스타일*/
 .add-option{
     padding-inline: 40px;
     padding-block: 30px;
@@ -137,21 +335,19 @@
     margin-bottom: 40px;
 }
 
-/* 異붽��샃�뀡 1�뿴 */
 .options-wrapper{
     display: flex;
     flex-direction: row;
 }
-.add-option-row01{
+.add-option-col01{
     flex:1;
 }
-.add-option-row01 span{
+.add-option-col01 span{
     font-size: 18px;
     color: var(--gray);
 }
 
-/* 異붽��샃�뀡 2�뿴 */
-.add-option-row02{
+.add-option-col02{
     flex:4.6;
 }
 .option-box{
@@ -163,160 +359,44 @@
     margin-bottom: 20px;
 }
 
-/* 異붽��샃�뀡 2�뿴 1�뻾 */
-.option-box-col01{
+.option-box-row01{
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.option-box-col01 input{
+.option-box-row01 input{
     width: 20px;
     height: 20px;
     accent-color: var(--bright-purple);
 }
+.option-box-row01 input:hover{
+    accent-color: rgba(108,74,182,0.3);
+	transition:0.5s;
+}
 
-/* 異붽��샃�뀡 2�뿴 2�뻾 (泥댄겕諛뺤뒪 �솢�꽦�솕 �맂寃쎌슦)*/
-.option-box-col02{
+.option-box-row02{
     display: flex;
     flex-direction: row;
+    justify-content:space-between;
     align-items: center;
     width: auto;
     height: 60px;
     padding-inline:20px ;
-    background-color: var(--light-gray);
+    background-color: rgb(141,114,225,0.1);
     border-radius: var(--radius-weak);
     margin-top: 10px;
 }
 
-.option-box-col02 input{
+.option-box-row02 input{
     background-color: rgba(0,0,0,0);
 }
 
-.option-box-col02 select{
-    margin-left: 50px;
-    width: 100px;
-    border: none;
-    border-radius: var(--radius-weak);
-    background-color: rgba(0,0,0,0);
-}
+
 /* ////////////////////////////////////////////////////////// */
-/* �떒�씪 �뙣�궎吏� */
-.single-package{
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 40px;
-}
-/* single-package-row01 */
-.single-package-row01{
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    flex:1;
-}
-.single-package-row01 span{
-    font-size: 18px;
-    color: var(--gray);
-}
 
-.single-package-row-wrapper{
-    padding-top: 100px;
-}
-.single-package-row01-col01{
-    margin-bottom: 110px;
-}
-
-.single-package-row02{
-    width: fit-content;
-    display: flex;
-    flex-direction: row;
-    flex:9;
-}
-
-.single-package-wrapper{
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    flex: 1;
-}
-
-/* �뙣�궎吏����엯 �쁺�뿭 */
-.single-package-type{
-    font-size: 24px;
-    font-weight: bold;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--gray);
-    margin-bottom: 50px;
-}
-
-/* �뙣�궎吏� '�젣紐�' �엯�젰 �쁺�뿭 */
-.single-package-title{
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    height: 79px;
-    background-color: var(--light-gray);
-    padding: 10px;
-    margin-bottom: 30px;
-}
-.single-package-title-col01{
-    display: flex;
-    width: auto;
-    flex:4;
-}
-.single-package-title-col01 textarea{
-    background-color: rgba(0,0,0,0);
-    width: 100%;
-    height: auto;
-    font-size: 16px;
-}
-.single-package-title-col01 textarea::placeholder{
-    color: var(--gray);
-    font-size: 16px;
-}
-.single-package-title-col02{
-    display: flex;
-    width: auto;
-    font-size: 12px;
-    font-weight: bold;
-    color: var(--gray);
-    flex:1;
-}
-
-/* �뙣�궎吏� '�궡�슜' �엯�젰 �쁺�뿭 */
-.single-package-description{
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    height: 79px;
-    background-color: var(--light-gray);
-    padding: 10px;
-}
-.single-package-description-col01{
-    display: flex;
-    width: auto;
-    flex:4;
-}
-.single-package-description-col01 textarea{
-    background-color: rgba(0,0,0,0);
-    width: 100%;
-    height: auto;
-    font-size: 16px;
-}
-.single-package-description-col01 textarea::placeholder{
-    color: var(--gray);
-    font-size: 16px;
-}
-.single-package-description-col02{
-    display: flex;
-    width: auto;
-    font-size: 12px;
-    font-weight: bold;
-    color: var(--gray);
-    flex:1;
+.deactivate{
+	display:none;
 }
 /* //////////////////////////////////////////////////////////// */
 
