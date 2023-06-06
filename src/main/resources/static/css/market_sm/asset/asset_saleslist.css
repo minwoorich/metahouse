@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+ul {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	vertical-align: baseline;
+	list-style: none;
+}
+
+.asset-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.asset-body-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	width: 720px;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+
+.asset-body-title span {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.asset-body-cardlist {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	width: 720px;
+}
+
+.asset-body-card {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+	padding: 30px;
+	margin-bottom: 30px;
+	border: 1px solid var( --bright-purple);
+	border-radius: 8px;
+}
+
+.asset-body-card:not(:last-child) {
+	margin-bottom: 50px;
+}
+
+.asset-body-img-frame {
+	display: flex;
+	flex: 1;
+}
+
+.asset-body-card img {
+	width: 100%;
+	height: 120px;
+	object-fit: cover;
+	box-sizing: border-box;
+}
+
+.asset-body-tag {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-left: 10px;
+	flex: 3.07;
+}
+
+.asset-body-tag-row01 {
+	font-size: 14px;
+	color: var( --gray);
+	margin-bottom: 15px;
+}
+
+.asset-body-tag-row02 {
+	font-size: 16px;
+	margin-bottom: 24px;
+}
+
+.asset-body-tag-row03 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.asset-body-tag-row03 div span:nth-child(2){
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.asset-body-registration {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 720px;
+	height: 178px;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	border: 1px solid var( --bright-purple);
+	border-radius: 8px;
+}
+
+.asset-body-registration:hover {
+	background-color: var( --light-gray);
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.asset-body-button {
+	display: flex;
+	flex-direction: row;
+}
+
+button:active {
+	box-shadow: none;
+}
+
+.asset-body-bottom-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	width: 720px;
+	height: 125px;
+	margin-bottom: 50px;
+	background-color: var( --light-blue);
+	border-radius: 8px;
+}
+
+.button--xsmall {
+	padding: 5px 12px;
+	font-size: 10px;
+	background-color: var( --light-purple);
+}
+
+.button--small {
+    /* 수정 영역 */
+    padding: 8px 20px;
+    width: 90px;
+    height: 28px;
+    font-size: 12px;
+}

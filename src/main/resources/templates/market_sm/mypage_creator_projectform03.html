@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/minwoo_style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/screen/mypage_creator_projectform03.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <title>크리에이터-판매등록03</title>
+</head>
+
+<body>
+   
+    <!-- 내가 설정한 body -->
+    <main class="minwoo_body">
+        <div class="minwoo_container w1000">
+            <!-- 진행 상태 바 -->
+                <div class="progress-bar">
+                    <div class="progress-bar-wrapper">
+                        <!-- 1.서비스 설정 -->
+                        <div class="progress-bar-item ">
+                            <i class="fa-sharp fa-circle-1 fa-2xl"></i>
+                            <span class="progress-bar-text">서비스 설정</span>
+                        </div>
+                        <!-- 첫번째 화살표 -->
+                        <i class="fa-solid fa-chevron-right fa-xl" style="color:var(--gray)"></i>
+                        <!-- 2. 가격설정 -->
+                        <div class="progress-bar-item ">
+                            <i class="fa-sharp fa-circle-2 fa-2xl"></i>
+                            <span class="progress-bar-text">가격 설정</span>
+                        </div>
+                        <!-- 두번째 화살표 -->
+                        <i class="fa-solid fa-chevron-right fa-xl" style="color:var(--gray)"></i>
+                        <!-- 3. 서비스 등록 -->
+                        <div class="progress-bar-item current">
+                            <i class="fa-sharp fa-circle-3 fa-2xl"></i>
+                            <span class="progress-bar-text">서비스 등록</span>
+                        </div>
+                    </div>
+                </div>
+            <!-- form -->
+            <div class="form">
+                <div class="form-wrapper">
+                    <!-- 제목 입력-->
+                    <div class="form-item texttype">
+                        <div class="label">제목</div>
+                        <div class="form-item-column01">
+                            <div class="form-item-description">
+                                <span>메타버스 맵 제작 해드립니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 카테고리 선택 -->
+                    <div class="form-item selecttype">
+                        <div class="label">카테고리</div>
+                        <div class="form-item-column01">
+                            <div class="form-item-description">
+                                <span>메타버스 맵</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- 서비스 설명 입력 -->
+                    <div class="form-item texttype">
+                        <div class="label">서비스 설명</div>
+                        <div class="form-item-column01">
+                            <div class="form-item-description">
+                                <span>이러쿵 저러쿵 열심히 만들어드립니다.
+                                    차원이 다른 서비스입니다</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 대표 사진 첨부 -->
+                    <div class="form-item filetype">
+                        <!-- **
+                        empty : 아직 아무 사진도 등록 안한 경우
+                        full : max까지 전부 등록 경우-->
+                        <div class="form-item-column01">
+                            <div class="form-item-file">
+                                 <!-- 미리보기 이미지-->
+                                 <div class="label">대표 사진</div>
+                                <div class="image-frame">
+                                    <img src="images/test_images/test01.jpeg" alt="대표 사진">
+                                    <div>test01.jpeg</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- 상세 사진 첨부 -->
+                    <div class="form-item filetype">
+                        <div class="form-item-column01">
+                            <div class="form-item-file">
+                                <div class="label">상세 사진</div>
+                                <div class="form-item-images-wrapper">
+                                    <!-- 미리보기 이미지들 -->
+                                    <div class="image-frame">
+                                        <img src="images/test_images/test02.jpeg" alt="상세 사진">
+                                        <div>test02.jpeg</div>
+                                    </div>
+                                    <div class="image-frame">
+                                        <img src="images/test_images/test03.jpeg" alt="상세 사진">
+                                        <div>test03.jpeg</div>
+                                    </div>
+                                    <div class="image-frame">
+                                        <img src="images/test_images/test04.jpeg" alt="상세 사진">
+                                        <div>test04.jpeg</div>
+                                    </div>
+                                    <div class="image-frame">
+                                        <img src="images/test_images/test05.jpeg" alt="상세 사진">
+                                        <div>test05.jpeg</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 단일 패키지 -->
+                    <div class="single-package">
+                        
+                        <!-- 패키지 2열 - 실제 작성할 입력 칸 -->
+                        <div class="single-package-row02">
+                            <div class="single-package-wrapper">
+                                <!-- 패키지 타입 => BASIC -->
+                                <div class="single-package-type">
+                                    <span>BASIC</span>
+                                </div>
+                                <!-- 제목(BASIC)  -->
+                                <div class="label">패키지 제목</div>
+                                <div class="single-package-title">
+                                    <div class="single-package-title-col01">
+                                        <span>초저가 패키지!!</span>
+                                    </div>
+                                </div>
+
+                                <!-- 설명(BASIC) -->
+                                <div class="label">패키지 설명</div>
+                                <div class="single-package-description">
+                                    <div class="single-package-description-col01">
+                                        <span>가장 싼 패키지 입니다</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 단일패키지 끝 -->
+
+                    <!-- 3단 패키지 -->
+                    <div class="triple-package activate">
+                        <!-- 패키지 1열 - 작성할 카테고리 -->
+                        <div class="triple-package-row01">
+                            <div class="triple-package-row-wrapper">
+                                <!-- 패키지 1열 1행 -->
+                                <div class="triple-package-row01-col01">
+                                    <span>제목</span>
+                                </div>
+                                <!-- 패키지 1열 2행 -->
+                                <div class="triple-package-row01-col02">
+                                    <span>설명</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- 패키지 2열 - 실제 작성할 입력 칸 -->
+                        <div class="triple-package-row02">
+                            <div class="triple-package-wrapper">
+                                <!-- 패키지 타입 => BASIC -->
+                                <div class="triple-package-type">
+                                    <span>BASIC</span>
+                                </div>
+                                <!-- 제목(BASIC)  -->
+                                <div class="triple-package-title">
+                                    <div class="triple-package-title-col01">
+                                        <textarea type="readonly" name="" 
+                                            readonly>초저가패키지입니다</textarea>
+                                    </div>
+                                </div>
+
+                                <!-- 설명(BASIC) -->
+                                <div class="triple-package-description">
+                                    <div class="triple-package-description-col01">
+                                        <textarea readonly>초저가 패키지라서 매우 빠르게 제작해드립니다.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 패키지 타입 => ECONOMY -->
+                            <div class="triple-package-wrapper">
+                                <div class="triple-package-type">
+                                    <span>ECONOMY</span>
+                                </div>
+                                <!-- 제목(ECONOMY)  -->
+                                <div class="triple-package-title">
+                                    <div class="triple-package-title-col01">
+                                        <textarea readonly>중저가 패키지</textarea>
+                                    </div>
+                                </div>
+
+                                <!-- 설명(ECONOMY) -->
+                                <div class="triple-package-description">
+                                    <div class="triple-package-description-col01">
+                                        <textarea readonly>중저가 패키지라서 보다 나은 퀄리티로 제작해드립니다.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 패키지 타입 => PREMIUM -->
+                            <div class="triple-package-wrapper">
+                                <div class="triple-package-type">
+                                    <span>PREMIUM</span>
+                                </div>
+                                <!-- 제목(PREMIUM)  -->
+                                <div class="triple-package-title">
+                                    <div class="triple-package-title-col01">
+                                        <textarea readonly>고오급 패키지</textarea>
+                                    </div>
+                                </div>
+
+                                <!-- 설명(PREMIUM) -->
+                                <div class="triple-package-description">
+                                    <div class="triple-package-description-col01">
+                                        <textarea readonly>고오급 패키지답게 최상급의 퀄리티로 대규모 맵도 제작해드립니다</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 3단 패키지 끝 -->
+
+                    <!-- 추가 옵션 -->
+                    <div class="add-option">
+                        <div class="options-wrapper">
+                            <div class="label">추가 옵션</div>
+                            <div class="add-option-row02">
+                                <!-- 옵션이 선택된 된 후 -->
+                                <div class="option-box selected">
+                                        <div class="option-box-col01">
+                                            <span>빠른 작업</span>
+                                        </div>
+                                        <div class="option-box-col02">
+                                            <input readonly value="50000" />
+                                            <span>원 추가</span>
+                                            <select disabled="disabled">
+                                            </select>
+                                            <span>1일 단축</span>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 버튼 파트 -->
+                    <div class="form-buttons last">
+                        <!-- 
+                            first : 첫째장
+                            last : 마지막장 -->
+                        <button type="button" onclick="" value="prev"
+                            class="form-buttons-prev button--small">이전</button>
+                        <div>
+                            <button type="button" onclick="" value="cancel" class="form-buttons-cancel">취소</button>
+                            <button type="button" onclick="" value="next"
+                                class="form-buttons-submit button--small">등록</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
