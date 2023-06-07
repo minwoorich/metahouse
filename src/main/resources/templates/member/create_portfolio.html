@@ -5,32 +5,197 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<th:block layout:fragment="config">
-		<link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
-		<link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
-		<link rel="stylesheet" href="/mh/css/member/create_protfolio.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
-	</th:block>
+	<link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css">
+	<link rel="stylesheet" href="/mh/css/thymeleaf/style.css">
+	<link rel="stylesheet" href="/mh/css/member/create_protfolio.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/mh/js/member/create_protfolio.js"></script>
+	<!-- 폰트어썸 -->
+	<script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div layout:fragment="content">
 		<form>
 			<div class="creat_portfolio_title">포트폴리오 생성</div>
-			
-			<div class="creat_portfolio_subtitle">포트폴리오 이미지 입력</div>
-			<div class="create_portfolio_input_img">
-				<label class="img_insert_lable" for="portfolio_img_insert">
-					<div class="create_portfolio_img">
-						사진추가
+			<div class="creat_portfolio_subtitle">카테고리 선택</div>
+			<div class="portfolio_category">
+				<div class="portfolio_first_category">
+					<span class="portfolio_category_name">1차 카테고리</span>
+					<div class="portfolio_category_list_cover">
+						<select name="portfolio_category_list" class="portfolio_category_list">
+							<option value="portfolio_second_category">맵</option>
+							<option value="portfolio_second_category">에셋</option>
+							<option value="portfolio_second_category">서비스</option>
+							<option value="portfolio_second_category">기타</option>
+						</select>
 					</div>
-				</label> 
-				<input type="file" id="portfolio_img_insert">
+				</div>
+				<div class="portfolio_second_category">
+					<span class="portfolio_category_name">2차 카테고리</span>
+					<div class="portfolio_category_list_cover">
+						<select name="portfolio_category_list" class="portfolio_category_list">
+							<option value="portfolio_first_category">마인크래프트</option>
+							<option value="portfolio_first_category">제페토</option>
+							<option value="portfolio_first_category">로블록스</option>
+							<option value="portfolio_first_category">게더타운</option>
+							<option value="portfolio_first_category">더 샌드박스</option>
+							<option value="portfolio_first_category">기타</option>
+						</select>
+					</div>
+				</div>
 			</div>
-			<div class="creat_portfolio_subtitle">포트폴리오 내용 입력</div>
-			<div class="create_portfolio_input_text">
-				<textarea class="create_portfolio_text_area" id="protfolio_content_textarea"></textarea>
+			
+			<div class="creat_portfolio_subtitle">포트폴리오 제목</div>
+			<div class="portfolio_title_area">
+				<span class="portfolio_title_name">포트폴리오 제목</span>
+				<div class="portfolio_title_cover">
+					<input type="text" placeholder="포트폴리오 제목을 입력하세요.">
+				</div>
 			</div>
+			
+			<div class="creat_portfolio_subtitle">참여 기간</div>
+			<div class="create_portfolio_date_cover">
+				<div class="portfolio_date">프로젝트 시작일</div>
+				<div class="portfolio_date_calendar">
+					<input type="date" name=""/>
+				</div>
+				<div class="portfolio_date">프로젝트 종료일</div>
+				<div class="portfolio_date_calendar">
+					<input type="date" name=""/>
+				</div>
+			</div>
+			
+			<div class="creat_portfolio_subtitle">참여 인원</div>
+			<div class="portfolio_num_people_cover">
+				<div class="portfolio_num_people_title">참여 인원</div>
+				<div class="portfolio_num_people">
+					<input type="text" placeholder="참여인원을 작성하세요.">
+				</div>
+			</div>
+			
+			<div class="creat_portfolio_subtitle">포트폴리오 메인 이미지 (필수)</div>
+			<div class="create-portfolio-main-img">
+				<div class="create_portfolio_input_img">
+					<div class="image-frame main-img">
+						<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
+					</div>
+					<label class="img_insert_lable" for="portfolio_img_insert">
+						<div class="create_portfolio_img main-img-add">
+							<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
+						</div>
+					</label> 
+					<input type="file" class="portfolio_img_insert" id="portfolio_img_insert">
+				</div>
+				<div class="img-check-column">
+					<div class="check-counter">
+						<span class="main-img-counter">0</span> <span>/</span> <span>1</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="creat_portfolio_subtitle">서비스 내용에 대한 사진과, 설명을 입력하세요.</div>			
+			<div class="create_portfolio_input_detail">
+				<div class="create_portfolio_input_detail_cover">
+					<div class="create_portfolio_input_detail_img">
+						<div class="image-frame option1-img">
+							<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
+						</div>
+						<div class="image-frame option1-img">
+							<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
+						</div>
+						<label class="img_insert_lable" for="portfolio_img_content_insert">
+							<div class="create_portfolio_img option1-img-add">
+								<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
+							</div>
+						</label> 
+						<input type="file" id="portfolio_img_content_insert">
+					</div>
+					<div class="img-check-column">
+						<div class="check-counter">
+							<span class="option1-img-counter">0</span> <span>/</span> <span>3</span>
+						</div>
+					</div>
+				</div>
+				<div class="create_portfolio_input_text">
+					<div class="create_portfolio_input_text_cover">
+						<div class="create_portfolio_input_text_name">서비스의 내용</div>
+						<textarea class="create_portfolio_text_area" id="protfolio_content_textarea" placeholder="내용을 입력하세요."
+							maxlength="500"></textarea>
+					</div>
+					<div class="text-check-column">
+						<div class="check-counter">
+							<span class="text1-counter">0</span> <span>/</span> <span>500</span>
+						</div>
+					</div>
+				</div>
+			</div>
+					
+			<div class="creat_portfolio_subtitle">서비스의 특징을 나타낼 수 있는 사진과, 설명을 입력하세요.</div>			
+			<div class="create_portfolio_input_detail">
+				<div class="create_portfolio_input_detail_cover">
+					<div class="create_portfolio_input_detail_img">
+						<div class="image-frame option2-img">
+							<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
+						</div>
+						<label class="img_insert_lable" for="portfolio_img_point_insert">
+							<div class="create_portfolio_img option2-img-add">
+								<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
+							</div>
+						</label> 
+						<input type="file" id="portfolio_img_point_insert">
+					</div>
+					<div class="img-check-column">
+						<div class="check-counter">
+							<span class="option2-img-counter">0</span> <span>/</span> <span>3</span>
+						</div>
+					</div>
+				</div>
+				<div class="create_portfolio_input_text">
+					<div class="create_portfolio_input_text_cover">
+						<div class="create_portfolio_input_text_name">서비스의 특징</div>
+						<textarea class="create_portfolio_text_area" id="protfolio_content_point_textarea" placeholder="내용을 입력하세요."
+							maxlength="500"></textarea>
+					</div>
+					<div class="text-check-column">
+						<div class="check-counter">
+							<span class="text2-counter">0</span> <span>/</span> <span>500</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="creat_portfolio_subtitle">자신이 제작한 서비스의 스타일을 나타낼 수 있는 사진과, 설명을 입력하세요.</div>			
+			<div class="create_portfolio_input_detail">
+				<div class="create_portfolio_input_detail_cover">
+					<div class="create_portfolio_input_detail_img">
+						<label class="img_insert_lable" for="portfolio_img_style_insert">
+							<div class="create_portfolio_img option3-img-add">
+								<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
+							</div>
+						</label> 
+						<input type="file" id="portfolio_img_style_insert">
+					</div>
+					<div class="img-check-column">
+						<div class="check-counter">
+							<span class="option3-img-counter">0</span> <span>/</span> <span>3</span>
+						</div>
+					</div>
+				</div>
+				<div class="create_portfolio_input_text">
+					<div class="create_portfolio_input_text_cover">
+						<div class="create_portfolio_input_text_name">서비스의 스타일</div>
+						<textarea class="create_portfolio_text_area" id="protfolio_content_style_textarea" placeholder="내용을 입력하세요."
+							maxlength="500"></textarea>
+					</div>
+					<div class="text-check-column">
+						<div class="check-counter">
+							<span class="text3-counter">0</span> <span>/</span> <span class="maxlength">500</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
 			<div class="create_portfolio_input_content">
 				<label for="portfolio_content" class="create_portfolio_input">첨부파일</label>
 				<input type="file" class="portfolio_content"
@@ -40,15 +205,25 @@
 				<button class="button--small">작성완료</button>
 			</div>
 		</form>
-		<script>
-			ClassicEditor
-				.create( document.querySelector( '#protfolio_content_textarea' ), {
-					toolbar: ['Undo', 'Redo', 'heading', '|', 'bold', 'italic']
-				} )
-				.catch( error => {
-					console.error( error );
-				});
-		</script>
+		<div id="delete-img-Modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"
+							style="font-weight: bold; font-size: 24px;">사진 삭제</h4>
+					</div>
+					<div class="modal-body" style="font-weight: 600; font-size: 16px;">
+						<p>사진을 삭제 하시겠습니까?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button--xsmall" data-dismiss="modal">삭제</button>
+						<!-- <button>네, 삭제 하겠습니다</button> 빨간 글씨 버전-->
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
