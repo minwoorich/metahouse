@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashboard/layout/dashboardLayout}">
+<body>
+	<div class="content" layout:fragment="content">
+		<h1>회원정보수정</h1>
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">회원조회</h5>
+						<div class="search_form">
+						<form action="">
+							<span>
+								<select class="search_cb">
+									<option value="아이디" selected="selected">아이디</option>
+									<option value="이메일">이메일</option>
+									<option value="이름">이름</option>
+								</select>
+							</span> 
+							<span>
+								<input id="search_input" type="text" autocomplete="off" placeholder=" 회원아이디 혹은 회원이름을 검색해주세요.">
+							</span>
+							<span>
+								<i id="search_btn" class="fa-regular fa-magnifying-glass fa-2xl"></i>
+							</span>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">회원조회</h5>
+						<div class="search_form">
+						<form action="">
+							<span>
+								<select class="search_cb">
+									<option value="아이디" selected="selected">아이디</option>
+									<option value="이메일">이메일</option>
+									<option value="이름">이름</option>
+								</select>
+							</span> 
+							<span>
+								<input id="search_input" type="text" autocomplete="off" placeholder=" 회원아이디 혹은 회원이름을 검색해주세요.">
+							</span>
+							<span>
+								<i id="search_btn" class="fa-regular fa-magnifying-glass fa-2xl"></i>
+							</span>
+						</form>
+						</div>
+						<div class="search_result">
+							<table class="table">
+							<thead>
+								<tr>
+									<th>아이디</th>
+									<th>이메일</th>
+									<th>이름</th>
+									<th>전화번호</th>
+									<th>성별</th>
+									<th>생년월일</th>
+									<th>가입일자</th>
+									<th>등급</th>
+									<th>포인트</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>greatkim</td>
+									<td>greatkim@gmail.com</td>
+									<td>김하나</td>
+									<td>010-1111-1111</td>
+									<td>여</td>
+									<td>911111</td>
+									<td>2023/01/11</td>
+									<td>VIP</td>
+									<td>56100</td>
+									<td>정상</td>
+									<td>Edit</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">회원정보수정</h5>
+						<div class="update_form">
+							<form action="">
+								<span>아이디</span><span><input type="text"/></span><br/>
+								<span>이메일</span><span><input type="text"/></span><br/>
+								<span>이름</span><span><input type="text"/></span><br/>
+								<span>비밀번호</span><span><input type="text"/></span><br/>
+								<span>전화번호</span><span><input type="text"/></span><br/>
+								<span>성별</span><span><input type="text"/></span><br/>
+								<span>생년월일</span><span><input type="text"/></span><br/>
+								<span>자기소개</span><span><input type="text"/></span><br/>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
