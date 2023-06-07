@@ -97,10 +97,6 @@ $(document).ready(function(){
     	}else{
     		$(this).parent().siblings(".option-box-row02").addClass("deactivate");
     	}
-    	if(value===""){
-        	$(this).parent().removeClass("alert-style");
-            $(this).parent().next(".alert-msg").remove();
-        }
     });
     
     // 필수 사항 입력 안 한 채로 "다음" 버튼 누른경우

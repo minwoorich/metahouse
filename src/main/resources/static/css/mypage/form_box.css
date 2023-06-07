@@ -81,8 +81,32 @@
     padding-inline: 20px;
 
 }
+/* 에디터 css*/ 
+.ck{
+	flex:5.6;
+	width:100%;
+	height:400px;
+}
+ .ck.ck-editor__editable.ck-focused {
+   /* border:1px solid var(--light-purple)!important; */
+ }
 
-
+/* form-item-display (취소 및 환불) */
+.form-item-display{
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+	align-items:center;
+	flex:5.6;
+	border:1px solid var(--bright-purple);
+	border-radius: 6px;
+	padding-block:10px;
+}
+.form-item-display:hover{
+	transition:0.5s;
+	background-color:rgb(141,114,225,0.2);
+	cursor:pointer;
+}
 /* form-item-file */
 .form-item-file{
     flex:5.6;
