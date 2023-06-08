@@ -23,6 +23,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- 내 js코드 -->
 <script src="/mh/js/mypage/mypage_creator_jobform.js"></script>
+<!-- ck에디터 CDN -->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
 <title>크리에이터-구인등록</title>
 </head>
 
@@ -43,8 +46,7 @@
 					</div>
 					<div class="modal-body" style="font-weight: 500; font-size: 16px;">
 						<p>
-							지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br />
-							<br />그래도 취소 하시겠습니까?
+							지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br /> <br />그래도 취소 하시겠습니까?
 						</p>
 					</div>
 					<div class="modal-footer">
@@ -80,26 +82,19 @@
 			<div class="progress-bar">
 				<div class="progress-bar-wrapper">
 					<!-- 1.서비스 설정 -->
-					<div class="progress-bar-item current">
+					<div style="padding-left:50px;" class="progress-bar-item current">
 						<i class="fa-sharp fa-circle-1 fa-2xl"></i> <span
 							class="progress-bar-text">서비스 설정</span>
 					</div>
 					<!-- 첫번째 화살표 -->
-					<i class="fa-solid fa-chevron-right fa-xl"
-						style="color: var(- -gray)"></i>
+					<!-- <i class="fa-solid fa-chevron-right fa-xl"
+						style="color: var(--gray)"></i> -->
 					<!-- 2. 가격설정 -->
-					<div class="progress-bar-item">
+					<div style="padding-right:50px;" class="progress-bar-item">
 						<i class="fa-sharp fa-circle-2 fa-2xl"></i> <span
 							class="progress-bar-text">가격 설정</span>
 					</div>
-					<!-- 두번째 화살표 -->
-					<i class="fa-solid fa-chevron-right fa-xl"
-						style="color: var(- -gray)"></i>
-					<!-- 3. 서비스 등록 -->
-					<div class="progress-bar-item">
-						<i class="fa-sharp fa-circle-3 fa-2xl"></i> <span
-							class="progress-bar-text">서비스 등록</span>
-					</div>
+					
 				</div>
 			</div>
 			<!-- 등록서 작성 파트 -->
@@ -111,10 +106,10 @@
 							<div class="form-item-title">
 								<span>제목</span> <span>*</span>
 							</div>
-							<textarea class="form-item-description" type="text" maxlength="30"
-								placeholder="제목을 입력하세요" value="" name="" required
+							<textarea class="form-item-description" type="text"
+								maxlength="30" placeholder="제목을 입력하세요" value="" name="" required
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '제목을 입력하세요'" ></textarea>
+								onblur="this.placeholder = '제목을 입력하세요'"></textarea>
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -128,14 +123,58 @@
 							<div class="form-item-title">
 								<span>의뢰 사항</span> <span>*</span>
 							</div>
-							<textarea class="form-item-description" maxlength="1500"
-								placeholder="의뢰 사항을 작성해주세요" value="" name="" required
-								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '의뢰 사항을 작성해주세요'"></textarea>
+							<textarea class="form-item-description" id="form-editor" name=""
+								value="" maxlength="1500"></textarea>
+							<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								ClassicEditor
+									.create( document.querySelector( '#form-editor' ), {
+										toolbar: ['Undo', 'Redo', 'heading', '|', 'bold', 'italic']
+									} )
+									.then( editor => {
+										let defaultText =
+											" <strong>1. 프로젝트 개요</strong><br/>"+
+											"프로젝트 목적, 타겟 고객, 진행 계획 등<br/><br/>"+
+											" <strong>2. 상세 업무 내용</strong><br/>"+
+											"업무 내용 설명, 작업 범위 및 분량, 필요한 조건 등<br/><br/>"+
+											" <strong>3. 참고 서비스/사이트</strong><br/><br/>"+
+											"<strong>4. 유의사항</strong><br/>"+
+											"지원자 필수 요건, 희망 계획 방식 등<br/><br/>";
+								      // 에디터 인스턴스 생성 후 setData 메서드를 사용하여 초기값 설정
+								      editor.setData(defaultText);
+								   	  // 글자수 카운트
+								      const charCountContainer = document.querySelector('#editor-counter');
+      
+								      // 초기 글자 수 업데이트
+								      const initialContent = editor.getData();
+								      const initialCharCount = countCharacters(initialContent);
+								      charCountContainer.textContent = initialCharCount;
+								      
+								      // 에디터 내용 변경 시 글자 수 업데이트
+								      editor.model.document.on( 'change:data', () => {
+								    	const MAXLENGTH = 1500;
+								        const content = editor.getData();
+								        const charCount = countCharacters(content);
+								        charCountContainer.textContent = charCount;
+								    	  
+								      });
+								      
+								      // 문자열에서 HTML 태그를 제외한 글자 수를 세는 함수
+								      function countCharacters(text) {
+								        const strippedText = text.replace(/<\/?[^>]+(>|$)/g, '');
+								        return strippedText.length;
+								      }
+								    })
+									.catch( error => {
+										console.error( error );
+									});
+							});
+							</script>
+							
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
-								<span class="counter">0</span> <span>/</span> <span>1500</span>
+								<span class="counter" id="editor-counter">0</span> <span>/</span> <span>1500</span>
 							</div>
 						</div>
 					</div>
@@ -148,7 +187,7 @@
 							<div class="form-item-description-wrapper">
 								<div class="form-item-description">
 									<div class="label">모집 마감 날짜</div>
-									<input type="date" name="" required/>
+									<input type="date" name="" required />
 								</div>
 								<div class="form-item-description">
 									<div class="label">프로젝트 작업 기간</div>
@@ -164,7 +203,7 @@
 
 					</div>
 					<!-- 대표 사진 첨부 -->
-					<div class="form-item filetype">
+					<div class="form-item filetype thumbnail-form">
 						<!-- **
                         empty : 아직 아무 사진도 등록 안한 경우
                         full : max까지 전부 등록 경우-->

@@ -1,9 +1,17 @@
-.stat-row {
+/* row 설정 (overriding) */
+.row {
 	display: flex;
-    justify-content: center;	
+    /* justify-content: center; */
 }
 
-.custom-primary {
+/* card 클래스 설정 (overriding) */
+.card {
+	width: 450px;
+}
+
+/* 미사용 CSS */
+/*
+ .custom-primary {
 	color: #6C4AB6;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 20px;
@@ -38,8 +46,6 @@
 .custom-primaryimg {
 	margin-top: 40px;
 	margin-left: 30px;
-}
+} 
+*/
 
-.card {
-	width: 450px;
-}

@@ -35,7 +35,7 @@ select::-ms-expand {
 
 .search_content {
 	border-width: 0px 0px 2px 0px;
-	font-size: 16pt;
+	font-size: 14pt;
 }
 
 .search_content:focus {
@@ -43,7 +43,7 @@ select::-ms-expand {
 }
 
 .search_btn {
-	width: 4em;
+	width: 2.5em;
 	background-color: white;
 	border: 0px;
 	cursor: pointer;
