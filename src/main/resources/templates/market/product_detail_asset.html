@@ -4,7 +4,7 @@
       layout:decorate="~{layout/salesLayout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Asset/detail</title>
 <link href="/mh/css/thymeleaf/style.css" rel="stylesheet" >
 <link href="/mh/css/thymeleaf/buttons.css" rel="stylesheet" type="text/css">
 <link href="/mh/css/market/product_detail.css" rel="stylesheet" type="text/css" />
@@ -14,8 +14,8 @@
 	<div layout:fragment="content" class="content">	
 		<!-- product detail -->
 		<div id="product_detail">
+			<div>ASSET &rang; 카테고리1 &rang; 카테고리2</div><br>
 			<div id="main_title">제패토 옷 팝니다.</div>
-			<div>ASSET &rang; 카테고리1 &rang; 카테고리2</div>
 			<!-- 이미지 갤러리 -->
 			<div id="photo_container">
 				<div id="main_photo_box">
@@ -35,11 +35,13 @@
 				'유니버스'(Universe)의 합성어로, 현실세계와 같은 사회·경제·문화 활동이 이뤄지는 3차원의 가상세계를 가리킨다.
 				메타버스는 가상현실(VR, 컴퓨터로 만들어 놓은 가상의 세계에서 사람이 실제와 같은 체험을 할 수 있도록 하는 최첨단
 				기술)보다 한 단계 더 진화한 개념으로, 아바타를 활용해 단지 게임이나 가상현실을 즐기는 데 그치지 않고 실제 현실과 같은
-				사회·문화적 활동을 할 수 있다는 특징이 있다. [네이버 지식백과] 메타버스 (시사상식사전, pmg 지식엔진연구소)</div>
-			<div class="sub_title" id="price_explain">가격 설명</div>
-			<div><!-- 가격 등록양식 붙이기 --></div>
-			<div class="sub_title" id="product_option">추가옵션</div>
-			<div><!-- 추가옵션 등록양식 붙이기 --></div>
+				사회·문화적 활동을 할 수 있다는 특징이 있다. [네이버 지식백과] 메타버스 (시사상식사전, pmg 지식엔진연구소)
+			</div>
+			<div class="sub_title">가격</div>
+			<div class="sub_content">30000원</div>
+			<div id="report">
+				<img alt="신고아이콘" src="/mh/images/report_icon.png" id="report_img"><span>게시글 신고하기</span>
+			</div>
 		</div>
 
 		<!-- select_product_box -->
@@ -63,13 +65,13 @@
 			</div>
 			<!-- buy button -->
 			<div id="btn">
-				<button class="button--small btn_custom">문의하기</button>
+				<button class="button--small btn_custom" id="ask">문의하기</button>
 				<button class="button--small btn_custom">구매하기</button>
 			</div>
 		</div>
+	<script src="/mh/js/market/img_show.js"></script>
 	</div><!-- layout:fragment -->	
 	
-	<script src="/mh/js/market/img_show.js"></script>
 
 </body>
 </html>
