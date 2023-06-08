@@ -66,11 +66,21 @@
 .single-package-col01-wrapper{
     padding-top: 105px;
 }
+/* 제목 */
 .single-package-col01-row01{
     margin-bottom: 86px;
 }
+/* 설명 */
 .single-package-col01-row02{
     margin-bottom: 210px;
+}
+/* 가격 */
+.single-package-col01-row03{
+    margin-bottom: 45px;
+}
+/* 수정 */
+.single-package-col01-row04{
+    margin-bottom: 53px;
 }
 
 
@@ -127,7 +137,6 @@
     display: flex;
     width: auto;
     font-size: 12px;
-    font-weight: bold;
     color: var(--gray);
     flex:1;
 }
@@ -158,10 +167,10 @@
     display: flex;
     width: auto;
     font-size: 12px;
-    font-weight: bold;
     color: var(--gray);
     flex:1;
 }
+
 /* 단일패키지 - 가격 입력 */
 .single-package-cost{
 	display: flex;
@@ -176,44 +185,105 @@
 }
 .single-package-cost input{
 	background-color : rgba(1,1,1,0);
-	width:50%;
+	width:35%;
 }
+
+/* 단일패키지 수정 */
 .single-package-revision{
+	position:relative;
 	display:flex;
-	flex-direction:column;
+	width: 100%;
+	flex-direction:row;
+	align-items:center;
 	margin-bottom: 30px;
-}
-.single-package-revision-dropdown{
 	background-color: rgb(141,114,225,0.1);
-	width : 100%;
-	height: fit-content;
 	padding:10px;
 	border-radius: 8px;
-	font-weight:500;
+	
+}
+.single-package-revision-dropdown{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	width : 100%;
+	height: fit-content;
+	font-weight:400;
 }
 .single-package-revision-dropdown:hover{
 	cursor: pointer;
 }
+.single-package-revision-dropdown div{
+	width:32%;
+	display:flex;
+	flex-direction: row;
+	justify-content:space-between;
+	align-items:center;
+}
+
 .single-package-revision ul{
+	z-index:999;
+	position:absolute;
+	top : 40px;
+	left:130px;
 	display:flex;
 	flex-direction:column;
-	align-items:center;
-	width:50px;
-	background-color: rgb(141,114,225,0.1);
-	height: fit-content;
+	align-items:start;
+	width:10%;
+	height: 200px; 
 	border-radius: 8px;
-	padding-block:10px;
+	box-shadow: var(--shade-dropdown);
+	overflow-x:auto;
+	
+}
+/* 스크롤바 꾸미기 */
+.single-package-revision ul::-webkit-scrollbar{
+    width: 5px
+}
+.single-package-revision ul::-webkit-scrollbar-thumb{
+    background-color: var(--light-purple);  /* rgb(141,158,255) */
+}
+.single-package-revision ul::-webkit-scrollbar-track{
+    background-color: rgba(141,158,255,0.2);
 }
 .single-package-revision li{
-	padding-inline:10px;
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+	align-items : start;
+	width:100%;
+	padding-inline:20px;
+	padding-block:5px;
+	background-color: white;
+}
+.single-package-revision li:first-child{
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+.single-package-revision li:last-child{
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 .single-package-revision li:hover{
 	cursor:pointer;
-	color:var(--light-purple);
+	color:var(--bright-purple);
+	font-weight: bold;
 }
+
+/* 단일패키지 - 작업일 입력 */
 .single-package-date{
-	
+	width:100%;
+	height: fit-content;
+	background-color: rgb(141,114,225,0.1);
+	border-radius:8px;
+	padding:10px;
 }
+.single-package-date input{
+	background-color : rgba(1,1,1,0);
+	width:35%;
+}
+
+
+
 /******** single패키지 끝 ********/
 
 /**** 3단 패키지 시작 *****/
@@ -240,11 +310,21 @@
 .triple-package-col-wrapper{
     padding-top: 105px;
 }
+/* 제목 */
 .triple-package-col01-row01{
     margin-bottom: 86px;
 }
+/* 설명 */
 .triple-package-col01-row02{
     margin-bottom: 210px;;
+}
+/* 가격 */
+.triple-package-col01-row03{
+    margin-bottom: 45px;
+}
+/* 수정 */
+.triple-package-col01-row04{
+    margin-bottom: 53px;
 }
 
 .triple-package-col02{
@@ -306,7 +386,6 @@
     display: flex;
     width: auto;
     font-size: 12px;
-    font-weight: bold;
     color: var(--gray);
     flex:1;
 }
@@ -339,7 +418,6 @@
     display: flex;
     width: auto;
     font-size: 12px;
-    font-weight: bold;
     color: var(--gray);
     flex:1;
 }
@@ -354,12 +432,101 @@
     background-color: rgb(141,114,225,0.1);
     border-radius:8px;
     padding: 10px;
+    margin-bottom: 30px;
 }
 .triple-package-cost input{
 	background-color : rgba(1,1,1,0);
 	width:80%;
 }
 
+/* 3단 패키지 수정 횟수 입력 */
+.triple-package-revision{
+	position:relative;
+	display:flex;
+	flex-direction:column;
+	margin-bottom: 30px;
+}
+.triple-package-revision-dropdown{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	background-color: rgb(141,114,225,0.1);
+	width : 100%;
+	height: fit-content;
+	padding:10px;
+	border-radius: 8px;
+	font-weight:500;
+}
+.triple-package-revision-dropdown:hover{
+	cursor: pointer;
+}
+.triple-package-revision-dropdown div{
+	width:90%;
+	display:flex;
+	flex-direction: row;
+	align-items:center;
+	justify-content: space-between;
+}
+.triple-package-revision ul{
+	z-index:999;
+	position:absolute;
+	top:40px;
+	left:135px;
+	display:flex;
+	flex-direction:column;
+	align-items:start;
+	width:30%;
+	height: 200px;
+	border-radius: 8px;
+	box-shadow: var(--shade-dropdown);
+	overflow-x: auto;
+}
+/* 스크롤바 꾸미기 */
+.triple-package-revision ul::-webkit-scrollbar{
+    width: 5px
+}
+.triple-package-revision ul::-webkit-scrollbar-thumb{
+    background-color: var(--light-purple);  /* rgb(141,158,255) */
+}
+.triple-package-revision ul::-webkit-scrollbar-track{
+    background-color: rgba(141,158,255,0.2);
+}
+.triple-package-revision li{
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+	align-items : start;
+	width:100%;
+	padding-inline:20px;
+	padding-block:5px;
+	background-color: white;
+}
+.triple-package-revision li:first-child{
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+.triple-package-revision li:last-child{
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+.triple-package-revision li:hover{
+	cursor:pointer;
+	color:var(--bright-purple);
+	font-weight: bold;
+}
+/* 3단패키지 - 작업일 입력 */
+.triple-package-date{
+	display:flex;
+	flex-direction:row;
+	height: fit-content;
+	background-color: rgb(141,114,225,0.1);
+	border-radius:8px;
+	padding:10px;
+}
+.triple-package-date input{
+	background-color : rgba(1,1,1,0);
+}
 
 
 /* 추가 옵션 스타일*/
@@ -431,9 +598,7 @@
 
 /* ////////////////////////////////////////////////////////// */
 
-.deactivate{
-	display:none;
-}
+
 /* //////////////////////////////////////////////////////////// */
 
 /* 踰꾪듉 �뙆�듃 */
@@ -450,7 +615,9 @@
 
 }
 
-
+.deactivate{
+	display:none!important;
+}
 
 
 
