@@ -114,7 +114,7 @@ $(document).ready(function () {
     		$(".thumbnail-form").addClass("alert-style");
     	}
     	if(isValid){
-    		location.href='/mh/asset/asset-form-02';
+    		location.href='/mh/creator/creator-form-02';
     	}else{//스크롤이 맨 위로 올라감
     		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
     	}

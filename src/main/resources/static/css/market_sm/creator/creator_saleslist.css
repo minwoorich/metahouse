@@ -75,51 +75,39 @@ select {
 
 .creater-body-box {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	justify-content: space-between;
 	align-items: center;
 	box-sizing: border-box;
 	width: 150px;
 	height: 150px;
+	padding-inline: 20px;
 	background-color: #FFFFFF;
 	border: 2px solid #8D72E1;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 8px;
+	transition: 0.5s;
+}
+
+.creater-body-box:hover {
+	cursor: pointer;
+	border: 2px solid var(--light-purple);
+	transition: 0.5s;
+}
+
+.creater-body-box-text {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
 }
 
 .creater-body-box span {
 	font-size: 14px;
-	margin-left: 50px;
 }
 
 .creater-body-box p {
 	font-size: 20px;
 	font-weight: bold;
-	margin-left: 50px;
-}
-
-.creater-body-box-wrapper div:nth-child(1) {
-	background: url("/mh/images/clock-solid.svg") no-repeat 15px;
-	background-size: 30px;
-	background-color: #FFFFFF;
-}
-
-.creater-body-box-wrapper div:nth-child(2) {
-	background: url("/mh/images/right-to-bracket-solid.svg") no-repeat 15px;
-	background-size: 30px;
-	background-color: #FFFFFF;
-}
-
-.creater-body-box-wrapper div:nth-child(3) {
-	background: url("/mh/images/circle-exclamation-solid.svg") no-repeat 15px;
-	background-size: 30px;
-	background-color: #FFFFFF;
-}
-
-.creater-body-box-wrapper div:nth-child(4) {
-	background: url("/mh/images/store-solid.svg") no-repeat 15px;
-	background-size: 30px;
-	background-color: #FFFFFF;
 }
 
 .creater-body-form {
