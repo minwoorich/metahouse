@@ -40,7 +40,6 @@ $(document).ready(function () {
 
 
     // 작업기간 입력폼에 0~90 까지만 입력 가능하게 하는 코드
-
     $('input[type="number"]').on('input', function (event) {
         const value = $(this).val();
         const alertMsg = $("<div>0~90 만 입력해주세요</div>").attr("class", "alert-msg");
@@ -76,9 +75,7 @@ $(document).ready(function () {
         }
     )
 
-
     //사진 누르면 삭제 모달뜨고 버튼 누르면 삭제완료됨
-
     const deleteBtn = $("#delete-img-Modal").find("button");
     //삭제할 사진을 누르면 해당 사진 객체 저장 + 모달 뜸
     $(".image-frame").on("click", function (event) {
@@ -119,15 +116,20 @@ $(document).ready(function () {
 				  $(this).addClass('alert-style');
 				  isValid=false;
 			  }
-  	});
+    	});
+    	if($(".thumbnail-img").length == 0){
+    		$(".thumbnail-form").addClass("alert-style");
+    		isValid=false;
+    	}
+    	//필수항목 다 채웠으면 다음 페이지로 넘어감
     	if(isValid){
     		location.href='/mh/mypage/project-form-02';
-    	}else{
+    	}else{// 다 못채웠으면 스크롤 최상단으로 올라감
     		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
     	}
   	});
     
-    //textarea에 값을 입력하면 alert-style 사라짐
+    //textarea,input에 값을 입력하면 alert-style 사라짐
     $("textarea").on("input",function(){
     	if($(this).val()!==""){
     		$(this).parent().parent().removeClass("alert-style");
@@ -138,7 +140,9 @@ $(document).ready(function () {
     		$(this).removeClass("alert-style");
     	}
     });
-
-
+  //사진 추가하면 alert-style 사라짐
+    if($(".thumbnail-img").length !== 0){
+		$(".thumbnail-form").removeClass("alert-style");
+	}
 });
 

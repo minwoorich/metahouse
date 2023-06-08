@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.form{
+    width: 920px;
+    height: fit-content;
+    padding-inline: 40px;
+    padding-block: 40px;
+}
+
+.form-wrapper{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+}
+
+.form-item-column01{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.form-item-title{
+    flex:1;
+    line-height: 160%;
+}
+
+.form-item-title>span:nth-child(1){
+    color: var(--gray);
+}
+.form-item-title>span:nth-child(2){
+    color: var(--red);
+}
+
+.form-item-description{
+    flex:5.6;
+    line-height: 160%;
+    border: none;
+}

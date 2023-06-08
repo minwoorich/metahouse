@@ -21,7 +21,7 @@ time, mark, audio, video {
 	border: 0;
 	/* font-size: 100%; */
 	font-size: 16px;
-	font: inherit;
+	font-family: 'Noto Sans KR', sans-serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -42,6 +42,12 @@ blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
+}
+select  {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+border:none;
 }
 table {
 	border-collapse: collapse;

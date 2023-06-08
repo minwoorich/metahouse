@@ -116,7 +116,6 @@ $(document).ready(function () {
     	if(isValid){
     		location.href='/mh/asset/asset-form-02';
     	}else{//스크롤이 맨 위로 올라감
-    		alert(isValid);
     		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
     	}
     	
