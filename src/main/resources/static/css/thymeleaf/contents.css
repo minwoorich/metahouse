@@ -1,3 +1,4 @@
+/* content 요소 설정 */
 .content{
 	display: block;
 	margin-left: 50px;
@@ -20,6 +21,7 @@
 	color: #344767;
 }
 
+/* row|col 설정 */
 .row {
 	display: flex;
     justify-content: space-between;
@@ -37,6 +39,7 @@
 	margin-left: 10px;
 }
 
+/* card 클래스 관련 CSS (시작) */
 .card {
 	width: 100%;
 	margin: 20px;
@@ -67,7 +70,11 @@
 	font-size: 14px;
 	color: #555;
 }
+/* card 클래스 관련 CSS (끝) */
 
+/* 
+   input type:text
+*/
 #search_input{
 	width: 500px;
 	height: 40px;
@@ -75,18 +82,24 @@
 	/* margin-bottom: 10px; */
 }
 
-/* search 아이콘에 pointer 설정 */
+/* 
+   search button
+*/
 #search_btn{
 	cursor: pointer;
 }
 
-/* search에 사용하는 콤보 박스 class */
+/*
+   search combo box 
+*/
 .search_cb{
 	width: 100px;
 	height: 40px;
 }
 
-/* form 태그 하위 span 사이 margin 설정 */
+/* 
+   form 하위 span 요소 간 margin 설정 
+*/
 form span{
 	margin-right: 10px;
 }
