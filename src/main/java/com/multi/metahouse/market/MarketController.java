@@ -32,6 +32,6 @@ public class MarketController {
 	}
 	@GetMapping("product/purchase")
 	public String otherProfile() {
-		return "market/purchase";
+		return "market/purchase_gigs";
 	}
 }
