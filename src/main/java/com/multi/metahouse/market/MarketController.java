@@ -30,8 +30,12 @@ public class MarketController {
 	public String showGigs2() {
 		return "market/product_detail_gigs_2";
 	}
+	@GetMapping("product/purchase_asset")
+	public String puchaseAsset() {
+		return "market/purchase_asset";
+	}
 	@GetMapping("product/purchase")
-	public String otherProfile() {
+	public String puchaseGigs() {
 		return "market/purchase_gigs";
 	}
 }
