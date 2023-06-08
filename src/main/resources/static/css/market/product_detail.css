@@ -1,44 +1,90 @@
 @charset "UTF-8";
 
 .content {
-	margin: 0;
+	margin-bottom: 5rem;
 	padding: 0;
 	display: inline-flex;
 	justify-content: space-between;
 	width: 100%;
 }
+
 #product_detail {
 	margin: 1rem;
 	margin-right: 5rem;
-	width: 70%;
+	width: 700px;
 }
-#main_title{
+
+#main_title {
 	font-size: 26px;
 	font-weight: bold;
 }
-.sub_title{
-	margin-top: 1.5rem;
-	padding: 1rem;
-	border-top: 1px solid;
-	font-size: 14pt;
+
+.sub_title {
+	margin-top: 25px;
+	font-size: 16pt;
 	font-weight: bold;
 }
-.sub_content{
+
+.sub_content {
 	padding: 1rem;
+	text-align: justify;
 }
 
+table {
+	margin-top: 1rem;
+	width: 100%;
+}
+
+th {
+	background-color: rgba(141, 114, 255, 0.2);
+	padding-left: 10px;
+}
+
+tr {
+	border-bottom: 1px solid;
+}
+
+td {
+	padding-left: 10px;
+}
+
+.price_table {
+	min-height: 250px;
+	border-top: 1.5px solid;
+	border-bottom: 1.5px solid;
+}
+
+.td2, .td3, .td4 {
+	width: 30%;
+}
+
+.product_option {
+	height: 50px;
+	border: none;
+}
+
+#report {
+	margin: 1.5rem 0;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 25px;
+}
+
+#report_img {
+	height: 100%;
+}
 /* 선택상품 사이드바 */
 #select_product_box {
-	top : 1.5rem;
+	top: 25rem;
 	position: sticky;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	width: 30%;
+	width: 300px;
 	height: 80%;
-	border: 2px solid var(--bright-purple);
-	border-color: medium-purple;
+	box-shadow: 1px 1px 12px #C4B0FF;
 	border-radius: 8px;
 }
 
@@ -53,21 +99,24 @@
 #represent_img {
 	width: 100%;
 }
-.product_title{
-	margin-top: 0.5red;
+
+.product_title {
+	margin-top: 0.5rem;
 	font-size: 16pt;
 	font-weight: bold;
-	overflow:hidden;
-    word-wrap:break-word;
-}
-.product_info{
-	margin-bottom: 0.5rem;
+	overflow: hidden;
+	word-wrap: break-word;
 }
 
-#product_price{
-	font-size:14pt;
+.product_info {
+	margin: 0.5rem 0;
+}
+
+#product_price {
+	font-size: 14pt;
 	font-weight: bold;
 }
+
 /* 판매자 프로필 */
 #seller_profile {
 	margin-bottom: 1.5rem;
@@ -91,9 +140,10 @@
 	height: 100%;
 	object-fit: cover;
 }
+
 #seller_info {
 	margin: 3%;
-	width:70%;
+	width: 70%;
 	font-size: 8pt;
 }
 
@@ -101,12 +151,16 @@
 	margin: 3%;
 }
 /* 버튼 */
-#btn{
+#btn {
 	margin-bottom: 2rem;
 	display: inline-flex;
 	justify-content: space-around;
-	width: 80%;
+	width: 90%;
 }
-.btn_custom{
-	font-size: 14px;
+
+.btn_custom {
+	padding: 0px;
+	width: 95px;
+	height: 40px;
+	font-size: 10px;
 }

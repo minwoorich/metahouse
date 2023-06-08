@@ -11,7 +11,7 @@
 	margin: 1rem auto 3rem;
 	padding: 10px 0;
 	width: 100%;
-	border-top: 2px solid purple;
+	border-top: 2px solid #6C4AB6;
 }
 
 /* product */
@@ -19,15 +19,15 @@
 	margin:1.5rem auto;
 	width: 20rem;
 	height: 25rem; 
-	border: 2px solid;
-	border-radius: 8px;
 	
 }
 /* product img */
 .product_img_cover{
-	margin: 2rem auto;
-	width: 16rem;
+	margin: 1rem auto;
+	width: 20rem;
 	height: 13rem;
+	border-radius: 6px;
+	overflow: hidden;
 }
 
 .product_img {
@@ -44,6 +44,7 @@
 
 .product_title {
 	font-size: 12pt;
+	font-weight:bolder;
 	margin-left: 1rem;
 }
 .product_seller {
