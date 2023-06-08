@@ -1,10 +1,170 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/nonsideLayout}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="/mh/css/member/portfolio_detail.css">
+    <script>
+      function next(el){
+            let list = el.parentNode.querySelector(".banner-slider-list");
+
+            let listSize = list.offsetWidth;
+            let itemSize = list.firstElementChild.offsetWidth;
+            let countOfView = parseInt(listSize/itemSize);
+
+
+
+            let index = Number(list.getAttribute("index"));
+            let itemCount = list.childElementCount;
+
+            if(index+countOfView >= itemCount){
+                return;
+            }
+            index++;
+            list.setAttribute("index",index);
+            
+            
+            list.style.left = -itemSize*index+"px";
+
+        }
+
+        function pre(el){
+            let list = el.parentNode.querySelector(".banner-slider-list");
+
+            let listSize = list.offsetWidth;
+            let itemSize = list.firstElementChild.offsetWidth;
+            let countOfView = parseInt(listSize/itemSize);
+
+
+
+            let index = Number(list.getAttribute("index"));
+            let itemCount = list.childElementCount;
+
+            if(index<=0){
+                list.style.left = 0;
+                list.setAttribute("index",0);
+                return;
+            }
+            index--;
+            list.setAttribute("index",index);
+            
+            list.style.left = -itemSize*index+"px";
+        }
+
+    </script>
 </head>
 <body>
-
+	<div layout:fragment="content">
+		<!-- 카테고리, 제목, 수행기간, 참여 인원에 대한 정보 출력 -->
+		<div class="content-cover">
+			<div class="content-header">
+				<div class="ch-content-cover">
+					<div class="ch-profile-cover">
+						<div class="ch-profile">
+							<img src="/mh/images/test_images/test01.jpeg" alt="대표 사진">
+						</div>
+						<div class="ch-expert">유세희</div>
+					</div>
+				</div>
+			</div>
+			<div class="header">
+				<div class="content-header-cover">
+					<div class="header-info">
+						<!-- 카테고리 -->
+						<div class="content-header">
+							<!-- ch = content-header -->
+							<div class="ch-category">맵 > 로블록스</div>
+						</div>
+						
+						<!-- 제목 -->
+						<div class="content-header">
+							<div class="ch-title">[포트폴리오 제목] META HAUS 제작</div>
+						</div>
+						<!-- 수행기간 -->
+						<div class="content-header">
+							<div class="ch-content-cover">
+								<div class="ch-name">참여 기간</div>
+								<div class="ch-content">2023-05-12 ~ 2023-07-11</div>
+							</div>
+						</div>
+						
+						<!-- 참여 인원 -->
+						<div class="content-header">
+							<div class="ch-content-cover">
+								<div class="ch-name">참여 인원</div>
+								<div class="ch-content">6명</div>
+							</div>
+						</div>
+					</div>
+					<div class="header-button">
+						<div class="chat-button-cover">
+							<div class="chat-button">전문가에게 문의남기기</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-header-cover">
+					<div class="main-img-cover">
+						<img alt="메인 이미지" src="/mh/images/test_images/test06.jpeg">
+					</div>
+				</div>
+			</div>
+			<hr/>
+		</div>
+	
+		<!-- 진행한 프로젝트에 대한 세부적인 정보(사진, 글) 출력 -->
+		<div class="content-cover">
+			<!-- 프로젝트 내용 -->
+			<div class="subtitle">프로젝트 내용</div>
+			<div class="main-content">
+				<!-- 첨부한 사진 출력 -->
+				<div class="main-content-img">
+					<div class="banner-slider-wrap">
+            			<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+            			<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+            			<div class="slider-outter">
+			                <div index="0" class="banner-slider-list">
+			                    <div class="banner-slider-item">
+			                        <div class="item-img-warp" >
+			                        	<img alt="이미지1" src="/mh/images/test_images/test01.jpeg">
+			                        </div>
+			                    </div>
+			                    <div class="banner-slider-item">
+			                        <div class="item-img-warp">
+			                        	<img alt="이미지1" src="/mh/images/test_images/test01.jpeg">
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+				</div>
+				<!-- 작성한 글 출력 -->
+				<div class="main-content-text">
+					<div class=""></div>
+					<div class=""></div>
+				</div>
+			</div>
+			<!-- 특징 -->
+			<div class="main-content">
+			
+			</div>
+			<!-- 스타일 -->
+			<div class="main-content">
+			
+			</div>
+		</div>
+		<!-- 첨부파일 다운로드 -->
+		<div class="content-cover">
+			
+		</div>
+		<!-- 작성자의 다른 포트폴리오 -->
+		<div class="content-cover">
+			<!-- 포트폴리오 1 -->
+			<div>
+			
+			</div>
+		</div>
+	</div>
 </body>
 </html>
