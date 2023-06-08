@@ -73,7 +73,7 @@ $(document).ready(function(){
     // 가격 입력(추가옵션 + 패키지 가격) 했을때 경고 메시지
     $('input[type="number"]').on('input', function (event) {
         const value = $(this).val();
-        const alertMsg = $("<div>5,000~ 999,999,999 원 까지 만 입력 가능합니다</div>").attr("class", "alert-msg");
+        const alertMsg = $("<div>5,000~ 999,999,000 원 까지 만 입력 가능합니다</div>").attr("class", "alert-msg");
         
         if (value < 5000 || value > 999999999) {
         	$(this).parent().next(".alert-msg").remove();
@@ -89,9 +89,24 @@ $(document).ready(function(){
         }
     });
     
-    //추가 옵션 설정
+    //가격 입력 하면 1000원 미만은 0으로 내림해주는 코드 + 1000마다 "," 추가해주기
+	$('.single-package-cost input').on('blur', function() {
+		  var value = parseInt($(this).val());
+		  // 1000원 밑으로는 0으로 내림
+		  var roundedValue = Math.floor(value / 1000) * 1000;
+		  // 1000마다 쉼표추가
+		  var formattedValue = addCommas(roundedValue);
+		  alert(formattedValue);
+		  $(this).val(formattedValue);
+	});
+	// 쉼표 추가해주는 정규식
+	function addCommas(value) {
+		  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+    
+    
+    //추가 옵션 설정 - 체크박스 선택하면 체크된 옵션에 대해 정보 입력칸 나옴
     $(".option-box-row01 input").on("change",function(){
-    	
     	if($(this).is(":checked")){
     		$(this).parent().siblings(".option-box-row02").removeClass("deactivate");
     	}else{
