@@ -166,17 +166,53 @@
 .single-package-cost{
 	display: flex;
     flex-direction: row;
-    justify-content:space-between;
     align-items:center;
     width: auto;
     height:fit-content;
     background-color: rgb(141,114,225,0.1);
     border-radius:8px;
     padding: 10px;
+    margin-bottom: 30px;
 }
 .single-package-cost input{
 	background-color : rgba(1,1,1,0);
-	width:80%;
+	width:50%;
+}
+.single-package-revision{
+	display:flex;
+	flex-direction:column;
+	margin-bottom: 30px;
+}
+.single-package-revision-dropdown{
+	background-color: rgb(141,114,225,0.1);
+	width : 100%;
+	height: fit-content;
+	padding:10px;
+	border-radius: 8px;
+	font-weight:500;
+}
+.single-package-revision-dropdown:hover{
+	cursor: pointer;
+}
+.single-package-revision ul{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	width:50px;
+	background-color: rgb(141,114,225,0.1);
+	height: fit-content;
+	border-radius: 8px;
+	padding-block:10px;
+}
+.single-package-revision li{
+	padding-inline:10px;
+}
+.single-package-revision li:hover{
+	cursor:pointer;
+	color:var(--light-purple);
+}
+.single-package-date{
+	
 }
 /******** single패키지 끝 ********/
 

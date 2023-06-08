@@ -43,6 +43,12 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+select  {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+border:none;
+}
 table {
 	border-collapse: collapse;
 	border-spacing: 0;

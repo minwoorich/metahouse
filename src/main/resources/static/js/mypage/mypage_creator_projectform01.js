@@ -93,11 +93,15 @@ $(document).ready(function () {
 				  isValid=false;
 			  }
     	});
+    	if($(".thumbnail-img").length == 0){
+    		$(".thumbnail-form").addClass("alert-style");
+    	}
     	if(isValid){
     		location.href='/mh/mypage/project-form-02';
-    	}else{
+    	}else{//스크롤이 맨 위로 올라감
     		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
     	}
+    	
   	});
     
     //textarea에 값을 입력하면 alert-style 사라짐
@@ -106,6 +110,12 @@ $(document).ready(function () {
     		$(this).parent().parent().removeClass("alert-style");
     	}
     });
+    
+    //사진 추가하면 alsert-style 사라짐
+    if($(".thumbnail-img").length !== 0){
+		$(".thumbnail-form").removeClass("alert-style");
+	}
+	
     
 
 
