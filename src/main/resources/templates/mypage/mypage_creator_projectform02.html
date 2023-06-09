@@ -44,10 +44,9 @@
 						<h4 class="modal-title"
 							style="font-weight: bold; font-size: 24px;">서비스 등록 취소</h4>
 					</div>
-					<div class="modal-body" style="font-weight: 500; font-size: 16px;">
+					<div class="modal-body" style="font-weight: 400; font-size: 16px;">
 						<p>
-							지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br />
-							<br />그래도 취소 하시겠습니까?
+							지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br /> <br />그래도 취소 하시겠습니까?
 						</p>
 					</div>
 					<div class="modal-footer">
@@ -89,7 +88,7 @@
 						</div>
 						<!-- 첫번째 화살표 -->
 						<i class="fa-solid fa-chevron-right fa-xl"
-							style="color: var(- -gray)"></i>
+							style="color: var(--gray)"></i>
 						<!-- 2. 가격설정 -->
 						<div class="progress-bar-item current">
 							<i class="fa-sharp fa-circle-2 fa-2xl"></i> <span
@@ -97,7 +96,7 @@
 						</div>
 						<!-- 두번째 화살표 -->
 						<i class="fa-solid fa-chevron-right fa-xl"
-							style="color: var(- -gray)"></i>
+							style="color: var(--gray)"></i>
 						<!-- 3. 서비스 등록 -->
 						<div class="progress-bar-item">
 							<i class="fa-sharp fa-regular fa-circle-3 fa-2xl"
@@ -121,23 +120,23 @@
 						<div class="single-package-col01-wrapper">
 							<!-- 패키지 1열 1행 (제목)-->
 							<div class="single-package-col01-row01">
-								<span>제목</span> <span style="color: var(- -red);">*</span>
+								<span>제목</span> <span style="color: var(--red);">*</span>
 							</div>
 							<!-- 패키지 1열 2행 (설명)-->
 							<div class="single-package-col01-row02">
-								<span>설명</span> <span style="color: var(- -red);">*</span>
+								<span>설명</span> <span style="color: var(--red);">*</span>
 							</div>
 							<!-- 패키지 1열 3행 (가격)-->
 							<div class="single-package-col01-row03">
-								<span>가격</span> <span style="color: var(- -red);">*</span>
+								<span>가격</span> <span style="color: var(--red);">*</span>
 							</div>
 							<!-- 패키지 1열 4행 (수정횟수)-->
 							<div class="single-package-col01-row04">
-								<span>수정</span> <span style="color: var(- -red);">*</span>
+								<span>수정</span> <span style="color: var(--red);">*</span>
 							</div>
 							<!-- 패키지 1열 5행 (작업 기한)-->
 							<div class="single-package-col01-row05">
-								<span>작업일</span> <span style="color: var(- -red);">*</span>
+								<span>작업일</span> <span style="color: var(--red);">*</span>
 							</div>
 						</div>
 					</div>
@@ -180,7 +179,7 @@
 							</div>
 
 							<!-- 단일, 가격 설정(BASIC) -->
-							<div class="single-package-cost">
+							<div class="single-package-cost price">
 								<input placeholder="최소 5000원 이상을 입력하세요" value="" name=""
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상을 입력하세요'"
@@ -189,32 +188,36 @@
 
 							<!-- 단일, 수정횟수 설정(BASIC) -->
 							<div class="single-package-revision">
-								<label class="single-package-revision-dropdown">
-									<span style="color: var(--gray);margin-right:10px;">수정 횟수를 선택해주세요</span>
-									<i class="fa-regular fa-chevron-down fa-sm" style="color: #aaaaaa;"></i>
-									<span style="font-weight:500;">회</span>
+								<label class="single-package-revision-dropdown dropdown">
+									<div>
+										<span class="revision-placeholder"
+											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
+											class="fa-regular fa-chevron-down fa-sm"
+											style="color: #aaaaaa;"></i>
+									</div> <span style="font-weight: 400; margin-left: 22px;">회</span>
 								</label>
-								<ul>
-									<li>0</li>
-									<li>1</li>
-									<li>2</li>
-									<li>3</li>
-									<li>4</li>
-									<li>5</li>
-									<li>6</li>
-									<li>7</li>
-									<li>8</li>
-									<li>9</li>
-									<li>10</li>
+								<ul class="deactivate">
+									<li><span class="revision-value">0</span><span>회</span></li>
+									<li><span class="revision-value">1</span><span>회</span></li>
+									<li><span class="revision-value">2</span><span>회</span></li>
+									<li><span class="revision-value">3</span><span>회</span></li>
+									<li><span class="revision-value">4</span><span>회</span></li>
+									<li><span class="revision-value">5</span><span>회</span></li>
+									<li><span class="revision-value">6</span><span>회</span></li>
+									<li><span class="revision-value">7</span><span>회</span></li>
+									<li><span class="revision-value">8</span><span>회</span></li>
+									<li><span class="revision-value">9</span><span>회</span></li>
+									<li><span class="revision-value">10</span><span>회</span></li>
 								</ul>
 							</div>
 
 							<!-- 단일, 작업기한 설정(BASIC) -->
-							<div class="single-package-date">
-								<input placeholder="최소 5000원 이상을 입력하세요" value="" name=""
-									required onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '최소 5000원 이상을 입력하세요'"
-									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
+							<div class="single-package-date date">
+								<input
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
 							</div>
 						</div>
 					</div>
@@ -228,22 +231,30 @@
 						<div class="triple-package-col-wrapper">
 							<!-- 패키지 1열 1행 -->
 							<div class="triple-package-col01-row01">
-								<span>제목</span> <span style="color: var(- -red);">*</span>
+								<span>제목</span> <span style="color: var(--red);">*</span>
 							</div>
 							<!-- 패키지 1열 2행 -->
 							<div class="triple-package-col01-row02">
-								<span>설명</span> <span style="color: var(- -red);">*</span>
+								<span>설명</span> <span style="color: var(--red);">*</span>
 							</div>
 							<!-- 패키지 1열 3행 -->
 							<div class="triple-package-col01-row03">
-								<span>가격</span> <span style="color: var(- -red);">*</span>
+								<span>가격</span> <span style="color: var(--red);">*</span>
+							</div>
+							<!-- 패키지 1열 4행 -->
+							<div class="triple-package-col01-row04">
+								<span>수정</span> <span style="color: var(--red);">*</span>
+							</div>
+							<!-- 패키지 1열 5행 -->
+							<div class="triple-package-col01-row05">
+								<span>작업일</span> <span style="color: var(--red);">*</span>
 							</div>
 						</div>
 					</div>
 					<!-- 패키지 2열 - 실제 작성할 입력 칸 -->
 					<div class="triple-package-col02">
+						<!---------------BASIC wrapper------------->
 						<div class="triple-package-wrapper">
-							<!-- 패키지 타입 => BASIC -->
 							<div class="triple-package-type">
 								<span>BASIC</span>
 							</div>
@@ -278,14 +289,46 @@
 								</div>
 							</div>
 							<!-- 가격(BASIC) -->
-							<div class="triple-package-cost">
-								<input type="number" placeholder="최소 5000원 이상" value="" name=""
+							<div class="triple-package-cost price">
+								<input placeholder="최소 5000원 이상" value="" name=""
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상'"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
 							</div>
+							<!-- 수정(BASIC) -->
+							<div class="triple-package-revision">
+								<label class="triple-package-revision-dropdown dropdown">
+									<div>
+										<span class="revision-placeholder"
+											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
+											class="fa-regular fa-chevron-down fa-sm"
+											style="color: #aaaaaa;"></i>
+									</div> <span style="font-weight: 400;">회</span>
+								</label>
+								<ul class="deactivate">
+									<li><span class="revision-value">0</span><span>회</span></li>
+									<li><span class="revision-value">1</span><span>회</span></li>
+									<li><span class="revision-value">2</span><span>회</span></li>
+									<li><span class="revision-value">3</span><span>회</span></li>
+									<li><span class="revision-value">4</span><span>회</span></li>
+									<li><span class="revision-value">5</span><span>회</span></li>
+									<li><span class="revision-value">6</span><span>회</span></li>
+									<li><span class="revision-value">7</span><span>회</span></li>
+									<li><span class="revision-value">8</span><span>회</span></li>
+									<li><span class="revision-value">9</span><span>회</span></li>
+									<li><span class="revision-value">10</span><span>회</span></li>
+								</ul>
+							</div>
+							<!-- 작업기한(BASIC) -->
+							<div class="triple-package-date date">
+								<input
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
+							</div>
 						</div>
-						<!-- 패키지 타입 => ECONOMY -->
+						<!---------------ECONOMY wrapper------------->
 						<div class="triple-package-wrapper">
 							<div class="triple-package-type">
 								<span>ECONOMY</span>
@@ -316,19 +359,52 @@
 								</div>
 								<div class="triple-package-description-row02">
 									<div class="triple-package-counter">
-										<span class="counter">60</span> <span>/</span> <span>60</span>
+										<span class="counter">0</span> <span>/</span> <span>60</span>
 									</div>
 								</div>
 							</div>
 							<!-- 가격(ECONOMY) -->
-							<div class="triple-package-cost">
-								<input type="number" placeholder="최소 5000원 이상" value="" name=""
+							<div class="triple-package-cost price">
+								<input  placeholder="최소 5000원 이상" value="" name=""
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상'"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
 							</div>
+							<!-- 수정(ECONOMY) -->
+							<div class="triple-package-revision">
+								<label class="triple-package-revision-dropdown dropdown">
+									<div>
+										<span class="revision-placeholder"
+											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
+											class="fa-regular fa-chevron-down fa-sm"
+											style="color: #aaaaaa;"></i>
+									</div> <span style="font-weight: 400;">회</span>
+								</label>
+								<ul class="deactivate">
+									<li><span class="revision-value">0</span><span>회</span></li>
+									<li><span class="revision-value">1</span><span>회</span></li>
+									<li><span class="revision-value">2</span><span>회</span></li>
+									<li><span class="revision-value">3</span><span>회</span></li>
+									<li><span class="revision-value">4</span><span>회</span></li>
+									<li><span class="revision-value">5</span><span>회</span></li>
+									<li><span class="revision-value">6</span><span>회</span></li>
+									<li><span class="revision-value">7</span><span>회</span></li>
+									<li><span class="revision-value">8</span><span>회</span></li>
+									<li><span class="revision-value">9</span><span>회</span></li>
+									<li><span class="revision-value">10</span><span>회</span></li>
+								</ul>
+							</div>
+							<!-- 작업기한(ECONOMY) -->
+							<div class="triple-package-date date">
+								<input
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
+							</div>
 						</div>
-						<!-- 패키지 타입 => PREMIUM -->
+
+						<!---------------PREMIUM wrapper------------->
 						<div class="triple-package-wrapper">
 							<div class="triple-package-type">
 								<span>PREMIUM</span>
@@ -364,76 +440,111 @@
 								</div>
 							</div>
 							<!-- 가격(PREMIUM) -->
-							<div class="triple-package-cost">
-								<input type="number" placeholder="최소 5000원 이상" value="" name=""
+							<div class="triple-package-cost price">
+								<input placeholder="최소 5000원 이상" value="" name=""
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상'"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
 							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 3단 패키지 끝 -->
-
-				<!-- 추가 옵션 -->
-				<div class="add-option">
-					<div class="options-wrapper">
-						<div class="add-option-col01">
-							<span>추가 옵션</span>
-						</div>
-						<div class="add-option-col02">
-							<div class="option-box">
-								<div class="option-box-wrapper">
-									<label class="option-box-row01"> <span>빠른 작업</span> <input
-										type="checkbox" name="" value="">
-									</label>
-									<div class="option-box-row02 deactivate">
-										<span style="margin-right: 30px;">1일 단축 당</span> <input
-											type="number" placeholder="금액 입력" value="5000" name=""
-											onfocus="this.placeholder = ''"
-											onblur="this.placeholder = '금액 입력'"
-											oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-										<span>원 추가</span>
-									</div>
-								</div>
+							<!-- 수정(PREMIUM) -->
+							<div class="triple-package-revision">
+								<label class="triple-package-revision-dropdown dropdown">
+									<div>
+										<span class="revision-placeholder"
+											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
+											class="fa-regular fa-chevron-down fa-sm"
+											style="color: #aaaaaa;"></i>
+									</div> <span style="font-weight: 400;">회</span>
+								</label>
+								<ul class="deactivate">
+									<li><span class="revision-value">0</span><span>회</span></li>
+									<li><span class="revision-value">1</span><span>회</span></li>
+									<li><span class="revision-value">2</span><span>회</span></li>
+									<li><span class="revision-value">3</span><span>회</span></li>
+									<li><span class="revision-value">4</span><span>회</span></li>
+									<li><span class="revision-value">5</span><span>회</span></li>
+									<li><span class="revision-value">6</span><span>회</span></li>
+									<li><span class="revision-value">7</span><span>회</span></li>
+									<li><span class="revision-value">8</span><span>회</span></li>
+									<li><span class="revision-value">9</span><span>회</span></li>
+									<li><span class="revision-value">10</span><span>회</span></li>
+								</ul>
 							</div>
-							<div class="option-box">
-								<div class="option-box-wrapper">
-									<label class="option-box-row01"> <span>추가 수정</span> <input
-										type="checkbox" name="" value="">
-									</label>
-									<div class="option-box-row02 deactivate">
-										<span style="margin-right: 30px;">1회 수정 당</span> <input
-											type="number" placeholder="금액 입력" value="5000" name=""
-											onfocus="this.placeholder = ''"
-											onblur="this.placeholder = '금액 입력'"
-											oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-										<span>원 추가</span>
-
-									</div>
-								</div>
+							<!-- 작업기한(PREMIUM) -->
+							<div class="triple-package-date date">
+								<input
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
 							</div>
-
 						</div>
-					</div>
-				</div>
-
-				<!-- 버튼 파트 -->
-				<div class="form-buttons">
-					<!-- 
-                            first : 첫째장
-                            last : 마지막장 -->
-					<button type="button"
-						onclick="location.href='/mh/mypage/project-form-01'" value="prev"
-						class="form-buttons-prev button--small">이전</button>
-					<div>
-						<button type="button" data-toggle='modal' data-target='#cancel'
-							class="form-buttons-cancel">취소</button>
-						<button type="button" value="next"
-							class="form-buttons-next button--small">다음</button>
 					</div>
 				</div>
 			</div>
+			<!-- 3단 패키지 끝 -->
+
+			<!-- 추가 옵션 -->
+			<div class="add-option">
+				<div class="options-wrapper">
+					<div class="add-option-col01">
+						<span>추가 옵션</span>
+					</div>
+					<div class="add-option-col02">
+						<div class="option-box">
+							<div class="option-box-wrapper">
+								<label class="option-box-row01"> <span>빠른 작업</span> <input
+									type="checkbox" name="" value="">
+								</label>
+								<div class="option-box-row02 price deactivate">
+									<span style="margin-right: 30px;">1일 단축 당</span> 
+									<input
+										 placeholder="금액 입력" value="5000" name=""
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '금액 입력'"
+										oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+									<span>원 추가</span>
+								</div>
+							</div>
+						</div>
+						<div class="option-box">
+							<div class="option-box-wrapper">
+								<label class="option-box-row01"> <span>추가 수정</span> <input
+									type="checkbox" name="" value="">
+								</label>
+								<div class="option-box-row02 price deactivate">
+									<span style="margin-right: 30px;">1회 수정 당</span> 
+									<input
+										 placeholder="금액 입력" value="5000" name="rere"
+										onfocus="this.placeholder = ''"
+										onblur="this.placeholder = '금액 입력'"
+										oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+									<span>원 추가</span>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- 버튼 파트 -->
+			<div class="form-buttons">
+				<!-- 
+                            first : 첫째장
+                            last : 마지막장 -->
+				<button type="button"
+					onclick="location.href='/mh/mypage/project-form-01'" value="prev"
+					class="form-buttons-prev button--small">이전</button>
+				<div>
+					<button type="button" data-toggle='modal' data-target='#cancel'
+						class="form-buttons-cancel">취소</button>
+					<button type="button" value="next"
+						class="form-buttons-next button--small">다음</button>
+				</div>
+			</div>
+		</div>
 		</div>
 	</main>
 </body>
