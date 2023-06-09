@@ -68,6 +68,8 @@
 	margin: 10px;
 	margin-left: 0px;
 	padding-left: 10px;
+	border: solid 1px #8D72E1;
+	border-radius: 6px;
  }
  .withdrawal_button{
  	width:100px;

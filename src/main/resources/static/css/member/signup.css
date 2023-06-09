@@ -6,7 +6,6 @@
 .signup_container {
 		margin:auto;
 		width:660px;
-		height:1200px;
 		position: relative;
 		padding:40px;
 		
@@ -21,7 +20,7 @@
 		text-shadow: 1px 1px 1px #8D9EFF;
 	}
 	.signup_content{
-		height:1060px;
+		height:900px;
 		border:solid 1px #6C4AB6;
 		padding:70px;
 		box-shadow: 1px 1px 1px 1px #8D9EFF;
@@ -63,8 +62,10 @@
 		border-radius: 6px;
 	}
 	
-	.single_check{
-		font-size: small;
+	.single_check label{
+		font-size: 14px;
+		font-weight: normal;
+		
 	}
 	
 	.signup_check_box_hr{
