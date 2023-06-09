@@ -224,7 +224,7 @@
 	z-index:999;
 	position:absolute;
 	top : 40px;
-	left:130px;
+	left:160px;
 	display:flex;
 	flex-direction:column;
 	align-items:start;
@@ -594,6 +594,7 @@
 .option-box-row02 input{
     background-color: rgba(0,0,0,0);
 }
+
 
 
 /* ////////////////////////////////////////////////////////// */

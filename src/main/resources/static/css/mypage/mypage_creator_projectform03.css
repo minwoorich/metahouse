@@ -165,22 +165,23 @@
     flex: 1;
 }
 
-/* �뙣�궎吏����엯 �쁺�뿭 */
-.single-package-type{
-    font-size: 24px;
-    font-weight: bold;
+/* 단일 패키지 - 패키지 타입 */
+.single-package-type {
     padding-bottom: 20px;
     border-bottom: 1px solid var(--gray);
     margin-bottom: 50px;
 }
+.single-package-type span {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-/* �뙣�궎吏� '�젣紐�' �엯�젰 �쁺�뿭 */
+/* 단일 패키지 - 패키지 제목 */
 .single-package-title{
     display: flex;
     flex-direction: column;
     width: auto;
     height: 79px;
-    padding: 10px;
     margin-bottom: 30px;
 }
 .single-package-title-col01{
@@ -203,13 +204,12 @@
     flex:1;
 }
 
-/* �뙣�궎吏� '�궡�슜' �엯�젰 �쁺�뿭 */
+/*단일 패키지 - 패키지 설명 */
 .single-package-description{
     display: flex;
     flex-direction: column;
     width: auto;
     height: 79px;
-    padding: 10px;
 }
 .single-package-description-col01{
     display: flex;
@@ -222,6 +222,25 @@
     height: auto;
     font-size: 16px;
 }
+
+
+/* 단일 패키지 - 수정횟수 */
+.single-package-revision{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 79px;
+}
+.single-package-revision-col01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.single-package-revision-col01 span{
+    font-size: 16px;
+}
+
+
 /* //////////////////////////////////////////////////////////// */
 
 /* 3단 패키지 시작 */
@@ -240,7 +259,7 @@
     flex:1;
 }
 .triple-package-row01 span{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -248,7 +267,13 @@
     padding-top: 100px;
 }
 .triple-package-row01-col01{
-    margin-bottom: 110px;
+    margin-bottom: 93px;
+}
+.triple-package-row01-col02{
+    margin-bottom: 93px;
+}
+.triple-package-row01-col03{
+    margin-bottom: 93px;
 }
 
 .triple-package-row02{
@@ -266,16 +291,19 @@
     flex: 1;
 }
 
-/* �뙣�궎吏����엯 �쁺�뿭 */
+/* 삼단패키지 - 패키지타입*/
 .triple-package-type{
-    font-size: 24px;
-    font-weight: bold;
+    
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--gray);
+    border-bottom:1px solid rgb(108,74,182);
     margin-bottom: 50px;
 }
+.triple-package-type span{
+	font-size: 24px;
+    font-weight: bold;
+}
 
-/* �뙣�궎吏� '�젣紐�' �엯�젰 �쁺�뿭 */
+/* 삼단패키지 - 패키지 제목 */
 .triple-package-title{
     display: flex;
     flex-direction: column;
@@ -283,6 +311,8 @@
     height: 79px;
     padding: 10px;
     margin-bottom: 30px;
+    border-bottom:1px solid rgb(141,114,225,0.2);
+    
 }
 .triple-package-title-col01{
     display: flex;
@@ -296,13 +326,15 @@
     font-size: 16px;
 }
 
-/* �뙣�궎吏� '�궡�슜' �엯�젰 �쁺�뿭 */
+/* 삼단 패키지 - 패키지 설명 */
 .triple-package-description{
     display: flex;
     flex-direction: column;
     width: auto;
     height: 79px;
     padding: 10px;
+    margin-bottom: 30px;
+    border-bottom:1px solid rgb(141,114,225,0.2);
 }
 .triple-package-description-col01{
     display: flex;
@@ -316,9 +348,52 @@
     font-size: 16px;
 }
 
+/* 삼단패키지 - 수정횟수 */
+.triple-package-revision{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 79px;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-bottom:1px solid rgb(141,114,225,0.2);
+}
+.triple-package-revision-col01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.triple-package-revision-col01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+
+/* 삼단패키지 - 작업일 */
+.triple-package-date{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 79px;
+    padding: 10px;
+    border-bottom:1px solid rgb(141,114,225,0.2);
+}
+.triple-package-date-col01{
+    display: flex;
+    width: auto;
+    flex:4;
+}
+.triple-package-date-col01 textarea{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+
 /* ////////////////////////////////////////////////////////// */
 
-/* 異붽��샃�뀡 �뙆�듃 */
+/*추가 옵션*/
 .add-option{
     padding-inline: 40px;
     padding-block: 30px;
@@ -347,7 +422,7 @@
     accent-color: var(--bright-purple);
 }
 
-/* 異붽��샃�뀡 2�뿴 2�뻾 (泥댄겕諛뺤뒪 �솢�꽦�솕 �맂寃쎌슦)*/
+/* 추가옵션 2열 2행 (체크박스 활성화 된경우)*/
 .option-box-col02{
     display: flex;
     flex-direction: row;
@@ -371,7 +446,7 @@
     border-radius: var(--radius-weak);
     background-color: rgba(0,0,0,0);
 }
-/* 踰꾪듉 �뙆�듃 */
+/* 최종 등록 버튼 */
 .form-buttons{
     display: flex;
     flex-direction: row;

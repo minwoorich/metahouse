@@ -64,7 +64,7 @@ $(document).ready(function(){
             let hasMargin = (parentMarginBottom!=="auto" && parentMarginBottom!=="" && parentMarginBottom!=="0px");
             
             //5000미만, 999,999,999 초과면 alert-msg 띄움
-            if (value < 5000 || value > 999999999) {  
+            if (value < 5000 || value > 999999000) {  
             	if(hasMargin){ // 부모가 margin-bottom 있는 경우 => alert-msg가 부모의 마진만큼 위로 올라가야함
             		let cssProp = {
             				"position":"relative",
