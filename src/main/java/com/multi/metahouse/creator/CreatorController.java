@@ -1,6 +1,7 @@
 package com.multi.metahouse.creator;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,5 +25,10 @@ public class CreatorController {
 	@RequestMapping("/creator-form-02")
 	public String creatorForm02() {
 		return "market_sm/creator/mypage_creator_creatorform02";
+	}
+	
+	@GetMapping("/creator-product")
+	public String assetFormlist() {
+		return "market_sm/creator/mypage_creator_product_list";
 	}
 }

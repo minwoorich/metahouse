@@ -33,6 +33,11 @@ select {
 	padding-left: 15px;
 }
 
+button {
+	border: 0;
+	background-color:  transparent;
+}
+
 .main-content {
 	display: flex;
 	flex-direction: column;
@@ -146,7 +151,7 @@ select {
 }
 
 .search-box:hover {
-	cursor: pointer;
+	cursor: text;
 	background-color: rgba(141,114,225,0.1);
 	transition: 0.5s;
 }
@@ -314,11 +319,29 @@ select {
 	font-size: 10px;
 	width: 61px;
 	height: 28px;
-	background-color: var( --light-purple);
 }
 
 button:active {
 	box-shadow: none;
+}
+
+.creator-product-add{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    width: 720px;
+    height: 180px;
+    padding: 30px;
+    border-radius:8px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    background-color: rgb(141,114,225,0.1);
+}
+
+.creator-product-add:hover {
+	background-color: rgb(141,114,225,0.3);
+	cursor: pointer;
 }
 
 .creater-body-tip {
@@ -330,7 +353,6 @@ button:active {
 	height: 120px;
 	padding: 30px 40px;
 	background-color: rgba(141,114,225,0.3);
-	margin-top: 50px;
 	margin-bottom: 50px;
 	border-radius: 8px;
 }

@@ -54,9 +54,9 @@ textarea::placeholder{
 input[type="date"]:hover{
     cursor: pointer;
 }
-input[type="date"]{
+/* input[type="date"]{
     background-color: var(--light-purple);
-}
+} */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

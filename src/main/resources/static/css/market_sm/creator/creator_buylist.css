@@ -147,7 +147,7 @@ select {
 }
 
 .search-box:hover {
-	cursor: pointer;
+	cursor: text;
 	background-color: rgba(141,114,225,0.1);
 	transition: 0.5s;
 }
