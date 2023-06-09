@@ -45,4 +45,14 @@ public class MemberController {
 	public String otherProfile() {
 		return "member/profile_other";
 	}
+	
+	@GetMapping("mypage/portfolio")
+	public String portfolio() {
+		return "member/portfolio_detail";
+	}
+	
+	@GetMapping("main")
+	public String main() {
+		return "thymeleaf/index";
+	}
 }

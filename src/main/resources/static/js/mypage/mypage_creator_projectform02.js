@@ -31,28 +31,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	/*//텍스트 입력 할 때 높이 자동 조절
-	$('textarea').on('input', function() {
-		let target=null;
-		if($(this).hasClass("single-textarea-title")){
-			target = $(".single-textarea-title");
-		}else if($(this).hasClass("single-textarea-description")){
-			target = $(".single-textarea-description");
-		}else if($(this).hasClass("triple-textarea-title")){
-			target = $(".triple-textarea-title");
-		}else{
-			target = $(".triple-textarea-description");
-		}
-		target.css('height', $(this).prop('scrollHeight') + 'px');
-	});
-	// 텍스트 지울때 높이 자동 조절
-	$('textarea').on('keydown', function(event) {
-	  // Backspace 키를 누를 때에도 높이를 조정
-	  if (event.key === 'Backspace') {
-	    $(this).css('height', 'auto'); // 초기 높이를 자동으로 설정
-	    $(this).css('height', $(this).prop('scrollHeight') + 'px'); // 내용에 맞게 높이 조정
-	  }
-	});*/
+	//////////////////////////////////////////////////////
 	
 	//사용자가 입력한 글자수 카운팅
     $("textarea").on("input", function (event) {
@@ -70,41 +49,121 @@ $(document).ready(function(){
         }
     });
     
-    // 가격 입력(추가옵션 + 패키지 가격) 했을때 경고 메시지
-    $('input[type="number"]').on('input', function (event) {
-        const value = $(this).val();
-        const alertMsg = $("<div>5,000~ 999,999,000 원 까지 만 입력 가능합니다</div>").attr("class", "alert-msg");
-        
-        if (value < 5000 || value > 999999999) {
-        	$(this).parent().next(".alert-msg").remove();
-            $(this).parent().addClass("alert-style");
-            $(this).parent().after(alertMsg);
-        } else{
-        	$(this).parent().removeClass("alert-style");
-            $(this).parent().next(".alert-msg").remove();
-        }
-        if(value===""){
-        	$(this).parent().removeClass("alert-style");
-            $(this).parent().next(".alert-msg").remove();
-        }
+ ////////////////////////////////////////////////////////// 
+//    입력 금액 한도 범위 벗어나면 주의 문구 붙여줌
+    $(".price").each(function(){
+    	$(this).find("input").on('input',function(){
+    		//parseFormattedNumber() : 문자열값을 정수로 파싱해주는 함수
+    		const value = parseFormattedNumber($(this).val());
+    		$(this).parent().css("position","relative");
+            let alertMsg = $("<div>5,000~ 999,999,000 원 까지 만 입력 가능합니다</div>")
+            .attr("class", "alert-msg");
+            // 부모의 마진바텀 값
+            let parentMarginBottom = $(this).parent().css("margin-bottom");
+            // 부모가 마진바텀이 있으면 true저장 , 아니면 false
+            let hasMargin = (parentMarginBottom!=="auto" && parentMarginBottom!=="" && parentMarginBottom!=="0px");
+            
+            //5000미만, 999,999,999 초과면 alert-msg 띄움
+            if (value < 5000 || value > 999999000) {  
+            	if(hasMargin){ // 부모가 margin-bottom 있는 경우 => alert-msg가 부모의 마진만큼 위로 올라가야함
+            		let cssProp = {
+            				"position":"relative",
+                    		"top":"-"+parentMarginBottom};
+            		alertMsg.css(cssProp);
+            		$(this).parent().next(".alert-msg").remove();//alertMsg 가 누적으로 쌓이는걸 방지
+                    $(this).parent().addClass("alert-style");
+                    $(this).parent().after(alertMsg);
+            	}else{ // 부모가 margin-bottom 없는 경우 
+            		$(this).parent().next(".alert-msg").remove();//alertMsg 가 누적으로 쌓이는걸 방지
+                    $(this).parent().addClass("alert-style");
+                    $(this).parent().after(alertMsg);
+            	}
+            } 
+            //5000~999,999,999 안에 해당된 경우
+            else{
+            	$(this).parent().removeClass("alert-style");
+                $(this).parent().next(".alert-msg").remove();
+            }
+            
+            //이거 없으면 오류남
+            if(value===""){
+            	$(this).parent().removeClass("alert-style");
+                $(this).parent().next(".alert-msg").remove();
+            }
+    	});
     });
+    // (문자열)"20,122,000"  => (정수)20122000 파싱
+    function parseFormattedNumber(value) {
+    	  // 쉼표 제거
+    	  var cleanedValue = value.replace(/,/g, '');
+    	  // 정수로 파싱
+    	  var parsedValue = parseInt(cleanedValue, 10);
+    	  return parsedValue;
+    	}
     
+/////////////////////////////////////////////////////////////////
     //가격 입력 하면 1000원 미만은 0으로 내림해주는 코드 + 1000마다 "," 추가해주기
-	$('.single-package-cost input').on('blur', function() {
-		  var value = parseInt($(this).val());
-		  // 1000원 밑으로는 0으로 내림
-		  var roundedValue = Math.floor(value / 1000) * 1000;
-		  // 1000마다 쉼표추가
-		  var formattedValue = addCommas(roundedValue);
-		  alert(formattedValue);
-		  $(this).val(formattedValue);
-	});
+    $('.price').each(function(){
+    	let priceInput = $(this).find("input");
+    	priceInput.on('blur',function(){
+    		if($(this).val()!=0){
+			var value = parseInt($(this).val());
+			  // 1000원 밑으로는 0으로 내림
+			  var roundedValue = Math.floor(value / 1000) * 1000;
+			  // 1000마다 쉼표추가
+			  var formattedValue = addCommas(roundedValue);
+			  $(this).val(formattedValue);
+    		}
+    	});
+    });
 	// 쉼표 추가해주는 정규식
 	function addCommas(value) {
 		  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-    
-    
+    ////////////////////////////////////////////
+	//작업일 범위 벗어나게 입력하면 주의 문구 
+	$(".date").each(function(){
+    	$(this).find("input").on('input',function(){
+    		//parseFormattedNumber() : 문자열값을 정수로 파싱해주는 함수
+    		const value = $(this).val();
+    		$(this).parent().css("position","relative");
+            let alertMsg = $("<div>0 ~ 90 일 까지 만 입력 가능합니다</div>")
+            .attr("class", "alert-msg");
+            // 부모의 마진바텀 값
+            let parentMarginBottom = $(this).parent().css("margin-bottom");
+            // 부모가 마진바텀이 있으면 true저장 , 아니면 false
+            let hasMargin = (parentMarginBottom!=="auto" && parentMarginBottom!=="" && parentMarginBottom!=="0px");
+            
+            //0일 미만, 90일 초과면 alert-msg 띄움
+            if (value < 0 || value > 90) {  
+            	if(hasMargin){ // 부모가 margin-bottom 있는 경우 => alert-msg가 부모의 마진만큼 위로 올라가야함
+            		let cssProp = {
+            				"position":"relative",
+                    		"top":"-"+parentMarginBottom};
+            		alertMsg.css(cssProp);
+            		$(this).parent().next(".alert-msg").remove();//alertMsg 가 누적으로 쌓이는걸 방지
+                    $(this).parent().addClass("alert-style");
+                    $(this).parent().after(alertMsg);
+            	}else{ // 부모가 margin-bottom 없는 경우 
+            		$(this).parent().next(".alert-msg").remove();//alertMsg 가 누적으로 쌓이는걸 방지
+                    $(this).parent().addClass("alert-style");
+                    $(this).parent().after(alertMsg);
+            	}
+            } 
+            //0~90 안에 해당된 경우
+            else{
+            	$(this).parent().removeClass("alert-style");
+                $(this).parent().next(".alert-msg").remove();
+            }
+            
+            //이거 없으면 오류남
+            if(value===""){
+            	$(this).parent().removeClass("alert-style");
+                $(this).parent().next(".alert-msg").remove();
+            }
+    	});
+    });
+   /////////////////////////////////////////////// 
     //추가 옵션 설정 - 체크박스 선택하면 체크된 옵션에 대해 정보 입력칸 나옴
     $(".option-box-row01 input").on("change",function(){
     	if($(this).is(":checked")){
@@ -113,7 +172,29 @@ $(document).ready(function(){
     		$(this).parent().siblings(".option-box-row02").addClass("deactivate");
     	}
     });
-    
+    ///////////////////////////////////////////////
+    //드롭다운 : list 내리기, value 띄우기 구현해야함
+    $(".dropdown").on("click",function(){
+    	//지금 내가 접근한 드롭다운을 저장
+    	let thisDropdown = $(this);
+    	let list = $(this).siblings("ul");
+    	if(list.hasClass("deactivate")){
+    		list.removeClass("deactivate");
+    	}else{
+    		list.addClass("deactivate");
+    	}
+    	
+    	//드롭다운 옵션 클릭하면 해당하는 value를 출력
+    	list.find("li").each(function(){
+    		$(this).on("click",function(){
+        		let value = $(this).find(".revision-value").text();
+        		thisDropdown.find(".revision-placeholder").text(value).css("color","black");
+        		list.addClass("deactivate");
+    		});
+    		
+    	});
+    });
+    ///////////////////////////////////////////////
     // 필수 사항 입력 안 한 채로 "다음" 버튼 누른경우
     $(".form-buttons-next").on("click",function(){
     	let isValid = true;
@@ -133,6 +214,12 @@ $(document).ready(function(){
 	  				  isValid=false;
 	  			  }
     		});
+    		let value = $(".single-package-revision").find(".revision-placeholder").text(); 
+    		if(isNaN(value)){
+    			$(".single-package-revision").addClass('alert-style');
+    			isValid=false;
+    		}
+    		
     	//3단 패키지 모드인경우
     	}else{
     		$('.triple-package textarea[required]').each(function() {
@@ -147,6 +234,11 @@ $(document).ready(function(){
 	  				  isValid=false;
 	  			  }
 	  		});
+	  		let value = $(".triple-package-revision").find(".revision-placeholder").text(); 
+    		if(isNaN(value)){
+    			$(".triple-package-revision").addClass('alert-style');
+    			isValid=false;
+    		}
     	}
     	
     	//전부 채웠으면 다음 페이지 이동
@@ -157,7 +249,7 @@ $(document).ready(function(){
     	}
     });
     
-    //
+    //다시 값을 입력하면 alert-style 사라짐
     $("textarea").on("input",function(){
     	if($(this).val()!==""){
     		$(this).parent().parent().removeClass("alert-style");
@@ -168,5 +260,7 @@ $(document).ready(function(){
     		$(this).parent().removeClass("alert-style");
     	}
     });
-	
+    $(".single-package-revision").on("click",function(){
+    	$(".single-package-revision").removeClass('alert-style');
+    });
 });

@@ -124,13 +124,13 @@ body{
 }
 .banner-slider-item:nth-child(odd) .item-img-warp{
     
-        background-image: url("./1.JPG");
+        background-image: url("/mh/images/test_images/test01.jpeg");
         background-size: cover; /* 이미지를 요소에 맞게 조절 */
         background-position: center; /* 이미지를 가운데로 정렬 */
     
 }
 .banner-slider-item:nth-child(even) .item-img-warp{
-    background-image: url("./2.JPG");
+    background-image: url("/mh/images/test_images/test01.jpeg");
         background-size: cover; /* 이미지를 요소에 맞게 조절 */
         background-position: center; /* 이미지를 가운데로 정렬 */
 }
