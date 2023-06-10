@@ -4,16 +4,19 @@
 	layout:decorate="~{layout/mypageLayout}">
 <head>
 <meta charset="UTF-8">
-<title>에셋 판매 관리</title>
+<title>에셋 - 판매 관리</title>
 <link rel="stylesheet" href="/mh/css/thymeleaf/style.css" />
 <link rel="stylesheet" href="/mh/css/thymeleaf/buttons.css" />
 <link rel="stylesheet" href="/mh/css/market_sm/asset/asset_saleslist.css" />
 <link>
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+    crossorigin="anonymous"></script>
 </head>
 <body>
 	<div layout:fragment="content" class="asset-body">
 		<div class="asset-body-title">
-			<span>판매 등록</span><br>
+			<span>판매 관리</span><br>
 		</div>
 		<ul class="asset-body-cardlist">
 			<li class="asset-body-card">
@@ -74,10 +77,14 @@
 				</div>
 			</li>
 		</ul>
-		<div class="asset-body-registration">
-			<button type="button"
-				class="asset-body-registration-button button--small">에셋 등록</button>
-		</div>
+		<div class="asset-product-add">
+				<div class="asset-product-add-text">
+					<button>
+						<i class="fa-light fa-circle-plus fa-2xl"
+							style="color: #ffffff; font-size: 70px;"></i>
+					</button>
+				</div>
+			</div>
 		<div class="asset-body-bottom-box">
 			<span>지금 바로 에셋을 등록하고,</span> <span>메타버스 전문가로 활동해보세요!</span>
 		</div>

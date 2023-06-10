@@ -27,6 +27,12 @@ ul {
 	list-style: none;
 }
 
+button {
+	border: 0;
+	background-color: transparent;
+}
+
+
 .asset-body {
 	display: flex;
 	flex-direction: column;
@@ -141,6 +147,25 @@ button:active {
 	box-shadow: none;
 }
 
+.asset-product-add{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    width: 720px;
+    height: 180px;
+    padding: 30px;
+    border-radius:8px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    background-color: rgb(141,114,225,0.1);
+}
+
+.asset-product-add:hover {
+	background-color: rgb(141,114,225,0.3);
+	cursor: pointer;
+}
+
 .asset-body-bottom-box {
 	display: flex;
 	flex-direction: column;
@@ -150,20 +175,11 @@ button:active {
 	width: 720px;
 	height: 125px;
 	margin-bottom: 50px;
-	background-color: var( --light-blue);
+	background-color: rgba(141,114,225,0.3);
 	border-radius: 8px;
 }
 
 .button--xsmall {
 	padding: 5px 12px;
 	font-size: 10px;
-	background-color: var( --light-purple);
-}
-
-.button--small {
-    /* 수정 영역 */
-    padding: 8px 20px;
-    width: 90px;
-    height: 28px;
-    font-size: 12px;
 }

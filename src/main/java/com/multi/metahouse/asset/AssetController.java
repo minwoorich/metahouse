@@ -21,4 +21,9 @@ public class AssetController {
 	public String assetForm02() {
 		return "market_sm/asset/mypage_asset_assetform02";
 	}
+	
+	@GetMapping("/asset-product")
+	public String assetFormlist() {
+		return "market_sm/asset/mypage_asset_product_list";
+	}
 }
