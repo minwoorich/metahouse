@@ -12,6 +12,11 @@ public class AssetController {
 		return "market_sm/asset/asset_saleslist";
 	}
 	
+	@RequestMapping("/buylist")
+	public String assetBuy() {
+		return "market_sm/asset/asset_buylist";
+	}
+	
 	@GetMapping("/asset-form-01")
 	public String assetForm01() {
 		return "market_sm/asset/mypage_asset_assetform01";

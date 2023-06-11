@@ -18,6 +18,58 @@
 		<div class="asset-body-title">
 			<span>판매 관리</span><br>
 		</div>
+		<div class="sales-revenue">
+			<div class="sales-revenue-row01">
+				<input type="radio" value="monthly" name="revenueType">
+				<span>월 별 수입</span>
+				<input type="radio" value="total"name="revenueType" style="margin-left: 10px;">
+				<span>총 수입</span>
+			</div>
+			<div class="sales-revenue-row02">
+				<span class="sales-revenue-text">
+					이번 달 총 수입
+				</span>
+				<span class="sales-revenue-price">
+					900,000원
+				</span>
+			</div>
+		</div>
+		<div class="asset-search-form">
+			<div class="asset-search-form-row01">
+				<select class="search-box category01">
+					<option value="all">전체 상품</option>
+					<option value="map">맵</option>
+					<option value="asset">에셋</option>
+					<option value="proposan">기획서</option>
+				</select> 
+				
+				<select class="search-box category02">
+					<option value="all">전체 메타버스</option>
+					<option value="roblox">로블록스</option>
+					<option value="zepeto">제페토</option>
+					<option value="minecraft">마인크랜프트</option>
+					<option value="sendbox">더 샌드박스</option>
+					<option value="gathertown">게더타운</option>
+				</select> 
+				
+				<select class="search-box category03">
+					<option value="orderno">주문 번호</option>
+					<option value="productno">상품 번호</option>
+					<option value="nickname">닉네임</option>
+				</select>
+
+				<div class="category04">
+					<input type="date" class="search-box startdate">
+					<div>~</div>
+					<input type="date" class="search-box enddate">
+				</div>
+			</div>
+			<div class="asset-search-form-row02">
+				<input type="text" class="search-box asset-search-bar"
+					placeholder="검색어를 입력하세요">
+				<button type="button" onclick="" class="search-button button--small">조회</button>
+			</div>
+		</div>
 		<ul class="asset-body-cardlist">
 			<li class="asset-body-card">
 				<div class="asset-body-img-frame">
@@ -77,17 +129,6 @@
 				</div>
 			</li>
 		</ul>
-		<div class="asset-product-add">
-				<div class="asset-product-add-text">
-					<button>
-						<i class="fa-light fa-circle-plus fa-2xl"
-							style="color: #ffffff; font-size: 70px;"></i>
-					</button>
-				</div>
-			</div>
-		<div class="asset-body-bottom-box">
-			<span>지금 바로 에셋을 등록하고,</span> <span>메타버스 전문가로 활동해보세요!</span>
-		</div>
 	</div>
 </body>
 </html>

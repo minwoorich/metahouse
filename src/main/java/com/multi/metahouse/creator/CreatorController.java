@@ -17,16 +17,6 @@ public class CreatorController {
 		return "market_sm/creator/creator_saleslist";
 	}
 	
-	@RequestMapping("/creator-form-01")
-	public String creatorForm01() {
-		return "market_sm/creator/mypage_creator_creatorform01";
-	}
-	
-	@RequestMapping("/creator-form-02")
-	public String creatorForm02() {
-		return "market_sm/creator/mypage_creator_creatorform02";
-	}
-	
 	@GetMapping("/creator-product")
 	public String assetFormlist() {
 		return "market_sm/creator/mypage_creator_product_list";

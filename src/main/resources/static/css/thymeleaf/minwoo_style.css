@@ -8,23 +8,10 @@
     align-items: center;
 }
 
-/* 너비 설정 */
-.w-fullview{
-    width: 100vw;
-}
-.w1320{
-    width: 1320px;
-}
-.w1000{
-    width: 1000px;
-}
-.w1020{
-    width: 1020px;
-}
 
 /* 드롭다운 스크롤 바 꾸미기*/
 .my-dropdown-contents::-webkit-scrollbar{
-    width: 5px
+    width: 5px;
 }
 .my-dropdown-contents::-webkit-scrollbar-thumb{
     background-color: var(--light-purple);  /* rgb(141,158,255) */
@@ -54,9 +41,15 @@ textarea::placeholder{
 input[type="date"]:hover{
     cursor: pointer;
 }
+<<<<<<< HEAD
 /* input[type="date"]{
     background-color: var(--light-purple);
 } */
+=======
+input[type="date"]{
+    background-color: transparent;
+}
+>>>>>>> refs/remotes/myupstream/main
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
