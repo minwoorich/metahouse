@@ -7,7 +7,6 @@ $(document).ready(function(){
 		const switchOuter = $(this);
 		const switchInner = switchOuter.find(".switch-inner");
 		
-		
 		if(switchMode=="off"){
 			//스위치 스타일 변경해주는 코드
 			switchOuter.addClass("on-outer");
@@ -57,13 +56,13 @@ $(document).ready(function(){
     		const value = parseFormattedNumber($(this).val());
     		$(this).parent().css("position","relative");
             let alertMsg = $("<div>5,000~ 999,999,000 원 까지 만 입력 가능합니다</div>")
-            .attr("class", "alert-msg");
+            					.attr("class", "alert-msg");
             // 부모의 마진바텀 값
             let parentMarginBottom = $(this).parent().css("margin-bottom");
             // 부모가 마진바텀이 있으면 true저장 , 아니면 false
             let hasMargin = (parentMarginBottom!=="auto" && parentMarginBottom!=="" && parentMarginBottom!=="0px");
             
-            //5000미만, 999,999,999 초과면 alert-msg 띄움
+            //5000미만, 999,999,000 초과면 alert-msg 띄움
             if (value < 5000 || value > 999999000) {  
             	if(hasMargin){ // 부모가 margin-bottom 있는 경우 => alert-msg가 부모의 마진만큼 위로 올라가야함
             		let cssProp = {
@@ -79,7 +78,7 @@ $(document).ready(function(){
                     $(this).parent().after(alertMsg);
             	}
             } 
-            //5000~999,999,999 안에 해당된 경우
+            //5000~999,999,000 안에 해당된 경우
             else{
             	$(this).parent().removeClass("alert-style");
                 $(this).parent().next(".alert-msg").remove();

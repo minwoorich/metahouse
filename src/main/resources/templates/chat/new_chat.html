@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/nonsideLayout}">
+<head>
+<meta charset="UTF-8">
+<!-- 민우's style css [무조건 맨위에 와야함]-->
+<link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+<!-- 부트스트랩 css -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- 페이지 전용 css -->
+<link rel="stylesheet"
+	href="/mh/css/chat/new_chat.css">
+
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+
+<!-- 내 js코드 -->
+<script type="text/javascript" src="/mh/js/chat/new_chat.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content" class="chat-container">
+		<div class="chat-left-sidebar">
+			<div class="chat-search">
+				<input class="chat-search-bar" type="text" maxlength="30" 
+					placeholder="키워드를 입력하세요" value="" name=""
+					onfocus="this.placeholder = ''"
+					onblur="this.placeholder = '키워드를 입력하세요'"/>
+				<button class="chat-search-button" type="button">
+					<i class="fa-regular fa-magnifying-glass fa-xl" style="color: #aaaaaa;"></i>
+				</button>
+			</div>
+			<div class="chatroom-list-container">
+				<ul class="chatroom-list">
+					<li class="chatroom-card" style="background-color: white;">
+						<div class="chatroom-card__profile-image">
+							<img src="/mh/images/test_images/test01.jpeg"/>
+						</div>			
+						<div class="chatroom-card__info">
+							<div class="chatroom-card__info-row01">
+								<span class="username">별</span>
+								<span class="last-date">22.05.12</span>
+							</div>
+							<div class="chatroom-card__info-row02">
+								안녕하세요 ...<br/>명함은 이렇게 저렇게
+							</div>
+						</div>
+					</li>
+					<li class="chatroom-card">
+						<div class="chatroom-card__profile-image">
+							<img src="/mh/images/test_images/test01.jpeg"/>
+						</div>			
+						<div class="chatroom-card__info">
+							<div class="chatroom-card__info-row01">
+								<span class="username">별</span>
+								<span class="last-date">22.05.12</span>
+							</div>
+							<div class="chatroom-card__info-row02">
+								안녕하세요 ...<br/>명함은 이렇게 저렇게
+							</div>
+						</div>
+					</li>
+					<li class="chatroom-card">
+						<div class="chatroom-card__profile-image">
+							<img src="/mh/images/test_images/test01.jpeg"/>
+						</div>			
+						<div class="chatroom-card__info">
+							<div class="chatroom-card__info-row01">
+								<span class="username">별</span>
+								<span class="last-date">22.05.12</span>
+							</div>
+							<div class="chatroom-card__info-row02">
+								안녕하세요 ...<br/>명함은 이렇게 저렇게
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+			
+		</div>
+		<div class="chat-main">
+			<div class="chat-header"></div>
+			<div class="chat-body">
+				<div class="chat-body__chat-section"></div>
+				<div class="chat-body__profile-section"></div>
+				<div></div>
+			</div>
+			<div class="chat-footer">
+				<input class="chat-footer-row01"
+					placeholder="메시지를 입력해주세요" value="" name=""
+					onfocus="this.placeholder = ''"
+					onblur="this.placeholder = '메시지를 입력해주세요'"/>
+				<div class="chat-footer-row02">
+					<div class="chat-functional-buttons">
+					<button class="functional-button functional-button--attachment">
+						<i class="fa-regular fa-paperclip fa-xl" style="color: #aaaaaa;"></i>
+						<span>파일첨부</span>
+					</button>
+					<button class="functional-button functional-button--delievery">
+						<i class="fa-regular fa-truck fa-xl" style="color: #aaaaaa;"></i>
+						<span>작업물 전송</span>
+					</button>
+					<button class="functional-button functional-button--report">
+						<i class="fa-regular fa-light-emergency fa-xl" style="color: #aaaaaa;"></i>
+						<span>신고 하기</span>
+					</button>
+				</div>
+				<button class="send-button button--xsmall">
+						전송
+				</button>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
