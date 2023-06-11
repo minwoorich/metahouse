@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     // 맨처음 시작할때 이미지 카운터
     const thumbnailCnt = $(".thumbnail-img").length;

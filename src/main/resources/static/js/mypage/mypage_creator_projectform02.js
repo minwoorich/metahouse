@@ -89,6 +89,7 @@ $(document).ready(function(){
             	$(this).parent().removeClass("alert-style");
                 $(this).parent().next(".alert-msg").remove();
             }
+        
     	});
     });
     // (문자열)"20,122,000"  => (정수)20122000 파싱
