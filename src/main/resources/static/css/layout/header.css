@@ -1,5 +1,5 @@
 .custom-primary {
-    color: #6C4AB6;
+    color: black;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 20px;
 }
@@ -9,24 +9,48 @@
 }
 
 .custom-primary:hover {
-    color: #0056b3;
+    color: #6C4AB6;
 }
 
 .input-group {
     margin-left: -180px;
     margin-top: 60px;
+    
 }
 .form-control {
     border-radius: 30px;
+    width: 80%;  /* 가로 크기 조절 */
+    height: 50px;  /* 세로 크기 조절 */
 }
 
 .btn-default {
     border-radius: 30px;
+    width: 90%;  /* 가로 크기 조절 */
+    height: 50px;  /* 세로 크기 조절 */
 }
 .nav.navbar-nav {
     font-weight: bold;
 }
 .custom-primaryimg {
-    margin-top: 40px;
-    margin-left: 30px;
+    margin-top: 10%;
+    margin-left: 0px;
+}
+
+.nav-link.custom-primary {
+    position: relative; /* child elements를 absolute로 위치를 잡기 위해 */
+}
+
+.nav-link.custom-primary:hover::after {
+    content: attr(data-tooltip);  /* 말풍선에 표시할 텍스트를 data-tooltip 속성 값으로 설정 */
+    position: absolute;
+    bottom: 50px; /* 말풍선 위치 조정 */
+    left: 0;
+    width: 400px; /* 말풍선의 너비 */
+    padding: 10px; /* 말풍선 내부의 패딩 */
+    background-color: white; /* 말풍선의 배경색 */
+    color: 6C4AB6; /* 텍스트 색 */
+    border-radius: 5px; /* 말풍선의 모서리 둥글게 */
+    text-align: center;
+    opacity: 0.8;
+    pointer-events: none; /* 말풍선이 마우스 이벤트를 가로채는 것을 방지 */
 }
