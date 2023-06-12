@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           input.value = '';
         }
-      }
+      } 
 
       var sendButton = document.querySelector('.send-button');
       sendButton.addEventListener('click', sendMessage);
