@@ -1,4 +1,4 @@
-///////////////mypage_creator_product_list (구인관리) 시작/////////////////////////
+///////////////mypage_creator_product_list 시작/////////////////////////
 
 
 $(document).ready(function () {
