@@ -133,17 +133,33 @@
 	box-sizing: border-box;
 	width: 100%;
 	flex: 1;
+	height: 600px; /* 수정된 높이 */
 }
 
 .chat-body__chat-section {
 	flex: 1;
 	height: inherit;
+	overflow-y: scroll; /* 세로 스크롤 추가 */
 }
+
+.chat-body__chat-section::-webkit-scrollbar {
+  width: 5px; /* 스크롤 바의 너비 */
+}
+
+.chat-body__chat-section::-webkit-scrollbar-thumb {
+  background-color: var(--bright-purple); /* 스크롤 바 색상 */
+}
+
+.chat-body__chat-section::-webkit-scrollbar-track {
+  background-color: rgba(141, 158, 255, 0.2); /* 스크롤 바 트랙 색상 */
+}
+
 
 .chat-body__profile-section {
 	width: 300px;
 	height: inherit;
 	border-left: 1px solid rgb(141, 114, 225, 0.1);
+	
 }
 
 /* 채팅 푸터 영역*/
@@ -157,6 +173,8 @@
 	border-top: 1px solid rgb(141, 114, 225, 0.1);
 	padding: 20px;
 }
+ 
+
 
 /* 메시지 입력칸 */
 .chat-footer input {
@@ -203,4 +221,30 @@
 	background: var(--bright-purple);
 	box-shadow: var(--shade-button);
 	border-radius: 6px;
+}
+
+
+.chat-header h1 {
+        font-size: 30px;
+        color: #333;
+        margin-left: 20px; /* 원하는 픽셀 값으로 조정하세요 */
+        margin-top: 30px;
+        /* 원하는 스타일 속성을 추가로 설정하세요 */
+    }
+    .chat-body__profile-section img{
+   border-radius: 999px;
+       width: 65px;
+    height: 65px;
+    object-fit: cover;
+    margin-left: 120px;
+    margin-top: 70px;
+    }
+    
+    
+    .chat_body_profile-info {
+    	margin-top: 30px;
+    	margin-left: 120px;
+    }
+    .chatroom-card:hover {
+  background-color: white;
 }
