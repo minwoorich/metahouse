@@ -1,153 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mypageLayout}">
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./cash.css"/>
-  <link rel="stylesheet" type="text/css" href="./footer.css"/>
-  <link rel="stylesheet" type="text/css" href="./header.css"/>
-  <title>마이캐시 페이지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/mh/css/cash/cash.css" />
 
+<title>마이캐시 페이지</title>
+<style>
+</style>
 </head>
 <body>
-   
-  <!-- <header class="container-fluid gradient-bg" style="border-bottom: 1px solid #6C4AB6;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <a href="your_homepage_url">
-                    <img src="./v3.png" alt="META HOUSE" class="custom-primaryimg" style="height: 90px;">
-                </a>
-            </div>
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="서비스 또는 전문가를 검색해보세요.">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go</button>
-                    </span>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-item"><a class="nav-link custom-primary" href="#"><span class="glyphicon glyphicon-bell"></span> </a></li>
-                    <li class="nav-item"><a class="nav-link custom-primary" href="#"><span class="glyphicon glyphicon-comment"></span> </a></li>
-                    <li class="nav-item"><a class="nav-link custom-primary" href="#"><span class="glyphicon glyphicon-log-in"></span> </a></li>
-                    <li class="nav-item"><a class="nav-link custom-primary" href="#"><span class="glyphicon glyphicon-user"></span> </a></li>
-                </ul>
-            </div>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="nav-item"><a class="nav-link custom-primary" href="#">META GIGS</a></li>
-            <li class="nav-item"><a class="nav-link custom-primary" href="#">META MARKET</a></li>
-            <li class="nav-item"><a class="nav-link custom-primary" href="#">META ACADEMY</a></li>
-        </ul>
-    </div>
-</header>
-  -->
- 
-    <div class="mycash-section">
-    <h2>마이캐시</h2>
-    <div class="mycash-info">
-      <div>
-        <span class="mycash-label">보유중인 캐시:</span> 0원
-      </div>
-      <div>
-        <span class="mycash-label">적립캐시:</span> 0원
-      </div>
-      <div>
-        <span class="mycash-label">충전캐시:</span> 0원
-      </div>
-    </div>
+	<div class="mycash-section" layout:fragment="content">
+		<h2>마이캐시</h2>
+		<div class="mycash-info">
+			<div>
+				<span class="mycash-label">보유중인 캐시:</span> 0원
+			</div>
+			<div>
+				<span class="mycash-label">적립캐시:</span> 0원
+			</div>
+			<div>
+				<span class="mycash-label">충전캐시:</span> 0원
+			</div>
+		</div>
 
-    <div class="mycash-transaction">
-      <h3>충전 내역 조회</h3>
-      <table>
-        <tr>
-          <th>충전일</th>
-          <th>충전금액</th>
-        </tr>
-        <tr>
-          <td>2023-05-27</td>
-          <td>100,000원</td>
-        </tr>
-        <tr>
-          <td>2023-05-25</td>
-          <td>50,000원</td>
-        </tr>
-        <!-- 추가적인 내역을 여기에 추가할 수 있습니다 -->
-      </table>
-    </div>
+		<div class="mycash-transaction">
+			<h3>충전 내역 조회</h3>
+			<table>
+				<tr>
+					<th>충전일</th>
+					<th>충전금액</th>
+				</tr>
+				<tr>
+					<td>2023-05-27</td>
+					<td>100,000원</td>
+				</tr>
+				<tr>
+					<td>2023-05-25</td>
+					<td>50,000원</td>
+				</tr>
+				<!-- 추가적인 내역을 여기에 추가할 수 있습니다 -->
+			</table>
+		</div>
 
-    <div>
-      <h3>마이캐시 안내</h3>
-      <p>여기에 마이캐시에 대한 설명이나 안내를 작성하세요.</p>
-    </div>
-  </div>
-<!-- 
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="footer-section">
-            <h5>고객센터</h5>
-            <p>10:30~18:00 (점심시간 13:00~14:00)</p>
-            <p>주말,공휴일 휴무</p>
-            <button class="btn btn-primary">1:1문의</button>
-          </div>
-        </div>
-      
-        <div class="col-md-3">
-          <div class="footer-section">
-            <h5>메타하우스</h5>
-            <div>
-              <ul>
-                <li><a href="#">메타하우스메인</a></li>
-                <li><a href="#">Prime</a></li>
-                <li><a href="#">엔터프라이즈</a></li>
-                <li><a href="#">프리랜서클럽</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      
-        <div class="col-md-3">
-          <div class="footer-section">
-            <h5>메타하우스 정보</h5>
-            <div>
-              <ul>
-                <li><a href="#">서비스소개</a></li>
-                <li><a href="#">인재영입</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      
-        <div class="col-md-3">
-          <div class="footer-section">
-            <h5>관련사이트</h5>
-            <div>
-              <ul>
-                <li><a href="#">메타하우스 블로그</a></li>
-                <li><a href="#">메타하우스 포스트</a></li>
-                <li><a href="#">메타하우스 인스타그램</a></li>
-                <li><a href="#">메타하우스 유튜브</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr/><hr/>
-    <div class="footer-end text-center">
-      (주)메타하우스|서울시 강동구155,3층|대표:이창훈|개인정보관리책임자:이창훈|사업자등록번호"613-00-00000
-      통신판매업신고 : 2023-서울서초-0000유료직업소개사업등록번호 : 제2023호고객센터 : 1544-624help@.com
-      (주)메타하우스는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 상품, 상품정보, 거래에 관한 의무와 책임은 판매회원에게 있습니다.
-      (주)메타하우스 사이트의 상품/판매회원/중개 서비스/거래 정보, 콘텐츠, UI 등에 대한 무단복제, 전송, 배포, 스크래핑 등의 행위는 저작권법, 콘텐츠산업 진흥법 등 관련법령에 의하여 엄격히 금지됩니다. 
-    </div>
-  </footer> -->
+		<div>
+			<h3>마이캐시 안내</h3>
+			<p>여기에 마이캐시에 대한 설명이나 안내를 작성하세요.</p>
+		</div>
+	</div>
 
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap//js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap//js/bootstrap.min.js"></script>
 </body>
 </html>
