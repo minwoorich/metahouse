@@ -38,6 +38,7 @@ table {
 th {
 	background-color: rgba(141, 114, 255, 0.2);
 	padding-left: 10px;
+	vertical-align: middle;
 }
 
 tr {
@@ -46,6 +47,8 @@ tr {
 
 td {
 	padding-left: 10px;
+	vertical-align: middle;
+	vertical-align: middle;
 }
 
 .price_table {
@@ -76,7 +79,7 @@ td {
 }
 /* 선택상품 사이드바 */
 #select_product_box {
-	top: 25rem;
+	top: 18rem;
 	position: sticky;
 	display: flex;
 	flex-direction: column;
