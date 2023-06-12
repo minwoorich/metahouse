@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mainlayout}">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +12,16 @@
     <link rel="stylesheet" type="text/css" href="/mh/css/main/index.css" />
     <link rel="stylesheet" type="text/css" href="/mh/css/layout/header.css" />
     <link rel="stylesheet" type="text/css" href="/mh/css/layout/footer.css" />
+    
     <title>META HOUSE</title>
 
 </head>
 
-<body>
+<body layout:fragment="content">
 
   
 
-        <header class="container-fluid gradient-bg" style="border-bottom: 1px solid #6C4AB6;">
+   <header class="container-fluid gradient-bg" style="border-bottom: 1px solid #6C4AB6;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
@@ -492,7 +495,7 @@
             <video src="/mh/images/banner-bottom-video.mp4" autoplay muted loop></video>
         </section>
 
-        <footer class="footer">
+      <footer class="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
