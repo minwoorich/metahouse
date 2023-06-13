@@ -287,19 +287,43 @@
 					</div>
 					<!-- 가격 설정 입력 -->
 					<div class="form-item texttype">
-                        <div class="form-item-column01">
-                            <div class="form-item-title">
-                                <span>상품 가격</span> <span>*</span>
-                            </div>
-                            <input type="number" class= "form-item-description" placeholder="최소 5000원 이상을 입력하세요"
-                            name="" required onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '최소 5000원 이상을 입력하세요'"
-                            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-                            pattern="[0-9]+" />
-                            <span>원</span>
-                        </div>
-                    </div>
-
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>상품 가격</span> <span>*</span>
+							</div>
+							<input type="number" class="form-item-description"
+								placeholder="최소 5000원 이상을 입력하세요" name="" required
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '최소 5000원 이상을 입력하세요'"
+								oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+								pattern="[0-9]+" /> <span>원</span>
+						</div>
+					</div>
+					<!-- 첨부 파일-->
+					<div class="form-item filetype">
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>첨부 파일</span> <span>*</span>
+							</div>
+							<div class="form-item-file">
+								<div class="form-item-images-wrapper">
+									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
+									<label for="optional">
+										<div class="image-add optional-add">
+											<i class="fa-sharp fa-solid fa-plus fa-2xl"
+												style="color: #ffffff;"></i>
+										</div>
+									</label> <input id="optional" name="" value="" type="file"
+										style="display: none" />
+								</div>
+							</div>
+						</div>
+						<div class="form-item-column02">
+							<div class="form-item-counter ">
+								<span class="optional-img-counter">0</span> <span>/</span> <span>6</span>
+							</div>
+						</div>
+					</div>
 					<!-- 대표 사진 첨부 -->
 					<div class="form-item filetype thumbnail-form">
 						<!-- **
