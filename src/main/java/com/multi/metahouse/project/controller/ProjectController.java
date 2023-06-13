@@ -1,19 +1,15 @@
-package com.multi.metahouse.mypage;
+package com.multi.metahouse.project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/mypage")
-public class MypageController {
-	@GetMapping("/job-form")
-	public String jobForm() {
-		return "mypage/mypage_creator_jobform";
-	}
-	@GetMapping("/job-offerlist")
-	public String jobFormList() {
-		return "mypage/mypage_creator_joboffer_list";
+@RequestMapping("/project")
+public class ProjectController {
+	@GetMapping("/project-product")
+	public String projectFormlist() {
+		return "market_sm/project/mypage_project_product_list";
 	}
 	@GetMapping("/project-form-01")
 	public String projectForm01() {

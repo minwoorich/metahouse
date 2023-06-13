@@ -1,11 +1,11 @@
-package com.multi.metahouse.market;
+package com.multi.metahouse.asset.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MarketController {
+public class AssetMarketController {
 	@RequestMapping("assetMarket/main")
 	public String assetMarket() {
 		return "market/Market_main_asset";
