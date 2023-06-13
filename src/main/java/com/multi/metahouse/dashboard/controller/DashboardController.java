@@ -1,4 +1,4 @@
-package com.multi.metahouse.controller;
+package com.multi.metahouse.dashboard.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
