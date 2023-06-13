@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/mypageLayout}">
+	layout:decorate="~{common/layout/mypageLayout}">
 
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- 민우's style css [무조건 맨위에 와야함]-->
-<link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+<link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
 
 <!-- 부트스트랩 css -->
 <link rel="stylesheet"
@@ -16,7 +16,7 @@
 
 <!-- 페이지 전용 css -->
 <link rel="stylesheet"
-	href="/mh/css/market_sm/creator/mypage_creator_product_list.css">
+	href="/metahaus/css/project/project_product_list.css">
 
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/123626a3b2.js"
@@ -25,7 +25,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- 내 js코드 -->
-<script src="/mh/js/market_sm/creator/mypage_creator_product_list.js"></script>
+<script src="/metahaus/js/project/project_product_list.js"></script>
 <title>크리에이터-서비스 관리</title>
 </head>
 
@@ -57,10 +57,10 @@
 
 			</div>
 		</div>
-		<div class="creator-product-wrapper">
+		<div class="project-product-wrapper">
 			<h1 class="mypage-title">내 서비스 목록</h1>
-			<div class="creator-search-form">
-				<div class="creator-search-form-row01">
+			<div class="project-search-form">
+				<div class="project-search-form-row01">
 					<select class="search-box category01">
 						<option value="all">전체 상품</option>
 						<option value="map">맵</option>
@@ -84,27 +84,27 @@
 						<input type="date" class="search-box enddate">
 					</div>
 				</div>
-				<div class="creator-search-form-row02">
-					<input type="text" class="search-box creator-search-bar"
+				<div class="project-search-form-row02">
+					<input type="text" class="search-box project-search-bar"
 						placeholder="검색어를 입력하세요">
 					<button type="button" onclick=""
 						class="search-button button--small">조회</button>
 				</div>
 			</div>
-			<ul class="creator-product-list">
-				<li onclick="" class="creator-product-card">
-					<div class="creator-product-image">
-						<img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
+			<ul class="project-product-list">
+				<li onclick="" class="project-product-card">
+					<div class="project-product-image">
+						<img src="/metahaus/images/test_images/test05.jpeg" alt="thumbnail">
 					</div>
-					<div class="creator-product-contents">
-						<div class="creator-product-contents-row01">
-							<div class="creator-product-info">
+					<div class="project-product-contents">
+						<div class="project-product-contents-row01">
+							<div class="project-product-info">
 								<span>#1211</span> <span>|</span> <span>메타버스 맵</span>
 							</div>
-							<div class="creator-product-option">
+							<div class="project-product-option">
 								<i class="fa-regular fa-ellipsis-vertical fa-xl"
 									style="color: #000000;"></i>
-								<ul class="creator-product-option-dropdown closed">
+								<ul class="project-product-option-dropdown closed">
 									<li><button>수정 하기</button></li>
 									<li><button type="button" data-toggle="modal"
 											data-target="#myModal">삭제 하기</button></li>
@@ -112,29 +112,29 @@
 								</ul>
 							</div>
 						</div>
-						<div class="creator-product-contents-row02">
-							<div class="creator-product-title">메타버스 맵 제작을 원합니다.</div>
-							<div class="creator-product-body">
-								<div class="creator-product-body-price">
+						<div class="project-product-contents-row02">
+							<div class="project-product-title">메타버스 맵 제작을 원합니다.</div>
+							<div class="project-product-body">
+								<div class="project-product-body-price">
 									<span>금액</span> <span>500,000</span> <span>원</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</li>
-				<li onclick="" class="creator-product-card">
-					<div class="creator-product-image">
-						<img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
+				<li onclick="" class="project-product-card">
+					<div class="project-product-image">
+						<img src="/metahaus/images/test_images/test05.jpeg" alt="thumbnail">
 					</div>
-					<div class="creator-product-contents">
-						<div class="creator-product-contents-row01">
-							<div class="creator-product-info">
+					<div class="project-product-contents">
+						<div class="project-product-contents-row01">
+							<div class="project-product-info">
 								<span>#1211</span> <span>|</span> <span>메타버스 맵</span>
 							</div>
-							<div class="creator-product-option">
+							<div class="project-product-option">
 								<i class="fa-regular fa-ellipsis-vertical fa-xl"
 									style="color: #000000;"></i>
-								<ul class="creator-product-option-dropdown closed">
+								<ul class="project-product-option-dropdown closed">
 									<li><button>수정 하기</button></li>
 									<li><button type="button" data-toggle="modal"
 											data-target="#myModal">삭제 하기</button></li>
@@ -142,29 +142,29 @@
 								</ul>
 							</div>
 						</div>
-						<div class="creator-product-contents-row02">
-							<div class="creator-product-title">메타버스 맵 제작을 원합니다.</div>
-							<div class="creator-product-body">
-								<div class="creator-product-body-price">
+						<div class="project-product-contents-row02">
+							<div class="project-product-title">메타버스 맵 제작을 원합니다.</div>
+							<div class="project-product-body">
+								<div class="project-product-body-price">
 									<span>금액</span> <span>500,000</span> <span>원</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</li>
-				<li onclick="" class="creator-product-card">
-					<div class="creator-product-image">
-						<img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
+				<li onclick="" class="project-product-card">
+					<div class="project-product-image">
+						<img src="/metahaus/images/test_images/test05.jpeg" alt="thumbnail">
 					</div>
-					<div class="creator-product-contents">
-						<div class="creator-product-contents-row01">
-							<div class="creator-product-info">
+					<div class="project-product-contents">
+						<div class="project-product-contents-row01">
+							<div class="project-product-info">
 								<span>#1211</span> <span>|</span> <span>메타버스 맵</span>
 							</div>
-							<div class="creator-product-option">
+							<div class="project-product-option">
 								<i class="fa-regular fa-ellipsis-vertical fa-xl"
 									style="color: #000000;"></i>
-								<ul class="creator-product-option-dropdown closed">
+								<ul class="project-product-option-dropdown closed">
 									<li><button>수정 하기</button></li>
 									<li><button type="button" data-toggle="modal"
 											data-target="#myModal">삭제 하기</button></li>
@@ -172,29 +172,29 @@
 								</ul>
 							</div>
 						</div>
-						<div class="creator-product-contents-row02">
-							<div class="creator-product-title">메타버스 맵 제작을 원합니다.</div>
-							<div class="creator-product-body">
-								<div class="creator-product-body-price">
+						<div class="project-product-contents-row02">
+							<div class="project-product-title">메타버스 맵 제작을 원합니다.</div>
+							<div class="project-product-body">
+								<div class="project-product-body-price">
 									<span>금액</span> <span>500,000</span> <span>원</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</li>
-				<li onclick="" class="creator-product-card">
-					<div class="creator-product-image">
-						<img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
+				<li onclick="" class="project-product-card">
+					<div class="project-product-image">
+						<img src="/metahaus/images/test_images/test05.jpeg" alt="thumbnail">
 					</div>
-					<div class="creator-product-contents">
-						<div class="creator-product-contents-row01">
-							<div class="creator-product-info">
+					<div class="project-product-contents">
+						<div class="project-product-contents-row01">
+							<div class="project-product-info">
 								<span>#1211</span> <span>|</span> <span>메타버스 맵</span>
 							</div>
-							<div class="creator-product-option">
+							<div class="project-product-option">
 								<i class="fa-regular fa-ellipsis-vertical fa-xl"
 									style="color: #000000;"></i>
-								<ul class="creator-product-option-dropdown closed">
+								<ul class="project-product-option-dropdown closed">
 									<li><button>수정 하기</button></li>
 									<li><button type="button" data-toggle="modal"
 											data-target="#myModal">삭제 하기</button></li>
@@ -202,19 +202,20 @@
 								</ul>
 							</div>
 						</div>
-						<div class="creator-product-contents-row02">
-							<div class="creator-product-title">메타버스 맵 제작을 원합니다.</div>
-							<div class="creator-product-body">
-								<div class="creator-product-body-price">
+						<div class="project-product-contents-row02">
+							<div class="project-product-title">메타버스 맵 제작을 원합니다.</div>
+							<div class="project-product-body">
+								<div class="project-product-body-price">
 									<span>금액</span> <span>500,000</span> <span>원</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</li>
+				
 			</ul>
-			<div class="creator-product-add">
-				<div class="creator-product-add-text">
+			<div class="project-product-add">
+				<div class="project-product-add-text">
 					<button>
 						<i class="fa-light fa-circle-plus fa-2xl"
 							style="color: #ffffff; font-size: 70px;"></i>

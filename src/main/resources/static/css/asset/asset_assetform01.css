@@ -1,11 +1,11 @@
 /* @import "form_box.css"; */
-@import "progress_bar.css";
+@import "/metahaus/css/common/progress_bar.css";
 
 select {
 	background-color: white;
 	-webkit-appearance:none;
 	padding-left: 15px;
-	background: url("/mh/images/caret-down-solid.svg") no-repeat 610px center;
+	background: url("/metahaus/images/caret-down-solid.svg") no-repeat 610px center;
 	background-size: 12px;
 }
 

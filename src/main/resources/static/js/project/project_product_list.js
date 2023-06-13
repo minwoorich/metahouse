@@ -1,21 +1,20 @@
-///////////////mypage_creator_product_list 시작/////////////////////////
-
+///////////////project_product_list 시작/////////////////////////
 
 $(document).ready(function () {
 
     //옵션 드롭다운
-    $(".creator-product-option").click(function () {
-        $(this).find(".creator-product-option-dropdown").toggle();
+    $("project-product-option").click(function () {
+        $(this).find(".project-product-option-dropdown").toggle();
     });
 
 
     //옵션 드롭다운 - 삭제하기
-    $(".creator-product-option-dropdown li a").click(function () {
+    $(".project-product-option-dropdown li a").click(function () {
         $(this)
     });
 
     //카드 호버
-    /*$(".creator-product-card").mouseover(function (event) {
+    /*$(".project-product-card").mouseover(function (event) {
         event.stopPropagation();
         var target = $(event.target); // 이벤트가 발생한 요소
         $(target).css({
@@ -32,7 +31,7 @@ $(document).ready(function () {
 
 
     //카드 클릭 -> 상세보기 페이지로 이동
-    $(".creator-product-card").on("click", function (event) {
+    $(".project-product-card").on("click", function (event) {
         const target = event.target;
         // 구인 글 고유번호 추출 + 컨트롤러 전송
         //...
@@ -40,4 +39,4 @@ $(document).ready(function () {
     });
 });
 
-////////////////////////mypage_creator_produce_list (구인관리) 끝///////////////////////////
+////////////////////////project_produce_list (구인관리) 끝///////////////////////////
