@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/nonsideLayout}">
+      layout:decorate="~{common/layout/nonsideLayout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/mh/css/member/login.css">
+<link rel="stylesheet" href="/metahaus/css/member/login.css">
 </head>
 	<body>
 		<div layout:fragment="content" class="login_page">
 			<div class="login_box">
 				<div class="login_page_img">
+					<img alt="로그인 화면" src="/metahaus/images/loginimg1.jpg">
 				</div>
 				<div class="login_page_input_area">
 					<div class="login_text">
@@ -49,7 +50,7 @@
 							<p>metahouse의 회원이 되시면,<br/>할인혜택을 드립니다.</p>
 						</div>
 						<div class="link_signup_page">	
-							<a href="/mh/join">
+							<a href="/metahaus/join">
 								<div>
 									<span>metahouse 회원가입하기</span>
 								</div>
