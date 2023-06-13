@@ -1,18 +1,9 @@
-/* @import "form_box.css"; */
-@import "progress_bar.css";
+@import "/metahaus/css/common/progress_bar.css";
 
-select {
-	background-color: white;
-	-webkit-appearance:none;
-	padding-left: 15px;
-	background: url("/mh/images/caret-down-solid.svg") no-repeat 610px center;
-	background-size: 12px;
-}
-
+/* 모달 스타일 */
 .modal-content{
     padding: 30px;
 }
-
 .modal-footer{
     display: flex;
     flex-direction: row;
@@ -22,6 +13,12 @@ select {
 .minwoo_container{
 	display:flex;
 	flex-direction:column;
+	align-items:center;
+}
+/* form-box �떆�옉 */
+.minwoo_container{
+	display:flex;
+	flex-direction : column;
 	align-items:center;
 }
 .form{
@@ -46,8 +43,6 @@ select {
     padding-inline : 40px;
     padding-top: 30px;
     padding-bottom: 10px;
-    border: 1px solid var(--medium-purple);
-    border-radius: var(--radius-weak);
     font-size: 18px;
     margin-bottom: 30px;
 }
@@ -63,60 +58,24 @@ select {
     justify-content: end;
 }
 
-/* .form-item-title */
-.form-item-title{
-    flex:1;
-    line-height: 160%;
-}
-.form-item-title>span:nth-child(1){
-    color: var(--gray);
-}
-.form-item-title>span:nth-child(2){
-    color: var(--red);
-}
 
 /* .form-item-description */
 .form-item-description{
     flex:5.6;
     line-height: 160%;
     border: none;
-    background-color:rgba(1,1,1,0);
 }
 .form-item-description select{
     width: 100%;
     height: 60px;
-    background-color: rgb(141,114,225,0.1);
+    background-color: var(--light-gray);
     border: none;
     border-radius: var(--radius-weak);
     padding-inline: 20px;
 
 }
-/* 에디터 css*/ 
-.ck{
-	flex:5.6;
-	width:100%;
-	height:400px;
-}
- .ck.ck-editor__editable.ck-focused {
-   /* border:1px solid var(--light-purple)!important; */
- }
 
-/* form-item-display (취소 및 환불) */
-.form-item-display{
-	display:flex;
-	flex-direction:row;
-	justify-content:center;
-	align-items:center;
-	flex:5.6;
-	border:1px solid var(--bright-purple);
-	border-radius: 6px;
-	padding-block:10px;
-}
-.form-item-display:hover{
-	transition:0.5s;
-	background-color:rgb(141,114,225,0.2);
-	cursor:pointer;
-}
+
 /* form-item-file */
 .form-item-file{
     flex:5.6;
@@ -127,22 +86,6 @@ select {
     height: fit-content;
 }
 
-.image-add{
-    width: 280px;
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(141,114,225,0.1);
-    cursor: pointer;
-    border-radius:8px;
-    overflow:hidden;
-    transition:0.5s;
-}
-.image-add:hover{
-	background-color: rgb(141,114,225,0.5);
-	transition:0.5s;
-}
 
 .form-item-images-wrapper{
     display: flex;
@@ -151,16 +94,15 @@ select {
 }
 
 .image-frame{
-	position:relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 280px;
     height: 180px;
-    border-radius:8px;
-    overflow:hidden;
     margin-right: 15px;
     margin-bottom: 15px;
+    border-radius:8px;
+    overflow:hidden;
 }
 .image-frame img{
     width: 100%;
@@ -179,7 +121,7 @@ select {
     color: var(--gray);
 }
 
-/* 버튼 파트 */
+/* 踰꾪듉 �뙆�듃 */
 .form-buttons{
     display: flex;
     flex-direction: row;
@@ -192,6 +134,28 @@ select {
     font-weight: bold;
     color: var(--red) ;
     cursor: pointer;
+}
+.form-buttons-next{
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+.colored-box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--light-gray);
+	padding: 20px;
+	border-radius: 8px;
+}
+
+/* 踰꾪듉 �뙆�듃 */
+.form-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
     font-weight: bold;
 }
 .form-buttons-next{
@@ -200,6 +164,16 @@ select {
 .form-buttons-submit{
     margin-left: 30px;
 }
-.full{
-    display: none;
+
+.form-buttons div{
+    display: flex;
+    flex-direction: row;
+}
+.miwnoo_label{
+	text-align:start;
+	padding:0px;
+	color:black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }

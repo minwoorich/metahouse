@@ -9,16 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProjectController {
 	@GetMapping("/project-product")
 	public String projectFormlist() {
-		return "market_sm/project/mypage_project_product_list";
+		return "project/project_product_list";
 	}
+	
 	@GetMapping("/project-form-01")
 	public String projectForm01() {
 		return "mypage/mypage_creator_projectform01";
 	}
+	
 	@GetMapping("/project-form-02")
 	public String projectForm02() {
 		return "mypage/mypage_creator_projectform02";
 	}
+	
 	@GetMapping("/project-form-03")
 	public String projectForm03() {
 		return "mypage/mypage_creator_projectform03";

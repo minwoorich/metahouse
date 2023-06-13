@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AssetController {
 	@GetMapping("/asset-form-01")
 	public String assetForm01() {
-		return "market_sm/asset/mypage_asset_assetform01";
+		return "asset/asset_assetform01";
 	}
+	
 	@GetMapping("/asset-form-02")
 	public String assetForm02() {
-		return "market_sm/asset/mypage_asset_assetform02";
+		return "asset/asset_assetform02";
 	}
+	
 	@GetMapping("/asset-product")
 	public String assetFormlist() {
-		return "market_sm/asset/mypage_asset_product_list";
+		return "asset/asset_product_list";
 	}
 }
