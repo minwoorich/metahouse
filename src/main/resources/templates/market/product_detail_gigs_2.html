@@ -9,6 +9,8 @@
 <link href="/mh/css/thymeleaf/buttons.css" rel="stylesheet" type="text/css">
 <link href="/mh/css/market/product_detail.css" rel="stylesheet" type="text/css" />
 <link href="/mh/css/market/product_detail_img.css" rel="stylesheet" type="text/css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 	<div layout:fragment="content" class="content">	
@@ -119,7 +121,7 @@
 			<!-- buy button -->
 			<div id="btn">
 				<button class="button--small btn_custom">문의하기</button>
-				<button class="button--small btn_custom">지원하기</button>
+				<button class="button--small btn_custom"  data-toggle="modal" data-target="#apply">지원하기</button>
 			</div>
 		</div>
 		
@@ -139,7 +141,7 @@
 						</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="button--xsmall" data-dismiss="modal">지원하기</button>
+						<button type="button" class="button--xsmall" data-dismiss="modal" style="float: right;">지원하기</button>
 					</div>
 				</div>
 			</div>

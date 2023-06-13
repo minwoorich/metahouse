@@ -10,8 +10,8 @@
 
 #product_detail {
 	margin: 1rem;
-	margin-right: 5rem;
-	width: 700px;
+	margin-right: 3rem;
+	width: 70%;
 }
 
 #main_title {
@@ -65,7 +65,43 @@ td {
 	height: 50px;
 	border: none;
 }
+/* 별점 */
+.reviewer_star_rating {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
 
+.star-ratings {
+	color: #aaa9a9;
+	position: relative;
+	unicode-bidi: bidi-override;
+	width: max-content;
+	-webkit-text-fill-color: transparent;
+	/* Will override color (regardless of order) */
+	-webkit-text-stroke-width: 1.3px;
+	-webkit-text-stroke-color: #2b2a29;
+}
+
+.star-ratings-fill {
+	color: #fff58c;
+	padding: 0;
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	-webkit-text-fill-color: gold;
+}
+
+.star-ratings-base {
+	z-index: 0;
+	padding: 0;
+}
+
+/* 신고 섹션 */
 #report {
 	margin: 1.5rem 0;
 	display: flex;
@@ -85,7 +121,7 @@ td {
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	width: 300px;
+	width: 35%;
 	height: 80%;
 	box-shadow: 1px 1px 12px #C4B0FF;
 	border-radius: 8px;
@@ -132,8 +168,8 @@ td {
 }
 
 #seller_img_box {
-	width: 5rem;
-	height: 5rem;
+	width: 5em;
+	height: 4.5em;
 	border-radius: 50%;
 	overflow: hidden;
 }
