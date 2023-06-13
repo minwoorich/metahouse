@@ -50,14 +50,21 @@
 						<div class="wrap">
 							<p class="sub_title">옵션항목</p>
 					        <div class="option data">
+					        	<div class="">선택</div>
+					        	<div class="option_item">제목</div>
+					        	<div class="option_item">설명</div>
+					        	<div class="option_item">가격</div>
+					        	<div class="updown option_item">수량</div>
+					        </div>
+					        <div class="option data">
 					        	<input class="option_chk" type='checkbox' name='add_option' value='#'/>
 					        	<div class="option_item">빠른작업</div>
 					        	<div class="option_item">1일 단축</div>
 					        	<div class="option_item">10000원 추가</div>
 					        	<div class="updown option_item">
-					        		<span><i class="fa-duotone fa-square-minus fa-lg"></i></span>
-					        		<input type="text" placeholder="0" class="updown_display">
-					        		<span><i class="fa-duotone fa-square-plus fa-lg"></i></span>
+					        		<button type ="button" class="down">-</button>
+					        		<input type="text" placeholder="0" readonly="readonly" class="updown_display">
+					        		<button type ="button" class="up">+</button>
 					        	</div>
 					        </div>
 					        <div class="option data">
@@ -66,9 +73,9 @@
 					        	<div class="option_item">수정 3회 추가</div>
 					        	<div class="option_item">20000원 추가</div>
 					        	<div class="updown option_item">
-					        		<span><i class="fa-duotone fa-square-minus fa-lg"></i></span>
-					        		<input type="text" placeholder="0" class="updown_display">
-					        		<span><i class="fa-duotone fa-square-plus fa-lg"></i></span>
+					        		<button type ="button" class="down">-</button>
+					        		<input type="text" placeholder="0" readonly="readonly" class="updown_display">
+					        		<button type ="button" class="up">+</button>
 					        	</div>
 					        </div>
 						</div>
@@ -76,7 +83,7 @@
 				    <div class="wrap">
 						<p class="sub_title">요청사항</p>
 						<div class="data request_form">
-							<textarea placeholder="의뢰내용을 간략히 작성해주세요"  maxlength="100" required="required"></textarea>
+							<textarea placeholder="의뢰내용을 간략히 작성해주세요"  maxlength="100" required="required" class="request"></textarea>
 							<div class="request-counter">
 								<span class="counter">0</span> <span>/</span> <span>100</span>
 							</div>
@@ -90,7 +97,7 @@
 							<span>이름&nbsp;</span> <input type="text" required="required" class="buyer_info_inupt">
 						</div>
 						<div class="buyer_info" id="buyer_tell">
-							<span>연락처</span> <input type="text" required="required" class="buyer_info_inupt">
+							<span>연락처</span> <input type="text" required="required" class="buyer_info_inupt autoHyphen" maxlength="13">
 						</div>
 					<p>&lowast;서비스 의뢰자의 정보와 동일해야합니다.</p>
 					</div>
@@ -121,6 +128,9 @@
 				</div>
 			</div>
 		</div>
+	
+		<script src="/mh/js/market/purchase.js"></script>
+		
 	</div><!-- layout:fragment -->
 </body>
 </html>
