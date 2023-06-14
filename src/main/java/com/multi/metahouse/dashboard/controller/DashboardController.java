@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/dashboard")
 public class DashboardController {
-
+	
+	/* View Mapping */
 	@GetMapping("/")
 	public String viewDashboardMain(Model model) {
-		return "dashboard/content/dash_statistics";
+		return "dashboard/content/dashboard_statistics";
 	}
 	
 	@GetMapping("/member/management")
@@ -36,6 +37,6 @@ public class DashboardController {
 	
 	@GetMapping("/statistics")
 	public String viewStatistics(Model model) {
-		return "dashboard/content/dash_statistics";
+		return "dashboard/content/dashboard_statistics";
 	}
 }
