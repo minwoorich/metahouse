@@ -6,36 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AssetMarketController {
-	@RequestMapping("assetMarket/main")
+	@RequestMapping("asset/main")
 	public String assetMarket() {
-		return "market/Market_main_asset";
+		return "asset/main";
 	}
-	@RequestMapping("assetMarket/detail")
+
+	@RequestMapping("asset/detail")
 	public String showAsset() {
-		return "market/product_detail_asset";
+		return "asset/market_detail";
 	}
-	@RequestMapping("gigsSell/main")
-	public String gigs1() {
-		return "market/Market_main_gigs_1";
-	}
-	@RequestMapping("gigsSell/detail")
-	public String showGigs1() {
-		return "market/product_detail_gigs_1";
-	}
-	@RequestMapping("gigsGather/main")
-	public String gigs2() {
-		return "market/Market_main_gigs_2";
-	}
-	@RequestMapping("gigsGather/detail")
-	public String showGigs2() {
-		return "market/product_detail_gigs_2";
-	}
+
 	@GetMapping("product/purchase_asset")
 	public String puchaseAsset() {
-		return "market/purchase_asset";
-	}
-	@GetMapping("product/purchase")
-	public String puchaseGigs() {
-		return "market/purchase_gigs";
+		return "order/asset_purchase";
 	}
 }
