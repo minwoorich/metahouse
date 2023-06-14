@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/point")
 public class PointController {
-	@RequestMapping("cash/mycash")
-	public String cash() {
-		return "cash/cash";
+	@RequestMapping("/mypoint")
+	public String viewMyPoint() {
+		return "point/point";
 	}
-
 }
 
