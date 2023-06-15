@@ -1,12 +1,32 @@
 package com.multi.metahouse.domain.entity.project;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name="project")
 public class ProjectEntity {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int projectId;
+	private String creatorId;
+	private String tag;
+	private String title;
+	private String description;
+	private Timestamp projectDate;
+	private int projectHits;
+	private String category1;
+	private String category2Pj;
 }
