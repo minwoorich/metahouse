@@ -69,5 +69,4 @@ public class AssetDAOImpl implements AssetDAO {
 		return sqlSession.selectOne("com.multi.metahaus.asset.selectAsset");
 	}
 	
-
 }
