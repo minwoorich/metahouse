@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mypageLayout}">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 민우's style css [무조건 맨위에 와야함]-->
+<link rel="stylesheet" href="/mh/css/thymeleaf/minwoo_style.css">
+
+<!-- 부트스트랩 css -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- 페이지 전용 css -->
+<link rel="stylesheet"
+	href="/mh/css/mypage/mypage_creator_joboffer_list.css">
+
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+<!-- 제이쿼리 js -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 내 js코드 -->
+<script src="/mh/js/mypage/mypage_creator_joboffer_list.js"></script>
+<title>크리에이터-구인관리</title>
+</head>
+
+<body>
+	<!-- 내가 설정한 body -->
+	<main layout:fragment="content" class="minwoo_body">
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" style="font-weight: bold; font-size: 24px;">구인
+						등록 삭제</h4>
+				</div>
+				<div class="modal-body" style="font-weight: 600; font-size: 16px;">
+					<p>
+						지금 삭제를 하신다면 추후에 구인 서비스 사용시 패널티를 받을 수 있습니다. <br> <br>그래도
+						삭제 하시겠습니까?
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="button--xsmall" data-dismiss="modal">네
+						삭제하겠습니다</button>
+					<!-- <button>네, 삭제 하겠습니다</button> 빨간 글씨 버전-->
+				</div>
+			</div>
+
+		</div>
+	</div>
+		<div class="job-offer-wrapper">
+			<h1 class="mypage-title">내 구인 목록</h1>
+			<ul class="job-offer-list">
+				<li onclick="" class="job-offer-card">
+					<div class="job-offer-image">
+						<img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
+					</div>
+					<div class="job-offer-contents">
+						<div class="job-offer-contents-row01">
+							<div class="job-offer-info">
+								<span>#1211</span> <span>|</span> <span>메타버스 맵</span>
+							</div>
+							<div class="job-offer-option">
+								<i class="fa-regular fa-ellipsis-vertical fa-xl"
+									style="color: #000000;"></i>
+								<ul class="job-offer-option-dropdown closed">
+									<li><button>수정 하기</button></li>
+									<li><button type="button" data-toggle="modal"
+											data-target="#myModal">삭제 하기</button></li>
+
+								</ul>
+							</div>
+						</div>
+						<div class="job-offer-contents-row02">
+							<div class="job-offer-title">메타버스 맵 제작을 원합니다.</div>
+							<div class="job-offer-body">
+								<div class="job-offer-body-price">
+									<span>예산</span> <span>500,000</span> <span>원</span>
+								</div>
+								<div class="my-dropdown">
+									<button>
+										<span>신청 현황</span><span>4</span><span>명</span> <i
+											class="fa-solid fa-chevron-down fa-sm" style="color: black;"></i>
+									</button>
+									<ul class="my-dropdown-contents closed">
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</li>
+				<li onclick="" class="job-offer-card">
+					<div class="job-offer-image">
+						<img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
+					</div>
+					<div class="job-offer-contents">
+						<div class="job-offer-contents-row01">
+							<div class="job-offer-info">
+								<span>#1211</span> <span>|</span> <span>메타버스 맵</span>
+							</div>
+							<div class="job-offer-option">
+								<i class="fa-regular fa-ellipsis-vertical fa-xl"
+									style="color: #000000;"></i>
+								<ul class="job-offer-option-dropdown closed">
+									<li><button>수정 하기</button></li>
+									<li><button type="button" data-toggle="modal"
+											data-target="#myModal">삭제 하기</button></li>
+
+								</ul>
+							</div>
+						</div>
+						<div class="job-offer-contents-row02">
+							<div class="job-offer-title">메타버스 맵 제작을 원합니다.</div>
+							<div class="job-offer-body">
+								<div class="job-offer-body-price">
+									<span>예산</span> <span>500,000</span> <span>원</span>
+								</div>
+								<div class="my-dropdown">
+									<button>
+										<span>신청 현황</span><span>4</span><span>명</span> <i
+											class="fa-solid fa-chevron-down fa-sm" style="color: black;"></i>
+									</button>
+									<ul class="my-dropdown-contents closed">
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</li>
+				<li onclick="" class="job-offer-card">
+					<div class="job-offer-image">
+						<img src="/mh/images/test_images/test05.jpeg" alt="thumbnail">
+					</div>
+					<div class="job-offer-contents">
+						<div class="job-offer-contents-row01">
+							<div class="job-offer-info">
+								<span>#1211</span> <span>|</span> <span>메타버스 맵</span>
+							</div>
+							<div class="job-offer-option">
+								<i class="fa-regular fa-ellipsis-vertical fa-xl"
+									style="color: #000000;"></i>
+								<ul class="job-offer-option-dropdown closed">
+									<li><button>수정 하기</button></li>
+									<li><button type="button" data-toggle="modal"
+											data-target="#myModal">삭제 하기</button></li>
+
+								</ul>
+							</div>
+						</div>
+						<div class="job-offer-contents-row02">
+							<div class="job-offer-title">메타버스 맵 제작을 원합니다.</div>
+							<div class="job-offer-body">
+								<div class="job-offer-body-price">
+									<span>예산</span> <span>500,000</span> <span>원</span>
+								</div>
+								<div class="my-dropdown">
+									<button>
+										<span>신청 현황</span><span>4</span><span>명</span> <i
+											class="fa-solid fa-chevron-down fa-sm" style="color: black;"></i>
+									</button>
+									<ul class="my-dropdown-contents closed">
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+										<li><img class="my-dropdown-contents-img"
+											src="/mh/images/test_images/test03.jpeg" alt="프로필">
+											<div class="my-dropdown-contents-text">
+												<div class="text-row01">
+													<a href="#">kjk1241</a>
+													<div>
+														<span>신청일자</span> <span>2023.05.24</span>
+													</div>
+												</div>
+												<div class="text-row02">
+													<a href="#">1:1 채팅하기</a>
+												</div>
+											</div></li>
+									</ul>
+
+								</div>
+							</div>
+
+						</div>
+				</li>
+
+			</ul>
+
+		</div>
+		</div>
+	</main>
+
+</body>
+
+</html>
