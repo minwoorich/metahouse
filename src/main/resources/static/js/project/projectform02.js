@@ -243,7 +243,7 @@ $(document).ready(function(){
     	
     	//전부 채웠으면 다음 페이지 이동
     	if(isValid){
-    		location.href='/mh/project/project-form-03';
+    		location.href='/metahaus/project/project-form-03';
     	}else{//못채웠으면 모달 출력
     		$('html, body').animate({ scrollTop: 0 }, "0.5s");
     	}
