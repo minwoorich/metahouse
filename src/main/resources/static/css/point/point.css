@@ -1,48 +1,87 @@
-.mycash-section {
-    
-    padding: 1%;
-  
-    margin-left: 10%;
-    margin-right: 10%;
+.mypoint-section {
+    padding: 40px;
   }
 
-  .mycash-section h2 {
-    margin-top: 0;
+  .mypoint-section h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    color: var(--medium-purple);
   }
 
-  .mycash-info {
-    display: grid;
+  .mypoint-info {
+  	display: flex;
+  	justify-content: space-between;
+/* 	
+	display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+ */
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    border-collapse: collapse;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px var(--medium-purple)
   }
 
-  .mycash-info div {
+  .mypoint-info div {
     text-align: center;
   }
 
-  .mycash-label {
+  .mypoint-label {
     font-weight: bold;
     display: inline-block;
     padding: 8px;
-    background-color: #6C4AB6;
+    color: white;
+    background-color: var(--medium-purple);
     border: 1px solid #ccc;
     border-radius: 4px;
+    border-collapse: collapse;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px var(--medium-purple);
+  }
+  
+  .mypoint-count{
+  	padding-left: 10px;
+  	padding-right: 10px;
+  	text-align: right;
   }
 
-  .mycash-transaction {
+  .mypoint-history {
     margin-top: 20px;
   }
 
-  .mycash-transaction table {
+  .mypoint-history table {
     width: 100%;
+    border: 1px solid black;
+    border-radius: 4px;
     border-collapse: collapse;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px var(--medium-purple);
+    table-layout:fixed;
+    word-break:break-all;
   }
 
-  .mycash-transaction th, .mycash-transaction td {
+  .mypoint-history th, .mypoint-history td {
     border: 1px solid #ccc;
     padding: 8px;
   }
 
-  .mycash-transaction th {
-    background-color: #6C4AB6;
+  .mypoint-history th {
+    background-color: var(--medium-purple);
+    text-align: center;
+    color: white;
   }
+  
+  /* 날짜 데이터 중앙 정렬 */
+  .mypoint-history td:nth-child(2){
+  	text-align: center;
+  }
+  
+  /* 금액 우측 정렬 */
+  .mypoint-history td:nth-child(3), td:nth-child(4){
+  	text-align: right;
+  }
+  

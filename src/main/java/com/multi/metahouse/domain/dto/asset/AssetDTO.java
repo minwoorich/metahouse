@@ -30,4 +30,5 @@ public class AssetDTO {
 	private List<MultipartFile> optional_img;
 	private String asset_date;
 	private String asset_hits;
+
 }
