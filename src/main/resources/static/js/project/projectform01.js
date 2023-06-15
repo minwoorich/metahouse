@@ -55,7 +55,23 @@ $(document).ready(function () {
             $(this).find(".delete-cover").remove();
         }
     )
-
+    
+    //이미지 추가버튼 누르면 미리보기 생성 - 대표이미지
+    $("#thumbnail").on("click",function(){
+    	let file = $(this)[0].files[0];
+    	if(file){//파일이 존재한다면
+    		alert("파일미리보기 성공");
+    		//업로드할 이미지의 경로(미리보기용)
+    		let fileURL = URL.createObjectURL(file);
+    		//미리보기할 이미지를 담은 요소
+    		let element = "<div class='image-frame thumbnail-img'>"+
+							"<img src='"+fileURL +"'alt='대표 사진'>"+
+							"</div>"
+    		$("#thumbnail-form").append(element);
+    	}else{
+    		alert("파일이 존재하지 않습니다!");
+    	}
+    });
 
     //사진 누르면 삭제 모달뜨고 버튼 누르면 삭제완료됨
     const deleteBtn = $("#delete-img-Modal").find("button");
@@ -83,10 +99,12 @@ $(document).ready(function () {
         });
     });
 
-    // 필수 사항 입력 안 한 채로 "다음" 버튼 누른경우
+    // "다음" 버튼 누른경우 - 
     $(".form-buttons-next").on("click",function(){
     	let isValid = true;
     	const alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
+    	
+    	
     	$('textarea[required]').each(function() {
 			  if ($(this).val().trim() === '') {
 				  $(this).parent().parent().addClass('alert-style');
@@ -96,9 +114,14 @@ $(document).ready(function () {
     	if($(".thumbnail-img").length == 0){
     		$(".thumbnail-form").addClass("alert-style");
     	}
-    	if(isValid){
-    		location.href='/mh/project/project-form-02';
-    	}else{//스크롤이 맨 위로 올라감
+    	if(isValid){//전부 채워넣은경우 -> 컨트롤러에 formData전부 보내줌
+    		let form = $("#form");
+    		let formData = form.serialize();
+    		$.ajax({
+    			
+    		});
+    		
+    	}else{//필수 사항 미 완성 -> 스크롤이 맨 위로 올라감
     		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
     	}
     	
