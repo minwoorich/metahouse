@@ -68,5 +68,6 @@ public class AssetDAOImpl implements AssetDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("com.multi.metahaus.asset.selectAsset");
 	}
+	
 
 }
