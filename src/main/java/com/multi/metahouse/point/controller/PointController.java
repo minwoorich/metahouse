@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/point")
 public class PointController {
 	@RequestMapping("/mypoint")
-	public String viewMyPoint() {
+	public String viewMyPointPage() {
 		return "point/point";
 	}
+	
+	@RequestMapping("/charge")
+	public String viewPointChargePage() {
+		return "point/charge";
+	}
 }
-
