@@ -108,14 +108,15 @@ $(document).ready(function () {
         });
         
         //.length : 객체의 개수
-    	if($(".thumbnail-img").length == 0){
-    		isValid = false;
-    		$(".thumbnail-form").addClass("alert-style");
-    	}
+    	//if($(".thumbnail-img").length == 0){
+    		//isValid = false;
+    		//$(".thumbnail-form").addClass("alert-style");
+    	//}
     	if(isValid){
-    		location.href='/mh/asset/asset-form-02';
+    		return true;
     	}else{//스크롤이 맨 위로 올라감
     		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
+    		 return false;
     	}
     	
   	});

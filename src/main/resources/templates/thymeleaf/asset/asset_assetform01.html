@@ -36,6 +36,7 @@
 
 	<!-- 내가 설정한 body -->
 	<main layout:fragment="content" class="minwoo_body">
+	<form action="/metahaus/asset/asset-form-01" method="POST" enctype="multipart/form-data">
 		<!-- 취소 Modal -->
 		<div id="cancel" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -173,7 +174,7 @@
 								<span>제목</span> <span>*</span>
 							</div>
 							<textarea class="form-item-description" maxlength="30"
-								type="search" placeholder="제목을 입력하세요" value="" name=""
+								type="search" placeholder="제목을 입력하세요" value="" name="title"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '제목을 입력하세요'" required></textarea>
 						</div>
@@ -191,7 +192,7 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select name="">
+								<select name="category1">
 									<option value="maps">의류</option>
 									<option value="assets">악세서리</option>
 									<option value="promo/event">무기</option>
@@ -209,7 +210,7 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select name="">
+								<select name="category2_as">
 									<option value="roblox">로블록스</option>
 									<option value="zepeto">제페토</option>
 									<option value="sandbox">더 샌드박스</option>
@@ -226,7 +227,7 @@
 							<div class="form-item-title" style="width: 114px !important;">
 								<span>서비스 설명</span> <span>*</span>
 							</div>
-							<textarea class="form-item-description" id="form-editor" name=""
+							<textarea class="form-item-description" id="form-editor" name="description"
 								value="" maxlength="1500"></textarea>
 							<script>
 							document.addEventListener("DOMContentLoaded", function() {
@@ -292,7 +293,7 @@
 								<span>상품 가격</span> <span>*</span>
 							</div>
 							<input type="number" class="form-item-description"
-								placeholder="최소 5000원 이상을 입력하세요" name="" required
+								placeholder="최소 5000원 이상을 입력하세요" name="price" required
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '최소 5000원 이상을 입력하세요'"
 								oninput="this.value = this.value.replace(/[^0-9]/g, '');"
@@ -308,12 +309,12 @@
 							<div class="form-item-file">
 								<div class="form-item-images-wrapper">
 									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
-									<label for="optional">
+									<label for="attach">
 										<div class="image-add optional-add">
 											<i class="fa-sharp fa-solid fa-plus fa-2xl"
 												style="color: #ffffff;"></i>
 										</div>
-									</label> <input id="optional" name="" value="" type="file"
+									</label> <input id="attach" name="attach_file" value="" type="file"
 										style="display: none" />
 								</div>
 							</div>
@@ -344,7 +345,7 @@
 										<i class="fa-sharp fa-solid fa-plus fa-2xl"
 											style="color: #ffffff;"></i>
 									</div>
-								</label> <input id="thumbnail" name="" value="" type="file"
+								</label> <input id="thumbnail" name="thumbnail_img" value="" type="file"
 									style="display: none" />
 							</div>
 						</div>
@@ -365,19 +366,7 @@
 								<div class="form-item-images-wrapper">
 									<!-- 미리보기 이미지들 -->
 									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test02.jpeg" alt="상세 사진">
-
-									</div>
-									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test03.jpeg" alt="상세 사진">
-
-									</div>
-									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test04.jpeg" alt="상세 사진">
-
-									</div>
-									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test05.jpeg" alt="상세 사진">
+										<img src="/metahaus/images/test_images/test02.jpeg" alt="상세 사진" id="img">
 
 									</div>
 									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
@@ -386,8 +375,8 @@
 											<i class="fa-sharp fa-solid fa-plus fa-2xl"
 												style="color: #ffffff;"></i>
 										</div>
-									</label> <input id="optional" name="" value="" type="file"
-										style="display: none" />
+									</label> <input id="optional" name="optional_img" value="" type="file" style="display: none"
+											onchange="document.getElementById('img').src = window.URL.createObjectURL(this.files[0])"/>
 								</div>
 							</div>
 						</div>
@@ -418,12 +407,13 @@
                         last : 마지막장 -->
 						<button type="button" data-toggle='modal' data-target='#cancel'
 							value="cancel" class="form-buttons-cancel">취소</button>
-						<button type="button" value="next"
+						<button type="submit" value="next"
 							class="form-buttons-next button--small">다음</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		</form>
 	</main>
 </body>
 </html>
