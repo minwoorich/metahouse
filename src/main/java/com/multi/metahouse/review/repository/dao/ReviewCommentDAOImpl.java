@@ -38,4 +38,10 @@ public class ReviewCommentDAOImpl implements ReviewCommentDAO {
     public List<ReviewCommentDTO> getReviewCommentsByReviewId(int reviewId) {
         return sqlSession.selectList("getReviewCommentsByReviewId", reviewId);
     }
+
+	@Override
+	public void addReviewComment(ReviewCommentDTO reviewComment) {
+		// TODO Auto-generated method stub
+		
+	}
 }
