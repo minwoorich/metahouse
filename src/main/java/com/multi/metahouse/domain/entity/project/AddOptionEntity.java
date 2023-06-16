@@ -14,14 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="project_options")
-public class ProjectOptionsEntity {
+@Table(name="add_option")
+public class AddOptionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int projectOptionId;
+	private int addOptionId;
 	private int projectId;
-	private int price;
-	private String optionDescription;
-	private String packageRank;
-	private int workdays;
+	private String addOptionName;
+	private int addOptionPrice;
+	private String addOptionDescription;
 }
