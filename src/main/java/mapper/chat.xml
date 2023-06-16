@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.metahouse.domain.dao.ChatroomDAO">
+
+    <insert id="insertChatroom">
+        INSERT INTO chatroom (chatroom_id, user_1_id, user_2_id, tag, open_Date, seller_info)
+        VALUES (#{chatroom_id}, #{user_1_id}, #{user_2_id}, #{tag}, #{open_Date}, #{seller_info})
+    </insert>
+
+    <update id="updateChatroom">
+        UPDATE chatroom
+        SET user_1_id = #{user_1_id}, user_2_id = #{user_2_id}, tag = #{tag},
+            open_Date = #{open_Date}, seller_info = #{seller_info}
+        WHERE chatroom_id = #{chatroom_id}
+    </update>
+
+    <delete id="deleteChatroom">
+        DELETE FROM chatroom WHERE chatroom_id = #{chatroomId}
+    </delete>
+
+    <select id="getChatroomById" resultType="com.multi.metahouse.domain.dto.ChatroomDTO">
+        SELECT chatroom_id, user_1_id, user_2_id, tag, open_Date, seller_info
+        FROM chatroom
+        WHERE chatroom_id = #{chatroomId}
+    </select>
+
+
+</mapper>

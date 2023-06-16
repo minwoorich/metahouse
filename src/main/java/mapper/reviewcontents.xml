@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.metahouse.domain.dao.ReviewContentsDAO">
+    <insert id="saveReviewContents" parameterType="com.multi.metahouse.domain.dto.review.ReviewContentsDTO">
+        INSERT INTO review_contents (review_contents_id, review_id, review_store_filename, review_img_no)
+        VALUES (#{review_contents_id}, #{review_id}, #{review_store_filename}, #{review_img_no})
+    </insert>
+    
+    <update id="updateReviewContents" parameterType="com.multi.metahouse.domain.dto.review.ReviewContentsDTO">
+        UPDATE review_contents SET review_id = #{review_id}, review_store_filename = #{review_store_filename},
+        review_img_no = #{review_img_no}
+        WHERE review_contents_id = #{review_contents_id}
+    </update>
+    
+    <delete id="deleteReviewContents" parameterType="int">
+        DELETE FROM review_contents WHERE review_contents_id = #{reviewContentsId}
+    </delete>
+    
+    <select id="getReviewContentsById" resultType="com.multi.metahouse.domain.dto.review.ReviewContentsDTO" parameterType="int">
+        SELECT * FROM review_contents WHERE review_contents_id = #{reviewContentsId}
+    </select>
+    
+    <select id="getReviewContentsByReviewId" resultType="com.multi.metahouse.domain.dto.review.ReviewContentsDTO" parameterType="int">
+        SELECT * FROM review_contents WHERE review_id = #{reviewId}
+    </select>
+    <!-- 필요한 추가적인 SQL 매핑을 작성할 수 있습니다. -->
+</mapper>
