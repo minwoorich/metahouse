@@ -11,5 +11,6 @@ public interface ReviewDAO {
     void deleteReview(int reviewId);//주어진 리뷰 ID에 해당하는 리뷰를 삭제합니다.
     ReviewDTO getReviewById(int reviewId);//주어진 리뷰 ID에 해당하는 리뷰를 가져온다
     List<ReviewDTO> getAllReviews();//모든리뷰를 가져온다.
+	void createReview(ReviewDTO reviewDTO);
 }
 

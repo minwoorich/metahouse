@@ -12,6 +12,7 @@ public interface ReviewCommentDAO {
     void deleteReviewComment(int reviewCommentId);//주어진 리뷰 댓글 ID에 해당하는 리뷰 댓글을 삭제합니다.
     ReviewCommentDTO getReviewCommentById(int reviewCommentId);//주어진 리뷰 댓글 ID에 해당하는 리뷰 댓글을 가져온다.
     List<ReviewCommentDTO> getReviewCommentsByReviewId(int reviewId);//주어진 리뷰 ID에 해당하는 모든 리뷰 댓글을 가져온다.
+	void addReviewComment(ReviewCommentDTO reviewComment);
 }
 
 
