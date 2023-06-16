@@ -144,7 +144,7 @@
 			<!-- 등록서 작성 파트 -->
 			<form class="form" id="form" method="post" enctype="multipart/form-data">
 				<!-- 세션에 저장된 유저의 id를 projectDto에 저장 -->
-				<input type="hidden"  value="1" />
+				<input type="hidden"  value="${#session.getAttribute('userId')}" />
 				
 				<div class="form-wrapper">
 					<!-- 진행 상태 바 -->
@@ -182,7 +182,7 @@
 							<div class="form-item-title">
 								<span>제목</span> <span>*</span>
 							</div>
-							<textarea class="form-item-description" maxlength="30"
+							<textarea  class="form-item-description" maxlength="30"
 								type="search" placeholder="제목을 입력하세요" value="" name=""
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '제목을 입력하세요'" required></textarea>
