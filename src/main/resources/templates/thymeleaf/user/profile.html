@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/mypageLayout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/metahaus/css/market/page_bar.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/metahaus/css/user/profile.css">
+</head>
+<body>
+<div layout:fragment="content" class="profile_page_css">
+	<div class="profile_page_title">
+		내 정보
+	</div>
+	<div class="profile_area">
+		<div class="profile_img_area">
+			<div class="profile_img">
+				<div class="profile_img_view">
+					<img th:if="${userProfile.thumbnailStoreFilename != null}" 
+						 th:src="|/metahaus/upload/userthumbnail/${userProfile.thumbnailStoreFilename}|">
+					
+					<img th:unless="${userProfile.thumbnailStoreFilename != null}" 
+						 src="/metahaus/images/test_img.jpg">
+				</div>
+				<div class="profile_user_name">
+					[[${userProfile.userName}]]
+				</div>
+			</div>
+		</div>
+		<div class="profile_info">
+			<div class="profile_info_intro">
+				[[${userProfile.selfIntroduction}]]
+			</div>
+			<div class="profile_info_etc">	
+				<div class="profile_info_etc_title">email</div><div class="profile_info_etc_content">[[${userProfile.email}]]</div>
+			</div>
+			<div class="profile_info_etc">
+				<div class="profile_info_etc_title">phone</div><div class="profile_info_etc_content">[[${userProfile.phoneNumber}]]</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="profile_page_title">
+		포트폴리오
+	</div>
+	<div class="profile_view_area">
+		<div class="info_card_view">
+			<div class="portfolio_info_card" onclick="location.href='/metahaus/mypage/portfolio'">
+				<div class="portfolio_info_img">
+					<img alt="사진" src="/metahaus/images/mincraft.jpg">
+				</div>
+				<hr>
+				<div class="portfolio_info_text">
+					[포트폴리오] META HAUS 제작
+				</div>
+			</div>
+			<div class="portfolio_info_card">
+				<div class="portfolio_info_img">
+					<img alt="사진" src="/metahaus/images/mincraft.jpg">
+				</div>
+				<hr>
+				<div class="portfolio_info_text">
+					[포트폴리오] META HAUS 제작2
+				</div>
+			</div>
+			<div class="portfolio_info_card">
+				<div class="portfolio_info_img">
+					<img alt="사진" src="/metahaus/images/mincraft.jpg">
+				</div>
+				<hr>
+				<div class="portfolio_info_text">
+					[포트폴리오] META HAUS 제작3
+				</div>
+			</div>
+		</div>
+		<div class="button_cover">
+			<div class="create_portfolio_button" onclick="location.href='/metahaus/mypage/create/portfolio'">
+				포트폴리오 작성하기
+			</div>
+		</div>
+	</div>
+	<!-- 포트폴리오 작성 버튼 -->
+	<div class="page_wrap">
+		<div class="page_nation">
+			<a class="arrow pprev" href="#">&lang;&lang;</a>
+			<a class="arrow prev" href="#">&lang;</a>
+			<a href="#" class="active">1</a>
+			<a href="#">2</a>
+			<a href="#">3</a>
+			<a href="#">4</a>
+			<a href="#">5</a> 
+			<a class="arrow next" href="#">&rang;</a>
+			<a class="arrow nnext" href="#">&rang;&rang;</a>
+		</div>
+	</div>
+	
+	<div class="profile_page_title">
+		리뷰
+	</div>
+	<div class="profile_view_area">
+		<div class="review_box">
+			<div class="reviewer_cover">
+				<div class="reviewer_thumbnail_cover">
+					<div class="reviewer_thumbnail">
+						<img alt="" src="/metahaus/images/test_img.jpg">
+					</div>
+					<div class="reviewer_name">
+						유세희
+					</div>
+				</div>
+				<div class="reviewer_star_rating">
+					<div class="star-ratings">
+						<div class="star-ratings-fill space-x-2 text-lg"
+					    :style="{ width: ratingToPercent + '%' }">
+							<span>★</span><span>★</span><span>★</span><span>★</span>
+						</div>
+						<div class="star-ratings-base space-x-2 text-lg">
+							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="purchased_item_name">
+				맵 제작해드립니다.
+			</div>
+			<div class="review_content_cover">
+				<div class="review_img_cover">
+					<div class="review_img">
+						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
+					</div>
+					<div class="review_img">
+						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
+					</div>	
+					<div class="review_img">
+						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
+					</div>			
+				</div>
+				<div class="review_content">
+					<div class="review_content_name">리뷰</div>
+					<div class="review_content_text">리뷰의 내용이 출력됩니다.</div>
+				</div>
+			</div>
+		</div>
+		<div class="review_box">
+			<div class="reviewer_cover">
+				<div class="reviewer_thumbnail_cover">
+					<div class="reviewer_thumbnail">
+						<img alt="" src="/metahaus/images/test_img.jpg">
+					</div>
+					<div class="reviewer_name">
+						유세희
+					</div>
+				</div>
+				<div class="reviewer_star_rating">
+					<div class="star-ratings">
+						<div class="star-ratings-fill space-x-2 text-lg"
+					    :style="{ width: ratingToPercent + '%' }">
+							<span>★</span><span>★</span><span>★</span><span>★</span>
+						</div>
+						<div class="star-ratings-base space-x-2 text-lg">
+							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="purchased_item_name">
+				에셋 제작해드립니다.
+			</div>
+			<div class="review_content_cover">
+				<div class="review_img_cover">
+					<div class="review_img">
+						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
+					</div>
+					<div class="review_img">
+						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
+					</div>	
+					<div class="review_img">
+						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
+					</div>			
+				</div>
+				<div class="review_content">
+					<div class="review_content_name">리뷰</div>
+					<div class="review_content_text">리뷰의 내용이 출력됩니다.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page_wrap">
+		<div class="page_nation">
+			<a class="arrow pprev" href="#">&lang;&lang;</a>
+			<a class="arrow prev" href="#">&lang;</a>
+			<a href="#" class="active">1</a>
+			<a href="#">2</a>
+			<a href="#">3</a>
+			<a href="#">4</a>
+			<a href="#">5</a> 
+			<a class="arrow next" href="#">&rang;</a>
+			<a class="arrow nnext" href="#">&rang;&rang;</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>
