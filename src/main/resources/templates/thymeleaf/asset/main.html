@@ -32,17 +32,30 @@
 			<div class="search_bar">
 				<input type="text" placeholder="search" class="search_content">
 				<button type="submit" class="search_btn">
-					<img src="/mh/images/search_icon.png" class="btn_image">
+					<img src="/metahaus/images/search_icon.png" class="btn_image">
 				</button>
 			</div>
 		</nav>
 
 		<!-- Product grid -->
-			<table class="products">
-				<tbody>
-					<tr>
-						<td>
-							<!-- Product -->
+		<table class="products">
+			<thead>
+				<tr>
+					<th colspan="4" class="sort">
+						<a class="sort_tag">최근 등록순</a>
+						<span>|</span>
+						<a class="sort_tag">가격 낮은순</a>
+						<span>|</span>
+						<a class="sort_tag">가격 높은순</a>
+						<span>|</span>
+						<a class="sort_tag">인기순</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+			 <tr th:each="asset, i:${assetlist}"  th:if="${i.index%4==1}">
+					<td th:if="${i.index < i.size}" >
+						<!-- Product -->
 						<div class="product">
 							<div class="product_img_cover">
 								<img class="product_img" src="/mh/images/item2.png" alt="Product 1" />
@@ -61,17 +74,17 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
+								<span th:text="${assetlist[i.index].title}" class="product_title"></span>
+								<span th:text="${assetlist[i.index].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index].price}+원" class="product_price"></span>
 							</div>
 						</div>
 					</td>
-					<td>
+					<td th:if="${i.index+1 < i.size}">
 						<!-- Product -->
 						<div class="product">
 							<div class="product_img_cover">
-								<img class="product_img" src="/mh/images/item.png" alt="Product 1" />
+								<img class="product_img" src="/mh/images/item2.png" alt="Product 1" />
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
@@ -79,164 +92,82 @@
 									<div class="star-ratings">
 										<div class="star-ratings-fill space-x-2 text-lg"
 									    :style="{ width: ratingToPercent + '%' }">
+											<span>★</span><span>★</span><span>★</span><span>★</span>
 										</div>
 										<div class="star-ratings-base space-x-2 text-lg">
 											<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 										</div>
 									</div>
-									<span>&ensp;(0)</span>
+									<span>&ensp;(37)</span>
 								</div>								
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
+								<span th:text="${assetlist[i.index+1].title}" class="product_title"></span>
+								<span th:text="${assetlist[i.index+1].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index+1].price}+원" class="product_price"></span>
 							</div>
 						</div>
 					</td>
-					<td>
-						<!-- Product -->
-						<div class="product">
-							<div class="product_img_cover">
-								<img class="product_img" src="/mh/images/item.png" alt="Product 1" />
-							</div>
-							<div class="product_info">
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
-							</div>
-						</div>
-					</td>
-					<td>
+					<td th:if="${i.index+2 < i.size}" >
 						<!-- Product -->
 						<div class="product">
 							<div class="product_img_cover">
 								<img class="product_img" src="/mh/images/item2.png" alt="Product 1" />
 							</div>
 							<div class="product_info">
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
+								<!-- 별점 -->
+								<div class="reviewer_star_rating">
+									<div class="star-ratings">
+										<div class="star-ratings-fill space-x-2 text-lg"
+									    :style="{ width: ratingToPercent + '%' }">
+											<span>★</span><span>★</span><span>★</span><span>★</span>
+										</div>
+										<div class="star-ratings-base space-x-2 text-lg">
+											<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+										</div>
+									</div>
+									<span>&ensp;(37)</span>
+								</div>								
+								<span th:text="${assetlist[i.index+2].title}" class="product_title"></span>
+								<span th:text="${assetlist[i.index+2].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index+2].price}+원" class="product_price"></span>
 							</div>
 						</div>
 					</td>
-				</tr>
-				<tr>
-					<td>
+					<td th:if="${i.index+3 < i.size}">
 						<!-- Product -->
-					<div class="product">
-						<div class="product_img_cover">
-							<img class="product_img" src="/mh/images/item.png" alt="Product 1" />
+						<div class="product">
+							<div class="product_img_cover">
+								<img class="product_img" src="/mh/images/item2.png" alt="Product 1" />
+							</div>
+							<div class="product_info">
+								<!-- 별점 -->
+								<div class="reviewer_star_rating">
+									<div class="star-ratings">
+										<div class="star-ratings-fill space-x-2 text-lg"
+									    :style="{ width: ratingToPercent + '%' }">
+											<span>★</span><span>★</span><span>★</span><span>★</span>
+										</div>
+										<div class="star-ratings-base space-x-2 text-lg">
+											<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+										</div>
+									</div>
+									<span>&ensp;(37)</span>
+								</div>								
+								<span th:text="${assetlist[i.index+3].title}" class="product_title"></span>
+								<span th:text="${assetlist[i.index+3].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index+3].price}+원" class="product_price"></span>
+							</div>
 						</div>
-						<div class="product_info">
-							<span class="product_title">Product1</span>
-							<span class="product_seller">판매자A</span> 
-							<span class="product_price">30,000원</span>
-						</div>
-					</div>
-				</td>
-				<td>
-					<!-- Product -->
-					<div class="product">
-						<div class="product_img_cover">
-							<img class="product_img" src="/mh/images/item2.png" alt="Product 1" />
-						</div>
-						<div class="product_info">
-							<span class="product_title">Product1</span>
-							<span class="product_seller">판매자A</span> 
-							<span class="product_price">30,000원</span>
-						</div>
-					</div>
-				</td>
-				<td>
-					<!-- Product -->
-					<div class="product">
-						<div class="product_img_cover">
-							<img class="product_img" src="/mh/images/item.png" alt="Product 1" />
-						</div>
-						<div class="product_info">
-							<span class="product_title">Product1</span>
-							<span class="product_seller">판매자A</span> 
-							<span class="product_price">30,000원</span>
-						</div>
-					</div>
-				</td>
-				<td>
-					<!-- Product -->
-					<div class="product">
-						<div class="product_img_cover">
-							<img class="product_img" src="/mh/images/item2.png" alt="Product 1" />
-						</div>
-						<div class="product_info">
-							<span class="product_title">Product1</span>
-							<span class="product_seller">판매자A</span> 
-							<span class="product_price">30,000원</span>
-						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<!-- Product -->
-				<div class="product">
-					<div class="product_img_cover">
-						<img class="product_img" src="/mh/images/item.png" alt="Product 1" />
-					</div>
-					<div class="product_info">
-						<span class="product_title">Product1</span>
-						<span class="product_seller">판매자A</span> 
-						<span class="product_price">30,000원</span>
-					</div>
-				</div>
-			</td>
-			<td>
-				<!-- Product -->
-				<div class="product">
-					<div class="product_img_cover">
-						<img class="product_img" src="/mh/images/item.png" alt="Product 1" />
-					</div>
-					<div class="product_info">
-						<span class="product_title">Product1</span>
-						<span class="product_seller">판매자A</span> 
-						<span class="product_price">30,000원</span>
-					</div>
-				</div>
-			</td>
-			<td>
-				<!-- Product -->
-				<div class="product">
-					<div class="product_img_cover">
-						<img class="product_img" src="/mh/images/item2.png" alt="Product 1" />
-					</div>
-					<div class="product_info">
-						<span class="product_title">Product1</span>
-						<span class="product_seller">판매자A</span> 
-						<span class="product_price">30,000원</span>
-					</div>
-				</div>
-			</td>
-			<td>
-				<!-- Product -->
-				<div class="product">
-					<div class="product_img_cover">
-						<img class="product_img" src="/mh/images/item.png" alt="Product 1" />
-					</div>
-					<div class="product_info">
-						<span class="product_title">Product1</span>
-						<span class="product_seller">판매자A</span> 
-						<span class="product_price">30,000원</span>
-					</div>
-				</div>
-			</td>
-		</tr>
-
-				</tbody>
-			</table>
+					</td>
+			 </tr>
+			</tbody>
+		</table>
 			
 			<!-- 페이지 번호 -->
 			<div class="page_wrap">
 				<div class="page_nation">
 					<a class="arrow pprev" href="#">&lang;&lang;</a>
 					<a class="arrow prev" href="#">&lang;</a>
-					<a href="#" class="active">1</a>
+					<a href="/metahaus/asset/main?pageNo=0" class="active">1</a>
 					<a href="#">2</a>
 				<a href="#">3</a>
 				<a href="#">4</a>

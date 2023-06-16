@@ -10,6 +10,7 @@ import com.multi.metahouse.asset.repository.dao.AssetDAO;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 @Service
 public class AssetServiceImpl implements AssetService {
@@ -74,6 +75,12 @@ public class AssetServiceImpl implements AssetService {
 		
 		
 		return 0;
+	}
+	
+//	에셋마켓 메인 페이징
+	@Override
+	public List<AssetEntity> assetlist(int pageNo) {
+		return dao.assetlist(pageNo);
 	}
 
 }
