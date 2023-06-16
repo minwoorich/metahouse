@@ -101,6 +101,7 @@ $(document).ready(function () {
 
     // "다음" 버튼 누른경우 - 
     $(".form-buttons-next").on("click",function(){
+    	$(this).preventDefault();
     	let isValid = true;
     	const alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
     	
@@ -114,15 +115,10 @@ $(document).ready(function () {
     	if($(".thumbnail-img").length == 0){
     		$(".thumbnail-form").addClass("alert-style");
     	}
-    	if(isValid){//전부 채워넣은경우 -> 컨트롤러에 formData전부 보내줌
-    		let form = $("#form");
-    		let formData = form.serialize();
-    		$.ajax({
-    			
-    		});
-    		
-    	}else{//필수 사항 미 완성 -> 스크롤이 맨 위로 올라감
-    		 $('html, body').animate({ scrollTop: 0 }, "0.5s");
+    	if(!isValid){//필수 사항 미 완성 -> 스크롤이 맨 위로 올라감
+    		$('html, body').animate({ scrollTop: 0 }, "0.5s");
+    	}else{//전부 채워넣은경우 -> submit 동작 수행
+    		$(this).submit();
     	}
     	
   	});

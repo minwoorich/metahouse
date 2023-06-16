@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -56,7 +58,7 @@ public class ProjectController {
 		}
 		return "project/projectform01";
 	}
-
+	
 	@GetMapping("project/forms/options")
 	public String writeOptionForm(HttpSession session) {
 		if (session.getAttribute("projectOptionForm") == null) {
@@ -70,11 +72,26 @@ public class ProjectController {
 	public String getFormPreview() {
 		return "project/projectform03";
 	}
+	
+	@PostMapping("project/{pageNo}/forms-action")
+	public String saveIntoSession(HttpSession session,@PathVariable("pageNo")int pageNo) {
+		String mappingUrl = "";
+		if(pageNo == 1) {//첫번째 페이지 일 경우
+			ProjectFormDTO projectForm = new ProjectFormDTO();
+			session.setAttribute("projectForm", projectForm);
+			mappingUrl = "redirect:project/forms/options";
+		}else { //두번째 페이지 일 경우
+			ProjectOptionFormDTO projectOptionForm = new ProjectOptionFormDTO();
+			session.setAttribute("projectOptionForm", projectOptionForm);
+			mappingUrl = "redirect:project/forms/preview";
+		}
+		return mappingUrl;
+	}
 
-	@RequestMapping(value = "main/index", method = RequestMethod.POST)
+	@PostMapping("project/forms")
 	public String insertForm(HttpSession session) {
 //		List<MultipartFile> imageList = session.getAttribute("imageList");
-		return "redirect:";
+		return "redirect:main/index";
 	}
 	
 	////////////////////승민님 파트//////////////////////////

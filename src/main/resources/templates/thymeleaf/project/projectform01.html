@@ -142,9 +142,9 @@
 		</div>
 		<div class="minwoo_container">
 			<!-- 등록서 작성 파트 -->
-			<form class="form" id="form" method="post" enctype="multipart/form-data">
+			<form action="/metahaus/${'1'}/forms-action" class="form" id="form" method="post" enctype="multipart/form-data">
 				<!-- 세션에 저장된 유저의 id를 projectDto에 저장 -->
-				<input type="hidden"  value="${#session.getAttribute('userId')}" />
+				<input type="hidden"  th:value="${#session.getAttribute('userId')}" />
 				
 				<div class="form-wrapper">
 					<!-- 진행 상태 바 -->
@@ -401,7 +401,7 @@
                         last : 마지막장 -->
 						<button type="button" data-toggle='modal' data-target='#cancel'
 							value="cancel" class="form-buttons-cancel">취소</button>
-						<button type="button" value="next"
+						<button type="submit" value="next"
 							class="form-buttons-next button--small">다음</button>
 					</div>
 				</div>
