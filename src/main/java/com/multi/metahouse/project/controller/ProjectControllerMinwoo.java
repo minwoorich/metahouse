@@ -71,7 +71,7 @@ public class ProjectControllerMinwoo {
 	}
 	@RequestMapping(value="main/index", method=RequestMethod.POST)
 	public String insertForm(HttpSession session) {
-		List<MultipartFile> imageList = session.getAttribute("imageList");
+//		List<MultipartFile> imageList = session.getAttribute("imageList");
 		return "redirect:";
 	}
 }
