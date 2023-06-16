@@ -3,6 +3,10 @@
 	box-sizing: border-box;
 }
 
+.sidebar{
+	/* width: 250px; */
+}
+
 .col-sm-2{
 	display: flex;
 	justify-content: center;

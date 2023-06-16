@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderController {
 	// project 구매 관리
 	@GetMapping("/project/buylist")
-	public String firstBuylist() {
-		return "market_sm/project/project_buylist";
+	public String projectBuylist() {
+		return "order/project_buylist";
 	}
 	// project 판매 관리	
 	@GetMapping("/project/saleslist")
-	public String firstSalelist() {
-		return "market_sm/project/project_saleslist";
+	public String projectSalelist() {
+		return "order/project_saleslist";
+	}
+	
+	// asset 구매 관리
+	@GetMapping("/asset/buylist")
+	public String assetBuylist() {
+		return "order//asset_buylist";
 	}
 	
 	// asset 구매 관리	
 	@GetMapping("/asset/saleslist")
-	public String assetSale() {
-		return "market_sm/asset/asset_saleslist";
-	}
-	
-	// asset 판매 관리
-	@GetMapping("/asset/buylist")
-	public String assetBuy() {
-		return "market_sm/asset/asset_buylist";
+	public String assetSalelist() {
+		return "order/asset_saleslist";
 	}
 }
