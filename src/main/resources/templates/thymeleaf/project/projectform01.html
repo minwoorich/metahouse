@@ -182,10 +182,13 @@
 							<div class="form-item-title">
 								<span>제목</span> <span>*</span>
 							</div>
-							<textarea  class="form-item-description" maxlength="30"
-								type="search" placeholder="제목을 입력하세요" value="" name=""
+							<textarea  th:text="${#session.getAttribute('title')}" 
+							class="form-item-description" maxlength="30"
+								type="search" placeholder="제목을 입력하세요"  name=""
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '제목을 입력하세요'" required></textarea>
+								onblur="this.placeholder = '제목을 입력하세요'" required>
+								 
+							</textarea>
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -201,7 +204,7 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select>
+								<select th:value="${#session.getAttribute('category1')}">
 									<option value="roblox">로블록스</option>
 									<option value="zepeto">제페토</option>
 									<option value="sandbox">더 샌드박스</option>
@@ -220,7 +223,7 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select>
+								<select th:value="${#session.getAttribute('category2_pj')}">
 									<option value="maps">메타버스 맵</option>
 									<option value="assets">메타버스 에셋</option>
 									<option value="promo/event">홍보/이벤트</option>
@@ -237,7 +240,8 @@
 							<div class="form-item-title" style="width: 114px !important;">
 								<span>서비스 설명</span> <span>*</span>
 							</div>
-							<textarea class="form-item-description" id="form-editor" maxlength="1500"></textarea>
+							<textarea th:text="${'1231231'}"
+								class="form-item-description" id="form-editor" maxlength="1500"></textarea>
 							<script>
 							document.addEventListener("DOMContentLoaded", function() {
 								ClassicEditor
