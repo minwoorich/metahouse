@@ -27,9 +27,6 @@ public interface AssetDAO {
 	//id로 검색
 	List<AssetDTO> assetlist(String asset_id);
 
-	//에셋 마켓 메인 페이징
-	List<AssetEntity> assetlist(int pageNo);
-	
 	//에셋 삭제
 	int delete(String asset_id);
 }

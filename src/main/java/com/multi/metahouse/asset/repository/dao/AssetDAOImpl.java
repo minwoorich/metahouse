@@ -56,15 +56,6 @@ public class AssetDAOImpl implements AssetDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-//	에셋 마켓 메인 페이징
-	@Override
-	public List<AssetEntity> assetlist(int pageNo) {
-//		일단 가격 정렬로 리스트 뽑아오기
-		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.ASC, "price"));
-		Page<AssetEntity> page = repositry.findAll(pageRequest);
-		List<AssetEntity> list = page.getContent();
-		return list;
-	}
 
 	@Override
 	public int attachFileInsert(List<AssetContentDTO> attachfiledlist) {

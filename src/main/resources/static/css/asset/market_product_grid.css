@@ -14,6 +14,10 @@
 	border-top: 2px solid #6C4AB6;
 }
 
+td {
+	width: 25%;
+}
+
 .sort {
 	text-align: right;
 	padding-top: 1rem;
@@ -54,6 +58,7 @@
 	margin-left: 1rem;
 	font-size: 12pt;
 	font-weight: bolder;
+	color: black;
 }
 
 .product_seller {
