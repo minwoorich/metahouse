@@ -17,26 +17,26 @@
 		<div class="profile_img_area">
 			<div class="profile_img">
 				<div class="profile_img_view">
-					<img th:if="${userProfile.thumbnailStoreFilename != null}" 
-						 th:src="|/metahaus/upload/userthumbnail/${userProfile.thumbnailStoreFilename}|">
+					<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
+						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
 					
-					<img th:unless="${userProfile.thumbnailStoreFilename != null}" 
+					<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
 						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div class="profile_user_name">
-					[[${userProfile.userName}]]
+					[[${session.loginUser.userName}]]
 				</div>
 			</div>
 		</div>
 		<div class="profile_info">
 			<div class="profile_info_intro">
-				[[${userProfile.selfIntroduction}]]
+				[[${session.loginUser.selfIntroduction}]]
 			</div>
 			<div class="profile_info_etc">	
-				<div class="profile_info_etc_title">email</div><div class="profile_info_etc_content">[[${userProfile.email}]]</div>
+				<div class="profile_info_etc_title">email</div><div class="profile_info_etc_content">[[${session.loginUser.email}]]</div>
 			</div>
 			<div class="profile_info_etc">
-				<div class="profile_info_etc_title">phone</div><div class="profile_info_etc_content">[[${userProfile.phoneNumber}]]</div>
+				<div class="profile_info_etc_title">phone</div><div class="profile_info_etc_content">[[${session.loginUser.phoneNumber}]]</div>
 			</div>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<div class="button_cover">
-			<div class="create_portfolio_button" onclick="location.href='/metahaus/mypage/create/portfolio'">
+			<div class="create_portfolio_button" onclick="location.href='/metahaus/mypage/create_portfolio'">
 				포트폴리오 작성하기
 			</div>
 		</div>

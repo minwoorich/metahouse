@@ -1,15 +1,45 @@
 package com.multi.metahouse.portfolio.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
+
+@Controller
 public class PortfolioController {
+	
 	@GetMapping("mypage/portfolio")
 	public String portfolio() {
-		return "user/portfolio_detail";
+		return "portfolio/portfolio_detail";
 	}
 	
-	@GetMapping("mypage/create/portfolio")
+	@GetMapping("mypage/create_portfolio")
 	public String createPortfolio() {
-		return "user/create_portfolio";
+		return "portfolio/create_portfolio";
 	}
+	
+	@PostMapping("mypage/create_portfolio")
+	public String createPortfolio(PortfolioDTO portfoliodto) {
+		return "portfolio/create_portfolio";
+	}
+	
+	@GetMapping("mypage/update_portfolio")
+	public String updatePortfolio() {
+		return "portfolio/update_portfolio";
+	}
+	
+	@PostMapping("mypage/update_portfolio")
+	public String updatePortfolio(PortfolioDTO portfoliodto) {
+		return "portfolio/update_portfolio";
+	}
+	
+	@PostMapping("mypage/delete_portfolio")
+	public String deletePortfolio(HttpSession session) {
+		return "redirect:profile";
+	}
+
+
 }

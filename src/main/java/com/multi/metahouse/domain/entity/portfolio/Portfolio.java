@@ -1,13 +1,13 @@
-package com.multi.metahouse.domain.dto.portfolio;
+package com.multi.metahouse.domain.entity.portfolio;
 
 import java.util.Date;
-import java.util.List;
 
-import org.apache.ibatis.type.Alias;
-import org.springframework.web.multipart.MultipartFile;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.multi.metahouse.domain.dto.user.UserDTO;
+import com.multi.metahouse.domain.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +16,13 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Alias("portfolio")
-public class PortfolioDTO {
+@AllArgsConstructor
+@Entity
+@Table(name = "portfolio")
+public class Portfolio {
+	@Id
+	@NonNull
 	private String portfolioId;
 	private String userId;
 	private String category1;
@@ -33,12 +36,4 @@ public class PortfolioDTO {
 	private String portfolioPjPoint;
 	private String portfolioPjStyle;
 	private Date portfolioWriteDay;
-	
-	private List<MultipartFile> portfolioPjContentImg;
-	private List<MultipartFile> portfolioPjPointImg;
-	private List<MultipartFile> portfolioPjStyleImg;
-	private List<MultipartFile> portfolioAttachFile;
-	private MultipartFile multipartMainImg;
-	
-	
 }

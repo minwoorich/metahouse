@@ -46,6 +46,12 @@
 	background-color: #8D9EFF;
 	overflow: hidden;
 }
+
+.profile_change_img_view img{
+	width: 100%;
+	height: 100%;
+}
+
 .profile_text_change{
 	width: 550px;
 	margin: 20px;

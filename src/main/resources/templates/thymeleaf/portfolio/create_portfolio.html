@@ -73,16 +73,14 @@
 			
 			<div class="creat_portfolio_subtitle">포트폴리오 메인 이미지 (필수)</div>
 			<div class="create-portfolio-main-img">
-				<div class="create_portfolio_input_img">
-					<div class="image-frame main-img">
-						<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
-					</div>
+				<div class="create_portfolio_input_img" id="main_img_parent">
+					
 					<label class="img_insert_lable" for="portfolio_img_insert">
 						<div class="create_portfolio_img main-img-add">
 							<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
 						</div>
 					</label> 
-					<input type="file" class="portfolio_img_insert" id="portfolio_img_insert">
+					<input type="file" class="portfolio_img_insert" id="portfolio_img_insert" name="multipartMainImg">
 				</div>
 				<div class="img-check-column">
 					<div class="check-counter">
@@ -94,19 +92,13 @@
 			<div class="creat_portfolio_subtitle">서비스 내용에 대한 사진과, 설명을 입력하세요.</div>			
 			<div class="create_portfolio_input_detail">
 				<div class="create_portfolio_input_detail_cover">
-					<div class="create_portfolio_input_detail_img">
-						<div class="image-frame option1-img">
-							<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
-						</div>
-						<div class="image-frame option1-img">
-							<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
-						</div>
+					<div class="create_portfolio_input_detail_img" id="content_img_parent">
 						<label class="img_insert_lable" for="portfolio_img_content_insert">
 							<div class="create_portfolio_img option1-img-add">
 								<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
 							</div>
 						</label> 
-						<input type="file" id="portfolio_img_content_insert">
+						<input type="file" id="portfolio_img_content_insert" multiple="multiple" name="portfolioPjContentImg">
 					</div>
 					<div class="img-check-column">
 						<div class="check-counter">
@@ -197,7 +189,7 @@
 			<div class="create_portfolio_input_content">
 				<label for="portfolio_content" class="create_portfolio_input">첨부파일</label>
 				<input type="file" class="portfolio_content"
-						id="portfolio_content" placeholder="파일선택">
+						id="portfolio_content" placeholder="파일선택" multiple="multiple" >
 			</div>
 			<div class="create_portfolio_submit">
 				<button class="button--small">작성완료</button>

@@ -33,19 +33,28 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int update(User user) {
+	public User update(User user) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		User table = repository.findById(user.getUserId()).orElseThrow(() -> new RuntimeException());
+		table.setEmail(user.getEmail());
+		table.setUserName(user.getUserName());
+		table.setPhoneNumber(user.getPhoneNumber());
+		table.setGender(user.getGender());
+		table.setBirth(user.getBirth());
+		table.setSelfIntroduction(user.getSelfIntroduction());
+		table.setMkAgree(user.isMkAgree());
+		if(!(user.getThumbnailStoreFilename().isEmpty())) {
+			table.setThumbnailStoreFilename(user.getThumbnailStoreFilename());
+		}
+		
+		repository.save(table);
+		return table;
 	}
 
 	@Override
 	public void delete(String userId) {
 		repository.deleteById(userId);
-	}
-
-	@Override
-	public User read(String userId) {
-		return repository.findById(userId).orElseThrow(() -> new RuntimeException());
 	}
 
 }
