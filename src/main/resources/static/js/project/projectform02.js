@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 	//현재 스위치 상태 -> 시작은 off임(단일패키지), on == 3종패키지
 	let switchMode = "off";
@@ -164,15 +165,7 @@ $(document).ready(function(){
     	});
     });
    /////////////////////////////////////////////// 
-    //추가 옵션 설정 - 체크박스 선택하면 체크된 옵션에 대해 정보 입력칸 나옴
-    $(".option-box-row01 input").on("change",function(){
-    	if($(this).is(":checked")){
-    		$(this).parent().siblings(".option-box-row02").removeClass("deactivate");
-    	}else{
-    		$(this).parent().siblings(".option-box-row02").addClass("deactivate");
-    	}
-    });
-    ///////////////////////////////////////////////
+   
     //드롭다운 : list 내리기, value 띄우기 구현해야함
     $(".dropdown").on("click",function(){
     	//지금 내가 접근한 드롭다운을 저장
@@ -189,10 +182,34 @@ $(document).ready(function(){
     		$(this).on("click",function(){
         		let value = $(this).find(".revision-value").text();
         		thisDropdown.find(".revision-placeholder").text(value).css("color","black");
+        		if(thisDropdown.hasClass("single")){
+        			$("#revision").val(value);//input태그에 value저장
+        		}else if(thisDropdown.hasClass("triple-basic")){
+        			$("#basic_revision").val(value);//input태그에 value저장
+        		}else if(thisDropdown.hasClass("triple-economy")){
+        			$("#economy_revision").val(value);//input태그에 value저장
+        		}else if(thisDropdown.hasClass("triple-premium")){
+        			$("#premium_revision").val(value);//input태그에 value저장
+        		}
+        		
         		list.addClass("deactivate");
     		});
     		
     	});
+    });
+    
+   
+    //추가 옵션 설정 - 체크박스 선택하면 체크된 옵션에 대해 정보 입력칸 나옴
+    let optionMap = {};
+    $(".option-box-row01 input").on("change",function(){
+    	if($(this).is(":checked")){
+    		$(this).parent().siblings(".option-box-row02").removeClass("deactivate");
+    		
+    		
+    	}else{
+    		$(this).parent().siblings(".option-box-row02").addClass("deactivate");
+    		
+    	}
     });
     ///////////////////////////////////////////////
     // 필수 사항 입력 안 한 채로 "다음" 버튼 누른경우
@@ -241,11 +258,171 @@ $(document).ready(function(){
     		}
     	}
     	
-    	//전부 채웠으면 다음 페이지 이동
-    	if(isValid){
-    		location.href='/metahaus/project/project-form-03';
-    	}else{//못채웠으면 모달 출력
+    	// 32,000 -> 32000 으로 포맷 변경
+    	function numberFormatParsing(formattedNumber){
+    		return Number(formattedNumber.replace(/,/g, ''));
+    	}
+    	
+    	
+    	
+    	//추가 옵션에 대한 List객체 생성
+    	function createOptionList(){
+    		//둘중 하나라도 체크된경우 옵션에 대한 객체 생성후 값들 반환
+    		if($("#leadtime").is(":checked") || $("#add_revision").is(":checked")){
+    			let projectAddOptionList = [];
+    			//"빠른 작업" 추가
+    			if($("#leadtime").is(":checked")){
+        			let options={
+        					"add_option_name" : $("#leadtime_add_option_name").text(),
+        					"add_option_description" : $("#leadtime_add_option_description").text(),
+        					"add_option_price" : numberFormatParsing($("#leadtime_add_option_price").val())
+        				}	
+        			projectAddOptionList.push(options);
+        		}
+    			//"추가 수정" 체크
+        		if($("#add_revision").is(":checked")){
+        			let options={
+        					"add_option_name" : $("#revision_add_option_name").text(),
+        					"add_option_description" : $("#revision_add_option_description").text(),
+        					"add_option_price" : numberFormatParsing($("#revision_add_option_price").val())
+        			}
+        			projectAddOptionList.push(options);
+        		}
+        		return projectAddOptionList;
+    		}else{//하나도 체크안된경우 null 반환
+    			return null;
+    		}
+    	}
+    	//단일패키지 입력값 
+    	function singlePacakgeInputs(){
+    		//보낼 데이터들
+    		let pkg_title = $("#pkg_title").val();
+    		let pkg_description = $("#pkg_description").val();
+    		let price = numberFormatParsing($("#price").val());
+    		let revision = $("#revision").val();
+    		let workdays = $("#workdays").val();
+    		let projectAddOptionList = createOptionList();
+    		/*console.log("pkg_title" , pkg_title);
+    		console.log("pkg_description" , pkg_description);
+    		console.log("price" , price);
+    		console.log("workdays" , workdays);
+    		console.log("projectAddOptionMap" , projectAddOptionMap);*/
+    		
+    		let requestData = {//FormData는 직접 리스트 전송 불가(Multipart는 가능한듯?)
+    				"pkg_title":pkg_title,
+    				"pkg_description":pkg_description,
+    				"price":price,
+    				"revision":revision,
+    				"workdays":workdays,
+    				"projectAddOptionList":projectAddOptionList
+    		};
+    		
+    		return requestData;
+    	} 
+    	// 삼단 패키지 입력값들
+    	function triplePacakgeInputs(){
+    		//보낼 데이터들 
+    		//베이직 패키지
+    		let basic_pkg_title = $("#basic_pkg_title").val();
+    		let basic_pkg_description = $("#basic_pkg_description").val();
+    		let basic_price = numberFormatParsing($("#basic_price").val());
+    		let basic_revision = $("#basic_revision").val();
+    		let basic_workdays = $("#basic_workdays").val();
+    		
+    		//이코노미 패키지
+    		let economy_pkg_title = $("#economy_pkg_title").val();
+    		let economy_pkg_description = $("#economy_pkg_description").val();
+    		let economy_price = numberFormatParsing($("#economy_price").val());
+    		let economy_revision = $("#economy_revision").val();
+    		let economy_workdays = $("#economy_workdays").val();
+    		
+    		//프리미엄 패키지
+    		let premium_pkg_title = $("#premium_pkg_title").val();
+    		let premium_pkg_description = $("#premium_pkg_description").val();
+    		let premium_price = numberFormatParsing($("#premium_price").val());
+    		let premium_revision = $("#premium_revision").val();
+    		let premium_workdays = $("#premium_workdays").val();
+    		
+    		let projectAddOptionList = createOptionList();
+    		/*console.log("pkg_title" , pkg_title);
+    		console.log("pkg_description" , pkg_description);
+    		console.log("price" , price);
+    		console.log("workdays" , workdays);
+    		console.log("projectAddOptionMap" , projectAddOptionMap);*/
+    		
+    		let requestData = {//FormData는 직접 리스트 전송 불가(Multipart는 가능한듯?)
+    				"basic_pkg_title":basic_pkg_title,
+    				"basic_pkg_description":basic_pkg_description,
+    				"basic_price":basic_price,
+    				"basic_revision":basic_revision,
+    				"basic_workdays":basic_workdays,
+    				
+    				"economy_pkg_title":economy_pkg_title,
+    				"economy_pkg_description":economy_pkg_description,
+    				"economy_price":economy_price,
+    				"economy_revision":economy_revision,
+    				"economy_workdays":economy_workdays,
+    				
+    				"premium_pkg_title":premium_pkg_title,
+    				"premium_pkg_description":premium_pkg_description,
+    				"premium_price":premium_price,
+    				"premium_revision":premium_revision,
+    				"premium_workdays":premium_workdays,
+    				
+    				"projectAddOptionList":projectAddOptionList
+    		};
+    		
+    		return requestData;
+    	} 
+    	
+    	if(!isValid){//필수 사항 미 완성 -> 스크롤이 맨 위로 올라감
     		$('html, body').animate({ scrollTop: 0 }, "0.5s");
+//    		console.log();
+    		
+    	}else{//전부 채워넣은경우 -> 데이터 전송
+    		if(switchMode==="off"){//싱글패키지
+        		//보낼 데이터들
+        		let requestData = singlePacakgeInputs();
+        		
+        		//ajax통신
+        		$.ajax({
+    				url:"/metahaus/project/single-package-ajax",
+    				type:"post",
+    				processData:false,
+    				contentType:"application/json; charset=UTF-8",
+    				dataType : 'text',
+    				cache:false,
+    				data:JSON.stringify(requestData),
+    				success:function(nextPageURL){
+    					window.location.href = nextPageURL;
+    				},
+    				error:function(request,status,error){
+    				        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    			    }
+    			});
+        		
+    		}else{//삼단패키지
+    			//보낼 데이터들
+        		let requestData = triplePacakgeInputs();
+        		
+        		//ajax통신
+        		$.ajax({
+    				url:"/metahaus/project/triple-package-ajax",
+    				type:"post",
+    				processData:false,
+    				contentType:"application/json; charset=UTF-8",
+    				dataType : 'text',
+    				cache:false,
+    				data:JSON.stringify(requestData),
+    				success:function(nextPageURL){
+    					window.location.href = nextPageURL;
+    				},
+    				error:function(request,status,error){
+    				        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    			    }
+    			});
+    		}
+    		
     	}
     });
     
