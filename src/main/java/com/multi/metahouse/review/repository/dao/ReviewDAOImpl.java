@@ -40,4 +40,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 	    public List<ReviewDTO> getAllReviews() {
 	        return sqlSession.selectList("getAllReviews");
 	    }
+
+		@Override
+		public void createReview(ReviewDTO reviewDTO) {
+			// TODO Auto-generated method stub
+			
+		}
 	}

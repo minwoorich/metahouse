@@ -31,6 +31,7 @@
 </head>
 
 <body>
+	
 	<!-- 내가 설정한 body -->
 	<main layout:fragment="content" class="minwoo_body">
 
@@ -75,7 +76,7 @@
 			</div>
 		</div>
 		<!-- form -->
-		<div class="form">
+		<form class="form" id="form" method="post">
 			<div class="form-wrapper">
 				<!-- 진행 상태 바 -->
 				<div class="progress-bar">
@@ -105,7 +106,7 @@
 						</div>
 					</div>
 				</div>
-
+				
 				<!-- 패키지 스위치 -->
 				<div class="switch">
 					<label for="switch">패키지 스위치</label>
@@ -150,7 +151,8 @@
 							<!-- 단일, 제목(BASIC)  -->
 							<div class="single-package-title">
 								<div class="single-package-title-row01">
-									<textarea class="single-textarea-title" type="text" name=""
+									<textarea class="single-textarea-title" type="text" 
+										id="pkg_title" name="pkg_title"
 										placeholder="제목을 입력하세요" onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20"
 										required></textarea>
@@ -165,8 +167,10 @@
 							<!-- 단일, 설명(BASIC) -->
 							<div class="single-package-description">
 								<div class="single-package-description-row01">
-									<textarea class="single-textarea-description" name=""
-										placeholder="설명을 입력하세요" value=""
+									<textarea class="single-textarea-description" 
+										name="pkg_description"
+										id="pkg_description"
+										placeholder="설명을 입력하세요" 
 										onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60"
 										required></textarea>
@@ -180,15 +184,17 @@
 
 							<!-- 단일, 가격 설정(BASIC) -->
 							<div class="single-package-cost price">
-								<input placeholder="최소 5000원 이상을 입력하세요" value="" name=""
+								<input placeholder="최소 5000원 이상을 입력하세요" 
+									id="price"
+									name="price"
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상을 입력하세요'"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
 							</div>
-
+							
 							<!-- 단일, 수정횟수 설정(BASIC) -->
 							<div class="single-package-revision">
-								<label class="single-package-revision-dropdown dropdown">
+								<label class="single-package-revision-dropdown dropdown single">
 									<div>
 										<span class="revision-placeholder"
 											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
@@ -209,13 +215,14 @@
 									<li><span class="revision-value">9</span><span>회</span></li>
 									<li><span class="revision-value">10</span><span>회</span></li>
 								</ul>
+								<input type="hidden" name="revision" id="revision"/>
 							</div>
 
 							<!-- 단일, 작업기한 설정(BASIC) -->
 							<div class="single-package-date date">
 								<input
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									placeholder="기간을 입력해주세요 ex 10" id="workdays"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
 							</div>
@@ -261,7 +268,8 @@
 							<!-- 제목(BASIC)  -->
 							<div class="triple-package-title">
 								<div class="triple-package-title-row01">
-									<textarea class="triple-textarea-title" type="text" name=""
+									<textarea class="triple-textarea-title" type="text" 
+										id="basic_pkg_title"
 										placeholder="제목을 입력하세요" onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20"
 										required></textarea>
@@ -276,7 +284,8 @@
 							<!-- 설명(BASIC) -->
 							<div class="triple-package-description">
 								<div class="triple-package-description-row01">
-									<textarea class="triple-textarea-description" name=""
+									<textarea class="triple-textarea-description" 
+										id="basic_pkg_description"
 										placeholder="설명을 입력하세요" value=""
 										onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60"
@@ -290,14 +299,14 @@
 							</div>
 							<!-- 가격(BASIC) -->
 							<div class="triple-package-cost price">
-								<input placeholder="최소 5000원 이상" value="" name=""
+								<input placeholder="최소 5000원 이상" id="basic_price"
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상'"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
 							</div>
 							<!-- 수정(BASIC) -->
 							<div class="triple-package-revision">
-								<label class="triple-package-revision-dropdown dropdown">
+								<label class="triple-package-revision-dropdown dropdown triple-basic">
 									<div>
 										<span class="revision-placeholder"
 											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
@@ -318,12 +327,14 @@
 									<li><span class="revision-value">9</span><span>회</span></li>
 									<li><span class="revision-value">10</span><span>회</span></li>
 								</ul>
+								<!-- [triple-basic] 수정 value 저장 -->
+								<input type="hidden" name="basic_revision" id="basic_revision"/>
 							</div>
 							<!-- 작업기한(BASIC) -->
 							<div class="triple-package-date date">
 								<input
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									placeholder="기간을 입력해주세요 ex 10" id="basic_workdays"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
 							</div>
@@ -336,7 +347,7 @@
 							<!-- 제목(ECONOMY)  -->
 							<div class="triple-package-title">
 								<div class="triple-package-title-row01">
-									<textarea class="triple-textarea-title" type="text" name=""
+									<textarea class="triple-textarea-title" type="text" id="economy_pkg_title"
 										placeholder="제목을 입력하세요" onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20"
 										required></textarea>
@@ -351,7 +362,7 @@
 							<!-- 설명(ECONOMY) -->
 							<div class="triple-package-description">
 								<div class="triple-package-description-row01">
-									<textarea class="triple-textarea-description" name=""
+									<textarea class="triple-textarea-description" id="economy_pkg_description"
 										placeholder="설명을 입력하세요" value=""
 										onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60"
@@ -365,14 +376,14 @@
 							</div>
 							<!-- 가격(ECONOMY) -->
 							<div class="triple-package-cost price">
-								<input  placeholder="최소 5000원 이상" value="" name=""
+								<input  placeholder="최소 5000원 이상" id="economy_price"
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상'"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
 							</div>
 							<!-- 수정(ECONOMY) -->
 							<div class="triple-package-revision">
-								<label class="triple-package-revision-dropdown dropdown">
+								<label class="triple-package-revision-dropdown dropdown triple-economy">
 									<div>
 										<span class="revision-placeholder"
 											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
@@ -392,13 +403,16 @@
 									<li><span class="revision-value">8</span><span>회</span></li>
 									<li><span class="revision-value">9</span><span>회</span></li>
 									<li><span class="revision-value">10</span><span>회</span></li>
+									
 								</ul>
+								<!-- [triple-economy] 수정 value 저장 -->
+								<input type="hidden" name="economy_revision" id="economy_revision"/>
 							</div>
 							<!-- 작업기한(ECONOMY) -->
 							<div class="triple-package-date date">
 								<input
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									placeholder="기간을 입력해주세요 ex 10" id="economy_workdays"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
 							</div>
@@ -412,7 +426,7 @@
 							<!-- 제목(PREMIUM)  -->
 							<div class="triple-package-title">
 								<div class="triple-package-title-row01">
-									<textarea class="triple-textarea-title" type="text" name=""
+									<textarea class="triple-textarea-title" type="text" id="premium_pkg_title"
 										placeholder="제목을 입력하세요" onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '제목을 입력하세요'" maxlength="20"
 										required></textarea>
@@ -427,7 +441,7 @@
 							<!-- 설명(PREMIUM) -->
 							<div class="triple-package-description">
 								<div class="triple-package-description-row01">
-									<textarea class="triple-textarea-description" name=""
+									<textarea class="triple-textarea-description" id="premium_pkg_description"
 										placeholder="설명을 입력하세요" value=""
 										onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '설명을 입력하세요'" maxlength="60"
@@ -441,14 +455,14 @@
 							</div>
 							<!-- 가격(PREMIUM) -->
 							<div class="triple-package-cost price">
-								<input placeholder="최소 5000원 이상" value="" name=""
+								<input placeholder="최소 5000원 이상" id="premium_price"
 									required onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '최소 5000원 이상'"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><span>원</span>
 							</div>
 							<!-- 수정(PREMIUM) -->
 							<div class="triple-package-revision">
-								<label class="triple-package-revision-dropdown dropdown">
+								<label class="triple-package-revision-dropdown dropdown triple-premium">
 									<div>
 										<span class="revision-placeholder"
 											style="color: var(--gray);">수정 횟수를 선택해주세요</span> <i
@@ -469,12 +483,14 @@
 									<li><span class="revision-value">9</span><span>회</span></li>
 									<li><span class="revision-value">10</span><span>회</span></li>
 								</ul>
+								<!-- [triple-premium] 수정 value 저장 -->
+								<input type="hidden" name="premium_revision" id="premium_revision"/>
 							</div>
 							<!-- 작업기한(PREMIUM) -->
 							<div class="triple-package-date date">
 								<input
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-									placeholder="기간을 입력해주세요 ex 10" value="" name=""
+									placeholder="기간을 입력해주세요 ex 10" id="premium_workdays"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '기간을 입력해주세요 ex 10'" required /><span>일</span>
 							</div>
@@ -493,29 +509,37 @@
 					<div class="add-option-col02">
 						<div class="option-box">
 							<div class="option-box-wrapper">
-								<label class="option-box-row01"> <span>빠른 작업</span> <input
-									type="checkbox" name="" value="">
+								<label class="option-box-row01"> 
+								<span id="leadtime_add_option_name">빠른 작업</span>
+								<input id="leadtime" value="leadtime" type="checkbox">
 								</label>
 								<div class="option-box-row02 price deactivate">
-									<span style="margin-right: 30px;">1일 단축 당</span> 
+									<span 
+										id="leadtime_add_option_description" 
+										style="margin-right: 30px;">1일 단축 당</span> 
 									<input
-										 placeholder="금액 입력" value="5000" name=""
-										onfocus="this.placeholder = ''"
-										onblur="this.placeholder = '금액 입력'"
-										oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+										 placeholder="금액 입력" value="5000" 
+										 name="add_option_price"
+										 id="leadtime_add_option_price"
+										 onfocus="this.placeholder = ''"
+										 onblur="this.placeholder = '금액 입력'"
+										 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 									<span>원 추가</span>
 								</div>
 							</div>
 						</div>
 						<div class="option-box">
 							<div class="option-box-wrapper">
-								<label class="option-box-row01"> <span>추가 수정</span> <input
-									type="checkbox" name="" value="">
+								<label class="option-box-row01"> 
+								<span id="revision_add_option_name">추가 수정</span> 
+								<input
+									id="add_revision" type="checkbox" value="add_revision">
 								</label>
 								<div class="option-box-row02 price deactivate">
-									<span style="margin-right: 30px;">1회 수정 당</span> 
+									<span id="revision_add_option_decription" style="margin-right: 30px;">1회 수정 당</span> 
 									<input
-										 placeholder="금액 입력" value="5000" name="rere"
+										id="revision_add_option_price"
+										placeholder="금액 입력" value="5000" 
 										onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '금액 입력'"
 										oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
@@ -535,7 +559,7 @@
                             first : 첫째장
                             last : 마지막장 -->
 				<button type="button"
-					onclick="location.href='/metahaus/project/project-form-01'" value="prev"
+					onclick="location.href='/metahaus/project/forms/descriptions'" value="prev"
 					class="form-buttons-prev button--small">이전</button>
 				<div>
 					<button type="button" data-toggle='modal' data-target='#cancel'
@@ -544,7 +568,7 @@
 						class="form-buttons-next button--small">다음</button>
 				</div>
 			</div>
-		</div>
+		</form>
 		</div>
 	</main>
 </body>
