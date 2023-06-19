@@ -142,10 +142,12 @@
 		</div>
 		<div class="minwoo_container">
 			<!-- 등록서 작성 파트 -->
-			<form class="form" id="form" method="post" enctype="multipart/form-data">
+			<form class="form" id="form" method="post"
+				enctype="multipart/form-data">
 				<!-- 세션에 저장된 유저의 id를 projectDto에 저장 -->
-				<input type="hidden"  value="${#session.getAttribute('userId')}" />
-				
+				<input id="creator_id" type="hidden"
+					th:value="${session.creator_id}" />
+
 				<div class="form-wrapper">
 					<!-- 진행 상태 바 -->
 					<div class="progress-bar">
@@ -182,10 +184,11 @@
 							<div class="form-item-title">
 								<span>제목</span> <span>*</span>
 							</div>
-							<textarea  class="form-item-description" maxlength="30"
-								type="search" placeholder="제목을 입력하세요" value="" name=""
+							<textarea id="title" name="title" class="form-item-description" 
+								maxlength="30"  placeholder="제목을 입력하세요"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '제목을 입력하세요'" required></textarea>
+
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -201,13 +204,14 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select>
+								<select name="category1" id="category1">
 									<option value="roblox">로블록스</option>
 									<option value="zepeto">제페토</option>
 									<option value="sandbox">더 샌드박스</option>
 									<option value="minecraft">마인크래프트</option>
 									<option value="gathertown">게더타운</option>
 								</select>
+
 							</div>
 						</div>
 
@@ -220,12 +224,11 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select>
+								<select name="category2_pj" id="category2_pj">
 									<option value="maps">메타버스 맵</option>
 									<option value="assets">메타버스 에셋</option>
 									<option value="promo/event">홍보/이벤트</option>
 									<option value="proposal">기획/구축</option>
-
 								</select>
 							</div>
 						</div>
@@ -237,56 +240,24 @@
 							<div class="form-item-title" style="width: 114px !important;">
 								<span>서비스 설명</span> <span>*</span>
 							</div>
-							<textarea class="form-item-description" id="form-editor" maxlength="1500"></textarea>
-							<script>
-							document.addEventListener("DOMContentLoaded", function() {
-								ClassicEditor
-									.create( document.querySelector( '#form-editor' ), {
-										toolbar: ['Undo', 'Redo', 'heading', '|', 'bold', 'italic']
-									} )
-									.then( editor => {
-										let defaultText =
-											" <strong>[서비스 소개]</strong><br/><br/>"+
-											"- 제작물에 대한 기본 저작권은 디자이너에게 귀속됩니다. 협의 후 저작권료 지급 시 귀속 가능합니다.<br/>"+
-											"- 디자이너와 협의 한 범위 내에서 상업적 이용이 가능합니다.<br/>"+
-											"- 제작된 작업물은 포트폴리오로 사용될 수 있습니다. 원치 않으실 경우 미리 말씀해 주세요.<br/>"+
-											"- 원저작물의 2차 저작(수정, 변형, 가공) 시, 디자이너의 허가가 필요합니다.<br/><br/><br/>"+
-											"<strong>[구매 시 유의사항]</strong><br/><br/>"+
-											"만족스러운 결과물을 위해, 아래 내용을 미리 준비해 주세요.<br/>"+
-											"- 취향<br/>"+
-											"- 컨셉·분위기<br/>"+
-											"- 원하는 색상<br/>"+
-											"- 레퍼런스(참고할 만한 디자인)";
-								      // 에디터 인스턴스 생성 후 setData 메서드를 사용하여 초기값 설정
-								      editor.setData(defaultText);
-								   	  // 글자수 카운트
-								      const charCountContainer = document.querySelector('#editor-counter');
-      
-								      // 초기 글자 수 업데이트
-								      const initialContent = editor.getData();
-								      const initialCharCount = countCharacters(initialContent);
-								      charCountContainer.textContent = initialCharCount;
-								      
-								      // 에디터 내용 변경 시 글자 수 업데이트
-								      editor.model.document.on( 'change:data', () => {
-								    	const MAXLENGTH = 1500;
-								        const content = editor.getData();
-								        const charCount = countCharacters(content);
-								        charCountContainer.textContent = charCount;
-								    	  
-								      });
-								      
-								      // 문자열에서 HTML 태그를 제외한 글자 수를 세는 함수
-								      function countCharacters(text) {
-								        const strippedText = text.replace(/<\/?[^>]+(>|$)/g, '');
-								        return strippedText.length;
-								      }
-								    })
-									.catch( error => {
-										console.error( error );
+							<textarea name="description" class="form-item-description"
+								id="form-editor" maxlength="1500"></textarea>
+							<!-- <script type="text/javascript" th:inline="javascript">
+									function getEditorData(){
+										if(editor){
+											const editorData = editor.getData();
+											console.log(editorData);
+										}else{
+											alert("에디터없어");
+										}
+									}
+									document.addEventListener("DOMContentLoaded", function() {
+										const element = document.querySelector(".form-buttons-next");
+										element.addEventListener("click",function(event){
+											getEditorData();
+										});
 									});
-							});
-							</script>
+								</script> -->
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -307,7 +278,7 @@
 							<div class="form-item-title">
 								<span>대표 사진</span> <span>*</span>
 							</div>
-							<div class="form-item-file" id="">
+							<div class="form-item-file" id="thumbnail-form">
 								<!-- 미리보기 이미지-->
 								<!-- <div class="image-frame thumbnail-img">
 									<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
@@ -318,8 +289,7 @@
 										<i class="fa-sharp fa-solid fa-plus fa-2xl"
 											style="color: #ffffff;"></i>
 									</div>
-								</label> 
-								<input id="thumbnail" type="file" required
+								</label> <input name="thumbnail" id="thumbnail" type="file" required
 									style="display: none" />
 							</div>
 						</div>
@@ -336,38 +306,19 @@
 							<div class="form-item-title">
 								<span>상세 사진</span>
 							</div>
-							<div class="form-item-file">
+							<div class="form-item-file" id="optional-form">
 								<div class="form-item-images-wrapper">
-									<!-- 미리보기 이미지들 -->
-									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test02.jpeg"
-											alt="상세 사진">
-
-									</div>
-									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test03.jpeg"
-											alt="상세 사진">
-
-									</div>
-									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test04.jpeg"
-											alt="상세 사진">
-
-									</div>
-									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test05.jpeg"
-											alt="상세 사진">
-
-									</div>
-									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
 									<label for="optional">
 										<div class="image-add optional-add">
 											<i class="fa-sharp fa-solid fa-plus fa-2xl"
 												style="color: #ffffff;"></i>
 										</div>
-									</label> <input id="optional" type="file"
-										style="display: none" multiple="multiple" />
+									</label> <input id="optional" type="file" style="display: none"
+										multiple="multiple" /> <input name="detailImages"
+										id="detailImages" type="file" multiple="multiple"
+										style="display: none">
 								</div>
+
 							</div>
 						</div>
 						<div class="form-item-column02">

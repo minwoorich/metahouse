@@ -16,7 +16,8 @@ select {
 	padding:8px;
 	border:1px solid #999;
 	font-family:'Nanumgothic';
-	background:url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+	background:url(/metahaus/images/caret-down-solid.svg) no-repeat 95% 50%;
+	background-size: 12px;
 	border-radius:4px;
 	appearance : none;
 	flex: 0 0 16em;
