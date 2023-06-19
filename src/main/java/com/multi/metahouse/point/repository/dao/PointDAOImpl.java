@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.domain.dto.point.MyPointDTO;
 import com.multi.metahouse.domain.entity.point.ChargedPointInfo;
 import com.multi.metahouse.domain.entity.point.ConsumedPointInfo;
 import com.multi.metahouse.domain.entity.user.User;
@@ -74,4 +75,16 @@ public class PointDAOImpl implements PointDAO {
 		return null;
 	}
 
+	@Override
+	public MyPointDTO getMyPointDTO(User loginUser) {
+		System.out.println("1111111");
+		List<ChargedPointInfo> cgpilist = chargedPointInfoRepository.findByUserId(loginUser.getUserId());
+		System.out.println("2222222");
+		List<ConsumedPointInfo> cspilist = consumedPointInfoRepository.findByUserId(loginUser.getUserId());
+		System.out.println("3333333");
+		int tcgp = chargedPointInfoRepository.getTotalChargingPoint(loginUser);
+		System.out.println("4444444");
+		int tcsp = consumedPointInfoRepository.getTotalConsumedPoint(loginUser);
+		return new MyPointDTO(cgpilist, cspilist, tcgp, tcsp);
+	}
 }

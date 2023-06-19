@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.multi.metahouse.domain.dto.point.MyPointDTO;
 import com.multi.metahouse.domain.entity.point.ChargedPointInfo;
 import com.multi.metahouse.domain.entity.point.ConsumedPointInfo;
 import com.multi.metahouse.domain.entity.user.User;
@@ -45,6 +46,11 @@ public class PointServiceImpl implements PointService {
 	public List<ConsumedPointInfo> consumePointInfoList(String userId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public MyPointDTO getMyPointDTO(User loginUser) {
+		return dao.getMyPointDTO(loginUser);
 	}
 	
 }

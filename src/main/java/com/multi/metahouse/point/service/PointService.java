@@ -2,6 +2,7 @@ package com.multi.metahouse.point.service;
 
 import java.util.List;
 
+import com.multi.metahouse.domain.dto.point.MyPointDTO;
 import com.multi.metahouse.domain.entity.point.ChargedPointInfo;
 import com.multi.metahouse.domain.entity.point.ConsumedPointInfo;
 import com.multi.metahouse.domain.entity.user.User;
@@ -15,4 +16,6 @@ public interface PointService {
 	public List<ChargedPointInfo> chargePointInfoList(String userId);
 	// 포인트 사용내역 조회하기
 	public List<ConsumedPointInfo> consumePointInfoList(String userId);
+	// MyPointDTO 조회하기
+	public MyPointDTO getMyPointDTO(User loginUser);
 }
