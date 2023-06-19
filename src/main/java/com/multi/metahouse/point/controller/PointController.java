@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.point.service.PointService;
 
 @Controller
@@ -33,9 +34,12 @@ public class PointController {
 	
 	@GetMapping("/charge.do")
 	public String pointCharge(HttpSession session, int point) {
-		System.out.println("point = " + point);
+		User loginUser = (User)session.getAttribute("loginUser");
 		
-		service.chargePoint(point);
+		System.out.println("point = " + point);
+		System.out.println("loginUser = " + loginUser);
+		
+		service.chargePoint(loginUser, point);
 		
 		return "point/charge";
 	}

@@ -15,7 +15,7 @@
 		<h3>내 포인트</h3>
 		<div class="mypoint-info">
 			<div class="mypoint-label-div">
-				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count"> 1,500 </span> 
+				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count" th:text="${session.loginUser?.point}"></span> 
 			</div>
 			<div class="mypoint-label-div">
 				<span class="mypoint-label">충전 포인트</span> <span class="mypoint-count"> 150,000 </span>

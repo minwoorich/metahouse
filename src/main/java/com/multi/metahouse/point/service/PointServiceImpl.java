@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.multi.metahouse.domain.entity.point.ChargedPointInfo;
 import com.multi.metahouse.domain.entity.point.ConsumedPointInfo;
+import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.point.repository.dao.PointDAO;
 
 @Service
@@ -23,14 +24,15 @@ public class PointServiceImpl implements PointService {
 	}
 
 	@Override
-	public void chargePoint(int chargeAmount) {
-		dao.chargePoint(chargeAmount);
+	@Transactional
+	public void chargePoint(User loginUser, int chargeAmount) {
+		dao.createPointInfo(loginUser, chargeAmount);
+		dao.chargePoint(loginUser, chargeAmount);
 	}
 
 	@Override
-	public void consumePoint(int consumeAmount) {
+	public void consumePoint(User loginUser, int consumeAmount) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
