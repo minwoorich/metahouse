@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Alias("mypoint")
 public class MyPointDTO {
-	List<ChargedPointInfo> chargedConsumedInfoList;
-	List<ConsumedPointInfo> consumedConsumedInfoList;
+	private List<ChargedPointInfo> chargedInfoList;
+	private List<ConsumedPointInfo> consumedInfoList;
+	private int totalChargedPoint;
+	private int totalConsumedPoint;
 }
