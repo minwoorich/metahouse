@@ -15,25 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
 import com.multi.metahouse.domain.dto.project.ProjectOptionFormDTO;
-import com.multi.metahouse.project.service.ProjectFileService;
-import com.multi.metahouse.project.service.ProjectOptionService;
-import com.multi.metahouse.project.service.ProjectService;
 
-@Controller
+//@Controller
 @RequestMapping("/project")
 public class ProjectControllerMinwoo {
-	ProjectService projectService;
-	ProjectFileService projectFileService;
-	ProjectOptionService projectOptionService;
 	
 	
-	@Autowired
-	public ProjectControllerMinwoo(ProjectService projectService, ProjectFileService projectFileService,ProjectOptionService projectOptionService) {
-		super();
-		this.projectService = projectService;
-		this.projectFileService = projectFileService;
-		this.projectOptionService = projectOptionService;
-	}
+	
 
 
 	@GetMapping("/project-product")

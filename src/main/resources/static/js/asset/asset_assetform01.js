@@ -63,7 +63,7 @@ $(document).ready(function () {
         const deleteTarget = $(this);
         //모달 버튼 누르면 삭제
         deleteBtn.on("click", function () {
-            deleteTarget.remove();
+            deleteTarget.find("img").attr("src","");
             //등록된 사진개수가 한도 까지 등록된경우 추가 버튼 사라짐
             if ($(".thumbnail-img").length == thumbnailMax) {
                 $(".thumbnail-add").addClass("full");

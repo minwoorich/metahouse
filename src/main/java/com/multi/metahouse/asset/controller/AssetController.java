@@ -77,6 +77,7 @@ public class AssetController {
 		System.out.println(optionalfiledtolist);
 		
 		service.insert(dto, optionalfiledtolist, attachfiledtolist);
+		
 		return "asset/asset_assetform02";
 	}
 	
@@ -92,5 +93,5 @@ public class AssetController {
 	public String assetFormlist() {		
 		return "asset/asset_product_list";
 	}
-	
+		
 }

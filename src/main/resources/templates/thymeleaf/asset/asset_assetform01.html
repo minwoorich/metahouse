@@ -36,7 +36,7 @@
 
 	<!-- 내가 설정한 body -->
 	<main layout:fragment="content" class="minwoo_body">
-	<form action="/metahaus/asset/asset-form-01" method="POST" enctype="multipart/form-data">
+	
 		<!-- 취소 Modal -->
 		<div id="cancel" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -144,7 +144,7 @@
 		</div>
 		<div class="minwoo_container">
 			<!-- 등록서 작성 파트 -->
-			<div class="form">
+			<form action="/metahaus/asset/asset-form-01" method="POST" class="form" enctype="multipart/form-data">
 				<div class="form-wrapper">
 					<!-- 진행 상태 바 -->
 					<div class="progress-bar">
@@ -193,10 +193,9 @@
 							</div>
 							<div class="form-item-description">
 								<select name="category1">
-									<option value="maps">의류</option>
-									<option value="assets">악세서리</option>
-									<option value="promo/event">무기</option>
-									<option value="proposal">기타</option>
+									<option value="10001">로블록스</option>
+									<option value="10002">제페토</option>
+									<option value="10003">더샌드박스</option>
 								</select>
 							</div>
 						</div>
@@ -211,11 +210,11 @@
 							</div>
 							<div class="form-item-description">
 								<select name="category2_as">
-									<option value="roblox">로블록스</option>
-									<option value="zepeto">제페토</option>
-									<option value="sandbox">더 샌드박스</option>
-									<option value="minecraft">마인크래프트</option>
-									<option value="gathertown">게더타운</option>
+									<option value="1000100001">의류</option>
+									<option value="1000100002">악세사리</option>
+									<option value="1000100003">무기</option>
+									<option value="1000100004">기타</option>
+									
 								</select>
 							</div>
 						</div>
@@ -336,9 +335,9 @@
 							</div>
 							<div class="form-item-file">
 								<!-- 미리보기 이미지-->
-								<div class="image-frame thumbnail-img">
+								<!-- <div class="image-frame thumbnail-img">
 									<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
-								</div>
+								</div> -->
 								<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
 								<label for="thumbnail">
 									<div class="image-add thumbnail-add">
@@ -366,7 +365,7 @@
 								<div class="form-item-images-wrapper">
 									<!-- 미리보기 이미지들 -->
 									<div class="image-frame optional-img">
-										<img src="/metahaus/images/test_images/test02.jpeg" alt="상세 사진" id="img">
+										<img src="" alt="상세 사진" id="img">
 
 									</div>
 									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
@@ -375,8 +374,9 @@
 											<i class="fa-sharp fa-solid fa-plus fa-2xl"
 												style="color: #ffffff;"></i>
 										</div>
-									</label> <input id="optional" name="optional_img" value="" type="file" style="display: none"
-											onchange="document.getElementById('img').src = window.URL.createObjectURL(this.files[0])"/>
+									</label> <input id="optional" name="optional_img" 
+												multiple='multiple'  type="file" style="display: none"
+												onchange="document.getElementById('img').src = window.URL.createObjectURL(this.files[0])"/>
 								</div>
 							</div>
 						</div>
@@ -411,9 +411,8 @@
 							class="form-buttons-next button--small">다음</button>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
-		</form>
 	</main>
 </body>
 </html>
