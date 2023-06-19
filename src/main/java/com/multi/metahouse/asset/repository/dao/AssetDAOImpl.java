@@ -4,21 +4,27 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 @Repository
 public class AssetDAOImpl implements AssetDAO {
-	
+
 	SqlSession sqlSession;
-	
+	AssetRepositry repositry;
+
 	@Autowired
-	public AssetDAOImpl(SqlSession sqlSession) {
+	public AssetDAOImpl(SqlSession sqlSession, AssetRepositry repositry) {
 		super();
 		this.sqlSession = sqlSession;
+		this.repositry = repositry;
 	}
 
 	@Override
@@ -68,5 +74,5 @@ public class AssetDAOImpl implements AssetDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("com.multi.metahaus.asset.selectAsset");
 	}
-	
+
 }
