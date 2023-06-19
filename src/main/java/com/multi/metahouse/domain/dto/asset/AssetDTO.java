@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.multi.metahouse.domain.dto.user.UserDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +32,10 @@ public class AssetDTO {
 	private List<MultipartFile> optional_img;
 	private String asset_date;
 	private String asset_hits;
+	
+	private UserDTO userName;
+	
+	
+	
 
 }

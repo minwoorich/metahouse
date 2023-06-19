@@ -4,15 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
-import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 @Repository
 public class AssetDAOImpl implements AssetDAO {
@@ -74,5 +70,22 @@ public class AssetDAOImpl implements AssetDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("com.multi.metahaus.asset.selectAsset");
 	}
+	
+/*---------------------------------------------------------------------------------------*/
 
+	//에셋 상품 정보+판매자 정보 조회
+	@Override
+	public AssetDTO assetInfo(String asset_id) {
+		return sqlSession.selectOne("com.multi.metahaus.asset.AssetInfo",asset_id);
+	}
+	//에셋 상품 이미지 조회
+	public List<AssetDetailImgDTO> assetImgInfo (String asset_id){
+		return sqlSession.selectList("com.multi.metahaus.asset.AssetImgs",asset_id);
+		
+	}
+	//에셋 상품 컨텐츠
+	public List<AssetContentDTO> assetContentInfo(String asset_id){
+		return sqlSession.selectList("com.multi.metahaus.asset.AssetContents",asset_id);
+		
+	}
 }
