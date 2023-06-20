@@ -21,3 +21,34 @@
 	
 	padding: 10px;
 }
+.point-charge-form-inner-radio p {
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--medium-purple);
+	margin-bottom: 10px;
+}
+
+.point-charge-form-inner-radio input[type=radio]{
+	display: none;
+}
+
+.point-charge-form-inner-radio input[type=radio]+label{
+	display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+    
+    background-color: #fff;
+    color: #333;
+}
+
+.point-charge-form-inner-radio input[type=radio]:checked + label{
+    background-color: #333;
+    color: #fff;
+}
+
