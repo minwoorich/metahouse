@@ -106,7 +106,7 @@
 }
 
 /* 날짜 데이터 중앙 정렬 */
-.mypoint-history td:nth-child(2) {
+.mypoint-history td:nth-child(1), td:nth-child(2) {
 	text-align: center;
 }
 

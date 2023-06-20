@@ -21,12 +21,14 @@
 		<h3>포인트 충전</h3>
 		<div class="point-charge-form-div">
 			<form action="/metahaus/point/charge.do">
-				<input type="radio" name="point" value="1000" checked="checked" th:text="1000원"/> </br>
-				<input type="radio" name="point" value="5000" th:text="5000원"/> </br>
-				<input type="radio" name="point" value="10000" th:text="10000원"/> </br> 
-				<input type="radio" name="point" value="30000" th:text="30000원"/> </br>
-				<input type="radio" name="point" value="50000" th:text="50000원"/> </br>
-				
+				<div class="point-charge-form-inner-radio">
+					<input type="radio" name="point" value="1000" checked="checked" th:text=" 1000원" /> </br></br>
+					<input type="radio" name="point" value="5000" th:text=" 5000원" /> </br></br>
+					<input type="radio" name="point" value="10000" th:text=" 10000원" /> </br></br>
+					<input type="radio" name="point" value="30000" th:text=" 30000원" /> </br></br>
+					<input type="radio" name="point" value="50000" th:text=" 50000원" />
+				</div>	
+				</br></br>
 				<input type="submit" class="button--small"/>
 			</form>
 			
