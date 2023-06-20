@@ -5,7 +5,6 @@ import java.util.List;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
-import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 public interface AssetDAO {
 	//에셋 등록

@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDTO {
-//	private int category_id;
-//	private String category1;
-	private String category1_nm;
-//	private String category2;
-//	private String category2_nm;
+public class AssetCategoryDTO {
+	private String buyer_id2;
+	private String order_number;
+	private String asset_order_date;
+	private String category1;
+	private String category1_as;
+	
 }

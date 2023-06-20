@@ -1,27 +1,27 @@
 package com.multi.metahouse.order.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.metahouse.domain.dto.order.OrderDTO;
-import com.multi.metahouse.order.service.OrderService;
+import com.multi.metahouse.order.service.AssetCategoryService;
+
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	OrderService service;
+	
+	AssetCategoryService service;
 	
 	@Autowired
-	public OrderController(OrderService service) {
+	public OrderController(AssetCategoryService service) {
 		super();
 		this.service = service;
 	}
+	
 	// project 구매 관리
 	@GetMapping("/project/buylist")
 	public String projectBuylist() {
@@ -45,11 +45,9 @@ public class OrderController {
 		return "order/asset_saleslist";
 	}
 	
-	@RequestMapping("/asset/category")
-	public String category(Model model) {
-		List<OrderDTO> orderlist = service.orderlist();
-		model.addAttribute("category1", orderlist);
-		
-		return "order/asset_category";
+	@GetMapping("/asset/category")
+	public String assetCategory(Model model) {
+		return null;
 	}
+	
 }
