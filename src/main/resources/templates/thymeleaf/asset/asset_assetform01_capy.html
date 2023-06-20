@@ -36,6 +36,7 @@
 
 	<!-- 내가 설정한 body -->
 	<main layout:fragment="content" class="minwoo_body">
+	
 		<!-- 취소 Modal -->
 		<div id="cancel" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -143,12 +144,7 @@
 		</div>
 		<div class="minwoo_container">
 			<!-- 등록서 작성 파트 -->
-			<form class="form" id="form" method="post"
-				enctype="multipart/form-data">
-				<!-- 세션에 저장된 유저의 id를 projectDto에 저장 -->
-				<input id="user_id" type="hidden" name="user_id"
-					th:value="${session.user_id}" />
-
+			<form action="/metahaus/asset/asset-form-01" method="POST" class="form" enctype="multipart/form-data">
 				<div class="form-wrapper">
 					<!-- 진행 상태 바 -->
 					<div class="progress-bar">
@@ -177,11 +173,10 @@
 							<div class="form-item-title">
 								<span>제목</span> <span>*</span>
 							</div>
-							<textarea id="title" name="title" class="form-item-description" 
-								maxlength="30"  placeholder="제목을 입력하세요"
+							<textarea class="form-item-description" maxlength="30"
+								type="search" placeholder="제목을 입력하세요" value="" name="title"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '제목을 입력하세요'" required></textarea>
-
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -197,14 +192,11 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select name="category1" id="category1">
-									<option value="roblox">로블록스</option>
-									<option value="zepeto">제페토</option>
-									<option value="sandbox">더 샌드박스</option>
-									<option value="minecraft">마인크래프트</option>
-									<option value="gathertown">게더타운</option>
+								<select name="category1">
+									<option value="10001">로블록스</option>
+									<option value="10002">제페토</option>
+									<option value="10003">더샌드박스</option>
 								</select>
-
 							</div>
 						</div>
 
@@ -217,11 +209,12 @@
 								</span> <span>*</span>
 							</div>
 							<div class="form-item-description">
-								<select name="category2_as" id="category2_as">
-									<option value="의류">의류</option>
-									<option value="악세사리">악세사리</option>
-									<option value="무기">무기</option>
-									<option value="기타">기타</option>
+								<select name="category2_as">
+									<option value="1000100001">의류</option>
+									<option value="1000100002">악세사리</option>
+									<option value="1000100003">무기</option>
+									<option value="1000100004">기타</option>
+									
 								</select>
 							</div>
 						</div>
@@ -231,11 +224,59 @@
 					<div class="form-item texttype">
 						<div class="form-item-column01">
 							<div class="form-item-title" style="width: 114px !important;">
-								<span>상품 설명</span> <span>*</span>
+								<span>서비스 설명</span> <span>*</span>
 							</div>
-							<textarea name="description" class="form-item-description"
-								id="form-editor" maxlength="1500"></textarea>
-							
+							<textarea class="form-item-description" id="form-editor" name="description"
+								value="" maxlength="1500"></textarea>
+							<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								ClassicEditor
+									.create( document.querySelector( '#form-editor' ), {
+										toolbar: ['Undo', 'Redo', 'heading', '|', 'bold', 'italic']
+									} )
+									.then( editor => {
+										let defaultText =
+											" <strong>[서비스 소개]</strong><br/><br/>"+
+											"- 제작물에 대한 기본 저작권은 디자이너에게 귀속됩니다. 협의 후 저작권료 지급 시 귀속 가능합니다.<br/>"+
+											"- 디자이너와 협의 한 범위 내에서 상업적 이용이 가능합니다.<br/>"+
+											"- 제작된 작업물은 포트폴리오로 사용될 수 있습니다. 원치 않으실 경우 미리 말씀해 주세요.<br/>"+
+											"- 원저작물의 2차 저작(수정, 변형, 가공) 시, 디자이너의 허가가 필요합니다.<br/><br/><br/>"+
+											"<strong>[구매 시 유의사항]</strong><br/><br/>"+
+											"만족스러운 결과물을 위해, 아래 내용을 미리 준비해 주세요.<br/>"+
+											"- 취향<br/>"+
+											"- 컨셉·분위기<br/>"+
+											"- 원하는 색상<br/>"+
+											"- 레퍼런스(참고할 만한 디자인)";
+								      // 에디터 인스턴스 생성 후 setData 메서드를 사용하여 초기값 설정
+								      editor.setData(defaultText);
+								   	  // 글자수 카운트
+								      const charCountContainer = document.querySelector('#editor-counter');
+      
+								      // 초기 글자 수 업데이트
+								      const initialContent = editor.getData();
+								      const initialCharCount = countCharacters(initialContent);
+								      charCountContainer.textContent = initialCharCount;
+								      
+								      // 에디터 내용 변경 시 글자 수 업데이트
+								      editor.model.document.on( 'change:data', () => {
+								    	const MAXLENGTH = 1500;
+								        const content = editor.getData();
+								        const charCount = countCharacters(content);
+								        charCountContainer.textContent = charCount;
+								    	  
+								      });
+								      
+								      // 문자열에서 HTML 태그를 제외한 글자 수를 세는 함수
+								      function countCharacters(text) {
+								        const strippedText = text.replace(/<\/?[^>]+(>|$)/g, '');
+								        return strippedText.length;
+								      }
+								    })
+									.catch( error => {
+										console.error( error );
+									});
+							});
+							</script>
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -250,7 +291,7 @@
 							<div class="form-item-title">
 								<span>상품 가격</span> <span>*</span>
 							</div>
-							<input id="price" type="number" class="form-item-description"
+							<input type="number" class="form-item-description"
 								placeholder="최소 5000원 이상을 입력하세요" name="price" required
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '최소 5000원 이상을 입력하세요'"
@@ -258,7 +299,31 @@
 								pattern="[0-9]+" /> <span>원</span>
 						</div>
 					</div>
-
+					<!-- 첨부 파일-->
+					<div class="form-item filetype">
+						<div class="form-item-column01">
+							<div class="form-item-title">
+								<span>첨부 파일</span> <span>*</span>
+							</div>
+							<div class="form-item-file">
+								<div class="form-item-images-wrapper">
+									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
+									<label for="attach">
+										<div class="image-add optional-add">
+											<i class="fa-sharp fa-solid fa-plus fa-2xl"
+												style="color: #ffffff;"></i>
+										</div>
+									</label> <input id="attach" name="attach_file" value="" type="file"
+										style="display: none" />
+								</div>
+							</div>
+						</div>
+						<div class="form-item-column02">
+							<div class="form-item-counter ">
+								<span class="optional-img-counter">0</span> <span>/</span> <span>6</span>
+							</div>
+						</div>
+					</div>
 					<!-- 대표 사진 첨부 -->
 					<div class="form-item filetype thumbnail-form">
 						<!-- **
@@ -268,7 +333,7 @@
 							<div class="form-item-title">
 								<span>대표 사진</span> <span>*</span>
 							</div>
-							<div class="form-item-file" id="thumbnail-form">
+							<div class="form-item-file">
 								<!-- 미리보기 이미지-->
 								<!-- <div class="image-frame thumbnail-img">
 									<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
@@ -279,7 +344,7 @@
 										<i class="fa-sharp fa-solid fa-plus fa-2xl"
 											style="color: #ffffff;"></i>
 									</div>
-								</label> <input name="thumbnail" id="thumbnail" type="file" required
+								</label> <input id="thumbnail" name="thumbnail_img" value="" type="file"
 									style="display: none" />
 							</div>
 						</div>
@@ -296,35 +361,28 @@
 							<div class="form-item-title">
 								<span>상세 사진</span>
 							</div>
-							<div class="form-item-file" id="optional-form">
+							<div class="form-item-file">
 								<div class="form-item-images-wrapper">
+									<!-- 미리보기 이미지들 -->
+									<div class="image-frame optional-img">
+										<img src="" alt="상세 사진" id="img">
+
+									</div>
+									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
 									<label for="optional">
 										<div class="image-add optional-add">
 											<i class="fa-sharp fa-solid fa-plus fa-2xl"
 												style="color: #ffffff;"></i>
 										</div>
-									</label> 
-									<input id="optional" name="detailImages" type="file" style="display: none"/> 
-										
+									</label> <input id="optional" name="optional_img" 
+												multiple='multiple'  type="file" style="display: none"
+												onchange="document.getElementById('img').src = window.URL.createObjectURL(this.files[0])"/>
 								</div>
-
 							</div>
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter ">
 								<span class="optional-img-counter">0</span> <span>/</span> <span>6</span>
-							</div>
-						</div>
-					</div>
-					<!-- 첨부 파일-->
-					<div class="form-item filetype">
-						<div class="form-item-column01">
-							<div class="form-item-title">
-								<span>첨부 파일</span> <span>*</span>
-							</div>
-							<div class="form-item-file">
-									<!-- 파일 추가 버튼 : input 자체를 못꾸며서 label로 빼와서 label을 대신 꾸밈 -->
-									<input id="attach_file" name="attach_file"  type="file" />
 							</div>
 						</div>
 					</div>
@@ -349,7 +407,7 @@
                         last : 마지막장 -->
 						<button type="button" data-toggle='modal' data-target='#cancel'
 							value="cancel" class="form-buttons-cancel">취소</button>
-						<button type="button" value="next"
+						<button type="submit" value="next"
 							class="form-buttons-next button--small">다음</button>
 					</div>
 				</div>

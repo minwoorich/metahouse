@@ -36,7 +36,6 @@ public class AssetFileUploadLogicService {
 		String storeFilename = "";
 		
 		if(!multipartFile.isEmpty()) { //multipartFile 비어있지 않으면 작업
-			System.out.println("multifile is empty");
 			String originalFilename = multipartFile.getOriginalFilename(); //API 차원에서 지원해줌.
 			//서버에서 식별할 수 있도록 파일명을 변경
 			storeFilename  =createStoreFilename(originalFilename);
@@ -47,7 +46,6 @@ public class AssetFileUploadLogicService {
 			System.out.println("원본파일명:"+originalFilename);
 			System.out.println("저장파일명:"+storeFilename);
 		}
-		System.out.println("multifile is not empty");
 		return storeFilename;
 	}
 	
