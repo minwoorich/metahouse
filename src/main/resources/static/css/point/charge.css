@@ -11,3 +11,13 @@
 	margin-top: 50px;
 	color: var(--medium-purple);
 }
+
+.point-charge-form-inner-radio{
+	border: 1px solid black;
+	border-radius: 4px;
+	border-collapse: collapse;
+	border-style: hidden;
+	box-shadow: 0 0 0 1px var(--medium-purple);
+	
+	padding: 10px;
+}
