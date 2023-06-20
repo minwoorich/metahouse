@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,18 +77,32 @@ public class AssetServiceImpl implements AssetService {
 
 		return 0;
 	}
-//---------------------------------------------------------
+/*-------------------------------------------------------------------------------------*/
 	@Autowired
 	AssetRepositry repositry;
 	//에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기 'findAllById(카테고리 값)'
+	@Override
 	public Page<AssetEntity> list(int pageNo) {
 		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC,"assetDate"));
 		return repositry.findAll(pageRequest);
 	}
-	
-	public AssetEntity assetView(String assetId) {
-		return repositry.findById(assetId).get();
+	//에셋 상품 정보+이미지+판매자 정보 조회
+	@Override
+	public AssetDTO assetInfo(String asset_id) {
+		return dao.assetInfo(asset_id);
 	}
+	//에셋 이미지
+	@Override
+	public List<AssetDetailImgDTO> assetImgInfo(String asset_id) {
+		return dao.assetImgInfo(asset_id);
+	}
+	//에셋 컨텐츠
+	@Override
+	public List<AssetContentDTO> assetContentInfo(String asset_id) {
+		return dao.assetContentInfo(asset_id);
+	}
+	
+	
 	
 		
 }

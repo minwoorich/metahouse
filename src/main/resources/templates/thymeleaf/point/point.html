@@ -15,13 +15,13 @@
 		<h3>내 포인트</h3>
 		<div class="mypoint-info">
 			<div class="mypoint-label-div">
-				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count"> 1,500 </span> 
+				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count" th:text="${session.loginUser?.point}"></span> 
 			</div>
 			<div class="mypoint-label-div">
-				<span class="mypoint-label">충전 포인트</span> <span class="mypoint-count"> 150,000 </span>
+				<span class="mypoint-label">충전 포인트</span> <span class="mypoint-count" th:text="${tcgp}"></span>
 			</div>
 			<div class="mypoint-label-div">
-				<span class="mypoint-label">사용 포인트</span> <span class="mypoint-count"> 148,500 </span>
+				<span class="mypoint-label">사용 포인트</span> <span class="mypoint-count" th:text="${tcsp}"></span>
 			</div>
 		</div>
 		<div class="mypoint-button-div">
@@ -33,23 +33,16 @@
 			<table>
 				<tr>
 					<th>충전 수단</th>
-					<th>충전 일자</th>
+					<th>충전 일시</th>
 					<th>충전 포인트</th>
 					<th>잔여 포인트</th>
 				</tr>
-				<tr>
-					<td>카카오페이</td>
-					<td>2023-05-27</td>
-					<td>100,000 포인트</td>
-					<td>150,000 포인트</td>
+				<tr th:each="cpi:${cgpilist}">
+					<td th:text="metapoint"></td>
+					<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd')}"></td>
+					<td th:text="${cpi.chargingPoint + ' 포인트'}"></td>
+					<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
 				</tr>
-				<tr>
-					<td>네이버페이</td>
-					<td>2023-05-25</td>
-					<td>50,000 포인트</td>
-					<td>50,000 포인트</td>
-				</tr>
-				<!-- 추가적인 내역을 여기에 추가할 수 있습니다 -->
 			</table>
 		</div>
 		
@@ -62,19 +55,13 @@
 					<th>사용 포인트</th>
 					<th>잔여 포인트</th>
 				</tr>
-				<tr>
-					<td>A 프로젝트 발주</td>
-					<td>2023-06-27</td>
-					<td>100,000 포인트</td>
-					<td>1,500 포인트</td>
+				<tr th:each="cpi:${cspilist}">
+					<td th:text="${cpi.consumeInfo}"></td>
+					<td th:text="${#dates.format(cpi.consumeDate, 'yyyy-MM-dd')}"></td>
+					<td th:text="${cpi.consumingPoint + ' 포인트'}"></td>
+					<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
 				</tr>
-				<tr>
-					<td>B 에셋  구매</td>
-					<td>2023-06-25</td>
-					<td>48,500 포인트</td>
-					<td>101,500 포인트</td>
-				</tr>
-				<!-- 추가적인 내역을 여기에 추가할 수 있습니다 -->
+				<!-- 추가적인 내역을 여기에 추가할 수 있습니다 HH:mm:ss -->
 			</table>
 		</div>
 

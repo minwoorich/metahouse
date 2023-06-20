@@ -13,18 +13,26 @@
 		<h3>내 포인트</h3>
 		<div class="mypoint-info">
 			<div class="mypoint-label-div">
-				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count"> 1,500 </span> 
+				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count" th:text="${session.loginUser?.point}">  </span> 
 			</div>
 		</div>
 
 
 		<h3>포인트 충전</h3>
 		<div class="point-charge-form-div">
-			<input type="radio" value="1000" th:text="1000원"/> </br>
-			<input type="radio" name="" value="5000" th:text="5000원"/> </br>
-			<input type="radio" name="" value="10000" th:text="10000원"/> </br> 
-			<input type="radio" name="" value="30000" th:text="30000원"/> </br>
-			<input type="radio" name="" value="50000" th:text="50000원"/> </br>
+			<form action="/metahaus/point/charge.do">
+				<div class="point-charge-form-inner-radio">
+					<p>MetaPoint</p>
+					<input type="radio" id="point1" name="point" value="1000" ><label for="point1" class="box-radio-input"><span th:text="1000원"></span></label>
+					<input type="radio" id="point2" name="point" value="3000" ><label for="point2" class="box-radio-input"><span th:text="3000원"></span></label>
+					<input type="radio" id="point3" name="point" value="5000" ><label for="point3" class="box-radio-input"><span th:text="5000원"></span></label>
+					<input type="radio" id="point4" name="point" value="10000" ><label for="point4" class="box-radio-input"><span th:text="10000원"></span></label>
+					<input type="radio" id="point5" name="point" value="50000" ><label for="point5" class="box-radio-input"><span th:text="50000원"></span></label>
+				</div>	
+				</br></br>
+				<input type="submit" class="button--small"/>
+			</form>
+			
 		</div>
 	</div>
 </body>

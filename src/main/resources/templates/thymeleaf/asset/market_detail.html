@@ -12,20 +12,20 @@
 	<div layout:fragment="content" class="content">	
 		<!-- product detail -->
 		<div id="product_detail">
-			<div>ASSET &rang;&ensp;<span th:text="${asset.category1}"></span>&rang;<span></span></div><br>
+			<div>ASSET&ensp;&rang;&ensp;
+				<span th:text="${asset.category1}"></span>&ensp;&rang;&ensp;
+				<span th:text="${asset.category2_as}"></span>
+			</div><br>
 			<div id="main_title" th:text="${asset.title}"></div>
 			<!-- 이미지 갤러리 -->
 			<div id="photo_container">
 				<div id="main_photo_box">
-					<img th:src="@{/upload/asset_thumbnail_img/${asset.mainImg}}" alt="photo" id="photo">
-				</div>
-				<ul id="gallery">
-					<li><img src="/mh/images/item.png" alt="thumbnail"></li>
-					<li><img src="/mh/images/item2.png" alt="thumbnail"></li>
-					<li><img src="/mh/images/item.png" alt="thumbnail"></li>
-					<li><img src="/mh/images/test_img2.png" alt="thumbnail"></li>
-					<li><img src="/mh/images/mincraft.jpg" alt="thumbnail"></li>
-					<li><img src="/mh/images/test_img2.png" alt="thumbnail"></li>
+ 					<img th:src="@{/upload/asset_thumbnail_img/${asset.main_img}}" alt="photo" id="photo">
+ 				</div>
+				<ul id="gallery" th:if="${assetImgs != null}">
+					<li th:each="assetImgs, i:${assetImgs}">
+						<img th:src="@{/upload/asset_thumbnail_img/${assetImgs.asset_detail_img_store_filename}}" alt="thumbnail">
+					</li>
 				</ul>
 			</div>
 			<div class="sub_title" id="product_explain">서비스 설명</div>
@@ -61,10 +61,10 @@
 		<div id="select_product_box">
 			<!-- select product -->
 			<div id="select_product">
-				<img th:if="${asset.mainImg != null}" id="represent_img"
-					th:src="@{/upload/asset_thumbnail_img/${asset.mainImg}}"/>
+	 		<img th:if="${asset.main_img != null}" id="represent_img"
+					th:src="@{/upload/asset_thumbnail_img/${asset.main_img}}"/>
 				<div class="product_title" th:text="${asset.title}"></div>
-				<div class="product_info" id="product_date" th:text="'작성일자: '+${asset.assetDate}"></div>
+				<div class="product_info" id="product_date" th:text="'작성일자: '+${asset.asset_date}"></div>
 				<div class="product_info" id="product_price" th:text="${asset.price}+원"></div>
 			</div>
 			<!-- seller profile -->
@@ -73,8 +73,8 @@
 					<img alt="프로필 이미지" src="/metahaus/images/test_img.jpg" id="seller_img">
 				</div>
 				<div id="seller_info">
-					<div class="seller_name">판매자A(닉네임)</div>
-					<div class="seller_name">sellerA(아이디)</div>
+					<div class="seller_name" th:text="${asset.userName.userName}"></div>
+					<div class="seller_name" th:text="${asset.seller_id}"></div>
 				</div>
 			</div>
 			<!-- buy button -->

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.metahouse.asset.service.AssetService;
+import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
+import com.multi.metahouse.domain.dto.asset.AssetDTO;
+import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 @Controller
@@ -44,8 +47,12 @@ public class AssetMarketController {
 //	특정 에셋상품보기> 조회수 업데이트 해주기
 	@RequestMapping("asset/detail")
 	public String showAsset(Model model, String assetNum) {
-		AssetEntity asset = service.assetView(assetNum);
+		AssetDTO asset = service.assetInfo(assetNum);
+		List<AssetDetailImgDTO> assetImgs = service.assetImgInfo(assetNum);
+		List<AssetContentDTO> assetContents = service.assetContentInfo(assetNum);
 		model.addAttribute("asset", asset);
+		model.addAttribute("assetImgs", assetImgs);
+		model.addAttribute("assetContents", assetContents);
 		return "asset/market_detail";
 	}
 
