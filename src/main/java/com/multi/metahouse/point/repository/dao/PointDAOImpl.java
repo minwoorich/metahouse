@@ -5,9 +5,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.point.MyPointDTO;
@@ -64,27 +65,52 @@ public class PointDAOImpl implements PointDAO {
 	}
 
 	@Override
-	public List<ChargedPointInfo> chargePointInfoList(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ChargedPointInfo> chargePointInfoList(User loginUser) {
+		PageRequest cgpiPageRequest = PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC,"chargePointInfoId"));
+		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findAll(cgpiPageRequest);
+		return cgpiPage.getContent();
+	}
+	
+	@Override
+	public List<ChargedPointInfo> chargePointInfoList(User loginUser, int pageNo) {
+		PageRequest cgpiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"chargePointInfoId"));
+		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findAll(cgpiPageRequest);
+		return cgpiPage.getContent();
 	}
 
 	@Override
-	public List<ConsumedPointInfo> consumePointInfoList(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ConsumedPointInfo> consumePointInfoList(User loginUser) {
+		PageRequest cspiPageRequest = PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC,"consumePointInfoId"));
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findAll(cspiPageRequest);
+		return cspiPage.getContent();
+	}
+	
+	@Override
+	public List<ConsumedPointInfo> consumePointInfoList(User loginUser, int pageNo) {
+		PageRequest cspiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"consumePointInfoId"));
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findAll(cspiPageRequest);
+		return cspiPage.getContent();
 	}
 
 	@Override
 	public MyPointDTO getMyPointDTO(User loginUser) {
-		System.out.println("1111111");
-		List<ChargedPointInfo> cgpilist = chargedPointInfoRepository.findByUserId(loginUser.getUserId());
-		System.out.println("2222222");
-		List<ConsumedPointInfo> cspilist = consumedPointInfoRepository.findByUserId(loginUser.getUserId());
-		System.out.println("3333333");
+		PageRequest cgpiPageRequest = getPageRequest("chargePointInfoId");
+		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findAll(cgpiPageRequest);
+		List<ChargedPointInfo> cgpilist = chargePointInfoList(loginUser);
+		
+		PageRequest cspiPageRequest = getPageRequest("consumePointInfoId");
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findAll(cspiPageRequest);
+		List<ConsumedPointInfo> cspilist = consumePointInfoList(loginUser);
+		
 		int tcgp = chargedPointInfoRepository.getTotalChargingPoint(loginUser);
-		System.out.println("4444444");
 		int tcsp = consumedPointInfoRepository.getTotalConsumedPoint(loginUser);
-		return new MyPointDTO(cgpilist, cspilist, tcgp, tcsp);
+		return new MyPointDTO(cgpilist, cspilist, tcgp, tcsp, cgpiPage.getTotalPages(), cspiPage.getTotalPages());
 	}
+	
+	@Override
+	public PageRequest getPageRequest(String id) {
+		PageRequest pageRequest = PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, id));
+		return pageRequest;
+	}
+	
 }

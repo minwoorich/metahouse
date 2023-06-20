@@ -37,15 +37,23 @@ public class PointServiceImpl implements PointService {
 	}
 
 	@Override
-	public List<ChargedPointInfo> chargePointInfoList(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ChargedPointInfo> chargePointInfoList(User loginUser) {
+		return dao.chargePointInfoList(loginUser);
+	}
+	
+	@Override
+	public List<ChargedPointInfo> chargePointInfoList(User loginUser, int pageNo) {
+		return dao.chargePointInfoList(loginUser, pageNo);
 	}
 
 	@Override
-	public List<ConsumedPointInfo> consumePointInfoList(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ConsumedPointInfo> consumePointInfoList(User loginUser) {
+		return dao.consumePointInfoList(loginUser);
+	}
+	
+	@Override
+	public List<ConsumedPointInfo> consumePointInfoList(User loginUser, int pageNo) {
+		return dao.consumePointInfoList(loginUser, pageNo);
 	}
 	
 	@Override

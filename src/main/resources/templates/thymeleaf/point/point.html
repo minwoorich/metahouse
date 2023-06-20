@@ -5,10 +5,56 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/metahaus/css/point/point.css" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".pageNum-cg").on("click", function(){
+				//console.log("ajax전");
+				
+				
+				
+ 				$.ajax({
+					url: "/metahaus/point/page/cgpointinfo",
+					type: "post",
+					data: {
+						"pageNum" : $(this).children().text(),
+						"location" : "cg"
+					},
+					dataType: "json",
+					success:function(data){
+						console.log(data);
+						console.log(data.length);
+						
+						let parent = $(".cgInfo").parent();
+						
+						$(".cgInfo").remove();
+						
+						renewList = '';
+						
+						for(let i=0; i<data.length; i++){
+							renewList += '<tr id="cgInfoList">';
+							renewList += '<td> metapoint </td>';
+							renewList += '<td>' + data[i].chargeDate + '</td>';
+							renewList += '<td>' + data[i].chargingPoint + " 포인트" + '</td>';
+							renewList += '<td>' + data[i].remainingPoint + " 포인트" + '</td>';
+							renewList += '</tr>';
+						}
+						renewList += '<tr id="cgInfoListPageNum">';
+						renewList += '<td colspan="4">';
+						renewList += '<a class="pageNum-cg" th:each="num:${#numbers.sequence(0, (tpcgpi-1))}">'
+						renewList += '<span th:text="${num+1}"/>';
+						renewList += '</a></td></tr>';
+						
+						console.log(renewList);
+						console.log(parent);
+						
+						parent.append(renewList);
 
+					}
+				})
+			})
+		})
+	</script>
 <title>내 포인트 조회</title>
-<style>
-</style>
 </head>
 <body>
 	<div class="mypoint-section" layout:fragment="content">
@@ -37,11 +83,18 @@
 					<th>충전 포인트</th>
 					<th>잔여 포인트</th>
 				</tr>
-				<tr th:each="cpi:${cgpilist}">
+				<tr id="cgInfoList" class="cgInfo" th:each="cpi:${cgpilist}">
 					<td th:text="metapoint"></td>
 					<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd')}"></td>
 					<td th:text="${cpi.chargingPoint + ' 포인트'}"></td>
 					<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
+				</tr>
+				<tr id="cgInfoListPageNum" class="cgInfo">
+					<td colspan="4">
+						<a class="pageNum-cg" th:each="num:${#numbers.sequence(0, (tpcgpi-1))}">
+							<span th:text="${num+1}"/>
+						</a>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -55,12 +108,20 @@
 					<th>사용 포인트</th>
 					<th>잔여 포인트</th>
 				</tr>
-				<tr th:each="cpi:${cspilist}">
+				<tr id="csInfoList" th:each="cpi:${cspilist}">
 					<td th:text="${cpi.consumeInfo}"></td>
 					<td th:text="${#dates.format(cpi.consumeDate, 'yyyy-MM-dd')}"></td>
 					<td th:text="${cpi.consumingPoint + ' 포인트'}"></td>
 					<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
 				</tr>
+				<tr id="csInfoListPageNum">
+					<td colspan="4">
+						<a class="pageNum-cs" th:each="num:${#numbers.sequence(0, (tpcspi-1))}">
+							<span th:text="${num+1}"/>
+						</a>
+					</td>
+				</tr>
+				
 				<!-- 추가적인 내역을 여기에 추가할 수 있습니다 HH:mm:ss -->
 			</table>
 		</div>
