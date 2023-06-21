@@ -52,6 +52,7 @@ public class PointDAOImpl implements PointDAO {
 		ChargedPointInfo chargedPointInfo = new ChargedPointInfo();
 		chargedPointInfo.setUserId(loginUser.getUserId());
 		chargedPointInfo.setChargingPoint(chargeAmount);
+		chargedPointInfo.setPaymentMethod("metapoint");
 		chargedPointInfo.setRemainingPoint(loginUser.getPoint() + chargeAmount);
 		chargedPointInfo.setChargeDate(date);
 		

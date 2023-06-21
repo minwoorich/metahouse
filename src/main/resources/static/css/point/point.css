@@ -119,6 +119,10 @@
 	font-size: 18px;
 }
 
-.pageNum-cg, .pageNum-cs span{
+.pageNo{
 	cursor: pointer;
+}
+
+.paging-div {
+	width:725px;
 }
