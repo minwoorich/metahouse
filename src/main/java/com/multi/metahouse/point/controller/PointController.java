@@ -36,33 +36,34 @@ public class PointController {
 		
 		MyPointDTO myPoint = service.getMyPointDTO((User)session.getAttribute("loginUser"));
 		
-//		System.out.println("myPoint : " + myPoint);
-		
 		mav.addObject("cgpilist", myPoint.getChargedInfoList());
 		mav.addObject("cspilist", myPoint.getConsumedInfoList());
-		mav.addObject("tcgp", myPoint.getTotalChargedPoint());
-		mav.addObject("tcsp", myPoint.getTotalConsumedPoint());
-		mav.addObject("tpcgpi", myPoint.getTotalPageOfChargedPointInfo());
-		mav.addObject("tpcspi", myPoint.getTotalPageOfConsumedPointInfo());
+		mav.addObject("tot_cgp", myPoint.getTotalChargedPoint());
+		mav.addObject("tot_csp", myPoint.getTotalConsumedPoint());
+		mav.addObject("tot_page_cgpi", myPoint.getTotalPageOfChargedPointInfo());
+		mav.addObject("tot_page_cspi", myPoint.getTotalPageOfConsumedPointInfo());
 		
-		mav.setViewName("point/point");
+		//mav.setViewName("point/point");
+		mav.setViewName("point/point_test");
 		return mav;
 	}
 	
 	/* ajax 페이징 (chargedPointInfoList) */
-	@PostMapping(value = "/page/cgpointinfo", produces = "application/json;charset=utf-8")
+	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNum, String location) {
-		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNum)-1);
+	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNo) {
+		System.out.println("pageNo = " + pageNo);
+		
+		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
 		
 		return list;
 	}
 	
 	/* ajax 페이징 (consumedPointInfoList) */
-	@PostMapping(value = "/page/cspointinfo", produces = "application/json;charset=utf-8")
+	@PostMapping(value = "/page/cspi", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<ConsumedPointInfo> csPageList(HttpSession session, String pageNum, String location) {
-		List<ConsumedPointInfo> list = service.consumePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNum)-1);
+	public List<ConsumedPointInfo> csPageList(HttpSession session, String pageNo) {
+		List<ConsumedPointInfo> list = service.consumePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
 		
 		return list;
 	}

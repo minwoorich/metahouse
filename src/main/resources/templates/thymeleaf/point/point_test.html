@@ -16,10 +16,13 @@
 				},
 				dataType:"json",
 				success:function(data){
-					console.log(data);
-					console.log(data.length);
+					//console.log(data);
+					//console.log(data.length);
 					
-					$("#cg_tb").children("tbody").children().remove();
+					//console.log($(".cgInfo"));
+					//console.log($("#cg_tb").children().children(".cgInfo"));
+					
+					$("#cg_tb").children().children(".cgInfo").remove();
 					
 					let addElement = '';
 					let myDate = '';
@@ -38,7 +41,7 @@
 					
 					//console.log($("#cg_tb").children("tbody"));
 					
-					$("#cg_tb").children("tbody").append(addElement);
+					$("#cg_tb").children().children(".tb_head").after(addElement);
 				}
 			})
 		})
@@ -78,22 +81,18 @@
 			<div class="mypoint-history">
 				<h3>충전 내역 조회</h3>
 				<table id="cg_tb">
-					<thead>
-						<tr class="tb_head">
-							<th>충전 수단</th>
-							<th>충전 일시</th>
-							<th>충전 포인트</th>
-							<th>잔여 포인트</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="cgInfo" th:each="cpi:${cgpilist}">
-							<td th:text="${cpi.paymentMethod}"></td>
-							<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd')}"></td>
-							<td th:text="${cpi.chargingPoint + ' 포인트'}"></td>
-							<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
-						</tr>
-					</tbody>
+					<tr class="tb_head">
+						<th>충전 수단</th>
+						<th>충전 일시</th>
+						<th>충전 포인트</th>
+						<th>잔여 포인트</th>
+					</tr>
+					<tr class="cgInfo" th:each="cpi:${cgpilist}">
+						<td th:text="${cpi.paymentMethod}"></td>
+						<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd')}"></td>
+						<td th:text="${cpi.chargingPoint + ' 포인트'}"></td>
+						<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
+					</tr>
 				</table>
 				<div class="paging-div">
 					<!--/* Bootstrap pager */-->
