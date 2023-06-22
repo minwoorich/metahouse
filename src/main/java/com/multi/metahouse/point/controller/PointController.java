@@ -1,6 +1,8 @@
 package com.multi.metahouse.point.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -43,8 +45,8 @@ public class PointController {
 		mav.addObject("tot_page_cgpi", myPoint.getTotalPageOfChargedPointInfo());
 		mav.addObject("tot_page_cspi", myPoint.getTotalPageOfConsumedPointInfo());
 		
-		//mav.setViewName("point/point");
-		mav.setViewName("point/point_test");
+		mav.setViewName("point/point");
+		//mav.setViewName("point/point_test");
 		return mav;
 	}
 	
@@ -52,11 +54,20 @@ public class PointController {
 	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNo) {
-		System.out.println("pageNo = " + pageNo);
-		
 		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
 		
 		return list;
+	}
+	
+	/* ajax 페이징 테스트 (chargedPointInfoList) */
+	@PostMapping(value = "/page/cgpi/test", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String, Object> cgPageListTest(HttpSession session, String pageNo) {
+		Map<String, Object> json = service.chargePointInfoListTest((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+		
+//		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+		
+		return json;
 	}
 	
 	/* ajax 페이징 (consumedPointInfoList) */
@@ -77,11 +88,8 @@ public class PointController {
 	public String pointCharge(HttpSession session, int point) {
 		User loginUser = (User)session.getAttribute("loginUser");
 		
-//		System.out.println("point = " + point);
-//		System.out.println("loginUser = " + loginUser);
-		
 		service.chargePoint(loginUser, point);
 		
-		return "point/charge";
+		return "point/charge_success";
 	}
 }
