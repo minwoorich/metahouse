@@ -39,6 +39,7 @@ public class ProjectEntity {
 	private String tag;
 	private String title;
 	private String description;
+	private int projectHits;
 	@CreationTimestamp
 	private LocalDateTime projectDate;
 	private String category1;
