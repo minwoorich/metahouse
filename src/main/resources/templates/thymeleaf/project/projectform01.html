@@ -145,7 +145,7 @@
 			<form class="form" id="form" method="post"
 				enctype="multipart/form-data">
 				<!-- 세션에 저장된 유저의 id를 projectDto에 저장 -->
-				<input id="creator_id" type="hidden"
+				<input name="creator_id" id="creator_id" type="hidden"
 					th:value="${session.creator_id}" />
 
 				<div class="form-wrapper">
@@ -205,11 +205,11 @@
 							</div>
 							<div class="form-item-description">
 								<select name="category1" id="category1">
-									<option value="roblox">로블록스</option>
-									<option value="zepeto">제페토</option>
-									<option value="sandbox">더 샌드박스</option>
-									<option value="minecraft">마인크래프트</option>
-									<option value="gathertown">게더타운</option>
+									<option value="로블록스">로블록스</option>
+									<option value="제페토">제페토</option>
+									<option value="샌드박스">더 샌드박스</option>
+									<option value="마인크래프트">마인크래프트</option>
+									<option value="게더타운">게더타운</option>
 								</select>
 
 							</div>
@@ -225,10 +225,10 @@
 							</div>
 							<div class="form-item-description">
 								<select name="category2_pj" id="category2_pj">
-									<option value="maps">메타버스 맵</option>
-									<option value="assets">메타버스 에셋</option>
-									<option value="promo/event">홍보/이벤트</option>
-									<option value="proposal">기획/구축</option>
+									<option value="메타버스">메타버스 맵</option>
+									<option value="메타버스">메타버스 에셋</option>
+									<option value="홍보/이벤트">홍보/이벤트</option>
+									<option value="기획/구축">기획/구축</option>
 								</select>
 							</div>
 						</div>
@@ -242,22 +242,7 @@
 							</div>
 							<textarea name="description" class="form-item-description"
 								id="form-editor" maxlength="1500"></textarea>
-							<!-- <script type="text/javascript" th:inline="javascript">
-									function getEditorData(){
-										if(editor){
-											const editorData = editor.getData();
-											console.log(editorData);
-										}else{
-											alert("에디터없어");
-										}
-									}
-									document.addEventListener("DOMContentLoaded", function() {
-										const element = document.querySelector(".form-buttons-next");
-										element.addEventListener("click",function(event){
-											getEditorData();
-										});
-									});
-								</script> -->
+							
 						</div>
 						<div class="form-item-column02">
 							<div class="form-item-counter">
@@ -289,7 +274,7 @@
 										<i class="fa-sharp fa-solid fa-plus fa-2xl"
 											style="color: #ffffff;"></i>
 									</div>
-								</label> <input name="thumbnail" id="thumbnail" type="file" required
+								</label> <input name="thumbnail"  id="thumbnail" type="file" required
 									style="display: none" />
 							</div>
 						</div>
@@ -313,10 +298,8 @@
 											<i class="fa-sharp fa-solid fa-plus fa-2xl"
 												style="color: #ffffff;"></i>
 										</div>
-									</label> <input id="optional" type="file" style="display: none"
-										multiple="multiple" /> <input name="detailImages"
-										id="detailImages" type="file" multiple="multiple"
-										style="display: none">
+									</label> 
+									<input id="optional"  type="file" style="display: none"/> 
 								</div>
 
 							</div>

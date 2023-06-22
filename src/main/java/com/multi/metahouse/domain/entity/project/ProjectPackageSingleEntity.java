@@ -7,26 +7,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor 
 @Data
 @Entity
-@Table(name="project_content")
-public class ProjectContentsEntity {
+@Table(name="project_package_single")
+public class ProjectPackageSingleEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="project_content_id")
-	private Long projectContentId;
 	@Column(name="project_id")
 	private Long projectId;
-	private String projectStoreFilename;
-	private int projectFileNo;
-	
-	
-	
+	@Column(name="pkg_title")
+	private String pkgTitle;
+	@Column(name="pkg_description")
+	private String pkgDescription;
+	private int price;
+	private int revision;
+	private int workdays;
 }
