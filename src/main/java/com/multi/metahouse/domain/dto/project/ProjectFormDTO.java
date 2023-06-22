@@ -4,13 +4,22 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
-@Data
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class ProjectFormDTO {
 	private String creator_id;
 	private String title;
@@ -19,6 +28,14 @@ public class ProjectFormDTO {
 	private String category2_pj;
 	private MultipartFile thumbnail;
 	private List<MultipartFile> detailImages;
-	//미리보기용 이미지 경로
-	private List<String> filePath;
+	
+	@Builder
+	public ProjectFormDTO(String creator_id, String title, String description, String category1, String category2_pj) {
+		super();
+		this.creator_id = creator_id;
+		this.title = title;
+		this.description = description;
+		this.category1 = category1;
+		this.category2_pj = category2_pj;
+	}
 }

@@ -31,5 +31,7 @@ public class AssetDTO {
 	//상세 이미지
 	private List<MultipartFile> optional_img;
 	private String asset_date;
-
+	
+	//판매자 정보를 저장하기위한 변수	
+	private UserDTO userName;
 }

@@ -23,8 +23,13 @@ public class AssetEntity {
 	private String sellerId;
 	private String title;
 	private String category1;
+<<<<<<< HEAD
 	@Column(name = "category2_as")
 	private String category2As;
+=======
+	@Column(name="category2_as")
+	private String category2;
+>>>>>>> refs/remotes/Dojins/main
 	private String description;
 	private String price;
 	private String mainImg;

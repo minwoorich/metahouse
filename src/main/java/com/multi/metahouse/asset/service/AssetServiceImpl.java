@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.metahouse.asset.repository.dao.AssetDAO;
-import com.multi.metahouse.asset.repository.dao.AssetRepositry;
+import com.multi.metahouse.asset.repository.jpa.AssetRepository;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
@@ -77,32 +77,43 @@ public class AssetServiceImpl implements AssetService {
 
 		return 0;
 	}
-/*-------------------------------------------------------------------------------------*/
+
+	/*-------------------------------------------------------------------------------------*/
 	@Autowired
-	AssetRepositry repositry;
-	//에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기 'findAllById(카테고리 값)'
+	AssetRepository repositry;
+
+	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
-	public Page<AssetEntity> list(int pageNo) {
-		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC,"assetDate"));
-		return repositry.findAll(pageRequest);
+	public Page<AssetEntity> list(String category1, String category2, int pageNo) {
+		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC, "assetDate"));
+		Page<AssetEntity> assetlistPage = null;
+		if (category1 == null && category2 == null) {
+			assetlistPage = repositry.findAll(pageRequest);
+		} else if (category1 != null && category2 == null) {
+			assetlistPage = repositry.findByCategory1(category1, pageRequest);
+		} else {
+			assetlistPage = repositry.findByCategory1AndCategory2(category1, category2, pageRequest);
+		}
+
+		return assetlistPage;
 	}
-	//에셋 상품 정보+이미지+판매자 정보 조회
+
+	// 에셋 상품 정보+이미지+판매자 정보 조회
 	@Override
 	public AssetDTO assetInfo(String asset_id) {
 		return dao.assetInfo(asset_id);
 	}
-	//에셋 이미지
+
+	// 에셋 이미지
 	@Override
 	public List<AssetDetailImgDTO> assetImgInfo(String asset_id) {
 		return dao.assetImgInfo(asset_id);
 	}
-	//에셋 컨텐츠
+
+	// 에셋 컨텐츠
 	@Override
 	public List<AssetContentDTO> assetContentInfo(String asset_id) {
 		return dao.assetContentInfo(asset_id);
 	}
-	
-	
-	
-		
+
 }

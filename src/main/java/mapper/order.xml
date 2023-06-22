@@ -6,4 +6,9 @@
 	<select id="selectAssetCategory" resultType="com.multi.metahouse.domain.dto.order.AssetCategoryDTO">
 		
 	</select>
+	
+<!-- ******************************************************* -->
+	<insert id="insertOrderA" parameterType="assetOrder">
+        INSERT INTO asset_orders VALUES (null, #{asset_id}, #{buyer_id2}, now())
+    </insert>
 </mapper>

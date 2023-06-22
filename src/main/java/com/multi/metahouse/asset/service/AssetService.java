@@ -27,7 +27,7 @@ public interface AssetService {
 
 /*----------------------------------------------------*/
 	//에셋마켓 상품 전체보기
-	Page<AssetEntity> list(int pageNo);
+	public Page<AssetEntity> list(String category1, String category2, int pageNo);
 	//에셋마켓 특정상품보기
 	public AssetDTO assetInfo(String asset_id);
 	public List<AssetDetailImgDTO> assetImgInfo(String asset_id);

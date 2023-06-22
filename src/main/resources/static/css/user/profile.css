@@ -5,6 +5,11 @@
 
 a{
 	text-decoration: none;
+	color: white;
+}
+
+a:hover{
+	text-decoration: none;
 }
 
 
@@ -118,6 +123,7 @@ a{
 }
 
 .info_card_view{
+	width: 100%;
 	height: 400px;
 	display: flex;
 	justify-content: center;
@@ -132,12 +138,13 @@ a{
 	border-radius: 6px;
 	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	cursor: pointer;
+	text-decoration: none;
 }
 .portfolio_info_card:hover{
 	background-color: #6C4AB6;
 	transition: 0.5s;
-	width: 240px;
-	height: 360px;
+	width: 230px;
+	height: 345px;
 }
 
 .portfolio_info_img{
@@ -161,10 +168,26 @@ a{
 	margin-right: 0px;
 }
 
+.portfolio_content_preview{
+	height: 35%;
+}
+
 .portfolio_info_text{
+	height:20%;
 	font-size: 13px;
 	color: white;
 	text-align: center;
+}
+
+.portfolio_info_etc{
+	height: 80%;
+	display:flex;
+	align-items: flex-end;
+}
+
+.portfolio_info_etc div{
+	font-size: 12px;
+	color: white;
 }
 
 .button_cover{
@@ -318,4 +341,116 @@ a{
 .review_content_text{
 	padding: 20px;
 	width: 90%;
+}
+
+/* slider */
+.banner-slider-list{
+    position: relative;
+    display: flex;
+    padding: 6px;
+    left:0;
+    transition: left 1s;
+}
+
+/* 슬라이더 아이템 */
+.banner-slider-item{
+    width: 33.333%;
+    flex-shrink:0;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+}
+
+.banner-slider-portfolio{
+    width: 19%;
+    flex-shrink:0;
+    padding: 6px;
+    border-radius: 6px;
+    margin-left: 1%;
+
+}
+
+.banner-slider-portfolio:first-child{
+	margin-left: 0px;
+}
+
+
+.item-img-warp{
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.item-img-warp img{
+	width: 100%;
+	height: 100%;
+}
+
+.slider-outter{
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    background-color: #FAFAFC; 
+    height: 100%;
+}
+
+.banner-slider-item span{
+    display: block;
+}
+
+
+/* 슬라이더 버튼 */
+.btn-shape{
+    position: absolute;
+    top:58%;
+    left: 1%;
+    transform: translate(-100%,-150%);
+
+    z-index: 2;
+    align-self: center;
+    cursor: pointer;
+    color: rgb(174, 174, 174);
+    
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+
+    border-radius: 50%;
+    box-shadow: 3px 5px 5px rgb(163, 163, 163);
+}
+
+.btn-shape2{
+    position: absolute;
+    top:50%;
+    transform: translate(-100%,-150%);
+
+    z-index: 2;
+    align-self: center;
+    cursor: pointer;
+    color: rgb(174, 174, 174);
+    
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+
+    border-radius: 50%;
+    box-shadow: 3px 5px 5px rgb(163, 163, 163);
+}
+
+.nextbtn{
+    left:99%;
+    transform: translate(0%,-150%);
+}
+
+.another-portfolio .nextbtn{
+    left:100%;
+    transform: translate(0%,-150%);
+}
+
+.banner-slider-wrap{
+	width: 100%;
+    position: relative;
 }

@@ -20,4 +20,6 @@ public class MyPointDTO {
 	private List<ConsumedPointInfo> consumedInfoList;
 	private int totalChargedPoint;
 	private int totalConsumedPoint;
+	private int totalPageOfChargedPointInfo;
+	private int totalPageOfConsumedPointInfo;
 }
