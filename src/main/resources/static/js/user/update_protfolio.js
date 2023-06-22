@@ -1,5 +1,36 @@
 $(document).ready(function () {
     // 맨처음 시작할때 이미지 카운터
+	updateImageCounters();
+	
+	$(".image-frame").hover(
+	        function () {
+	            const coverImage =
+	                $("<button type='button' data-toggle='modal' data-target='#delete-img-Modal'>" +
+	                    "<div>" +
+	                    "<i class='fa-solid fa-trash fa-2xl' style='color: rgba(255,0,0);'></i>" +
+	                    "<div/>" +
+	                    "</button>").attr("class", "delete-cover");
+	            $(this).append(coverImage);
+	        },
+	        function () {
+	            $(this).find(".delete-cover").remove();
+	        }
+	    )
+
+
+	    //사진 누르면 삭제 모달뜨고 버튼 누르면 삭제완료됨
+
+	    const deleteBtn = $("#delete-img-Modal").find("button");
+	    //삭제할 사진을 누르면 해당 사진 객체 저장 + 모달 뜸
+	    $(".image-frame").on("click", function (event) {
+	        const deleteTarget = $(this);
+	        //모달 버튼 누르면 삭제
+	        deleteBtn.on("click", function () {
+	            deleteTarget.remove();
+	            //등록된 사진개수가 한도 까지 등록된경우 추가 버튼 사라짐
+	            updateImageCounters()
+	        });
+	    });
 
     // 맨 처음 시작할 때 이미지 추가 버튼 상태
     function updateImageCounters() {
@@ -137,19 +168,19 @@ $(document).ready(function () {
         });
         
         element.on("mouseenter", function() {
-            const coverImage =
-              $("<button type='button' data-toggle='modal' data-target='#delete-img-Modal'>" +
-                "<div>" +
-                "<i class='fa-solid fa-trash fa-2xl' style='color: rgba(255,0,0,0.5);'></i>" +
-                "<div/>" +
-                "</button>").attr("class", "delete-cover");
-            $(this).append(coverImage);
-          });
+        	const coverImage =
+	          $("<button type='button' data-toggle='modal' data-target='#delete-img-Modal'>" +
+	            "<div>" +
+	            "<i class='fa-solid fa-trash fa-2xl' style='color: rgba(255,0,0,0.5);'></i>" +
+	            "<div/>" +
+	            "</button>").attr("class", "delete-cover");
+	        $(this).append(coverImage);
+	    });
 
-          element.on("mouseleave", function() {
-            $(this).find(".delete-cover").remove();
-          });
-     });
+	    element.on("mouseleave", function() {
+	        $(this).find(".delete-cover").remove();
+	    });
+    });
         
         
     var PointfileMap = new Map();

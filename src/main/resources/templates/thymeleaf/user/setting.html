@@ -6,63 +6,98 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/metahaus/css/user/setting.css">
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#profile_img").on("change", function() {
+			$("#thumbnail_img").attr('src', window.URL.createObjectURL(this.files[0]));
+		});
+		
+		$("#submit").on("click", function(){
+			let finalCheck = confirm("정말 수정하시겠습니까?");
+			if(finalCheck){
+				alert("수정이 완료되었습니다.");
+				return true;
+			}else{
+				alert("취소되었습니다.");
+				return false;
+			}
+		});
+		
+	});
+</script>
+
 </head>
 	<body>
 		<div layout:fragment="content" class="profile_setting">
 			<div class="profile_setting_title">
 				설정
 			</div>
-			<form action="">
+			<form action="/metahaus/mypage/setting" method="POST" enctype="multipart/form-data">
 				<div class="profile_change_area">
 					<div class="profile_img_change">
 						<div class="profile_change_img_view">
+							<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
+								 th:src="|/metahaus/upload/userthumbnail/${session.loginUser.thumbnailStoreFilename}|" id="thumbnail_img">
 							
+							<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
+								 src="/metahaus/images/test_img.jpg" id="thumbnail_img">
 						</div>
 						<label class="profile_insert_lable" for="profile_img">
 		 					<div class="profile_img_input">프로필 변경</div>
 		 				</label> 
-		 				<input type="file" id="profile_img">
+		 				<input type="file" id="profile_img" name="multipartfile">
 					</div>
 					<div class="profile_text_change">
-						<textarea></textarea>
+						<textarea name="selfIntroduction">[[${session.loginUser.selfIntroduction}]]</textarea>
 					</div>
 				</div>
 				<div class="profile_detail_change">
 					<div class="profile_detail_change_write">
 						<div class="profile_detail_change_write_title">이름</div> 
-						<div class="profile_detail_change_write_text"><input type="text" placeholder="이름을 작성해주세요"></div>
+						<div class="profile_detail_change_write_text">
+							<input type="text" placeholder="이름을 작성해주세요" th:value="${session.loginUser.userName}" name="userName">
+						</div>
 					</div>
 					<div class="profile_detail_change_write">
 						<div class="profile_detail_change_write_title">이메일</div> 
-						<div class="profile_detail_change_write_text"><input type="text" placeholder="이메일을 작성해주세요"></div>
+						<div class="profile_detail_change_write_text">
+							<input type="text" placeholder="이메일을 작성해주세요" th:value="${session.loginUser.email}" name="email">
+						</div>
 					</div>
 					<div class="profile_detail_change_write">
 						<div class="profile_detail_change_write_title">전화번호</div> 
-						<div class="profile_detail_change_write_text"><input type="text" placeholder="전화번호를 작성해주세요"></div>
+						<div class="profile_detail_change_write_text">
+							<input type="text" placeholder="전화번호를 작성해주세요" th:value="${session.loginUser.phoneNumber}" name="phoneNumber">
+						</div>
 					</div>
 					<div class="profile_detail_change_write">
 						<div class="profile_detail_change_write_title">생년월일</div> 
-						<div class="profile_detail_change_write_text"><input type="text" placeholder="생년월일을 작성해주세요"></div>
+						<div class="profile_detail_change_write_text">
+							<input type="text" placeholder="생년월일을 작성해주세요" th:value="${session.loginUser.birth}" name="birth">
+						</div>
 					</div>
 					<div class="profile_detail_change_write">
 						<div class="profile_detail_change_write_title">성별</div> 
-						<div class="profile_detail_change_write_text"><input type="text" placeholder="성별을 작성해주세요"></div>
+						<div class="profile_detail_change_write_text">
+							<input type="text" placeholder="성별을 작성해주세요" th:value="${session.loginUser.gender}" name="gender">
+						</div>
 					</div>
 				</div>
 				<div class="agree_check_box_area">
 					<div class="agree_check_box_title">
 						마케팅 수신 동의
 					</div>
-					<div class="agree_check_box">
-						<p><input type="checkbox"> 1</p>
-						<p><input type="checkbox"> 2</p>
-						<p><input type="checkbox"> 3</p>
-						<p><input type="checkbox"> 4</p>
+					<div class="agree_check_box">	
+						<p>
+							<input th:if="${session.loginUser.mkAgree}" type="checkbox" checked="checked" name="mkAgree">
+							<input th:unless="${session.loginUser.mkAgree}" type="checkbox" name="mkAgree">
+							  마케팅 수신/홍보 목적의 개인정보 수집 및 이용에 동의합니다.
+						</p>
 					</div>
 				</div>
 				<div class="profile_setting_button">
 					<div class="button--small">비밀번호 변경</div>
-					<div class="button--small"><input type="button" value="수정완료"></div>
+					<div class="button--small"><input type="submit" value="수정완료" id="submit"></div>
 					<a href="/metahaus/mypage/delete_account"><div class="button--small">회원 탈퇴</div></a>
 				</div>
 			</form>

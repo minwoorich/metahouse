@@ -1,27 +1,43 @@
 package com.multi.metahouse.user.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
+import com.multi.metahouse.domain.entity.portfolio.Portfolio;
 import com.multi.metahouse.domain.entity.user.User;
+import com.multi.metahouse.portfolio.service.PortfolioService;
+import com.multi.metahouse.user.service.UserFileUploadLogicService;
 import com.multi.metahouse.user.service.UserService;
 
 @Controller
 public class UserController {
 	UserService service;
+	PortfolioService portfolioservice;
+	ResourceLoader resourceLoader;
+	UserFileUploadLogicService fileuploadservice;
 	
 	@Autowired
-	public UserController(UserService service) {
+	public UserController(UserService service, ResourceLoader resourceLoader, UserFileUploadLogicService fileuploadservice, PortfolioService portfolioservice) {
 		super();
 		this.service = service;
+		this.resourceLoader = resourceLoader;
+		this.fileuploadservice = fileuploadservice;
+		this.portfolioservice = portfolioservice;
 	}
 	
 	//로그인 페이지
@@ -84,8 +100,20 @@ public class UserController {
 	}
 	
 	@PostMapping("mypage/setting")
-	public String setting(User user) {
-		return ("redirect:profile");
+	public String setting(@RequestPart(value = "multipartfile") MultipartFile multipartfile, User user, HttpSession session) throws IOException {
+		
+		String path = resourceLoader.getResource("classpath:static/upload/userThumbnail").getFile().getAbsolutePath();
+		String thumbnailStoreFilename = fileuploadservice.uploadFile(multipartfile, path);
+		user.setThumbnailStoreFilename(thumbnailStoreFilename);
+		System.out.println(user.getThumbnailStoreFilename());
+		
+		user.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		System.out.println(user.getUserId());
+		
+		User loginUser = service.update(user);
+		session.setAttribute("loginUser", loginUser);
+		
+		return "redirect:profile";
 	}
 	
 	
@@ -122,14 +150,12 @@ public class UserController {
 	
 	@RequestMapping("mypage/profile")
 	public ModelAndView profile(HttpSession session) {
-		ModelAndView profileView = new ModelAndView("user/profile");
-		
-		//update로 값이 변경되면 session의 값과 table에 저장된 값이 달라지 때문에 read를 호출해 출력.
+		ModelAndView profile = new ModelAndView("user/profile");
 		String userId = ((User)session.getAttribute("loginUser")).getUserId();
-		User userProfile = service.read(userId);
-		profileView.addObject("userProfile", userProfile);
-		
-		return profileView;
+		List<PortfolioDTO> portfolioList = portfolioservice.selectPortfolioList(userId);
+		System.out.println(portfolioList);
+		profile.addObject("portfolioList", portfolioList);
+		return profile;
 	}
 	
 	@GetMapping("user/profile")

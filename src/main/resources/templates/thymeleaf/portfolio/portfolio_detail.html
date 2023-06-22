@@ -64,9 +64,13 @@
 				<div class="ch-content-cover">
 					<div class="ch-profile-cover">
 						<div class="ch-profile">
-							<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
+							<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
+								 th:src="|/metahaus/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
+							
+							<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
+								 src="/metahaus/images/test_img.jpg">
 						</div>
-						<div class="ch-expert">유세희</div>
+						<div class="ch-expert">[[${session.loginUser.userName}]]</div>
 					</div>
 				</div>
 			</div>
@@ -76,18 +80,18 @@
 						<!-- 카테고리 -->
 						<div class="content-header">
 							<!-- ch = content-header -->
-							<div class="ch-category">맵 > 로블록스</div>
+							<div class="ch-category">[[${portfolioInfo.portfolio.category1}]] > [[${portfolioInfo.portfolio.category2}]]</div>
 						</div>
 						
 						<!-- 제목 -->
 						<div class="content-header">
-							<div class="ch-title">[포트폴리오 제목] META HAUS 제작</div>
+							<div class="ch-title">[[${portfolioInfo.portfolio.portfolioTitle}]]</div>
 						</div>
 						<!-- 수행기간 -->
 						<div class="content-header">
 							<div class="ch-content-cover">
 								<div class="ch-name">참여 기간</div>
-								<div class="ch-content">2023-05-12 ~ 2023-07-11</div>
+								<div class="ch-content">[[${portfolioInfo.portfolio.portfolioPjStartDay}]] ~ [[${portfolioInfo.portfolio.portfolioPjEndDay}]]</div>
 							</div>
 						</div>
 						
@@ -95,7 +99,7 @@
 						<div class="content-header">
 							<div class="ch-content-cover">
 								<div class="ch-name">참여 인원</div>
-								<div class="ch-content">6명</div>
+								<div class="ch-content">[[${portfolioInfo.portfolio.nop}]]명</div>
 							</div>
 						</div>
 					</div>
@@ -107,7 +111,7 @@
 				</div>
 				<div class="content-header-cover">
 					<div class="main-img-cover">
-						<img alt="메인 이미지" src="/metahaus/images/test_images/test04.jpeg">
+						<img th:src="|/metahaus/upload/portfolio/mainImg/${portfolioInfo.portfolio.mainImgStoreFilename}|" alt="대표 사진">
 					</div>
 				</div>
 			</div>
@@ -126,14 +130,9 @@
             			<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
             			<div class="slider-outter">
 			                <div index="0" class="banner-slider-list">
-			                    <div class="banner-slider-item">
+			                    <div class="banner-slider-item" th:each="contentImg:${portfolioInfo.contentImgList}">
 			                        <div class="item-img-warp" >
-			                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-			                        </div>
-			                    </div>
-			                    <div class="banner-slider-item">
-			                        <div class="item-img-warp">
-			                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
+			                        	<img alt="이미지" th:src="|/metahaus/upload/portfolio/contentImg/${contentImg.pjImgStoreFilename}|">
 			                        </div>
 			                    </div>
 			                </div>
@@ -143,7 +142,7 @@
 				<!-- 작성한 글 출력 -->
 				<div class="main-content-text">
 					<div class="main-ct-title">프로젝트 내용</div>
-					<div class="main-ct-content">프로젝트를 변경해봅니다~~</div>
+					<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjContent}]]</div>
 				</div>
 			</div>
 			
@@ -158,14 +157,9 @@
             			<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
             			<div class="slider-outter">
 			                <div index="0" class="banner-slider-list">
-			                    <div class="banner-slider-item">
+			                    <div class="banner-slider-item" th:each="pointImg:${portfolioInfo.PointImgList}">
 			                        <div class="item-img-warp" >
-			                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-			                        </div>
-			                    </div>
-			                    <div class="banner-slider-item">
-			                        <div class="item-img-warp">
-			                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
+			                        	<img alt="이미지" th:src="|/metahaus/upload/portfolio/pointImg/${pointImg.pointImgStoreFilename}|">
 			                        </div>
 			                    </div>
 			                </div>
@@ -175,7 +169,7 @@
 				<!-- 작성한 글 출력 -->
 				<div class="main-content-text">
 					<div class="main-ct-title">프로젝트 특징</div>
-					<div class="main-ct-content">프로젝트를 변경해봅니다~~</div>
+					<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjPoint}]]</div>
 				</div>
 			</div>
 			<!-- 스타일 -->
@@ -188,14 +182,9 @@
             			<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
             			<div class="slider-outter">
 			                <div index="0" class="banner-slider-list">
-			                    <div class="banner-slider-item">
+			                    <div class="banner-slider-item" th:each="styleImg:${portfolioInfo.StyleImgList}">
 			                        <div class="item-img-warp" >
-			                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-			                        </div>
-			                    </div>
-			                    <div class="banner-slider-item">
-			                        <div class="item-img-warp">
-			                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
+			                        	<img alt="이미지" th:src="|/metahaus/upload/portfolio/styleImg/${styleImg.styleImgStoreFilename}|">
 			                        </div>
 			                    </div>
 			                </div>
@@ -205,7 +194,7 @@
 				<!-- 작성한 글 출력 -->
 				<div class="main-content-text">
 					<div class="main-ct-title">프로젝트 스타일</div>
-					<div class="main-ct-content">프로젝트를 변경해봅니다~~</div>
+					<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjStyle}]]</div>
 				</div>
 			</div>
 		</div>
@@ -213,85 +202,54 @@
 		<div class="content-cover">
 			<div class="subtitle">첨부파일 <i class="fa-sharp fa-light fa-file-arrow-down"></i></div>
 			<div class="download-cover">
-				<a href="#">첨부파일1</a>
-				<a href="#">첨부파일2</a>
+				<div th:each="attachFile:${portfolioInfo.attachFileList}">
+					<a th:href="|/metahaus/upload/portfolio/attachFile/${attachFile.attachStoreFilename}|">[[${attachFile.attachFilename}]]</a>
+				</div>
 			</div>
 		</div>
 		<!-- 작성자의 다른 포트폴리오 -->
 		<div class="content-cover">
 			<div class="subtitle">다른 포트폴리오도 만나보세요!</i></div>
-			<div class="banner-slider-wrap another-portfolio">
-          			<div class="btn-shape2 prebtn" onclick='pre(this)'>◀</div>
-          			<div class="btn-shape2 nextbtn" onclick='next(this)'>▶</div>
-          			<div class="slider-outter">
-	                <div index="0" class="banner-slider-list">
-	                    <div class="banner-slider-portfolio">
-	                        <div class="item-img-warp" >
-	                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-	                        </div>
-	                        <hr>
-							<div class="portfolio_info_text">
-								포트폴리오 1에 대한 내용을 여기 적어요!
-							</div>
-	                    </div>
-	                    <div class="banner-slider-portfolio">
-	                        <div class="item-img-warp">
-	                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-	                        </div>
-	                        <hr>
-							<div class="portfolio_info_text">
-								포트폴리오 1에 대한 내용을 여기 적어요!
-							</div>
-	                    </div>
-	                    <div class="banner-slider-portfolio">
-	                        <div class="item-img-warp">
-	                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-	                        </div>
-	                        <hr>
-							<div class="portfolio_info_text">
-								포트폴리오 1에 대한 내용을 여기 적어요!
-							</div>
-	                    </div>
-	                    <div class="banner-slider-portfolio">
-	                        <div class="item-img-warp">
-	                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-	                        </div>
-	                        <hr>
-							<div class="portfolio_info_text">
-								포트폴리오 1에 대한 내용을 여기 적어요!
-							</div>
-	                    </div>
-	                    <div class="banner-slider-portfolio">
-	                        <div class="item-img-warp">
-	                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-	                        </div>
-	                        <hr>
-							<div class="portfolio_info_text">
-								포트폴리오 1에 대한 내용을 여기 적어요!
-							</div>
-	                    </div>
-	                    <div class="banner-slider-portfolio">
-	                        <div class="item-img-warp">
-	                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-	                        </div>
-	                        <hr>
-							<div class="portfolio_info_text">
-								포트폴리오 1에 대한 내용을 여기 적어요!
-							</div>
-	                    </div>
-	                    <div class="banner-slider-portfolio">
-	                        <div class="item-img-warp">
-	                        	<img alt="이미지1" src="/metahaus/images/test_images/test01.jpeg">
-	                        </div>
-	                        <hr>
-							<div class="portfolio_info_text">
-								포트폴리오 1에 대한 내용을 여기 적어요!
-							</div>
-	                    </div>
-	                    
-	                </div>
-	            </div>
+			<div class="info_card_view">
+				<div class="banner-slider-wrap another-portfolio">
+	          			<div class="btn-shape2 prebtn" onclick='pre(this)'>◀</div>
+	          			<div class="btn-shape2 nextbtn" onclick='next(this)'>▶</div>
+	          			<div class="slider-outter">
+		                <div index="0" class="banner-slider-list">
+		                    <div class="banner-slider-portfolio" th:each="portfolio:${anotherportfolioList}">
+							<a th:href="@{/mypage/portfolio(portfolioId=${portfolio.portfolio_id})}">
+								<div class="portfolio_info_card">
+									<div class="portfolio_info_img">
+										<img th:src="|/metahaus/upload/portfolio/mainImg/${portfolio.main_img_store_filename}|" alt="대표 사진">
+									</div>
+									<hr>
+									<div class="portfolio_content_preview">
+										<div class="portfolio_info_text">
+											[[${portfolio.portfolio_title}]]
+										</div>
+										<div class="portfolio_info_etc">
+											<div>
+												카테고리: [[${portfolio.category1}]] > [[${portfolio.category2}]] <br/>
+												기간: [[${portfolio.portfolio_pj_start_day}]]~[[${portfolio.portfolio_pj_end_day}]] <br/>
+												참여인원: [[${portfolio.nop}]]
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+		                </div>
+		            </div>
+		        </div>
 	        </div>
+		</div>
+		<div class="content-cover">
+			<hr>
+			<div class="button_area">
+				<div class="update_delete_button"><a th:href="@{/mypage/update_portfolio(portfolioId=${portfolioInfo.portfolio.portfolioId})}">수정하기</a></div>
+				<div class="update_delete_button"><a th:href="@{/mypage/delete_portfolio(portfolioId=${portfolioInfo.portfolio.portfolioId})}">삭제하기</a></div>
+			</div>
+			<hr>
 		</div>
 	</div>
 </body>
