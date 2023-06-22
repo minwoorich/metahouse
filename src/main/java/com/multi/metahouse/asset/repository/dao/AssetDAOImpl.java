@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.asset.repository.jpa.AssetRepository;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
@@ -14,10 +15,10 @@ import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 public class AssetDAOImpl implements AssetDAO {
 
 	SqlSession sqlSession;
-	AssetRepositry repositry;
+	AssetRepository repositry;
 
 	@Autowired
-	public AssetDAOImpl(SqlSession sqlSession, AssetRepositry repositry) {
+	public AssetDAOImpl(SqlSession sqlSession, AssetRepository repositry) {
 		super();
 		this.sqlSession = sqlSession;
 		this.repositry = repositry;

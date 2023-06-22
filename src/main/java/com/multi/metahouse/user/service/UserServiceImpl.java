@@ -31,20 +31,14 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int update(User user) {
+	public User update(User user) {
 		// TODO Auto-generated method stub
-		return 0;
+		return userDao.update(user);
 	}
 
 	@Override
 	public void delete(String userId) {
 		userDao.delete(userId);
-	}
-
-	@Override
-	public User read(String userId) {
-		User user = userDao.read(userId);
-		return user;
 	}
 
 }

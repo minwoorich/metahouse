@@ -5,70 +5,141 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/metahaus/css/point/point.css" />
-
-<title>내 포인트 조회</title>
-<style>
-</style>
-</head>
-<body>
-	<div class="mypoint-section" layout:fragment="content">
-		<h3>내 포인트</h3>
-		<div class="mypoint-info">
-			<div class="mypoint-label-div">
-				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count" th:text="${session.loginUser?.point}"></span> 
-			</div>
-			<div class="mypoint-label-div">
-				<span class="mypoint-label">충전 포인트</span> <span class="mypoint-count" th:text="${tcgp}"></span>
-			</div>
-			<div class="mypoint-label-div">
-				<span class="mypoint-label">사용 포인트</span> <span class="mypoint-count" th:text="${tcsp}"></span>
-			</div>
-		</div>
-		<div class="mypoint-button-div">
-			<button class="button--small" onclick="location.href='/metahaus/point/charge'">충전하기</button>
-		</div>
-
-		<div class="mypoint-history">
-			<h3>충전 내역 조회</h3>
-			<table>
-				<tr>
-					<th>충전 수단</th>
-					<th>충전 일시</th>
-					<th>충전 포인트</th>
-					<th>잔여 포인트</th>
-				</tr>
-				<tr th:each="cpi:${cgpilist}">
-					<td th:text="metapoint"></td>
-					<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd')}"></td>
-					<td th:text="${cpi.chargingPoint + ' 포인트'}"></td>
-					<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
-				</tr>
-			</table>
-		</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".pageNo").on("click", function(){
+			$.ajax({
+				url:"/metahaus/point/page/cgpi",
+				type:"post",
+				data: {
+					pageNo : $(this).children().text()
+				},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					console.log(data.length);
+					
+					$("#cg_tb").children("tbody").children().remove();
+					
+					let addElement = '';
+					let myDate = '';
+					
+					for(let i=0; i<data.length; i++){
+						addElement += '<tr class="cgInfo">';
+						addElement += '<td>' + data[i].paymentMethod + '</td>';
+						// 날짜 데이터 포맷
+						//myDate = dateFormat(data[i].chargeDate);
+						myDate = data[i].chargeDate.substring(0, 10);
+						addElement += '<td>' + myDate + '</td>';
+						addElement += '<td>' + data[i].chargingPoint + ' 포인트</td>';
+						addElement += '<td>' + data[i].remainingPoint + ' 포인트</td>';
+						addElement += '</tr>';
+					}
+					
+					//console.log($("#cg_tb").children("tbody"));
+					
+					$("#cg_tb").children("tbody").append(addElement);
+				}
+			})
+		})
 		
-		<div class="mypoint-history">
-			<h3>사용 내역 조회</h3>
-			<table>
-				<tr>
-					<th>사용 내역</th>
-					<th>사용 일자</th>
-					<th>사용 포인트</th>
-					<th>잔여 포인트</th>
-				</tr>
-				<tr th:each="cpi:${cspilist}">
-					<td th:text="${cpi.consumeInfo}"></td>
-					<td th:text="${#dates.format(cpi.consumeDate, 'yyyy-MM-dd')}"></td>
-					<td th:text="${cpi.consumingPoint + ' 포인트'}"></td>
-					<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
-				</tr>
-				<!-- 추가적인 내역을 여기에 추가할 수 있습니다 HH:mm:ss -->
-			</table>
+	})
+	
+	/* 	
+	function dateFormat(date) {
+		let dateFormat = date.getFullYear() +
+			'-' + ((date.getMonth()+1) < 9 ? "0" + (date.getMonth()+1) : (date.getMonth()+1)) +
+			'-' + ((date.getDate()) < 9 ? "0" + (date.getDate()) : (date.getDate()));
+		return dateFormat;
+	}
+	*/
+ 
+</script>
+<title>내 포인트 조회</title>
+</head>
+	<body>
+		<div class="mypoint-section" layout:fragment="content">
+			<h3>내 포인트</h3>
+			<div class="mypoint-info">
+				<div class="mypoint-label-div">
+					<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count" th:text="${session.loginUser?.point}"></span> 
+				</div>
+				<div class="mypoint-label-div">
+					<span class="mypoint-label">충전 포인트</span> <span class="mypoint-count" th:text="${tot_cgp}"></span>
+				</div>
+				<div class="mypoint-label-div">
+					<span class="mypoint-label">사용 포인트</span> <span class="mypoint-count" th:text="${tot_csp}"></span>
+				</div>
+			</div>
+			<div class="mypoint-button-div">
+				<button class="button--small" onclick="location.href='/metahaus/point/charge'">충전하기</button>
+			</div>
+	
+			<div class="mypoint-history">
+				<h3>충전 내역 조회</h3>
+				<table id="cg_tb">
+					<thead>
+						<tr class="tb_head">
+							<th>충전 수단</th>
+							<th>충전 일시</th>
+							<th>충전 포인트</th>
+							<th>잔여 포인트</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="cgInfo" th:each="cpi:${cgpilist}">
+							<td th:text="${cpi.paymentMethod}"></td>
+							<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd')}"></td>
+							<td th:text="${cpi.chargingPoint + ' 포인트'}"></td>
+							<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="paging-div">
+					<!--/* Bootstrap pager */-->
+					<ul class="pager">
+						<li class="previous">
+							<a href="#">Previous</a>
+						</li>
+						<li class="pageNo" th:each="num:${#numbers.sequence(0, (tot_page_cgpi-1))}">
+							<a th:text="${num+1}"></a>
+						</li>
+						<li class="next">
+							<a href="#">Next</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="mypoint-history">
+				<h3>사용 내역 조회</h3>
+				<table id="cs_tb">
+					<tr class="tb_head">
+						<th>사용 내역</th>
+						<th>사용 일자</th>
+						<th>사용 포인트</th>
+						<th>잔여 포인트</th>
+					</tr>
+					<tr id="csInfoList" th:each="cpi:${cspilist}">
+						<td th:text="${cpi.consumeInfo}"></td>
+						<td th:text="${#dates.format(cpi.consumeDate, 'yyyy-MM-dd')}"></td>
+						<td th:text="${cpi.consumingPoint + ' 포인트'}"></td>
+						<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
+					</tr>
+					<tr id="csInfoListPageNum">
+						<td colspan="4">
+							<a class="pageNum-cs" th:each="num:${#numbers.sequence(0, (tot_page_cgpi-1))}">
+								<span th:text="${num+1}"/>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div class="mypoint-description">
+				<h3>내 포인트 조회 안내</h3>
+				<p>여기에 마이포인트에 대한 설명이나 안내를 작성하세요.</p>
+			</div>
 		</div>
-
-		<div class="mypoint-description">
-			<h3>내 포인트 조회 안내</h3>
-			<p>여기에 마이포인트에 대한 설명이나 안내를 작성하세요.</p>
-		</div>
-	</div>
-</body>
+	</body>
 </html>

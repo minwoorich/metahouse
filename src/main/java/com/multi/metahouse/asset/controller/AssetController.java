@@ -131,5 +131,10 @@ public class AssetController {
 	public String assetFormlist() {
 		return "asset/asset_product_list";
 	}
+<<<<<<< HEAD
 
 }
+=======
+		
+}
+>>>>>>> refs/remotes/myupstream/main

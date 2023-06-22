@@ -118,3 +118,11 @@
 .mypoint-description p {
 	font-size: 18px;
 }
+
+.pageNo{
+	cursor: pointer;
+}
+
+.paging-div {
+	width:725px;
+}

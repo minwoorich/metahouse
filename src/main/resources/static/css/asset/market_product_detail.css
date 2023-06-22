@@ -65,9 +65,21 @@ td {
 	height: 50px;
 	border: none;
 }
+/* 리뷰 종합 섹션 */
+.review_summary{
+	display: flex;
+}
+.review_avg{
+	margin-right: 1rem;
+	font-size: 1.6rem;
+}
+.review_title{
+	margin: 1rem 0;
+	font-size: 14pt;
+	font: bold;
+}
 /* 별점 */
 .reviewer_star_rating {
-	width: 100%;
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-end;
@@ -100,7 +112,16 @@ td {
 	z-index: 0;
 	padding: 0;
 }
-
+/* 고객 리뷰 섹션 */
+.review-wrap{
+	margin: 1rem 0;
+	padding: 1rem;
+	border-radius: 6px;
+	background-color: rgba(223,224,255,0.4);
+}
+.review_info_wrap{
+	display: flex;
+}
 /* 신고 섹션 */
 #report {
 	margin: 1.5rem 0;
