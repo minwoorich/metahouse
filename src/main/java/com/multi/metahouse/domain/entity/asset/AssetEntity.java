@@ -1,5 +1,6 @@
 package com.multi.metahouse.domain.entity.asset;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,8 @@ public class AssetEntity {
 	private String sellerId;
 	private String title;
 	private String category1;
-//	private String category2As;
+	@Column(name = "category2_as")
+	private String category2As;
 	private String description;
 	private String price;
 	private String mainImg;

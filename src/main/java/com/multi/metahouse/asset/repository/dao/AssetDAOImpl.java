@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 @Repository
 public class AssetDAOImpl implements AssetDAO {
@@ -87,5 +88,11 @@ public class AssetDAOImpl implements AssetDAO {
 	public List<AssetContentDTO> assetContentInfo(String asset_id){
 		return sqlSession.selectList("com.multi.metahaus.asset.AssetContents",asset_id);
 		
+	}
+
+	/////////////////////////LCH////////////////////////
+	@Override
+	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc() {
+		return repositry.findTop9ByOrderByAssetHitsDesc();
 	}
 }

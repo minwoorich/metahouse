@@ -2,6 +2,7 @@ package com.multi.metahouse.domain.entity.project;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,5 +29,8 @@ public class ProjectEntity {
 	private Timestamp projectDate;
 	private int projectHits;
 	private String category1;
+	///////////LCH//////////////
+	@Column(name="category2_pj")
 	private String category2Pj;
 }
+//UUID = 
