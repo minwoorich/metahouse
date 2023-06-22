@@ -32,7 +32,7 @@ public class AssetController {
 	AssetFileUploadLogicService assetfileuploadservice;
 	AttachFileUploadLogicService attachfileuploadservice;
 	ResourceLoader resourceLoader;
-	
+
 	@Autowired
 	public AssetController(AssetService service, AssetFileUploadLogicService assetfileuploadservice,
 			AttachFileUploadLogicService attachfileuploadservice, ResourceLoader resourceLoader) {
@@ -42,40 +42,41 @@ public class AssetController {
 		this.attachfileuploadservice = attachfileuploadservice;
 		this.resourceLoader = resourceLoader;
 	}
-	//에셋 설명 입력하는 페이지 반환
-		@GetMapping("asset/forms/descriptions")
-		public String writeForm(HttpSession session) {
-			session.setAttribute("user_id", "정민우");
-			return "asset/asset_assetform01";
-		}
-		
 
-		@GetMapping("asset/forms/preview")
-		public String getFormPreview(HttpSession session,Model model) {
-			System.out.println("[세션]assetForm = "+session.getAttribute("assetForm"));
-			
-			
-			return "asset/asset_assetform02";
-		}
+	// 에셋 설명 입력하는 페이지 반환
+	@GetMapping("asset/forms/descriptions")
+	public String writeForm(HttpSession session) {
+		session.setAttribute("user_id", "정민우");
+		return "asset/asset_assetform01";
+	}
+
+	@GetMapping("asset/forms/preview")
+	public String getFormPreview(HttpSession session, Model model) {
+		System.out.println("[세션]assetForm = " + session.getAttribute("assetForm"));
+
+		return "asset/asset_assetform02";
+	}
+
+	@RequestMapping(value = "asset/forms-ajax", produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String saveIntoSessionAjax(HttpSession session, AssetFormDTO assetForm) {
+		// 세션 저장
+		session.setAttribute("assetForm", assetForm);
+		System.out.println("[두번째 페이지 호출]assetForm = " + assetForm);
+		return "/metahaus/asset/forms/preview";
+	}
+
+	@GetMapping("asset/forms")
+	public String insertForm(HttpSession session) {
+		
+		AssetFormDTO assetForm = (AssetFormDTO)session.getAttribute("assetForm");
 		
 		
-		@RequestMapping(value="asset/forms-ajax",produces="application/text;charset=utf-8")
-		@ResponseBody
-		public String saveIntoSessionAjax(
-				HttpSession session, 
-				AssetFormDTO assetForm) {
-			//세션 저장
-			session.setAttribute("assetForm", assetForm);
-			System.out.println("[두번째 페이지 호출]assetForm = " + assetForm);
-			return  "/metahaus/asset/forms/preview";
-		}
 		
-	
-		@PostMapping("asset/forms")
-		public String insertForm(HttpSession session) {
 //			List<MultipartFile> imageList = session.getAttribute("imageList");
-			return "redirect:main/index";
-		}
+		return "main/index";
+	}
+	
 //	@GetMapping("/asset-form-01")
 //	public String assetForm01() {
 //		return "asset/asset_assetform01";
@@ -125,10 +126,10 @@ public class AssetController {
 //		System.out.println(path);
 //		return "asset/asset_assetform02";
 //	}
-	
+
 	@GetMapping("/asset-product")
-	public String assetFormlist() {		
+	public String assetFormlist() {
 		return "asset/asset_product_list";
 	}
-		
+
 }
