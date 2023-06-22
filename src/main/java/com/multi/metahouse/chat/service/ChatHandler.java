@@ -1,4 +1,4 @@
-package com.multi.metahouse.chat;
+package com.multi.metahouse.chat.service;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -14,7 +14,7 @@ import javax.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Component;
 
 @Component
-@ServerEndpoint(value="/new-chat")
+@ServerEndpoint(value="/chat")
 public class ChatHandler {
 
 	private static Set<Session> clientset = Collections.synchronizedSet(new HashSet<Session>());
