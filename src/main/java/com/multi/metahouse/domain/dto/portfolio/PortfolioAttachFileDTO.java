@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Alias("portfolio_attach_file")
-public class PortfolioAttachFileDTO {
-	private String attachFileId;
-	private String portfolioId;
-	private String attachFilename;
-	private String attachStoreFilename;
-	private String assetFileno;
+public class PortfolioAttachFileDTO{
+	private String attach_file_id;
+	private String portfolio_id;
+	private String attach_filename;
+	private String attach_store_filename;
+	private String attach_fileno;
 }

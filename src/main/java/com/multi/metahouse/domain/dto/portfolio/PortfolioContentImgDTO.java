@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Alias("portfolio_content_img")
-public class PortfolioContentImgDTO {
-	private String portfolioPjId;
-	private String portfolioId;
-	private String pjImgStoreFilename;
-	private String pjImgFileno;
+public class PortfolioContentImgDTO{
+	private String portfolio_pj_id;
+	private String portfolio_id;
+	private String pj_img_store_filename;
+	private String pj_img_fileno;
 }

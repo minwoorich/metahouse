@@ -13,31 +13,32 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form>
+		<form id="form">
+			<input type="hidden" th:value="${session.loginUser.userId}" id="userId">
 			<div class="creat_portfolio_title">포트폴리오 생성</div>
 			<div class="creat_portfolio_subtitle">카테고리 선택</div>
 			<div class="portfolio_category">
 				<div class="portfolio_first_category">
 					<span class="portfolio_category_name">1차 카테고리</span>
 					<div class="portfolio_category_list_cover">
-						<select name="portfolio_category_list" class="portfolio_category_list">
-							<option value="portfolio_second_category">맵</option>
-							<option value="portfolio_second_category">에셋</option>
-							<option value="portfolio_second_category">서비스</option>
-							<option value="portfolio_second_category">기타</option>
+						<select name="portfolio_category_list" class="portfolio_category_list" id="category1">
+							<option value="맵">맵</option>
+							<option value="에셋">에셋</option>
+							<option value="서비스">서비스</option>
+							<option value="기타">기타</option>
 						</select>
 					</div>
 				</div>
 				<div class="portfolio_second_category">
 					<span class="portfolio_category_name">2차 카테고리</span>
 					<div class="portfolio_category_list_cover">
-						<select name="portfolio_category_list" class="portfolio_category_list">
-							<option value="portfolio_first_category">마인크래프트</option>
-							<option value="portfolio_first_category">제페토</option>
-							<option value="portfolio_first_category">로블록스</option>
-							<option value="portfolio_first_category">게더타운</option>
-							<option value="portfolio_first_category">더 샌드박스</option>
-							<option value="portfolio_first_category">기타</option>
+						<select name="portfolio_category_list" class="portfolio_category_list" id="category2">
+							<option value="마인크래프트">마인크래프트</option>
+							<option value="제페토">제페토</option>
+							<option value="로블록스">로블록스</option>
+							<option value="게더타운">게더타운</option>
+							<option value="더 샌드박스">더 샌드박스</option>
+							<option value="기타">기타</option>
 						</select>
 					</div>
 				</div>
@@ -47,7 +48,7 @@
 			<div class="portfolio_title_area">
 				<span class="portfolio_title_name">포트폴리오 제목</span>
 				<div class="portfolio_title_cover">
-					<input type="text" placeholder="포트폴리오 제목을 입력하세요.">
+					<input type="text" placeholder="포트폴리오 제목을 입력하세요." id="title">
 				</div>
 			</div>
 			
@@ -55,11 +56,11 @@
 			<div class="create_portfolio_date_cover">
 				<div class="portfolio_date">프로젝트 시작일</div>
 				<div class="portfolio_date_calendar">
-					<input type="date" name=""/>
+					<input type="date" name="" id="startDay"/>
 				</div>
 				<div class="portfolio_date">프로젝트 종료일</div>
 				<div class="portfolio_date_calendar">
-					<input type="date" name=""/>
+					<input type="date" name="" id="endDay"/>
 				</div>
 			</div>
 			
@@ -67,7 +68,7 @@
 			<div class="portfolio_num_people_cover">
 				<div class="portfolio_num_people_title">참여 인원</div>
 				<div class="portfolio_num_people">
-					<input type="text" placeholder="참여인원을 작성하세요.">
+					<input type="text" placeholder="참여인원을 작성하세요." id="nop">
 				</div>
 			</div>
 			
@@ -123,16 +124,13 @@
 			<div class="creat_portfolio_subtitle">서비스의 특징을 나타낼 수 있는 사진과, 설명을 입력하세요.</div>			
 			<div class="create_portfolio_input_detail">
 				<div class="create_portfolio_input_detail_cover">
-					<div class="create_portfolio_input_detail_img">
-						<div class="image-frame option2-img">
-							<img src="/metahaus/images/test_images/test01.jpeg" alt="대표 사진">
-						</div>
+					<div class="create_portfolio_input_detail_img" id="point_img_parent">
 						<label class="img_insert_lable" for="portfolio_img_point_insert">
 							<div class="create_portfolio_img option2-img-add">
 								<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
 							</div>
 						</label> 
-						<input type="file" id="portfolio_img_point_insert">
+						<input type="file" id="portfolio_img_point_insert" multiple="multiple" name="portfolioPjPointImg">
 					</div>
 					<div class="img-check-column">
 						<div class="check-counter">
@@ -157,13 +155,13 @@
 			<div class="creat_portfolio_subtitle">자신이 제작한 서비스의 스타일을 나타낼 수 있는 사진과, 설명을 입력하세요.</div>			
 			<div class="create_portfolio_input_detail">
 				<div class="create_portfolio_input_detail_cover">
-					<div class="create_portfolio_input_detail_img">
+					<div class="create_portfolio_input_detail_img" id="style_img_parent">
 						<label class="img_insert_lable" for="portfolio_img_style_insert">
 							<div class="create_portfolio_img option3-img-add">
 								<i class="fa-sharp fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
 							</div>
 						</label> 
-						<input type="file" id="portfolio_img_style_insert">
+						<input type="file" id="portfolio_img_style_insert" multiple="multiple" name="portfolioPjStyleImg">
 					</div>
 					<div class="img-check-column">
 						<div class="check-counter">
@@ -192,7 +190,7 @@
 						id="portfolio_content" placeholder="파일선택" multiple="multiple" >
 			</div>
 			<div class="create_portfolio_submit">
-				<button class="button--small">작성완료</button>
+				<button type="button" class="button--small" id="submit">작성완료</button>
 			</div>
 		</form>
 		<div id="delete-img-Modal" class="modal fade" role="dialog">

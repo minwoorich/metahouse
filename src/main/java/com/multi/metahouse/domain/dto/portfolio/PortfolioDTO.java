@@ -3,6 +3,8 @@ package com.multi.metahouse.domain.dto.portfolio;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,20 +21,20 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Alias("portfolio")
-public class PortfolioDTO {
-	private String portfolioId;
-	private String userId;
+public class PortfolioDTO{
+	private String portfolio_id;
+	private String user_id;
 	private String category1;
 	private String category2;
-	private String portfolioTitle;
-	private Date portfolioPjStartDay;
-	private Date portfolioPjEndDay;
-	private String mainImg;
-	private String mainImgStoreFilename;
-	private String portfolioPjContent;
-	private String portfolioPjPoint;
-	private String portfolioPjStyle;
-	private Date portfolioWriteDay;
+	private String portfolio_title;
+	private String portfolio_pj_start_day;
+	private String portfolio_pj_end_day;
+	private String main_img_store_filename;
+	private String portfolio_pj_content;
+	private String portfolio_pj_point;
+	private String portfolio_pj_style;
+	private Date portfolio_write_day;
+	private String nop;
 	
 	private List<MultipartFile> portfolioPjContentImg;
 	private List<MultipartFile> portfolioPjPointImg;

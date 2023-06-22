@@ -28,12 +28,12 @@ public class Portfolio {
 	private String category1;
 	private String category2;
 	private String portfolioTitle;
-	private Date portfolioPjStartDay;
-	private Date portfolioPjEndDay;
-	private String mainImg;
+	private String portfolioPjStartDay;
+	private String portfolioPjEndDay;
 	private String mainImgStoreFilename;
 	private String portfolioPjContent;
 	private String portfolioPjPoint;
 	private String portfolioPjStyle;
 	private Date portfolioWriteDay;
+	private int nop;
 }
