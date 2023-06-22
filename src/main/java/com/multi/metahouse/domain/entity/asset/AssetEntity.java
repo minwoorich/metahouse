@@ -17,22 +17,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "assets")
 public class AssetEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String assetId;
-	private String sellerId;
-	private String title;
-	private String category1;
-<<<<<<< HEAD
-	@Column(name = "category2_as")
-	private String category2As;
-=======
-	@Column(name="category2_as")
-	private String category2;
->>>>>>> refs/remotes/Dojins/main
-	private String description;
-	private String price;
-	private String mainImg;
-	private String assetDate;
-	private String assetHits;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String assetId;
+    private String sellerId;
+    private String title;
+    private String category1;
+    @Column(name="category2_as")
+    private String category2;
+    private String description;
+    private String price;
+    private String mainImg;
+    private String assetDate;
+    private String assetHits;
 }

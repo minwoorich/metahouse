@@ -16,13 +16,13 @@ import com.multi.metahouse.domain.entity.asset.AssetEntity;
 public class AssetDAOImpl implements AssetDAO {
 
 	SqlSession sqlSession;
-	AssetRepository repositry;
+	AssetRepository repository;
 
 	@Autowired
-	public AssetDAOImpl(SqlSession sqlSession, AssetRepository repositry) {
+	public AssetDAOImpl(SqlSession sqlSession, AssetRepository repository) {
 		super();
 		this.sqlSession = sqlSession;
-		this.repositry = repositry;
+		this.repository = repository;
 	}
 
 	@Override
@@ -94,6 +94,6 @@ public class AssetDAOImpl implements AssetDAO {
 	/////////////////////////LCH////////////////////////
 	@Override
 	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc() {
-		return repositry.findTop9ByOrderByAssetHitsDesc();
+		return repository.findTop9ByOrderByAssetHitsDesc();
 	}
 }

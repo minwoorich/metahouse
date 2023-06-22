@@ -9,7 +9,7 @@ import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 
 @Repository
-public interface AssetRepositry extends JpaRepository<AssetEntity, String>{
+public interface AssetRepository extends JpaRepository<AssetEntity, String>{
 	/////LCH/////////////
 	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc();
 }
