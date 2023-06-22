@@ -43,6 +43,8 @@ public class ProjectEntity {
 	private LocalDateTime projectDate;
 	private int projectHits;
 	private String category1;
+	///////////LCH//////////////
+	@Column(name="category2_pj")
 	private String category2Pj;
 	private String thumbnail; 
 	@OneToMany(fetch=FetchType.EAGER)
@@ -59,3 +61,4 @@ public class ProjectEntity {
 				.build();
 	}
 }
+//UUID = 

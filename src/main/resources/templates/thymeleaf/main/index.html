@@ -21,6 +21,8 @@
 
   
 
+<<<<<<< HEAD
+=======
    <header class="container-fluid gradient-bg" style="border-bottom: 1px solid #6C4AB6;">
             <div class="container">
                 <div class="row">
@@ -63,6 +65,7 @@
                 </ul>
             </div>
         </header>
+>>>>>>> refs/remotes/Dojins/main
 
         <section id="color-test" style="background-color: #6C4AB6; transition:.5s;" class="section-visual">
             <div class="inner-test">
@@ -93,14 +96,14 @@
 
                                     <div class="banner-slider-item3">
                                         <div class="item-img-warp2">
-                                            <video width="100%" height="100%" autoplay loop>
+                                            <video width="100%" height="100%" autoplay loop muted>
                                                 <source src="/metahaus/images/banner-video1.mp4" type="video/mp4">
                                             </video>
                                         </div>
                                     </div>
                                     <div class="banner-slider-item3">
                                         <div class="item-img-warp2">
-                                            <video width="100%" height="100%" autoplay loop>
+                                            <video width="100%" height="100%" autoplay loop muted>
                                                 <source src="/metahaus/images/banner-video2.mp4" type="video/mp4">
                                             </video>
                                         </div>
@@ -274,95 +277,18 @@
 
                     <div class="slider-outter">
                         <div index="0" class="banner-slider-list">
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
+                           
+                            <div th:each="project:${projectList}" class="banner-slider-item">
+                                <div class="item-img-warp">
+                                </div>
                                 <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스1</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
+                                    <span th:text="${project.title}" class="myfont-3">메타버스틱스1</span>
+                                    <span th:text="${project.description}" class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
+                                    <span th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}" class="myfont-1">85,000원~</span>
                                     <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
                                 </div>
                             </div>
 
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스2</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스3</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스4</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스5</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스6</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스7</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스8</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스9</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -390,95 +316,18 @@
 
                     <div class="slider-outter">
                         <div index="0" class="banner-slider-list">
-                            <div class="banner-slider-item">
+                            
+                            <div th:each="asset:${assetList}" class="banner-slider-item">
                                 <div class="item-img-warp"></div>
                                 <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스1</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
+                                    <span th:text="${asset.title}" class="myfont-3"></span>
+                                    <span th:text="${asset.description}" class="myfont-2"></span>
+                                    <span th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원~'}" class="myfont-1"></span>
                                     <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
                                 </div>
                             </div>
 
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스2</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스3</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스4</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스5</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스6</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스7</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스8</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item">
-                                <div class="item-img-warp"></div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">메타버스틱스9</span>
-                                    <span class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
-                                    <span class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -495,69 +344,6 @@
             <video src="/metahaus/images/banner-bottom-video.mp4" autoplay muted loop></video>
         </section>
 
-      <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="footer-section">
-                            <h5>고객센터</h5>
-                            <p>10:30~18:00 (점심시간 13:00~14:00)</p>
-                            <p>주말,공휴일 휴무</p>
-                            <button class="btn btn-primary">1:1문의</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="footer-section">
-                            <h5>메타하우스</h5>
-                            <div>
-                                <ul>
-                                    <li><a href="#">메타하우스메인</a></li>
-                                    <li><a href="#">Prime</a></li>
-                                    <li><a href="#">엔터프라이즈</a></li>
-                                    <li><a href="#">프리랜서클럽</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="footer-section">
-                            <h5>메타하우스 정보</h5>
-                            <div>
-                                <ul>
-                                    <li><a href="#">서비스소개</a></li>
-                                    <li><a href="#">인재영입</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="footer-section">
-                            <h5>관련사이트</h5>
-                            <div>
-                                <ul>
-                                    <li><a href="#">메타하우스 블로그</a></li>
-                                    <li><a href="#">메타하우스 포스트</a></li>
-                                    <li><a href="#">메타하우스 인스타그램</a></li>
-                                    <li><a href="#">메타하우스 유튜브</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <hr />
-            <div class="footer-end text-center">
-                (주)메타하우스|서울시 강동구155,3층|대표:이창훈|개인정보관리책임자:이창훈|사업자등록번호"613-00-00000
-                통신판매업신고 : 2023-서울서초-0000유료직업소개사업등록번호 : 제2023호고객센터 : 1544-624help@.com
-                (주)메타하우스는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 상품, 상품정보, 거래에 관한 의무와 책임은 판매회원에게 있습니다.
-                (주)메타하우스 사이트의 상품/판매회원/중개 서비스/거래 정보, 콘텐츠, UI 등에 대한 무단복제, 전송, 배포, 스크래핑 등의 행위는 저작권법, 콘텐츠산업 진흥법 등 관련법령에 의하여
-                엄격히 금지됩니다.
-            </div>
-        </footer>
         <script src="/metahaus/js/main/main.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap//js/bootstrap.min.js"></script>
