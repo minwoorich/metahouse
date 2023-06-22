@@ -1,109 +1,250 @@
-   /* CSS 스타일링 */
-   .container-chat {
-    display: flex;
-  }
+@charset "UTF-8";
+/* 채팅 페이지 컨테이너 */
+.chat-container {
+	display: flex;
+	flex-direction: row;
+	min-width: 100%;
+	height: 900px;
+	border: 1px solid rgb(141, 114, 225, 0.1);
+}
 
-  .sidebar-container {
-    width: 300px;
-    background-color: white;
-    padding: 20px;
-  }
+/* 채팅 왼쪽 사이드 바 */
+.chat-left-sidebar {
+	width: 300px;
+	height: 100%;
+	border: 1px solid rgb(141, 114, 225, 0.1);
+	background-color: rgb(141, 114, 225, 0.1);
+}
+/* 왼쪽 사이드바 - 채팅 검색칸 */
+.chat-search {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid rgb(141, 114, 225, 0.1);
+	padding-inline: 20px;
+	background-color: white;
+}
 
-  .user-profile {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+.chat-search-bar {
+	border: 1px solid rgb(141, 114, 225, 0.1);
+	border-radius: 8px;
+	padding: 10px;
+	margin-right: 10px;
+}
 
-  .user-profile img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+/* 왼쪽 사이드바 - 채팅 목록 */
+.chatroom-list-container {
+	width: 100%;
+	height: 800px;
+	overflow-y: auto;
+}
+
+.chatroom-list-container::-webkit-scrollbar {
+	width: 5px
+}
+
+.chatroom-list-container::-webkit-scrollbar-thumb {
+	background-color: var(--light-purple); /* rgb(141,158,255) */
+}
+
+.chatroom-list-container::-webkit-scrollbar-track {
+	background-color: rgba(141, 158, 255, 0.2);
+}
+
+.chatroom-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.chatroom-card {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 120px;
+	border-bottom: 1px solid rgb(141, 114, 225, 0.1);
+	padding: 20px;
+}
+.chatroom-card:hover {
+	cursor:pointer;
+}
+
+.chatroom-card__profile-image {
+	width: 65px;
+	height: 65px;
+	border-radius: 999px;
+	overflow: hidden;
+	margin-right: 10px;
+}
+
+.chatroom-card__profile-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.chatroom-card__info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.chatroom-card__info-row01 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.username {
+	font-weight: bold;
+}
+
+.last-date {
+	color: var(--gray);
+}
+
+.chatroom-card__info-row02 {
+	
+}
+/* 채팅 메인 영역 */
+.chat-main {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid rgb(141, 114, 225, 0.1);
+}
+
+.chat-header {
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid rgb(141, 114, 225, 0.1);
+}
+
+.chat-body {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	box-sizing: border-box;
+	width: 100%;
+	flex: 1;
+	height: 600px; /* 수정된 높이 */
+}
+
+.chat-body__chat-section {
+	flex: 1;
+	height: inherit;
+	overflow-y: scroll; /* 세로 스크롤 추가 */
+}
+
+.chat-body__chat-section::-webkit-scrollbar {
+  width: 5px; /* 스크롤 바의 너비 */
+}
+
+.chat-body__chat-section::-webkit-scrollbar-thumb {
+  background-color: var(--bright-purple); /* 스크롤 바 색상 */
+}
+
+.chat-body__chat-section::-webkit-scrollbar-track {
+  background-color: rgba(141, 158, 255, 0.2); /* 스크롤 바 트랙 색상 */
+}
+
+
+.chat-body__profile-section {
+	width: 300px;
+	height: inherit;
+	border-left: 1px solid rgb(141, 114, 225, 0.1);
+	
+}
+
+/* 채팅 푸터 영역*/
+.chat-footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-height: 300px;
+	width: 100%;
+	height: fit-content;
+	border-top: 1px solid rgb(141, 114, 225, 0.1);
+	padding: 20px;
+}
+ 
+
+
+/* 메시지 입력칸 */
+.chat-footer input {
+	padding-inline: 20px;
+	padding-block: 10px;
+	width: 100%;
+	height: 60px;
+	border: 1px solid rgb(108, 74, 182, 0.1);
+	border-radius: 8px;
+	margin-bottom: 20px;
+}
+
+
+/* 채팅 버튼 모음 */
+.chat-footer-row02 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+/* 기능 버튼들 */
+.chat-functional-buttons {
+	display: flex;
+	width: fit-content;
+	height: fit-content;
+	flex-direction: row;
+	align-items: center;
+}
+
+.functional-button {
+	margin-right: 30px;
+	color: var(--gray);
+}
+/* 전송 버튼 */
+.send-button {
+	font-size:16px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 10px;
+	width: 66px;
+	height: 37px;
+	background: var(--bright-purple);
+	box-shadow: var(--shade-button);
+	border-radius: 6px;
+}
+
+
+.chat-header h1 {
+        font-size: 30px;
+        color: #333;
+        margin-left: 20px; /* 원하는 픽셀 값으로 조정하세요 */
+        margin-top: 30px;
+        /* 원하는 스타일 속성을 추가로 설정하세요 */
+    }
+    .chat-body__profile-section img{
+   border-radius: 999px;
+       width: 65px;
+    height: 65px;
     object-fit: cover;
-  }
-
-  .user-profile h2 {
-    margin-top: 10px;
-    font-size: 18px;
-  }
-
-  .chat-list-container {
-    background-color: white;
-    padding: 20px;
-    height: 400px;
-    overflow-y: scroll;
-  }
-
-  .chat-list-container ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .chat-list-container li {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  .chat-list-container li img {
-    width: 30px; /* 이미지의 크기 조정 */
-    height: 30px;
-    border-radius: 50%; /* 이미지를 원형으로 만듦 */
-    object-fit: cover; /* 이미지 비율 유지 */
-    margin-right: auto; /* 이미지를 오른쪽으로 정렬 */
-    margin-right: 10px; /* 이미지와 텍스트 사이 여백 설정 */
-  }
-
-  .chat-list-container li:hover {
-    background-color: #6C4AB6;
-  }
-
-  .chat-room-container {
-    flex: 1;
-    padding: 20px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .chat-room-container h1 {
-    margin-top: 0;
-  }
-
-  .messages-container {
-    flex-grow: 1;
-    overflow-y: scroll;
-  }
-
-  .message-container {
-    margin-bottom: 10px;
-  }
-
-  .input-box-container {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  .input-box-container input[type="text"] {
-    flex-grow: 1;
-    padding: 10px;
-  }
-
-  .input-box-container button {
-    margin-left: 10px;
-    padding: 10px 20px;
-    background-color: #6C4AB6;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5%;
-  }
-
-  .attachment-button-container {
-    margin-top: 10px;
-  }
-  .seller-info-container{
-  	width:300px;
-  }
+    margin-left: 120px;
+    margin-top: 70px;
+    }
+    
+    
+    .chat_body_profile-info {
+    	margin-top: 30px;
+    	margin-left: 120px;
+    }
+    .chatroom-card:hover {
+  background-color: white;
+}
