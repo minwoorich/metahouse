@@ -1,6 +1,7 @@
 package com.multi.metahouse.point.repository.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.PageRequest;
 
@@ -31,4 +32,7 @@ public interface PointDAO {
 	
 	// 포인트 사용내역 조회하기
 	public List<ConsumedPointInfo> consumePointInfoList(User loginUser, int pageNo);
+	
+	// test
+	Map<String, Object> chargePointInfoListTest(User loginUser, int pageNo);
 }
