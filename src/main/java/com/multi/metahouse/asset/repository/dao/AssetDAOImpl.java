@@ -10,18 +10,19 @@ import com.multi.metahouse.asset.repository.jpa.AssetRepository;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 @Repository
 public class AssetDAOImpl implements AssetDAO {
 
 	SqlSession sqlSession;
-	AssetRepository repositry;
+	AssetRepository repository;
 
 	@Autowired
-	public AssetDAOImpl(SqlSession sqlSession, AssetRepository repositry) {
+	public AssetDAOImpl(SqlSession sqlSession, AssetRepository repository) {
 		super();
 		this.sqlSession = sqlSession;
-		this.repositry = repositry;
+		this.repository = repository;
 	}
 
 	@Override
@@ -88,5 +89,11 @@ public class AssetDAOImpl implements AssetDAO {
 	public List<AssetContentDTO> assetContentInfo(String asset_id){
 		return sqlSession.selectList("com.multi.metahaus.asset.AssetContents",asset_id);
 		
+	}
+
+	/////////////////////////LCH////////////////////////
+	@Override
+	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc() {
+		return repository.findTop9ByOrderByAssetHitsDesc();
 	}
 }

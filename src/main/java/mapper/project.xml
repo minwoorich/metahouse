@@ -3,5 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.metahouse.project">
-	
+	<select id="getProjectWithPrice" resultType="com.multi.metahouse.domain.dto.project.ProjectDTO">
+		SELECT 
+        p.project_id , p.creator_id, p.tag, p.title, 
+        p.description , p.project_thumbnail_img ,
+        p.project_date , p.project_hits, p.category1, p.category2_pj,
+        o.price
+        FROM project p
+        JOIN project_options o
+        ON p.project_id = o.project_id
+        ORDER BY p.project_hits DESC
+        LIMIT 9
+    </select>
 </mapper>

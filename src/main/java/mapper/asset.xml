@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.multi.metahaus.asset">
 
-    <insert id="insertAsset" parameterType="asset">
+    <!-- <insert id="insertAsset" parameterType="asset">
         INSERT INTO assets VALUES (null, #{seller_id}, #{title}, #{category1}, #{category2_as}, #{description}, #{price}, #{main_img}, #{asset_date}, #{asset_hits})
     </insert>
     
@@ -25,25 +25,9 @@
     		(null,  #{file.asset_id}, #{file.asset_store_filename}, #{file.asset_fileno})
     	</foreach>
     </insert>
+     -->
+
     
-
-    <update id="updateAsset" parameterType="asset">
-        UPDATE assets SET
-        seller_id = #{seller_id},
-        title = #{title},
-        category1 = #{category1},
-        category2_as = #{category2_as},
-        description = #{description},
-        price = #{price},
-        main_img = #{main_img},
-        asset_date = #{asset_date},
-        asset_hits = #{asset_hits}
-        WHERE asset_id = #{asset_id}
-    </update>
-
-    <delete id="deleteAsset" parameterType="int">
-        DELETE FROM assets WHERE asset_id = #{assetId}
-    </delete>
 
     <select id="getAssetById" parameterType="int" resultType="com.multi.metahouse.domain.dto.asset.AssetDTO">
         SELECT * FROM assets WHERE asset_id = #{assetId}

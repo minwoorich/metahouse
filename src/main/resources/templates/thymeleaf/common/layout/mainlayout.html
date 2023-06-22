@@ -34,10 +34,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="index_container">
-		<div class="col-sm-12"  id="main">
-			<th:block layout:fragment="content"></th:block>
-		</div>
-	</div>
+		<th:block th:replace="common/includes/header :: header"></th:block>
+ 		<th:block layout:fragment="content"></th:block>	
+		<th:block th:replace="common/includes/footer :: footer"></th:block>
 </body>
 </html>
