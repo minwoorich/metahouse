@@ -57,5 +57,23 @@ $(document).ready(function(){
     			.replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3")
     			.replace("--", "-") );
     });
+    
+    $(".myBtn").on("click", function(){
+    	var param = {"asset_id" : $("#Aid").attr("value"), "buyer_id2" : $("#Uid").attr("value")}
+    	$.ajax({
+    		url : "/metahaus/order/asset",
+    		type : 'post',
+    		data : JSON.stringify(param),
+    		contentType: 'application/json',
+    		success : function() {
+    			alert("구매가 완료되었습니다.");
+    			location.href = "/metahaus/order/asset/buylist";
+    	     },
+    		error : function() {
+    			alert("error");
+    		}
+    	});
+    	 
 
+    });
 })
