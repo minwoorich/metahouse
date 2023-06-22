@@ -394,6 +394,7 @@ $(document).ready(function(){
     				cache:false,
     				data:JSON.stringify(requestData),
     				success:function(nextPageURL){
+    					//nextPageURL = /metahaus/project/forms/preview
     					window.location.href = nextPageURL;
     				},
     				error:function(request,status,error){
@@ -415,6 +416,7 @@ $(document).ready(function(){
     				cache:false,
     				data:JSON.stringify(requestData),
     				success:function(nextPageURL){
+    					//nextPageURL = /metahaus/project/forms/preview
     					window.location.href = nextPageURL;
     				},
     				error:function(request,status,error){
