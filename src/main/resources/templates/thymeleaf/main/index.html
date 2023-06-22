@@ -21,51 +21,6 @@
 
   
 
-<<<<<<< HEAD
-=======
-   <header class="container-fluid gradient-bg" style="border-bottom: 1px solid #6C4AB6;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <a href="">
-                            <img src="/metahaus/images/logo.png" alt="META HOUSE" class="custom-primaryimg">
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="서비스 또는 전문가를 검색해보세요.">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><span
-                                        class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item"><a class="nav-link custom-primary" href="#"><span
-                                        class="glyphicon glyphicon-bell"></span> </a></li>
-                            <li class="nav-item"><a class="nav-link custom-primary" href="http://localhost:8088/metahaus/chat/new-chat"><span
-                                        class="glyphicon glyphicon-comment"></span> </a></li>
-                            <li class="nav-item"><a class="nav-link custom-primary" href="#"><span
-                                        class="glyphicon glyphicon-log-in"></span> </a></li>
-                            <li class="nav-item"><a class="nav-link custom-primary" href="http://localhost:8088/metahaus/mypage/profile"><span
-                                        class="glyphicon glyphicon-user"></span> </a></li>
-                        </ul>
-                    </div>
-                </div>
-                <ul class="nav navbar-nav">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/main/index}" data-tooltip="홈으로 돌아가기">홈</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/asset/main?pageNo=0}"
-                                data-tooltip="메타에셋을 구매 판매 하세요~">메타에셋</a></li>
-                        <li class="nav-item"><a class="nav-link custom-primary" href="#"
-                                data-tooltip="메타마켓에서 메타버스를 창조하세요~">메타마켓</a></li>
-                    </ul>
-
-
-                </ul>
-            </div>
-        </header>
->>>>>>> refs/remotes/Dojins/main
 
         <section id="color-test" style="background-color: #6C4AB6; transition:.5s;" class="section-visual">
             <div class="inner-test">
@@ -320,9 +275,9 @@
                             <div th:each="asset:${assetList}" class="banner-slider-item">
                                 <div class="item-img-warp"></div>
                                 <div class="item-desc-warp">
-                                    <span th:text="${asset.title}" class="myfont-3"></span>
-                                    <span th:text="${asset.description}" class="myfont-2"></span>
-                                    <span th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원~'}" class="myfont-1"></span>
+                                    <span th:text="${asset.title}" class="myfont-3">메타버스틱스1</span>
+                                    <span th:text="${asset.description}" class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
+                                    <span th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}" class="myfont-1">85,000원~</span>
                                     <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
                                 </div>
                             </div>
