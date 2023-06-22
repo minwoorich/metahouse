@@ -176,7 +176,7 @@ public class ProjectController {
 	//////////////////// 승민님 파트//////////////////////////
 	@GetMapping("project/project-product")
 	public String projectFormlist() {
-		return "market_sm/project/mypage_project_product_list";
+		return "project/project_product_list";
 	}
 	/////////////////// 창훈님 파트///////////////////////
 

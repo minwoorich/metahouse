@@ -94,6 +94,14 @@ $(document).ready(function () {
       
      
     });
+    
+    $("#attach_file").on("input", function() {
+    	let file = $(this)[0].files[0];
+    	let filename = file.name;
+    	localStorage.setItem('attach_file', filename);
+    	
+    	
+    });
     // //////////////////////////////////////////////////////////////////////////////////
     let fileMap = new Map();
     let fileList = [];// 상세사진의 file들 담는 리스트
