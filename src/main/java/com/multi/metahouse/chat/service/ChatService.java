@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.multi.metahouse.domain.dto.ChatroomDTO;
 
-public interface ChatroomService {
+public interface ChatService {
 
 	 void createChatRoom(ChatroomDTO chatRoomDTO);
 	    void updateChatroom(ChatroomDTO chatRoomDTO);
 	    void deleteChatroom(int chatroomId);
-	    ChatroomDTO getChatRoomById(int chatroomId);
+	    ChatroomDTO getChatroomById(int chatroomId);
 	    List<ChatroomDTO> getAllChatRooms();
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.multi.metahouse.domain.dto.ChatroomDTO;
 
-public class ChatroomServiceImpl implements ChatroomService {
+public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public void createChatRoom(ChatroomDTO chatRoomDTO) {
@@ -25,7 +25,7 @@ public class ChatroomServiceImpl implements ChatroomService {
 	}
 
 	@Override
-	public ChatroomDTO getChatRoomById(int chatroomId) {
+	public ChatroomDTO getChatroomById(int chatroomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
