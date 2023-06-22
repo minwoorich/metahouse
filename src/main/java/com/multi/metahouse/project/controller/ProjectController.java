@@ -158,8 +158,11 @@ public class ProjectController {
 			fileDtoList = fileService.uploadFiles(detailImages); 
 		}
 
-		// ProjectEntity에 데이터 옮겨담기
-//		ProjectEntity projectEntity = 
+		// 1) ProjectEntity에 데이터 옮겨담기
+		ProjectEntity projectEntity = ProjectEntity.toEntity(projectForm);//DTO->엔티티 
+		projectEntity.setThumbnail(thumbnailPath);
+		
+		
 				
 		// 단일패키지 or 삼단패키지
 		if (session.getAttribute("projectPackageSingleForm") != null) {

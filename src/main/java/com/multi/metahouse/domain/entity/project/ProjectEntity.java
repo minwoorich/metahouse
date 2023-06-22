@@ -41,15 +41,17 @@ public class ProjectEntity {
 	private String description;
 	@CreationTimestamp
 	private LocalDateTime projectDate;
-	private int projectHits;
 	private String category1;
 	private String category2Pj;
 	private String thumbnail; 
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="project_id")
 	private List<ProjectContentsEntity> projectContentsEntity = new ArrayList<>();
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinColumn(name="project_id")
+//	private List<>
 	
-	public ProjectEntity toEntity(ProjectFormDTO dto) {
+	public static ProjectEntity toEntity(ProjectFormDTO dto) {
 		return ProjectEntity.builder().
 				creatorId(dto.getCreator_id())
 				.title(dto.getTitle())
