@@ -1,62 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/nonsideLayout}">
+	layout:decorate="~{common/layout/nonsideLayout}">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/mh/css/chat/chat.css" />
+<!-- 민우's style css [무조건 맨위에 와야함]-->
+<link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
+
+ 
+<!-- 페이지 전용 css -->
+<link rel="stylesheet"
+	href="/metahaus/css/chat/chat.css">
+
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+
+<!-- 내 js코드 -->
+<script type="text/javascript" src="/metahaus/js/chat/chat.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<div layout:fragment="content" class="container-chat">
-		<!-- 왼쪽 사이드바 300px -->
-		<div class="sidebar-container"> 
-			<div class="user-profile">
-				<img src="./v3.png" alt="User Profile">
-				<h2>User ID</h2>
+	<div layout:fragment="content" class="chat-container">
+		<div class="chat-left-sidebar">
+			<div class="chat-search">
+				<input class="chat-search-bar" type="text" maxlength="30" 
+					placeholder="키워드를 입력하세요" value="" name=""
+					onfocus="this.placeholder = ''"
+					onblur="this.placeholder = '키워드를 입력하세요'"/>
+				<button class="chat-search-button" type="button">
+					<i class="fa-regular fa-magnifying-glass fa-xl" style="color: #aaaaaa;"></i>
+				</button>
 			</div>
-			<div class="chat-list-container">
-				<h3>채팅중인 목록</h3>
-				<ul>
-					<li onclick="enterChatRoom(1)"><img src="./v3.png"
-						alt="User Profile"> 채팅방 1</li>
-					<li onclick="enterChatRoom(2)"><img src="./user2.jpg"
-						alt="User Profile"> 채팅방 2</li>
-					<li onclick="enterChatRoom(3)"><img src="./user3.jpg"
-						alt="User Profile"> 채팅방 3</li>
-					<li onclick="enterChatRoom(4)"><img src="./user3.jpg"
-						alt="User Profile"> 채팅방 4</li>
-					<li onclick="enterChatRoom(5)"><img src="./user3.jpg"
-						alt="User Profile"> 채팅방 5</li>
-
-					<!-- 나머지 li 요소도 동일한 방식으로 이미지 추가 -->
+			<div class="chatroom-list-container">
+				<ul class="chatroom-list">
+					<li class="chatroom-card">
+						<div class="chatroom-card__profile-image">
+							<img src="/metahaus/images/test_images/test01.jpeg"/>
+						</div>			
+						<div class="chatroom-card__info">
+							<div class="chatroom-card__info-row01">
+								<span class="username">별</span>
+								<span class="last-date">22.05.12</span>
+							</div>
+							<div class="chatroom-card__info-row02">
+								안녕하세요 ...<br/>명함은 이렇게 저렇게
+							</div>
+						</div>
+					</li>
+					<li class="chatroom-card">
+						<div class="chatroom-card__profile-image">
+							<img src="/metahaus/images/test_images/test01.jpeg"/>
+						</div>			
+						<div class="chatroom-card__info">
+							<div class="chatroom-card__info-row01">
+								<span class="username">별</span>
+								<span class="last-date">22.05.12</span>
+							</div>
+							<div class="chatroom-card__info-row02">
+								안녕하세요 ...<br/>명함은 이렇게 저렇게
+							</div>
+						</div>
+					</li>
+					<li class="chatroom-card">
+						<div class="chatroom-card__profile-image">
+							<img src="/metahaus/images/test_images/test01.jpeg"/>
+						</div>			
+						<div class="chatroom-card__info">
+							<div class="chatroom-card__info-row01">
+								<span class="username">별</span>
+								<span class="last-date">22.05.12</span>
+							</div>
+							<div class="chatroom-card__info-row02">
+								안녕하세요 ...<br/>명함은 이렇게 저렇게
+							</div>
+						</div>
+					</li>
+					
 				</ul>
 			</div>
+			
 		</div>
-		<!-- 가운데 메인 컨테이너 -->
-		<div class="chat-room-container" id="chatRoom">
-			<h1>채팅방을 선택하세요.</h1>
-
-			<div class="messages-container">
-				<!-- 메시지 컨테이너 -->
+		<div class="chat-main">
+			<div class="chat-header">
+			<h1>방 이름</h1>
 			</div>
-			<div class="input-box-container">
-				<input type="text" id="messageInput" placeholder="메시지를 입력하세요"
-					onkeydown="handleKeyDown(event)">
-
-				<button onclick="sendMessage()">전송</button>
+			<div class="chat-body">
+				<div class="chat-body__chat-section"></div>
+				<div class="chat-body__profile-section">
+				<img src="/metahaus/images/test_images/test01.jpeg">
+				<div class="chat_body_profile-info">안녕하세요</div>
+				</div>
+				
 			</div>
-			<div class="attachment-button-container">
-				<input type="file" id="file-input"> <label for="file-input"></label>
+			<div class="chat-footer">
+				<input class="chat-footer-row01"
+					placeholder="메시지를 입력해주세요" value="" name=""
+					onfocus="this.placeholder = ''"
+					onblur="this.placeholder = '메시지를 입력해주세요'"/>
+				<div class="chat-footer-row02">
+					<div class="chat-functional-buttons">
+					<button class="functional-button functional-button--attachment">
+						<i class="fa-regular fa-paperclip fa-xl" style="color: #aaaaaa;"></i>
+						<span>파일첨부</span>
+					</button>
+					<button class="functional-button functional-button--delievery">
+						<i class="fa-regular fa-truck fa-xl" style="color: #aaaaaa;"></i>
+						<span>작업물 전송</span>
+					</button>
+					<button class="functional-button functional-button--report">
+						<i class="fa-regular fa-light-emergency fa-xl" style="color: #aaaaaa;"></i>
+						<span>신고 하기</span>
+					</button>
+				</div>
+				<button class="send-button button--xsmall">
+						전송
+				</button>
+				</div>
+				
 			</div>
 		</div>
-		<!-- 오른쪽 사이드바 -->
-		<div class="seller-info-container">
-			<h2>셀러 정보</h2>
-			<p>셀러 이름: John Doe</p>
-			<p>전화번호: 123-456-7890</p>
-			<p>이메일: john.doe@example.com</p>
-		</div>
+		
 	</div>
+
 </body>
 </html>

@@ -10,9 +10,5 @@ public class ChatController {
 	public String chatRoom() {
 		return "chat/chat";
 	}
-	@RequestMapping("/new-chat")
-	public String newChatRoom() {
-		return "chat/new_chat";
-	}
 	
 }
