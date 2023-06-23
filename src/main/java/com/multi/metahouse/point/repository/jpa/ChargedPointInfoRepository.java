@@ -14,7 +14,7 @@ import com.multi.metahouse.domain.entity.user.User;
 // 기본 키는 Integer
 @Repository
 public interface ChargedPointInfoRepository extends JpaRepository<ChargedPointInfo, Integer>{
-	@Query("SELECT COALESCE(SUM(cpi.chargingPoint), 0) FROM ChargedPointInfo cpi WHERE cpi.user = :user")
+	@Query("SELECT COALESCE(SUM(cgpi.chargingPoint), 0) FROM ChargedPointInfo cgpi WHERE cgpi.user = :user")
 	int getTotalChargingPoint(@Param("user") User user);
 	
 	Page<ChargedPointInfo> findByUserId(String userId, Pageable pageable);

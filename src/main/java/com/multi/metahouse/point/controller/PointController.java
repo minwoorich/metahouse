@@ -50,33 +50,40 @@ public class PointController {
 		return mav;
 	}
 	
+	/* ajax 페이징 (chargedPointInfoList) (이전) */
+//	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
+//	@ResponseBody
+//	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNo) {
+//		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+//		
+//		return list;
+//	}
+	
 	/* ajax 페이징 (chargedPointInfoList) */
 	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNo) {
-		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
-		
-		return list;
-	}
-	
-	/* ajax 페이징 테스트 (chargedPointInfoList) */
-	@PostMapping(value = "/page/cgpi/test", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public Map<String, Object> cgPageListTest(HttpSession session, String pageNo) {
-		Map<String, Object> json = service.chargePointInfoListTest((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
-		
-//		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+	public Map<String, Object> cgPageListJSON(HttpSession session, String pageNo) {
+		Map<String, Object> json = service.chargePointInfoListJSON((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
 		
 		return json;
 	}
 	
+	/* ajax 페이징 (consumedPointInfoList) (이전)*/
+//	@PostMapping(value = "/page/cspi", produces = "application/json;charset=utf-8")
+//	@ResponseBody
+//	public List<ConsumedPointInfo> csPageList(HttpSession session, String pageNo) {
+//		List<ConsumedPointInfo> list = service.consumePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+//		
+//		return list;
+//	}
+	
 	/* ajax 페이징 (consumedPointInfoList) */
 	@PostMapping(value = "/page/cspi", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<ConsumedPointInfo> csPageList(HttpSession session, String pageNo) {
-		List<ConsumedPointInfo> list = service.consumePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+	public Map<String, Object> csPageListJSON(HttpSession session, String pageNo) {
+		Map<String, Object> json = service.consumePointInfoListJSON((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
 		
-		return list;
+		return json;
 	}
 	
 	@GetMapping("/charge")
