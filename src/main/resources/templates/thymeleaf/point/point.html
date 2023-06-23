@@ -19,11 +19,10 @@
 				success:function(data){
 					console.log(data);
 					console.log(data.tot_page_cgpi);
+					
 					// 기존데이터 삭제	
 					$("#cg_tb").children("tbody").children().remove();
-					//$("#cgPagingPager").children(".cg-pageNo").remove();
-					
-					$("#cgPagingPager").remove();
+					$("#cgPagingPager").children(".cg-pageNo").remove();
 					
 					let addElement = '';
 					let addPager = '';
@@ -42,27 +41,17 @@
 					}
 					 
 					// 페이저 작성
-					addPager += '<ul id="cgPagingPager" class="pager">';
-					addPager += '<li class="previous">';
-					addPager += '<a href="#">Previous</a>';
-					addPager += '</li>';
-					
 					for(let i=1; i<=data.tot_page_cgpi; i++){
 						addPager += '<li class="cg-pageNo">';
 						addPager += '<a>' + i + '</a>'
 						addPager += '</li>';
 					}
-					
-					addPager += '<li class="next">';
-					addPager += '<a href="#">Next</a>';
-					addPager += '</li></ul>';
 					 
 					// 새 데이터 삽입
 					$("#cg_tb").children("tbody").append(addElement);
 					
 					// 페이저 삽입
-					//$("#cgPagingPager").children(".previous").after(addPager);
-					$(".cg-paging-div").append(addPager);
+					$("#cgPagingPager").children(".previous").after(addPager);
 				}
 			})
 		})
