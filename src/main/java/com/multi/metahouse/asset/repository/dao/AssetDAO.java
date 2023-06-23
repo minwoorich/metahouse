@@ -38,6 +38,5 @@ public interface AssetDAO {
 	public List<AssetContentDTO> assetContentInfo(String asset_id);
 	
 	/////////LCH/////////////////////
-	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc();
 	public List<AssetDTO> findTopNByAssetReviewAvg(int limit);
 }

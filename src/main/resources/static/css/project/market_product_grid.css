@@ -13,7 +13,23 @@
 	width: 100%;
 	border-top: 2px solid #6C4AB6;
 }
-.product{
+
+td {
+	width: 25%;
+}
+
+.sort_pj {
+	text-align: right;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.sort_pj_tag {
+	color: black;
+	cursor: pointer;
+}
+
+.product {
 	margin-bottom: 3em;
 }
 
@@ -42,6 +58,7 @@
 	margin-left: 1rem;
 	font-size: 12pt;
 	font-weight: bolder;
+	color: black;
 }
 
 .product_seller {
@@ -55,8 +72,7 @@
 	font-weight: bold;
 }
 /*별점*/
-
-.reviewer_star_rating{
+.reviewer_star_rating {
 	width: 100%;
 	margin-left: -16px;
 	margin-bottom: 1rem;
@@ -66,31 +82,33 @@
 }
 
 .star-ratings {
-  color: #aaa9a9; 
-  position: relative;
-  unicode-bidi: bidi-override;
-  width: max-content;
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1.3px;
-  -webkit-text-stroke-color: #2b2a29;
+	color: #aaa9a9;
+	position: relative;
+	unicode-bidi: bidi-override;
+	width: max-content;
+	-webkit-text-fill-color: transparent;
+	/* Will override color (regardless of order) */
+	-webkit-text-stroke-width: 1.3px;
+	-webkit-text-stroke-color: #2b2a29;
 }
- 
+
 .star-ratings-fill {
-  color: #fff58c;
-  padding: 0;
-  position: absolute;
-  z-index: 1;
-  display: flex;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  -webkit-text-fill-color: gold;
+	color: #fff58c;
+	padding: 0;
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	-webkit-text-fill-color: gold;
 }
- 
+
 .star-ratings-base {
-  z-index: 0;
-  padding: 0;
+	z-index: 0;
+	padding: 0;
 }
-.star-ratings + span{
+
+.star-ratings+span {
 	font-size: 14px;
 }

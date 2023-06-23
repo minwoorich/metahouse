@@ -16,7 +16,7 @@ public interface AssetRepository extends JpaRepository<AssetEntity, String> {
 
 	Page<AssetEntity> findByCategory1AndCategory2(@Param("category1") String category1,
 			@Param("category2") String category2, PageRequest pageRequest);
+	
+/*------------------------------------------- LCH -------------------------------------------*/
 
-    /////LCH/////////////
-	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc();
 }
