@@ -96,4 +96,9 @@ public class AssetDAOImpl implements AssetDAO {
 	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc() {
 		return repository.findTop9ByOrderByAssetHitsDesc();
 	}
+
+	@Override
+	public List<AssetDTO> findTopNByAssetReviewAvg(int limit) {
+		return sqlSession.selectList("com.multi.metahaus.asset.findOrderByReviewRating",limit);
+	}
 }

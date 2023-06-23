@@ -39,5 +39,10 @@ public class ProjectDAOImpl implements ProjectDAO{
 		return SqlSession.selectList("com.multi.metahouse.project.getProjectWithPrice");
 	}
 
+	@Override
+	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit) {
+		return SqlSession.selectList("com.multi.metahouse.project.findOrderByReviewRating",limit);
+	}
+
 
 }
