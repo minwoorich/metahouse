@@ -116,8 +116,8 @@
 						<li class="previous">
 							<a href="#">Previous</a>
 						</li>
-						<li class="pageNo" th:each="num:${#numbers.sequence(0, (tot_page_cgpi-1))}">
-							<a th:text="${num+1}"></a>
+						<li class="pageNo" th:each="num:${#numbers.sequence(1, tot_page_cgpi)}" th:if="${num != 0}">
+							<a th:text="${num}"></a>
 						</li>
 						<li class="next">
 							<a href="#">Next</a>
@@ -143,8 +143,8 @@
 					</tr>
 					<tr id="csInfoListPageNum">
 						<td colspan="4">
-							<a class="pageNum-cs" th:each="num:${#numbers.sequence(0, (tot_page_cgpi-1))}">
-								<span th:text="${num+1}"/>
+							<a class="pageNum-cs" th:each="num:${#numbers.sequence(1, tot_page_cspi)}" th:if="${num != 0}">
+								<span th:text="${num}"/>
 							</a>
 						</td>
 					</tr>
