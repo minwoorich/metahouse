@@ -47,10 +47,10 @@ public class PointServiceImpl implements PointService {
 		return dao.chargePointInfoList(loginUser, pageNo);
 	}
 	
-	// test
+	// Charge Map
 	@Override
-	public Map<String, Object> chargePointInfoListTest(User loginUser, int pageNo) {
-		return dao.chargePointInfoListTest(loginUser, pageNo);
+	public Map<String, Object> chargePointInfoListJSON(User loginUser, int pageNo) {
+		return dao.chargePointInfoListJSON(loginUser, pageNo);
 	}	
 
 	@Override
@@ -61,6 +61,12 @@ public class PointServiceImpl implements PointService {
 	@Override
 	public List<ConsumedPointInfo> consumePointInfoList(User loginUser, int pageNo) {
 		return dao.consumePointInfoList(loginUser, pageNo);
+	}
+	
+	// Consume Map
+	@Override
+	public Map<String, Object> consumePointInfoListJSON(User loginUser, int pageNo) {
+		return dao.consumePointInfoListJSON(loginUser, pageNo);
 	}
 	
 	@Override

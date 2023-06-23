@@ -97,6 +97,7 @@
 	border: 1px solid #ccc;
 	padding: 8px;
 	font-size: 18px;
+	word-break: keep-all;
 }
 
 .mypoint-history th {
@@ -119,10 +120,22 @@
 	font-size: 18px;
 }
 
-.pageNo{
+.cg-pageNo, .cs-pageNo{
 	cursor: pointer;
 }
 
 .paging-div {
 	width:725px;
 }
+
+.pager li{
+ 
+}
+
+.pager li>a{
+	display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+} 
