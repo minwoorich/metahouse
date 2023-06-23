@@ -9,19 +9,31 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
+import com.multi.metahouse.domain.entity.user.User;
+import com.multi.metahouse.project.repository.dao.ProjectDAO;
 import com.multi.metahouse.project.repository.jpa.ProjectRepository;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-	@Override
-	public int insertProjectInfo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-/*-------------------------------------------------------------------------------------*/
+	ProjectRepository repository;
+	ProjectDAO projectDao;
+	
 	@Autowired
-	ProjectRepository repositry;
+	public ProjectServiceImpl(ProjectRepository repository, ProjectDAO projectDao) {
+		super();
+		this.repository = repository;
+		this.projectDao = projectDao;
+	}
+
+
+	@Override
+	public void insertProjectInfo(ProjectEntity projectEntity) {
+		repository.save(projectEntity);
+	}
+
+	/*-------------------------------------------------------------------------------------*/
+	
 
 	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
@@ -29,11 +41,11 @@ public class ProjectServiceImpl implements ProjectService {
 		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC, "projectDate"));
 		Page<ProjectEntity> projectlistPage = null;
 		if (category1 == null && category2 == null) {
-			projectlistPage = repositry.findAll(pageRequest);
+			projectlistPage = repository.findAll(pageRequest);
 		} else if (category1 != null && category2 == null) {
-			projectlistPage = repositry.findByCategory1(category1, pageRequest);
+			projectlistPage = repository.findByCategory1(category1, pageRequest);
 		} else {
-			projectlistPage = repositry.findByCategory1AndCategory2Pj(category1, category2, pageRequest);
+			projectlistPage = repository.findByCategory1AndCategory2Pj(category1, category2, pageRequest);
 		}
 
 		return projectlistPage;
