@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 public interface ProjectRepository extends JpaRepository<ProjectEntity, Long>{
-	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc();
+//	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc();
 	/*---------------------------------- OSE ---------------------------------*/
 		Page<ProjectEntity> findByCategory1(@Param("category1") String category1, PageRequest pageRequest);
 
