@@ -21,12 +21,14 @@
 					console.log(data.tot_page_cgpi);
 					// 기존데이터 삭제	
 					$("#cg_tb").children("tbody").children().remove();
-					$("#cgPagingPager").children(".cg-pageNo").remove();
+					//$("#cgPagingPager").children(".cg-pageNo").remove();
+					
+					$("#cgPagingPager").remove();
 					
 					let addElement = '';
 					let addPager = '';
 					let myDate = '';
-					 
+
 					// 내역 작성
 					for(let i=0; i<data.cgpi.length; i++){
 						addElement += '<tr class="cgInfo">';
@@ -40,17 +42,27 @@
 					}
 					 
 					// 페이저 작성
+					addPager += '<ul id="cgPagingPager" class="pager">';
+					addPager += '<li class="previous">';
+					addPager += '<a href="#">Previous</a>';
+					addPager += '</li>';
+					
 					for(let i=1; i<=data.tot_page_cgpi; i++){
 						addPager += '<li class="cg-pageNo">';
 						addPager += '<a>' + i + '</a>'
 						addPager += '</li>';
 					}
+					
+					addPager += '<li class="next">';
+					addPager += '<a href="#">Next</a>';
+					addPager += '</li></ul>';
 					 
 					// 새 데이터 삽입
 					$("#cg_tb").children("tbody").append(addElement);
 					
 					// 페이저 삽입
-					$("#cgPagingPager").children(".previous").after(addPager);
+					//$("#cgPagingPager").children(".previous").after(addPager);
+					$(".cg-paging-div").append(addPager);
 				}
 			})
 		})
@@ -74,7 +86,7 @@
 					let addElement = '';
 					let addPager = '';
 					let myDate = '';
-					 
+					
 					// 내역 작성
 					for(let i=0; i<data.cspi.length; i++){
 						addElement += '<tr class="csInfo">';
@@ -147,7 +159,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="paging-div">
+				<div class="cg-paging-div">
 					<!--/* Bootstrap pager */-->
 					<ul id="cgPagingPager" class="pager">
 						<li class="previous">
@@ -162,12 +174,6 @@
 					</ul>
 				</div>
 			</div>
-			
-			<ul>
-				<li class="cg-pageNo" th:each="num:${#numbers.sequence(1, tot_page_cgpi)}" th:if="${num != 0}">
-					<a th:text="${num}"></a>
-				</li>
-			</ul>
 			
 			<div class="mypoint-history">
 				<h3>사용 내역 조회</h3>
@@ -189,7 +195,7 @@
 					</tr>
 				</tbody>
 				</table>
-				<div class="paging-div">
+				<div class="cs-paging-div">
 					<!--/* Bootstrap pager */-->
 					<ul id="csPagingPager" class="pager">
 						<li class="previous">

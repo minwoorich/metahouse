@@ -124,7 +124,7 @@
 	cursor: pointer;
 }
 
-.paging-div {
+.cg-paging-div, .cs-paging-div {
 	width:725px;
 }
 
