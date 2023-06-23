@@ -39,6 +39,7 @@ public class PointDAOImpl implements PointDAO {
 	}
 	
 	// User 충전 포인트 업데이트
+	// !!!트랜잭션 로직 추가 필요
 	@Override
 	public void chargePoint(User loginUser, int chargeAmount) {
 		loginUser.setPoint(loginUser.getPoint() + chargeAmount);
@@ -82,9 +83,9 @@ public class PointDAOImpl implements PointDAO {
 		return cgpiPage.getContent();
 	}
 	
-	// test
+	// JSON Map
 	@Override
-	public Map<String, Object> chargePointInfoListTest(User loginUser, int pageNo) {
+	public Map<String, Object> chargePointInfoListJSON(User loginUser, int pageNo) {
 		Map<String, Object> ret = new HashMap<String, Object>();
 		PageRequest cgpiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"chargePointInfoId"));
 		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findByUserId(loginUser.getUserId(), cgpiPageRequest);
@@ -105,6 +106,17 @@ public class PointDAOImpl implements PointDAO {
 		PageRequest cspiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"consumePointInfoId"));
 		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findByUserId(loginUser.getUserId(), cspiPageRequest);
 		return cspiPage.getContent();
+	}
+	
+	// JSON Map
+	@Override
+	public Map<String, Object> consumePointInfoListJSON(User loginUser, int pageNo) {
+		Map<String, Object> ret = new HashMap<String, Object>();
+		PageRequest cspiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"consumePointInfoId"));
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findByUserId(loginUser.getUserId(), cspiPageRequest);
+		ret.put("cspi", cspiPage.getContent());
+		ret.put("tot_page_cspi", cspiPage.getTotalPages());
+		return ret;
 	}
 
 	@Override

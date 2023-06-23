@@ -42,5 +42,14 @@ public class PortfolioDTO{
 	private List<MultipartFile> portfolioAttachFile;
 	private MultipartFile multipartMainImg;
 	
+	private String delContentImg;
+	private String delPointImg;
+	private String delStyleImg;
 	
+	private int contentSize;
+	private int pointSize;
+	private int styleSize;
+	
+	
+
 }

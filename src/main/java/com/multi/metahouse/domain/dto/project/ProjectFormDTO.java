@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
+import com.multi.metahouse.domain.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -29,13 +30,14 @@ public class ProjectFormDTO {
 	private MultipartFile thumbnail;
 	private List<MultipartFile> detailImages;
 	
-	@Builder
-	public ProjectFormDTO(String creator_id, String title, String description, String category1, String category2_pj) {
-		super();
-		this.creator_id = creator_id;
-		this.title = title;
-		this.description = description;
-		this.category1 = category1;
-		this.category2_pj = category2_pj;
+	public ProjectEntity toEntity() {
+		return ProjectEntity.builder()
+				.creatorId(creator_id)
+				.title(title)
+				.description(description)
+				.category1(category1)
+				.category2Pj(category2_pj)
+				.build();
 	}
+	
 }

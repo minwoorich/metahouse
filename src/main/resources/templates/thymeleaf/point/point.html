@@ -7,10 +7,10 @@
 <link rel="stylesheet" type="text/css" href="/metahaus/css/point/point.css" />
 <script type="text/javascript">
 	$(document).ready(function(){
-		/* $(".pageNo").on("click", function(){ */
-		$(document).on("click", (".pageNo"), function(){
+		// 충전 내역 조회
+		$(document).on("click", (".cg-pageNo"), function(){
 			$.ajax({
-				url:"/metahaus/point/page/cgpi/test",
+				url:"/metahaus/point/page/cgpi",
 				type:"post",
 				data: {
 					pageNo : $(this).children().text()
@@ -19,26 +19,15 @@
 				success:function(data){
 					console.log(data);
 					console.log(data.tot_page_cgpi);
+					
 					// 기존데이터 삭제	
 					$("#cg_tb").children("tbody").children().remove();
-					$("#cgPagingPager").children(".pageNo").remove();
+					$("#cgPagingPager").children(".cg-pageNo").remove();
 					
 					let addElement = '';
 					let addPager = '';
 					let myDate = '';
-/* 					
-					for(let i=0; i<data.length; i++){
-						addElement += '<tr class="cgInfo">';
-						addElement += '<td>' + data[i].paymentMethod + '</td>';
-						// 날짜 데이터 포맷
-						myDate = data[i].chargeDate.substring(0, 10);
-						addElement += '<td>' + myDate + '</td>';
-						addElement += '<td>' + data[i].chargingPoint + ' 포인트</td>';
-						addElement += '<td>' + data[i].remainingPoint + ' 포인트</td>';
-						addElement += '</tr>';
-					}
-					 */
-					 
+
 					// 내역 작성
 					for(let i=0; i<data.cgpi.length; i++){
 						addElement += '<tr class="cgInfo">';
@@ -53,7 +42,7 @@
 					 
 					// 페이저 작성
 					for(let i=1; i<=data.tot_page_cgpi; i++){
-						addPager += '<li class="pageNo">';
+						addPager += '<li class="cg-pageNo">';
 						addPager += '<a>' + i + '</a>'
 						addPager += '</li>';
 					}
@@ -66,7 +55,56 @@
 				}
 			})
 		})
-		
+ 		
+		// 소비 내역 조회
+		$(document).on("click", (".cs-pageNo"), function(){
+			$.ajax({
+				url:"/metahaus/point/page/cspi",
+				type:"post",
+				data: {
+					pageNo : $(this).children().text()
+				},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					console.log(data.tot_page_cspi);
+					// 기존데이터 삭제	
+					$("#cs_tb").children("tbody").children().remove();
+					$("#csPagingPager").children(".cs-pageNo").remove();
+					
+					let addElement = '';
+					let addPager = '';
+					let myDate = '';
+					
+					// 내역 작성
+					for(let i=0; i<data.cspi.length; i++){
+						addElement += '<tr class="csInfo">';
+						addElement += '<td>' + data.cspi[i].consumeInfo + '</td>';
+						// 날짜 데이터 포맷
+						myDate = data.cspi[i].consumeDate.substring(0, 10);
+						addElement += '<td>' + myDate + '</td>';
+						addElement += '<td>' + data.cspi[i].consumingPoint + ' 포인트</td>';
+						addElement += '<td>' + data.cspi[i].remainingPoint + ' 포인트</td>';
+						addElement += '</tr>';
+					}
+					 
+					// 페이저 작성
+					for(let i=1; i<=data.tot_page_cspi; i++){
+						addPager += '<li class="cs-pageNo">';
+						addPager += '<a>' + i + '</a>'
+						addPager += '</li>';
+					}
+					 
+					// 새 데이터 삽입
+					$("#cs_tb").children("tbody").append(addElement);
+					
+					// 페이저 삽입
+					$("#csPagingPager").children(".previous").after(addPager);
+					
+				}
+			})
+		})
+		 
 	})
  
 </script>
@@ -110,13 +148,13 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="paging-div">
+				<div class="cg-paging-div">
 					<!--/* Bootstrap pager */-->
 					<ul id="cgPagingPager" class="pager">
 						<li class="previous">
 							<a href="#">Previous</a>
 						</li>
-						<li class="pageNo" th:each="num:${#numbers.sequence(1, tot_page_cgpi)}" th:if="${num != 0}">
+						<li class="cg-pageNo" th:each="num:${#numbers.sequence(1, tot_page_cgpi)}" th:if="${num != 0}">
 							<a th:text="${num}"></a>
 						</li>
 						<li class="next">
@@ -129,26 +167,37 @@
 			<div class="mypoint-history">
 				<h3>사용 내역 조회</h3>
 				<table id="cs_tb">
+				<thead>
 					<tr class="tb_head">
 						<th>사용 내역</th>
 						<th>사용 일자</th>
 						<th>사용 포인트</th>
 						<th>잔여 포인트</th>
 					</tr>
+				</thead>
+				<tbody>
 					<tr id="csInfoList" th:each="cpi:${cspilist}">
 						<td th:text="${cpi.consumeInfo}"></td>
 						<td th:text="${#dates.format(cpi.consumeDate, 'yyyy-MM-dd')}"></td>
 						<td th:text="${cpi.consumingPoint + ' 포인트'}"></td>
 						<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
 					</tr>
-					<tr id="csInfoListPageNum">
-						<td colspan="4">
-							<a class="pageNum-cs" th:each="num:${#numbers.sequence(1, tot_page_cspi)}" th:if="${num != 0}">
-								<span th:text="${num}"/>
-							</a>
-						</td>
-					</tr>
+				</tbody>
 				</table>
+				<div class="cs-paging-div">
+					<!--/* Bootstrap pager */-->
+					<ul id="csPagingPager" class="pager">
+						<li class="previous">
+							<a href="#">Previous</a>
+						</li>
+						<li class="cs-pageNo" th:each="num:${#numbers.sequence(1, tot_page_cspi)}" th:if="${num != 0}">
+							<a th:text="${num}"></a>
+						</li>
+						<li class="next">
+							<a href="#">Next</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			
 			<div class="mypoint-description">

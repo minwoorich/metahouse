@@ -32,6 +32,38 @@ public class PortfolioPjContentFileUploadLogicService {
 		return filedtolist;
 	}
 	
+	public List<PortfolioContentImgDTO> uploadFiles(List<MultipartFile> multipartFiles, String path, String[] delListArr) throws IllegalStateException, IOException {
+		List<PortfolioContentImgDTO> filedtolist = new ArrayList<PortfolioContentImgDTO>();
+		//파일 갯수만큼 각 업로드된 파일 마다 번호를 증가시키며 생성 (순서 저장하는거)
+		
+		int count = 0;
+		for(MultipartFile multipartFile : multipartFiles) {
+			//업로드를 하는 경우 원본파일명과 서버에서 식별할 수 있는 실제 서버에 저장되는 파일명 두 개를 관리
+			//클라이언트가 업로드한 원본 파일명
+			String storeFilename = uploadFile(multipartFile, path);
+			System.out.println("optionalFile-upload-method(storeFilename : " + storeFilename);
+			filedtolist.add(new PortfolioContentImgDTO(null, null, storeFilename, delListArr[count]));
+			count++;
+		}
+		return filedtolist;
+	}
+	
+	public List<PortfolioContentImgDTO> uploadFiles(List<MultipartFile> multipartFiles, String path, int contentSize) throws IllegalStateException, IOException {
+		List<PortfolioContentImgDTO> filedtolist = new ArrayList<PortfolioContentImgDTO>();
+		//파일 갯수만큼 각 업로드된 파일 마다 번호를 증가시키며 생성 (순서 저장하는거)
+		
+		int count = contentSize + 1;
+		for(MultipartFile multipartFile : multipartFiles) {
+			//업로드를 하는 경우 원본파일명과 서버에서 식별할 수 있는 실제 서버에 저장되는 파일명 두 개를 관리
+			//클라이언트가 업로드한 원본 파일명
+			String storeFilename = uploadFile(multipartFile, path);
+			System.out.println("optionalFile-upload-method(storeFilename : " + storeFilename);
+			filedtolist.add(new PortfolioContentImgDTO(null, null, storeFilename, count+""));
+			count++;
+		}
+		return filedtolist;
+	}
+	
 	//파일 한 개를 업로드하고 저장된 파일명을 리턴하는 메소드
 	public String uploadFile(MultipartFile multipartFile, String path) throws IllegalStateException, IOException {
 		String storeFilename = "";
