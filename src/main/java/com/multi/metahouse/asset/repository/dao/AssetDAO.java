@@ -39,4 +39,5 @@ public interface AssetDAO {
 	
 	/////////LCH/////////////////////
 	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc();
+	public List<AssetDTO> findTopNByAssetReviewAvg(int limit);
 }

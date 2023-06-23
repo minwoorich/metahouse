@@ -67,4 +67,29 @@
         select * from asset_content 
         where asset_id= #{assetId}
     </select>
+    
+    <!-- LCH -->
+    <resultMap type="asset" id="assetWithReviewAvg">
+        <id column="asset_id" property="asset_id"/>
+        <result column="seller_id" property="seller_id"/>
+        <result column="title" property="title"/>
+        <result column="category1" property="category1"/>
+        <result column="category2_as" property="category2_as"/>
+        <result column="description" property="description"/>
+        <result column="price" property="price"/>
+        <result column="main_img" property="main_img"/>
+        <result column="asset_date" property="asset_date"/>
+        <result column="asset_hit" property="asset_hit"/>
+        <result column="average_reviews" property="average_reviews" />
+        <result column="review_count" property="review_count" />
+	</resultMap>
+	
+    <select id="findOrderByReviewRating" parameterType="int" resultMap="assetWithReviewAvg">
+    	SELECT a.*, count(r.asset_review_id) review_count, AVG(r.rating) AS average_reviews
+		FROM assets a
+		LEFT JOIN asset_review r ON a.asset_id = r.asset_id
+		GROUP BY a.asset_id
+		order by average_reviews desc
+		limit #{limit}
+    </select>
 </mapper>

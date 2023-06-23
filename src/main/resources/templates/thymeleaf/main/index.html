@@ -122,98 +122,9 @@
                                     <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
                                 </div>
                             </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review2.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기2</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review1.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기3</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review1.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기4</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review1.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기5</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review1.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기6</span>
-
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review1.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기7</span>
-
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review1.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기8</span>
-
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
-
-                            <div class="banner-slider-item2">
-                                <div class="item-img-warp">
-                                    <img height="100%" width="100%" src="/metahaus/images/review1.JPG" />
-                                </div>
-                                <div class="item-desc-warp">
-                                    <span class="myfont-3">후기9</span>
-
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
-
                 </div>
-
-
-
             </div>
         </section>
         <hr />
@@ -240,7 +151,7 @@
                                     <span th:text="${project.title}" class="myfont-3">메타버스틱스1</span>
                                     <span th:text="${project.description}" class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
                                     <span th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}" class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
+                                    <span class="myfont-3"><span th:text="${'★ '+project.average_reviews}">★ 4.8 </span>| [[${project.review_count}]]개의 평가</span>
                                 </div>
                             </div>
 
@@ -278,7 +189,7 @@
                                     <span th:text="${asset.title}" class="myfont-3">메타버스틱스1</span>
                                     <span th:text="${asset.description}" class="myfont-2">당신만의 메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span>
                                     <span th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}" class="myfont-1">85,000원~</span>
-                                    <span class="myfont-3">★ 4.8 | 1,147개의 평가</span>
+                                    <span class="myfont-3"><span th:text="${'★ '+asset.average_reviews}">★ 4.8</span> | [[${asset.review_count}]]개의 평가</span>
                                 </div>
                             </div>
 

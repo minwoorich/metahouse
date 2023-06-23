@@ -18,18 +18,43 @@ import lombok.NoArgsConstructor;
 @Alias("project")
 public class ProjectDTO {
 	//column
-	int project_id;
-	String creator_id;
-	String tag;
-	String title;
-	String description;
-	String project_thumbnail_img;
-	Timestamp project_date;
-	int project_hits;
-	String category1;
-	String category2_pj;
+	private int project_id;
+	private String creator_id;
+	private String tag;
+	private String title;
+	private String description;
+	private String project_thumbnail_img;
+	private Timestamp project_date;
+	private int project_hits;
+	private String category1;
+	private String category2_pj;
 	
 	
 	//extra data
-	int price;
+	//단일패키지 가격 
+	private int price;
+	//리뷰갯수	
+	private int review_count;
+	//리뷰평균
+	private double average_reviews;
+	public ProjectDTO(int project_id, String creator_id, String tag, String title, String description,
+			Timestamp project_date, int project_hits, String category1, String category2_pj, int price,
+			int review_count, double average_reviews) {
+		super();
+		this.project_id = project_id;
+		this.creator_id = creator_id;
+		this.tag = tag;
+		this.title = title;
+		this.description = description;
+		this.project_date = project_date;
+		this.project_hits = project_hits;
+		this.category1 = category1;
+		this.category2_pj = category2_pj;
+		this.price = price;
+		this.review_count = review_count;
+		this.average_reviews = average_reviews;
+	}
+	
+	
+	
 }
