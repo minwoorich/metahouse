@@ -57,7 +57,7 @@ public class UserController {
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
-			view = "redirect:mypage/profile";
+			view = "redirect:main/index";
 			
 		}else {
 			view ="redirect:login";
