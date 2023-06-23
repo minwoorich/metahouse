@@ -9,7 +9,7 @@ import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 public interface MainService {
-	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc();
+	//public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc();
 	
 	public List<ProjectDTO> test();
 	public List<AssetDTO> findTopNByAssetReviewAvg(int limit);
