@@ -30,7 +30,9 @@ td {
 }
 
 .product {
+	
 	margin-bottom: 3em;
+	cursor: pointer;
 }
 
 /* product img */
