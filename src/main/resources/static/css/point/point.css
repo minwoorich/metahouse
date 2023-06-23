@@ -14,20 +14,8 @@
 	width: 725px;
 	display: flex;
 	justify-content: space-between;
-	/* 
-	display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-     */
 	margin-top: 10px;
 	margin-bottom: 20px;
-	/* 
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    border-collapse: collapse;
-    border-style: hidden;
-    box-shadow: 0 0 0 1px var(--medium-purple)
-     */
 }
 
 .mypoint-info div {
@@ -124,18 +112,6 @@
 	cursor: pointer;
 }
 
-.paging-div {
+.cg-paging-div, .cs-paging-div {
 	width:725px;
 }
-
-.pager li{
- 
-}
-
-.pager li>a{
-	display: inline-block;
-    padding: 5px 14px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-} 
