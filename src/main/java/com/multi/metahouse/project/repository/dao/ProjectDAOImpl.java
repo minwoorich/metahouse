@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
+import com.multi.metahouse.project.repository.jpa.ProjectRepository;
 
 @Repository
 public class ProjectDAOImpl implements ProjectDAO{

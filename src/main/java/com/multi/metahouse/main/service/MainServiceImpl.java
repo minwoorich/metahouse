@@ -35,11 +35,6 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc() {
-		return assetDAO.findTop9ByOrderByAssetHitsDesc();
-	}
-	
-	@Override
 	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc() {
 		return projectDAO.findTop9ByOrderByProjectHitsDesc();
 	}

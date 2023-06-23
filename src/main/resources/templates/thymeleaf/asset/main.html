@@ -8,6 +8,19 @@
 <link href="/metahaus/css/asset/market_product_grid.css" rel="stylesheet" type="text/css" />
 <link href="/metahaus/css/asset/market_nav.css" rel="stylesheet" type="text/css" />
 <link href="/metahaus/css/asset/market_page_bar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    function getURL() {
+    	var category2  = document.getElementById("category2_as");
+		var value = (category2.options[category2.selectedIndex].value);
+		var URL = window.location.href+"&category2="+value
+		var ctg = window.location.search.substr(1).includes('category1');
+		if(ctg){
+			
+		}else{
+			alert("채널을 먼저 선택하세요")
+		}
+    }
+</script>
 </head>
 <body>
 	<div layout:fragment="content">
@@ -16,11 +29,11 @@
 		<nav>
 			<!-- category combo -->
 			<div class="selectBox">
-				<p>ASSET MARKET 
-					<span th:if="${category1!=null}" th:text="&rang;+${assetlist.category1}"></span>
+				<p>ASSET MARKET&ensp;
+					<span th:if="${param.category1!=null}" th:text="'&rang;&ensp;'+${param.category1}"></span>
 				</p>
-				<select name="" class="select">
-					<option disabled selected>채널을 선택하세요</option>
+				<select id="category2_as" class="select" onchange="getURL();">
+					<option disabled selected>카테고리 선택하기</option>
 					<option value="의류">의류</option>
 					<option value="악세사리">악세사리</option>
 					<option value="무기">무기</option>
@@ -54,13 +67,13 @@
 			</thead>
 		<!-- 상품 그리드 -->			
 			<tbody>
-			 <tr th:each="asset, i:${assetlist}"  th:if="${i.index%4==1}">
+			 <tr th:each="asset, i:${assetlist}"  th:if="${i.index%4==0}">
 				<!-- Product1 -->
 					<td th:if="${i.index < i.size}" >
 						<div class="product">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/${assetlist[i.index].mainImg}}"/>
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index].mainImg}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
@@ -89,7 +102,7 @@
 						<div class="product">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index+1].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/${assetlist[i.index+1].mainImg}}"/>
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+1].mainImg}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
@@ -118,7 +131,7 @@
 						<div class="product">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index+2].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/${assetlist[i.index+2].mainImg}}"/>
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+2].mainImg}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
@@ -147,7 +160,7 @@
 						<div class="product">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index+3].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/${assetlist[i.index+3].mainImg}}"/>
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+3].mainImg}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
