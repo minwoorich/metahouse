@@ -37,11 +37,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return session.selectList("com.multi.metahouse.project.findOrderByReviewRating",limit);
 	}
 
-	@Override
-	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 }
