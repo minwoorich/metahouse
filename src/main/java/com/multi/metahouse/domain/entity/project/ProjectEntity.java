@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,13 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-
-import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
+import com.multi.metahouse.domain.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,34 +35,39 @@ import lombok.NoArgsConstructor;
 public class ProjectEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="project_id")
 	private Long projectId;
+	@Column(name="creator_id")
 	private String creatorId;
 	private String tag;
 	private String title;
 	private String description;
-	private int projectHits;
 	@CreationTimestamp
 	private LocalDateTime projectDate;
 	private String category1;
-	///////////LCH//////////////
 	@Column(name="category2_pj")
 	private String category2Pj;
 	private String thumbnail; 
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="project_id")
-	private List<ProjectContentsEntity> projectContentsEntity = new ArrayList<>();
-//	@OneToMany(fetch=FetchType.EAGER)
-//	@JoinColumn(name="project_id")
-//	private List<>
 	
-	public static ProjectEntity toEntity(ProjectFormDTO dto) {
-		return ProjectEntity.builder().
-				creatorId(dto.getCreator_id())
-				.title(dto.getTitle())
-				.description(dto.getDescription())
-				.category1(dto.getCategory1())
-				.category2Pj(dto.getCategory2_pj())
-				.build();
-	}
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name="creator_id")
+//	private User user;
+	
+	//mappedBy = "projectEntity", 
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="project_id")
+	private List<ProjectContentsEntity> projectContentsEntityList;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="project_id")
+	private ProjectPackageSingleEntity singleEntity;
+	
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private ProjectPackageTripleEntity tripleEntity;
+	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<AddOptionEntity> addOptionEntityList = new ArrayList<>();
+
+	
 }
-//UUID = 

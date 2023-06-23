@@ -259,13 +259,7 @@ $(document).ready(function () {
     				", description = "+description+
     				", thumbnail = " + thumbnail+
     				", detailImages = " + detailImages);
-    		alert("userId = "+userId+
-    				", title = "+title+
-    				", category1 = " + category1+
-    				",category2_pj="+category2_pj+
-    				", description = "+description+
-    				", thumbnail = " + thumbnail+
-    				", detailImages = " + detailImages);
+    		
     		
     		
     		myformdata.append("description",description);

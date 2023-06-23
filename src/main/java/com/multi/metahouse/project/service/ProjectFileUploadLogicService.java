@@ -6,35 +6,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
+import com.multi.metahouse.domain.dto.project.ProjectPackageForm;
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 
 @Service
 public class ProjectFileUploadLogicService {
-	private String uploadPath = "C:\\Users\\minwo\\Desktop\\IT STUDY\\javaweb\\upload\\";
-	
-	public String getUploadpath(String fileName) {
-		return uploadPath + fileName;
-	}
-	
-	public List<ProjectContentsEntity> uploadFiles(List<MultipartFile> multipartFiles)
+	public List<ProjectContentsEntity> uploadFiles(List<MultipartFile> multipartFiles, String path)
 			throws IllegalStateException, IOException {
-		List<ProjectContentsEntity> fileDtoList = new ArrayList<ProjectContentsEntity>();
+		List<ProjectContentsEntity> contentsList = new ArrayList<ProjectContentsEntity>();
 		int count = 1;
 		for (MultipartFile multipartFile : multipartFiles) {
 			// uploadFile() 호출해서 사용
-			String storeFilename = uploadFile(multipartFile);
+			String storeFilename = uploadFile(multipartFile,path);
 			//ProjectContentsEntity 데이터 옮겨담기
-			fileDtoList.add(new ProjectContentsEntity(null, null, storeFilename, count));
+			
+			contentsList.add(ProjectContentsEntity
+					.builder()
+					.projectStoreFilename(storeFilename)
+					.projectFileNo(count).build());
 			count++;
 		}
-		return fileDtoList;
+		return contentsList;
 	}
 	
 	// 파일 한 개 업로드하고 저장된 파일명을 리턴하는 메서드
-		public String uploadFile(MultipartFile multipartFile) throws IllegalStateException, IOException {
+		public String uploadFile(MultipartFile multipartFile, String uploadPath) throws IllegalStateException, IOException {
 			String storeFilename = "";
 			if (!multipartFile.isEmpty()) {
 				// key = "식별자명(고유번호)", value="원본 파일명"
@@ -45,7 +46,7 @@ public class ProjectFileUploadLogicService {
 				storeFilename = createStoreFileName(originalFilename);
 
 				// 파일명과 path를 이용해서 실제 File객체를 만든 후 업로드 하기
-				multipartFile.transferTo(new File(getUploadpath(storeFilename)));
+				multipartFile.transferTo(new File(uploadPath+File.separator+storeFilename));
 
 				System.out.println("원본 파일명 : " + originalFilename);
 				System.out.println("저장 파일명 : " + storeFilename);

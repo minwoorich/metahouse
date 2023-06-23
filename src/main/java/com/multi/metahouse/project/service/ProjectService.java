@@ -1,6 +1,7 @@
 package com.multi.metahouse.project.service;
 
+import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 public interface ProjectService {
-	int insertProjectInfo();
+	void insertProjectInfo(ProjectEntity projectEntity);
 }
