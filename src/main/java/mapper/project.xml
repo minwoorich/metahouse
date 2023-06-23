@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.metahouse.project">
-	<select id="getProjectWithPrice" resultType="com.multi.metahouse.domain.dto.project.ProjectDTO">
+	<select id="getProjectWithPrice" resultType="project">
 		SELECT 
         p.project_id , p.creator_id, p.tag, p.title, 
         p.description , p.project_thumbnail_img ,
@@ -14,5 +14,34 @@
         ON p.project_id = o.project_id
         ORDER BY p.project_hits DESC
         LIMIT 9
+    </select>
+    
+    
+    <resultMap type="project" id="projectWithReviewAvg">
+        <id column="project_id" property="project_id"/>
+        <result column="creator_id" property="creator_id"/>
+        <result column="tag" property="tag"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="project_thumbnail_img" property="project_thumbnail_img"/>
+        <result column="project_date" property="project_date"/>
+        <result column="project_hit" property="project_hit"/>
+        <result column="category1" property="category1"/>
+        <result column="category2_pj" property="category2_pj"/>
+        <result column="average_reviews" property="average_reviews" />
+        <result column="review_count" property="review_count" />
+        <result column="price" property="price" />
+	</resultMap>
+	
+    <select id="findOrderByReviewRating" parameterType="int" resultMap="projectWithReviewAvg">
+    	SELECT a.*, 
+		count(r.project_review_id) review_count,
+		 AVG(r.rating) AS average_reviews,
+		(select ps.price from project_package_single ps where a.project_id = ps.project_id) price
+		FROM project a
+		LEFT JOIN project_review r ON a.project_id = r.project_id
+		GROUP BY a.project_id
+		order by average_reviews desc
+		limit #{limit}
     </select>
 </mapper>

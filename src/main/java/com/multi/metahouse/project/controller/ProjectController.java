@@ -7,7 +7,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.core.io.ResourceLoader;
+
+import org.springframework.data.domain.Page;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +27,11 @@ import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
 import com.multi.metahouse.domain.dto.project.ProjectPackageForm;
 import com.multi.metahouse.domain.dto.project.ProjectPackageSingleForm;
 import com.multi.metahouse.domain.dto.project.ProjectPackageTripleForm;
+
 import com.multi.metahouse.domain.entity.project.AddOptionEntity;
+
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
+
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageSingleEntity;
@@ -48,10 +56,21 @@ public class ProjectController {
 	}
 
 
+
 	////////////////////// 승언님 파트////////////////////////
+
+/*------------------------------------- 승언님 파트 ------------------------------------ */
+
 //	프로젝트 마켓 상품목록 보기
 	@RequestMapping("project/main")
-	public String gigs1() {
+	public String projectMarket(Model model, String pageNo, String category1, String category2) {
+		Page<ProjectEntity> projectlistPage = projectService.list(category1, category2, Integer.parseInt(pageNo));
+		List<ProjectEntity> projectlist = projectlistPage.getContent();
+
+		model.addAttribute("pjPage", projectlistPage);
+		model.addAttribute("projectlist", projectlist);
+		model.addAttribute("maxPage", 5);
+
 		return "project/main";
 	}
 
@@ -79,7 +98,7 @@ public class ProjectController {
 		return "project/z_project2_detail";
 	}
 
-	/////////////////////////// 민우님 파트////////////////////////////////
+/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// 프로젝트 설명 입력하는 페이지 반환
 	@GetMapping("project/forms/descriptions")
 	public String writeForm(HttpSession session) {

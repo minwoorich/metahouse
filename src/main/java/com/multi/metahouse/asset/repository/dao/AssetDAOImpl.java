@@ -73,7 +73,7 @@ public class AssetDAOImpl implements AssetDAO {
 		return sqlSession.selectOne("com.multi.metahaus.asset.selectAsset");
 	}
 	
-/*---------------------------------------------------------------------------------------*/
+/*------------------------------------------ OSE ---------------------------------------------*/
 
 	//에셋 상품 정보+판매자 정보 조회
 	@Override
@@ -92,8 +92,9 @@ public class AssetDAOImpl implements AssetDAO {
 	}
 
 	/////////////////////////LCH////////////////////////
+
 	@Override
-	public List<AssetEntity> findTop9ByOrderByAssetHitsDesc() {
-		return repository.findTop9ByOrderByAssetHitsDesc();
+	public List<AssetDTO> findTopNByAssetReviewAvg(int limit) {
+		return sqlSession.selectList("com.multi.metahaus.asset.findOrderByReviewRating",limit);
 	}
 }

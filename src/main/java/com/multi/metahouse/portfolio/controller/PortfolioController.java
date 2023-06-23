@@ -6,11 +6,13 @@ import java.util.List;
 import javax.print.attribute.standard.Severity;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,6 +43,7 @@ public class PortfolioController {
 	PortfolioPjStyleFileUploadLogicService pjStyleFileUploadService;
 	ResourceLoader resourceLoader;
 	
+	@Autowired
 	public PortfolioController(PortfolioService service, MainImgUploadLogicService mainImgUploadService,
 			PortfolioAttachFileUploadLogicService attachFileUploadService,
 			PortfolioPjContentFileUploadLogicService pjContentFileUploadService,
@@ -78,7 +81,7 @@ public class PortfolioController {
 		return "portfolio/create_portfolio";
 	}
 	
-	@PostMapping(value="mypage/create_portfolio", produces="application/text;charset=utf-8")
+	@PostMapping(value="mypage/create_portfolio", produces="application/contentType; charset=utf-8")
 	@ResponseBody
 	public String createPortfolio(PortfolioDTO portfoliodto) throws IOException {
 		
@@ -122,6 +125,75 @@ public class PortfolioController {
 		portfolioUpdate.addObject("portfolioInfo", portfolioInfo);
 		
 		return portfolioUpdate;
+	}
+	
+	@PostMapping(value="mypage/update_portfolio",  produces="application/contentType; charset=utf-8")
+	@ResponseBody
+	public String updatePortfolio(PortfolioDTO portfoliodto) throws IOException{
+		System.out.println(portfoliodto);
+		
+		if(portfoliodto.getMultipartMainImg() != null) {
+			MultipartFile multipartMainImg = portfoliodto.getMultipartMainImg();
+			String mainImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/mainImg").getFile().getAbsolutePath();
+			String mainImgStoreFilename = mainImgUploadService.uploadFile(multipartMainImg, mainImgPath);
+			portfoliodto.setMain_img_store_filename(mainImgStoreFilename);
+		}
+		
+		String[] delContentImgArr = portfoliodto.getDelContentImg().split(",");
+		String[] delPointImgArr = portfoliodto.getDelPointImg().split(",");
+		String[] delStyleImgArr = portfoliodto.getDelStyleImg().split(",");
+		
+		int contentSize = portfoliodto.getContentSize();
+		int pointSize = portfoliodto.getPointSize();
+		int styleSize = portfoliodto.getStyleSize();
+		
+		//content_img Update
+		List<PortfolioContentImgDTO> portfolioContentDtoList = null;
+		if(portfoliodto.getPortfolioPjContentImg() != null) {
+			if(delContentImgArr.length != 0) {
+				List<MultipartFile> portfolioPjContentImg = portfoliodto.getPortfolioPjContentImg();
+				String contentImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/contentImg").getFile().getAbsolutePath();
+				portfolioContentDtoList = pjContentFileUploadService.uploadFiles(portfolioPjContentImg, contentImgPath, delContentImgArr);
+			}else {
+				List<MultipartFile> portfolioPjContentImg = portfoliodto.getPortfolioPjContentImg();
+				String contentImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/contentImg").getFile().getAbsolutePath();
+				portfolioContentDtoList = pjContentFileUploadService.uploadFiles(portfolioPjContentImg, contentImgPath, contentSize);
+			}
+		}
+		System.out.println(portfolioContentDtoList);
+		
+		//point_img Update
+		List<PortfolioPointImgDTO> portfolioPointDtoList = null;
+		if(portfoliodto.getPortfolioPjPointImg() != null) {
+			if(delPointImgArr.length != 0) {
+				List<MultipartFile> portfolioPjPointImg = portfoliodto.getPortfolioPjPointImg();
+				String pointImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/pointImg").getFile().getAbsolutePath();
+				portfolioPointDtoList = pjPointFileUploadService.uploadFiles(portfolioPjPointImg, pointImgPath, delPointImgArr);
+			}
+		}
+		System.out.println(portfolioPointDtoList);
+		
+		//style_img Update
+		List<PortfolioStyleImgDTO> portfolioStyleDtoList = null;
+		if(portfoliodto.getPortfolioPjStyleImg() != null) {
+			if(delStyleImgArr.length != 0) {
+				List<MultipartFile> portfolioPjStyleImg = portfoliodto.getPortfolioPjStyleImg();
+				String styleImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/styleImg").getFile().getAbsolutePath();
+				portfolioStyleDtoList = pjStyleFileUploadService.uploadFiles(portfolioPjStyleImg, styleImgPath, delStyleImgArr);
+			}
+		}
+		System.out.println(portfolioStyleDtoList);
+		
+		//attach_file Update
+		List<PortfolioAttachFileDTO> portfolioAttachFileDtoList = null;
+		if(portfoliodto.getPortfolioAttachFile() != null) {
+			List<MultipartFile> portfolioAttachFile = portfoliodto.getPortfolioAttachFile();
+			String attachFilePath = resourceLoader.getResource("classpath:static/upload/portfolio/attachFile").getFile().getAbsolutePath();
+			portfolioAttachFileDtoList = attachFileUploadService.uploadFiles(portfolioAttachFile, attachFilePath);
+		}
+		System.out.println(portfolioAttachFileDtoList);
+		
+		return "redirect:main/index";
 	}
 	
 	@RequestMapping("mypage/delete_portfolio")

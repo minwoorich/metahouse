@@ -19,16 +19,48 @@ $(document).ready(function () {
 
 
 	    //사진 누르면 삭제 모달뜨고 버튼 누르면 삭제완료됨
-
+	    var delContentImg = [];
+		var delPointImg = [];
+		var delStyleImg = [];
+	
 	    const deleteBtn = $("#delete-img-Modal").find("button");
 	    //삭제할 사진을 누르면 해당 사진 객체 저장 + 모달 뜸
 	    $(".image-frame").on("click", function (event) {
 	        const deleteTarget = $(this);
+	        //console.log($(this).attr("value"));
+	        let delContentImgTag = null;
+	        let delPointImgTag = null;
+	        let delStyleImgTag = null;
+	        
+	        if($(this).attr('class') === "image-frame option1-img"){
+	        	delContentImgTag = $(this).attr("value");
+	        }else if($(this).attr('class') === "image-frame option2-img"){
+	        	delPointImgTag = $(this).attr("value");
+	        }else if($(this).attr('class') === "image-frame option3-img"){
+	        	delStyleImgTag = $(this).attr("value");
+	        };
+	        
+	        
 	        //모달 버튼 누르면 삭제
 	        deleteBtn.on("click", function () {
 	            deleteTarget.remove();
+	            if(delContentImgTag != null){
+	            	delContentImg.push(delContentImgTag);
+	            	delContentImgTag = null;
+	            }
+	            if(delPointImgTag != null){
+	            	delPointImg.push(delPointImgTag);
+	            	delPointImgTag = null;
+	            }
+	            if(delStyleImgTag != null){
+	            	delStyleImg.push(delStyleImgTag);
+	            	delStyleImgTag = null;
+	            }
+	            console.log("delContentImg: "+delContentImg);
+	            console.log("delPointImg: "+delPointImg);
+	            console.log("delStyleImg: "+delStyleImg);
 	            //등록된 사진개수가 한도 까지 등록된경우 추가 버튼 사라짐
-	            updateImageCounters()
+	            updateImageCounters();
 	        });
 	    });
 
@@ -434,27 +466,53 @@ $(document).ready(function () {
 		myformdata.append("portfolio_pj_point", portfolioPjPoint);
 		myformdata.append("portfolio_pj_style", portfolioPjStyle);
 		
-		myformdata.append("multipartMainImg", multipartMainImg);
+		
+		if(multipartMainImg != null){
+			myformdata.append("multipartMainImg", multipartMainImg);
+		}
 		
 		//리스트로 보낼때 for문으로 동작시켜줘야한다.
-		for (let i = 0; i < portfolioPjContentImg.length; i++) {
-			myformdata.append("portfolioPjContentImg", portfolioPjContentImg[i]);
+		if(portfolioPjContentImg.length != 0){
+			for (let i = 0; i < portfolioPjContentImg.length; i++) {
+				myformdata.append("portfolioPjContentImg", portfolioPjContentImg[i]);
+			}
 		}
 		
-		for (let i = 0; i < portfolioPjPointImg.length; i++) {
-			myformdata.append("portfolioPjPointImg", portfolioPjPointImg[i]);
+		if(portfolioPjPointImg.length != 0){
+			for (let i = 0; i < portfolioPjPointImg.length; i++) {
+				myformdata.append("portfolioPjPointImg", portfolioPjPointImg[i]);
+			}
 		}
 		
-		for (let i = 0; i < portfolioPjStyleImg.length; i++) {
-			myformdata.append("portfolioPjStyleImg", portfolioPjStyleImg[i]);
+		if(portfolioPjStyleImg.length != 0){
+			for (let i = 0; i < portfolioPjStyleImg.length; i++) {
+				myformdata.append("portfolioPjStyleImg", portfolioPjStyleImg[i]);
+			}
 		}
 		
-		for (let i = 0; i < portfolioAttachFile.length; i++) {
-			myformdata.append("portfolioAttachFile", portfolioAttachFile[i]);
+		if(portfolioAttachFile.length != 0){
+			for (let i = 0; i < portfolioAttachFile.length; i++) {
+				myformdata.append("portfolioAttachFile", portfolioAttachFile[i]);
+			}
 		}
+		
+		
+		//기존 이미지 중 삭제된 부분 넣음
+		myformdata.append("delContentImg", delContentImg);
+		myformdata.append("delPointImg", delPointImg);
+		myformdata.append("delStyleImg", delStyleImg);
+		
+		//기존 이미지를 삭제하지 않고 추가한다면 추가될 위치에 대한 값
+		let contentSize = $("#content-size").val();
+		let pointSize = $("point-size").val();
+		let styleSize = $("style-size").val();		
+		
+		myformdata.append("contentSize", contentSize);
+		myformdata.append("pointSize", pointSize);
+		myformdata.append("styleSize", styleSize);
 		
 		$.ajax({
-			url:"/metahaus/mypage/create_portfolio",
+			url:"/metahaus/mypage/update_portfolio",
 			type:"post",
 			processData:false,
 			contentType:false,

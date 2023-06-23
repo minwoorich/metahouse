@@ -143,6 +143,14 @@ textarea {
 	border-color: #8D72E1;
 	border-radius: 4px;
 }
+.policy_term{
+	margin: 2rem 0;
+	padding: 1rem;
+}
+.policy_term_title{
+	font-size: 16pt;
+	font-weight: bold;
+}
 /* 가격 정보 요약 */
 #price_summary {
 	padding: 2rem;
@@ -164,8 +172,8 @@ textarea {
 	font-weight: bold;
 }
 
-hr {
-	height: 1.5px;
+.myhr {
+	height: 1.2px;
 	background-color: #8D72E1;
 }
 

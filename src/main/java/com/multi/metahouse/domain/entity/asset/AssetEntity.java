@@ -29,5 +29,4 @@ public class AssetEntity {
     private String price;
     private String mainImg;
     private String assetDate;
-    private String assetHits;
 }

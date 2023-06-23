@@ -1,6 +1,7 @@
 package com.multi.metahouse.point.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -45,6 +46,12 @@ public class PointServiceImpl implements PointService {
 	public List<ChargedPointInfo> chargePointInfoList(User loginUser, int pageNo) {
 		return dao.chargePointInfoList(loginUser, pageNo);
 	}
+	
+	// Charge Map
+	@Override
+	public Map<String, Object> chargePointInfoListJSON(User loginUser, int pageNo) {
+		return dao.chargePointInfoListJSON(loginUser, pageNo);
+	}	
 
 	@Override
 	public List<ConsumedPointInfo> consumePointInfoList(User loginUser) {
@@ -54,6 +61,12 @@ public class PointServiceImpl implements PointService {
 	@Override
 	public List<ConsumedPointInfo> consumePointInfoList(User loginUser, int pageNo) {
 		return dao.consumePointInfoList(loginUser, pageNo);
+	}
+	
+	// Consume Map
+	@Override
+	public Map<String, Object> consumePointInfoListJSON(User loginUser, int pageNo) {
+		return dao.consumePointInfoListJSON(loginUser, pageNo);
 	}
 	
 	@Override

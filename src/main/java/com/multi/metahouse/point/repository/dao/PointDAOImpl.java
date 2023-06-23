@@ -3,7 +3,9 @@ package com.multi.metahouse.point.repository.dao;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -68,39 +70,62 @@ public class PointDAOImpl implements PointDAO {
 	@Override
 	public List<ChargedPointInfo> chargePointInfoList(User loginUser) {
 		PageRequest cgpiPageRequest = PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC,"chargePointInfoId"));
-		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findAll(cgpiPageRequest);
+//		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findAll(cgpiPageRequest);
+		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findByUserId(loginUser.getUserId(), cgpiPageRequest);
 		return cgpiPage.getContent();
 	}
 	
 	@Override
 	public List<ChargedPointInfo> chargePointInfoList(User loginUser, int pageNo) {
 		PageRequest cgpiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"chargePointInfoId"));
-		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findAll(cgpiPageRequest);
+		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findByUserId(loginUser.getUserId(), cgpiPageRequest);
 		return cgpiPage.getContent();
+	}
+	
+	// JSON Map
+	@Override
+	public Map<String, Object> chargePointInfoListJSON(User loginUser, int pageNo) {
+		Map<String, Object> ret = new HashMap<String, Object>();
+		PageRequest cgpiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"chargePointInfoId"));
+		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findByUserId(loginUser.getUserId(), cgpiPageRequest);
+		ret.put("cgpi", cgpiPage.getContent());
+		ret.put("tot_page_cgpi", cgpiPage.getTotalPages());
+		return ret;
 	}
 
 	@Override
 	public List<ConsumedPointInfo> consumePointInfoList(User loginUser) {
 		PageRequest cspiPageRequest = PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC,"consumePointInfoId"));
-		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findAll(cspiPageRequest);
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findByUserId(loginUser.getUserId(), cspiPageRequest);
 		return cspiPage.getContent();
 	}
 	
 	@Override
 	public List<ConsumedPointInfo> consumePointInfoList(User loginUser, int pageNo) {
 		PageRequest cspiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"consumePointInfoId"));
-		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findAll(cspiPageRequest);
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findByUserId(loginUser.getUserId(), cspiPageRequest);
 		return cspiPage.getContent();
+	}
+	
+	// JSON Map
+	@Override
+	public Map<String, Object> consumePointInfoListJSON(User loginUser, int pageNo) {
+		Map<String, Object> ret = new HashMap<String, Object>();
+		PageRequest cspiPageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"consumePointInfoId"));
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findByUserId(loginUser.getUserId(), cspiPageRequest);
+		ret.put("cspi", cspiPage.getContent());
+		ret.put("tot_page_cspi", cspiPage.getTotalPages());
+		return ret;
 	}
 
 	@Override
 	public MyPointDTO getMyPointDTO(User loginUser) {
 		PageRequest cgpiPageRequest = getPageRequest("chargePointInfoId");
-		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findAll(cgpiPageRequest);
+		Page<ChargedPointInfo> cgpiPage = chargedPointInfoRepository.findByUserId(loginUser.getUserId(), cgpiPageRequest);
 		List<ChargedPointInfo> cgpilist = chargePointInfoList(loginUser);
 		
 		PageRequest cspiPageRequest = getPageRequest("consumePointInfoId");
-		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findAll(cspiPageRequest);
+		Page<ConsumedPointInfo> cspiPage = consumedPointInfoRepository.findByUserId(loginUser.getUserId(), cspiPageRequest);
 		List<ConsumedPointInfo> cspilist = consumePointInfoList(loginUser);
 		
 		int tcgp = chargedPointInfoRepository.getTotalChargingPoint(loginUser);

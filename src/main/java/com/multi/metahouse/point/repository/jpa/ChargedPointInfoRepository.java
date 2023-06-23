@@ -1,7 +1,7 @@
 package com.multi.metahouse.point.repository.jpa;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,8 +14,8 @@ import com.multi.metahouse.domain.entity.user.User;
 // 기본 키는 Integer
 @Repository
 public interface ChargedPointInfoRepository extends JpaRepository<ChargedPointInfo, Integer>{
-	@Query("SELECT COALESCE(SUM(cpi.chargingPoint), 0) FROM ChargedPointInfo cpi WHERE cpi.user = :user")
+	@Query("SELECT COALESCE(SUM(cgpi.chargingPoint), 0) FROM ChargedPointInfo cgpi WHERE cgpi.user = :user")
 	int getTotalChargingPoint(@Param("user") User user);
 	
-	List<ChargedPointInfo> findByUserId(String userId);
+	Page<ChargedPointInfo> findByUserId(String userId, Pageable pageable);
 }

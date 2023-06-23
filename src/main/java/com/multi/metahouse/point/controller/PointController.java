@@ -1,6 +1,8 @@
 package com.multi.metahouse.point.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -43,29 +45,45 @@ public class PointController {
 		mav.addObject("tot_page_cgpi", myPoint.getTotalPageOfChargedPointInfo());
 		mav.addObject("tot_page_cspi", myPoint.getTotalPageOfConsumedPointInfo());
 		
-		//mav.setViewName("point/point");
-		mav.setViewName("point/point_test");
+		mav.setViewName("point/point");
+		//mav.setViewName("point/point_test");
 		return mav;
 	}
+	
+	/* ajax 페이징 (chargedPointInfoList) (이전) */
+//	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
+//	@ResponseBody
+//	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNo) {
+//		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+//		
+//		return list;
+//	}
 	
 	/* ajax 페이징 (chargedPointInfoList) */
 	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNo) {
-		System.out.println("pageNo = " + pageNo);
+	public Map<String, Object> cgPageListJSON(HttpSession session, String pageNo) {
+		Map<String, Object> json = service.chargePointInfoListJSON((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
 		
-		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
-		
-		return list;
+		return json;
 	}
+	
+	/* ajax 페이징 (consumedPointInfoList) (이전)*/
+//	@PostMapping(value = "/page/cspi", produces = "application/json;charset=utf-8")
+//	@ResponseBody
+//	public List<ConsumedPointInfo> csPageList(HttpSession session, String pageNo) {
+//		List<ConsumedPointInfo> list = service.consumePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+//		
+//		return list;
+//	}
 	
 	/* ajax 페이징 (consumedPointInfoList) */
 	@PostMapping(value = "/page/cspi", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<ConsumedPointInfo> csPageList(HttpSession session, String pageNo) {
-		List<ConsumedPointInfo> list = service.consumePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
+	public Map<String, Object> csPageListJSON(HttpSession session, String pageNo) {
+		Map<String, Object> json = service.consumePointInfoListJSON((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
 		
-		return list;
+		return json;
 	}
 	
 	@GetMapping("/charge")
@@ -77,11 +95,8 @@ public class PointController {
 	public String pointCharge(HttpSession session, int point) {
 		User loginUser = (User)session.getAttribute("loginUser");
 		
-//		System.out.println("point = " + point);
-//		System.out.println("loginUser = " + loginUser);
-		
 		service.chargePoint(loginUser, point);
 		
-		return "point/charge";
+		return "point/charge_success";
 	}
 }

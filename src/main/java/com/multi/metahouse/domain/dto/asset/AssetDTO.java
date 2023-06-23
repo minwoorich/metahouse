@@ -32,6 +32,28 @@ public class AssetDTO {
 	private List<MultipartFile> optional_img;
 	private String asset_date;
 	
-	//판매자 정보를 저장하기위한 변수	
+	//판매자 정보를 저장하기위한 변수
 	private UserDTO userName;
+	
+	//리뷰 평균값
+	private double average_reviews;
+	//리 갯
+	private int review_count;
+
+	public AssetDTO(String asset_id, String seller_id, String title, String category1, String category2_as,
+			String description, int price, String main_img, String asset_date, double average_reviews , int review_count) {
+		this.asset_id = asset_id;
+		this.seller_id = seller_id;
+		this.title = title;
+		this.category1 = category1;
+		this.category2_as = category2_as;
+		this.description = description;
+		this.price = price;
+		this.main_img = main_img;
+		this.asset_date = asset_date;
+		this.average_reviews = average_reviews;
+		this.review_count = review_count;
+	}
+	
+	
 }
