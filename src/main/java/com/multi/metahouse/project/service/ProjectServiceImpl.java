@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.user.User;
@@ -28,6 +29,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 
 	@Override
+	@Transactional
 	public void insertProjectInfo(ProjectEntity projectEntity) {
 		repository.save(projectEntity);
 	}

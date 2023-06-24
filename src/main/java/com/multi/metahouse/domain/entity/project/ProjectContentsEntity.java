@@ -32,13 +32,13 @@ public class ProjectContentsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="project_content_id")
 	private Long projectContentId;
-	@Column(name="project_id")
-	private Long projectId;
+//	@Column(name="project_id")
+//	private Long projectId;
 	private String projectStoreFilename;
 	private int projectFileNo;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "project_id")
-//	private ProjectEntity projectEntity;
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private ProjectEntity projectId;
 	
 }
