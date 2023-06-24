@@ -4,13 +4,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.multi.metahouse.domain.dto.ChatroomDTO;
+import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
 @Repository
 public interface ChatDAO {
-	 void insertChatroom(ChatroomDTO chatroomDTO);
-	    void updateChatroom(ChatroomDTO chatroomDTO);
-	    void deleteChatroom(int chatroomId);
-	    ChatroomDTO getChatroomById(int chatroomId);
-	    // 추가적인 메서드들을 필요에 따라 정의합니다.
-	}
+	// 채팅방 생성
+	void insertChatroom(ChatroomDTO chatroomDTO);
+	// 채팅방 수정?
+    void updateChatroom(ChatroomDTO chatroomDTO);
+    // 채팅방 나가기
+    void deleteChatroom(String targetId);
+    // 현재 세션 id 의 채팅방 조회
+    List<ChatroomDTO> getChatroomById(String userId);
+    // 추가적인 메서드들을 필요에 따라 정의합니다.
+//	String getLastMsgDateById(int chatroom_id);
+}
