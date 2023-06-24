@@ -3,6 +3,7 @@ package com.multi.metahouse.project.service;
 import org.springframework.data.domain.Page;
 
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
+import com.multi.metahouse.domain.entity.user.User;
 
 public interface ProjectService {
 	void insertProjectInfo(ProjectEntity projectEntity);
