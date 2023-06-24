@@ -53,7 +53,7 @@ public class User {
 	private int point;
 	private String thumbnailStoreFilename;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="creator_id")
-	private List<ProjectEntity> projectEntityList = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+//	@JoinColumn(name="creator_id")
+//	private List<ProjectEntity> projectEntityList = new ArrayList<>();
 }
