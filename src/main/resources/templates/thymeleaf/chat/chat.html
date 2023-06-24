@@ -27,13 +27,35 @@
 			
 			// 채팅방 채팅 불러오기
  			$.ajax({
-				url:"/metahaus/chat/",
+				url:"/metahaus/chat/load/chat",
 				type:"get",
 				data:{
 					"chatroomId" : chatroomId
 				},
 				dataType:"json",
-				success:function(data){
+				success:function(jsonData){
+					console.log(jsonData);
+					
+					let chatMsg = jsonData.chatMsg;
+					let loginUser = jsonData.loginUser;
+					
+					if(loginUser.userId != chatMsg.writer_id){
+						alert('1');
+					}
+					
+					
+					let targetProfile = jsonData.targetProfile;
+					
+					// 기존 프로필 정보 삭제
+					$(".chat_body_profile-img").remove();
+					$(".chat_body_profile-info").remove();
+					
+					// 프로필 요소 작성
+					addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
+					addPro += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
+					
+					// 프로필 요소 추가
+					$(".chat-body__profile-section").append(addPro);
 					
 				}
 				
@@ -82,10 +104,35 @@
 			<h1>방 이름</h1>
 			</div>
 			<div class="chat-body">
-				<div class="chat-body__chat-section"></div>
+				<div class="chat-body__chat-section">
+					<div class="chat-block chat-block--send">
+				        <div class="chat-block__message chat-block__message--send">
+				            <div class="chat-block__message-text">
+				                안녕하세요 반가워요. 얼마까지 알아보셨어요
+				            </div>
+				            <div class="chat-block__message-files"></div>
+				        </div>
+				        <div class="chat-block__timestamp">
+				            <div class="chat-block__timestamp-date">22.02.12</div>
+				            <div class="chat-block__timestamp-time">17:25</div>
+				        </div>
+				    </div>
+				    <div class="chat-block chat-block--reception">
+				        <div class="chat-block__message chat-block__message--reception">
+				            <div class="chat-block__message-text">
+				                안녕하세요 반가워요
+				            </div>
+				            <div class="chat-block__message-files"></div>
+				        </div>
+				        <div class="chat-block__timestamp">
+				            <div class="chat-block__timestamp-date">22.02.12</div>
+				            <div class="chat-block__timestamp-time">17:25</div>
+				        </div>
+				    </div>
+				</div>
 				<div class="chat-body__profile-section">
-					<img src="/metahaus/images/test_images/test01.jpeg">
-					<div class="chat_body_profile-info">안녕하세요</div>
+					<img class="chat_body_profile-img" src="/metahaus/images/test_images/test01.jpeg">
+					<div class="chat_body_profile-info"></div>
 				</div>
 				
 			</div>

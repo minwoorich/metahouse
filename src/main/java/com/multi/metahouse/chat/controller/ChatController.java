@@ -1,6 +1,8 @@
 package com.multi.metahouse.chat.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.metahouse.chat.service.ChatService;
@@ -32,9 +35,6 @@ public class ChatController {
 		ModelAndView mav = new ModelAndView();
 		
 		User loginUser = (User)session.getAttribute("loginUser");
-		//Map<String, Object> chat_view_data = service.getChatroomView(loginUser.getUserId());
-		//mav.addObject("chatrooms", chat_view_data.get("chatrooms"));
-		//mav.addObject("chatrooms_last_msg", chat_view_data.get("chatrooms_last_msg"));
 
 		List<ChatroomDTO> chatrooms = service.getChatroomView(loginUser.getUserId());
 		mav.addObject("chatrooms", chatrooms);
@@ -43,10 +43,18 @@ public class ChatController {
 		return mav;
 	}
 	
-	@GetMapping("/load/chat")
-	public String loadChat(int chatroomId) {
-		List<ChatMsgDTO> chats = service.getChatMsgById(chatroomId);
-		return "chat/chat";
+	@GetMapping(value = "/load/chat", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String, Object> loadChat(HttpSession session, int chatroomId) {
+		Map<String, Object> chatmsgJSON = new HashMap<>();
+		chatmsgJSON.put("chatMsg", service.getChatMsgById(chatroomId));
+		chatmsgJSON.put("targetProfile", service.getTargetProfileById(chatroomId));
+		
+		User loginUser = (User)session.getAttribute("loginUser");
+		System.out.println(loginUser);
+		chatmsgJSON.put("loginUser", loginUser);
+		
+		return chatmsgJSON;
 	}
 	
 }

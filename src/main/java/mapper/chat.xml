@@ -24,5 +24,18 @@
 		WHERE user_1_id = #{user_1_id}
 		  and c.user_2_id = u.user_id
     </select>
+    
+    <select id="getChatMsgById" parameterType="int" resultType="chatmsg">
+        SELECT *
+		FROM message m
+		where chatroom_id = #{chatroomId}
+    </select>
+    
+    <select id="getChatProfileById" parameterType="int" resultType="chatprofile">
+        SELECT u.user_name, u.self_introduction, u.thumbnail_store_filename
+		FROM chatroom c, user u
+		where chatroom_id = #{chatroomId}
+		  and c.user_2_id = u.user_id;
+    </select>
 
 </mapper>
