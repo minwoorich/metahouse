@@ -24,11 +24,13 @@ import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -53,7 +55,6 @@ public class User {
 	private int point;
 	private String thumbnailStoreFilename;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="creator_id")
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy = "creatorId")
 	private List<ProjectEntity> projectEntityList = new ArrayList<>();
 }
