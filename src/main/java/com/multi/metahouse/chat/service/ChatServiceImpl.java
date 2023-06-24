@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.multi.metahouse.chat.repository.dao.ChatDAO;
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
 @Service
@@ -62,17 +63,19 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Override
 	public List<ChatroomDTO> getChatroomView(String userId) {
-		System.out.println("service 메소드 실행!");
 		List<ChatroomDTO> chatrooms = dao.getChatroomById(userId);
-		System.out.println(chatrooms);
-		
 		return chatrooms;
 	}
 	
 	// chatMsg 관련
 	@Override
 	public List<ChatMsgDTO> getChatMsgById(int chatroomId) {
-		return null;
+		return dao.getChatMsgById(chatroomId);
+	}
+	
+	@Override
+	public ChatProfileDTO getTargetProfileById(int chatroomId) {
+		return dao.getTargetProfileById(chatroomId);
 	}
 	
 }

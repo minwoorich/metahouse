@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
 @Repository
@@ -17,5 +19,7 @@ public interface ChatDAO {
     // 현재 세션 id 의 채팅방 조회
     List<ChatroomDTO> getChatroomById(String userId);
     // 추가적인 메서드들을 필요에 따라 정의합니다.
-//	String getLastMsgDateById(int chatroom_id);
+    List<ChatMsgDTO> getChatMsgById(int chatroomId);
+    
+    ChatProfileDTO getTargetProfileById(int chatroomId);
 }

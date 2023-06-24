@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
 @Repository
@@ -37,27 +39,21 @@ public class ChatDAOImpl implements ChatDAO {
 
     @Override
     public List<ChatroomDTO> getChatroomById(String userId) {
-		System.out.println("dao 메소드 실행!");
     	List<ChatroomDTO> chatrooms = sqlSession.selectList("getChatroomById", userId);
         return chatrooms;
     }
     
-//    @Override
-//    public String getLastMsgDateById(int chatroom_id) {
-//    	System.out.println("dao 메소드 실행!! chatroom_id = " + chatroom_id);
-//    	Date last_msg_date = sqlSession.selectOne("getLastMsgDateById", chatroom_id);
-//    	System.out.println("쿼리결과:" + last_msg_date);
-//    	String last_msg_date_str = "";
-//    	/* Date 포맷 가공 */
-//    	// Date가 null 이 아닌경우에만 포맷
-//    	if(last_msg_date != null) {
-//    		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        	last_msg_date_str = format.format(last_msg_date);
-//        	System.out.println("가공된 Date:" + last_msg_date_str);
-//    	}
-//    	
-//        return last_msg_date_str;
-//    }
-
+    @Override
+    public List<ChatMsgDTO> getChatMsgById(int chatroomId) {
+    	List<ChatMsgDTO> chatMsgs = sqlSession.selectList("getChatMsgById", chatroomId);
+    	System.out.println("chatMsgs:" + chatMsgs);
+        return chatMsgs;
+    }
+    
     // 추가적인 메서드들을 필요에 따라 구현합니다.
+    public ChatProfileDTO getTargetProfileById(int chatroomId) {
+    	ChatProfileDTO target = sqlSession.selectOne("getChatProfileById", chatroomId);
+    	System.out.println("target:" + target);
+    	return target;
+    }
 }
