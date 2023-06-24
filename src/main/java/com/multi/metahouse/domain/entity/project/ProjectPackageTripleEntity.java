@@ -27,7 +27,7 @@ public class ProjectPackageTripleEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="project_package_triple_id")
 	private Long projectPackageTripleId;
-	private Long projectId;
+	
 	private String basicPkgTitle;
 	private String basicPkgDescription;
 	private int basicPrice;
@@ -46,8 +46,7 @@ public class ProjectPackageTripleEntity {
 	private int premiumRevision;
 	private int premiumWorkdays;
 	
-//	@OneToOne(fetch = FetchType.LAZY)
-//	@MapsId //@MapsId 는 @id로 지정한 컬럼에 @OneToOne 이나 @ManyToOne 관계를 매핑시키는 역할
-//	@JoinColumn(name = "project_id")
-//	private ProjectEntity projectEntity;
+	@OneToOne
+	@JoinColumn(name = "project_id")
+	private ProjectEntity projectId;
 }

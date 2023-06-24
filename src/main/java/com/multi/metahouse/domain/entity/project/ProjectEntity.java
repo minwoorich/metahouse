@@ -18,26 +18,29 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+
 import com.multi.metahouse.domain.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@DynamicInsert
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="project")
+@Table(name = "project")
 public class ProjectEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="project_id")
+	@Column(name = "project_id")
 	private Long projectId;
-	@Column(name="creator_id")
+	@Column(name = "creator_id")
 	private String creatorId;
 	private String tag;
 	private String title;
@@ -45,29 +48,21 @@ public class ProjectEntity {
 	@CreationTimestamp
 	private LocalDateTime projectDate;
 	private String category1;
-	@Column(name="category2_pj")
+	@Column(name = "category2_pj")
 	private String category2Pj;
-	private String thumbnail; 
+	private String thumbnail;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name="creator_id")
-//	private User user;
-	
-	//mappedBy = "projectEntity", 
-	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="project_id")
-	private List<ProjectContentsEntity> projectContentsEntityList;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="project_id")
-	private ProjectPackageSingleEntity singleEntity;
-	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private ProjectPackageTripleEntity tripleEntity;
-	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	private List<AddOptionEntity> addOptionEntityList = new ArrayList<>();
 
-	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
+	private List<ProjectContentsEntity> projectContentsEntityList;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
+	private ProjectPackageSingleEntity singleEntity;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
+	private ProjectPackageTripleEntity tripleEntity;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
+	private List<AddOptionEntity> addOptionEntityList = new ArrayList<>();
+
 }
