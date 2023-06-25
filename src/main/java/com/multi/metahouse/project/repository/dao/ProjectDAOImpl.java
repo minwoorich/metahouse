@@ -21,12 +21,18 @@ public class ProjectDAOImpl implements ProjectDAO {
 		this.session = session;
 		this.projectRepo = projectRepo;
 	}
-
+	/* ----------------------민우 영역---------------------------- */
 	@Override
 	public void insert(ProjectEntity projectEntity) {
 		projectRepo.save(projectEntity);
 	}
-
+	@Override
+	public List<ProjectEntity> selectAllProjects() {
+		return projectRepo.findAll();
+	}
+	
+	
+	/* -------------------------------------------------------- */
 	@Override 
 	public List<ProjectDTO> test() {
 		return session.selectList("com.multi.metahouse.project.getProjectWithPrice");
@@ -36,12 +42,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit) {
 		return session.selectList("com.multi.metahouse.project.findOrderByReviewRating",limit);
 	}
+	
 
-//	@Override
-//	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	
 
 
 }

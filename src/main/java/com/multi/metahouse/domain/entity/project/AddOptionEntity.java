@@ -32,7 +32,8 @@ public class AddOptionEntity {
 	private int addOptionPrice;
 	private String addOptionDescription;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	///////////////외래키////////////////////////////////
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="project_id")
 	private ProjectEntity projectId;
 }

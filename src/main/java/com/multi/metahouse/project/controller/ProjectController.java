@@ -97,6 +97,13 @@ public class ProjectController {
 	}
 
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
+	// "판매 등록" 페이지 반환 
+	@GetMapping("project/my-products")
+	public String showProductList() {
+		
+		return "project/project_product_list";
+	}
+	
 	// 프로젝트 설명 입력하는 페이지 반환
 	@GetMapping("project/forms/descriptions")
 	public String writeForm(HttpSession session) {
@@ -209,7 +216,7 @@ public class ProjectController {
 										thumbnailPath,
 										contentsList);
 		
-		return "redirect:/main/index";
+		return "redirect:/project/my-products";
 	}
 
 	//////////////////// 승민님 파트//////////////////////////

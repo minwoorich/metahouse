@@ -37,7 +37,7 @@ public class ProjectPackageSingleEntity {
 	private int revision;
 	private int workdays;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "project_id")
 	private ProjectEntity projectId;
 	
