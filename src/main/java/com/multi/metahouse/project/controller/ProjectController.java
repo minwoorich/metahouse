@@ -97,7 +97,7 @@ public class ProjectController {
 	}
 
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
-	
+	// "판매 등록" 페이지 반환 
 	@GetMapping("project/my-products")
 	public String showProductList() {
 		return "project/project_product_list";

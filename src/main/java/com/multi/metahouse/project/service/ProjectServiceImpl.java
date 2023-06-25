@@ -41,11 +41,10 @@ public class ProjectServiceImpl implements ProjectService {
 		this.projectDao = projectDao;
 	}
 
-	@Override
+	@Override // 판매자가 본인의 서비스 프로젝트 등록
 	public void insertProjectInfo(ProjectFormDTO projectFormDto, ProjectPackageForm packageFormDto,
 			String thumbnailPath, List<ProjectContentsDTO> contentsList) {
-		System.out.println("서비스 호출!!!!!!%n");
-
+		
 		// 프로젝트 엔티티
 		ProjectEntity projectEntity = ProjectEntity.builder().creatorId(projectFormDto.getCreator_id())
 				.title(projectFormDto.getTitle()).description(projectFormDto.getDescription())

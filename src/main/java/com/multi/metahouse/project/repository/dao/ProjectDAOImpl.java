@@ -26,7 +26,10 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public void insert(ProjectEntity projectEntity) {
 		projectRepo.save(projectEntity);
 	}
-	
+	@Override
+	public List<ProjectEntity> selectAllProjects() {
+		return projectRepo.findAll();
+	}
 	
 	
 	/* -------------------------------------------------------- */
@@ -39,6 +42,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit) {
 		return session.selectList("com.multi.metahouse.project.findOrderByReviewRating",limit);
 	}
+	
 
 	
 

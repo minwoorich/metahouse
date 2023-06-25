@@ -22,13 +22,14 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 
+import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
 import com.multi.metahouse.domain.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@DynamicInsert
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -52,21 +53,30 @@ public class ProjectEntity {
 	private String category2Pj;
 	private String thumbnail;
 	
+////////////////////외래키들////////////////////
 //	@ManyToOne(cascade = CascadeType.ALL)
 //	@JoinColumn(name = "creator_id")
 //	User creatorId;
-	@Builder.Default
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
-	private List<ProjectContentsEntity> projectContentsEntityList = new ArrayList<>();
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
+	
+////////////////////////////////////////////////////////////////////////////////////
+	@OneToOne(cascade = CascadeType.ALL,  mappedBy = "projectId")
 	private ProjectPackageSingleEntity singleEntity = new ProjectPackageSingleEntity();
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
+	@OneToOne(cascade = CascadeType.ALL,  mappedBy = "projectId")
 	private ProjectPackageTripleEntity tripleEntity = new ProjectPackageTripleEntity();
 	
 	@Builder.Default
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
+	@OneToMany(cascade = CascadeType.ALL,  mappedBy = "projectId")
 	private List<AddOptionEntity> addOptionEntityList = new ArrayList<>();
+	
+	@Builder.Default
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "projectId")
+	private List<ProjectContentsEntity> projectContentsEntityList = new ArrayList<>();
+	
+	@Builder.Default
+	@OneToMany(cascade = CascadeType.ALL,  mappedBy = "projectId")
+	private List<ProjectReviewEntity> reviewEntityList = new ArrayList<>();
+	
+	
 
 }

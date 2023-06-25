@@ -9,7 +9,7 @@ public interface ProjectDAO {
 	/* ----------------------민우 영역---------------------------- */
 	void insert(ProjectEntity projectEntity);
 	
-	
+	List<ProjectEntity> selectAllProjects();
 	
 	/* -------------------------------------------------------- */
 
