@@ -4,36 +4,38 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.metahouse.unionreview">
 	<select id="findOrderByDate" parameterType="int" resultType="unionreview">
-		SELECT product_id, title, writer_id, review_text,rating,review_date,review_type
-	FROM (
-	  SELECT
-	  a.asset_id AS product_id,
-	  a.writer_id as writer_id , 
-	  a.review_text as review_text ,
-	  a.rating as rating,
-	  a.review_date AS review_date,
-	  ast.title as title,
-	  'a' AS review_type
-	  FROM asset_review a
-	  join assets ast
-	  on ast.asset_id = a.asset_id
-	) AS asset_reviews
-	UNION ALL
-	SELECT product_id, title, writer_id, review_text,rating,review_date,review_type
-	FROM (
-	  SELECT
-	  p.project_id AS product_id,
-	  p.writer_id as writer_id , 
-	  p.review_text as review_text ,
-	  p.rating as rating,
-	  p.review_date AS review_date,
-	  prj.title as title,
-	  'p' AS review_type
-	  FROM project_review p
-	  join project prj
-	  on prj.project_id = p.project_id
-	) AS project_reviews
-	ORDER BY review_date DESC
-	LIMIT #{limit}
+		SELECT product_id, title, writer_id, review_text,rating,review_date,profile_img,review_type
+		FROM (
+	 	 SELECT
+	 	 a.asset_id AS product_id,
+		  a.writer_id as writer_id , 
+		  a.review_text as review_text ,
+		  a.rating as rating,
+		  a.review_date AS review_date,
+		  ast.title as title,
+	      (select u.thumbnail_store_filename from `user` u where writer_id = u.user_id) as profile_img,
+		  'a' AS review_type
+		  FROM asset_review a
+		  join assets ast
+		  on ast.asset_id = a.asset_id
+		) AS asset_reviews
+		UNION ALL
+		SELECT product_id, title, writer_id, review_text,rating,review_date,profile_img,review_type
+		FROM (
+		  SELECT
+		  p.project_id AS product_id,
+		  p.writer_id as writer_id , 
+		  p.review_text as review_text ,
+		  p.rating as rating,
+		  p.review_date AS review_date,
+		  prj.title as title,
+	       (select u.thumbnail_store_filename from `user` u where writer_id = u.user_id) as profile_img,
+		  'p' AS review_type
+		  FROM project_review p
+		  join project prj
+		  on prj.project_id = p.project_id
+		) AS project_reviews
+		ORDER BY review_date DESC
+		LIMIT #{LIMIT}
 	</select>
 </mapper>

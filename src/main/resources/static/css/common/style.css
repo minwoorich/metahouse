@@ -26,6 +26,11 @@ input[type="number"]{
     --gray : #AAAAAA;
     --light-gray : rgba(170,170,170,0.2); /*#F5F5F5;*/
     --red : #ff0000;
+	--chat-yellow-5 : #FFEA7f;
+    --chat-yellow-5o : rgba(255,214,0,0.5);
+    --medium-purple-1: rgb(141,114,225,0.1);
+    --light-purple-3o : rgb(141,158,255,0.3);
+    --light-purple-3 :#C5CEFF ;
 
     /* 웹사이트 그림자 효과 */
     --shade-button : 4px 4px 8px rgba(0, 0, 0, 0.5);
