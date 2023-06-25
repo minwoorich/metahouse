@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
 		this.repository = repository;
 		this.projectDao = projectDao;
 	}
-
+////////////////////민우 영역////////////////////////////////////////////////////////////////////////
 	@Override // 판매자가 본인의 서비스 프로젝트 등록
 	public void insertProjectInfo(ProjectFormDTO projectFormDto, ProjectPackageForm packageFormDto,
 			String thumbnailPath, List<ProjectContentsDTO> contentsList) {
@@ -99,9 +99,15 @@ public class ProjectServiceImpl implements ProjectService {
 
 		}
 		projectDao.insert(projectEntity);
-//		repository.save(projectEntity);
 	}
 
+	@Override // 모든 프로젝트 가져오기(테스트용)
+	public List<ProjectFormDTO> selectAllProjects() {
+		List<ProjectEntity> entity = projectDao.selectAllProjects();
+		
+		
+		return null;
+	}
 	/*-------------------------------------------------------------------------------------*/
 
 	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
@@ -119,5 +125,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 		return projectlistPage;
 	}
+
+	
 
 }

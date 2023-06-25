@@ -14,7 +14,7 @@ public interface ProjectService {
 
 	/*-------------------민우 영역-------------------------------------------------*/
 	void insertProjectInfo(ProjectFormDTO projectFormDto, ProjectPackageForm packageFormDto, String thumbnailPath, List<ProjectContentsDTO> contentsList);
-//	List<ProjectFormDTO> selectAllProjects();	
+	List<ProjectFormDTO> selectAllProjects();	
 
 	/*-------------------------------------------------------------------------------------*/
 	public Page<ProjectEntity> list(String category1, String category2, int pageNo);
