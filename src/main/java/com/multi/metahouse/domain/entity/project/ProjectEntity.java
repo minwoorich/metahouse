@@ -52,16 +52,20 @@ public class ProjectEntity {
 	private String category2Pj;
 	private String thumbnail;
 	
-
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "creator_id")
+//	User creatorId;
+	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
-	private List<ProjectContentsEntity> projectContentsEntityList;
+	private List<ProjectContentsEntity> projectContentsEntityList = new ArrayList<>();
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
-	private ProjectPackageSingleEntity singleEntity;
+	private ProjectPackageSingleEntity singleEntity = new ProjectPackageSingleEntity();
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
-	private ProjectPackageTripleEntity tripleEntity;
-
+	private ProjectPackageTripleEntity tripleEntity = new ProjectPackageTripleEntity();
+	
+	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectId")
 	private List<AddOptionEntity> addOptionEntityList = new ArrayList<>();
 

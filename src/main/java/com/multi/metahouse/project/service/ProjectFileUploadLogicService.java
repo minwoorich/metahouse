@@ -16,16 +16,17 @@ import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 
 @Service
 public class ProjectFileUploadLogicService {
-	public List<ProjectContentsEntity> uploadFiles(List<MultipartFile> multipartFiles, String path)
+	public List<ProjectContentsDTO> uploadFiles(List<MultipartFile> multipartFiles, String path)
 			throws IllegalStateException, IOException {
-		List<ProjectContentsEntity> contentsList = new ArrayList<ProjectContentsEntity>();
+//		List<ProjectContentsEntity> contentsList = new ArrayList<ProjectContentsEntity>();
+		List<ProjectContentsDTO> contentsList = new ArrayList<ProjectContentsDTO>();
 		int count = 1;
 		for (MultipartFile multipartFile : multipartFiles) {
 			// uploadFile() 호출해서 사용
 			String storeFilename = uploadFile(multipartFile,path);
 			//ProjectContentsEntity 데이터 옮겨담기
 			
-			contentsList.add(ProjectContentsEntity
+			contentsList.add(ProjectContentsDTO
 					.builder()
 					.projectStoreFilename(storeFilename)
 					.projectFileNo(count).build());
