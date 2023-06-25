@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectPackageTripleForm implements ProjectPackageForm{
-	private int project_id;
-	private int add_option_id;
+	
 	//베이직 패키지
 	private String basic_pkg_title;
 	private String basic_pkg_description;

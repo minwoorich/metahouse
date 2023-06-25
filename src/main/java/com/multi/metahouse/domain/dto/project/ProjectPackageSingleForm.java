@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectPackageSingleForm implements ProjectPackageForm{
-	private int project_id;
+	
 	private int add_option_id;
 	private String pkg_title;
 	private String pkg_description;

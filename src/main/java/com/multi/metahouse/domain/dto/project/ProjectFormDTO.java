@@ -39,5 +39,4 @@ public class ProjectFormDTO {
 				.category2Pj(category2_pj)
 				.build();
 	}
-	
 }

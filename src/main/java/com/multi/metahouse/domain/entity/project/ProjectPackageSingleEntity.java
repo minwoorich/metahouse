@@ -1,5 +1,6 @@
 package com.multi.metahouse.domain.entity.project;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,7 @@ public class ProjectPackageSingleEntity {
 	private int revision;
 	private int workdays;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
 	private ProjectEntity projectId;
 	
