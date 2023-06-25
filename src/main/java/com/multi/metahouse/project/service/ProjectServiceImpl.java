@@ -99,8 +99,8 @@ public class ProjectServiceImpl implements ProjectService {
 			}
 
 		}
-
-		repository.save(projectEntity);
+		projectDao.insert(projectEntity);
+//		repository.save(projectEntity);
 	}
 
 	/*-------------------------------------------------------------------------------------*/
