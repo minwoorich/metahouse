@@ -25,3 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
+
+function createProfileElement(targetProfile){
+	addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
+	addPro += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
+	
+	return addPro;
+}

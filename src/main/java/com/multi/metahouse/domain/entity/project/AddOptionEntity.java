@@ -1,5 +1,6 @@
 package com.multi.metahouse.domain.entity.project;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,6 +32,7 @@ public class AddOptionEntity {
 	private int addOptionPrice;
 	private String addOptionDescription;
 	
+	///////////////외래키////////////////////////////////
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="project_id")
 	private ProjectEntity projectId;

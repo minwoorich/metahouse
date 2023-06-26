@@ -1,39 +1,64 @@
 package com.multi.metahouse.chat.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.multi.metahouse.domain.dto.ChatroomDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.multi.metahouse.chat.repository.dao.ChatDAO;
+import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
+import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
+
+@Service
 public class ChatServiceImpl implements ChatService {
 
+	ChatDAO dao;
+	
+	@Autowired
+	public ChatServiceImpl(ChatDAO dao) {
+		super();
+		this.dao = dao;
+	}
+
 	@Override
-	public void createChatRoom(ChatroomDTO chatRoomDTO) {
+	public void createChatroom(ChatroomDTO chatroomDTO) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void updateChatroom(ChatroomDTO chatRoomDTO) {
+	public void updateChatroom(ChatroomDTO chatroomDTO) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deleteChatroom(int chatroomId) {
+	public void deleteChatroom(String targetId) {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	/* 채팅방 조회 */
 	@Override
-	public ChatroomDTO getChatroomById(int chatroomId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ChatroomDTO> getChatroomView(String userId) {
+		List<ChatroomDTO> chatrooms = dao.getChatroomById(userId);
+		return chatrooms;
 	}
-
+	
+	/* 채팅방 메시지 조회 */
 	@Override
-	public List<ChatroomDTO> getAllChatRooms() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ChatMsgDTO> getChatMsgById(int chatroomId) {
+		return dao.getChatMsgById(chatroomId);
 	}
-
+	
+	/* 채팅 상대방 프로필 조회 */
+	@Override
+	public ChatProfileDTO getTargetProfileById(int chatroomId) {
+		return dao.getTargetProfileById(chatroomId);
+	}
+	
 }

@@ -97,6 +97,13 @@ public class ProjectController {
 	}
 
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
+	// "판매 등록" 페이지 반환 
+	@GetMapping("project/my-products")
+	public String showProductList() {
+		
+		return "project/project_product_list";
+	}
+	
 	// 프로젝트 설명 입력하는 페이지 반환
 	@GetMapping("project/forms/descriptions")
 	public String writeForm(HttpSession session) {
@@ -169,12 +176,13 @@ public class ProjectController {
 
 	@GetMapping("project/forms")
 	public String insertForm(HttpSession session) throws IllegalStateException, IOException {
-
+		ProjectFormDTO projectForm = new ProjectFormDTO();
 		ProjectPackageForm packageFormDto = null;
-		List<ProjectContentsEntity> contentsList = new ArrayList<>();
+		List<ProjectContentsDTO> contentsList = new ArrayList<>();
 
-		///////////// 세션에서 DTO 추출///////////////// // 세션에서 데이터 추출 - projectForm
-		ProjectFormDTO projectForm = (ProjectFormDTO) session.getAttribute("projectForm");
+		///////////// 세션에서 DTO 추출///////////////// 
+		// 세션에서 데이터 추출 - projectForm
+		projectForm = (ProjectFormDTO) session.getAttribute("projectForm");
 
 		// 세션에서 데이터 추출 - packageFormDto(단일,삼단 패키지)
 		if (session.getAttribute("projectPackageSingleForm") != null) {
@@ -182,60 +190,33 @@ public class ProjectController {
 		} else {
 			packageFormDto = (ProjectPackageTripleForm) session.getAttribute("projectPackageTripleForm");
 		}
-
+		
 		/////////////////// DTO에서 이미지 파일 추출 및 업로드//////////////////////// //
 //		  썸네일 추출 & 업로드 & DTO의 thumbnailPath 세팅 
 		String path = resourceLoader.getResource("classpath:static/upload/project_thumbnail_img").getFile().getAbsolutePath();
 		MultipartFile thumbnail = projectForm.getThumbnail();
 		String thumbnailPath = fileService.uploadFile(thumbnail, path);
-
+		
 		// 상세이미지들 추출 & 업로드 & ProjectContentsEntity 데이터 옮겨담기
-		if (!projectForm.getDetailImages().isEmpty()) { // 상세이미지들 추출
+		if (projectForm.getDetailImages() != null) { // 상세이미지들 추출
 			List<MultipartFile> detailImages = projectForm.getDetailImages(); // 상세이미지들 업로드
 			contentsList = fileService.uploadFiles(detailImages, path);
 		}
-   
-		//////////////////// DTO -> ENTITY로 데이터 추출//////////////
-		// 0) 모든 엔티티 객체 생성
-		ProjectEntity projectEntity = new ProjectEntity();
-		ProjectPackageSingleEntity singleEntity = new ProjectPackageSingleEntity();
-		ProjectPackageTripleEntity tripleEntity = new ProjectPackageTripleEntity();
-		AddOptionEntity addOptionEntity = new AddOptionEntity();
-
-		// 1) ProjectEntity에 데이터 옮겨담기
-		projectEntity = projectForm.toEntity();// DTO->엔티티 
-		projectEntity.setThumbnail(thumbnailPath); //썸네일 경로 주입
-				
-
-		// 2) ProjectPackageSingleEntity, ProjectPackageTripleEntity, AddOptionEntity 에 데이터 옮겨담기
-		List<AddOptionEntity> addOptionEntityList = new ArrayList<>();
-		if (packageFormDto instanceof ProjectPackageSingleForm) {// 단일패키지인경우 // single DTO -> 엔티티 
-			singleEntity = ((ProjectPackageSingleForm) packageFormDto).toEntity(); // single DTO 에 있던 addOptionList 추출
-			List<ProjectAddOption> addOptionList = ((ProjectPackageSingleForm) packageFormDto)
-					.getProjectAddOptionList();
-
-			// addOption DTO -> 엔티티 , 그리고 엔티티 리스트 생성
-			for (ProjectAddOption addOption : addOptionList) {
-				addOptionEntity = addOption.toEntity();
-				addOptionEntityList.add(addOptionEntity);
-			}
-			// ProjectEntity에 추후에 담을 예정
-		} else {// 삼단패키지 인경우 // triple DTO -> 엔티티
-			tripleEntity = ((ProjectPackageTripleForm) packageFormDto).toEntity();
-			// triple DTO 에 있던 addOptionList 추출
-			List<ProjectAddOption> addOptionList = ((ProjectPackageTripleForm) packageFormDto).getProjectAddOptionList();
-
-			// addOption DTO -> 엔티티 , 그리고 엔티티 리스트 생성
-			for (ProjectAddOption addOption : addOptionList) {
-				addOptionEntity = addOption.toEntity();
-				addOptionEntityList.add(addOptionEntity);
-			}
+		System.out.println("projectFormDto : " + projectForm);
+		System.out.println("packageFormDto : " + packageFormDto);
+		System.out.println("thumbnailPath : " + thumbnailPath);
+		for(ProjectContentsDTO dto : contentsList) {
+			System.out.println("content : " + dto);
 		}
-
+		
+		
 		//서비스 호출
-		projectService.insertProjectInfo(projectEntity);
-
-		return "redirect:/main/index";
+		projectService.insertProjectInfo(projectForm, 
+										packageFormDto, 
+										thumbnailPath,
+										contentsList);
+		
+		return "redirect:/project/my-products";
 	}
 
 	//////////////////// 승민님 파트//////////////////////////

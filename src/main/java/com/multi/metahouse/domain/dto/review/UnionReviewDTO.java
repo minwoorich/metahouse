@@ -20,4 +20,5 @@ public class UnionReviewDTO {
 	int rating;
 	Timestamp review_date;
 	String review_type;
+	String profile_img;
 }
