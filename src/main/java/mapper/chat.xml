@@ -19,7 +19,7 @@
     </delete>
 
     <select id="getChatroomById" parameterType="String" resultType="chatroom">
-        SELECT c.chatroom_id, c.user_1_id, c.user_2_id, c.open_date, DATE_FORMAT(c.last_chat_time, '%Y-%m-%d') as last_chat_time, last_chat, u.user_name as user_2_name 
+        SELECT c.chatroom_id, c.user_1_id, c.user_2_id, c.open_date, DATE_FORMAT(last_chat_time, '%Y-%m-%d') as last_chat_time, last_chat, u.user_name as user_2_name 
 		FROM chatroom c, user u
 		WHERE user_1_id = #{user_1_id}
 		  and c.user_2_id = u.user_id
