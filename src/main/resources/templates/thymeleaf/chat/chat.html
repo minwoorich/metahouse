@@ -39,20 +39,61 @@
 					let chatMsg = jsonData.chatMsg;
 					let loginUser = jsonData.loginUser;
 					
-					if(loginUser.userId != chatMsg.writer_id){
-						alert('1');
+					let myChatEle = '';
+										
+					console.log(chatMsg[0].write_time);
+					console.log(chatMsg[0].write_time.substr(2, 8));
+					console.log(chatMsg[0].write_time.substr(2, 8).replaceAll("-", "."));
+					console.log(chatMsg[0].write_time.substr(11, 5));
+					
+					// 채팅 요소 작성
+					for(let i=0; i<chatMsg.length; i++){
+						if(loginUser.userId == chatMsg[i].writer_id){
+							// 구매자 채팅
+							myChatEle += '<div class="chat-block chat-block--send">' +
+					                     '<div class="chat-block__message chat-block__message--send">' +
+					                     '<div class="chat-block__message-text">' +
+					                     	chatMsg[i].message_content +
+					            		 '</div><div class="chat-block__message-files"></div></div>' + 
+					        			 '<div class="chat-block__timestamp">' +
+					            		 '<div class="chat-block__timestamp-date">' +
+					            		 	chatMsg[i].write_time.substr(2, 8).replaceAll("-", ".") +
+					        			 '</div><div class="chat-block__timestamp-time">' +
+					        			 	chatMsg[i].write_time.substr(11, 5) +
+					        			 '</div></div></div>';
+						}else{
+							// 판매자 채팅
+							myChatEle += '<div class="chat-block chat-block--reception">' + 
+				        				 '<div class="chat-block__message chat-block__message--reception">' +
+				            			 '<div class="chat-block__message-text">' +
+				            			 	chatMsg[i].message_content +
+				            			 '</div><div class="chat-block__message-files"></div></div>' +
+				        				 '<div class="chat-block__timestamp">' +
+							             '<div class="chat-block__timestamp-date">' + 
+							              	chatMsg[i].write_time.substr(2, 8).replaceAll("-", ".") +
+							             '</div><div class="chat-block__timestamp-time">' +
+							             	chatMsg[i].write_time.substr(11, 5) +
+							             '</div></div></div>';
+						}
 					}
 					
+					console.log(myChatEle);
 					
-					let targetProfile = jsonData.targetProfile;
+					// 테스트 채팅 요소 삭제
+					$(".chat-body__chat-section").children().remove();
 					
-					// 기존 프로필 정보 삭제
+					// 채팅 요소 추가
+					$(".chat-body__chat-section").append(myChatEle);
+					
+					//let targetProfile = jsonData.targetProfile;
+					
+					// 프로필 요소 작성
+					addPro = createProfileElement(jsonData.targetProfile);
+					
+					// 기존 프로필 요소 삭제
 					$(".chat_body_profile-img").remove();
 					$(".chat_body_profile-info").remove();
 					
-					// 프로필 요소 작성
-					addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
-					addPro += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
 					
 					// 프로필 요소 추가
 					$(".chat-body__profile-section").append(addPro);

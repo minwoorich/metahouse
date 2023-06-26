@@ -30,6 +30,7 @@ public class ChatController {
 		this.service = service;
 	}
 
+	/* 채팅방 메인 페이지 */
 	@RequestMapping("/")
 	public ModelAndView viewChatroom(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -43,6 +44,7 @@ public class ChatController {
 		return mav;
 	}
 	
+	/* 채팅방 메시지, 상대방 프로필 조회 */
 	@GetMapping(value = "/load/chat", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String, Object> loadChat(HttpSession session, int chatroomId) {

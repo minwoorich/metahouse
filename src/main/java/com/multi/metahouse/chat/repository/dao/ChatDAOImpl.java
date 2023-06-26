@@ -21,36 +21,40 @@ public class ChatDAOImpl implements ChatDAO {
     public ChatDAOImpl(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
     }
-
+    
+	/* 채팅방 생성 */
     @Override
     public void insertChatroom(ChatroomDTO chatroomDTO) {
         sqlSession.insert("insertChatroom", chatroomDTO);
     }
 
+	/* 채팅방 수정 (필요한지?) */
     @Override
     public void updateChatroom(ChatroomDTO chatroomDTO) {
         sqlSession.update("updateChatroom", chatroomDTO);
     }
 
+    /* 채팅방 삭제 */
     @Override
     public void deleteChatroom(String targetId) {
         sqlSession.delete("deleteChatroom", targetId);
     }
 
+	/* 유저의 채팅방 조회 (view 호출) */
     @Override
     public List<ChatroomDTO> getChatroomById(String userId) {
     	List<ChatroomDTO> chatrooms = sqlSession.selectList("getChatroomById", userId);
         return chatrooms;
     }
     
+	/* 채팅방의 메시지 호출 */
     @Override
     public List<ChatMsgDTO> getChatMsgById(int chatroomId) {
     	List<ChatMsgDTO> chatMsgs = sqlSession.selectList("getChatMsgById", chatroomId);
-    	System.out.println("chatMsgs:" + chatMsgs);
         return chatMsgs;
     }
     
-    // 추가적인 메서드들을 필요에 따라 구현합니다.
+	/* 채팅 상대방의 프로필 호출 */
     public ChatProfileDTO getTargetProfileById(int chatroomId) {
     	ChatProfileDTO target = sqlSession.selectOne("getChatProfileById", chatroomId);
     	System.out.println("target:" + target);

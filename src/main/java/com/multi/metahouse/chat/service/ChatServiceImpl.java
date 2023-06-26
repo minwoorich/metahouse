@@ -41,38 +41,21 @@ public class ChatServiceImpl implements ChatService {
 		// TODO Auto-generated method stub
 
 	}
-
-//	@Override
-//	public Map<String, Object> getChatroomView(String userId) {
-//		System.out.println("service 메소드 실행!");
-//		
-//		Map<String, Object> chatroom_json = new HashMap<>();
-//		List<ChatroomDTO> chatrooms = dao.getChatroomById(userId);
-//		
-//		System.out.println(chatrooms);
-//		
-////		List<String> chatrooms_last_msg = new ArrayList<>();
-////		for(int i=0; i<chatrooms.size(); i++) {
-////			chatrooms_last_msg.add(dao.getLastMsgDateById(chatrooms.get(i).getChatroom_id()));
-////		}
-//		chatroom_json.put("chatrooms", chatrooms);
-////		chatroom_json.put("chatrooms_last_msg", chatrooms_last_msg);
-//		
-//		return chatroom_json;
-//	}
 	
+	/* 채팅방 조회 */
 	@Override
 	public List<ChatroomDTO> getChatroomView(String userId) {
 		List<ChatroomDTO> chatrooms = dao.getChatroomById(userId);
 		return chatrooms;
 	}
 	
-	// chatMsg 관련
+	/* 채팅방 메시지 조회 */
 	@Override
 	public List<ChatMsgDTO> getChatMsgById(int chatroomId) {
 		return dao.getChatMsgById(chatroomId);
 	}
 	
+	/* 채팅 상대방 프로필 조회 */
 	@Override
 	public ChatProfileDTO getTargetProfileById(int chatroomId) {
 		return dao.getTargetProfileById(chatroomId);
