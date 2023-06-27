@@ -13,6 +13,7 @@ import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioContentImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioPointImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioStyleImgDTO;
+import com.multi.metahouse.domain.entity.portfolio.PortfolioStyleImg;
 
 
 @Service
@@ -34,17 +35,16 @@ public class PortfolioPjStyleFileUploadLogicService {
 		return filedtolist;
 	}
 	
-	public List<PortfolioStyleImgDTO> uploadFiles(List<MultipartFile> multipartFiles, String path, String[] delListArr) throws IllegalStateException, IOException {
-		List<PortfolioStyleImgDTO> filedtolist = new ArrayList<PortfolioStyleImgDTO>();
+	public List<PortfolioStyleImg> entityUploadFiles(List<MultipartFile> multipartFiles, String path) throws IllegalStateException, IOException {
+		List<PortfolioStyleImg> filedtolist = new ArrayList<PortfolioStyleImg>();
 		//파일 갯수만큼 각 업로드된 파일 마다 번호를 증가시키며 생성 (순서 저장하는거)
-		
-		int count = 0;
+		int count = 1;
 		for(MultipartFile multipartFile : multipartFiles) {
 			//업로드를 하는 경우 원본파일명과 서버에서 식별할 수 있는 실제 서버에 저장되는 파일명 두 개를 관리
 			//클라이언트가 업로드한 원본 파일명
 			String storeFilename = uploadFile(multipartFile, path);
 			System.out.println("optionalFile-upload-method(storeFilename : " + storeFilename);
-			filedtolist.add(new PortfolioStyleImgDTO(null, null, storeFilename, delListArr[count]));
+			filedtolist.add(new PortfolioStyleImg(null, null, storeFilename, count+""));
 			count++;
 		}
 		return filedtolist;

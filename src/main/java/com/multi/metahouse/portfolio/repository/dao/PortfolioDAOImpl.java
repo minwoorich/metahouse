@@ -109,25 +109,25 @@ public class PortfolioDAOImpl implements PortfolioDAO {
 	
 	public List<PortfolioAttachFile> readAttachFile(String portfolioId){
 		List<PortfolioAttachFile> portfolioAttachFile = attachFileRepository.findByPortfolioId(portfolioId);
-		//System.out.println("id가"+ portfolioId +"인 portfolioAttachFile출력: " + portfolioAttachFile);
+		System.out.println("id가"+ portfolioId +"인 portfolioAttachFile출력: " + portfolioAttachFile);
 		return portfolioAttachFile;
 	}
 	
 	public List<PortfolioContentImg> readContentImg(String portfolioId){
 		List<PortfolioContentImg> portfolioContentImg = contentImgRepository.findByPortfolioId(portfolioId);
-		//System.out.println("id가"+ portfolioId +"인 portfolioContentImg출력: " + portfolioContentImg);
+		System.out.println("id가"+ portfolioId +"인 portfolioContentImg출력: " + portfolioContentImg);
 		return portfolioContentImg;
 	}
 	
 	public List<PortfolioPointImg> readPointImg(String portfolioId){
 		List<PortfolioPointImg> portfolioPointImg = pointImgRepository.findByPortfolioId(portfolioId);
-		//System.out.println("id가"+ portfolioId +"인 portfolioPointImg출력: " + portfolioPointImg);
+		System.out.println("id가"+ portfolioId +"인 portfolioPointImg출력: " + portfolioPointImg);
 		return portfolioPointImg;
 	}
 	
 	public List<PortfolioStyleImg> readStyleImg(String portfolioId){
 		List<PortfolioStyleImg> portfolioStyleImg = styleImgRepository.findByPortfolioId(portfolioId);
-		//System.out.println("id가"+ portfolioId +"인 portfolioStyleImg출력: " + portfolioStyleImg);
+		System.out.println("id가"+ portfolioId +"인 portfolioStyleImg출력: " + portfolioStyleImg);
 		return portfolioStyleImg;
 	}
 
@@ -163,4 +163,48 @@ public class PortfolioDAOImpl implements PortfolioDAO {
 		
 	}
 
+	
+	//update
+	@Override
+	public void updatePortfolio(PortfolioDTO portfolioDto) {
+		Portfolio table = portfolioRepository.findById(portfolioDto.getPortfolio_id()).orElseThrow(() -> new RuntimeException());
+		table.setCategory1(portfolioDto.getCategory1());
+		table.setCategory2(portfolioDto.getCategory2());
+		table.setPortfolioTitle(portfolioDto.getPortfolio_title());
+		table.setPortfolioPjStartDay(portfolioDto.getPortfolio_pj_start_day());
+		table.setPortfolioPjEndDay(portfolioDto.getPortfolio_pj_end_day());
+		if(portfolioDto.getMain_img_store_filename() != null) {
+			table.setMainImgStoreFilename(portfolioDto.getMain_img_store_filename());
+		}
+		table.setPortfolioPjContent(portfolioDto.getPortfolio_pj_content());
+		table.setPortfolioPjPoint(portfolioDto.getPortfolio_pj_point());
+		table.setPortfolioPjStyle(portfolioDto.getPortfolio_pj_style());
+		table.setNop(Integer.parseInt(portfolioDto.getNop()));
+		
+		portfolioRepository.save(table);
+	}
+
+	@Override
+	public void updateAttachFile(List<PortfolioAttachFile> attachFileList) {
+		attachFileRepository.saveAll(attachFileList);
+		
+	}
+
+	@Override
+	public void updateContentImg(List<PortfolioContentImg> contentImgList) {
+		contentImgRepository.saveAll(contentImgList);
+		
+	}
+
+	@Override
+	public void updatePointImg(List<PortfolioPointImg> pointImgList) {
+		pointImgRepository.saveAll(pointImgList);
+		
+	}
+
+	@Override
+	public void updateStyleImg(List<PortfolioStyleImg> styleImgList) {
+		styleImgRepository.saveAll(styleImgList);
+		
+	}
 }
