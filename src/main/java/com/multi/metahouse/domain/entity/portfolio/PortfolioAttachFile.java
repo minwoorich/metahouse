@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,7 +24,7 @@ import lombok.NonNull;
 @Table(name = "portfolio_attach_file")
 public class PortfolioAttachFile{
 	@Id
-	@NonNull
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String attachFileId;
 	private String portfolioId;
 	private String attachFilename;

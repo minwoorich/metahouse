@@ -36,4 +36,10 @@ public interface PortfolioDAO {
 	//profile에 출력할 portfolio List를 가져오는 메소드.
 	List<PortfolioDTO> selectPortfolioList(String userId);
 	List<PortfolioDTO> selectPortfolioList(PortfolioDTO dto);
+	
+	void updatePortfolio(PortfolioDTO portfolioDto);
+	void updateAttachFile(List<PortfolioAttachFile> attachFileList);
+	void updateContentImg(List<PortfolioContentImg> contentImgList);
+	void updatePointImg(List<PortfolioPointImg> pointImgList);
+	void updateStyleImg(List<PortfolioStyleImg> styleImgList);
 }

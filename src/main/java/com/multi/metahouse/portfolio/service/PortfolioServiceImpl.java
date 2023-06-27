@@ -14,7 +14,12 @@ import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioInfoDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioPointImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioStyleImgDTO;
+import com.multi.metahouse.domain.dto.portfolio.PortfolioUpdateDTO;
 import com.multi.metahouse.domain.entity.portfolio.Portfolio;
+import com.multi.metahouse.domain.entity.portfolio.PortfolioAttachFile;
+import com.multi.metahouse.domain.entity.portfolio.PortfolioContentImg;
+import com.multi.metahouse.domain.entity.portfolio.PortfolioPointImg;
+import com.multi.metahouse.domain.entity.portfolio.PortfolioStyleImg;
 import com.multi.metahouse.portfolio.repository.dao.PortfolioDAO;
 
 @Service
@@ -98,6 +103,47 @@ public class PortfolioServiceImpl implements PortfolioService {
 		return dao.selectPortfolioList(dto);
 	}
 
-	
-	
+	@Override
+	@Transactional
+	public void update(PortfolioUpdateDTO portfolioUpdateDTO) {
+		
+		String portfolioId = portfolioUpdateDTO.getPortfolioDto().getPortfolio_id();
+		
+		List<PortfolioContentImg> contentImgList = portfolioUpdateDTO.getContentImgList();
+		List<PortfolioPointImg> pointImgList = portfolioUpdateDTO.getPointImgList();
+		List<PortfolioStyleImg> styleImgList = portfolioUpdateDTO.getStyleImgList();
+		List<PortfolioAttachFile> attachFileList = portfolioUpdateDTO.getAttachFileList();
+
+		dao.deleteContentImg(portfolioId);
+		dao.deletePointImg(portfolioId);
+		dao.deleteStyleImg(portfolioId);
+		dao.deleteAttachFile(portfolioId);
+
+		for(int i=0; i<contentImgList.size(); i++) {
+			contentImgList.get(i).setPortfolioId(portfolioId);
+		}
+		
+		for(int i=0; i<pointImgList.size(); i++) {
+			pointImgList.get(i).setPortfolioId(portfolioId);
+		}
+		
+		for(int i=0; i<styleImgList.size(); i++) {
+			styleImgList.get(i).setPortfolioId(portfolioId);
+		}
+		if(attachFileList != null) {
+			for(int i=0; i<attachFileList.size(); i++) {
+				attachFileList.get(i).setPortfolioId(portfolioId);
+			}
+		}
+		
+		dao.updatePortfolio(portfolioUpdateDTO.getPortfolioDto());
+		dao.updateContentImg(contentImgList);
+		dao.updatePointImg(pointImgList);
+		dao.updateStyleImg(styleImgList);
+		
+		if(attachFileList != null) {
+			dao.updateAttachFile(attachFileList);
+		}
+
+ 	}
 }
