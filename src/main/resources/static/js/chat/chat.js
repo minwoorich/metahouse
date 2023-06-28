@@ -6,22 +6,23 @@ $(document).ready(function(){
 	let mydata = {};
 	$(".chatroom-card").on("click", function(){
 		chatroomId = $(this).attr("id").replace("chatroom", "");
-		
-		console.log(chatroomId);
-		
+		loginUser = $("#loginUser").val();
+//		console.log("chatroomId : " + chatroomId);
+//		console.log("loginUser : " + loginUser);
 		// 채팅방 채팅 불러오기
 		$.ajax({
 			url:"/metahaus/chat/load/chat",
 			type:"get",
 			data:{
-				"chatroomId" : chatroomId
+				"chatroomId" : chatroomId,
+				"loginUser" : loginUser
 			},
 			dataType:"json",
 			success:function(jsonData){
 				console.log(jsonData);
 				
 				let chatMsg = jsonData.chatMsg;
-				loginUser = jsonData.loginUser;
+//				loginUser = jsonData.loginUser;
 				
 				// 채팅 요소 작성
 				let myChatEle = createChatElement(chatMsg, loginUser);
@@ -50,7 +51,7 @@ $(document).ready(function(){
 					let resmsg = JSON.parse(msg.data);
 					let msgcss = "";
 					
-					if(resmsg.writer_id==loginUser.userId){
+					if(resmsg.writer_id==loginUser){
 						// 내 채팅
 						msgblkcss = "class='chat-block chat-block--send'";
 						msgcss = "class='chat-block__message chat-block__message--send'";
@@ -109,7 +110,7 @@ $(document).ready(function(){
 		 
 		// 서버로 보낼 메시지를 만들기
 		// 사용자 아이디, 지금은 input 태그에 입력한 것을 가져오지만 나중에는 세션에서 아이디 꺼내서 전달
-		mydata.writer_id = loginUser.userId;
+		mydata.writer_id = loginUser;
 		mydata.chatroom_id = chatroomId;
 		mydata.message_content = msg;
 		mydata.write_time = new Date();
@@ -131,7 +132,7 @@ $(document).ready(function(){
 		myChatEle = '';
 		
 		for(let i=0; i<chatMsg.length; i++){
-			if(loginUser.userId == chatMsg[i].writer_id){
+			if(loginUser == chatMsg[i].writer_id){
 				// 내 채팅
 				myChatEle += '<div class="chat-block chat-block--send">' +
 		                     '<div class="chat-block__message chat-block__message--send">' +
