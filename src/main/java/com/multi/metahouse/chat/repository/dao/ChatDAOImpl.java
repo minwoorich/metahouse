@@ -60,4 +60,10 @@ public class ChatDAOImpl implements ChatDAO {
     	System.out.println("target:" + target);
     	return target;
     }
+
+	@Override
+	public int insertMessage(ChatMsgDTO chatMsgDTO) {
+		return sqlSession.insert("insertChatMsg", chatMsgDTO);
+	}
+    
 }

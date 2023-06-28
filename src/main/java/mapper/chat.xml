@@ -7,6 +7,11 @@
         INSERT INTO chatroom (chatroom_id, user_1_id, user_2_id, open_date)
         VALUES (#{chatroom_id}, #{user_1_id}, #{user_2_id}, #{open_date})
     </insert>
+    	
+    <insert id="insertChatMsg" parameterType="chatmsg">
+    	INSERT INTO message
+    	VALUES (null, #{writer_id}, #{chatroom_id}, #{write_time}, #{message_content})
+    </insert>
 
     <update id="updateChatroom">
         UPDATE chatroom

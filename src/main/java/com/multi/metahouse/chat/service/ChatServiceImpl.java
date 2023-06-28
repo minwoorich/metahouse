@@ -60,5 +60,13 @@ public class ChatServiceImpl implements ChatService {
 	public ChatProfileDTO getTargetProfileById(int chatroomId) {
 		return dao.getTargetProfileById(chatroomId);
 	}
+
+	/* 채팅 메시지 저장 */
+	@Override
+	public int insertMessage(ChatMsgDTO chatMsgDTO) {
+		return dao.insertMessage(chatMsgDTO);
+	}
+	
+	
 	
 }
