@@ -13,8 +13,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
-import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

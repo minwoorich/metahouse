@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Alias("project")
-public class ProjectDTO {
+public class ProjectReviewDTO {
 	//column
 	private int project_id;
 	private String creator_id;
@@ -37,7 +37,7 @@ public class ProjectDTO {
 	private int review_count;
 	//리뷰평균
 	private double average_reviews;
-	public ProjectDTO(int project_id, String creator_id, String tag, String title, String description,
+	public ProjectReviewDTO(int project_id, String creator_id, String tag, String title, String description,
 			Timestamp project_date, int project_hits, String category1, String category2_pj, int price,
 			int review_count, double average_reviews) {
 		super();

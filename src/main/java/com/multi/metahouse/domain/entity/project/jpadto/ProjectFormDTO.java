@@ -1,4 +1,4 @@
-package com.multi.metahouse.domain.dto.project;
+package com.multi.metahouse.domain.entity.project.jpadto;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.multi.metahouse.project.repository.dao;
 
 import java.util.List;
 
-import com.multi.metahouse.domain.dto.project.ProjectDTO;
+import com.multi.metahouse.domain.dto.project.ProjectReviewDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 public interface ProjectDAO {
@@ -11,11 +11,13 @@ public interface ProjectDAO {
 	
 	List<ProjectEntity> selectAllProjects();
 	
+	void delete(Long project_id);
+	
 	/* -------------------------------------------------------- */
 
-	public List<ProjectDTO> test();
+	public List<ProjectReviewDTO> test();
 
-	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit);
+	public List<ProjectReviewDTO> findTopNByProjectReviewAvg(int limit);
 	
 	
 	
