@@ -126,7 +126,7 @@ public class AssetController {
 //		return "asset/asset_assetform02";
 //	}
 	
-	@GetMapping("/asset-product")
+	@GetMapping("asset/asset-product")
 	public String assetFormlist() {		
 		return "asset/asset_product_list";
 	}
