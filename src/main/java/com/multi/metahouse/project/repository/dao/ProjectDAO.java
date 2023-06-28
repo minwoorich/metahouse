@@ -21,8 +21,11 @@ public interface ProjectDAO {
 
 	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit);
 	
+	public List<ProjectDTO> findByCreatorId(String creatorId);
+	
 /*------------------------------- OSE -----------------------------*/
 	public ProjectDTO projectInfo(Long project_id);
 	public List<ProjectContentsDTO> projectImg(Long project_id);
 	public List<ProjectAddOption> projectOption(Long project_id);
+  
 }

@@ -7,4 +7,5 @@ public interface UserDAO {
 	User insert(User user);
 	User update(User user);
 	void delete(String userId);
+	User read(String userId);
 }

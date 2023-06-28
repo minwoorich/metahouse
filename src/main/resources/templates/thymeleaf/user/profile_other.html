@@ -7,6 +7,54 @@
 <title>Insert title here</title>
 <link href="/metahaus/css/market/page_bar.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="/metahaus/css/user/profile_other.css">
+<script type="text/javascript">
+	function next(el){
+	    let list = el.parentNode.querySelector(".banner-slider-list");
+	
+	    let listSize = list.offsetWidth;
+	    let itemSize = list.firstElementChild.offsetWidth;
+	    let countOfView = parseInt(listSize/itemSize);
+	
+	
+	
+	    let index = Number(list.getAttribute("index"));
+	    let itemCount = list.childElementCount;
+	
+	    if(index+countOfView >= itemCount){
+	        return;
+	    }
+	    index++;
+	    list.setAttribute("index",index);
+	    
+	    
+	    list.style.left = -itemSize*index+"px";
+	
+	}
+	
+	function pre(el){
+	    let list = el.parentNode.querySelector(".banner-slider-list");
+	
+	    let listSize = list.offsetWidth;
+	    let itemSize = list.firstElementChild.offsetWidth;
+	    let countOfView = parseInt(listSize/itemSize);
+	
+	
+	
+	    let index = Number(list.getAttribute("index"));
+	    let itemCount = list.childElementCount;
+	
+	    if(index<=0){
+	        list.style.left = 0;
+	        list.setAttribute("index",0);
+	        return;
+	    }
+	    index--;
+	    list.setAttribute("index",index);
+	    
+	    list.style.left = -itemSize*index+"px";
+	}
+
+</script>
 </head>
 <body>
 <div layout:fragment="content" class="profile_page_css">
@@ -17,24 +65,28 @@
 		<div class="profile_img_area">
 			<div class="profile_img">
 				<div class="profile_img_view">
-					<img alt="사진출력" src="/metahaus/images/test_img.jpg">
+					<img th:if="${otherProfileInfo.userInfo.thumbnailStoreFilename != null}" 
+						 th:src="|/metahaus/upload/userThumbnail/${otherProfileInfo.userInfo.thumbnailStoreFilename}|">
+					
+					<img th:unless="${otherProfileInfo.userInfo.thumbnailStoreFilename != null}" 
+						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div class="profile_user_name">
-					유세희
+					[[${otherProfileInfo.userInfo.userName}]]
 				</div>
 			</div>
 		</div>
 		<div class="profile_info">
 			<div class="profile_info_intro">
-				소개글이 여기서 출력됩니다.
+				[[${otherProfileInfo.userInfo.selfIntroduction}]]
 			</div>
 			<div class="profile_info_etc_area">
 				<div class="profile_info_etc_cover">
-					<div class="profile_info_etc">
-						<div class="profile_info_etc_title">email</div><div class="profile_info_etc_content">sehui@metahouse.com</div>
+					<div class="profile_info_etc">	
+						<div class="profile_info_etc_title">email</div><div class="profile_info_etc_content">[[${otherProfileInfo.userInfo.email}]]</div>
 					</div>
 					<div class="profile_info_etc">
-						<div class="profile_info_etc_title">phone</div><div class="profile_info_etc_content">010-7777-7777</div>
+						<div class="profile_info_etc_title">phone</div><div class="profile_info_etc_content">[[${otherProfileInfo.userInfo.phoneNumber}]]</div>
 					</div>
 				</div>
 				<div class="profile_chat_button_cover">
@@ -49,232 +101,111 @@
 		포트폴리오
 	</div>
 	<div class="profile_view_area">
-		<div class="info_card_view">
-			<div class="portfolio_info_card" onclick="location.href='/metahaus/mypage/portfolio'">
-				<div class="portfolio_info_img">
-					<img alt="사진" src="/metahaus/images/mincraft.jpg">
-				</div>
-				<hr>
-				<div class="portfolio_info_text">
-					[포트폴리오] META HAUS 제작
-				</div>
-			</div>
-			<div class="portfolio_info_card">
-				<div class="portfolio_info_img">
-					<img alt="사진" src="/metahaus/images/mincraft.jpg">
-				</div>
-				<hr>
-				<div class="portfolio_info_text">
-					[포트폴리오] META HAUS 제작2
-				</div>
-			</div>
-			<div class="portfolio_info_card">
-				<div class="portfolio_info_img">
-					<img alt="사진" src="/metahaus/images/mincraft.jpg">
-				</div>
-				<hr>
-				<div class="portfolio_info_text">
-					[포트폴리오] META HAUS 제작3
+		<div th:if="${portfolioList != null}">
+			<div class="info_card_view">
+				<div class="banner-slider-wrap">
+	       			<div th:if="${#arrays.isEmpty(portfolioList) != true}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+	       			<div th:if="${#arrays.isEmpty(portfolioList) != true}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+	       			<div class="slider-outter">
+						<div index="0" class="banner-slider-list">
+							<div class="banner-slider-item" th:each="portfolio:${portfolioList}">
+								<a th:href="@{/user/portfolio(userId=${otherProfileInfo.userInfo.userId}, portfolioId=${portfolio.portfolio_id})}">
+									<div class="portfolio_info_card">
+										<div class="portfolio_info_img">
+											<img th:src="|/metahaus/upload/portfolio/mainImg/${portfolio.main_img_store_filename}|" alt="대표 사진">
+										</div>
+										<hr>
+										<div class="portfolio_content_preview">
+											<div class="portfolio_info_text">
+												[[${portfolio.portfolio_title}]]
+											</div>
+											<div class="portfolio_info_etc">
+												<div>
+													카테고리: [[${portfolio.category1}]] > [[${portfolio.category2}]] <br/>
+													기간: [[${portfolio.portfolio_pj_start_day}]]~[[${portfolio.portfolio_pj_end_day}]] <br/>
+													참여인원: [[${portfolio.nop}]]
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="page_wrap">
-		<div class="page_nation">
-			<a class="arrow pprev" href="#">&lang;&lang;</a>
-			<a class="arrow prev" href="#">&lang;</a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a> 
-			<a class="arrow next" href="#">&rang;</a>
-			<a class="arrow nnext" href="#">&rang;&rang;</a>
+		<div th:if="${portfolioList == null}">
 		</div>
 	</div>
 	
 	<div class="profile_page_title">
-		판매상품
+		판매상품 (에셋)
 	</div>
 	<div class="profile_view_area">
-		<table class="products">
-				<tbody>
-					<tr>
-						<td>
-							<!-- Product -->
-						<div class="product">
-							<div class="product_img_cover">
-								<img class="product_img" src="/metahaus/images/test_img2.png" alt="Product 1" />
-							</div>
-							<div class="product_info">
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
-							</div>
+		<div th:if="${otherProfileInfo.assetInfo != null}">
+			<div class="banner-slider-wrap">
+				<div th:if="${#arrays.isEmpty(otherProfileInfo.assetInfo) != true}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+				<div th:if="${#arrays.isEmpty(otherProfileInfo.assetInfo) != true}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+				<div class="slider-outter">
+					<div index="0" class="banner-slider-list">
+						<div th:each="asset:${otherProfileInfo.assetInfo}" class="banner-slider-item2">
+							<a th:href="@{/asset/detail(assetNum=${asset.asset_id})}">
+								<div class="item-warp">
+									<div class="item-img-warp">
+										<img width=100% height=100%
+											th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"></img>
+									</div>
+									<div class="item-desc-warp">
+										<span th:text="${asset.title}" class="myfont-3"></span><br/>
+										<span th:text="${asset.description}" class="myfont-2"></span><br/>
+										<span th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}" class="myfont-1"></span><br/>
+										<span class="myfont-3">
+											<span th:text="${'★ '+asset.average_reviews}">★ 4.8 </span><br/>
+											| [[${asset.review_count}]]개의 평가
+										</span>
+									</div>
+								</div>
+							</a>
 						</div>
-					</td>
-					<td>
-						<!-- Product -->
-						<div class="product">
-							<div class="product_img_cover">
-								<img class="product_img" src="/metahaus/images/test_img2.png" alt="Product 1" />
-							</div>
-							<div class="product_info">
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
-							</div>
-						</div>
-					</td>
-					<td>
-						<!-- Product -->
-						<div class="product">
-							<div class="product_img_cover">
-								<img class="product_img" src="/metahaus/images/test_img2.png" alt="Product 1" />
-							</div>
-							<div class="product_info">
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
-							</div>
-						</div>
-					</td>
-					<td>
-						<!-- Product -->
-						<div class="product">
-							<div class="product_img_cover">
-								<img class="product_img" src="/metahaus/images/test_img2.png" alt="Product 1" />
-							</div>
-							<div class="product_info">
-								<span class="product_title">Product1</span>
-								<span class="product_seller">판매자A</span> 
-								<span class="product_price">30,000원</span>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="page_wrap">
-		<div class="page_nation">
-			<a class="arrow pprev" href="#">&lang;&lang;</a>
-			<a class="arrow prev" href="#">&lang;</a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a> 
-			<a class="arrow next" href="#">&rang;</a>
-			<a class="arrow nnext" href="#">&rang;&rang;</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:unless="${otherProfileInfo.assetInfo != null}">
 		</div>
 	</div>
 	
 	<div class="profile_page_title">
-		리뷰
+		판매상품 (프로젝트)
 	</div>
 	<div class="profile_view_area">
-		<div class="review_box">
-			<div class="reviewer_cover">
-				<div class="reviewer_thumbnail_cover">
-					<div class="reviewer_thumbnail">
-						<img alt="" src="/metahaus/images/test_img.jpg">
-					</div>
-					<div class="reviewer_name">
-						유세희
-					</div>
-				</div>
-				<div class="reviewer_star_rating">
-					<div class="star-ratings">
-						<div class="star-ratings-fill space-x-2 text-lg"
-					    :style="{ width: ratingToPercent + '%' }">
-							<span>★</span><span>★</span><span>★</span><span>★</span>
-						</div>
-						<div class="star-ratings-base space-x-2 text-lg">
-							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="purchased_item_name">
-				맵 제작해드립니다.
-			</div>
-			<div class="review_content_cover">
-				<div class="review_img_cover">
-					<div class="review_img">
-						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
-					</div>
-					<div class="review_img">
-						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
-					</div>	
-					<div class="review_img">
-						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
-					</div>			
-				</div>
-				<div class="review_content">
-					<div class="review_content_name">리뷰</div>
-					<div class="review_content_text">리뷰의 내용이 출력됩니다.</div>
-				</div>
-			</div>
-		</div>
-		<div class="review_box">
-			<div class="reviewer_cover">
-				<div class="reviewer_thumbnail_cover">
-					<div class="reviewer_thumbnail">
-						<img alt="" src="/metahaus/images/test_img.jpg">
-					</div>
-					<div class="reviewer_name">
-						유세희
-					</div>
-				</div>
-				<div class="reviewer_star_rating">
-					<div class="star-ratings">
-						<div class="star-ratings-fill space-x-2 text-lg"
-					    :style="{ width: ratingToPercent + '%' }">
-							<span>★</span><span>★</span><span>★</span><span>★</span>
-						</div>
-						<div class="star-ratings-base space-x-2 text-lg">
-							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+		<div class="banner-slider-wrap">
+			<div th:if="${#arrays.isEmpty(otherProfileInfo.projectInfo) != true}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+			<div th:if="${#arrays.isEmpty(otherProfileInfo.projectInfo) != true}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+			<div class="slider-outter">
+				<div index="0" class="banner-slider-list">
+					<div th:each="project:${otherProfileInfo.projectInfo}" class="banner-slider-item2">
+						<div class="item-warp">
+							<div class="item-img-warp">
+								<img width=100% height=100%
+									th:src="@{/upload/project_thumbnail_img/}+${project.main_img}"></img>
+							</div>
+							<div class="item-desc-warp">
+								<span th:text="${project.title}" class="myfont-3"></span><br/>
+								<span th:text="${project.description}" class="myfont-2"></span><br/>
+								<span th:text="${#numbers.formatInteger(project.price, 1, 'COMMA') + '원'}" class="myfont-1"></span><br/>
+								<span class="myfont-3">
+									<span th:text="${'★ '+project.average_reviews}"></span><br/>
+									| [[${asset.review_count}]]개의 평가
+								</span>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="purchased_item_name">
-				맵 제작해드립니다.
-			</div>
-			<div class="review_content_cover">
-				<div class="review_img_cover">
-					<div class="review_img">
-						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
-					</div>
-					<div class="review_img">
-						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
-					</div>	
-					<div class="review_img">
-						<img alt="리뷰사진1" src="/metahaus/images/test_img.jpg">
-					</div>			
-				</div>
-				<div class="review_content">
-					<div class="review_content_name">리뷰</div>
-					<div class="review_content_text">리뷰의 내용이 출력됩니다.</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="page_wrap">
-		<div class="page_nation">
-			<a class="arrow pprev" href="#">&lang;&lang;</a>
-			<a class="arrow prev" href="#">&lang;</a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a> 
-			<a class="arrow next" href="#">&rang;</a>
-			<a class="arrow nnext" href="#">&rang;&rang;</a>
-		</div>
-	</div>
-	
 </div>
 </body>
 </html>

@@ -24,4 +24,8 @@ public interface ProjectRepository extends JpaRepository<ProjectEntity, Long>{
 
 		Page<ProjectEntity> findByCategory1AndCategory2Pj(@Param("category1") String category1,
 				@Param("category2Pj") String category2, PageRequest pageRequest);
+		
+	/* ------------------------------------- YSH ------------------------------------- */
+		List<ProjectEntity> findByCreatorId(String creatorId);
+		
 }

@@ -10,6 +10,7 @@ import com.multi.metahouse.domain.dto.portfolio.PortfolioPointImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioStyleImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioUpdateDTO;
 import com.multi.metahouse.domain.entity.portfolio.Portfolio;
+import com.multi.metahouse.domain.entity.user.User;
 
 public interface PortfolioService {
 	void insert(PortfolioDTO portfolioDto, List<PortfolioContentImgDTO> contentImgDto, List<PortfolioPointImgDTO> pointImgDto, 
