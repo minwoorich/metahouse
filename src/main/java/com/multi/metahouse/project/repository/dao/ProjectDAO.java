@@ -13,6 +13,8 @@ public interface ProjectDAO {
 	
 	List<ProjectEntity> selectAllProjects();
 	
+	List<ProjectEntity> selectListByUserId(String userId);
+	
 	void delete(Long project_id);
 	
 	/* -------------------------------------------------------- */

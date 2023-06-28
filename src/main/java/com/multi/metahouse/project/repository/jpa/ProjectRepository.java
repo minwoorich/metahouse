@@ -14,6 +14,7 @@ import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 public interface ProjectRepository extends JpaRepository<ProjectEntity, Long>{
 	/* --------------------------------------민우-------------------------------------- */
+	List<ProjectEntity> findByCreatorId(String creatorId);
 	
 	
 	
