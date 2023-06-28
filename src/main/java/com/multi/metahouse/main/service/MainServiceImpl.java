@@ -34,13 +34,9 @@ public class MainServiceImpl implements MainService{
 		this.reviewDAO = reviewDAO;
 	}
 
-//	@Override
-//	public List<ProjectEntity> findTop9ByOrderByProjectHitsDesc() {
-//		return projectDAO.findTop9ByOrderByProjectHitsDesc();
-//	}
 
 	@Override
-	public List<ProjectDTO> test() {
+	public List<ProjectDTO>test() {
 		return projectDAO.test();
 	}
 
@@ -50,7 +46,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<ProjectDTO> findTopNByProjectReviewAvgWithPrice(int limit) {
+	public List<ProjectDTO>findTopNByProjectReviewAvgWithPrice(int limit) {
 		
 		return projectDAO.findTopNByProjectReviewAvg(limit);
 	}

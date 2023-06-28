@@ -56,5 +56,64 @@
 		WHERE creator_id=#{creator_id}
 		GROUP BY a.project_id
 		order by average_reviews desc
+      
+    <resultMap type="project" id="projectInfo">
+        <id column="project_id" property="project_id"/>
+        <result column="creator_id" property="creator_id"/>
+        <result column="tag" property="tag"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="project_date" property="project_date"/>
+        <result column="category1" property="category1"/>
+        <result column="category2_pj" property="category2_pj"/>
+        <result column="thumbnail" property="project_thumbnail_img"/>
+        <!-- singlePkg -->
+        <result column="pkg_title" property="pjtSingle.pkg_title"/>
+        <result column="pkg_description" property="pjtSingle.pkg_description" />
+        <result column="price" property="pjtSingle.price" />
+        <result column="revision" property="pjtSingle.revision" />
+        <result column="workdays" property="pjtSingle.workdays" />
+        <!-- basicPkg -->
+        <result column="basic_pkg_title" property="pjtTriple.basic_pkg_title"/>
+        <result column="basic_pkg_description" property="pjtTriple.basic_pkg_description" />
+        <result column="basic_revision" property="pjtTriple.basic_revision" />
+        <result column="basic_price" property="pjtTriple.basic_price" />
+        <result column="basic_workdays" property="pjtTriple.basic_workdays" />
+        <!-- economyPkg -->
+        <result column="economy_pkg_title" property="pjtTriple.economy_pkg_title"/>
+        <result column="economy_pkg_description" property="pjtTriple.economy_pkg_description" />
+        <result column="economy_revision" property="pjtTriple.economy_revision" />
+        <result column="economy_price" property="pjtTriple.economy_price" />
+        <result column="economy_workdays" property="pjtTriple.economy_workdays" />
+        <!-- premiumPkg -->
+        <result column="premium_pkg_title" property="pjtTriple.premium_pkg_title"/>
+        <result column="premium_pkg_description" property="pjtTriple.premium_pkg_description" />
+        <result column="premium_revision" property="pjtTriple.premium_revision" />
+        <result column="premium_price" property="pjtTriple.premium_price" />
+        <result column="premium_workdays" property="pjtTriple.premium_workdays" />
+        <!-- user -->
+        <result column="user_name" property="creator.userName" />
+        <result column="thumbnail_store_filename" property="creator.thumbnailStoreFilename" />
+	</resultMap>
+
+    <select id="findProject" parameterType="Long" resultMap="projectInfo">
+    	select p.*, 
+    		   s.pkg_title, s.pkg_description, s.price, s.revision, s.workdays,
+    		   t.basic_pkg_title, t.basic_pkg_description, t.basic_revision, t.basic_price, t.basic_workdays,
+    		   t.economy_pkg_title, t.economy_pkg_description, t.economy_revision, t.economy_price, t.economy_workdays, 
+    		   t.premium_pkg_title, t.premium_pkg_description, t.premium_revision, t.premium_price, t.premium_workdays,
+    		   u.user_name, u.thumbnail_store_filename
+    	from project p 
+    		left outer join project_package_single s on p.project_id = s.project_id
+			left outer join project_package_triple t on p.project_id = t.project_id
+			left outer join user u on p.creator_id = u.user_id
+		WHERE p.project_id = #{projectId}
+    </select>
+ 
+    <select id="findProjectImg" parameterType="Long" resultType="ProjectContentsDTO">
+    	select * from project_content where project_id = #{projectId}
+    </select>
+    <select id="findProjectOptioin" parameterType="Long" resultType="ProjectAddOption">
+    	select * from add_option where project_id = #{projectId}
     </select>
 </mapper>

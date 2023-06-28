@@ -1,7 +1,8 @@
-package com.multi.metahouse.domain.dto.project;
+package com.multi.metahouse.domain.entity.project.jpadto;
 
 import java.util.List;
 
+import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 

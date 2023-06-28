@@ -22,7 +22,6 @@ public class ProjectOrdersEntity {
 	private String orderId;
 	private String projectId;
 	private String buyerId;
-	private String projectOptionId;
 	private String preOrderStatus;
 	private String orderCommitDate;
 	private String request;
