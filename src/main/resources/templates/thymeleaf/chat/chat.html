@@ -8,8 +8,7 @@
 <link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
 
 <!-- 페이지 전용 css -->
-<link rel="stylesheet"
-	href="/metahaus/css/chat/chat.css">
+<link rel="stylesheet" href="/metahaus/css/chat/chat.css">
 
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/123626a3b2.js"
@@ -20,113 +19,35 @@
 
 <!-- 테스트 js 코드 -->
 <script type="text/javascript">
-	$(document).ready(function(){
-		// 채팅방의 onClick eventListener
-		$(".chatroom-card").on("click", function(){
-			let chatroomId = $(this).attr("id").replace("chatroom", "");
-			
-			// 채팅방 채팅 불러오기
- 			$.ajax({
-				url:"/metahaus/chat/load/chat",
-				type:"get",
-				data:{
-					"chatroomId" : chatroomId
-				},
-				dataType:"json",
-				success:function(jsonData){
-					console.log(jsonData);
-					
-					let chatMsg = jsonData.chatMsg;
-					let loginUser = jsonData.loginUser;
-					
-					let myChatEle = '';
-										
-					console.log(chatMsg[0].write_time);
-					console.log(chatMsg[0].write_time.substr(2, 8));
-					console.log(chatMsg[0].write_time.substr(2, 8).replaceAll("-", "."));
-					console.log(chatMsg[0].write_time.substr(11, 5));
-					
-					// 채팅 요소 작성
-					for(let i=0; i<chatMsg.length; i++){
-						if(loginUser.userId == chatMsg[i].writer_id){
-							// 구매자 채팅
-							myChatEle += '<div class="chat-block chat-block--send">' +
-					                     '<div class="chat-block__message chat-block__message--send">' +
-					                     '<div class="chat-block__message-text">' +
-					                     	chatMsg[i].message_content +
-					            		 '</div><div class="chat-block__message-files"></div></div>' + 
-					        			 '<div class="chat-block__timestamp">' +
-					            		 '<div class="chat-block__timestamp-date">' +
-					            		 	chatMsg[i].write_time.substr(2, 8).replaceAll("-", ".") +
-					        			 '</div><div class="chat-block__timestamp-time">' +
-					        			 	chatMsg[i].write_time.substr(11, 5) +
-					        			 '</div></div></div>';
-						}else{
-							// 판매자 채팅
-							myChatEle += '<div class="chat-block chat-block--reception">' + 
-				        				 '<div class="chat-block__message chat-block__message--reception">' +
-				            			 '<div class="chat-block__message-text">' +
-				            			 	chatMsg[i].message_content +
-				            			 '</div><div class="chat-block__message-files"></div></div>' +
-				        				 '<div class="chat-block__timestamp">' +
-							             '<div class="chat-block__timestamp-date">' + 
-							              	chatMsg[i].write_time.substr(2, 8).replaceAll("-", ".") +
-							             '</div><div class="chat-block__timestamp-time">' +
-							             	chatMsg[i].write_time.substr(11, 5) +
-							             '</div></div></div>';
-						}
-					}
-					
-					console.log(myChatEle);
-					
-					// 테스트 채팅 요소 삭제
-					$(".chat-body__chat-section").children().remove();
-					
-					// 채팅 요소 추가
-					$(".chat-body__chat-section").append(myChatEle);
-					
-					//let targetProfile = jsonData.targetProfile;
-					
-					// 프로필 요소 작성
-					addPro = createProfileElement(jsonData.targetProfile);
-					
-					// 기존 프로필 요소 삭제
-					$(".chat_body_profile-img").remove();
-					$(".chat_body_profile-info").remove();
-					
-					
-					// 프로필 요소 추가
-					$(".chat-body__profile-section").append(addPro);
-					
-				}
-				
-			})
-		})
-	})
+
 </script>
 
-<title>Insert title here</title>
+<title>Metahaus Chatrooms</title>
 </head>
 <body>
 	<div layout:fragment="content" class="chat-container">
 		<div class="chat-left-sidebar">
 			<div class="chat-search">
-				<input class="chat-search-bar" type="text" maxlength="30" 
+				<input class="chat-search-bar" type="text" maxlength="30"
 					placeholder="키워드를 입력하세요" value="" name=""
 					onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '키워드를 입력하세요'"/>
+					onblur="this.placeholder = '키워드를 입력하세요'" />
 				<button class="chat-search-button" type="button">
-					<i class="fa-regular fa-magnifying-glass fa-xl" style="color: #aaaaaa;"></i>
+					<i class="fa-regular fa-magnifying-glass fa-xl"
+						style="color: #aaaaaa;"></i>
 				</button>
 			</div>
 			<div class="chatroom-list-container">
 				<ul class="chatroom-list">
-					<li th:each="chatroom:${chatrooms}" th:id="'chatroom'+${chatroomStat.count}" class="chatroom-card">
+					<li th:each="chatroom:${chatrooms}"
+						th:id="'chatroom'+${chatroom.chatroom_id}" class="chatroom-card">
 						<div class="chatroom-card__profile-image">
-							<img th:src="'/metahaus/images/test_images/test0'+ ${chatroomStat.count} +'.jpeg'"/>
+							<img
+								th:src="'/metahaus/upload/userThumbnail/'+ ${profiles[chatroomStat.index].thumbnail_store_filename}" />
 						</div>
 						<div class="chatroom-card__info">
-							<div th:class="'chatroom-card__info-row0'+${chatroomStat.count}">
+							<div th:class="'chatroom-card__info-row01'">
+								<input type="hidden" th:id="loginUser" th:value="${loginUser.userId}"/>
 								<span class="username" th:text="${chatroom.user_2_name}"></span>
 								<span class="last-date" th:text="${chatroom.last_chat_time}"></span>
 							</div>
@@ -135,76 +56,49 @@
 							</div>
 						</div>
 					</li>
-					
+
 				</ul>
 			</div>
-			
+
 		</div>
 		<div class="chat-main">
 			<div class="chat-header">
-			<h1>방 이름</h1>
+				<h1>방 이름</h1>
 			</div>
 			<div class="chat-body">
-				<div class="chat-body__chat-section">
-					<div class="chat-block chat-block--send">
-				        <div class="chat-block__message chat-block__message--send">
-				            <div class="chat-block__message-text">
-				                안녕하세요 반가워요. 얼마까지 알아보셨어요
-				            </div>
-				            <div class="chat-block__message-files"></div>
-				        </div>
-				        <div class="chat-block__timestamp">
-				            <div class="chat-block__timestamp-date">22.02.12</div>
-				            <div class="chat-block__timestamp-time">17:25</div>
-				        </div>
-				    </div>
-				    <div class="chat-block chat-block--reception">
-				        <div class="chat-block__message chat-block__message--reception">
-				            <div class="chat-block__message-text">
-				                안녕하세요 반가워요
-				            </div>
-				            <div class="chat-block__message-files"></div>
-				        </div>
-				        <div class="chat-block__timestamp">
-				            <div class="chat-block__timestamp-date">22.02.12</div>
-				            <div class="chat-block__timestamp-time">17:25</div>
-				        </div>
-				    </div>
-				</div>
+				<div class="chat-body__chat-section"></div>
 				<div class="chat-body__profile-section">
-					<img class="chat_body_profile-img" src="/metahaus/images/test_images/test01.jpeg">
+					<!-- <img class="chat_body_profile-img"
+						src="/metahaus/images/test_images/test01.jpeg"> -->
 					<div class="chat_body_profile-info"></div>
 				</div>
-				
+
 			</div>
 			<div class="chat-footer">
-				<input class="chat-footer-row01"
-					placeholder="메시지를 입력해주세요" value="" name=""
-					onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '메시지를 입력해주세요'"/>
+				<input class="chat-footer-row01" placeholder="메시지를 입력해주세요" value=""
+					name="" onfocus="this.placeholder = ''"
+					onblur="this.placeholder = '메시지를 입력해주세요'" />
 				<div class="chat-footer-row02">
 					<div class="chat-functional-buttons">
-					<button class="functional-button functional-button--attachment">
-						<i class="fa-regular fa-paperclip fa-xl" style="color: #aaaaaa;"></i>
-						<span>파일첨부</span>
-					</button>
-					<button class="functional-button functional-button--delievery">
-						<i class="fa-regular fa-truck fa-xl" style="color: #aaaaaa;"></i>
-						<span>작업물 전송</span>
-					</button>
-					<button class="functional-button functional-button--report">
-						<i class="fa-regular fa-light-emergency fa-xl" style="color: #aaaaaa;"></i>
-						<span>신고 하기</span>
-					</button>
+						<button class="functional-button functional-button--attachment">
+							<i class="fa-regular fa-paperclip fa-xl" style="color: #aaaaaa;"></i>
+							<span>파일첨부</span>
+						</button>
+						<button class="functional-button functional-button--delievery">
+							<i class="fa-regular fa-truck fa-xl" style="color: #aaaaaa;"></i>
+							<span>작업물 전송</span>
+						</button>
+						<button class="functional-button functional-button--report">
+							<i class="fa-regular fa-light-emergency fa-xl"
+								style="color: #aaaaaa;"></i> <span>신고 하기</span>
+						</button>
+					</div>
+					<button class="send-button button--xsmall">전송</button>
 				</div>
-				<button class="send-button button--xsmall">
-						전송
-				</button>
-				</div>
-				
+
 			</div>
 		</div>
-		
+
 	</div>
 
 </body>

@@ -18,5 +18,7 @@ public interface AssetRepository extends JpaRepository<AssetEntity, String> {
 			@Param("category2") String category2, PageRequest pageRequest);
 	
 /*------------------------------------------- LCH -------------------------------------------*/
-
+	
+/*------------------------------------------- YSH -------------------------------------------*/
+	List<AssetEntity> findBySellerId(String sellerId);
 }

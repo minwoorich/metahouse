@@ -92,4 +92,14 @@
 		order by average_reviews desc
 		limit #{limit}
     </select>
+    
+    <!-- 세희 -->
+    <select id="findAssetInfo" parameterType="String" resultMap="assetWithReviewAvg">
+    	SELECT a.*, count(r.asset_review_id) review_count, AVG(r.rating) AS average_reviews
+		FROM assets a
+		LEFT JOIN asset_review r ON a.asset_id = r.asset_id
+		WHERE seller_id=#{seller_id}
+		GROUP BY a.asset_id
+		order by average_reviews desc
+    </select>
 </mapper>

@@ -56,6 +56,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return session.selectList("com.multi.metahouse.project.findOrderByReviewRating",limit);
 	}
 	
+	/* ------------------------ YSH --------------------------- */
+	@Override
+	public List<ProjectDTO> findByCreatorId(String creatorId) {
+		return session.selectList("com.multi.metahouse.project.findProjectInfo", creatorId);
+	}
+
 /*---------------------------- OSE -------------------------------*/
 	@Override
 	public ProjectDTO projectInfo(Long project_id) {
@@ -69,8 +75,5 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public List<ProjectAddOption> projectOption(Long project_id) {
 		return session.selectList("com.multi.metahouse.project.findProjectOptioin", project_id);
 	}
-	
-	
-
 
 }
