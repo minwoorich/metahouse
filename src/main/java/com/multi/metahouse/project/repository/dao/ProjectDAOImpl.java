@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.multi.metahouse.domain.dto.project.ProjectDTO;
+import com.multi.metahouse.domain.dto.project.ProjectReviewDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.project.repository.jpa.ProjectRepository;
 
@@ -31,17 +31,23 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return projectRepo.findAll();
 	}
 	
+	@Override
+	public void delete(Long projectId) {
+		projectRepo.deleteById(projectId);
+	}
+	
 	
 	/* -------------------------------------------------------- */
 	@Override 
-	public List<ProjectDTO> test() {
+	public List<ProjectReviewDTO> test() {
 		return session.selectList("com.multi.metahouse.project.getProjectWithPrice");
 	}
 
 	@Override
-	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit) {
+	public List<ProjectReviewDTO> findTopNByProjectReviewAvg(int limit) {
 		return session.selectList("com.multi.metahouse.project.findOrderByReviewRating",limit);
 	}
+	
 	
 
 	

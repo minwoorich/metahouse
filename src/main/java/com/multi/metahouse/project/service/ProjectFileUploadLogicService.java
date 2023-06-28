@@ -10,9 +10,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
-import com.multi.metahouse.domain.dto.project.ProjectPackageForm;
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageForm;
 
 @Service
 public class ProjectFileUploadLogicService {

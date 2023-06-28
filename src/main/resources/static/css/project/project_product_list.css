@@ -252,8 +252,12 @@ button {
     color: black;
     font-size: 16px;
     box-sizing: border-box;
-    width: 100%;
+    width: fit-content;
     height: fit-content;
+}
+
+.project-product-option ul > li > form{
+	width : fit-content;
 }
 
 .project-product-option ul > li:hover {
