@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	let loginUser = null;
 	let chatroomId = null;
+	let ws = null;
 	// 채팅방의 onClick eventListener
 	let mydata = {};
 	$(".chatroom-card").on("click", function(){
@@ -38,28 +39,36 @@ $(document).ready(function(){
 				$(".chat-body__profile-section").append(addPro);
 				
 				// 채팅 구현
-				ws = new WebSocket("ws://"+ location.host +"/metahaus/chat");
-				
-				console.log("web 소켓 생성 : " + ws);
+				if(!ws || ws.readyState !== WebSocket.OPEN){
+					ws = new WebSocket("ws://" + location.host + "/metahaus/chat");
+					console.log("web 소켓 생성 : " + ws);
+				}else{
+					console.log("open중인 web 소켓이 이미 존재합니다.");
+				}
 				
 				ws.onmessage = function(msg){
-					console.log(msg);
 					let resmsg = JSON.parse(msg.data);
-					console.log(resmsg);
 					let msgcss = "";
-					if(resmsg.id==$("loginUser").val()){
+					
+					if(resmsg.writer_id==loginUser.userId){
 						// 내 채팅
-						msgcss = "class=chat-block chat-block--send";
+						msgblkcss = "class='chat-block chat-block--send'";
+						msgcss = "class='chat-block__message chat-block__message--send'";
 					}else{
 						// 상대방 채팅
-						msgcss = "class=chat-block chat-block--reception";
+						msgblkcss = "class='chat-block chat-block--reception'";
+						msgcss = "class='chat-block__message chat-block__message--reception'";
 					}
 					// 메시지 객체에 저장된 실제 데이터 꺼내기
-					let item = '<div ' + msgcss + '><div class="chat-block__message chat-block__message--send"><div class="chat-block__message-text">';
-					item += resmsg.msg;
-					item += resmsg.date + "]</b></br>";
-					
-					$("#talklist").append(item);
+					let item = '<div ' + msgblkcss + '><div ' + msgcss + '><div class="chat-block__message-text">';
+						item += resmsg.message_content;
+						item += '</div><div class="chat-block__message-files"></div></div><div class="chat-block__timestamp"><div class="chat-block__timestamp-date">';
+						item += resmsg.write_time.substr(2, 8).replaceAll("-", ".");
+						item += '</div><div class="chat-block__timestamp-time">';
+						item += resmsg.write_time.substr(11, 5);
+						item += '</div></div></div>';
+						
+					$(".chat-body__chat-section").append(item);
 				}
 				// 웹소켓이 연결된 후에
 				ws.onopen = function(msg){
@@ -104,7 +113,6 @@ $(document).ready(function(){
 		mydata.chatroom_id = chatroomId;
 		mydata.message_content = msg;
 		mydata.write_time = new Date();
-		//mydata.write_time = new Date().toLocaleString();
 		let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
 		
 		// 웹소켓으로 메시지 전송
@@ -155,35 +163,3 @@ $(document).ready(function(){
 		return myChatEle;
 	}
 })
-
-
-
-/*
-document.addEventListener('DOMContentLoaded', function() {
-	function sendMessage() {
-		var input = document.querySelector('.chat-footer-row01');
-		var message = input.value.trim();
-
-		if (message !== '') {
-			var chatSection = document.querySelector('.chat-body__chat-section');
-			var newMessage = document.createElement('div');
-			newMessage.classList.add('message');
-			newMessage.textContent = message;
-			chatSection.appendChild(newMessage);
-
-			input.value = '';
-		}
-	} 
-
-	var sendButton = document.querySelector('.send-button');
-	sendButton.addEventListener('click', sendMessage);
-
-	var input = document.querySelector('.chat-footer-row01');
-	input.addEventListener('keydown', function(event) {
-	  	if (event.key === 'Enter' && !event.shiftKey) {
-    		event.preventDefault();
-      		sendMessage();
-		}
-	});
-});
-*/
