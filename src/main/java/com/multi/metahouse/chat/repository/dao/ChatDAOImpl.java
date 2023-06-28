@@ -1,8 +1,8 @@
 package com.multi.metahouse.chat.repository.dao;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +28,6 @@ public class ChatDAOImpl implements ChatDAO {
         sqlSession.insert("insertChatroom", chatroomDTO);
     }
 
-	/* 채팅방 수정 (필요한지?) */
-    @Override
-    public void updateChatroom(ChatroomDTO chatroomDTO) {
-        sqlSession.update("updateChatroom", chatroomDTO);
-    }
-
     /* 채팅방 삭제 */
     @Override
     public void deleteChatroom(String targetId) {
@@ -42,9 +36,15 @@ public class ChatDAOImpl implements ChatDAO {
 
 	/* 유저의 채팅방 조회 (view 호출) */
     @Override
-    public List<ChatroomDTO> getChatroomById(String userId) {
-    	List<ChatroomDTO> chatrooms = sqlSession.selectList("getChatroomById", userId);
+    public List<ChatroomDTO> getChatroomByUserId(String userId) {
+    	List<ChatroomDTO> chatrooms = sqlSession.selectList("getChatroomByUserId", userId);
         return chatrooms;
+    }
+    
+    @Override
+    public ChatroomDTO getChatroomById(int chatroomId) {
+    	ChatroomDTO chatroom = sqlSession.selectOne("getChatroomById", chatroomId);
+        return chatroom;
     }
     
 	/* 채팅방의 메시지 호출 */
@@ -55,10 +55,10 @@ public class ChatDAOImpl implements ChatDAO {
     }
     
 	/* 채팅 상대방의 프로필 호출 */
-    public ChatProfileDTO getTargetProfileById(int chatroomId) {
-    	ChatProfileDTO target = sqlSession.selectOne("getChatProfileById", chatroomId);
-    	System.out.println("target:" + target);
-    	return target;
+    public ChatProfileDTO getProfileById(String target) {
+    	ChatProfileDTO targetProfile = sqlSession.selectOne("getChatProfileById", target);
+    	System.out.println("targetProfile:" + targetProfile);
+    	return targetProfile;
     }
 
 	@Override
