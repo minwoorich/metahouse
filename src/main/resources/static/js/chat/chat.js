@@ -22,7 +22,7 @@ $(document).ready(function(){
 				console.log(jsonData);
 				
 				let chatMsg = jsonData.chatMsg;
-//				loginUser = jsonData.loginUser;
+				let targetProfile = jsonData.targetProfile;
 				
 				// 채팅 요소 작성
 				let myChatEle = createChatElement(chatMsg, loginUser);
@@ -32,7 +32,7 @@ $(document).ready(function(){
 				$(".chat-body__chat-section").append(myChatEle);
 				
 				// 프로필 요소 작성
-				addPro = createProfileElement(jsonData.targetProfile);
+				addPro = createProfileElement(targetProfile);
 				// 기존 프로필 요소 삭제
 				$(".chat_body_profile-img").remove();
 				$(".chat_body_profile-info").remove();
