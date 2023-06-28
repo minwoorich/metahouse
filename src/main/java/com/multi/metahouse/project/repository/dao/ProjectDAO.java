@@ -17,6 +17,6 @@ public interface ProjectDAO {
 
 	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit);
 	
-	
+	public List<ProjectDTO> findByCreatorId(String creatorId);
 	
 }

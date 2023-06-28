@@ -57,4 +57,9 @@ public class UserDAOImpl implements UserDAO {
 		repository.deleteById(userId);
 	}
 
+	@Override
+	public User read(String userId) {
+		return repository.findByUserId(userId);
+	}
+
 }

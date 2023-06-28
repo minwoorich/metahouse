@@ -39,10 +39,12 @@ import com.multi.metahouse.portfolio.service.PortfolioPjContentFileUploadLogicSe
 import com.multi.metahouse.portfolio.service.PortfolioPjPointFileUploadLogicService;
 import com.multi.metahouse.portfolio.service.PortfolioPjStyleFileUploadLogicService;
 import com.multi.metahouse.portfolio.service.PortfolioService;
+import com.multi.metahouse.user.service.UserService;
 
 @Controller
 public class PortfolioController {
 	PortfolioService service;
+	UserService userService;
 	MainImgUploadLogicService mainImgUploadService;
 	PortfolioAttachFileUploadLogicService attachFileUploadService;
 	PortfolioPjContentFileUploadLogicService pjContentFileUploadService;
@@ -51,13 +53,15 @@ public class PortfolioController {
 	ResourceLoader resourceLoader;
 	
 	@Autowired
-	public PortfolioController(PortfolioService service, MainImgUploadLogicService mainImgUploadService,
+	public PortfolioController(PortfolioService service, UserService userService,
+			MainImgUploadLogicService mainImgUploadService,
 			PortfolioAttachFileUploadLogicService attachFileUploadService,
 			PortfolioPjContentFileUploadLogicService pjContentFileUploadService,
 			PortfolioPjPointFileUploadLogicService pjPointFileUploadService,
 			PortfolioPjStyleFileUploadLogicService pjStyleFileUploadService, ResourceLoader resourceLoader) {
 		super();
 		this.service = service;
+		this.userService = userService;
 		this.mainImgUploadService = mainImgUploadService;
 		this.attachFileUploadService = attachFileUploadService;
 		this.pjContentFileUploadService = pjContentFileUploadService;
@@ -80,6 +84,26 @@ public class PortfolioController {
 		dto.setUser_id(userId);
 		List<PortfolioDTO> anotherportfolioList = service.selectPortfolioList(dto);
 		System.out.println(anotherportfolioList);
+		portfolioDetail.addObject("anotherportfolioList", anotherportfolioList);
+		return portfolioDetail;
+	}
+
+	@GetMapping("user/portfolio")
+	public ModelAndView userPortfolio(String userId, String portfolioId) {
+		ModelAndView portfolioDetail = new ModelAndView("portfolio/portfolio_detail_other");
+		
+		User userInfo = userService.readUserInfo(userId);
+		System.out.println("userInfo:"+userInfo);
+		portfolioDetail.addObject("userInfo", userInfo);
+		
+		PortfolioInfoDTO portfolioInfo = service.read(portfolioId);
+		portfolioDetail.addObject("portfolioInfo", portfolioInfo);
+		
+		PortfolioDTO dto = new PortfolioDTO();
+		dto.setPortfolio_id(portfolioId);
+		dto.setUser_id(userId);
+		List<PortfolioDTO> anotherportfolioList = service.selectPortfolioList(dto);
+		//System.out.println(anotherportfolioList);
 		portfolioDetail.addObject("anotherportfolioList", anotherportfolioList);
 		return portfolioDetail;
 	}

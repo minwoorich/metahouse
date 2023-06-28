@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="/metahaus/css/user/portfolio_detail.css">
+	<link rel="stylesheet" href="/metahaus/css/user/portfolio_detail_other.css">
 	<script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
     <script>
       function next(el){
@@ -64,13 +64,13 @@
 				<div class="ch-content-cover">
 					<div class="ch-profile-cover">
 						<div class="ch-profile">
-							<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
-								 th:src="|/metahaus/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
+							<img th:if="${userInfo.thumbnailStoreFilename != null}" 
+								 th:src="|/metahaus/upload/userThumbnail/${userInfo.thumbnailStoreFilename}|">
 							
-							<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
+							<img th:unless="${userInfo.thumbnailStoreFilename != null}" 
 								 src="/metahaus/images/test_img.jpg">
 						</div>
-						<div class="ch-expert">[[${session.loginUser.userName}]]</div>
+						<div class="ch-expert">[[${userInfo.userName}]]</div>
 					</div>
 				</div>
 			</div>
@@ -209,7 +209,7 @@
 		</div>
 		<!-- 작성자의 다른 포트폴리오 -->
 		<div class="content-cover">
-			<div class="subtitle">다른 포트폴리오도 만나보세요!</i></div>
+			<div th:if="${#arrays.isEmpty(anotherportfolioList) != true}" class="subtitle">다른 포트폴리오도 만나보세요!</i></div>
 			<div class="info_card_view">
 				<div class="banner-slider-wrap another-portfolio">
 	          			<div th:if="${#arrays.isEmpty(anotherportfolioList) != true}" class="btn-shape2 prebtn" onclick='pre(this)'>◀</div>
@@ -217,7 +217,7 @@
 	          			<div class="slider-outter">
 		                <div index="0" class="banner-slider-list">
 		                    <div class="banner-slider-portfolio" th:each="portfolio:${anotherportfolioList}">
-							<a th:href="@{/mypage/portfolio(portfolioId=${portfolio.portfolio_id})}">
+							<a th:href="@{/user/portfolio(userId=${userInfo.userId}, portfolioId=${portfolio.portfolio_id})}">
 								<div class="portfolio_info_card">
 									<div class="portfolio_info_img">
 										<img th:src="|/metahaus/upload/portfolio/mainImg/${portfolio.main_img_store_filename}|" alt="대표 사진">
@@ -242,14 +242,6 @@
 		            </div>
 		        </div>
 	        </div>
-		</div>
-		<div class="content-cover">
-			<hr>
-			<div class="button_area">
-				<div class="update_delete_button"><a th:href="@{/mypage/update_portfolio(portfolioId=${portfolioInfo.portfolio.portfolioId})}">수정하기</a></div>
-				<div class="update_delete_button"><a th:href="@{/mypage/delete_portfolio(portfolioId=${portfolioInfo.portfolio.portfolioId})}">삭제하기</a></div>
-			</div>
-			<hr>
 		</div>
 	</div>
 </body>
