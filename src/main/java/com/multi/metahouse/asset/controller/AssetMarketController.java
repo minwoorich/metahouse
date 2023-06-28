@@ -65,13 +65,7 @@ public class AssetMarketController {
 		String view = null;
 		User userInfo = (User) session.getAttribute("loginUser");
 
-		if (userInfo == null) {
-			view = "redirect:/login";
-		} else {
-			model.addAttribute("userId", userInfo.getUserId());
-			view = "order/asset_purchase";
-		}
-		return view;
+		return "order/asset_purchase";
 	}
 
 }
