@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.multi.metahouse.domain.dto.user.UserDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +29,13 @@ public class ProjectDTO {
 	private int project_hits;
 	private String category1;
 	private String category2_pj;
+
+	//프로젝트 패키지 정보 저장을 위한 변수	
+	private ProjectPackageSingleForm pjtSingle;
+	private ProjectPackageTripleForm pjtTriple;
+	//판매자 정보 저장을 위한 변수
+	private UserDTO creator;
+	
 	
 	
 	//extra data

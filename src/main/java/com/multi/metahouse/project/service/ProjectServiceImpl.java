@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
 import com.multi.metahouse.domain.dto.project.ProjectPackageForm;
 import com.multi.metahouse.domain.dto.project.ProjectPackageSingleForm;
@@ -24,7 +25,6 @@ import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageSingleEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
-import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.project.repository.dao.ProjectDAO;
 import com.multi.metahouse.project.repository.jpa.ProjectRepository;
 
@@ -108,7 +108,7 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return null;
 	}
-	/*-------------------------------------------------------------------------------------*/
+/*------------------------------------------ OSE -------------------------------------------*/
 
 	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
@@ -126,6 +126,17 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectlistPage;
 	}
 
-	
+	@Override
+	public ProjectDTO projectInfo(Long projectNum) {
+		return projectDao.projectInfo(projectNum);
+	}
+	@Override
+	public List<ProjectContentsDTO> projectImg(Long projectNum) {
+		return projectDao.projectImg(projectNum);
+	}
+	@Override
+	public List<ProjectAddOption> projectOption(Long projectNum) {
+		return projectDao.projectOption(projectNum);
+	}
 
 }

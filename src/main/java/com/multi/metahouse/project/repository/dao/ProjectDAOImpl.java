@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.domain.dto.project.ProjectAddOption;
+import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.project.repository.jpa.ProjectRepository;
@@ -43,7 +45,19 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return session.selectList("com.multi.metahouse.project.findOrderByReviewRating",limit);
 	}
 	
-
+/*---------------------------- OSE -------------------------------*/
+	@Override
+	public ProjectDTO projectInfo(Long project_id) {
+		return session.selectOne("com.multi.metahouse.project.findProject", project_id);
+	}
+	@Override
+	public List<ProjectContentsDTO> projectImg(Long project_id) {
+		return session.selectList("com.multi.metahouse.project.findProjectImg", project_id);
+	}
+	@Override
+	public List<ProjectAddOption> projectOption(Long project_id) {
+		return session.selectList("com.multi.metahouse.project.findProjectOptioin", project_id);
+	}
 	
 
 

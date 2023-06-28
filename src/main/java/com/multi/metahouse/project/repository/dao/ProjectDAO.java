@@ -2,6 +2,8 @@ package com.multi.metahouse.project.repository.dao;
 
 import java.util.List;
 
+import com.multi.metahouse.domain.dto.project.ProjectAddOption;
+import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
@@ -17,6 +19,8 @@ public interface ProjectDAO {
 
 	public List<ProjectDTO> findTopNByProjectReviewAvg(int limit);
 	
-	
-	
+/*------------------------------- OSE -----------------------------*/
+	public ProjectDTO projectInfo(Long project_id);
+	public List<ProjectContentsDTO> projectImg(Long project_id);
+	public List<ProjectAddOption> projectOption(Long project_id);
 }
