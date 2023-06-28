@@ -11,4 +11,6 @@
 	<logger name="jdbc.resultsettable" level="OFF" />
 	<logger name="jdbc.connection" level="OFF" />
 	 -->
+	<logger name="org.springframework.web.socket" level="DEBUG" />
+    <logger name="org.springframework.messaging.simp" level="DEBUG" />
 </configuration>

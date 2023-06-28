@@ -18,8 +18,11 @@ public interface ChatDAO {
     void deleteChatroom(String targetId);
     // 현재 세션 id 의 채팅방 조회
     List<ChatroomDTO> getChatroomById(String userId);
-    // 추가적인 메서드들을 필요에 따라 정의합니다.
+    // 채팅 메시지 조회
     List<ChatMsgDTO> getChatMsgById(int chatroomId);
-    
+    // 채팅 상대방 프로필 조회
     ChatProfileDTO getTargetProfileById(int chatroomId);
+    
+    // 채팅 메시지 저장
+    int insertMessage(ChatMsgDTO chatMsgDTO);
 }
