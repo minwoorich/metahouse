@@ -33,6 +33,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return projectRepo.findAll();
 	}
 	
+	@Override
+	public void delete(Long projectId) {
+		projectRepo.deleteById(projectId);
+	}
+	
 	
 	/* -------------------------------------------------------- */
 	@Override 

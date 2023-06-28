@@ -1,68 +1,6 @@
 $(document).ready(function () {
     // 맨처음 시작할때 이미지 카운터
 	updateImageCounters();
-	
-	$(".image-frame").hover(
-	        function () {
-	            const coverImage =
-	                $("<button type='button' data-toggle='modal' data-target='#delete-img-Modal'>" +
-	                    "<div>" +
-	                    "<i class='fa-solid fa-trash fa-2xl' style='color: rgba(255,0,0);'></i>" +
-	                    "<div/>" +
-	                    "</button>").attr("class", "delete-cover");
-	            $(this).append(coverImage);
-	        },
-	        function () {
-	            $(this).find(".delete-cover").remove();
-	        }
-	    )
-
-
-	    //사진 누르면 삭제 모달뜨고 버튼 누르면 삭제완료됨
-	    var delContentImg = [];
-		var delPointImg = [];
-		var delStyleImg = [];
-	
-	    const deleteBtn = $("#delete-img-Modal").find("button");
-	    //삭제할 사진을 누르면 해당 사진 객체 저장 + 모달 뜸
-	    $(".image-frame").on("click", function (event) {
-	        const deleteTarget = $(this);
-	        //console.log($(this).attr("value"));
-	        let delContentImgTag = null;
-	        let delPointImgTag = null;
-	        let delStyleImgTag = null;
-	        
-	        if($(this).attr('class') === "image-frame option1-img"){
-	        	delContentImgTag = $(this).attr("value");
-	        }else if($(this).attr('class') === "image-frame option2-img"){
-	        	delPointImgTag = $(this).attr("value");
-	        }else if($(this).attr('class') === "image-frame option3-img"){
-	        	delStyleImgTag = $(this).attr("value");
-	        };
-	        
-	        
-	        //모달 버튼 누르면 삭제
-	        deleteBtn.on("click", function () {
-	            deleteTarget.remove();
-	            if(delContentImgTag != null){
-	            	delContentImg.push(delContentImgTag);
-	            	delContentImgTag = null;
-	            }
-	            if(delPointImgTag != null){
-	            	delPointImg.push(delPointImgTag);
-	            	delPointImgTag = null;
-	            }
-	            if(delStyleImgTag != null){
-	            	delStyleImg.push(delStyleImgTag);
-	            	delStyleImgTag = null;
-	            }
-	            console.log("delContentImg: "+delContentImg);
-	            console.log("delPointImg: "+delPointImg);
-	            console.log("delStyleImg: "+delStyleImg);
-	            //등록된 사진개수가 한도 까지 등록된경우 추가 버튼 사라짐
-	            updateImageCounters();
-	        });
-	    });
 
     // 맨 처음 시작할 때 이미지 추가 버튼 상태
     function updateImageCounters() {
@@ -430,6 +368,7 @@ $(document).ready(function () {
     
     $("#submit").on("click", function(){
     	let myformdata = new FormData();
+    	let portfolioId = $("#portfolioId").val();
 		let userId = $("#userId").val();
 		let category1 = $("#category1").val();
 		let category2 = $("#category2").val();
@@ -453,7 +392,7 @@ $(document).ready(function () {
 		console.log(myformdata+","+userId+","+category1+","+category2+","+title+","+startDay+","+endDay+","+nop+","+multipartMainImg+","+
 				portfolioPjContentImg+","+portfolioPjContent+","+portfolioPjPointImg+","+portfolioPjPoint+","+portfolioPjStyleImg+","+portfolioPjStyle+","+portfolioAttachFile);
 		
-		myformdata.append("portfolio_id", null);
+		myformdata.append("portfolio_id", portfolioId);
 		myformdata.append("user_id", userId);
 		myformdata.append("category1", category1);
 		myformdata.append("category2", category2);
@@ -497,19 +436,7 @@ $(document).ready(function () {
 		}
 		
 		
-		//기존 이미지 중 삭제된 부분 넣음
-		myformdata.append("delContentImg", delContentImg);
-		myformdata.append("delPointImg", delPointImg);
-		myformdata.append("delStyleImg", delStyleImg);
 		
-		//기존 이미지를 삭제하지 않고 추가한다면 추가될 위치에 대한 값
-		let contentSize = $("#content-size").val();
-		let pointSize = $("point-size").val();
-		let styleSize = $("style-size").val();		
-		
-		myformdata.append("contentSize", contentSize);
-		myformdata.append("pointSize", pointSize);
-		myformdata.append("styleSize", styleSize);
 		
 		$.ajax({
 			url:"/metahaus/mypage/update_portfolio",

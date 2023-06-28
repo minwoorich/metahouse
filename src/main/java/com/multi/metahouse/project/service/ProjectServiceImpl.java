@@ -16,15 +16,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
-import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
-import com.multi.metahouse.domain.dto.project.ProjectPackageForm;
-import com.multi.metahouse.domain.dto.project.ProjectPackageSingleForm;
-import com.multi.metahouse.domain.dto.project.ProjectPackageTripleForm;
 import com.multi.metahouse.domain.entity.project.AddOptionEntity;
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageSingleEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageForm;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageSingleForm;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageTripleForm;
 import com.multi.metahouse.project.repository.dao.ProjectDAO;
 import com.multi.metahouse.project.repository.jpa.ProjectRepository;
 
@@ -46,9 +47,14 @@ public class ProjectServiceImpl implements ProjectService {
 			String thumbnailPath, List<ProjectContentsDTO> contentsList) {
 		
 		// 프로젝트 엔티티
-		ProjectEntity projectEntity = ProjectEntity.builder().creatorId(projectFormDto.getCreator_id())
-				.title(projectFormDto.getTitle()).description(projectFormDto.getDescription())
-				.category2Pj(projectFormDto.getCategory2_pj()).thumbnail(thumbnailPath).build();
+		ProjectEntity projectEntity = ProjectEntity.builder().
+				creatorId(projectFormDto.getCreator_id())
+				.title(projectFormDto.getTitle())
+				.description(projectFormDto.getDescription())
+				.category1(projectFormDto.getCategory1())
+				.category2Pj(projectFormDto.getCategory2_pj())
+				.thumbnail(thumbnailPath)
+				.build();
 		System.out.println("컨텐츠 리스트 : " + projectEntity.getProjectContentsEntityList());
 
 		// 싱글 패키지 엔티티
@@ -102,11 +108,19 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override // 모든 프로젝트 가져오기(테스트용)
-	public List<ProjectFormDTO> selectAllProjects() {
-		List<ProjectEntity> entity = projectDao.selectAllProjects();
+	public List<ProjectListDTO> selectAllProjects() {
+		List<ProjectEntity> entityList = projectDao.selectAllProjects();
+		List<ProjectListDTO> dto = new ArrayList<ProjectListDTO>();
+		for(ProjectEntity entity : entityList) {
+			dto.add((new ProjectListDTO()).fromEntity(entity));
+		}
 		
-		
-		return null;
+		return dto;
+	}
+	
+	@Override
+	public void deleteProject(Long projectId) {
+		projectDao.delete(projectId);
 	}
 /*------------------------------------------ OSE -------------------------------------------*/
 
@@ -125,6 +139,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 		return projectlistPage;
 	}
+	
 
 	@Override
 	public ProjectDTO projectInfo(Long projectNum) {
