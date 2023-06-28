@@ -6,13 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
-import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
-import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageForm;
+import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 
 @Service
 public class ProjectFileUploadLogicService {

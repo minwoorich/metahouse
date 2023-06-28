@@ -13,19 +13,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.multi.metahouse.domain.dto.project.ProjectAddOption;
+import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.project.AddOptionEntity;
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageSingleEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
-import com.multi.metahouse.domain.entity.project.jpadto.ProjectAddOption;
-import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageForm;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageSingleForm;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageTripleForm;
-import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.project.repository.dao.ProjectDAO;
 import com.multi.metahouse.project.repository.jpa.ProjectRepository;
 
@@ -122,7 +122,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public void deleteProject(Long projectId) {
 		projectDao.delete(projectId);
 	}
-	/*-------------------------------------------------------------------------------------*/
+/*------------------------------------------ OSE -------------------------------------------*/
 
 	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
@@ -141,6 +141,17 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 
-	
+	@Override
+	public ProjectDTO projectInfo(Long projectNum) {
+		return projectDao.projectInfo(projectNum);
+	}
+	@Override
+	public List<ProjectContentsDTO> projectImg(Long projectNum) {
+		return projectDao.projectImg(projectNum);
+	}
+	@Override
+	public List<ProjectAddOption> projectOption(Long projectNum) {
+		return projectDao.projectOption(projectNum);
+	}
 
 }

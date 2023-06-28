@@ -1,4 +1,4 @@
-package com.multi.metahouse.domain.entity.project.jpadto;
+package com.multi.metahouse.domain.dto.project;
 
 import com.multi.metahouse.domain.entity.project.AddOptionEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageSingleEntity;

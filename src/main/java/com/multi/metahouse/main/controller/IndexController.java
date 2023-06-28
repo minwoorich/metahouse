@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
-import com.multi.metahouse.domain.dto.project.ProjectReviewDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.review.UnionReviewDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.user.User;
@@ -36,7 +36,7 @@ public class IndexController {
 		
 		List<AssetDTO> assetList = service.findTopNByAssetReviewAvg(9);
 		
-		List<ProjectReviewDTO> projectList = service.findTopNByProjectReviewAvgWithPrice(9);
+		List<ProjectDTO> projectList = service.findTopNByProjectReviewAvgWithPrice(9);
 		List<UnionReviewDTO> reviewList = service.findOrderByDate(9);
 		
 		reviewList.forEach((r)->{

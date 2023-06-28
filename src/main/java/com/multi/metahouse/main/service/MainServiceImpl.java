@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.multi.metahouse.asset.repository.dao.AssetDAO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
-import com.multi.metahouse.domain.dto.project.ProjectReviewDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.review.UnionReviewDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
@@ -36,7 +36,7 @@ public class MainServiceImpl implements MainService{
 
 
 	@Override
-	public List<ProjectReviewDTO>test() {
+	public List<ProjectDTO>test() {
 		return projectDAO.test();
 	}
 
@@ -46,7 +46,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<ProjectReviewDTO>findTopNByProjectReviewAvgWithPrice(int limit) {
+	public List<ProjectDTO>findTopNByProjectReviewAvgWithPrice(int limit) {
 		
 		return projectDAO.findTopNByProjectReviewAvg(limit);
 	}
