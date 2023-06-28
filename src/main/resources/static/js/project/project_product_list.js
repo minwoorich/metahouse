@@ -3,31 +3,21 @@
 $(document).ready(function () {
 
     //옵션 드롭다운
-    $("project-product-option").click(function () {
+    $(".project-product-option").click(function () {
         $(this).find(".project-product-option-dropdown").toggle();
     });
 
 
     //옵션 드롭다운 - 삭제하기
-    $(".project-product-option-dropdown li a").click(function () {
-        $(this)
+    $(".project-product-option-dropdown li button").click(function (event) {
+    	let deleteForm = $(this).closest("form");
+        event.preventDefault();
+        //모달에서 delete누르면 form 수행
+        $("#deleteProjectModal .delete").click(function(){
+        	deleteForm.submit();
+        })
     });
 
-    //카드 호버
-    /*$(".project-product-card").mouseover(function (event) {
-        event.stopPropagation();
-        var target = $(event.target); // 이벤트가 발생한 요소
-        $(target).css({
-            "background-color": "rgba(0,0,0,0.1)",
-            "transition": "0.5s"
-        });
-
-    }).mouseout(function (event) {
-        event.stopPropagation();
-        var target = $(event.target); // 이벤트가 발생한 요소
-        $(target).css("background-color", ""); // 원래 상태로 돌아가는 예시 (배경색 제거)
-
-    });*/
 
 
     //카드 클릭 -> 상세보기 페이지로 이동

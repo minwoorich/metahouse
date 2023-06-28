@@ -39,6 +39,7 @@ public class PointDAOImpl implements PointDAO {
 	}
 	
 	// User 충전 포인트 업데이트
+	// !!!트랜잭션 로직 추가 필요
 	@Override
 	public void chargePoint(User loginUser, int chargeAmount) {
 		loginUser.setPoint(loginUser.getPoint() + chargeAmount);

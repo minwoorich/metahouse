@@ -70,7 +70,7 @@
 			 <tr th:each="asset, i:${assetlist}"  th:if="${i.index%4==0}">
 				<!-- Product1 -->
 					<td th:if="${i.index < i.size}" >
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index].assetId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index].mainImg != null}"
 									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index].mainImg}"/>
@@ -89,9 +89,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${assetlist[i.index].title}" 
-									th:href="@{/asset/detail(assetNum=${assetlist[i.index].assetId})}" 
-									class="product_title"></a>
+								<a th:text="${assetlist[i.index].title}" class="product_title"></a>
 								<span th:text="${assetlist[i.index].sellerId}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index].price}+원" class="product_price"></span>
 							</div>
@@ -99,7 +97,7 @@
 					</td>
 				<!-- Product2 -->
 					<td th:if="${i.index+1 < i.size}">
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+1].assetId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index+1].mainImg != null}"
 									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+1].mainImg}"/>
@@ -118,9 +116,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${assetlist[i.index+1].title}"
-									th:href="@{/asset/detail(assetNum=${assetlist[i.index+1].assetId})}" 
-									class="product_title"></a>
+								<a th:text="${assetlist[i.index+1].title}" class="product_title"></a>
 								<span th:text="${assetlist[i.index+1].sellerId}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index+1].price}+원" class="product_price"></span>
 							</div>
@@ -128,7 +124,7 @@
 					</td>
 				<!-- Product3 -->
 					<td th:if="${i.index+2 < i.size}" >
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+2].assetId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index+2].mainImg != null}"
 									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+2].mainImg}"/>
@@ -147,9 +143,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${assetlist[i.index+2].title}"
-									th:href="@{/asset/detail(assetNum=${assetlist[i.index+2].assetId})}" 
-									class="product_title"></a>
+								<a th:text="${assetlist[i.index+2].title}" class="product_title"></a>
 								<span th:text="${assetlist[i.index+2].sellerId}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index+2].price}+원" class="product_price"></span>
 							</div>
@@ -157,7 +151,7 @@
 					</td>
 				<!-- Product4 -->
 					<td th:if="${i.index+3 < i.size}">
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+3].assetId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${assetlist[i.index+3].mainImg != null}"
 									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+3].mainImg}"/>
@@ -176,9 +170,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${assetlist[i.index+3].title}" 
-									th:href="@{/asset/detail(assetNum=${assetlist[i.index+3].assetId})}" 
-									class="product_title"></a>
+								<a th:text="${assetlist[i.index+3].title}" class="product_title"></a>
 								<span th:text="${assetlist[i.index+3].sellerId}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index+3].price}+원" class="product_price"></span>
 							</div>

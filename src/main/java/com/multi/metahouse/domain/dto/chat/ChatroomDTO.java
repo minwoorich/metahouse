@@ -13,9 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Alias("chatroom")
 public class ChatroomDTO {
-	private int chatroomId;
-	private String user1Id;
-	private String user2Id;
-	private Date openDate;
-	
+	private int chatroom_id;
+	private String user_1_id;
+	private String user_2_id;
+	private Date open_date;
+	private String last_chat_time;
+	private String last_chat;
+	private String user_2_name;
 }

@@ -8,6 +8,7 @@ import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioInfoDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioPointImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioStyleImgDTO;
+import com.multi.metahouse.domain.dto.portfolio.PortfolioUpdateDTO;
 import com.multi.metahouse.domain.entity.portfolio.Portfolio;
 
 public interface PortfolioService {
@@ -20,4 +21,6 @@ public interface PortfolioService {
 	//profile에 출력할 portfolio List를 가져오는 메소드.
 	List<PortfolioDTO> selectPortfolioList(String userId);
 	List<PortfolioDTO> selectPortfolioList(PortfolioDTO dto);
+	
+	void update(PortfolioUpdateDTO portfolioUpdateDTO);
 }

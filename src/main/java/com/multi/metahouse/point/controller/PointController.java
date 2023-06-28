@@ -46,18 +46,8 @@ public class PointController {
 		mav.addObject("tot_page_cspi", myPoint.getTotalPageOfConsumedPointInfo());
 		
 		mav.setViewName("point/point");
-		//mav.setViewName("point/point_test");
 		return mav;
 	}
-	
-	/* ajax 페이징 (chargedPointInfoList) (이전) */
-//	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
-//	@ResponseBody
-//	public List<ChargedPointInfo> cgPageList(HttpSession session, String pageNo) {
-//		List<ChargedPointInfo> list = service.chargePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
-//		
-//		return list;
-//	}
 	
 	/* ajax 페이징 (chargedPointInfoList) */
 	@PostMapping(value = "/page/cgpi", produces = "application/json;charset=utf-8")
@@ -67,15 +57,6 @@ public class PointController {
 		
 		return json;
 	}
-	
-	/* ajax 페이징 (consumedPointInfoList) (이전)*/
-//	@PostMapping(value = "/page/cspi", produces = "application/json;charset=utf-8")
-//	@ResponseBody
-//	public List<ConsumedPointInfo> csPageList(HttpSession session, String pageNo) {
-//		List<ConsumedPointInfo> list = service.consumePointInfoList((User)session.getAttribute("loginUser"), Integer.parseInt(pageNo)-1);
-//		
-//		return list;
-//	}
 	
 	/* ajax 페이징 (consumedPointInfoList) */
 	@PostMapping(value = "/page/cspi", produces = "application/json;charset=utf-8")

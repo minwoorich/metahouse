@@ -7,9 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +22,6 @@ public class ProjectOrdersEntity {
 	private String orderId;
 	private String projectId;
 	private String buyerId;
-	private String projectOptionId;
 	private String preOrderStatus;
 	private String orderCommitDate;
 	private String request;

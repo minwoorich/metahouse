@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioContentImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioPointImgDTO;
+import com.multi.metahouse.domain.entity.portfolio.PortfolioPointImg;
 
 
 @Service
@@ -33,17 +34,16 @@ public class PortfolioPjPointFileUploadLogicService {
 		return filedtolist;
 	}
 	
-	public List<PortfolioPointImgDTO> uploadFiles(List<MultipartFile> multipartFiles, String path, String[] delListArr) throws IllegalStateException, IOException {
-		List<PortfolioPointImgDTO> filedtolist = new ArrayList<PortfolioPointImgDTO>();
+	public List<PortfolioPointImg> entityUploadFiles(List<MultipartFile> multipartFiles, String path) throws IllegalStateException, IOException {
+		List<PortfolioPointImg> filedtolist = new ArrayList<PortfolioPointImg>();
 		//파일 갯수만큼 각 업로드된 파일 마다 번호를 증가시키며 생성 (순서 저장하는거)
-		
-		int count = 0;
+		int count = 1;
 		for(MultipartFile multipartFile : multipartFiles) {
 			//업로드를 하는 경우 원본파일명과 서버에서 식별할 수 있는 실제 서버에 저장되는 파일명 두 개를 관리
 			//클라이언트가 업로드한 원본 파일명
 			String storeFilename = uploadFile(multipartFile, path);
 			System.out.println("optionalFile-upload-method(storeFilename : " + storeFilename);
-			filedtolist.add(new PortfolioPointImgDTO(null, null, storeFilename, delListArr[count]));
+			filedtolist.add(new PortfolioPointImg(null, null, storeFilename, count+""));
 			count++;
 		}
 		return filedtolist;

@@ -10,4 +10,5 @@ import com.multi.metahouse.domain.entity.portfolio.PortfolioStyleImg;
 public interface PortfolioStyleImgRepository extends JpaRepository<PortfolioStyleImg, String>{
 	List<PortfolioStyleImg> findByPortfolioId(String portfolioId);
 	void deleteByPortfolioId(String portfolioId);
+	void deleteByPortfolioIdAndStyleImgFileno(String portfolioId, String styleImgFileno);
 }

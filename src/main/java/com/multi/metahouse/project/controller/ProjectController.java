@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
-import com.multi.metahouse.domain.dto.project.ProjectFormDTO;
-import com.multi.metahouse.domain.dto.project.ProjectPackageSingleForm;
-import com.multi.metahouse.domain.dto.project.ProjectPackageTripleForm;
-import com.multi.metahouse.domain.entity.asset.AssetEntity;
-import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
+import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
+//import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageForm;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageSingleForm;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageTripleForm;
 import com.multi.metahouse.project.service.ProjectFileUploadLogicService;
 import com.multi.metahouse.project.service.ProjectService;
 
@@ -31,16 +35,20 @@ import com.multi.metahouse.project.service.ProjectService;
 public class ProjectController {
 	ProjectFileUploadLogicService fileService;
 	ProjectService projectService;
+	ResourceLoader resourceLoader;
 
 	@Autowired
-	public ProjectController(ProjectFileUploadLogicService fileService, ProjectService projectService) {
+	public ProjectController(ProjectFileUploadLogicService fileService, ProjectService projectService,
+			ResourceLoader resourceLoader) {
 		super();
 		this.fileService = fileService;
 		this.projectService = projectService;
+		this.resourceLoader = resourceLoader;
 	}
 
-/*------------------------------------- 승언님 파트 ------------------------------------ */
-//	프로젝트 마켓 상품목록 보기
+	/*------------------------------------- 승언님 파트 ------------------------------------ */
+
+	// 프로젝트 마켓 상품목록 보기
 	@RequestMapping("project/main")
 	public String projectMarket(Model model, String pageNo, String category1, String category2) {
 		Page<ProjectEntity> projectlistPage = projectService.list(category1, category2, Integer.parseInt(pageNo));
@@ -55,34 +63,68 @@ public class ProjectController {
 
 	// 프로젝트 상세보기
 	@RequestMapping("project/detail")
-	public String showGigs1() {
+	public String showProject(Model model, Long projectNum) {
+		ProjectDTO project = projectService.projectInfo(projectNum);
+		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
+		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
+		model.addAttribute("pjtInfo", project);
+		model.addAttribute("projectImg", projectImg);
+		model.addAttribute("projectOption", projectOption);
+
+		System.out.println(project);
+		System.out.println(projectImg);
+		System.out.println(projectOption);
+
 		return "project/market_detail";
 	}
 
-//	프로젝트 구매하기
+	// 프로젝트 구매하기
 	@GetMapping("project/purchase")
-	public String puchaseGigs() {
+	public String puchaseGigs(Model model, Long projectNum, HttpSession session) {
+		ProjectDTO project = projectService.projectInfo(projectNum);
+		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
+		model.addAttribute("pjtInfo", project);
+		model.addAttribute("projectOption", projectOption);
+		System.out.println(project);
+		System.out.println(projectOption);
 		return "order/project_purchase";
 	}
 
-//	프로젝트 구인 상품목록 보기
+	// 프로젝트 구인 상품목록 보기
 	@RequestMapping("project/main2")
 	public String gigs2() {
 		return "project/z_project2_main";
 	}
 
-//	프로젝트 구인 상세페이지
+	// 프로젝트 구인 상세페이지
 	@RequestMapping("project/detail2")
 	public String showGigs2() {
 		return "project/z_project2_detail";
 	}
 
-/*----------------------------------------- 민우님 파트 -------------------------------------------*/
+	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
+	// "판매 등록" 페이지 반환
+	@GetMapping("project/my-products")
+	public String showProductList(Model model) {
+		List<ProjectListDTO> projectList = projectService.selectAllProjects();
+		model.addAttribute("projectList", projectList);
+		return "project/project_product_list";
+	}
+
+	@PostMapping("project/delete-product")
+	public String deleteProduct(Long project_id) {
+		System.out.println("전달받은 id값 : " + project_id);
+		System.out.println("프로젝트 삭제");
+		projectService.deleteProject(project_id);
+		System.out.println();
+		return "redirect:/project/my-products";
+	}
+
 	// 프로젝트 설명 입력하는 페이지 반환
 	@GetMapping("project/forms/descriptions")
 	public String writeForm(HttpSession session) {
-		session.setAttribute("creator_id", "정민우");
-		
+		session.setAttribute("creator_id", "user1");
+
 		return "project/projectform01";
 	}
 
@@ -95,7 +137,7 @@ public class ProjectController {
 
 	@GetMapping("project/forms/preview")
 	public String getFormPreview(HttpSession session, Model model) {
-		
+
 		// 세션에 삼단패키지가 들어갔는지 ,단일패키지가 들어갔는지
 		if (session.getAttribute("projectPackageTripleForm") == null) {
 			model.addAttribute("package", "single");
@@ -115,11 +157,10 @@ public class ProjectController {
 	@RequestMapping(value = "project/forms-ajax", produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String saveIntoSessionAjax(HttpSession session, ProjectFormDTO projectForm) {
-		
+
 		// 세션 저장
 		session.setAttribute("projectForm", projectForm);
-		
-		
+
 		return "/metahaus/project/forms/packages";
 	}
 
@@ -127,7 +168,7 @@ public class ProjectController {
 	@ResponseBody
 	public String saveIntoSessionAjax(@RequestBody ProjectPackageSingleForm projectPackageSingleForm,
 			HttpSession session) {
-		
+
 		// 세션 초기화(projectPackageSingelForm 데이터 세션에서 삭제)
 		session.removeAttribute("projectPackageSingleForm");
 		// 세션 저장
@@ -140,9 +181,9 @@ public class ProjectController {
 	@ResponseBody
 	public String saveIntoSessionAjax(@RequestBody ProjectPackageTripleForm projectPackageTripleForm,
 			HttpSession session) {
-		
+
 		// 세션 초기화(projectPackageTripleForm 데이터 세션에서 삭제)
-		session.removeAttribute("projectPackageTripleForm");
+//		session.removeAttribute("projectPackageTripleForm");
 		// 세션 저장
 		session.setAttribute("projectPackageTripleForm", projectPackageTripleForm);
 
@@ -151,35 +192,47 @@ public class ProjectController {
 
 	@GetMapping("project/forms")
 	public String insertForm(HttpSession session) throws IllegalStateException, IOException {
-		List<ProjectContentsEntity> fileDtoList = new ArrayList<>();
-		// 세션에서 데이터 추출
-		ProjectFormDTO projectForm = (ProjectFormDTO) session.getAttribute("projectForm");
-		
-		// 썸네일 추출  & 업로드 & DTO의 thumbnailPath 세팅
-		MultipartFile thumbnail = projectForm.getThumbnail();
-		String thumbnailPath = fileService.uploadFile(thumbnail); 
-		
-		//상세이미지들 추출 & 업로드 & ProjectContentsEntity 데이터 옮겨담기
-		if (!projectForm.getDetailImages().isEmpty()) {
-			// 상세이미지들 추출 
-			List<MultipartFile> detailImages = projectForm.getDetailImages();
-			// 상세이미지들 업로드
-			fileDtoList = fileService.uploadFiles(detailImages); 
-		}
+		ProjectFormDTO projectForm = new ProjectFormDTO();
+		ProjectPackageForm packageFormDto = null;
+		List<ProjectContentsDTO> contentsList = new ArrayList<>();
 
-		// ProjectEntity에 데이터 옮겨담기
-//		ProjectEntity projectEntity = 
-				
-		// 단일패키지 or 삼단패키지
+		///////////// 세션에서 DTO 추출/////////////////
+		// 세션에서 데이터 추출 - projectForm
+		projectForm = (ProjectFormDTO) session.getAttribute("projectForm");
+		session.removeAttribute("projectForm");
+
+		// 세션에서 데이터 추출 & 세션 삭제- packageFormDto(단일,삼단 패키지)
 		if (session.getAttribute("projectPackageSingleForm") != null) {
-			ProjectPackageSingleForm projectPackageSingleForm = 
-					(ProjectPackageSingleForm) session.getAttribute("projectPackageSingleForm");
-
+			packageFormDto = (ProjectPackageSingleForm) session.getAttribute("projectPackageSingleForm");
+			session.removeAttribute("projectPackageSingleForm");
 		} else {
-			ProjectPackageTripleForm projectPackageTripleForm = 
-					(ProjectPackageTripleForm) session.getAttribute("projectPackageTripleForm");
+			packageFormDto = (ProjectPackageTripleForm) session.getAttribute("projectPackageTripleForm");
+			session.removeAttribute("projectPackageTripleForm");
 		}
-		return "main/index";
+
+		/////////////////// DTO에서 이미지 파일 추출 및 업로드//////////////////////// //
+//		  썸네일 추출 & 업로드 & DTO의 thumbnailPath 세팅 
+		String path = resourceLoader.getResource("classpath:static/upload/project_thumbnail_img").getFile()
+				.getAbsolutePath();
+		MultipartFile thumbnail = projectForm.getThumbnail();
+		String thumbnailPath = fileService.uploadFile(thumbnail, path);
+
+		// 상세이미지들 추출 & 업로드 & ProjectContentsEntity 데이터 옮겨담기
+		if (projectForm.getDetailImages() != null) { // 상세이미지들 추출
+			List<MultipartFile> detailImages = projectForm.getDetailImages(); // 상세이미지들 업로드
+			contentsList = fileService.uploadFiles(detailImages, path);
+		}
+		System.out.println("projectFormDto : " + projectForm);
+		System.out.println("packageFormDto : " + packageFormDto);
+		System.out.println("thumbnailPath : " + thumbnailPath);
+		for (ProjectContentsDTO dto : contentsList) {
+			System.out.println("content : " + dto);
+		}
+
+		// 서비스 호출
+		projectService.insertProjectInfo(projectForm, packageFormDto, thumbnailPath, contentsList);
+
+		return "redirect:/project/my-products";
 	}
 
 	//////////////////// 승민님 파트//////////////////////////

@@ -56,7 +56,7 @@ public class AssetMarketController {
 	}
 
 //	구매하기 페이지 보여주기
-	@GetMapping("product/purchase_asset")
+	@GetMapping("asset/purchase")
 	public String puchaseAsset(Model model, String assetNum, HttpSession session) {
 		AssetDTO asset = service.assetInfo(assetNum);
 
