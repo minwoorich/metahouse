@@ -55,7 +55,7 @@ public class ChatHandler {
 		
 		System.out.println("chatMsg -> " + chatMsg);
 		
-		int insRes = service.insertMessage(chatMsg);
+		service.insertMessage(chatMsg);
 		
 		//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
 		for(Session data:clientset) {

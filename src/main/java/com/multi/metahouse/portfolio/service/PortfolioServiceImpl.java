@@ -86,11 +86,11 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	@Transactional
 	public void delete(String portfolioId) {
-		dao.delete(portfolioId);
 		dao.deleteAttachFile(portfolioId);
 		dao.deleteContentImg(portfolioId);
 		dao.deletePointImg(portfolioId);
 		dao.deleteStyleImg(portfolioId);
+		dao.delete(portfolioId);
 	}
 
 	@Override

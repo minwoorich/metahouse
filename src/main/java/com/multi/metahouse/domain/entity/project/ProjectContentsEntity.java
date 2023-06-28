@@ -37,8 +37,8 @@ public class ProjectContentsEntity {
 //	private Long projectId;
 	private String projectStoreFilename;
 	private int projectFileNo;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+	////////////////////////////////////////
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_id")
 	private ProjectEntity projectId;
 	
