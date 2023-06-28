@@ -95,7 +95,7 @@ button {
 }
 
 .search-box:hover {
-	cursor: text;
+	cursor: pointer;
 	background-color: rgba(141,114,225,0.1);
 	transition: 0.5s;
 }
@@ -143,6 +143,9 @@ button {
 	width: 620px;
 	height: 50px;
 	padding-left: 20px;
+}
+.project-search-bar:hover{
+	cursor: text;
 }
 
 .search-button {

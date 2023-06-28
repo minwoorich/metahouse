@@ -28,6 +28,7 @@ import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageForm;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageSingleForm;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageTripleForm;
+import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.project.service.ProjectFileUploadLogicService;
 import com.multi.metahouse.project.service.ProjectService;
 
@@ -105,10 +106,18 @@ public class ProjectController {
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// "판매 등록" 페이지 반환
 	@GetMapping("project/my-products")
-	public String showProductList(Model model) {
-		List<ProjectListDTO> projectList = projectService.selectAllProjects();
-		model.addAttribute("projectList", projectList);
-		return "project/project_product_list";
+	public String showProductList(Model model,HttpSession session) {
+		if(session.getAttribute("loginUser")!=null) {
+			User user = (User)session.getAttribute("loginUser");
+			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
+			model.addAttribute("projectList", projectList);
+			return "project/project_product_list";
+		}else {
+			return "redirect:/login";
+		}
+		
+//		List<ProjectListDTO> projectList = projectService.selectAllProjects();
+		
 	}
 
 	@PostMapping("project/delete-product")
@@ -122,8 +131,8 @@ public class ProjectController {
 
 	// 프로젝트 설명 입력하는 페이지 반환
 	@GetMapping("project/forms/descriptions")
-	public String writeForm(HttpSession session) {
-		session.setAttribute("creator_id", "user1");
+	public String writeForm() {
+		//[추후수정]세희님한테서 세션 어떻게 저장했는지 알아낸다음 사용
 
 		return "project/projectform01";
 	}

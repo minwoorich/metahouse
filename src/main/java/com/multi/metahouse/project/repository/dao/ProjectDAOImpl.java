@@ -34,6 +34,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 	
 	@Override
+	public List<ProjectEntity> selectListByUserId(String userId) {
+		
+		return projectRepo.findByCreatorId(userId);
+	}
+	
+	@Override
 	public void delete(Long projectId) {
 		projectRepo.deleteById(projectId);
 	}

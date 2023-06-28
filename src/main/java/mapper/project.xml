@@ -56,7 +56,7 @@
 		WHERE creator_id=#{creator_id}
 		GROUP BY a.project_id
 		order by average_reviews desc
-      
+      </select>
     <resultMap type="project" id="projectInfo">
         <id column="project_id" property="project_id"/>
         <result column="creator_id" property="creator_id"/>

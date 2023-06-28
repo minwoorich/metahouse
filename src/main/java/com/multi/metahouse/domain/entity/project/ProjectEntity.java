@@ -47,6 +47,7 @@ public class ProjectEntity {
 	private String title;
 	private String description;
 	@CreationTimestamp
+	@Column(name="project_date")
 	private LocalDateTime projectDate;
 	private String category1;
 	@Column(name = "category2_pj")
@@ -54,9 +55,9 @@ public class ProjectEntity {
 	private String thumbnail;
 	
 ////////////////////외래키들////////////////////
-//	@ManyToOne(cascade = CascadeType.ALL)
+//	@ManyToOne
 //	@JoinColumn(name = "creator_id")
-//	User creatorId;
+//	private String creatorId;
 	
 ////////////////////////////////////////////////////////////////////////////////////
 	@OneToOne(cascade = CascadeType.ALL,  mappedBy = "projectId")

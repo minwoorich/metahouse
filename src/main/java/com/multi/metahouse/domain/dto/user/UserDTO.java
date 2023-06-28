@@ -5,6 +5,7 @@ import java.util.Date;
 import org.apache.ibatis.type.Alias;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.multi.metahouse.domain.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,4 +38,6 @@ public class UserDTO {
 	private int mkAgree;
 	private int point;
 	private String thumbnailStoreFilename;
+	
+	
 }

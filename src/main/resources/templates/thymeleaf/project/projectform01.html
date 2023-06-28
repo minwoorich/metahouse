@@ -146,7 +146,7 @@
 				enctype="multipart/form-data">
 				<!-- 세션에 저장된 유저의 id를 projectDto에 저장 -->
 				<input name="creator_id" id="creator_id" type="hidden"
-					th:value="${session.creator_id}" />
+					th:value="${session.loginUser.userId}" />
 
 				<div class="form-wrapper">
 					<!-- 진행 상태 바 -->

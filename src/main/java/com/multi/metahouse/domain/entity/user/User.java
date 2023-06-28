@@ -55,6 +55,6 @@ public class User {
 	private int point;
 	private String thumbnailStoreFilename;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "creatorId")
-	private List<ProjectEntity> projectEntityList = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
+//	private List<ProjectEntity> projectEntityList = new ArrayList<>();
 }
