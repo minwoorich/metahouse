@@ -131,6 +131,8 @@ $(document).ready(function(){
 		fileURLlist.push(fileURL);
 		console.log("filelist : " + filelist);
 		console.log("fileURLlist : " + fileURLlist);
+		
+		
 	})
 	
 	/* 메시지 전송 메소드 */
