@@ -15,13 +15,17 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.BinaryMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.AbstractWebSocketHandler;
+import org.springframework.web.socket.handler.BinaryWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
 
 @Component
 @ServerEndpoint(value="/chat")
-public class ChatHandler {
+public class ChatHandler extends AbstractWebSocketHandler{
 	
 	private static Set<Session> clientset = Collections.synchronizedSet(new HashSet<Session>());
 	
@@ -63,10 +67,15 @@ public class ChatHandler {
 		}
 	}
 	
+//	@Override
+//	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
+//		System.out.println("바이너리 메세지 수신: " + message);
+//	}
+	
 	@OnMessage
 	public void onMessage(ByteBuffer msg, Session session) throws IOException {
-		System.out.println("바이너리 수신메세지:" + new String(msg.array()));
-		
+//		System.out.println("바이너리 수신 메세지:" + new String(msg.array()));
+		System.out.println("바이너리 수신 메세지:" + msg);
 		// 수신 메시지 DB에 저장
 //		ObjectMapper objectMapper = new ObjectMapper();
 //		ChatMsgDTO chatMsg = objectMapper.readValue(msg, ChatMsgDTO.class);

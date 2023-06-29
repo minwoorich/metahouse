@@ -6,7 +6,7 @@ $(document).ready(function(){
 	// 웹 소켓
 	let ws = null;
 	// Controller에 전송할 JSON
-	let mydata = {};
+	var mydata = {};
 	// 메시지 첨부 파일 관련 List
 	let filelist = [];
 	let fileURLlist = [];
@@ -121,7 +121,7 @@ $(document).ready(function(){
 	})
 	
 	// 첨부 파일 업로드 이벤트
-	$("#file_attach").on("input", function(){
+	$("#file_attach").on("change", function(){
 		console.log("첨부파일 업로드 클릭!");
 		let file = $(this)[0].files[0];
 		let fileURL = URL.createObjectURL(file);
@@ -144,23 +144,39 @@ $(document).ready(function(){
 		if(filelist.length !== 0){
 			console.log("파일 첨부 메시지");
 			
-			reader = new FileReader();
+//			ws.binaryType = "arraybuffer";
 			
 			mydata.writer_id = loginUser;
 			mydata.chatroom_id = chatroomId;
 			mydata.message_content = msg;
 			mydata.write_time = new Date();
+//			mydata.filelist = [];
+			
+			$.each(filelist, function(i, file){
+				let reader = new FileReader();
+				
+				reader.onload = function(event){
+//					console.log("mydata.filelist : " + mydata.filelist);
+					console.log("fileContent 전송!");
+					console.log(event.target.result);
+					ws.send(event.target.result);
+					
+//					mydata.filelist.push(fileContent);
+//					console.log("fileContent : " + fileContent);
+//					console.log("mydata.filelist : " + mydata.filelist);
+				}
+				reader.readAsArrayBuffer(file);
+//				if(reader.DONE){
+//					console.log("리더 시작!");
+//					reader.readAsArrayBuffer(file);
+//				}
+			})
+//			console.log(mydata.filelist);
 			mydata.fileURLlist = fileURLlist;
 			
 			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
-			
-			
-//			ws.send(new TextEncoder('utf-8').encode(filelist));
-			reader.readAsText(filelist);
-			console.log(reader.result);
-			
-//			ws.send(sendMsg);
-			ws.send(reader.result);
+
+			//ws.send(sendMsg);
 			
 		}else{
 			console.log("일반 메시지");

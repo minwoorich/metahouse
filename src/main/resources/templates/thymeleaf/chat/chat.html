@@ -39,7 +39,7 @@
 			</div>
 			<div class="chatroom-list-container">
 				<ul class="chatroom-list">
-					<li th:each="chatroom:${chatrooms}"
+					<li th:each="chatroom:${chatrooms}" th:if="${chatrooms != null}"
 						th:id="'chatroom'+${chatroom.chatroom_id}" class="chatroom-card">
 						<div class="chatroom-card__profile-image">
 							<img
