@@ -1,5 +1,9 @@
 package com.multi.metahouse.order.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
@@ -75,9 +82,19 @@ public class OrderController {
 	public void orderP(@RequestBody ObjectNode saveObj) throws JsonProcessingException, IllegalArgumentException {
 		 ObjectMapper mapper = new ObjectMapper();
 		 ProjectOrdersDTO projectOrder = mapper.treeToValue(saveObj.get("projectOrder"), ProjectOrdersDTO.class);
-		 SelectedAddOptionDTO option = mapper.treeToValue(saveObj.get("option"), SelectedAddOptionDTO.class);
-		 System.out.println(projectOrder);
-		 System.out.println(option);
-		 orderService.orderP(projectOrder, option);
+		 List<SelectedAddOptionDTO> options = new ArrayList<SelectedAddOptionDTO>();
+		 JsonNode JsonOptions = saveObj.get("options");
+		 
+		 for(int i=0; i<JsonOptions.size(); i++){
+				JsonNode json = mapper.createObjectNode();
+				json = JsonOptions.get(i);
+				SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
+				options.add(option);
+			}
+		 int result = orderService.orderP(projectOrder, options);
+		 
+		 System.out.println("주문내역"+projectOrder);
+		 System.out.println("추가옵션"+options);
+		 System.out.println("생성결과"+result);
 	}
 }

@@ -115,14 +115,16 @@
 					        	<div class="option_item">가격</div>
 					        	<div class="updown option_item">수량</div>
 					        </div>
-					        <div class="option data" th:each="option:${projectOption}">
-					        	<input class="option_chk" type='checkbox' name='add_option' th:value="${option.add_option_id}"/>
+					        <div class="option data" th:each="option, optionStat:${projectOption}">
+					        	<input class="option_chk" type='checkbox' name='add_option' 
+					        			th:value="${option.add_option_id}" th:id="'ADid'+${optionStat.index}"/>
 					        	<div class="option_item" th:text="${option.add_option_name}"></div>
 					        	<div class="option_item" th:text="${option.add_option_description}"></div>
 					        	<div class="option_item" th:text="${option.add_option_price}+'원'"></div>
 					        	<div class="updown option_item">
 					        		<button type ="button" class="down">-</button>
-					        		<input type="text" placeholder="0" readonly="readonly" class="updown_display">
+					        		<input type="text" placeholder="0" readonly="readonly" 
+					        				class="updown_display" th:id="'count'+${optionStat.index}">
 					        		<button type ="button" class="up">+</button>
 					        	</div>
 					        </div>

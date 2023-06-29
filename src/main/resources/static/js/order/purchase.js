@@ -76,10 +76,15 @@ $(document).ready(function(){
     					"request" : $(".request").val(),
     					"order_price" : $("#tp option:selected").val()
     					},
-    				 "option" : {
-    					 "add_option_id" : $("input[type=checkbox][name=add_option]:checked").val(),
-    					 "count" : $(".updown_display").val()
-    				 }
+    				 "options" : [{
+    					 	"add_option_id" : $("input[type=checkbox][id=ADid0]:checked").val(),
+    					 	"count" : $("#count0").val()
+    				 	},
+    				 	{
+    				 		"add_option_id" : $("input[type=checkbox][id=ADid1]:checked").val(),
+    				 		"count" : $("#count1").val()
+    				 	}
+    				 ]
     				}
     	$.ajax({
     		url : "/metahaus/order/project",
