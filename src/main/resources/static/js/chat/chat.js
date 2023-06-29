@@ -150,27 +150,15 @@ $(document).ready(function(){
 			mydata.write_time = new Date();
 			mydata.fileURLlist = fileURLlist;
 			
-//			mydata.filelist = [];
-//			filelist.forEach(function(element) {
-//				console.log("element : " + element);
-//				console.log("reader.readAsArrayBuffer(element) : " + reader.readAsArrayBuffer(element));
-//				console.log("reader.result : " + reader.result);
-//				mydata.filelist.push(reader.result);
-//			})
-//			console.log("mydata.filelist : " + mydata.filelist);
-			
 			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
 			
-			//ws.send(sendMsg);
-//			ws.send(new TextEncoder('utf-8').encode(filelist));
 			
-			filelist.forEach(function(element) {
-				console.log("element : " + element);
-				console.log("reader.readAsArrayBuffer(element) : " + reader.readAsArrayBuffer(element));
-				console.log("reader.result : " + reader.result);
-				mydata.filelist.push(reader.result);
-			})
-			console.log("mydata.filelist : " + mydata.filelist);
+//			ws.send(new TextEncoder('utf-8').encode(filelist));
+			reader.readAsText(filelist);
+			console.log(reader.result);
+			
+//			ws.send(sendMsg);
+			ws.send(reader.result);
 			
 		}else{
 			console.log("일반 메시지");
