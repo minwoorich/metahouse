@@ -1,0 +1,110 @@
+.dropdown-wrapper {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.dropdown-wrapper .dropdown {
+	margin-right: 10px;
+}
+
+.nav-tabs>li>a {
+	margin-right: 2px;
+	line-height: 1.42857143;
+	border: 1px solid transparent;
+	border-radius: 4px 4px 0 0;
+	font-size: 27px;
+}
+
+.btn-default {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+	margin-top: 36px;
+	font-size: 16px;
+}
+
+.col-md-4 {
+	width: 33.333333%;
+	margin-top: 100px;
+}
+
+.expert-card {
+	display: none;
+	display: flex;
+	align-items: center;
+	margin-top: 6%;
+}
+
+.expert-card .card {
+	display: flex;
+	align-items: center;
+}
+
+.expert-card .card img {
+	margin-right: 10px;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+}
+
+.expert-card .pro-card-body {
+	flex: 1;
+}
+
+.pro-row {
+	display: flex;
+	flex-direction: column;
+}
+
+.pagination-wrapper {
+	margin-top: 20px;
+	margin-left: 50%;
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.pagination li {
+	display: inline;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.pagination a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.pagination a:hover:not (.active ) {
+	background-color: #ddd;
+}
+
+.row {
+	margin-right: 80px;
+	margin-left: -14px;
+}
+
+.result-count {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.result-count p {
+	font-size: 24px;
+	margin-right: 40%;
+}
+
+.result-count .count {
+	font-weight: bold;
+}
+
+.nav-tabs {
+	border-bottom: 1px solid #ddd;
+	margin-top: 5%;
+}
