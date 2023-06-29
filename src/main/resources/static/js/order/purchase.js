@@ -49,16 +49,9 @@ $(document).ready(function(){
             $counter.css("color","var(--gray)");
         }
     });
- 
-    // 휴대폰 번호 자동 하이픈
-    $(".autoHyphen").on("input", function (event) {    	
-    	$(this).val( $(this).val()
-    			.replace(/[^0-9]/g, "")
-    			.replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3")
-    			.replace("--", "-") );
-    });
     
-    $(".myBtn").on("click", function(){
+//  에셋 구매버튼
+    $(".AssetBtn").on("click", function(){
     	var param = {"asset_id" : $("#Aid").attr("value"), "buyer_id2" : $("#Uid").attr("value")}
     	$.ajax({
     		url : "/metahaus/order/asset",
@@ -73,7 +66,38 @@ $(document).ready(function(){
     			alert("error");
     		}
     	});
-    	 
-
+    });
+    
+//   프로젝트 구매버튼 (null, #{order_id}, #{add_option_id}, #{count}) / (null, #{project_id}, #{buyer_id}, "주문요청", now(), #{request}, #{order_price})
+    $(".PjtBtn").on("click", function(){
+    	var param = {"projectOrder" : {
+    					"project_id" : $("#Aid_pj").attr("value"), 
+    					"buyer_id" : $("#U_id").attr("value"),
+    					"request" : $(".request").val(),
+    					"order_price" : $("#tp option:selected").val()
+    					},
+    				 "options" : [{
+    					 	"add_option_id" : $("input[type=checkbox][id=ADid0]:checked").val(),
+    					 	"count" : $("#count0").val()
+    				 	},
+    				 	{
+    				 		"add_option_id" : $("input[type=checkbox][id=ADid1]:checked").val(),
+    				 		"count" : $("#count1").val()
+    				 	}
+    				 ]
+    				}
+    	$.ajax({
+    		url : "/metahaus/order/project",
+    		type : 'post',
+    		data : JSON.stringify(param),
+    		contentType: 'application/json',
+    		success : function() {
+    			alert("구매가 완료되었습니다.");
+    			location.href = "/metahaus/order/project/buylist";
+    		},
+    		error : function() {
+    			alert("error");
+    		}
+    	});
     });
 })

@@ -3,6 +3,7 @@ package com.multi.metahouse.project.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
+import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 //import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
@@ -81,14 +85,22 @@ public class ProjectController {
 
 	// 프로젝트 구매하기
 	@GetMapping("project/purchase")
-	public String puchaseGigs(Model model, Long projectNum, HttpSession session) {
+	public String puchaseProject(Model model, Long projectNum, HttpSession session) {
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
+		User userInfo = (User) session.getAttribute("loginUser");
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectOption", projectOption);
-		System.out.println(project);
-		System.out.println(projectOption);
+		model.addAttribute("userInfo", userInfo);
 		return "order/project_purchase";
+	}
+	// ajax 프로젝트 구매하기-패키지정보
+	@PostMapping(value = "project/package/price", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String packData(Long projectNum) throws JsonProcessingException{
+		ObjectMapper mapper = new ObjectMapper(); 
+		String jsonString = mapper.writeValueAsString(projectService.projectInfo(projectNum).getPjtTriple());
+		return jsonString;
 	}
 
 	// 프로젝트 구인 상품목록 보기
