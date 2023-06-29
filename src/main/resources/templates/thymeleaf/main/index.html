@@ -92,18 +92,54 @@
 
 			<div class="image-grid">
 
-				<img src="/metahaus/images/Bondee.png" alt="Image 1"> <img
-					src="/metahaus/images/gather.png" alt="Image 2"> <img
-					src="/metahaus/images/minecraft.png" alt="Image 3"> <img
-					src="/metahaus/images/ZEPETO.png" alt="Image 4"> <img
-					src="/metahaus/images/thesendbox.png" alt="Image 5"> <img
-					src="/metahaus/images/ROBLOX.png" alt="Image 6">
+				<div class="image-container2">
+					<a href="www.naver.com" class="left-half"> 
+					<span class="tooltip2">에셋이동</span>
+					</a>
+					<a href="www.daum.net" class="right-half"> 
+					<span class="tooltip2">긱스이동</span>
+					</a>
+					<img src="/metahaus/images/Bondee.png" alt="이미지">
+				</div>
+				
+				<div class="image-container2">
+				<a href="www.naver.com" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/gather.png" alt="Image 2"> 
+				</div>
+				<div class="image-container2">
+				<a href="www.naver.com" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/minecraft.png" alt="Image 3"></div>
+				<div class="image-container2">
+				<a href="www.naver.com" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/ZEPETO.png" alt="Image 4"></div> 
+				<div class="image-container2">
+				<a href="www.naver.com" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/thesendbox.png" alt="Image 5"></div> 
+				<div class="image-container2">
+				<a href="www.naver.com" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/ROBLOX.png" alt="Image 6"></div>
+				
 			</div>
 		</div>
 	</section>
+	
 
-
-<hr/>
+	<hr />
 
 
 
@@ -125,20 +161,25 @@
 						<div class="banner-slider-item2" th:each="n:${reviewList}">
 							<div class="review-card">
 								<div class="card-header">
-									
-									
+
+
 									<div class="image-container">
-										<img th:if="${n.profile_img != null}" th:src="@{/upload/userthumbnail/}+${n.profile_img}" alt="profile" />
-										<img th:unless="${n.profile_img != null}" src="/metahaus/images/CSLEE.JPG" alt="profile" />
+										<img th:if="${n.profile_img != null}"
+											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
+											alt="profile" /> <img th:unless="${n.profile_img != null}"
+											src="/metahaus/images/CSLEE.JPG" alt="profile" />
 									</div>
-									
+
 									<div class="info-container">
-										<div class="star-rating"><span th:each="n:${#numbers.sequence(1,5)}" th:text="${(n-5)<=0 ? '★':'☆'}"></span>
+										<div class="star-rating">
+											<span th:each="n:${#numbers.sequence(1,5)}"
+												th:text="${(n-5)<=0 ? '★':'☆'}"></span>
 										</div>
 										<div class="date" th:text="${n.review_date}">2023-06-23</div>
 									</div>
 								</div>
-								<div class="review-content" th:text="${n.review_text}">이곳에 리뷰 내용을 작성하세요.</div>
+								<div class="review-content" th:text="${n.review_text}">이곳에
+									리뷰 내용을 작성하세요.</div>
 								<div class="work-date">작업일: 2023-06-21</div>
 							</div>
 
@@ -238,7 +279,7 @@
 		</div>
 	</section>
 
-	
+
 	<section class="section-visual2">
 		<video src="/metahaus/images/banner-bottom-video.mp4" autoplay muted
 			loop></video>
