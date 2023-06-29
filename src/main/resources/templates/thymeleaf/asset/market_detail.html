@@ -131,7 +131,7 @@
 				<div class="product_info" id="product_price" th:text="${asset.price}+원"></div>
 			</div>
 			<!-- seller profile -->
-			<div id="seller_profile">
+			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${asset.seller_id})}'|">
 				<div id="seller_img_box">
 					<img alt="프로필 이미지" src="/metahaus/images/test_img.jpg" id="seller_img">
 				</div>

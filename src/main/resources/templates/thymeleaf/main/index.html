@@ -93,42 +93,42 @@
 			<div class="image-grid">
 
 				<div class="image-container2">
-					<a href="www.naver.com" class="left-half"> 
+					<a th:href="@{/asset/main?pageNo=0}" class="left-half"> 
 					<span class="tooltip2">에셋이동</span>
 					</a>
-					<a href="www.daum.net" class="right-half"> 
+					<a th:href="@{/project/main?pageNo=0}" class="right-half"> 
 					<span class="tooltip2">긱스이동</span>
 					</a>
 					<img src="/metahaus/images/Bondee.png" alt="이미지">
 				</div>
 				
 				<div class="image-container2">
-				<a href="www.naver.com" class="left-half"> <span
+				<a th:href="@{/asset/main?pageNo=0&category1=게더타운}" class="left-half"> <span
 						class="tooltip2">에셋이동</span>
 					</a> <a href="www.daum.net" class="right-half"> <span
 						class="tooltip2">긱스이동</span>
 					</a><img src="/metahaus/images/gather.png" alt="Image 2"> 
 				</div>
 				<div class="image-container2">
-				<a href="www.naver.com" class="left-half"> <span
+				<a th:href="@{/asset/main?pageNo=0&category1=마인크래프트}" class="left-half"> <span
 						class="tooltip2">에셋이동</span>
 					</a> <a href="www.daum.net" class="right-half"> <span
 						class="tooltip2">긱스이동</span>
 					</a><img src="/metahaus/images/minecraft.png" alt="Image 3"></div>
 				<div class="image-container2">
-				<a href="www.naver.com" class="left-half"> <span
+				<a th:href="@{/asset/main?pageNo=0&category1=제페토}" class="left-half"> <span
 						class="tooltip2">에셋이동</span>
 					</a> <a href="www.daum.net" class="right-half"> <span
 						class="tooltip2">긱스이동</span>
 					</a><img src="/metahaus/images/ZEPETO.png" alt="Image 4"></div> 
 				<div class="image-container2">
-				<a href="www.naver.com" class="left-half"> <span
+				<a th:href="@{/asset/main?pageNo=0&category1=더%20샌드박스}" class="left-half"> <span
 						class="tooltip2">에셋이동</span>
 					</a> <a href="www.daum.net" class="right-half"> <span
 						class="tooltip2">긱스이동</span>
 					</a><img src="/metahaus/images/thesendbox.png" alt="Image 5"></div> 
 				<div class="image-container2">
-				<a href="www.naver.com" class="left-half"> <span
+				<a th:href="@{/asset/main?pageNo=0&category1=로블록스}" class="left-half"> <span
 						class="tooltip2">에셋이동</span>
 					</a> <a href="www.daum.net" class="right-half"> <span
 						class="tooltip2">긱스이동</span>
@@ -212,7 +212,7 @@
 							<div class="item-img-warp"></div>
 							<div class="item-desc-warp">
 								<span th:text="${project.title}" class="myfont-3">메타버스틱스1</span>
-								<span th:text="${project.description}" class="myfont-2">당신만의
+								<span th:utext="${project.description}" class="myfont-2">당신만의
 									메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span> <span
 									th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}"
 									class="myfont-1">85,000원~</span> <span class="myfont-3"><span

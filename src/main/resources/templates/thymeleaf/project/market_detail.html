@@ -161,7 +161,7 @@
 				</th:block>
 			</div>
 			<!-- seller profile -->
-			<div id="seller_profile">
+			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${pjtInfo.creator_id})}'|">
 				<div id="seller_img_box">
 					<th:block th:if="${pjtInfo.creator.thumbnailStoreFilename !=null}">
 					<img alt="프로필 이미지" th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.creator.thumbnailStoreFilename}" id="seller_img">

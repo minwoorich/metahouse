@@ -54,6 +54,13 @@
 				
 			});
 		});
+		
+		//추가금액 계산&표시
+		$("#tp").on("change", function(){
+			$("#price_totalOption").children().remove();
+	    	$("#price_totalOption").append(p);
+			
+		})
 	})
 
 </script>
@@ -173,7 +180,10 @@
 					</span>
 				</div>
 				<div class="data distance,">
-					<span>추가금액</span><span class="price_data">0원</span>
+					<span>추가금액</span>
+					<span class="price_data" id="price_totalOption">
+						<span>0원</span>
+					</span>
 				</div>
 				<div class="data distance">
 					<span class="total_price">최종결제 금액</span><span class="price_data total_price">30,000원</span>
