@@ -1,6 +1,7 @@
 package com.multi.metahouse.chat.service;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +14,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.server.standard.SpringConfigurator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
@@ -47,7 +46,7 @@ public class ChatHandler {
 	
 	@OnMessage
 	public void onMessage(String msg, Session session) throws IOException {
-		System.out.println("수신메세지:"+msg);
+		System.out.println("텍스트 수신메세지:"+msg);
 		
 		// 수신 메시지 DB에 저장
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -62,6 +61,25 @@ public class ChatHandler {
 			System.out.println("전송메세지:"+msg);
 			data.getBasicRemote().sendText(msg);
 		}
+	}
+	
+	@OnMessage
+	public void onMessage(ByteBuffer msg, Session session) throws IOException {
+		System.out.println("바이너리 수신메세지:" + new String(msg.array()));
+		
+		// 수신 메시지 DB에 저장
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		ChatMsgDTO chatMsg = objectMapper.readValue(msg, ChatMsgDTO.class);
+		
+//		System.out.println("chatMsg -> " + chatMsg);
+//		
+//		service.insertMessage(chatMsg);
+		
+		//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
+//		for(Session data:clientset) {
+//			System.out.println("전송메세지:"+msg);
+//			data.getBasicRemote().sendText(msg);
+//		}
 	}
 	
 	@OnClose

@@ -362,3 +362,24 @@
             color: inherit;
             font-size: 12px;
         }
+
+/*
+	테스트 코드
+ */ 
+
+.chat-functional-buttons label{
+	font-weight: inherit;
+	cursor:pointer;
+}
+
+/* 파일 필드 숨기기 */
+.chat-functional-buttons input[type="file"] {  
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}

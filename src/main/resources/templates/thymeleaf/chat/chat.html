@@ -61,9 +61,9 @@
 			</div>
 
 		</div>
-		<div class="chat-main">
+		<div class="chat-main" style="display: none;">
 			<div class="chat-header">
-				<h1>방 이름</h1>
+				<h1></h1>
 			</div>
 			<div class="chat-body">
 				<div class="chat-body__chat-section"></div>
@@ -80,10 +80,12 @@
 					onblur="this.placeholder = '메시지를 입력해주세요'" />
 				<div class="chat-footer-row02">
 					<div class="chat-functional-buttons">
-						<button class="functional-button functional-button--attachment">
+						<label for="file_attach" class="functional-button functional-button--attachment">
 							<i class="fa-regular fa-paperclip fa-xl" style="color: #aaaaaa;"></i>
-							<span>파일첨부</span>
-						</button>
+							<span>파일 첨부</span>
+						</label>
+						<input type="file" id="file_attach"/>
+						
 						<button class="functional-button functional-button--delievery">
 							<i class="fa-regular fa-truck fa-xl" style="color: #aaaaaa;"></i>
 							<span>작업물 전송</span>

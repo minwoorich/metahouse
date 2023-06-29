@@ -1,15 +1,25 @@
 $(document).ready(function(){
+	// 세션 로그인 객체 저장 용도
 	let loginUser = null;
+	// chatroom 목록 elements로부터 채팅방 id 호출해 저장할 용도 
 	let chatroomId = null;
+	// 웹 소켓
 	let ws = null;
-	// 채팅방의 onClick eventListener
+	// Controller에 전송할 JSON
 	let mydata = {};
+	// 메시지 첨부 파일 관련 List
+	let filelist = [];
+	let fileURLlist = [];
+	
+	// 채팅방 목록 onClick eventListener
 	$(".chatroom-card").on("click", function(){
+		// 숨김 처리되었던 채팅방 요소 보이기
+		$(".chat-main").attr("style", "display = flex;");
+
 		chatroomId = $(this).attr("id").replace("chatroom", "");
 		loginUser = $("#loginUser").val();
-//		console.log("chatroomId : " + chatroomId);
-//		console.log("loginUser : " + loginUser);
-		// 채팅방 채팅 불러오기
+		
+		// 채팅방의 채팅 불러오기
 		$.ajax({
 			url:"/metahaus/chat/load/chat",
 			type:"get",
@@ -23,6 +33,9 @@ $(document).ready(function(){
 				
 				let chatMsg = jsonData.chatMsg;
 				let targetProfile = jsonData.targetProfile;
+				
+				// 채팅방 이름 설정
+				$(".chat-header").children("h1").text(targetProfile.user_name);
 				
 				// 채팅 요소 작성
 				let myChatEle = createChatElement(chatMsg, loginUser);
@@ -89,38 +102,87 @@ $(document).ready(function(){
 		
 	})
 	
+	// 채팅 전송 이벤트 (버튼 클릭)
 	$(".send-button").on("click", function(){
 		sendMsg(); 
 	})
 	
+	// 채팅 전송 이벤트 (엔터 입력)
 	$(".chat-footer-row01").on("keyup", function(){
 		if(event.keyCode == 13){ // 엔터 입력시
 			sendMsg();
 		}
 	})
 	
+	// 웹소켓 종료 이벤트 (미구현)
 	$("#btnclose").on("click", function(){
 		// 웹 소켓 종료
 		ws.close();
 	})
 	
-	//메시지 전송
+	// 첨부 파일 업로드 이벤트
+	$("#file_attach").on("input", function(){
+		console.log("첨부파일 업로드 클릭!");
+		let file = $(this)[0].files[0];
+		let fileURL = URL.createObjectURL(file);
+		console.log("file : " + file);
+		console.log("fileURL : " + fileURL);
+		filelist.push(file);
+		fileURLlist.push(fileURL);
+		console.log("filelist : " + filelist);
+		console.log("fileURLlist : " + fileURLlist);
+	})
+	
+	/* 메시지 전송 메소드 */
 	function sendMsg(){
 		let msg = $(".chat-footer-row01").val();
 		 
 		// 서버로 보낼 메시지를 만들기
-		// 사용자 아이디, 지금은 input 태그에 입력한 것을 가져오지만 나중에는 세션에서 아이디 꺼내서 전달
-		mydata.writer_id = loginUser;
-		mydata.chatroom_id = chatroomId;
-		mydata.message_content = msg;
-		mydata.write_time = new Date();
-		let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
+		// 파일 첨부 메시지
+		if(filelist.length !== 0){
+			console.log("파일 첨부 메시지");
+			
+			reader = new FileReader();
+			
+			mydata.writer_id = loginUser;
+			mydata.chatroom_id = chatroomId;
+			mydata.message_content = msg;
+			mydata.write_time = new Date();
+			mydata.fileURLlist = fileURLlist;
+			
+			mydata.filelist = [];
+			filelist.forEach(function(element) {
+				console.log("element : " + element);
+				console.log("reader.readAsArrayBuffer(element) : " + reader.readAsArrayBuffer(element));
+				console.log("reader.result : " + reader.result);
+				mydata.filelist.push(reader.result);
+			})
+			console.log("mydata.filelist : " + mydata.filelist);
+			
+			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
+			
+			//ws.send(sendMsg);
+//			ws.send(new TextEncoder('utf-8').encode(filelist));
+			
+		}else{
+			console.log("일반 메시지");
+			mydata.writer_id = loginUser;
+			mydata.chatroom_id = chatroomId;
+			mydata.message_content = msg;
+			mydata.write_time = new Date();
+			
+			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
+			
+			console.log("sendMsg : " + sendMsg);
+			
+			// 웹소켓으로 메시지 전송
+			ws.send(sendMsg);
+		}
 		
-		// 웹소켓으로 메시지 전송
-		ws.send(sendMsg);
 		$(".chat-footer-row01").val("");
 	}
 	
+	/* 프로필 Elements 작성 메소드 */
 	function createProfileElement(targetProfile){
 		addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
 		addPro += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
@@ -128,6 +190,7 @@ $(document).ready(function(){
 		return addPro;
 	}
 
+	/* 채팅메시지 Elements 작성 메소드 */
 	function createChatElement(chatMsg, loginUser){
 		myChatEle = '';
 		
