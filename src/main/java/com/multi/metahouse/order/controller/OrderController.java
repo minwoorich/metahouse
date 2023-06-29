@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -62,28 +63,21 @@ public class OrderController {
 /*----------------------------------- OSE ------------------------------------*/
 //	ajax-asset 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/asset")
-	public String orderA(@RequestBody AssetOrdersDTO assetOrder) {
+	@ResponseBody
+	public void orderA(@RequestBody AssetOrdersDTO assetOrder) {
 		System.out.println(assetOrder);
-		int order = orderService.orderA(assetOrder);
-		System.out.println(order);
-		if (order == 1) {
-
-		} else {
-
-		}
-		return "redirect:/order/asset/buylist";
+		orderService.orderA(assetOrder);
 	}
+	
 //	ajax-project 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/project")
-	public String orderP(@RequestBody ObjectNode saveObj) throws JsonProcessingException, IllegalArgumentException {
+	@ResponseBody
+	public void orderP(@RequestBody ObjectNode saveObj) throws JsonProcessingException, IllegalArgumentException {
 		 ObjectMapper mapper = new ObjectMapper();
 		 ProjectOrdersDTO projectOrder = mapper.treeToValue(saveObj.get("projectOrder"), ProjectOrdersDTO.class);
 		 SelectedAddOptionDTO option = mapper.treeToValue(saveObj.get("option"), SelectedAddOptionDTO.class);
 		 System.out.println(projectOrder);
 		 System.out.println(option);
-		int order = orderService.orderP(projectOrder, option);
-//		System.out.println(order);
-
-		return "redirect:/order/project/buylist";
+		 orderService.orderP(projectOrder, option);
 	}
 }

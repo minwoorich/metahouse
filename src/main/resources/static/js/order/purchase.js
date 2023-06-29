@@ -67,6 +67,7 @@ $(document).ready(function(){
     		}
     	});
     });
+    
 //   프로젝트 구매버튼 (null, #{order_id}, #{add_option_id}, #{count}) / (null, #{project_id}, #{buyer_id}, "주문요청", now(), #{request}, #{order_price})
     $(".PjtBtn").on("click", function(){
     	var param = {"projectOrder" : {
