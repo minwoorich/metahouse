@@ -48,7 +48,7 @@ public class PointDAOImpl implements PointDAO {
 	
 	// User 충전 내역 업데이트
 	@Override
-	public void createPointInfo(User loginUser, int chargeAmount) {
+	public void createChargedPointInfo(User loginUser, int chargeAmount) {
 		LocalDate localDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
 		Date date = Date.valueOf(localDate);
 		
@@ -64,8 +64,24 @@ public class PointDAOImpl implements PointDAO {
 
 	@Override
 	public void consumePoint(User loginUser, int consumeAmount) {
-		// TODO Auto-generated method stub
-
+		loginUser.setPoint(loginUser.getPoint() - consumeAmount);
+		userRepository.save(loginUser);
+	}
+	
+	// User 소비 내역 업데이트
+	@Override
+	public void createConsumedPointInfo(User loginUser, int consumeAmount, String consumeInfo) {
+		LocalDate localDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
+		Date date = Date.valueOf(localDate);
+		
+		ConsumedPointInfo consumedPointInfo = new ConsumedPointInfo();
+		consumedPointInfo.setUserId(loginUser.getUserId());
+		consumedPointInfo.setConsumingPoint(consumeAmount);
+		consumedPointInfo.setConsumeInfo("/* 이 부분에 사용처를 저장해주세요! */");
+		consumedPointInfo.setRemainingPoint(loginUser.getPoint() - consumeAmount);
+		consumedPointInfo.setConsumeDate(date);
+		
+		consumedPointInfoRepository.save(consumedPointInfo);
 	}
 
 	@Override

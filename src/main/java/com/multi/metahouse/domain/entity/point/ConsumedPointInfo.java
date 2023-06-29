@@ -39,6 +39,7 @@ public class ConsumedPointInfo {
 	@NonNull
 	private int remainingPoint;		// 잔여 포인트
 	@CreationTimestamp
+	@NonNull
 	private Date consumeDate;		// 사용된 시간
 	
 	@ManyToOne
