@@ -18,6 +18,12 @@
         SET user_1_id = #{user_1_id}, user_2_id = #{user_2_id}, open_date = #{open_date}
         WHERE chatroom_id = #{chatroom_id}
     </update>
+    
+    <update id="updateLastChat" parameterType="chatmsg">
+        UPDATE chatroom
+        SET last_chat_time = #{write_time}, last_chat = #{message_content}
+        WHERE chatroom_id = #{chatroom_id}
+    </update>
 
     <delete id="deleteChatroom">
         DELETE FROM chatroom WHERE chatroom_id = #{chatroomId}

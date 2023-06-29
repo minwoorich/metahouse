@@ -150,7 +150,20 @@ $(document).ready(function(){
 			mydata.write_time = new Date();
 			mydata.fileURLlist = fileURLlist;
 			
-			mydata.filelist = [];
+//			mydata.filelist = [];
+//			filelist.forEach(function(element) {
+//				console.log("element : " + element);
+//				console.log("reader.readAsArrayBuffer(element) : " + reader.readAsArrayBuffer(element));
+//				console.log("reader.result : " + reader.result);
+//				mydata.filelist.push(reader.result);
+//			})
+//			console.log("mydata.filelist : " + mydata.filelist);
+			
+			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
+			
+			//ws.send(sendMsg);
+//			ws.send(new TextEncoder('utf-8').encode(filelist));
+			
 			filelist.forEach(function(element) {
 				console.log("element : " + element);
 				console.log("reader.readAsArrayBuffer(element) : " + reader.readAsArrayBuffer(element));
@@ -158,11 +171,6 @@ $(document).ready(function(){
 				mydata.filelist.push(reader.result);
 			})
 			console.log("mydata.filelist : " + mydata.filelist);
-			
-			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
-			
-			//ws.send(sendMsg);
-//			ws.send(new TextEncoder('utf-8').encode(filelist));
 			
 		}else{
 			console.log("일반 메시지");
@@ -180,6 +188,8 @@ $(document).ready(function(){
 		}
 		
 		$(".chat-footer-row01").val("");
+		
+		/* 최근 채팅내역 변경 로직 추가 필요 (필요!) */
 	}
 	
 	/* 프로필 Elements 작성 메소드 */
