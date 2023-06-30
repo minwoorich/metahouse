@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
@@ -55,6 +56,9 @@ public class User {
 	private int point;
 	private String thumbnailStoreFilename;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy = "creatorId")
-	private List<ProjectEntity> projectEntityList = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy = "creatorId")
+//	private List<ProjectEntity> projectEntityList = new ArrayList<>();
+//	
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerId")
+//	private List<AssetEntity> assetEntityList = new ArrayList<>();
 }

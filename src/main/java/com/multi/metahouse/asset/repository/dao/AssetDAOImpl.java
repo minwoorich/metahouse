@@ -1,15 +1,20 @@
 package com.multi.metahouse.asset.repository.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.asset.repository.jpa.AssetContentRepository;
+import com.multi.metahouse.asset.repository.jpa.AssetDetailImgRepository;
 import com.multi.metahouse.asset.repository.jpa.AssetRepository;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
+import com.multi.metahouse.domain.entity.asset.AssetContentEntity;
+import com.multi.metahouse.domain.entity.asset.AssetDetailImgEntity;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 @Repository
@@ -17,61 +22,51 @@ public class AssetDAOImpl implements AssetDAO {
 
 	SqlSession sqlSession;
 	AssetRepository repository;
+	AssetContentRepository contentRepository;
+	AssetDetailImgRepository detailImgRepository;
 
 	@Autowired
-	public AssetDAOImpl(SqlSession sqlSession, AssetRepository repository) {
+	public AssetDAOImpl(SqlSession sqlSession, AssetRepository repository, AssetContentRepository contentRepository,
+			AssetDetailImgRepository detailImgRepository) {
 		super();
 		this.sqlSession = sqlSession;
 		this.repository = repository;
+		this.contentRepository = contentRepository;
+		this.detailImgRepository = detailImgRepository;
 	}
 
 	@Override
-	public int insert(AssetDTO asset) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("com.multi.metahaus.asset.insertAsset", asset);
+	public void insert(AssetDetailImgEntity assetDetailImgEntity) {
+		detailImgRepository.save(assetDetailImgEntity);
 	}
 
 	@Override
-	public List<AssetDTO> assetlist() {
-		// TODO Auto-generated method stub
-		return null;
+	public void insert(AssetContentEntity assetContentEntity) {
+		contentRepository.save(assetContentEntity);
+	}
+	
+	@Override
+	public List<AssetEntity> selectAssetListBySellerId(String sellerId) {
+		return repository.findBySellerId(sellerId);
+	}
+	
+	@Override
+	public void deleteAssetByAssetId(String assetId) {
+		repository.deleteById(assetId);
+	}
+	
+	@Override
+	public void deleteAssetContentByAssetId(String assetId) {
+		AssetEntity assetEntity = repository.findById(assetId).orElseThrow(() -> new RuntimeException());
+		contentRepository.deleteByAssetId(assetEntity);
 	}
 
 	@Override
-	public int delete(String asset_id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void deleteAssetImgByAssetId(String assetId) {
+		AssetEntity assetEntity = repository.findById(assetId).orElseThrow(() -> new RuntimeException());
+		detailImgRepository.deleteByAssetId(assetEntity);
 	}
-
-	@Override
-	public int update(AssetDTO asset) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<AssetDTO> assetlist(String asset_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int attachFileInsert(List<AssetContentDTO> attachfiledlist) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("com.multi.metahaus.asset.insertAttachFile", attachfiledlist);
-	}
-
-	@Override
-	public int optionalFileInsert(List<AssetDetailImgDTO> optionalFiledlist) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("com.multi.metahaus.asset.insertOptionalFile", optionalFiledlist);
-	}
-
-	@Override
-	public String lastInsertId() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("com.multi.metahaus.asset.selectAsset");
-	}
+	
 	
 /*------------------------------------------ OSE ---------------------------------------------*/
 

@@ -1,5 +1,6 @@
 package com.multi.metahouse.asset.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,11 @@ import com.multi.metahouse.asset.repository.jpa.AssetRepository;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
+import com.multi.metahouse.domain.dto.asset.AssetFormDTO;
+import com.multi.metahouse.domain.entity.asset.AssetContentEntity;
+import com.multi.metahouse.domain.entity.asset.AssetDetailImgEntity;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
+import com.multi.metahouse.domain.entity.user.User;
 
 @Service
 public class AssetServiceImpl implements AssetService {
@@ -26,57 +31,78 @@ public class AssetServiceImpl implements AssetService {
 		this.dao = dao;
 	}
 
-	@Override
-	public int update(AssetDTO asset) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<AssetDTO> assetlist() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<AssetDTO> assetlist(String asset_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int delete(String asset_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	@Transactional
-	public int insert(AssetDTO asset, List<AssetDetailImgDTO> assetDetailImg, List<AssetContentDTO> assetContent) {
-		// TODO Auto-generated method stub
-		asset.setSeller_id("osm");
-		dao.insert(asset);
-
-		// lastInsertId 저장
-		String selectAsset = dao.lastInsertId();
-
-		for (int i = 0; i < assetContent.size(); i++) {
-			AssetContentDTO dto = assetContent.get(i);
-
-			dto.setAsset_id(selectAsset);
+	@Override
+	public void insert(String storeAttachFileName, String storeThumbnailFileName, List<AssetDetailImgDTO> storeOptionalFileNameList,
+			AssetFormDTO assetFormDto) {
+		AssetEntity assetEntity = new AssetEntity();
+		
+		//부모 Entity에 데이터 주입(AssetEntity)
+		assetEntity.setSellerId(assetFormDto.getUser_id());
+		assetEntity.setTitle(assetFormDto.getTitle());
+		assetEntity.setCategory1(assetFormDto.getCategory1());
+		assetEntity.setCategory2(assetFormDto.getCategory2_as());
+		assetEntity.setDescription(assetFormDto.getDescription());
+		assetEntity.setPrice(assetFormDto.getPrice());
+		assetEntity.setMainImg(storeThumbnailFileName);
+		
+		//자식 Entity에 데이터 주입 (AssetContentEntity)
+		AssetContentEntity assetContentEntity = new AssetContentEntity();
+		assetContentEntity.setAssetStoreFilename(storeAttachFileName);
+		assetContentEntity.setAssetId(assetEntity);
+		//assetEntity.setAssetContentEntity(assetContentEntity);
+		assetContentEntity.setAssetFileno("1");
+		dao.insert(assetContentEntity);
+		
+		
+		//자식 Entity에 데이터 주입2 (AssetDetailImgEntity	)
+		if (storeOptionalFileNameList != null) {
+			for (AssetDetailImgDTO dto : storeOptionalFileNameList) {
+				AssetDetailImgEntity entity = new AssetDetailImgEntity();
+				entity.setAssetDetailImgStoreFilename(dto.getAsset_detail_img_store_filename());
+				entity.setAssetFileno(dto.getAsset_fileno());
+				entity.setAssetId(assetEntity);
+//				assetEntity.getAssetDetailImgEntityList().add(entity);
+				
+				dao.insert(entity);
+			}
 		}
-
-		for (int i = 0; i < assetDetailImg.size(); i++) {
-			AssetDetailImgDTO dto = assetDetailImg.get(i);
-
-			dto.setAsset_id(selectAsset);
-		}
-
-		dao.attachFileInsert(assetContent);
-		dao.optionalFileInsert(assetDetailImg);
-
-		return 0;
+		System.out.println("++++++++++++++++++++++++++++");
+		System.out.println("-------" + assetEntity);
+		
 	}
+	
+	@Override
+	public List<AssetDTO> selectAssetListBySellerId(String sellerId) {
+		List<AssetEntity> entityList =  dao.selectAssetListBySellerId(sellerId);
+		List<AssetDTO> dtoList = new ArrayList<>();
+		
+		for(AssetEntity entity : entityList) {
+			AssetDTO dto = new AssetDTO();
+			dto.setAsset_id(entity.getAssetId());
+			dto.setSeller_id(entity.getSellerId());
+			dto.setTitle(entity.getTitle());
+			dto.setCategory1(entity.getCategory1());
+			dto.setCategory2_as(entity.getCategory2());
+			dto.setDescription(entity.getDescription());
+			dto.setPrice(Integer.parseInt(entity.getPrice()));
+			dto.setMain_img(entity.getMainImg());
+			dto.setAsset_date((entity.getAssetDate()).toString());
+			
+			dtoList.add(dto);
+		}
+		
+		return dtoList;
+	}
+	
+	@Transactional
+	@Override
+	public void deleteAssetByAssetId(String assetId) {
+		dao.deleteAssetContentByAssetId(assetId);
+		dao.deleteAssetImgByAssetId(assetId);
+		dao.deleteAssetByAssetId(assetId);
+	}
+
 
 	/*-------------------------------------------------------------------------------------*/
 	@Autowired
@@ -115,5 +141,4 @@ public class AssetServiceImpl implements AssetService {
 	public List<AssetContentDTO> assetContentInfo(String asset_id) {
 		return dao.assetContentInfo(asset_id);
 	}
-
 }
