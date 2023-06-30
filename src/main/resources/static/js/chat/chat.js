@@ -1,15 +1,25 @@
 $(document).ready(function(){
+	// 세션 로그인 객체 저장 용도
 	let loginUser = null;
+	// chatroom 목록 elements로부터 채팅방 id 호출해 저장할 용도 
 	let chatroomId = null;
+	// 웹 소켓
 	let ws = null;
-	// 채팅방의 onClick eventListener
-	let mydata = {};
+	// Controller에 전송할 JSON
+	var mydata = {};
+	// 메시지 첨부 파일 관련 List
+	let filelist = [];
+	let filenamelist = [];
+	
+	// 채팅방 목록 onClick eventListener
 	$(".chatroom-card").on("click", function(){
+		// 숨김 처리되었던 채팅방 요소 보이기
+		$(".chat-main").attr("style", "display = flex;");
+
 		chatroomId = $(this).attr("id").replace("chatroom", "");
 		loginUser = $("#loginUser").val();
-//		console.log("chatroomId : " + chatroomId);
-//		console.log("loginUser : " + loginUser);
-		// 채팅방 채팅 불러오기
+		
+		// 채팅방의 채팅 불러오기
 		$.ajax({
 			url:"/metahaus/chat/load/chat",
 			type:"get",
@@ -23,6 +33,9 @@ $(document).ready(function(){
 				
 				let chatMsg = jsonData.chatMsg;
 				let targetProfile = jsonData.targetProfile;
+				
+				// 채팅방 이름 설정
+				$(".chat-header").children("h1").text(targetProfile.user_name);
 				
 				// 채팅 요소 작성
 				let myChatEle = createChatElement(chatMsg, loginUser);
@@ -71,56 +84,113 @@ $(document).ready(function(){
 						
 					$(".chat-body__chat-section").append(item);
 				}
-				// 웹소켓이 연결된 후에
-				ws.onopen = function(msg){
-					$("#talklist").append("server start...\n");
-				}
-				// 웹소켓이 종료된 후에
-				ws.onclose = function(msg){
-					$("#talklist").append("server disconnect...\n");
-				}
-				// 웹소켓 사용 중 에러가 발생하는 경우
-				ws.onerror = function(msg){
-					$("#talklist").append("error...\n");
-				}
+				
+				/* 채팅 스크롤 항상 아래로 */
+				let scrChatBody = $(".chat-body__chat-section");
+				scrChatBody.scrollTop(scrChatBody[0].scrollHeight);
 			}
 			
 		})
 		
 	})
 	
+	// 채팅 전송 이벤트 (버튼 클릭)
 	$(".send-button").on("click", function(){
-		sendMsg(); 
-	})
-	
-	$(".chat-footer-row01").on("keyup", function(){
-		if(event.keyCode == 13){ // 엔터 입력시
+		if(filelist.length !== 0){
+			sendMsgWithFiles();
+		}else{
 			sendMsg();
 		}
 	})
 	
+	// 채팅 전송 이벤트 (엔터 입력)
+	$(".chat-footer-row01").on("keyup", function(){
+		if(event.keyCode == 13){ // 엔터 입력시
+			if(filelist.length !== 0){
+				sendMsgWithFiles();
+			}else{
+				sendMsg();
+			}
+			
+		}
+	})
+	
+	// 웹소켓 종료 이벤트 (미구현)
 	$("#btnclose").on("click", function(){
 		// 웹 소켓 종료
 		ws.close();
 	})
 	
-	//메시지 전송
+	// 첨부 파일 업로드 이벤트
+	$("#file_attach").on("change", function(){
+		console.log("첨부파일 업로드 클릭!");
+		let file = $(this)[0].files[0];
+		let filename = getFileNameFromBlob(file);
+		filelist.push(file);
+		filenamelist.push(filename);
+		console.log("filelist : " + filelist);
+		console.log("filenamelist : " + filenamelist);
+		
+	})
+	
+	/* 일반 메시지 전송 메소드 */
 	function sendMsg(){
+		console.log("일반 메시지");
 		let msg = $(".chat-footer-row01").val();
 		 
 		// 서버로 보낼 메시지를 만들기
-		// 사용자 아이디, 지금은 input 태그에 입력한 것을 가져오지만 나중에는 세션에서 아이디 꺼내서 전달
+		mydata.message_type = "Text";
 		mydata.writer_id = loginUser;
 		mydata.chatroom_id = chatroomId;
 		mydata.message_content = msg;
 		mydata.write_time = new Date();
+		
 		let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
+		console.log("sendMsg : " + sendMsg);
 		
 		// 웹소켓으로 메시지 전송
 		ws.send(sendMsg);
+		
 		$(".chat-footer-row01").val("");
+		
+		/* 최근 채팅내역 변경 로직 추가 필요 (필요!) */
 	}
 	
+	/* 파일 첨부 메시지 전송 메소드 */
+	function sendMsgWithFiles(){
+		// 파일 첨부 메시지
+		console.log("파일 첨부 메시지");
+		
+		mydata.message_type = "File";
+		mydata.writer_id = loginUser;
+		mydata.chatroom_id = chatroomId;
+		mydata.write_time = new Date();
+		mydata.message_content = $(".chat-footer-row01").val();
+		mydata.filenamelist = filenamelist;
+		
+		let sendMsg = JSON.stringify(mydata);
+		ws.send(sendMsg);
+		
+		$.each(filelist, function(i, file){
+			let fr = new FileReader();
+			
+			fr.onload = function(event){
+				let arrayBuffer = this.result;
+				console.log("arrayBuffer = " + arrayBuffer);
+				ws.send(arrayBuffer);
+			}
+			
+			console.log("ArrayBuffer 전송!");
+			fr.readAsArrayBuffer(file);
+		})
+		
+		$(".chat-footer-row01").val("");
+		filelist = [];
+		filenamelist = [];
+	}
+
+
+	/* 프로필 Elements 작성 메소드 */
 	function createProfileElement(targetProfile){
 		addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
 		addPro += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
@@ -128,6 +198,7 @@ $(document).ready(function(){
 		return addPro;
 	}
 
+	/* 채팅메시지 Elements 작성 메소드 */
 	function createChatElement(chatMsg, loginUser){
 		myChatEle = '';
 		
@@ -162,5 +233,15 @@ $(document).ready(function(){
 		}
 		
 		return myChatEle;
+	}
+	
+	function getFileNameFromBlob(blob) {
+		if (blob instanceof Blob && blob.name) {
+			// 파일 타입이 Blob 타입이 맞는지, Blob 파일이 name 속성을 갖는지 체크
+			return blob.name;
+		}
+		
+		// 파일 이름 확인 불가능할 경우
+		return null;
 	}
 })

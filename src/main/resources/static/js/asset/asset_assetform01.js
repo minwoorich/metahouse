@@ -281,7 +281,11 @@ $(document).ready(function () {
     		
     		myformdata.append("description",description);
     		myformdata.append("thumbnail",thumbnail);
-    		myformdata.append("detailImages",detailImages);
+    		
+    		for(let image of detailImages){
+                myformdata.append("detailImages",image);
+            }
+    		
     		myformdata.append("attach_file",attach_file);
     		
     		$.ajax({
@@ -292,6 +296,8 @@ $(document).ready(function () {
 				cache:false,
 				data:myformdata,
 				success:function(nextPageURL){
+					//let img = detailImages.length
+					//alert(img);
 					//nextPageURL = /metahaus/asset/forms/preview
 					window.location.href = nextPageURL;
 				},
