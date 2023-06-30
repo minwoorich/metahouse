@@ -161,9 +161,6 @@ $(document).ready(function(){
 		// 파일 첨부 메시지
 		console.log("파일 첨부 메시지");
 		
-		
-		let fr = new FileReader();
-		
 		mydata.message_type = "File";
 		mydata.writer_id = loginUser;
 		mydata.chatroom_id = chatroomId;
@@ -174,18 +171,22 @@ $(document).ready(function(){
 		let sendMsg = JSON.stringify(mydata);
 		ws.send(sendMsg);
 		
-		fr.onload = function(event){
-			let arrayBuffer = this.result;
-			console.log("arrayBuffer = " + arrayBuffer);
-			ws.send(arrayBuffer);
-		}
-
 		$.each(filelist, function(i, file){
+			let fr = new FileReader();
+			
+			fr.onload = function(event){
+				let arrayBuffer = this.result;
+				console.log("arrayBuffer = " + arrayBuffer);
+				ws.send(arrayBuffer);
+			}
+			
 			console.log("ArrayBuffer 전송!");
 			fr.readAsArrayBuffer(file);
 		})
 		
 		$(".chat-footer-row01").val("");
+		filelist = [];
+		filenamelist = [];
 	}
 
 

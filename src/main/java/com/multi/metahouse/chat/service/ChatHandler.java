@@ -30,8 +30,9 @@ import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
 public class ChatHandler extends AbstractWebSocketHandler{
 	
 	private static Set<Session> clientset = Collections.synchronizedSet(new HashSet<Session>());
-	private static String fileUploadSessionMsg = "";
+	private String fileUploadSessionMsg = "";
 	private ChatMsgDTO chatMsg = null;
+	private int fileIdx = 0;
 	private static ChatService service;
 	private static ResourceLoader resourceLoader;
 	
@@ -71,9 +72,10 @@ public class ChatHandler extends AbstractWebSocketHandler{
 			
 		}else {
 			System.out.println("File 첨부 메시지 수신됨.");
+			fileIdx = 0;
 			
 			// 수신 메시지 DB에 저장
-			//service.insertMessage(chatMsg);
+			service.insertMessage(chatMsg);
 		}
 		
 		System.out.println("chatMsg -> " + chatMsg);
@@ -102,8 +104,12 @@ public class ChatHandler extends AbstractWebSocketHandler{
             dir.mkdirs();
         }
 		
-        // 
-		String filename = UUID.randomUUID().toString() + "." + "png";
+        // 실제 파일 확장자 추출
+        int pos = chatMsg.getFilenamelist().get(fileIdx).lastIndexOf(".");
+        String ext = chatMsg.getFilenamelist().get(fileIdx).substring(pos+1);
+		String filename = UUID.randomUUID().toString() + "." + ext;
+		
+		fileIdx++;
 		
 		File attachedFile = new File(FILE_PATH, filename);
 		FileOutputStream out = null;

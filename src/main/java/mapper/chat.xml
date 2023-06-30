@@ -10,7 +10,7 @@
     	
     <insert id="insertChatMsg" parameterType="chatmsg">
     	INSERT INTO message
-    	VALUES (null, #{writer_id}, #{chatroom_id}, #{write_time}, #{message_content})
+    	VALUES (null, #{writer_id}, #{chatroom_id}, #{write_time}, #{message_content}, #{message_type})
     </insert>
 
     <update id="updateChatroom">
