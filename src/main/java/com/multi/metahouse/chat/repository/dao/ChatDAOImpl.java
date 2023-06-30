@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -64,6 +66,11 @@ public class ChatDAOImpl implements ChatDAO {
 	@Override
 	public int insertMessage(ChatMsgDTO chatMsgDTO) {
 		return sqlSession.insert("insertChatMsg", chatMsgDTO);
+	}
+	
+	@Override
+	public int updateLastChat(ChatMsgDTO chatMsgDTO) {
+		return sqlSession.update("updateLastChat", chatMsgDTO);
 	}
     
 }

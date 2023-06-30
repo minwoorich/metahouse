@@ -29,4 +29,5 @@ public interface ChatDAO {
     
     // 채팅 메시지 저장
     int insertMessage(ChatMsgDTO chatMsgDTO);
+	int updateLastChat(ChatMsgDTO chatMsgDTO);
 }

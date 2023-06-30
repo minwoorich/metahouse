@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,8 +99,10 @@ public class ChatServiceImpl implements ChatService {
 
 	/* 채팅 메시지 저장 */
 	@Override
+	@Transactional
 	public int insertMessage(ChatMsgDTO chatMsgDTO) {
-		return dao.insertMessage(chatMsgDTO);
+		dao.insertMessage(chatMsgDTO);
+		return dao.updateLastChat(chatMsgDTO);
 	}
 	
 	
