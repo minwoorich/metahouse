@@ -95,7 +95,9 @@
 			<ul class="asset-product-list" th:each="asset : ${assetList}">
 				<li onclick="" class="asset-product-card">
 					<div class="asset-product-image">
-						<img th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}" alt="썸네일">
+						<a th:href="@{/asset/detail(assetNum=${asset.asset_id})}">
+							<img th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}" alt="썸네일">
+						</a>
 					</div>
 					<div class="asset-product-contents">
 						<div class="asset-product-contents-row01">
