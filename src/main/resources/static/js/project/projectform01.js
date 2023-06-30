@@ -259,9 +259,6 @@ $(document).ready(function () {
     				", description = "+description+
     				", thumbnail = " + thumbnail+
     				", detailImages = " + detailImages);
-    		alert(description);
-    		
-    		
     		
     		myformdata.append("description",description);
     		myformdata.append("thumbnail",thumbnail);
@@ -278,7 +275,7 @@ $(document).ready(function () {
 				cache:false,
 				data:myformdata,
 				success:function(nextPageURL){
-					
+//					alert(description);
 					//nextPageURL = /metahaus/project/forms/packages
 					window.location.href = nextPageURL;
 				},

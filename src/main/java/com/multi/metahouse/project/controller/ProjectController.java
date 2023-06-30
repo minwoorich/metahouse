@@ -123,13 +123,11 @@ public class ProjectController {
 			User user = (User)session.getAttribute("loginUser");
 			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
 			model.addAttribute("projectList", projectList);
+			
 			return "project/project_product_list";
 		}else {
 			return "redirect:/login";
 		}
-		
-//		List<ProjectListDTO> projectList = projectService.selectAllProjects();
-		
 	}
 
 	@PostMapping("project/delete-product")
@@ -157,7 +155,6 @@ public class ProjectController {
 
 	@GetMapping("project/forms/preview")
 	public String getFormPreview(HttpSession session, Model model) {
-
 		// 세션에 삼단패키지가 들어갔는지 ,단일패키지가 들어갔는지
 		if (session.getAttribute("projectPackageTripleForm") == null) {
 			model.addAttribute("package", "single");
@@ -180,7 +177,7 @@ public class ProjectController {
 
 		// 세션 저장
 		session.setAttribute("projectForm", projectForm);
-
+		System.out.println("-------------projectForm.description : " + projectForm.getDescription());
 		return "/metahaus/project/forms/packages";
 	}
 
