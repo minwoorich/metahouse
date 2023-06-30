@@ -7,6 +7,11 @@
         INSERT INTO chatroom (chatroom_id, user_1_id, user_2_id, open_date)
         VALUES (#{chatroom_id}, #{user_1_id}, #{user_2_id}, #{open_date})
     </insert>
+    	
+    <insert id="insertChatMsg" parameterType="chatmsg">
+    	INSERT INTO message
+    	VALUES (null, #{writer_id}, #{chatroom_id}, #{write_time}, #{message_content})
+    </insert>
 
     <update id="updateChatroom">
         UPDATE chatroom
@@ -18,24 +23,32 @@
         DELETE FROM chatroom WHERE chatroom_id = #{chatroomId}
     </delete>
 
-    <select id="getChatroomById" parameterType="String" resultType="chatroom">
+    <select id="getChatroomByUserId" parameterType="String" resultType="chatroom">
         SELECT c.chatroom_id, c.user_1_id, c.user_2_id, c.open_date, DATE_FORMAT(last_chat_time, '%Y-%m-%d') as last_chat_time, last_chat, u.user_name as user_2_name 
 		FROM chatroom c, user u
 		WHERE user_1_id = #{user_1_id}
 		  and c.user_2_id = u.user_id
+		union
+		SELECT c.chatroom_id, c.user_1_id, c.user_2_id, c.open_date, DATE_FORMAT(last_chat_time, '%Y-%m-%d') as last_chat_time, last_chat, u.user_name as user_2_name 
+		FROM chatroom c, user u
+		WHERE user_2_id = #{user_1_id}
+		  and c.user_1_id = u.user_id;
     </select>
-    
+    <select id="getChatroomById" resultType="chatroom">
+    	SELECT * 
+		FROM chatroom c
+		WHERE chatroom_id = #{chatroomId}
+    </select>
     <select id="getChatMsgById" parameterType="int" resultType="chatmsg">
         SELECT *
 		FROM message m
 		where chatroom_id = #{chatroomId}
     </select>
     
-    <select id="getChatProfileById" parameterType="int" resultType="chatprofile">
-        SELECT u.user_name, u.self_introduction, u.thumbnail_store_filename
-		FROM chatroom c, user u
-		where chatroom_id = #{chatroomId}
-		  and c.user_2_id = u.user_id;
+    <select id="getChatProfileById" parameterType="String" resultType="chatprofile">
+		SELECT user_name, self_introduction, thumbnail_store_filename
+		FROM user
+		where user_id = #{target}
     </select>
 
 </mapper>

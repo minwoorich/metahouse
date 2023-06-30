@@ -92,4 +92,12 @@ public class AssetDAOImpl implements AssetDAO {
 	public List<AssetDTO> findTopNByAssetReviewAvg(int limit) {
 		return sqlSession.selectList("com.multi.metahaus.asset.findOrderByReviewRating",limit);
 	}
+	
+	
+	/*--------------------------------------- YSH --------------------------------------------- */
+	@Override
+	public List<AssetDTO> findBySellerId(String sellerId) {
+		return sqlSession.selectList("com.multi.metahaus.asset.findAssetInfo", sellerId);
+	}
+	
 }

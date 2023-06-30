@@ -31,4 +31,7 @@ public interface AssetDAO {
 	
 	/////////LCH/////////////////////
 	public List<AssetDTO> findTopNByAssetReviewAvg(int limit);
+	
+	/*-------------------------------- YSH --------------------------------------*/
+	public List<AssetDTO> findBySellerId(String sellerId);
 }

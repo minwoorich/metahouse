@@ -96,8 +96,8 @@
 	<div class="profile_view_area">
 		<div class="info_card_view">
 			<div class="banner-slider-wrap">
-       			<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
-       			<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+       			<div th:if="${#arrays.isEmpty(portfolioList) != true}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+       			<div th:if="${#arrays.isEmpty(portfolioList) != true}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
        			<div class="slider-outter">
 					<div index="0" class="banner-slider-list">
 						<div class="banner-slider-item" th:each="portfolio:${portfolioList}">

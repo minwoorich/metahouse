@@ -59,19 +59,12 @@ public class AssetMarketController {
 	@GetMapping("asset/purchase")
 	public String puchaseAsset(Model model, String assetNum, HttpSession session) {
 		AssetDTO asset = service.assetInfo(assetNum);
-
-		model.addAttribute("asset", asset);
-
-		String view = null;
 		User userInfo = (User) session.getAttribute("loginUser");
 
-		if (userInfo == null) {
-			view = "redirect:/login";
-		} else {
-			model.addAttribute("userId", userInfo.getUserId());
-			view = "order/asset_purchase";
-		}
-		return view;
+		model.addAttribute("asset", asset);
+		model.addAttribute("userInfo", userInfo);
+
+		return "order/asset_purchase";
 	}
 
 }

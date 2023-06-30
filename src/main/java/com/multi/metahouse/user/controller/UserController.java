@@ -18,7 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
+import com.multi.metahouse.domain.dto.user.OtherProfileInfoDTO;
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.portfolio.Portfolio;
+import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.portfolio.service.PortfolioService;
 import com.multi.metahouse.user.service.UserFileUploadLogicService;
@@ -159,7 +162,17 @@ public class UserController {
 	}
 	
 	@GetMapping("user/profile")
-	public String otherProfile() {
-		return "user/profile_other";
+	public ModelAndView otherProfile(String userId) {
+		System.out.println(userId);
+		ModelAndView profileOther = new ModelAndView("user/profile_other");
+		List<PortfolioDTO> portfolioList = portfolioservice.selectPortfolioList(userId);
+		OtherProfileInfoDTO otherProfileInfo = service.read(userId);
+		
+		System.out.println(portfolioList);
+		System.out.println(otherProfileInfo);
+		
+		profileOther.addObject("portfolioList", portfolioList);
+		profileOther.addObject("otherProfileInfo", otherProfileInfo);
+		return profileOther;
 	}
 }

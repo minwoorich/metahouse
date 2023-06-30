@@ -7,8 +7,20 @@
 		
 	</select>
 	
-<!-- ******************************************************* -->
+<!-- ************************* OSE ****************************** -->
 	<insert id="insertOrderA" parameterType="assetOrder">
         INSERT INTO asset_orders VALUES (null, #{asset_id}, #{buyer_id2}, now())
+    </insert>
+    
+	<insert id="insertOrderP" parameterType="projectOrder">
+	<!-- order_id, project_id, buyer_id, pre_order_status, order_commit_date, request, order_price -->
+        INSERT INTO project_orders VALUES (null, #{project_id}, #{buyer_id}, "주문요청", now(), #{request}, #{order_price})
+        <selectKey resultType="String" keyProperty="order_id" keyColumn="order_id" order="AFTER">
+    		SELECT LAST_INSERT_ID()
+    	</selectKey>
+    </insert>
+	<insert id="insertOrderOption" parameterType="selectedAddOption">
+	<!-- selected_add_option_id, order_id, add_option_id, count -->
+        INSERT INTO selected_add_option VALUES (null, #{order_id}, #{add_option_id}, #{count})
     </insert>
 </mapper>
