@@ -9,7 +9,7 @@ $(document).ready(function(){
 	var mydata = {};
 	// 메시지 첨부 파일 관련 List
 	let filelist = [];
-	let fileURLlist = [];
+	let filenamelist = [];
 	
 	// 채팅방 목록 onClick eventListener
 	$(".chatroom-card").on("click", function(){
@@ -84,18 +84,10 @@ $(document).ready(function(){
 						
 					$(".chat-body__chat-section").append(item);
 				}
-				// 웹소켓이 연결된 후에
-				ws.onopen = function(msg){
-					$("#talklist").append("server start...\n");
-				}
-				// 웹소켓이 종료된 후에
-				ws.onclose = function(msg){
-					$("#talklist").append("server disconnect...\n");
-				}
-				// 웹소켓 사용 중 에러가 발생하는 경우
-				ws.onerror = function(msg){
-					$("#talklist").append("error...\n");
-				}
+				
+				/* 채팅 스크롤 항상 아래로 */
+				let scrChatBody = $(".chat-body__chat-section");
+				scrChatBody.scrollTop(scrChatBody[0].scrollHeight);
 			}
 			
 		})
@@ -104,13 +96,22 @@ $(document).ready(function(){
 	
 	// 채팅 전송 이벤트 (버튼 클릭)
 	$(".send-button").on("click", function(){
-		sendMsg(); 
+		if(filelist.length !== 0){
+			sendMsgWithFiles();
+		}else{
+			sendMsg();
+		}
 	})
 	
 	// 채팅 전송 이벤트 (엔터 입력)
 	$(".chat-footer-row01").on("keyup", function(){
 		if(event.keyCode == 13){ // 엔터 입력시
-			sendMsg();
+			if(filelist.length !== 0){
+				sendMsgWithFiles();
+			}else{
+				sendMsg();
+			}
+			
 		}
 	})
 	
@@ -124,80 +125,70 @@ $(document).ready(function(){
 	$("#file_attach").on("change", function(){
 		console.log("첨부파일 업로드 클릭!");
 		let file = $(this)[0].files[0];
-		let fileURL = URL.createObjectURL(file);
-		console.log("file : " + file);
-		console.log("fileURL : " + fileURL);
+		let filename = getFileNameFromBlob(file);
 		filelist.push(file);
-		fileURLlist.push(fileURL);
+		filenamelist.push(filename);
 		console.log("filelist : " + filelist);
-		console.log("fileURLlist : " + fileURLlist);
-		
+		console.log("filenamelist : " + filenamelist);
 		
 	})
 	
-	/* 메시지 전송 메소드 */
+	/* 일반 메시지 전송 메소드 */
 	function sendMsg(){
+		console.log("일반 메시지");
 		let msg = $(".chat-footer-row01").val();
 		 
 		// 서버로 보낼 메시지를 만들기
-		// 파일 첨부 메시지
-		if(filelist.length !== 0){
-			console.log("파일 첨부 메시지");
-			
-//			ws.binaryType = "arraybuffer";
-			
-			mydata.writer_id = loginUser;
-			mydata.chatroom_id = chatroomId;
-			mydata.message_content = msg;
-			mydata.write_time = new Date();
-//			mydata.filelist = [];
-			
-			$.each(filelist, function(i, file){
-				let reader = new FileReader();
-				
-				reader.onload = function(event){
-//					console.log("mydata.filelist : " + mydata.filelist);
-					console.log("fileContent 전송!");
-					console.log(event.target.result);
-					ws.send(event.target.result);
-					
-//					mydata.filelist.push(fileContent);
-//					console.log("fileContent : " + fileContent);
-//					console.log("mydata.filelist : " + mydata.filelist);
-				}
-				reader.readAsArrayBuffer(file);
-//				if(reader.DONE){
-//					console.log("리더 시작!");
-//					reader.readAsArrayBuffer(file);
-//				}
-			})
-//			console.log(mydata.filelist);
-			mydata.fileURLlist = fileURLlist;
-			
-			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
-
-			//ws.send(sendMsg);
-			
-		}else{
-			console.log("일반 메시지");
-			mydata.writer_id = loginUser;
-			mydata.chatroom_id = chatroomId;
-			mydata.message_content = msg;
-			mydata.write_time = new Date();
-			
-			let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
-			
-			console.log("sendMsg : " + sendMsg);
-			
-			// 웹소켓으로 메시지 전송
-			ws.send(sendMsg);
-		}
+		mydata.message_type = "Text";
+		mydata.writer_id = loginUser;
+		mydata.chatroom_id = chatroomId;
+		mydata.message_content = msg;
+		mydata.write_time = new Date();
+		
+		let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
+		console.log("sendMsg : " + sendMsg);
+		
+		// 웹소켓으로 메시지 전송
+		ws.send(sendMsg);
 		
 		$(".chat-footer-row01").val("");
 		
 		/* 최근 채팅내역 변경 로직 추가 필요 (필요!) */
 	}
 	
+	/* 파일 첨부 메시지 전송 메소드 */
+	function sendMsgWithFiles(){
+		// 파일 첨부 메시지
+		console.log("파일 첨부 메시지");
+		
+		
+		let fr = new FileReader();
+		
+		mydata.message_type = "File";
+		mydata.writer_id = loginUser;
+		mydata.chatroom_id = chatroomId;
+		mydata.write_time = new Date();
+		mydata.message_content = $(".chat-footer-row01").val();
+		mydata.filenamelist = filenamelist;
+		
+		let sendMsg = JSON.stringify(mydata);
+		ws.send(sendMsg);
+		
+		fr.onload = function(event){
+			let arrayBuffer = this.result;
+			console.log("arrayBuffer = " + arrayBuffer);
+			ws.send(arrayBuffer);
+		}
+
+		$.each(filelist, function(i, file){
+			console.log("ArrayBuffer 전송!");
+			fr.readAsArrayBuffer(file);
+		})
+		
+		$(".chat-footer-row01").val("");
+	}
+
+
 	/* 프로필 Elements 작성 메소드 */
 	function createProfileElement(targetProfile){
 		addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
@@ -241,5 +232,15 @@ $(document).ready(function(){
 		}
 		
 		return myChatEle;
+	}
+	
+	function getFileNameFromBlob(blob) {
+		if (blob instanceof Blob && blob.name) {
+			// 파일 타입이 Blob 타입이 맞는지, Blob 파일이 name 속성을 갖는지 체크
+			return blob.name;
+		}
+		
+		// 파일 이름 확인 불가능할 경우
+		return null;
 	}
 })
