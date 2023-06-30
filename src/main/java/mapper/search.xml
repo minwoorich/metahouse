@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.metahouse.search">
+
+  <sql id="field">
+    SELECT title, price, img, writer_id, rating, review_count, regdate, category, flag
+  </sql>
+
+  <sql id="filter">
+    <where>
+      <if test="category != null">
+        category = #{category}
+      </if>
+      <if test="keyword != null">
+        AND (title LIKE CONCAT('%', #{keyword}, '%') OR writer_id LIKE CONCAT('%', #{keyword}, '%'))
+      </if>
+    </where>
+  </sql>
+
+  <select id="searchServiceByFilter" parameterType="searchfilter" resultType="serviceSearchResult">
+    <if test="option.equals('a') || option.equals('all')">
+      <include refid="field" />
+      FROM (
+      SELECT a.title title, a.price price, a.main_img img, a.seller_id writer_id,
+      (SELECT AVG(ar.rating) FROM asset_review ar WHERE a.asset_id = ar.asset_id) rating,
+      (SELECT COUNT(ar.rating) FROM asset_review ar WHERE a.asset_id = ar.asset_id) review_count,
+      a.category1 category, a.asset_date regdate, 'a' flag
+      FROM assets a
+      ) a
+      <include refid="filter" />
+    </if>
+
+    <if test="option.equals('all')">
+      UNION ALL
+    </if>
+
+    <if test="option.equals('p') || option.equals('all')">
+      <include refid="field" />
+      FROM (
+      SELECT p.title title,
+      (SELECT ps.price FROM project_package_single ps WHERE p.project_id = ps.project_id) price,
+      p.thumbnail img, p.creator_id writer_id,
+      (SELECT AVG(pr.rating) FROM project_review pr WHERE p.project_id = pr.project_id) rating,
+      (SELECT COUNT(pr.rating) FROM project_review pr WHERE p.project_id = pr.project_id) review_count,
+      p.category1 category,
+      p.project_date regdate,
+      'p' flag
+      FROM project p
+      ) p
+      <include refid="filter" />
+    </if>
+
+    <choose>
+      <when test="option.equals('rc')">
+        ORDER BY regdate DESC
+      </when>
+      <when test="option.equals('pd')">
+        ORDER BY price DESC
+      </when>
+      <when test="option.equals('pa')">
+        ORDER BY price ASC
+      </when>
+      <when test="option.equals('rd')">
+        ORDER BY rating DESC
+      </when>
+    </choose>
+  </select>
+
+</mapper>
