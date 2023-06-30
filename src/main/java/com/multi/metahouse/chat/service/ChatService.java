@@ -8,7 +8,7 @@ import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
 public interface ChatService {
- 	void createChatroom(ChatroomDTO chatroomDTO);
+ 	void createChatroom(String user_1_id, String user_2_id);
     void deleteChatroom(String targetId);
     
     // 현재 세션 id 의 채팅방 조회

@@ -142,7 +142,8 @@
 			</div>
 			<!-- buy button -->
 			<div id="btn">
-				<button class="button--small btn_custom" id="ask">문의하기</button>
+				<button class="button--small btn_custom" id="ask" 
+					th:onclick="|location.href='@{/chat/create/chatroom(seller_id=${asset.seller_id})}'|">문의하기</button>
 				<button class="button--small btn_custom"
 					 th:onclick="|location.href='@{/asset/purchase(assetNum=${asset.asset_id})}'|">구매하기</button>
 			</div>
