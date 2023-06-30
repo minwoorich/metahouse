@@ -139,7 +139,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 /*------------------------------------------ OSE -------------------------------------------*/
 
-	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
+	// 프로젝트 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
 	public Page<ProjectEntity> list(String category1, String category2, int pageNo) {
 		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC, "projectDate"));

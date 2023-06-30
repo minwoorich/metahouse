@@ -24,6 +24,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
+import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
+import com.multi.metahouse.domain.dto.review.ProjectReviewContentsDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 //import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
@@ -35,21 +37,25 @@ import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageTripleForm
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.project.service.ProjectFileUploadLogicService;
 import com.multi.metahouse.project.service.ProjectService;
+import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 public class ProjectController {
 	ProjectFileUploadLogicService fileService;
 	ProjectService projectService;
 	ResourceLoader resourceLoader;
+	ReviewService reviewService;
 
 	@Autowired
 	public ProjectController(ProjectFileUploadLogicService fileService, ProjectService projectService,
-			ResourceLoader resourceLoader) {
+			ResourceLoader resourceLoader, ReviewService reviewService) {
 		super();
 		this.fileService = fileService;
 		this.projectService = projectService;
 		this.resourceLoader = resourceLoader;
+		this.reviewService = reviewService;
 	}
+
 
 	/*------------------------------------- 승언님 파트 ------------------------------------ */
 
@@ -66,20 +72,23 @@ public class ProjectController {
 		return "project/main";
 	}
 
+
 	// 프로젝트 상세보기
 	@RequestMapping("project/detail")
 	public String showProject(Model model, Long projectNum) {
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
+		List<ProjectReviewContentsDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
+		List<ProjectReviewDTO> ReviewImg = reviewService.getAllReviewsImgByPJTid(projectNum);
+		
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);
-
-		System.out.println(project);
-		System.out.println(projectImg);
-		System.out.println(projectOption);
-
+		model.addAttribute("projectReview", projectReview);
+		model.addAttribute("ReviewImg", ReviewImg);
+		
+		System.out.println(ReviewImg);
 		return "project/market_detail";
 	}
 

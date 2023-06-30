@@ -54,11 +54,15 @@
 				
 			});
 		});
-		
+		//http://localhost:8088/metahaus/point/charge 포인트 충전하러가기
 		//추가금액 계산&표시
-		$("#tp").on("change", function(){
+		$(".option_chk").on("change", function(){
+	    	alert($("input[type=checkbox][name=add_option]:checked").val());
 			$("#price_totalOption").children().remove();
-	    	$("#price_totalOption").append(p);
+	    	$("#price_totalOption").append("<div>test</div>");
+	    	/* if($(".option_chk").is(":checked")){
+	    		
+	    	} */
 			
 		})
 	})

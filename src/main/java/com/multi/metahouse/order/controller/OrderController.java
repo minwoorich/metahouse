@@ -23,6 +23,7 @@ import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
 import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
 import com.multi.metahouse.order.service.AssetCategoryService;
 import com.multi.metahouse.order.service.OrderService;
+import com.multi.metahouse.point.service.PointService;
 
 @Controller
 @RequestMapping("/order")
@@ -30,6 +31,7 @@ public class OrderController {
 
 	AssetCategoryService service;
 	OrderService orderService;
+	PointService pointService;
 
 	@Autowired
 	public OrderController(AssetCategoryService service, OrderService orderService) {

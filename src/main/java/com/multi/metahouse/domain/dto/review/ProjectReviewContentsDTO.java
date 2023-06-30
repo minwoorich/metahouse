@@ -12,16 +12,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("projectreview")
-public class ProjectReviewDTO {
+@Alias("projectreviewImg")
+public class ProjectReviewContentsDTO {
+	private int review_contents_id;
 	private int project_review_id;
-	private int project_order_id;
-	private String writer_id;
+	private String order_id;
+	private String user_id;
 	private int project_id;
-	private int rating;
-	private String review_text;
-	private Timestamp review_date;
+	private String review_store_filename;
+	private String review_img_no;
 
-	private ReviewCommentDTO reviewComment;
 	
 }

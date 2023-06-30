@@ -2,6 +2,8 @@ package com.multi.metahouse.review.service;
 
 import java.util.List;
 
+import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
+import com.multi.metahouse.domain.dto.review.ProjectReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
 
 public interface ReviewService {
@@ -14,4 +16,7 @@ public interface ReviewService {
     void updateReview(ReviewDTO reviewDTO);
 
     void deleteReview(int reviewId);
+    
+    public List<ProjectReviewContentsDTO> getAllReviewsByPJTid(Long projectId);
+    public List<ProjectReviewDTO> getAllReviewsImgByPJTid(Long projectId);
 }
