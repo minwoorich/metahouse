@@ -153,7 +153,6 @@ public class ProjectController {
 	// 프로젝트 설명 입력하는 페이지 반환
 	@GetMapping("project/forms/descriptions")
 	public String writeForm() {
-		//[추후수정]세희님한테서 세션 어떻게 저장했는지 알아낸다음 사용
 
 		return "project/projectform01";
 	}
