@@ -11,7 +11,11 @@ import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 @Repository
 public interface ChatDAO {
 	// 채팅방 생성
-	void insertChatroom(ChatroomDTO chatroomDTO);
+	void createChatroom(String user_1_id, String user_2_id);
+	
+	// 채팅방 중복 체크
+	int checkChatroom(String user_1_id, String user_2_id);
+	
     // 채팅방 나가기
     void deleteChatroom(String targetId);
     // 현재 세션 id 의 채팅방 조회

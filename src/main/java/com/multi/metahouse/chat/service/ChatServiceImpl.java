@@ -27,9 +27,19 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public void createChatroom(ChatroomDTO chatroomDTO) {
-		// TODO Auto-generated method stub
-
+	public void createChatroom(String user_1_id, String user_2_id) {
+		// 채팅방 중복 체크
+		int check = dao.checkChatroom(user_1_id, user_2_id);
+		System.out.println("check : " + check);
+		if(check == 0) {
+			// 매치되는 값이 없음
+			dao.createChatroom(user_1_id, user_2_id);
+			
+		}else {
+			System.out.println("채팅방이 중복되었습니다!!! 채팅방을 생성하지 않습니다!!!");
+			
+		}
+		
 	}
 
 	@Override

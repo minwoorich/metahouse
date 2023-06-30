@@ -4,8 +4,8 @@
 
 <mapper namespace="com.multi.metahouse.domain.dto">
     <insert id="insertChatroom">
-        INSERT INTO chatroom (chatroom_id, user_1_id, user_2_id, open_date)
-        VALUES (#{chatroom_id}, #{user_1_id}, #{user_2_id}, #{open_date})
+        INSERT INTO chatroom
+        VALUES (null, #{user_1_id}, #{user_2_id}, #{open_date}, null, null)
     </insert>
     	
     <insert id="insertChatMsg" parameterType="chatmsg">
@@ -55,6 +55,13 @@
 		SELECT user_name, self_introduction, thumbnail_store_filename
 		FROM user
 		where user_id = #{target}
+    </select>
+    
+    <select id="checkChatroom" parameterType="chatroom" resultType="int">
+		SELECT ifnull(count(*), 0)
+		FROM chatroom
+		where user_1_id = #{user_1_id}
+		and user_2_id = #{user_2_id}
     </select>
 
 </mapper>

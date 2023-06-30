@@ -1,10 +1,7 @@
 package com.multi.metahouse.chat.repository.dao;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import javax.transaction.Transactional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +23,19 @@ public class ChatDAOImpl implements ChatDAO {
     
 	/* 채팅방 생성 */
     @Override
-    public void insertChatroom(ChatroomDTO chatroomDTO) {
+    public void createChatroom(String user_1_id, String user_2_id) {
+    	ChatroomDTO chatroomDTO = new ChatroomDTO(user_1_id, user_2_id);
+    	chatroomDTO.setOpen_date(new Date());
         sqlSession.insert("insertChatroom", chatroomDTO);
     }
-
+    
+	/* 채팅방 중복 체크 */
+    @Override
+    public int checkChatroom(String user_1_id, String user_2_id) {
+    	ChatroomDTO chatroomDTO = new ChatroomDTO(user_1_id, user_2_id);
+    	return sqlSession.selectOne("checkChatroom", chatroomDTO);
+    }
+    
     /* 채팅방 삭제 */
     @Override
     public void deleteChatroom(String targetId) {
