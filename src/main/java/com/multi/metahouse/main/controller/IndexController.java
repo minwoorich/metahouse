@@ -70,10 +70,7 @@ public class IndexController {
 		return "main/index";
 	}
 	
-	@GetMapping("/search/result")
-	public String show_search_result(Model model) {
-		return "search/search";
-	}
+	
 	
 
 }

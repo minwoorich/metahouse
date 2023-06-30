@@ -12,10 +12,9 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/search/search.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/common/layout/header.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/common/layout/footer.css}" />
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title>META HOUSE</title>
 </head>
@@ -34,36 +33,32 @@
     <div class="tab-content">
       <div id="services" class="tab-pane fade in active">
         <div class="dropdown-wrapper">
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="true">
-              카테고리 선택
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
-              <li><a href="#">게더하우스</a></li>
-              <li><a href="#">마인크래스트</a></li>
-              <li><a href="#">제페토</a></li>
-            </ul>
-          </div>
+         <div class="dropdown-wrapper">
+  <select name="category2_pj" class="select">
+    <option disabled selected>카테고리 선택하기</option>
+    <option value="게더타운">게더타운</option>
+    <option value="마인크레프트">마인크래프트</option>
+    <option value="제페토">제페토</option>
+    <option value="샌드박스">샌드박스</option>
+    <option value="로블록스">로블록스</option>
+  </select>
+</div>
 
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="optionDropdown" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="true">
-              서비스 옵션 선택
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="optionDropdown">
-              <li><a href="#">메타에셋</a></li>
-              <li><a href="#">메타긱스</a></li>
-            </ul>
-          </div>
+        <div class="dropdown-wrapper">
+  <select name="category2_pj" class="select">
+    <option disabled selected>카테고리 선택하기</option>
+    <option value="게더타운">메타에셋</option>
+    <option value="마인크레프트">메타긱스</option>
+ 
+  </select>
+</div>
+       
         </div>
         <div class="row">
           <div class="col-md-4">
             <div class="card">
               <div class="service-card-body">
-                <img src="/images/1.JPG" alt="프로필 이미지">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
                 <h4 class="card-title">검색 결과 1</h4>
                 <p class="card-text">검색 결과 1에 대한 설명</p>
                 <p class="card-text">가격: $10</p>
@@ -74,7 +69,7 @@
           <div class="col-md-4">
             <div class="card">
               <div class="service-card-body">
-                <img src="/images/1.JPG" alt="프로필 이미지">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
                 <h4 class="card-title">검색 결과 2</h4>
                 <p class="card-text">검색 결과 2에 대한 설명</p>
                 <p class="card-text">가격: $20</p>
@@ -85,7 +80,7 @@
           <div class="col-md-4">
             <div class="card">
               <div class="service-card-body">
-                <img src="/images/1.JPG" alt="프로필 이미지">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
                 <h4 class="card-title">검색 결과 3</h4>
                 <p class="card-text">검색 결과 3에 대한 설명</p>
                 <p class="card-text">가격: $30</p>
@@ -96,7 +91,7 @@
           <div class="col-md-4">
             <div class="card">
               <div class="service-card-body">
-                <img src="/images/1.JPG" alt="프로필 이미지">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
                 <h4 class="card-title">검색 결과 3</h4>
                 <p class="card-text">검색 결과 3에 대한 설명</p>
                 <p class="card-text">가격: $30</p>
@@ -121,17 +116,14 @@
       </div>
 
       <div id="experts" class="tab-pane fade">
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="ProDropdown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="true">
-            전문/상세분야
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="ProDropdown">
-            <li><a href="#">맵제작</a></li>
-            <li><a href="#">에셋제작</a></li>
-          </ul>
-        </div>
+           <div class="dropdown-wrapper">
+  <select name="category2_pj" class="select">
+    <option disabled selected>카테고리 선택하기</option>
+    <option value="게더타운">메타에셋</option>
+    <option value="마인크레프트">메타긱스</option>
+ 
+  </select>
+</div>
         <div class="pro-row">
             <div class="expert-card">
                 <a href="expert-page.html?id=1">
@@ -204,8 +196,7 @@
   </div>
   
   
+    
 	<script th:src="@{/js/search/search.js}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

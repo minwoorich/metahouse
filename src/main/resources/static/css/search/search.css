@@ -108,3 +108,17 @@
 	border-bottom: 1px solid #ddd;
 	margin-top: 5%;
 }
+
+
+select {
+    margin-top: 4rem;
+    width: 262px;
+    padding: 8px;
+    border: 1px solid #999;
+    font-family: 'Nanumgothic';
+    background: url(/metahaus/images/caret-down-solid.svg) no-repeat 95% 50%;
+    background-size: 12px;
+    border-radius: 4px;
+    appearance: none;
+    flex: 0 0 16em;
+}
