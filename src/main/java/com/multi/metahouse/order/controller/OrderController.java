@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,27 +23,33 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
 import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
-import com.multi.metahouse.order.service.AssetCategoryService;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
+import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.order.service.OrderService;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
 
-	AssetCategoryService service;
 	OrderService orderService;
 
 	@Autowired
-	public OrderController(AssetCategoryService service, OrderService orderService) {
+	public OrderController(OrderService orderService) {
 		super();
-		this.service = service;
 		this.orderService = orderService;
 	}
 
 	// project 구매 관리
 	@GetMapping("/project/buylist")
-	public String projectBuylist() {
-		return "order/project_buylist";
+	public String projectBuylist(Model model, HttpSession session) {
+		if(session.getAttribute("loginUser")!=null) {
+			User user = (User)session.getAttribute("loginUser");
+			
+			return "order/project_buylist";
+		}else {
+			return "redirect:/login";
+		}
+		
 	}
 
 	// project 판매 관리

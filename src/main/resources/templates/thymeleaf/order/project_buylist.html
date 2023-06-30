@@ -11,8 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="/metahaus/css/order/project_buylist.css" />
+<link rel="stylesheet" href="/metahaus/css/order/project_buylist.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js%22%3E"></script>
 <!-- 내 js코드 -->
@@ -20,7 +19,7 @@
 	src="/metahaus/js/order/project_buylist.js"></script>
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/123626a3b2.js"
-    crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div layout:fragment="content" class="main-content">
@@ -30,28 +29,34 @@
 		<div class="project-body">
 			<div class="project-body-box-wrapper">
 				<div class="project-body-box">
-				<i class="fa-solid fa-clock fa-2xl" style="color: #8d72e1;"></i>
+					<i class="fa-solid fa-circle-exclamation fa-2xl"
+						style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
-						<span>진행 중</span><p>1</p>
+						<span>주문 취소</span>
+						<p>1</p>
 					</div>
 				</div>
 				<div class="project-body-box">
-					<i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #8d72e1;"></i>
+					<i class="fa-solid fa-hourglass-start fa-2xl" style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
-						<span>작업물 도착</span><p>1</p>
+						<span>주문 대기중</span>
+						<p>1</p>
 					</div>
 				</div>
 				<div class="project-body-box">
-					<i class="fa-solid fa-circle-exclamation fa-2xl" style="color: #8d72e1;"></i>
+					<i class="fa-solid fa-truck-fast fa-2xl" style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
-						<span>수정 중</span><p>1</p>
+						<span>진행 중</span>
+						<p>1</p>
 					</div>
 				</div>
+				
+
 				<div class="project-body-box">
 					<i class="fa-solid fa-credit-card fa-2xl" style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
-						<span>구매 확정</span><p>1</p>
-						<span>구매 취소</span><p>1</p>
+						<span>구매 확정</span>
+						<p>1</p>
 					</div>
 				</div>
 			</div>
@@ -65,16 +70,12 @@
 					<option value="minecraft">마인크랜프트</option>
 					<option value="sendbox">더 샌드박스</option>
 					<option value="gathertown">게더타운</option>
-				</select> 
-				
-				<select class="search-box category02">
+				</select> <select class="search-box category02">
 					<option value="all">전체 서비스</option>
 					<option value="map">맵</option>
 					<option value="asset">에셋</option>
 					<option value="proposan">기획서</option>
-				</select> 
-				
-				<select class="search-box category03">
+				</select> <select class="search-box category03">
 					<option value="orderno">주문 번호</option>
 					<option value="productno">상품 번호</option>
 					<option value="nickname">닉네임</option>
@@ -97,20 +98,101 @@
 				조회 기간 : 1년)</span>
 		</div>
 		<ul class="project-body-cardlist">
+
+
+			<!-- 주문 대기중 -->
+			<li class="project-body-card">
+				<div class="project-body-tag">
+					<div class="project-body-tag-row01">
+						<span style="font-size: 16px; font-weight: bold;">주문 대기중</span>
+						<div>
+							<span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
+							<span style="font-size: 12px; color: var(--gray);">|</span> <span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">주문
+								대기 중</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+							<span style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+								style="font-size: 12px; color: var(--bright-purple);">23.06.01
+								15:13</span>
+						</div>
+					</div>
+					<div class="project-body-tag-row02">
+						<div class="project-body-tag-img">
+							<img src="/metahaus/images/test01.jpeg" />
+						</div>
+						<div class="project-body-tag-info">
+							<div class="project-body-tag-info-row01">
+								<span style="font-size: 16px; color: var(--gray);">#324891</span>
+								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
+							</div>
+							<div class="project-body-tag-info-row02">
+								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
+							</div>
+							<div class="project-body-tag-info-row03">
+								<div>
+									<span style="margin-right: 6px;">라떼 개발자</span>
+								</div>
+								<button type="button" class="project-body-button button--xsmall">문의하기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<!-- 주문 취소 -->
+			<li class="project-body-card"
+				style="background-color: var(--light-gray);">
+				<div class="project-body-tag">
+					<div class="project-body-tag-row01">
+						<span
+							style="font-size: 16px; font-weight: bold; color: var(--red);">주문
+							취소</span>
+						<div>
+							<span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
+							<span style="font-size: 12px; color: var(--gray);">|</span> <span
+								style="font-size: 12px; color: var(--red); font-weight: bold;">주문
+								취소</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+							<span style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+								style="font-size: 12px; color: var(--bright-purple);">23.06.01
+								15:13</span>
+						</div>
+					</div>
+					<div class="project-body-tag-row02">
+						<div class="project-body-tag-img">
+							<img src="/metahaus/images/test01.jpeg" />
+						</div>
+						<div class="project-body-tag-info">
+							<div class="project-body-tag-info-row01">
+								<span style="font-size: 16px; color: var(--gray);">#324891</span>
+								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
+							</div>
+							<div class="project-body-tag-info-row02">
+								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
+							</div>
+							<div class="project-body-tag-info-row03">
+								<div>
+									<span style="margin-right: 6px;">라떼 개발자</span>
+								</div>
+								<button type="button" class="project-body-button button--xsmall">문의하기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
 			<!-- 진행 중 -->
 			<li class="project-body-card">
 				<div class="project-body-tag">
 					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">진행 중</span> 
+						<span style="font-size: 16px; font-weight: bold;">진행 중</span>
 						<div>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
-							<!-- <span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">ECONOMY</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">PREMIUM</span> -->
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">진행 중</span>
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> 
-							<span style="font-size: 12px; color: var(--bright-purple);">23.06.01 15:13</span>
+							<span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
+							<span style="font-size: 12px; color: var(--gray);">|</span> <span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">진행
+								중</span> <span style="font-size: 12px; color: var(--gray);">|</span> <span
+								style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+								style="font-size: 12px; color: var(--bright-purple);">23.06.01
+								15:13</span>
 						</div>
 					</div>
 					<div class="project-body-tag-row02">
@@ -127,47 +209,7 @@
 							</div>
 							<div class="project-body-tag-info-row03">
 								<div>
-									<span style="margin-right: 6px;">라떼 개발자</span> <span
-										style="color: var(--gray);">0507-1205-0206</span>
-								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<!-- 작업물 도착 -->
-			<li class="project-body-card">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">작업물 도착</span> 
-						<div>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
-							<!-- <span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">ECONOMY</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">PREMIUM</span> -->
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">작업물 도착</span>
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> 
-							<span style="font-size: 12px; color: var(--bright-purple);">23.06.01 15:13</span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img src="/metahaus/images/test01.jpeg" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);">#324891</span>
-								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
-							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
-							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;">라떼 개발자</span> <span
-										style="color: var(--gray);">0507-1205-0206</span>
+									<span style="margin-right: 6px;">라떼 개발자</span>
 								</div>
 								<button type="button" class="project-body-button button--xsmall">문의하기</button>
 							</div>
@@ -176,177 +218,108 @@
 				</div>
 				<div class="project-body-download">
 					<div class="project-body-download-text">
-						<span>구매하신 작업물이 도착하였습니다.<br />
-							  지금 바로 다운로드 받으신 후 작업물을 확인해보세요!
-						</span>
-					</div>
-					<!-- <button type="button">다운로드 기간만료</button> -->
-					<button type="button">다운로드</button>
-				</div>
-			</li>
-			<!-- 수정 중 -->
-			<li class="project-body-card">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">수정 중</span> 
-						<div>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
-							<!-- <span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">ECONOMY</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">PREMIUM</span> -->
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">수정 중</span>
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> 
-							<span style="font-size: 12px; color: var(--bright-purple);">23.06.01 15:13</span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img src="/metahaus/images/test01.jpeg" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);">#324891</span>
-								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
-							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
-							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;">라떼 개발자</span> <span
-										style="color: var(--gray);">0507-1205-0206</span>
-								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<!-- 신고 접수 -->
-			<li class="project-body-card" style="background-color: var(--light-gray);">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; color: var(--red); font-weight: bold;">신고 접수</span> 
-						<div>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
-							<!-- <span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">ECONOMY</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">PREMIUM</span> -->
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">신고 접수</span>
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> 
-							<span style="font-size: 12px; color: var(--bright-purple);">23.06.01 15:13</span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img src="/metahaus/images/test01.jpeg" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);">#324891</span>
-								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
-							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
-							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;">라떼 개발자</span> <span
-										style="color: var(--gray);">0507-1205-0206</span>
-								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			<!-- 구매 취소 -->
-			<li class="project-body-card">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">구매 취소</span> 
-						<div>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
-							<!-- <span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">ECONOMY</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">PREMIUM</span> -->
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">구매 취소</span>
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> 
-							<span style="font-size: 12px; color: var(--bright-purple);">23.06.01 15:13</span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img src="/metahaus/images/test01.jpeg" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);">#324891</span>
-								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
-							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
-							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;">라떼 개발자</span> <span
-										style="color: var(--gray);">0507-1205-0206</span>
-								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<!-- 구매 확정 -->
-			<li class="project-body-card">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">구매 확정</span> 
-						<div>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
-							<!-- <span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">ECONOMY</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">PREMIUM</span> -->
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">구매 확정</span>
-							<span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> 
-							<span style="font-size: 12px; color: var(--bright-purple);">23.06.01 15:13</span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img src="/metahaus/images/test01.jpeg" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);">#324891</span>
-								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
-							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
-							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;">라떼 개발자</span> <span
-										style="color: var(--gray);">0507-1205-0206</span>
-								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="project-body-download">
-					<div class="project-body-download-text">
-						<span>작업물 확인 및 서비스 평가 작성이 완료된 주문입니다.<br />
-							  구매 확정 버튼을 눌러 진행 상태를 변경해주세요!
+						<span>작업물을 성공적으로 전달받으셨다면<br /> 구매 확정 버튼을 눌러 진행 상태를 변경해주세요!
 						</span>
 					</div>
 					<!-- <button type="button">다운로드 기간만료</button> -->
 					<button type="button">구매 확정</button>
 				</div>
+			</li>
+			<!-- 구매 확정 - 리뷰작성 전 -->
+			<li class="project-body-card">
+				<div class="project-body-tag">
+					<div class="project-body-tag-row01">
+						<span style="font-size: 16px; font-weight: bold;">구매 확정</span>
+						<div>
+							<span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
+							<span style="font-size: 12px; color: var(--gray);">|</span> <span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">구매
+								확정</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+							<span style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+								style="font-size: 12px; color: var(--bright-purple);">23.06.01
+								15:13</span> <span
+								style="font-size: 12px; color: var(--gray); margin-inline: 10px;">|</span>
+							<span
+								style="font-size: 12px; color: var(--gray); margin-right: 10px;">확정일시</span>
+							<span style="font-size: 12px; color: var(--bright-purple);">23.06.05
+								17:23</span>
+						</div>
+					</div>
+					<div class="project-body-tag-row02">
+						<div class="project-body-tag-img">
+							<img src="/metahaus/images/test01.jpeg" />
+						</div>
+						<div class="project-body-tag-info">
+							<div class="project-body-tag-info-row01">
+								<span style="font-size: 16px; color: var(--gray);">#324891</span>
+								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
+							</div>
+							<div class="project-body-tag-info-row02">
+								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
+							</div>
+							<div class="project-body-tag-info-row03">
+								<div>
+									<span style="margin-right: 6px;">라떼 개발자</span>
+								</div>
+								<button type="button" class="project-body-button button--xsmall">문의하기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="project-body-download">
+					<div class="project-body-download-text">
+						<span>작업물은 마음에 드시나요?<br /> 지금 바로 서비스를 평가하러 가보세요!
+						</span>
+					</div>
+					<!-- <button type="button">다운로드 기간만료</button> -->
+					<button type="button">리뷰 작성</button>
+				</div>
+			</li>
+
+			<!-- 구매 확정 - 리뷰작성 후 -->
+			<li class="project-body-card">
+				<div class="project-body-tag">
+					<div class="project-body-tag-row01">
+						<span style="font-size: 16px; font-weight: bold;">구매 확정</span>
+						<div>
+							<span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">BASIC</span>
+							<span style="font-size: 12px; color: var(--gray);">|</span> <span
+								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">구매
+								확정</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+							<span style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+								style="font-size: 12px; color: var(--bright-purple);">23.06.01
+								15:13</span> <span
+								style="font-size: 12px; color: var(--gray); margin-inline: 10px;">|</span>
+							<span
+								style="font-size: 12px; color: var(--gray); margin-right: 10px;">확정일시</span>
+							<span style="font-size: 12px; color: var(--bright-purple);">23.06.05
+								17:23</span>
+						</div>
+					</div>
+					<div class="project-body-tag-row02">
+						<div class="project-body-tag-img">
+							<img src="/metahaus/images/test01.jpeg" />
+						</div>
+						<div class="project-body-tag-info">
+							<div class="project-body-tag-info-row01">
+								<span style="font-size: 16px; color: var(--gray);">#324891</span>
+								<span>웹 프론트앤드 개발자 되는 구체적인 방법을 드립니다.</span>
+							</div>
+							<div class="project-body-tag-info-row02">
+								<span style="font-size: 22px; font-weight: bold;">18,000원</span>
+							</div>
+							<div class="project-body-tag-info-row03">
+								<div>
+									<span style="margin-right: 6px;">라떼 개발자</span>
+								</div>
+								<button type="button" class="project-body-button button--xsmall">문의하기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</li>
 		</ul>
 		<div class="project-body-tip" style="line-height: 160%;">

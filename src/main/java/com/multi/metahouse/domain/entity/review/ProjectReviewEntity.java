@@ -44,29 +44,29 @@ public class ProjectReviewEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "project_review_id")
 	private Long projectReviewId;
-//	@Column(name="project_order_id")
-//	private Long projectOrderId;
-//	@Column(name="writer_id")
-//	private String writerId;
-//	@Column(name="project_id")
-//	private Long projectId;
+	@Column(name="project_order_id")
+	private Long projectOrderId;
+	@Column(name="writer_id")
+	private String writerId;
+	@Column(name="project_id")
+	private Long projectId;
 	private Long rating;
 	private String reviewText;
 	@CreationTimestamp
 	private LocalDateTime reviewDate;
 	/////////////////////////////////////
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "project_order_id")
-	private ProjectOrdersEntity projectOrderId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "writer_id")
-	private User writerId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "project_id")
-	private ProjectEntity projectId;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "project_order_id")
+//	private ProjectOrdersEntity projectOrderId;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "writer_id")
+//	private User writerId;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "project_id")
+//	private ProjectEntity projectId;
 	
 	//////////////////////////////////////////////////////////////
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "projectReviewId")
