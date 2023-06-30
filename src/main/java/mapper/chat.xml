@@ -10,12 +10,18 @@
     	
     <insert id="insertChatMsg" parameterType="chatmsg">
     	INSERT INTO message
-    	VALUES (null, #{writer_id}, #{chatroom_id}, #{write_time}, #{message_content})
+    	VALUES (null, #{writer_id}, #{chatroom_id}, #{write_time}, #{message_content}, #{message_type})
     </insert>
 
     <update id="updateChatroom">
         UPDATE chatroom
         SET user_1_id = #{user_1_id}, user_2_id = #{user_2_id}, open_date = #{open_date}
+        WHERE chatroom_id = #{chatroom_id}
+    </update>
+    
+    <update id="updateLastChat" parameterType="chatmsg">
+        UPDATE chatroom
+        SET last_chat_time = #{write_time}, last_chat = #{message_content}
         WHERE chatroom_id = #{chatroom_id}
     </update>
 

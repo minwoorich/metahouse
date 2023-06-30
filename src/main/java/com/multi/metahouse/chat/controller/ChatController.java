@@ -59,6 +59,8 @@ public class ChatController {
 //		System.out.println("loginUser : " + loginUser);
 		
 		chatmsgJSON.put("chatMsg", service.getChatMsgById(chatroomId));
+		// 채팅 메시지 콘텐츠 리스트
+		
 		chatmsgJSON.put("targetProfile", service.getProfileById(chatroomId, loginUser));
 		
 //		chatmsgJSON.put("loginUser", loginUser);
