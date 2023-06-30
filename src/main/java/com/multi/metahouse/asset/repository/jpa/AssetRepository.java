@@ -21,4 +21,7 @@ public interface AssetRepository extends JpaRepository<AssetEntity, String> {
 	
 /*------------------------------------------- YSH -------------------------------------------*/
 	List<AssetEntity> findBySellerId(String sellerId);
+	
+/* ----------------------------------승민님 영역----------------------------------------*/
+	
 }

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectAddOption {
+	private String add_option_id;
 	private String add_option_name;
 	private String add_option_description;
 	private String add_option_price;

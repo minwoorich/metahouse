@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Alias("selectedAddOption")
 public class SelectedAddOptionDTO {
+	private String selected_add_option_id;
+	private String order_id;
 	private String add_option_id;
-	private String project_id;
-	private String add_option_name;
-	private String add_option_price;
-	private String add_option_description;
+	private String count;
 
 }

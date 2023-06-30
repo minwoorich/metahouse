@@ -7,14 +7,18 @@ import org.springframework.data.domain.Page;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
+import com.multi.metahouse.domain.dto.asset.AssetFormDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 public interface AssetService {
 	// 에셋 등록
-	int insert(AssetDTO asset, List<AssetDetailImgDTO> assetDetailImg, List<AssetContentDTO> assetContent);
-
+	void insert(String storeAttachFileName, String storeThumbnailFileName, List<AssetDetailImgDTO> storeOptionalFileNameList, AssetFormDTO assetFormDto);
 	
-
+	//나의 에셋 전체보기
+	List<AssetDTO> selectAssetListBySellerId(String sellerId);
+	
+	//에셋 삭제
+	void deleteAssetByAssetId(String assetId);
 /*----------------------------------------------------*/
 	//에셋마켓 상품 전체보기
 	public Page<AssetEntity> list(String category1, String category2, int pageNo);

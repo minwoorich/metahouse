@@ -1,13 +1,26 @@
 package com.multi.metahouse.order.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
+import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
+import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
 import com.multi.metahouse.order.service.AssetCategoryService;
 import com.multi.metahouse.order.service.OrderService;
 
@@ -25,7 +38,6 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 
-	/* ----------------- 민우 파트--------------------- */
 	// project 구매 관리
 	@GetMapping("/project/buylist")
 	public String projectBuylist() {
@@ -54,22 +66,35 @@ public class OrderController {
 	public String assetCategory(Model model) {
 		return null;
 	}
-	
-	
-	
-	
-	/*-----------------------------------------------------------------------*/
-//	asset 구매완료(구매 정보 저장하기)
+
+/*----------------------------------- OSE ------------------------------------*/
+//	ajax-asset 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/asset")
-	public String orderA(@RequestBody AssetOrdersDTO assetOrder) {
+	@ResponseBody
+	public void orderA(@RequestBody AssetOrdersDTO assetOrder) {
 		System.out.println(assetOrder);
-		int order = orderService.orderA(assetOrder);
-		System.out.println(order);
-		if (order == 1) {
-
-		} else {
-
-		}
-		return "redirect:/order/asset/buylist";
+		orderService.orderA(assetOrder);
+	}
+	
+//	ajax-project 구매완료(구매 정보 저장하기)
+	@RequestMapping(value = "/project")
+	@ResponseBody
+	public void orderP(@RequestBody ObjectNode saveObj) throws JsonProcessingException, IllegalArgumentException {
+		 ObjectMapper mapper = new ObjectMapper();
+		 ProjectOrdersDTO projectOrder = mapper.treeToValue(saveObj.get("projectOrder"), ProjectOrdersDTO.class);
+		 List<SelectedAddOptionDTO> options = new ArrayList<SelectedAddOptionDTO>();
+		 JsonNode JsonOptions = saveObj.get("options");
+		 
+		 for(int i=0; i<JsonOptions.size(); i++){
+				JsonNode json = mapper.createObjectNode();
+				json = JsonOptions.get(i);
+				SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
+				options.add(option);
+			}
+		 int result = orderService.orderP(projectOrder, options);
+		 
+		 System.out.println("주문내역"+projectOrder);
+		 System.out.println("추가옵션"+options);
+		 System.out.println("생성결과"+result);
 	}
 }
