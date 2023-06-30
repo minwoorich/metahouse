@@ -176,7 +176,7 @@ $(document).ready(function () {
     
     ClassicEditor
     .create( document.querySelector( '#form-editor' ), {
-      toolbar: ['Undo', 'Redo', 'heading', '|', 'bold', 'italic']
+      toolbar: ['Undo', 'Redo', 'heading','JustifyLeft','JustifyCenter','JustifyRight', '|', 'bold', 'italic']
     } )
     .then(instance=> {
       editor=instance;
@@ -192,9 +192,9 @@ $(document).ready(function () {
         "- 컨셉·분위기<br/>"+
         "- 원하는 색상<br/>"+
         "- 레퍼런스(참고할 만한 디자인)";
-      var contents = defaultText;
+      //var contents = defaultText;
       // 에디터 인스턴스 생성 후 setData 메서드를 사용하여 초기값 설정
-      editor.setData(contents);
+      editor.setData(defaultText);
       // 글자수 카운트
       var charCountContainer = $('#editor-counter');
 
@@ -259,11 +259,12 @@ $(document).ready(function () {
     				", description = "+description+
     				", thumbnail = " + thumbnail+
     				", detailImages = " + detailImages);
+    		alert(description);
     		
     		
     		
     		myformdata.append("description",description);
-   		myformdata.append("thumbnail",thumbnail);
+    		myformdata.append("thumbnail",thumbnail);
     		for(let image of detailImages){
     			myformdata.append("detailImages",image);
     			console.log("image : " + image);
