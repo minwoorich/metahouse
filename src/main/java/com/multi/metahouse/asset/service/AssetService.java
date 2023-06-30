@@ -13,17 +13,7 @@ public interface AssetService {
 	// 에셋 등록
 	int insert(AssetDTO asset, List<AssetDetailImgDTO> assetDetailImg, List<AssetContentDTO> assetContent);
 
-	// 에셋 업데이트
-	int update(AssetDTO asset);
-
-	// 에셋 목록보기
-	List<AssetDTO> assetlist();
-
-	// id로 검색
-	List<AssetDTO> assetlist(String asset_id);
-
-	// 에셋 삭제
-	int delete(String asset_id);
+	
 
 /*----------------------------------------------------*/
 	//에셋마켓 상품 전체보기

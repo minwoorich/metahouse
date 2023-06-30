@@ -25,6 +25,7 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 
+	/* ----------------- 민우 파트--------------------- */
 	// project 구매 관리
 	@GetMapping("/project/buylist")
 	public String projectBuylist() {
@@ -53,7 +54,10 @@ public class OrderController {
 	public String assetCategory(Model model) {
 		return null;
 	}
-
+	
+	
+	
+	
 	/*-----------------------------------------------------------------------*/
 //	asset 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/asset")

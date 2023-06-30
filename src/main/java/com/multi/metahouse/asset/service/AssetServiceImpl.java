@@ -26,29 +26,7 @@ public class AssetServiceImpl implements AssetService {
 		this.dao = dao;
 	}
 
-	@Override
-	public int update(AssetDTO asset) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<AssetDTO> assetlist() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<AssetDTO> assetlist(String asset_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int delete(String asset_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	@Override
 	@Transactional
