@@ -1,0 +1,202 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/nonsideLayout}">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/search/search.css}" />
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>META HOUSE</title>
+</head>
+<body layout:fragment="content">
+<div class="result-count">
+        <p>총 <span class="count">1</span>개의 검색 결과입니다.</p>
+      </div>
+      
+   
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#services">서비스</a></li>
+      <li><a data-toggle="tab" href="#experts">전문가</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="services" class="tab-pane fade in active">
+        <div class="dropdown-wrapper">
+         <div class="dropdown-wrapper">
+  <select name="category2_pj" class="select">
+    <option disabled selected>카테고리 선택하기</option>
+    <option value="게더타운">게더타운</option>
+    <option value="마인크레프트">마인크래프트</option>
+    <option value="제페토">제페토</option>
+    <option value="샌드박스">샌드박스</option>
+    <option value="로블록스">로블록스</option>
+  </select>
+</div>
+
+        <div class="dropdown-wrapper">
+  <select name="category2_pj" class="select">
+    <option disabled selected>카테고리 선택하기</option>
+    <option value="게더타운">메타에셋</option>
+    <option value="마인크레프트">메타긱스</option>
+ 
+  </select>
+</div>
+       
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="service-card-body">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
+                <h4 class="card-title">검색 결과 1</h4>
+                <p class="card-text">검색 결과 1에 대한 설명</p>
+                <p class="card-text">가격: $10</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="service-card-body">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
+                <h4 class="card-title">검색 결과 2</h4>
+                <p class="card-text">검색 결과 2에 대한 설명</p>
+                <p class="card-text">가격: $20</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="service-card-body">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
+                <h4 class="card-title">검색 결과 3</h4>
+                <p class="card-text">검색 결과 3에 대한 설명</p>
+                <p class="card-text">가격: $30</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="service-card-body">
+                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
+                <h4 class="card-title">검색 결과 3</h4>
+                <p class="card-text">검색 결과 3에 대한 설명</p>
+                <p class="card-text">가격: $30</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination-wrapper">
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <!-- 추가적인 페이지 번호를 여기에 추가할 수 있습니다. -->
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div id="experts" class="tab-pane fade">
+           <div class="dropdown-wrapper">
+  <select name="category2_pj" class="select">
+    <option disabled selected>카테고리 선택하기</option>
+    <option value="게더타운">메타에셋</option>
+    <option value="마인크레프트">메타긱스</option>
+ 
+  </select>
+</div>
+        <div class="pro-row">
+            <div class="expert-card">
+                <a href="expert-page.html?id=1">
+                  <div class="card">
+                    <img src="/images/1.JPG" alt="프로필 이미지">
+                    <div class="pro-card-body">
+                      <h4 class="card-title">전문가 1</h4>
+                      <p class="card-text">전문가 1에 대한 설명</p>
+                      <p class="card-text">전문 분야: 맵 제작</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            
+              <div class="expert-card">
+                <a href="expert-page.html?id=2">
+                  <div class="card">
+                    <img src="/images/1.JPG" alt="프로필 이미지">
+                    <div class="pro-card-body">
+                      <h4 class="card-title">전문가 2</h4>
+                      <p class="card-text">전문가 2에 대한 설명</p>
+                      <p class="card-text">전문 분야: 맵 제작</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="expert-card">
+                <a href="expert-page.html?id=1">
+                  <div class="card">
+                    <img src="/images/1.JPG" alt="프로필 이미지">
+                    <div class="pro-card-body">
+                      <h4 class="card-title">전문가 1</h4>
+                      <p class="card-text">전문가 1에 대한 설명</p>
+                      <p class="card-text">전문 분야: 맵 제작</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            
+              <div class="expert-card">
+                <a href="expert-page.html?id=2">
+                  <div class="card">
+                    <img src="/images/1.JPG" alt="프로필 이미지">
+                    <div class="pro-card-body">
+                      <h4 class="card-title">전문가 2</h4>
+                      <p class="card-text">전문가 2에 대한 설명</p>
+                      <p class="card-text">전문 분야: 맵 제작</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+        </div>
+
+        <div class="pagination-wrapper">
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <!-- 추가적인 페이지 번호를 여기에 추가할 수 있습니다. -->
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  
+    
+	<script th:src="@{/js/search/search.js}"></script>
+</body>
+</html>

@@ -201,6 +201,9 @@ body{
 }
 .banner-slider-item span{
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
