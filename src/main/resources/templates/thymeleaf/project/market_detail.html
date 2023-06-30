@@ -7,7 +7,7 @@
 
 <title>project/detail</title>
 <link href="/metahaus/css/project/market_product_detail.css" rel="stylesheet" type="text/css" />
-<link href="/metahaus/css/asset/market_product_detail_img.css" rel="stylesheet" type="text/css" /></head>
+<link href="/metahaus/css/project/market_product_detail_img.css" rel="stylesheet" type="text/css" /></head>
 <body>
 	<div layout:fragment="content" class="content">	
 		<!-- product detail -->
@@ -138,13 +138,27 @@
 	            	</div>
 	            </div>
 	            <hr/>
+	            <!-- 리뷰 이미지 -->
 				<div th:if="${ReviewImg.size > 0}">
-					<div class="review_title">포토 후기</div>
-					<div class="review_photos" style="background-color: pink;" th:each="reviewImg : ${ReviewImg}">
-						<img alt="리뷰이미지" src="#" class="review_photo">
-						th:src="@{/upload/review/project/}+${reviewImg.review_store_filename}"						
+					<div class="review_title">포토 후기</div>				
+					<div class="banner-slider-wrap">
+						<th:block th:if="${ReviewImg.size > 4}">
+							<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+							<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>		
+						</th:block>
+						<div class="slider-outter">
+							<div index="0" class="banner-slider-list">
+								<div th:each="reviewImg : ${ReviewImg}" class="banner-slider-item">
+									<div class="review_photos item-img-warp" >
+										<img  width=100% height=100% alt="리뷰이미지" th:src="@{/upload/review/project/}+${reviewImg.review_store_filename}"	
+										 class="review_photo" style="background-color: pink;">
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
+	
 				<div class="review_title">서비스 후기</div>
 				<!-- 개인 리뷰 -->
 				<div class="review-wrap" th:each="review : ${projectReview}">

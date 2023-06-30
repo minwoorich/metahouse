@@ -27,7 +27,7 @@
 	 					<img th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}" alt="photo" id="photo">
 					</li>
 					<li th:each="assetImgs, i:${assetImgs}">
-						<img th:src="@{/upload/asset_thumbnail_img/}+${assetImgs.asset_detail_img_store_filename}" alt="thumbnail">
+						<img th:src="@{/upload/asset_optional_img/}+${assetImgs.asset_detail_img_store_filename}" alt="thumbnail">
 					</li>
 				</ul>
 			</div>
