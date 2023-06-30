@@ -44,8 +44,7 @@
 					</div>
 					<div class="modal-body" style="font-weight: 600; font-size: 16px;">
 						<p>
-							지금 삭제를 하신다면 추후에 프로젝트 서비스 사용시 패널티를 받을 수 있습니다. <br> <br>그래도
-							삭제 하시겠습니까?
+							정말 프로젝트를 삭제하시겠습니까?
 						</p>
 					</div>
 					<div class="modal-footer">
@@ -58,7 +57,7 @@
 		</div>
 		<div class="project-product-wrapper">
 			<h1 class="mypage-title">내 서비스 목록</h1>
-			<div class="project-search-form">
+			<!-- <div class="project-search-form">
 				<div class="project-search-form-row01">
 					<select class="search-box category01">
 						<option value="all">전체 상품</option>
@@ -89,11 +88,13 @@
 					<button type="button" onclick=""
 						class="search-button button--small">조회</button>
 				</div>
-			</div>
+			</div> -->
 			<ul class="project-product-list" th:each="project : ${projectList}">
-				<li onclick="" class="project-product-card">
+				<li class="project-product-card">
 					<div class="project-product-image">
-						<img th:src="@{/upload/project_thumbnail_img/}+${project.thumbnail}" alt="썸네일"/>
+						<a th:href="@{/project/detail(projectNum=${project.project_id})}">
+							<img th:src="@{/upload/project_thumbnail_img/}+${project.thumbnail}" alt="썸네일"/>
+						</a>
 					</div>
 					<div class="project-product-contents">
 						<div class="project-product-contents-row01">
