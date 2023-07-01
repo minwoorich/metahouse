@@ -7,8 +7,8 @@
     <insert id="saveReview" parameterType="com.multi.metahouse.domain.dto.review.ReviewDTO">
         INSERT INTO reviews VALUES (#{review_id}, #{writer_id}, #{order_tag}, #{rating}, #{review_text}, #{review_date})
     </insert>
-    
-    <!-- 주어진 리뷰 정보를 이용하여 데이터베이스의 리뷰를 업데이트하는 쿼리 -->
+   
+   <!-- 주어진 리뷰 정보를 이용하여 데이터베이스의 리뷰를 업데이트하는 쿼리 -->
     <update id="updateReview" parameterType="com.multi.metahouse.domain.dto.review.ReviewDTO">
         UPDATE reviews SET writer_id = #{writer_id}, order_tag = #{order_tag}, rating = #{rating},
         review_text = #{review_text}, review_date = #{review_date}
@@ -30,4 +30,31 @@
         SELECT * FROM reviews
     </select>
     <!-- 필요한 추가적인 SQL 매핑을 작성할 수 있습니다. -->
+    
+    <!-- 프로젝트 별 리뷰를 가져오는 쿼리 -->
+    <resultMap type="projectreview" id="projectReview">
+        <id column="project_review_id" property="project_review_id"/>
+        <result column="project_order_id" property="project_order_id"/>
+        <result column="writer_id" property="writer_id"/>
+        <result column="project_id" property="project_id"/>
+        <result column="rating" property="rating"/>
+        <result column="review_text" property="review_text"/>
+        <result column="review_date" property="review_date"/>
+        <result column="project_review_comment_id" property="reviewComment.review_comment_id"/>
+        <result column="comment_writer_id" property="reviewComment.writer_id"/>
+        <result column="review_id" property="reviewComment.review_id"/>
+        <result column="comment_text" property="reviewComment.comment_text" />
+        <result column="comment_date" property="reviewComment.comment_date" />
+	</resultMap>
+    <select id="getAllReviewsByPJTid" parameterType="Long" resultMap="projectReview">
+        SELECT r.* , c.*
+		FROM project_review r
+ 		left outer join project_review_comment c on r.project_review_id = c.project_review_id 
+        WHERE r.project_id = #{project_id}
+    </select>
+    <select id="getAllreviewImgByPJTid" resultType="projectreviewImg">
+    	SELECT * 
+		FROM metahaus.project_review_contents
+		WHERE project_id = #{project_id};
+    </select> 
 </mapper>

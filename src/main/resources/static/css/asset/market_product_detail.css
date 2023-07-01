@@ -186,6 +186,7 @@ td {
 	align-items: center;
 	border-top: 1px solid;
 	border-bottom: 1px solid;
+	cursor: pointer;
 }
 
 #seller_img_box {

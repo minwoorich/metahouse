@@ -159,6 +159,7 @@ body{
     flex-shrink:0;
     padding:2%;
     box-sizing: border-box;
+    cursor: pointer;
 }
 .banner-slider-item2{
     width: 50%;

@@ -1,12 +1,12 @@
 package com.multi.metahouse.domain.dto.review;
 
 public class ReviewContentsDTO {
-    private int review_contents_id;
-    private int review_id;
-    private String review_store_filename;
-    private Integer review_img_no;
-	
-    public ReviewContentsDTO() {
+	private int review_contents_id;
+	private int review_id;
+	private String review_store_filename;
+	private Integer review_img_no;
+
+	public ReviewContentsDTO() {
 		super();
 	}
 
@@ -56,8 +56,5 @@ public class ReviewContentsDTO {
 	public void setReview_img_no(Integer review_img_no) {
 		this.review_img_no = review_img_no;
 	}
-   
-    
-    
-    
+
 }
