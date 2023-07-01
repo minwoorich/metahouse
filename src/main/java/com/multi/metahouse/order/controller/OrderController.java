@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
 import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
+import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.order.service.AssetCategoryService;
 import com.multi.metahouse.order.service.OrderService;
 import com.multi.metahouse.point.service.PointService;
@@ -69,7 +72,7 @@ public class OrderController {
 		return null;
 	}
 
-/*----------------------------------- OSE ------------------------------------*/
+	/*----------------------------------- OSE ------------------------------------*/
 //	ajax-asset 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/asset")
 	@ResponseBody
@@ -77,26 +80,32 @@ public class OrderController {
 		System.out.println(assetOrder);
 		orderService.orderA(assetOrder);
 	}
-	
+
 //	ajax-project 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/project")
 	@ResponseBody
-	public void orderP(@RequestBody ObjectNode saveObj) throws JsonProcessingException, IllegalArgumentException {
-		 ObjectMapper mapper = new ObjectMapper();
-		 ProjectOrdersDTO projectOrder = mapper.treeToValue(saveObj.get("projectOrder"), ProjectOrdersDTO.class);
-		 List<SelectedAddOptionDTO> options = new ArrayList<SelectedAddOptionDTO>();
-		 JsonNode JsonOptions = saveObj.get("options");
-		 
-		 for(int i=0; i<JsonOptions.size(); i++){
-				JsonNode json = mapper.createObjectNode();
-				json = JsonOptions.get(i);
-				SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
-				options.add(option);
-			}
-		 int result = orderService.orderP(projectOrder, options);
-		 
-		 System.out.println("주문내역"+projectOrder);
-		 System.out.println("추가옵션"+options);
-		 System.out.println("생성결과"+result);
+	public void orderP(@RequestBody ObjectNode saveObj, HttpSession session)
+			throws JsonProcessingException, IllegalArgumentException {
+		User loginUser = (User) session.getAttribute("loginUser");
+		ObjectMapper mapper = new ObjectMapper();
+		int consumeAmount = mapper.treeToValue(saveObj.get("consumeAmount"), Integer.TYPE);
+		ProjectOrdersDTO projectOrder = mapper.treeToValue(saveObj.get("projectOrder"), ProjectOrdersDTO.class);
+		List<SelectedAddOptionDTO> options = new ArrayList<SelectedAddOptionDTO>();
+		JsonNode JsonOptions = saveObj.get("options");
+
+		for (int i = 0; i < JsonOptions.size(); i++) {
+			JsonNode json = mapper.createObjectNode();
+			json = JsonOptions.get(i);
+			SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
+			options.add(option);
+		}
+		//int result = orderService.orderP(projectOrder, options, loginUser, consumeAmount);
+
+		System.out.println("주문내역" + projectOrder);
+		System.out.println("추가옵션" + options);
+		System.out.println("구매자" + loginUser);
+		System.out.println("결제금액" + consumeAmount);
+		//System.out.println("결과" + result);
+		
 	}
 }

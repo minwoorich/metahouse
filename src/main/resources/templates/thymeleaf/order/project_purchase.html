@@ -7,67 +7,6 @@
 <title>결제하기</title>
 <link href="/metahaus/css/order/purchase.css" rel="stylesheet" type="text/css">
 <script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		//3단 패키기 가격 정보보기
-		$("#tp").on("change", function(){
-			$.ajax({
-				url:"/metahaus/project/package/price",
-				type:"post",
-				data: {
-					projectNum : $("#Aid_pj").attr("value")
-					},
-				dataType:"json",
-				success:function(data){
-					var index = $("#tp option").index($("#tp option:selected"));
-					var val = $("#tp option:selected").val();
-					let item = null;
-					let p = '<span>'+ val +'원</span>';
-					switch (index) {
-					  case 0:
-						item = '<div class="price_package_info">제목<br/><br/>'+ data.basic_pkg_title +'</div>';
-						item += '<div class="price_package_info" id="price_package_explain">설명<br/><br/>'+ data.basic_pkg_description +'</div>';
-						item += '<div class="price_package_info">작업일<br/><br/>'+ data.basic_workdays +'일</div>';
-						item += '<div class="price_package_info">가격<br/><br/>'+ data.basic_price +'원</div>';
-					    break;
-					  case 1:
-						item = '<div class="price_package_info">제목<br/><br/>'+ data.economy_pkg_title +'</div>';
-						item += '<div class="price_package_info" id="price_package_explain">설명<br/><br/>'+ data.economy_pkg_description +'</div>';
-						item += '<div class="price_package_info">작업일<br/><br/>'+ data.economy_workdays +'일</div>';
-						item += '<div class="price_package_info">가격<br/><br/>'+ data.economy_price +'원</div>';
-					    break;
-					  default:
-						item = '<div class="price_package_info">제목<br/><br/>'+ data.premium_pkg_title +'</div>';
-						item += '<div class="price_package_info" id="price_package_explain">설명<br/><br/>'+ data.premium_pkg_description +'</div>';
-						item += '<div class="price_package_info">작업일<br/><br/>'+ data.premium_workdays +'일</div>';
-						item += '<div class="price_package_info">가격<br/><br/>'+ data.premium_price +'원</div>';
-					}
-						
-					$("#priceData").children().remove();
-					$("#select_price").children().remove();
-			    	$("#priceData").append(item);
-			    	$("#select_price").append(p);
-				},
-				error:function(result) {
-	                alert("error");
-	            }
-				
-			});
-		});
-		//http://localhost:8088/metahaus/point/charge 포인트 충전하러가기
-		//추가금액 계산&표시
-		$(".option_chk").on("change", function(){
-	    	alert($("input[type=checkbox][name=add_option]:checked").val());
-			$("#price_totalOption").children().remove();
-	    	$("#price_totalOption").append("<div>test</div>");
-	    	/* if($(".option_chk").is(":checked")){
-	    		
-	    	} */
-			
-		})
-	})
-
-</script>
 </head>
 <body>
 	<div layout:fragment="content" class="content">
@@ -131,7 +70,8 @@
 					        			th:value="${option.add_option_id}" th:id="'ADid'+${optionStat.index}"/>
 					        	<div class="option_item" th:text="${option.add_option_name}"></div>
 					        	<div class="option_item" th:text="${option.add_option_description}"></div>
-					        	<div class="option_item" th:text="${option.add_option_price}+'원'"></div>
+					        	<div class="option_item" th:text="${option.add_option_price}+'원'"
+					        		th:value="${option.add_option_price}"  th:id="'P'+${optionStat.index}"></div>
 					        	<div class="updown option_item">
 					        		<button type ="button" class="down">-</button>
 					        		<input type="text" placeholder="0" readonly="readonly" 
@@ -190,12 +130,18 @@
 					</span>
 				</div>
 				<div class="data distance">
-					<span class="total_price">최종결제 금액</span><span class="price_data total_price">30,000원</span>
+					<span class="total_price">최종결제 금액</span>
+					<span class="price_data total_price" id="consumeP" th:if="${pjtInfo.pjtSingle != null}">
+						<span th:value="${pjtInfo.pjtSingle.price}" th:text="${pjtInfo.pjtSingle.price}+'원'"></span>
+					</span>
+					<span class="price_data total_price" id="consumeP" th:if="${pjtInfo.pjtTriple != null}">
+						<span th:value="${pjtInfo.pjtTriple.basic_price}" th:text="${pjtInfo.pjtTriple.basic_price}+'원'"></span>
+					</span>
 				</div>
 				<hr/>
 				<div id="U_id" hidden="" th:value="${userInfo.userId}"></div>
 				<div class="data distance">
-					<span>보유 캐쉬</span><span class="price_data">100,000원</span>
+					<span>보유 캐쉬</span><span class="price_data" th:text="${userInfo.point}+'원'"></span>
 				</div>
 				<div class="data distance">
 					<span>결제 후 캐쉬</span><span class="price_data">70,000원</span>
