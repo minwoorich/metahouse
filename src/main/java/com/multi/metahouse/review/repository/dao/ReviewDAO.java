@@ -20,7 +20,7 @@ public interface ReviewDAO {
 	public List<UnionReviewDTO> findOrderByDate(int limit);
 
 	/*--------------------- OSE ----------------------*/
-	public List<ProjectReviewContentsDTO> getAllReviewsByPJT(Long projectId);//프로젝트에 달린 리뷰+리뷰의 답글 가져오기
-	public List<ProjectReviewDTO> getAllReviewsImgByPJT(Long projectId);//프로젝트에 달린 리뷰 이미지 모두 불러온다.
+	public List<ProjectReviewDTO> getAllReviewsByPJT(Long projectId);//프로젝트에 달린 리뷰+리뷰의 답글 가져오기
+	public	List<ProjectReviewContentsDTO> getAllReviewsImg(int project_review_id);//리뷰에 첨부된 리뷰 이미지 모두 불러온다.
 }
 

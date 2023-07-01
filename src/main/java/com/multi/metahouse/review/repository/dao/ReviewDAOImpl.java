@@ -60,12 +60,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 	
 	/*---------------------------------- OSE -------------------------------------*/
 	@Override
-	public List<ProjectReviewContentsDTO> getAllReviewsByPJT(Long projectId) {
+	public List<ProjectReviewDTO> getAllReviewsByPJT(Long projectId) {
 		return sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllReviewsByPJTid", projectId);
 	}
 	@Override
-	public List<ProjectReviewDTO> getAllReviewsImgByPJT(Long projectId) {
-		return sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllreviewImgByPJTid", projectId);
+	public List<ProjectReviewContentsDTO> getAllReviewsImg(int project_review_id) {
+		return sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllreviewImgByRewviewid", project_review_id);
 	}
 	
 }

@@ -17,6 +17,5 @@ public interface ReviewService {
 
     void deleteReview(int reviewId);
     
-    public List<ProjectReviewContentsDTO> getAllReviewsByPJTid(Long projectId);
-    public List<ProjectReviewDTO> getAllReviewsImgByPJTid(Long projectId);
+    public List<ProjectReviewDTO> getAllReviewsByPJTid(Long projectId);
 }

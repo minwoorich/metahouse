@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
+import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ProjectReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
 import com.multi.metahouse.review.repository.dao.ReviewDAO;
@@ -47,11 +49,18 @@ public class ReviewServiceImpl implements ReviewService {
 
 	/*-------------------- OSE ------------------*/
 	@Override
-	public List<ProjectReviewContentsDTO> getAllReviewsByPJTid(Long projectId) {
-		return reviewDAO.getAllReviewsByPJT(projectId);
-	}
-	@Override
-	public List<ProjectReviewDTO> getAllReviewsImgByPJTid(Long projectId) {
-		return reviewDAO.getAllReviewsImgByPJT(projectId);
+	@Transactional
+	public List<ProjectReviewDTO> getAllReviewsByPJTid(Long projectId) {
+		List<ProjectReviewDTO> PJTreviews = reviewDAO.getAllReviewsByPJT(projectId);
+		int PJTreviewId = 0;
+		for (int i = 0; i < PJTreviews.size(); i++) {
+			PJTreviewId = PJTreviews.get(i).getProject_review_id();
+			List<ProjectReviewContentsDTO> reviewImg = reviewDAO.getAllReviewsImg(PJTreviewId);
+			if(reviewImg.size()>0){
+				PJTreviews.get(i).setReviewImg(reviewImg);
+			}
+		}
+				
+		return PJTreviews;
 	}
 }

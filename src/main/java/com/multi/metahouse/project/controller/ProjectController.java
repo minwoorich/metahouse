@@ -79,14 +79,12 @@ public class ProjectController {
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
-		List<ProjectReviewContentsDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
-		//List<ProjectReviewDTO> ReviewImg = reviewService.getAllReviewsImgByPJTid(projectNum);
-		
+		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
+		System.out.println(projectReview);
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);
 		model.addAttribute("projectReview", projectReview);
-		/* model.addAttribute("ReviewImg", ReviewImg); */
 		
 		return "project/market_detail";
 	}

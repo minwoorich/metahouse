@@ -52,9 +52,9 @@
  		left outer join project_review_comment c on r.project_review_id = c.project_review_id 
         WHERE r.project_id = #{project_id}
     </select>
-    <select id="getAllreviewImgByPJTid" resultType="projectreviewImg">
+    <select id="getAllreviewImgByRewviewid" resultType="projectreviewImg">
     	SELECT * 
 		FROM metahaus.project_review_contents
-		WHERE project_id = #{project_id};
+		WHERE project_review_id = #{project_review_id};
     </select> 
 </mapper>
