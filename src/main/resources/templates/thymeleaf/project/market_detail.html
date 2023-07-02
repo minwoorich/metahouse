@@ -22,7 +22,7 @@
 				<div id="main_photo_box">
 					<img th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.project_thumbnail_img}" alt="photo" id="photo">
 				</div>
- 				<ul id="gallery" th:if="${projectImg != null}">
+ 				<ul id="gallery" th:if="${projectImg.size > 0}">
 					<li>
 						<img th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.project_thumbnail_img}" alt="photo" id="photo">
 					</li>
@@ -122,14 +122,12 @@
 						<!-- 별점 -->
 						<div class="reviewer_star_rating">
 							<div class="star-ratings">
-								<div class="star-ratings-fill space-x-2 text-lg"
-								    :style="{ width: ratingToPercent + '%' }">
-								    <th:block>
-										<span>★ </span>
-								    </th:block>
+								<div class="star-ratings-fill space-x-2 text-lg" 
+									th:style="${'width:'+(#aggregates.sum(projectReview.![rating])*1.0/#lists.size(projectReview))*20+'%'}">
+									★★★★★
 								</div>
 								<div class="star-ratings-base space-x-2 text-lg">
-									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									★★★★★
 								</div>
 							</div>
 						</div>

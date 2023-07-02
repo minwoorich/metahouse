@@ -25,7 +25,6 @@ import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
-import com.multi.metahouse.domain.dto.review.ProjectReviewContentsDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 //import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
@@ -56,7 +55,6 @@ public class ProjectController {
 		this.reviewService = reviewService;
 	}
 
-
 	/*------------------------------------- 승언님 파트 ------------------------------------ */
 
 	// 프로젝트 마켓 상품목록 보기
@@ -72,7 +70,6 @@ public class ProjectController {
 		return "project/main";
 	}
 
-
 	// 프로젝트 상세보기
 	@RequestMapping("project/detail")
 	public String showProject(Model model, Long projectNum) {
@@ -80,12 +77,12 @@ public class ProjectController {
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
 		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
-		System.out.println(projectReview);
+
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);
 		model.addAttribute("projectReview", projectReview);
-		
+
 		return "project/market_detail";
 	}
 
@@ -100,11 +97,12 @@ public class ProjectController {
 		model.addAttribute("userInfo", userInfo);
 		return "order/project_purchase";
 	}
+
 	// ajax 프로젝트 구매하기-패키지정보
 	@PostMapping(value = "project/package/price", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String packData(Long projectNum) throws JsonProcessingException{
-		ObjectMapper mapper = new ObjectMapper(); 
+	public String packData(Long projectNum) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
 		String jsonString = mapper.writeValueAsString(projectService.projectInfo(projectNum).getPjtTriple());
 		return jsonString;
 	}
@@ -124,18 +122,18 @@ public class ProjectController {
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// "판매 등록" 페이지 반환
 	@GetMapping("project/my-products")
-	public String showProductList(Model model,HttpSession session) {
-		if(session.getAttribute("loginUser")!=null) {
-			User user = (User)session.getAttribute("loginUser");
+	public String showProductList(Model model, HttpSession session) {
+		if (session.getAttribute("loginUser") != null) {
+			User user = (User) session.getAttribute("loginUser");
 			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
 			model.addAttribute("projectList", projectList);
 			return "project/project_product_list";
-		}else {
+		} else {
 			return "redirect:/login";
 		}
-		
+
 //		List<ProjectListDTO> projectList = projectService.selectAllProjects();
-		
+
 	}
 
 	@PostMapping("project/delete-product")

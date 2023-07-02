@@ -49,11 +49,15 @@ $(document).ready(function(){
             $counter.css("color","var(--gray)");
         }
     });
-    //프로젝트 구매가격 자동계산
 	
 //  에셋 구매버튼
     $(".AssetBtn").on("click", function(){
-    	var param = {"asset_id" : $("#Aid").attr("value"), "buyer_id2" : $("#Uid").attr("value")}
+    	var param = {"assetOrder" :{
+    		"asset_id" : $("#Aid").attr("value"),
+    		"buyer_id2" : $("#Uid").attr("value")
+    		},
+    		"consumeAmount" : $("#consumeAmount").text().replace(/,/g, "")
+    	}
     	$.ajax({
     		url : "/metahaus/order/asset",
     		type : 'post',
@@ -113,7 +117,7 @@ $(document).ready(function(){
 	    };
 	})(jQuery);
 	
-	//3단 패키기 가격 정보보기
+	//3단 패키기 가격 정보 출력
 	$("#tp").on("change", function(){
 		$.ajax({
 			url:"/metahaus/project/package/price",
