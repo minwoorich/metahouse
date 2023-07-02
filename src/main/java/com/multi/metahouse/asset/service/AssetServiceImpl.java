@@ -43,7 +43,7 @@ public class AssetServiceImpl implements AssetService {
 		assetEntity.setCategory1(assetFormDto.getCategory1());
 		assetEntity.setCategory2(assetFormDto.getCategory2_as());
 		assetEntity.setDescription(assetFormDto.getDescription());
-		assetEntity.setPrice(assetFormDto.getPrice());
+		assetEntity.setPrice(Integer.parseInt(assetFormDto.getPrice()));
 		assetEntity.setMainImg(storeThumbnailFileName);
 		
 		//자식 Entity에 데이터 주입 (AssetContentEntity)
@@ -85,9 +85,9 @@ public class AssetServiceImpl implements AssetService {
 			dto.setCategory1(entity.getCategory1());
 			dto.setCategory2_as(entity.getCategory2());
 			dto.setDescription(entity.getDescription());
-			dto.setPrice(Integer.parseInt(entity.getPrice()));
+			dto.setPrice(entity.getPrice());
 			dto.setMain_img(entity.getMainImg());
-			dto.setAsset_date((entity.getAssetDate()).toString());
+			dto.setAsset_date(entity.getAssetDate());
 			
 			dtoList.add(dto);
 		}
@@ -104,7 +104,7 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 
-	/*-------------------------------------------------------------------------------------*/
+	/*------------------------------------------- OSE ------------------------------------------*/
 	@Autowired
 	AssetRepository repositry;
 

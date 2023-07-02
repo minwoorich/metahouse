@@ -1,19 +1,23 @@
 package com.multi.metahouse.domain.dto.asset;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.metahouse.domain.dto.user.UserDTO;
+import com.multi.metahouse.domain.entity.asset.AssetEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Alias("asset")
 public class AssetDTO {
 	private String asset_id;
@@ -30,7 +34,7 @@ public class AssetDTO {
 	private MultipartFile thumbnail_img;
 	//상세 이미지
 	private List<MultipartFile> optional_img;
-	private String asset_date;
+	private LocalDateTime asset_date;
 	
 	//판매자 정보를 저장하기위한 변수
 	private UserDTO userName;
@@ -41,7 +45,7 @@ public class AssetDTO {
 	private int review_count;
 
 	public AssetDTO(String asset_id, String seller_id, String title, String category1, String category2_as,
-			String description, int price, String main_img, String asset_date, double average_reviews , int review_count) {
+			String description, int price, String main_img, LocalDateTime asset_date, double average_reviews , int review_count) {
 		this.asset_id = asset_id;
 		this.seller_id = seller_id;
 		this.title = title;
@@ -54,6 +58,18 @@ public class AssetDTO {
 		this.average_reviews = average_reviews;
 		this.review_count = review_count;
 	}
-	
+	 public static AssetDTO toDTO(AssetEntity entity) {
+	        return AssetDTO.builder()
+	                .asset_id(entity.getAssetId())
+	                .seller_id(entity.getSellerId())
+	                .title(entity.getTitle())
+	                .category1(entity.getCategory1())
+	                .category2_as(entity.getCategory2())
+	                .description(entity.getDescription())
+	                .price(entity.getPrice())
+	                .main_img(entity.getMainImg())
+	                .asset_date(entity.getAssetDate())
+	                .build();
+	    }
 	
 }

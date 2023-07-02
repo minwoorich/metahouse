@@ -32,7 +32,7 @@
 				</ul>
 			</div>
 			<div class="sub_title" id="product_explain">에셋 설명</div>
-			<div class="sub_content" th:text="${asset.description}"></div>
+			<div class="sub_content" th:utext="${asset.description}"></div>
 			<div class="sub_title">가격</div>
 			<div class="sub_content" th:text="${asset.price}+원"></div>
 			
