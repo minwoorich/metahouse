@@ -6,8 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
 import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
-import com.multi.metahouse.domain.dto.review.ProjectReviewContentsDTO;
+import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
 import com.multi.metahouse.domain.dto.review.UnionReviewDTO;
 
@@ -57,15 +58,32 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public List<UnionReviewDTO> findOrderByDate(int limit) {
 		return sqlSession.selectList("com.multi.metahouse.unionreview.findOrderByDate", limit);
 	}
-	
+
 	/*---------------------------------- OSE -------------------------------------*/
+	// 에셋 리뷰 조회
 	@Override
-	public List<ProjectReviewContentsDTO> getAllReviewsByPJT(Long projectId) {
+	public List<AssetReviewDTO> getAllReviewsByAsset(String AssetId) {
+		return sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllReviewsByAid", AssetId);
+	}
+
+	// 프로젝트 리뷰 조회
+	@Override
+	public List<ProjectReviewDTO> getAllReviewsByPJT(Long projectId) {
 		return sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllReviewsByPJTid", projectId);
 	}
+
+	// 리뷰 이미지 조회
 	@Override
-	public List<ProjectReviewDTO> getAllReviewsImgByPJT(Long projectId) {
-		return sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllreviewImgByPJTid", projectId);
+	public List<ReviewContentsDTO> getAllReviewsImg(int review_id, String tag) {
+		List<ReviewContentsDTO> reviewImgs = null;
+		if (tag == "a") {
+			reviewImgs = sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllAreviewImgByRewviewid",
+					review_id);
+		} else {
+			reviewImgs = sqlSession.selectList("com.multi.metahouse.domain.dao.ReviewDAO.getAllPreviewImgByRewviewid",
+					review_id);
+		}
+		return reviewImgs;
 	}
-	
+
 }

@@ -27,8 +27,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int orderA(AssetOrdersDTO assetOrder) {
-		return dao.insertOrderA(assetOrder);
+	@Transactional
+	public int orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount) {
+		int resultA = dao.insertOrderA(assetOrder);
+		//포인트 결제 내역생성
+		String consumeInfo = "Asset";
+		consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
+		pointDao.consumePoint(loginUser, consumeAmount);
+		pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
+		return resultA; 
 
 	}
 
@@ -48,9 +55,11 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 		// 포인트 결제내역 생성
+		String consumeInfo = "PJT";
+		consumeInfo = consumeInfo.concat(projectOrder.getProject_id());
 		pointDao.consumePoint(loginUser, consumeAmount);
-		pointDao.createConsumedPointInfo(loginUser, consumeAmount, projectOrder.getProject_id());
-		
+		pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
+
 		return resultP + resultO;
 
 	}

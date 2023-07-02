@@ -22,7 +22,7 @@
 				<div id="main_photo_box">
 					<img th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.project_thumbnail_img}" alt="photo" id="photo">
 				</div>
- 				<ul id="gallery" th:if="${projectImg != null}">
+ 				<ul id="gallery" th:if="${projectImg.size > 0}">
 					<li>
 						<img th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.project_thumbnail_img}" alt="photo" id="photo">
 					</li>
@@ -122,14 +122,12 @@
 						<!-- 별점 -->
 						<div class="reviewer_star_rating">
 							<div class="star-ratings">
-								<div class="star-ratings-fill space-x-2 text-lg"
-								    :style="{ width: ratingToPercent + '%' }">
-								    <th:block>
-										<span>★ </span>
-								    </th:block>
+								<div class="star-ratings-fill space-x-2 text-lg" 
+									th:style="${'width:'+(#aggregates.sum(projectReview.![rating])*1.0/#lists.size(projectReview))*20+'%'}">
+									★★★★★
 								</div>
 								<div class="star-ratings-base space-x-2 text-lg">
-									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									★★★★★
 								</div>
 							</div>
 						</div>
@@ -139,25 +137,27 @@
 	            </div>
 	            <hr/>
 	            <!-- 리뷰 이미지 -->
-				<!-- <div th:if="${ReviewImg.size > 0}">
+				<div>
 					<div class="review_title">포토 후기</div>				
 					<div class="banner-slider-wrap">
-						<th:block th:if="${ReviewImg.size > 4}">
+						<th:block>
 							<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
 							<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>		
 						</th:block>
 						<div class="slider-outter">
 							<div index="0" class="banner-slider-list">
-								<div th:each="reviewImg : ${ReviewImg}" class="banner-slider-item">
+							<th:block th:each="review : ${projectReview}" th:if="${review.reviewImg!=null}">
+								<div th:each="reviewImg : ${review.reviewImg}" class="banner-slider-item">
 									<div class="review_photos item-img-warp" >
 										<img  width=100% height=100% alt="리뷰이미지" th:src="@{/upload/review/project/}+${reviewImg.review_store_filename}"	
 										 class="review_photo" style="background-color: pink;">
 									</div>
 								</div>
+							</th:block>
 							</div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 	
 				<div class="review_title">서비스 후기</div>
 				<!-- 개인 리뷰 -->
@@ -182,6 +182,16 @@
 						<div th:text="'&ensp;'+${#numbers.formatDecimal(review.rating,1,1)}+'&ensp;'"></div>
 						<!-- 개인 리뷰등록일자 -->
 						<div class="reviewer" th:text="'|&ensp;'+${#dates.format(review.review_date,'yyyy.MM.dd')}"></div>
+					</div>
+					<!-- 개인 리뷰 이미지 -->
+					<div index="0" class="banner-slider-list">
+						<div class="banner-slider-item" th:if="${review.reviewImg!=null}" 
+							th:each="reviewImg : ${review.reviewImg}">
+							<div class="review_photos item-img-warp" >
+								<img  width=100% height=100% alt="리뷰이미지" class="review_photo" 
+									th:src="@{/upload/review/project/}+${reviewImg.review_store_filename}">
+							</div>
+						</div>
 					</div>
 					<br/>
 					<!-- 개인 리뷰 내용 -->

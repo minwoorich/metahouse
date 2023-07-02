@@ -21,7 +21,10 @@ public class ProjectReviewDTO {
 	private int rating;
 	private String review_text;
 	private Timestamp review_date;
-
+	//리뷰 답글 담기
 	private ReviewCommentDTO reviewComment;
+	//리뷰 이미지 담기
+	private List<ReviewContentsDTO> reviewImg;
+	
 	
 }

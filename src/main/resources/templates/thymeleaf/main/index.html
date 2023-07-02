@@ -197,8 +197,9 @@
 		<div class="banner-wrap">
 
 			<div class="banner-title-wrap">
-				<span class="myfont-1">메타 긱스에서 당신의 프로젝트를 맡겨보세요!</span> <span
-					class="myfont-2 ml-auto">더보기</span>
+				<span class="myfont-1">메타 크리에이터에게 당신의 프로젝트를 맡겨보세요!</span>
+				<span class="myfont-2 ml-auto" style="cursor: pointer;"
+					th:onclick="|location.href='@{/project/main?pageNo=0}'|">더보기</span>
 			</div>
 
 			<div class="banner-slider-wrap">
@@ -208,16 +209,18 @@
 				<div class="slider-outter testtest">
 					<div index="0" class="banner-slider-list">
 
-						<div th:each="project:${projectList}" class="banner-slider-item">
+						<div th:each="project:${projectList}" class="banner-slider-item"
+							th:onclick="|location.href='@{/project/detail(projectNum=${project.project_id})}'|">
 							<div class="item-img-warp"></div>
 							<div class="item-desc-warp">
 								<span th:text="${project.title}" class="myfont-3">메타버스틱스1</span>
-								<span th:utext="${project.description}" class="myfont-2">당신만의
-									메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span> <span
-									th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}"
-									class="myfont-1">85,000원~</span> <span class="myfont-3"><span
-									th:text="${'★ '+project.average_reviews}">★ 4.8 </span>|
-									[[${project.review_count}]]개의 평가</span>
+								<span th:utext="${project.description}" class="myfont-2"></span>
+								<span th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}"
+									class="myfont-1">85,000원~</span>
+								<span class="myfont-3">
+									<span th:text="${'★ '+project.average_reviews}">★ 4.8 </span>
+									| [[${project.review_count}]]개의 평가
+								</span>
 							</div>
 						</div>
 
@@ -238,8 +241,9 @@
 		<div class="banner-wrap">
 
 			<div class="banner-title-wrap">
-				<span class="myfont-1">메타 마켓에서 당신이 원하는 에셋을 가져가세요!</span> <span
-					class="myfont-2 ml-auto">더보기</span>
+				<span class="myfont-1">메타 마켓에서 당신이 원하는 에셋을 가져가세요!</span>
+				<span class="myfont-2 ml-auto" style="cursor: pointer;"
+					th:onclick="|location.href='@{/asset/main?pageNo=0}'|">더보기</span>
 			</div>
 
 			<div class="banner-slider-wrap">

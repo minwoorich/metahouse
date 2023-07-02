@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
-import com.multi.metahouse.domain.dto.review.ProjectReviewContentsDTO;
+import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
+import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
 import com.multi.metahouse.review.repository.dao.ReviewDAO;
 
@@ -46,12 +48,36 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	/*-------------------- OSE ------------------*/
+	//에셋 리뷰 조회(리뷰내용+이미지+답글)
 	@Override
-	public List<ProjectReviewContentsDTO> getAllReviewsByPJTid(Long projectId) {
-		return reviewDAO.getAllReviewsByPJT(projectId);
+	@Transactional
+	public List<AssetReviewDTO> getAllReviewsByAid(String assetId) {
+		List<AssetReviewDTO> AssetReviews = reviewDAO.getAllReviewsByAsset(assetId);
+		int AssetreviewId = 0;
+		for (int i = 0; i < AssetReviews.size(); i++) {
+			AssetreviewId = AssetReviews.get(i).getAsset_review_id();
+			List<ReviewContentsDTO> reviewImg = reviewDAO.getAllReviewsImg(AssetreviewId, "a");
+			if(reviewImg.size()>0){
+				AssetReviews.get(i).setReviewImg(reviewImg);
+			}
+		}
+		return AssetReviews;
 	}
+
+	//프로젝트 리뷰 조회(리뷰내용+이미지+답글)
 	@Override
-	public List<ProjectReviewDTO> getAllReviewsImgByPJTid(Long projectId) {
-		return reviewDAO.getAllReviewsImgByPJT(projectId);
+	@Transactional
+	public List<ProjectReviewDTO> getAllReviewsByPJTid(Long projectId) {
+		List<ProjectReviewDTO> PJTreviews = reviewDAO.getAllReviewsByPJT(projectId);
+		int PJTreviewId = 0;
+		for (int i = 0; i < PJTreviews.size(); i++) {
+			PJTreviewId = PJTreviews.get(i).getProject_review_id();
+			List<ReviewContentsDTO> reviewImg = reviewDAO.getAllReviewsImg(PJTreviewId, "p");
+			if(reviewImg.size()>0){
+				PJTreviews.get(i).setReviewImg(reviewImg);
+			}
+		}
+				
+		return PJTreviews;
 	}
 }
