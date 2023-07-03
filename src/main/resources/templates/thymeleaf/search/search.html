@@ -19,9 +19,7 @@
 <title>META HOUSE</title>
 </head>
 <body layout:fragment="content">
-<div class="result-count">
-        <p>총 <span class="count">1</span>개의 검색 결과입니다.</p>
-      </div>
+
       
    
   <div class="container">
@@ -29,75 +27,51 @@
       <li class="active"><a data-toggle="tab" href="#services">서비스</a></li>
       <li><a data-toggle="tab" href="#experts">전문가</a></li>
     </ul>
+    
+   
 
     <div class="tab-content">
+    
       <div id="services" class="tab-pane fade in active">
+       <div class="result-count">
+        <p>총 <span class="count">[[${#lists.size(serviceList)}]]</span>개의 검색 결과입니다.</p>
+      </div>
         <div class="dropdown-wrapper">
          <div class="dropdown-wrapper">
-  <select name="category2_pj" class="select">
-    <option disabled selected>카테고리 선택하기</option>
-    <option value="게더타운">게더타운</option>
-    <option value="마인크레프트">마인크래프트</option>
-    <option value="제페토">제페토</option>
-    <option value="샌드박스">샌드박스</option>
-    <option value="로블록스">로블록스</option>
+  <select id="searchCategory" name="category" class="select">
+    <option th:selected="${filter.category} == ${'all'}" value="all">카테고리 선택하기</option>
+    <option th:selected="${filter.category} == ${'게더타운'}" value="게더타운">게더타운</option>
+    <option th:selected="${filter.category} == ${'마인크래프트'}" value="마인크래프트">마인크래프트</option>
+    <option th:selected="${filter.category} == ${'제페토'}" value="제페토">제페토</option>
+    <option th:selected="${filter.category} == ${'샌드박스'}" value="샌드박스">샌드박스</option>
+    <option th:selected="${filter.category} == ${'로블록스'}" value="로블록스">로블록스</option>
   </select>
 </div>
 
         <div class="dropdown-wrapper">
-  <select name="category2_pj" class="select">
-    <option disabled selected>카테고리 선택하기</option>
-    <option value="게더타운">메타에셋</option>
-    <option value="마인크레프트">메타긱스</option>
+  <select id="searchOption" name="option" class="select">
+    <option th:selected="${filter.option} == ${'all'}" value="all">카테고리 선택하기</option>
+    <option th:selected="${filter.option} == ${'aa'}" value="aa">메타에셋</option>
+    <option th:selected="${filter.option} == ${'pp'}" value="pp">메타긱스</option>
  
   </select>
 </div>
        
         </div>
+        
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4" th:each="service : ${serviceList}">
             <div class="card">
               <div class="service-card-body">
-                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
-                <h4 class="card-title">검색 결과 1</h4>
-                <p class="card-text">검색 결과 1에 대한 설명</p>
-                <p class="card-text">가격: $10</p>
+                <img width="100%" height="100%" th:src="@{/upload/asset_thumbnail_img/}+${service.img}" alt="프로필 이미지">
+                <h4 class="card-title">[[${service.title}]]</h4>
+                <p class="card-text">[[${service.descr}]]</p>
+                <p class="card-text">가격: $[[${service.price}]]</p>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="card">
-              <div class="service-card-body">
-                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
-                <h4 class="card-title">검색 결과 2</h4>
-                <p class="card-text">검색 결과 2에 대한 설명</p>
-                <p class="card-text">가격: $20</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card">
-              <div class="service-card-body">
-                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
-                <h4 class="card-title">검색 결과 3</h4>
-                <p class="card-text">검색 결과 3에 대한 설명</p>
-                <p class="card-text">가격: $30</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card">
-              <div class="service-card-body">
-                <img src="/metahaus/images/1.JPG" alt="프로필 이미지">
-                <h4 class="card-title">검색 결과 3</h4>
-                <p class="card-text">검색 결과 3에 대한 설명</p>
-                <p class="card-text">가격: $30</p>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         <div class="pagination-wrapper">
@@ -116,66 +90,24 @@
       </div>
 
       <div id="experts" class="tab-pane fade">
-           <div class="dropdown-wrapper">
-  <select name="category2_pj" class="select">
-    <option disabled selected>카테고리 선택하기</option>
-    <option value="게더타운">메타에셋</option>
-    <option value="마인크레프트">메타긱스</option>
- 
-  </select>
-</div>
+       <div class="result-count">
+        <p>총 <span class="count">[[${#lists.size(userList)}]]</span>개의 검색 결과입니다.</p>
+      </div>
         <div class="pro-row">
-            <div class="expert-card">
+           
+            <div th:each="user : ${userList}" class="expert-card">
                 <a href="expert-page.html?id=1">
                   <div class="card">
-                    <img src="/images/1.JPG" alt="프로필 이미지">
+                    <img th:src="@{/upload/userThumbnail/}+${user.thumbnail_store_filename}" alt="프로필 이미지">
                     <div class="pro-card-body">
-                      <h4 class="card-title">전문가 1</h4>
-                      <p class="card-text">전문가 1에 대한 설명</p>
-                      <p class="card-text">전문 분야: 맵 제작</p>
+                      <h4 class="card-title">[[${user.user_name}]]</h4>
+                      <p class="card-text">[[${user.self_introduction}]]</p>
                     </div>
                   </div>
                 </a>
               </div>
             
-              <div class="expert-card">
-                <a href="expert-page.html?id=2">
-                  <div class="card">
-                    <img src="/images/1.JPG" alt="프로필 이미지">
-                    <div class="pro-card-body">
-                      <h4 class="card-title">전문가 2</h4>
-                      <p class="card-text">전문가 2에 대한 설명</p>
-                      <p class="card-text">전문 분야: 맵 제작</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <div class="expert-card">
-                <a href="expert-page.html?id=1">
-                  <div class="card">
-                    <img src="/images/1.JPG" alt="프로필 이미지">
-                    <div class="pro-card-body">
-                      <h4 class="card-title">전문가 1</h4>
-                      <p class="card-text">전문가 1에 대한 설명</p>
-                      <p class="card-text">전문 분야: 맵 제작</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            
-              <div class="expert-card">
-                <a href="expert-page.html?id=2">
-                  <div class="card">
-                    <img src="/images/1.JPG" alt="프로필 이미지">
-                    <div class="pro-card-body">
-                      <h4 class="card-title">전문가 2</h4>
-                      <p class="card-text">전문가 2에 대한 설명</p>
-                      <p class="card-text">전문 분야: 맵 제작</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
+             
         </div>
 
         <div class="pagination-wrapper">
