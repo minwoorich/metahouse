@@ -92,25 +92,42 @@ $(document).ready(function(){
 	var p2 = 0; 
 	var totalAddprice = 0;		
 	var TP = 0;
+	var balance = 0;
 	$("#count0").on('input', function() {
 	    count1 = $(this).val();
 	    p1 = $("#P0").attr("value")*count1;
 	    totalAddprice = p1 + p2;
 		TP = parseInt(SP)+parseInt(totalAddprice);
+		balance = parseInt($("#myPoint").text())-TP;
 		$("#price_totalOption").children().remove();
     	$("#price_totalOption").append("<span>"+totalAddprice+"원</spna>");
     	$("#consumeP").children().remove();
     	$("#consumeP").append("<span>"+TP+"원</spna>");
+    	if(balance<0){
+    		$("#balance").children().remove();
+    		$("#balance").append("<span>*잔액이 부족합니다.</span><a class='price_data' th:href='@{/point/charge}'>충전하기</a>");
+    	}else{
+    		$("#balance").children().remove();
+    		$("#balance").append("<span>결제 후 포인트</span><span class='price_data'>"+balance+"</span>");
+    	}
 	});
 	$("#count1").on('input', function() {
 	    count2 = $(this).val();
 	    p2 = $("#P1").attr("value")*count2;
 	    totalAddprice = p1 + p2;
 	    TP = parseInt(SP)+parseInt(totalAddprice);
+	    balance = parseInt($("#myPoint").text())-TP;
 		$("#price_totalOption").children().remove();
     	$("#price_totalOption").append("<span>"+totalAddprice+"원</spna>");
     	$("#consumeP").children().remove();
     	$("#consumeP").append("<span>"+TP+"원</spna>");
+    	if(balance<0){
+    		$("#balance").children().remove();
+    		$("#balance").append("<span>*잔액이 부족합니다.</span><span class='price_data' th:href='@{/point/charge}'>충전하기</span>");
+    	}else{
+    		$("#balance").children().remove();
+    		$("#balance").append("<span>결제 후 포인트</span><span class='price_data'>"+balance+"</span>");
+    	}
 	});
 	
 	(function ($) {
@@ -170,6 +187,15 @@ $(document).ready(function(){
 		    	TP = parseInt(SP)+parseInt(totalAddprice);
 		    	$("#consumeP").children().remove();
 		    	$("#consumeP").append("<span>"+TP+"원</spna>");
+		    	//결제 후 잔액 표시
+		    	balance = parseInt($("#myPoint").text())-TP;
+		    	if(balance<0){
+		    		$("#balance").children().remove();
+		    		$("#balance").append("<span>*잔액이 부족합니다.</span><a class='price_data' th:href='@{/point/charge}'>충전하기</a>");
+		    	}else{
+		    		$("#balance").children().remove();
+		    		$("#balance").append("<span>결제 후 포인트</span><span class='price_data'>"+balance+"</span>");
+		    	}
 			},
 			error:function(result) {
                 alert("error");
@@ -219,7 +245,38 @@ $(document).ready(function(){
     	}else{
     		alert("잔액이 부족합니다.")
     	}
-    		
     });
-    
+
+	/*콘솔창 차단 스크립트*/
+	!function() {
+	  function detectDevTool(allow) {
+	    if(isNaN(+allow)) allow = 100;
+	    var start = +new Date(); 
+	    debugger;
+	    var end = +new Date(); 
+	    if(isNaN(start) || isNaN(end) || end - start > allow) {
+	      // 개발자 도구가 open 된것을 감지했을때 실행할 코드 삽입
+	      alert('개발자 도구를 사용할 수 없습니다. 메인페이지로 돌아갑니다.');
+	      document.location.href="http://localhost:8088/metahaus/main/index";
+	    }
+	  }
+	  if(window.attachEvent) {
+	    if (document.readyState === "complete" || document.readyState === "interactive") {
+	        detectDevTool();
+	      window.attachEvent('onresize', detectDevTool);
+	      window.attachEvent('onmousemove', detectDevTool);
+	      window.attachEvent('onfocus', detectDevTool);
+	      window.attachEvent('onblur', detectDevTool);
+	    } else {
+	        setTimeout(argument.callee, 0);
+	    }
+	  } else {
+	    window.addEventListener('load', detectDevTool);
+	    window.addEventListener('resize', detectDevTool);
+	    window.addEventListener('mousemove', detectDevTool);
+	    window.addEventListener('focus', detectDevTool);
+	    window.addEventListener('blur', detectDevTool);
+	  }
+	}();
+	/*콘솔창 차단 스크립트 끝*/
 })

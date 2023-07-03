@@ -7,6 +7,7 @@
 <title>결제하기</title>
 <link href="/metahaus/css/order/purchase.css" rel="stylesheet" type="text/css">
 <script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div layout:fragment="content" class="content">
@@ -143,12 +144,15 @@
 				<div class="data distance">
 					<span>보유 포인트</span><span class="price_data" id="myPoint" th:text="${userInfo.point}+'원'"></span>
 				</div>
-				<div class="data distance">
-					<span>결제 후 포인트</span><span class="price_data">70,000원</span>
+				<div class="data distance" id="balance">
+					<th:block th:if="${pjtInfo.pjtSingle != null}">
+					<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtSingle.price}+'원'"></span>
+					</th:block>
+					<th:block th:if="${pjtInfo.pjtTriple != null}">
+					<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtTriple.basic_price}+'원'"></span>
+					</th:block>
 				</div>
-				<div class="data distance">
-					<span>*잔액이 부족합니다.</span><a class="price_data" th:href="@{/point/charge}">충전하기</a>
-				</div>
+
 				<hr/>
 				<p>*결제는 메타포인트만 가능합니다.</p>
 				<div id="btn">
@@ -158,7 +162,8 @@
 		</div>
 	
 		<script src="/metahaus/js/order/purchase.js"></script>
-		
+
 	</div><!-- layout:fragment -->
+	
 </body>
 </html>
