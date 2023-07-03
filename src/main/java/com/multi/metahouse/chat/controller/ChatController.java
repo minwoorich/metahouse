@@ -67,16 +67,11 @@ public class ChatController {
 	@ResponseBody
 	public Map<String, Object> loadChat(HttpSession session, int chatroomId, String loginUser) {
 		Map<String, Object> chatmsgJSON = new HashMap<>();
-
-//		User loginUser = (User)session.getAttribute("loginUser");
-//		System.out.println("loginUser : " + loginUser);
 		
-		chatmsgJSON.put("chatMsg", service.getChatMsgById(chatroomId));
 		// 채팅 메시지 콘텐츠 리스트
-		
+		chatmsgJSON.put("chatMsg", service.getChatMsgById(chatroomId));
+		// 상대방 프로필 리스트
 		chatmsgJSON.put("targetProfile", service.getProfileById(chatroomId, loginUser));
-		
-//		chatmsgJSON.put("loginUser", loginUser);
 		
 		return chatmsgJSON;
 	}

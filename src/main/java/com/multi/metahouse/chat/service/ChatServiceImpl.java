@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.multi.metahouse.chat.repository.dao.ChatDAO;
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
@@ -115,6 +116,16 @@ public class ChatServiceImpl implements ChatService {
 		return dao.updateLastChat(chatMsgDTO);
 	}
 	
+	/* 채팅 메시지 파일 저장 */
+	@Override
+	public int insertMessageFile(ChatMsgFileDTO chatMsgFileDTO) {
+		return dao.insertMessageFile(chatMsgFileDTO);
+	}
 	
+	/* message_id 얻기 위한 메소드 */
+	@Override
+	public int getLastInsertID() {
+		return dao.getLastInsertID();
+	}
 	
 }

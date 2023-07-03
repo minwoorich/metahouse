@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
@@ -75,8 +76,19 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 	
 	@Override
+	public int insertMessageFile(ChatMsgFileDTO chatMsgFileDTO) {
+		return sqlSession.insert("insertChatFileMsg", chatMsgFileDTO);
+	}
+	
+	@Override
 	public int updateLastChat(ChatMsgDTO chatMsgDTO) {
 		return sqlSession.update("updateLastChat", chatMsgDTO);
+	}
+	
+	/* message_id 얻기 위한 메소드 */
+	@Override
+	public int getLastInsertID() {
+		return sqlSession.selectOne("getLastInsertID");
 	}
     
 }
