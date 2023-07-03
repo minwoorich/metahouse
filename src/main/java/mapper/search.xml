@@ -5,12 +5,12 @@
 <mapper namespace="com.multi.metahouse.search">
 
   <sql id="field">
-    SELECT title, price, img, writer_id, rating, review_count, regdate, category, flag
+    SELECT title, price, img, writer_id, rating, review_count, regdate, category, flag , descr
   </sql>
 
   <sql id="filter">
     <where>
-      <if test="category != null">
+      <if test="category != 'all'">
         category = #{category}
       </if>
       <if test="keyword != null">
@@ -18,15 +18,15 @@
       </if>
     </where>
   </sql>
-
-  <select id="searchServiceByFilter" parameterType="searchfilter" resultType="serviceSearchResult">
-    <if test="option.equals('a') || option.equals('all')">
-      <include refid="field" />
+  
+  <sql id="serviceSearch">
+  <if test="option.equals('aa') or option.equals('all')">
+      
       FROM (
       SELECT a.title title, a.price price, a.main_img img, a.seller_id writer_id,
       (SELECT AVG(ar.rating) FROM asset_review ar WHERE a.asset_id = ar.asset_id) rating,
       (SELECT COUNT(ar.rating) FROM asset_review ar WHERE a.asset_id = ar.asset_id) review_count,
-      a.category1 category, a.asset_date regdate, 'a' flag
+      a.category1 category, a.asset_date regdate, 'a' flag , a.description descr
       FROM assets a
       ) a
       <include refid="filter" />
@@ -36,7 +36,7 @@
       UNION ALL
     </if>
 
-    <if test="option.equals('p') || option.equals('all')">
+    <if test="option.equals('pp') or option.equals('all')">
       <include refid="field" />
       FROM (
       SELECT p.title title,
@@ -46,26 +46,47 @@
       (SELECT COUNT(pr.rating) FROM project_review pr WHERE p.project_id = pr.project_id) review_count,
       p.category1 category,
       p.project_date regdate,
-      'p' flag
+      'p' flag , p.description descr
       FROM project p
       ) p
       <include refid="filter" />
     </if>
 
     <choose>
-      <when test="option.equals('rc')">
+      <when test="order.equals('rc')">
         ORDER BY regdate DESC
       </when>
-      <when test="option.equals('pd')">
+      <when test="order.equals('pd')">
         ORDER BY price DESC
       </when>
-      <when test="option.equals('pa')">
+      <when test="order.equals('pa')">
         ORDER BY price ASC
       </when>
-      <when test="option.equals('rd')">
+      <when test="order.equals('rd')">
         ORDER BY rating DESC
       </when>
     </choose>
+  </sql>
+
+  <select id="searchServiceByFilter" parameterType="searchfilter" resultType="serviceSearchResult">
+  	<include refid="field" />
+    <include refid="serviceSearch"></include>
+  </select>
+  
+  <select id="searchServiceByFilterCount" resultType="int" parameterType="searchfilter">
+  	select count(title)
+  		<include refid="serviceSearch"></include>
+  </select>
+  
+  
+  <select id="searchUser" parameterType="String" resultType="user">
+  	SELECT * FROM user
+	WHERE user_name LIKE CONCAT('%', #{keyword}, '%')
+  </select>
+  
+  <select id ="searchUserCount" parameterType="String" resultType="int">
+  	SELECT count(user_id) FROM user
+	WHERE user_name LIKE CONCAT('%', #{keyword}, '%')
   </select>
 
 </mapper>

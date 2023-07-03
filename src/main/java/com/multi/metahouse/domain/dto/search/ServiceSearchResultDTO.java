@@ -20,4 +20,5 @@ public class ServiceSearchResultDTO {
 	String regdate;
 	String category;
 	String flag;
+	String descr;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.search.SearchFilter;
 import com.multi.metahouse.domain.dto.search.ServiceSearchResultDTO;
+import com.multi.metahouse.domain.dto.user.UserDTO;
 
 import lombok.NoArgsConstructor;
 
@@ -25,6 +26,21 @@ public class SearchDAOImpl implements SearchDAO{
 	@Override
 	public List<ServiceSearchResultDTO> searchByFilter(SearchFilter filter) {
 		return ss.selectList("com.multi.metahouse.search.searchServiceByFilter", filter);
+	}
+
+	@Override
+	public List<UserDTO> searchUserByKeyword(String keyword) {
+		return ss.selectList("com.multi.metahouse.search.searchUser",keyword);
+	}
+
+	@Override
+	public int searchByFilterCount(SearchFilter filter) {
+		return ss.selectOne("com.multi.metahouse.search.searchServiceByFilter", filter);
+	}
+
+	@Override
+	public int searchUserByKeywordCount(String keyword) {
+		return ss.selectOne("com.multi.metahouse.search.searchUser",keyword);
 	}
 
 }

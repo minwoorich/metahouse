@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.multi.metahouse.domain.dto.search.SearchFilter;
 import com.multi.metahouse.domain.dto.search.ServiceSearchResultDTO;
+import com.multi.metahouse.domain.dto.user.UserDTO;
 import com.multi.metahouse.search.repository.dao.SearchDAO;
 
 import lombok.NoArgsConstructor;
@@ -30,6 +31,11 @@ public class SearchServiceImpl implements SearchService{
 	@Override
 	public List<ServiceSearchResultDTO> searchByFilter(SearchFilter filter) {
 		return dao.searchByFilter(filter);
+	}
+
+	@Override
+	public List<UserDTO> searchUserByKeyword(String keyword) {
+		return dao.searchUserByKeyword(keyword);
 	}
 
 }
