@@ -97,7 +97,7 @@ public class ChatHandler{
 		}else {
 			System.out.println("File 첨부 메시지 수신됨.");
 			fileIdx = 0;
-			
+			chatMsgFileList.clear();
 		}
 		
 	}
@@ -163,6 +163,7 @@ public class ChatHandler{
  			for(Session data:clientset) {
  				System.out.println("전송메세지:"+fileUploadSessionMsg);
  				data.getBasicRemote().sendText(fileUploadSessionMsg);
+ 				// 클라이언트 단에 파일 전송
 // 				for(ByteBuffer file:filelist) {
 // 					data.getBasicRemote().sendBinary(data);
 // 				}
