@@ -17,6 +17,7 @@ $(document).ready(function(){
 		$(".chat-main").attr("style", "display = flex;");
 
 		chatroomId = $(this).attr("id").replace("chatroom", "");
+		
 		loginUser = $("#loginUser").val();
 		
 		// 채팅방의 채팅 불러오기
@@ -83,6 +84,11 @@ $(document).ready(function(){
 						item += '</div></div></div>';
 						
 					$(".chat-body__chat-section").append(item);
+
+					// 최근 메시지 변경
+					chatroom = "chatroom" + chatroomId;
+					$("#"+chatroom).find(".last-chat").text(resmsg.message_content);
+					
 				}
 				
 				/* 채팅 스크롤 항상 아래로 */
