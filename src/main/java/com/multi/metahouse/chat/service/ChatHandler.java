@@ -88,22 +88,18 @@ public class ChatHandler{
 			// 수신 메시지 DB에 저장
 			insertChatMsg(chatMsg);
 			
+			//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
+			for(Session data:clientset) {
+				System.out.println("전송메세지:"+msg);
+				data.getBasicRemote().sendText(msg);
+			}
+			
 		}else {
 			System.out.println("File 첨부 메시지 수신됨.");
 			fileIdx = 0;
 			
-			// 수신 메시지 DB에 저장
-			////insertChatMsg(chatMsg);
-			
-			// 수신 메시지의 id값 DTO에 저장
-			////chatMsg.setMessage_id(service.getLastInsertID());
 		}
 		
-		//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
-		for(Session data:clientset) {
-			System.out.println("전송메세지:"+msg);
-			data.getBasicRemote().sendText(msg);
-		}
 	}
 	
 	@OnMessage
@@ -130,14 +126,6 @@ public class ChatHandler{
 		file.setFile_seq(fileIdx);
 		
 		chatMsgFileList.add(file);
-		
-		// 파일 정보 DB 저장
-		if(fileIdx+1 == chatMsg.getFilenamelist().size()) {
-			insertChatMsgFile(chatMsg, chatMsgFileList);
-		}
-		
-		// 파일 시퀀스 증가
-		fileIdx++;
 		
 		// 새 파일 생성 
 		File attachedFile = new File(FILE_PATH, filename);
@@ -166,6 +154,23 @@ public class ChatHandler{
             }
         }
         msg.position(0); //파일을 저장하면서 position값이 변경되었으므로 0으로 초기화한다.
+        
+        // 파일 정보 DB 저장
+ 		if(fileIdx+1 == chatMsg.getFilenamelist().size()) {
+ 			insertChatMsgFile(chatMsg, chatMsgFileList);
+ 			
+ 			//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
+ 			for(Session data:clientset) {
+ 				System.out.println("전송메세지:"+fileUploadSessionMsg);
+ 				data.getBasicRemote().sendText(fileUploadSessionMsg);
+// 				for(ByteBuffer file:filelist) {
+// 					data.getBasicRemote().sendBinary(data);
+// 				}
+ 			}
+ 		}
+ 		
+ 		// 파일 시퀀스 증가
+		fileIdx++;
 	}
 	
 	@OnClose
