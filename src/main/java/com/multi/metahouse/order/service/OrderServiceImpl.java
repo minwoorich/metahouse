@@ -29,38 +29,51 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	@Transactional
-	public void orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount) {
-		//에셋 주문내역 생성
-		dao.insertOrderA(assetOrder);
-		// 포인트 결제 내역생성
-		String consumeInfo = "Asset";
-		consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
-		pointDao.consumePoint(loginUser, consumeAmount);
-		pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
+	public int orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount) {
+		int payment = loginUser.getPoint()-consumeAmount;
+		int result = 0;
+		if(payment>=0) {
+			//에셋 주문내역 생성
+			dao.insertOrderA(assetOrder);
+			// 포인트 결제 내역생성
+			String consumeInfo = "Asset";
+			consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
+			pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
+			pointDao.consumePoint(loginUser, consumeAmount);
+			
+			result = 1;
+		}
 
+		return result;
 	}
 
 	@Override
 	@Transactional
-	public void orderP(ProjectOrdersDTO projectOrder, List<SelectedAddOptionDTO> options, User loginUser,
+	public int orderP(ProjectOrdersDTO projectOrder, List<SelectedAddOptionDTO> options, User loginUser,
 			int consumeAmount) {
-
-		// 주문내역 생성
-		dao.insertOrderP(projectOrder);
-		// 옵션내역 생성
-		for (int i = 0; i < options.size(); i++) {
-			options.get(i).setOrder_id(projectOrder.getOrder_id());
-			if (options.get(i).getAdd_option_id() != null) {
-				dao.insertOrderOption(options.get(i));
+		int payment = loginUser.getPoint()-consumeAmount;
+		int result = 0;
+		if(payment>=0) {
+			// 주문내역 생성
+			dao.insertOrderP(projectOrder);
+			// 옵션내역 생성
+			for (int i = 0; i < options.size(); i++) {
+				options.get(i).setOrder_id(projectOrder.getOrder_id());
+				if (options.get(i).getAdd_option_id() != null) {
+					dao.insertOrderOption(options.get(i));
+				}
 			}
+	
+			// 포인트 결제내역 생성
+			String consumeInfo = "PJT";
+			consumeInfo = consumeInfo.concat(projectOrder.getProject_id());
+			pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
+			pointDao.consumePoint(loginUser, consumeAmount);
+			
+			result = 1;
 		}
-
-		// 포인트 결제내역 생성
-		String consumeInfo = "PJT";
-		consumeInfo = consumeInfo.concat(projectOrder.getProject_id());
-		pointDao.consumePoint(loginUser, consumeAmount);
-		pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
-
+		
+		return result;
 	}
 
 }

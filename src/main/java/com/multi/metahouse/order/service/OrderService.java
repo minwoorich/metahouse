@@ -8,8 +8,8 @@ import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
 import com.multi.metahouse.domain.entity.user.User;
 
 public interface OrderService {
-	public void orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount);
+	public int orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount);
 
-	public void orderP(ProjectOrdersDTO projectOrder, List<SelectedAddOptionDTO> option, User loginUser,
+	public int orderP(ProjectOrdersDTO projectOrder, List<SelectedAddOptionDTO> option, User loginUser,
 			int consumeAmount);
 }

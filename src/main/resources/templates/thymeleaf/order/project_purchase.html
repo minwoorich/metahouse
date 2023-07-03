@@ -141,13 +141,16 @@
 				<hr/>
 				<div id="U_id" hidden="" th:value="${userInfo.userId}"></div>
 				<div class="data distance">
-					<span>보유 캐쉬</span><span class="price_data" th:text="${userInfo.point}+'원'"></span>
+					<span>보유 포인트</span><span class="price_data" id="myPoint" th:text="${userInfo.point}+'원'"></span>
 				</div>
 				<div class="data distance">
-					<span>결제 후 캐쉬</span><span class="price_data">70,000원</span>
+					<span>결제 후 포인트</span><span class="price_data">70,000원</span>
+				</div>
+				<div class="data distance">
+					<span>*잔액이 부족합니다.</span><a class="price_data" th:href="@{/point/charge}">충전하기</a>
 				</div>
 				<hr/>
-				<p>*결제는 메타캐시만 가능합니다.</p>
+				<p>*결제는 메타포인트만 가능합니다.</p>
 				<div id="btn">
 					<button class="button--large myBtn PjtBtn">구매하기</button>
 				</div>

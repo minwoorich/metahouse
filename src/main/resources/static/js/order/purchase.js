@@ -58,19 +58,29 @@ $(document).ready(function(){
     		},
     		"consumeAmount" : $("#consumeAmount").text().replace(/,/g, "")
     	}
-    	$.ajax({
-    		url : "/metahaus/order/asset",
-    		type : 'post',
-    		data : JSON.stringify(param),
-    		contentType: 'application/json',
-    		success : function() {
-    			alert("구매가 완료되었습니다.");
-    			location.href = "/metahaus/order/asset/buylist";
-    	     },
-    		error : function() {
-    			alert("error");
-    		}
-    	});
+    	var consumeAmount = parseInt($("#consumeAmount").text().replace(/,/g, ""));
+    	var myPoint =  parseInt($("#myPoint").text().replace(/,/g, ""));
+    	if(myPoint-consumeAmount>=0){
+	    	$.ajax({
+	    		url : "/metahaus/order/asset",
+	    		type : 'post',
+	    		data : JSON.stringify(param),
+	    		contentType: 'application/json',
+	    		success : function(data) {
+	    			if(data==1){
+		    			alert("구매가 완료되었습니다.");
+		    			location.href = "/metahaus/order/asset/buylist";
+	    			}else{
+						alert("결제에 실패했습니다. 잔액을 확인해주세요");
+	    			}
+	    	     },
+	    		error : function() {
+	    			alert("error");
+	    		}
+	    	});
+    	}else{
+    		alert("잔액이 부족합니다.")
+    	}    	
     });
 /*------------------------------- 프로젝트 구매 가격 자동계산+구매완료 -----------------------------*/   
 	var SP = $("#select_price span").text();
@@ -186,19 +196,30 @@ $(document).ready(function(){
     				 ],
     				 "consumeAmount" : parseInt(SP)+parseInt(totalAddprice)
     				}
-    	$.ajax({
-    		url : "/metahaus/order/project",
-    		type : 'post',
-    		data : JSON.stringify(param),
-    		contentType: 'application/json',
-    		success : function() {
-    			alert("구매가 완료되었습니다.");
-    			location.href = "/metahaus/order/project/buylist";
-    		},
-    		error : function() {
-    			alert("error");
-    		}
-    	});
+    	var myPoint =  parseInt($("#myPoint").text());
+    	
+    	if(myPoint-(parseInt(SP)+parseInt(totalAddprice))>=0){
+    		$.ajax({
+    			url : "/metahaus/order/project",
+    			type : 'post',
+    			data : JSON.stringify(param),
+    			contentType: 'application/json',
+    			success : function(data) {
+    				if(data==1){
+	    				alert("구매가 완료되었습니다.");
+	    				location.href = "/metahaus/order/project/buylist";
+    				}else {
+						alert("결제에 실패했습니다. 잔액을 확인해주세요");
+					}
+    			},
+    			error : function() {
+    				alert("error");
+    			}
+    		});
+    	}else{
+    		alert("잔액이 부족합니다.")
+    	}
+    		
     });
     
 })
