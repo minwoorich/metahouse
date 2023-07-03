@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
@@ -27,6 +28,11 @@ public interface ChatService {
     
     // 채팅 메시지 저장
     int insertMessage(ChatMsgDTO chatMsgDTO);
+    // 채팅 메시지 파일 저장
+	int insertMessageFile(ChatMsgFileDTO chatMsgFileDTO);
+	
+	// message_id 얻기 위한 메소드
+	int getLastInsertID();
     
 }
 
