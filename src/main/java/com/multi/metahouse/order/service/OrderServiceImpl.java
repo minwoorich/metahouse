@@ -21,46 +21,45 @@ public class OrderServiceImpl implements OrderService {
 	PointDAO pointDao;
 
 	@Autowired
-	public OrderServiceImpl(OrderDAO dao) {
+	public OrderServiceImpl(OrderDAO dao, PointDAO pointDao) {
 		super();
 		this.dao = dao;
+		this.pointDao = pointDao;
 	}
 
 	@Override
 	@Transactional
-	public int orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount) {
-		int resultA = dao.insertOrderA(assetOrder);
-		//포인트 결제 내역생성
+	public void orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount) {
+		//에셋 주문내역 생성
+		dao.insertOrderA(assetOrder);
+		// 포인트 결제 내역생성
 		String consumeInfo = "Asset";
 		consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
 		pointDao.consumePoint(loginUser, consumeAmount);
 		pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
-		return resultA; 
 
 	}
 
 	@Override
 	@Transactional
-	public int orderP(ProjectOrdersDTO projectOrder, List<SelectedAddOptionDTO> options, User loginUser,
+	public void orderP(ProjectOrdersDTO projectOrder, List<SelectedAddOptionDTO> options, User loginUser,
 			int consumeAmount) {
+
 		// 주문내역 생성
-		int resultP = dao.insertOrderP(projectOrder);
+		dao.insertOrderP(projectOrder);
 		// 옵션내역 생성
-		int resultO = 0;
 		for (int i = 0; i < options.size(); i++) {
 			options.get(i).setOrder_id(projectOrder.getOrder_id());
 			if (options.get(i).getAdd_option_id() != null) {
 				dao.insertOrderOption(options.get(i));
-				resultO++;
 			}
 		}
+
 		// 포인트 결제내역 생성
 		String consumeInfo = "PJT";
 		consumeInfo = consumeInfo.concat(projectOrder.getProject_id());
 		pointDao.consumePoint(loginUser, consumeAmount);
 		pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
-
-		return resultP + resultO;
 
 	}
 

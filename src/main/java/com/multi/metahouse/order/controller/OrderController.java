@@ -105,14 +105,8 @@ public class OrderController {
 			SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
 			options.add(option);
 		}
-		// int result = orderService.orderP(projectOrder, options, loginUser,
-		// consumeAmount);
-
-		System.out.println("주문내역" + projectOrder);
-		System.out.println("추가옵션" + options);
-		System.out.println("구매자" + loginUser);
-		System.out.println("결제금액" + consumeAmount);
-		// System.out.println("결과" + result);
+		//내역 생성
+		orderService.orderP(projectOrder, options, loginUser, consumeAmount);
 
 	}
 }
