@@ -1,6 +1,5 @@
 package com.multi.metahouse.domain.entity.project;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,32 +7,29 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
-
 import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
-import com.multi.metahouse.domain.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "project")
 public class ProjectEntity {
@@ -54,26 +50,27 @@ public class ProjectEntity {
 	private String category2Pj;
 	private String thumbnail;
 	
-////////////////////외래키들////////////////////
-//	@ManyToOne
-//	@JoinColumn(name = "creator_id")
-//	private String creatorId;
-	
-////////////////////////////////////////////////////////////////////////////////////
-	@OneToOne(cascade = CascadeType.ALL,  mappedBy = "projectId")
-	private ProjectPackageSingleEntity singleEntity = new ProjectPackageSingleEntity();
 
-	@OneToOne(cascade = CascadeType.ALL,  mappedBy = "projectId")
-	private ProjectPackageTripleEntity tripleEntity = new ProjectPackageTripleEntity();
+////////////////자식 참조하기///////////////////////////////////////////////////////
+	//양방향
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "projectId")
+	private ProjectPackageSingleEntity singleEntity = new ProjectPackageSingleEntity(); 
+
+	//양방향
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "projectId" )
+	private ProjectPackageTripleEntity tripleEntity = new ProjectPackageTripleEntity(); 
 	
+	//양방향
 	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL,  mappedBy = "projectId")
 	private List<AddOptionEntity> addOptionEntityList = new ArrayList<>();
 	
+	//양방향
 	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "projectId")
 	private List<ProjectContentsEntity> projectContentsEntityList = new ArrayList<>();
 	
+	//단방향
 	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL,  mappedBy = "projectId")
 	private List<ProjectReviewEntity> reviewEntityList = new ArrayList<>();

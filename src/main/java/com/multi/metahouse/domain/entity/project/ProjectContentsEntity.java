@@ -19,13 +19,18 @@ import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString(exclude="projectId")
 @Entity
 @Table(name="project_content")
 public class ProjectContentsEntity {

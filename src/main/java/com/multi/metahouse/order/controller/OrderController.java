@@ -1,7 +1,6 @@
 package com.multi.metahouse.order.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,16 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
 import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
+import com.multi.metahouse.domain.entity.project.jpadto.ProjectOrdersResponse;
 import com.multi.metahouse.domain.entity.user.User;
-import com.multi.metahouse.order.service.AssetCategoryService;
 import com.multi.metahouse.order.service.OrderService;
 import com.multi.metahouse.point.service.PointService;
 
@@ -32,22 +29,35 @@ import com.multi.metahouse.point.service.PointService;
 @RequestMapping("/order")
 public class OrderController {
 
-	AssetCategoryService service;
 	OrderService orderService;
 	PointService pointService;
 
 	@Autowired
-	public OrderController(AssetCategoryService service, OrderService orderService) {
+	public OrderController(OrderService orderService) {
 		super();
-		this.service = service;
 		this.orderService = orderService;
 	}
 
 	// project 구매 관리
-	@GetMapping("/project/buylist")
-	public String projectBuylist() {
-		return "order/project_buylist";
-	}
+		@GetMapping("/project/buylist")
+		public String projectBuylist(Model model, HttpSession session) {
+			try {
+				if(session.getAttribute("loginUser")!=null) {
+					User user = (User)session.getAttribute("loginUser");
+					List<ProjectOrdersResponse.BuyerResponse> orderList = orderService.selectOrderListForBuyerByUserId(user.getUserId());
+					model.addAttribute("orderList",orderList);
+					return "order/project_buylist";
+				}else {
+					return "redirect:/login";
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("/project/buylist/ -> 에러발생");
+				e.printStackTrace();
+				return "redirect:/login";
+			}
+		}
+
 
 	// project 판매 관리
 	@GetMapping("/project/saleslist")
