@@ -1,5 +1,6 @@
 package com.multi.metahouse.order.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
@@ -15,6 +16,17 @@ public interface OrderService {
 			int consumeAmount);
 	
 	/* ------------------- 민우-------------- */
-	List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyerByUserId(String buyerId);
-	List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId);
+//	List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyerByUserId(String buyerId);
+	List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(
+			String buyerId, int pageNo);
+	List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(
+			String buyerId, 
+			String category1, 
+			String category2, 
+			String category3,
+			LocalDateTime category4, 
+			LocalDateTime category5, 
+			int pageNo);
+//	List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId);
+	List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId, int pageNo);
 }

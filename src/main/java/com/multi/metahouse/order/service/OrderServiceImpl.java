@@ -1,9 +1,12 @@
 package com.multi.metahouse.order.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,17 +19,20 @@ import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectOrdersResponse;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.order.repository.dao.OrderDAO;
+import com.multi.metahouse.order.repository.jpa.ProjectOrdersRepository;
 import com.multi.metahouse.point.repository.dao.PointDAO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 	OrderDAO dao;
 	PointDAO pointDao;
+	ProjectOrdersRepository projectOrderRepository;
 
 	@Autowired
-	public OrderServiceImpl(OrderDAO dao) {
+	public OrderServiceImpl(OrderDAO dao, ProjectOrdersRepository projectOrderRepository) {
 		super();
 		this.dao = dao;
+		this.projectOrderRepository = projectOrderRepository;
 	}
 
 	@Override
@@ -69,6 +75,7 @@ public class OrderServiceImpl implements OrderService {
 
 	/*---------------------- 민우 영역 ----------------------------- */
 
+	
 	private String getTotalPrice(ProjectOrdersEntity entity) {
 		int optionPriceSum = 0;
 		if (entity.getProjectId().getAddOptionEntityList() != null) {
@@ -107,10 +114,76 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 	}
+	
+	@Override
+	public List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(String buyerId,int pageNo){
+		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"orderCommitDate"));
+		List<ProjectOrdersEntity> orderList = projectOrderRepository.findAllByBuyerId(pageRequest, buyerId);
+		
+		List<ProjectOrdersResponse.BuyerResponse> requestOrderList = new ArrayList<>();
+		
+		for (ProjectOrdersEntity entity : orderList) {
+			if("주문대기중".equals(entity.getOrderStatus()) || "주문취소".equals(entity.getOrderStatus())) {
+				requestOrderList.add(
+						new ProjectOrdersResponse.BuyerResponse(
+								entity, 
+								getTotalPrice(entity), 
+								getPackageType(entity),
+								null,
+								null));
+			}else if("진행중".equals(entity.getOrderStatus())){
+				requestOrderList.add(
+						new ProjectOrdersResponse.BuyerResponse(
+								entity, 
+								getTotalPrice(entity), 
+								getPackageType(entity),
+								entity.getOrderDetail().getOrderDate(),
+								null));
+			}else {//"구매확정"
+				System.out.println("------------------");
+				System.out.println("주문완료일시 : " + entity.getOrderDetail().getCompletionDate());
+				requestOrderList.add(
+						new ProjectOrdersResponse.BuyerResponse(
+								entity, 
+								getTotalPrice(entity), 
+								getPackageType(entity),
+								entity.getOrderDetail().getOrderDate(),
+								entity.getOrderDetail().getCompletionDate()));
+			}
+		}
+		
+		return requestOrderList;
+	}
 
 	@Override
-	public List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyerByUserId(String buyerId) {
-		List<ProjectOrdersEntity> orderList = dao.findAllProjectOrders(buyerId);
+	public List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(
+			String buyerId,
+			String category1,
+			String category2,
+			String category3, 
+			LocalDateTime category4, 
+			LocalDateTime category5, int pageNo) {
+		List<ProjectOrdersEntity> orderList = null;
+		
+		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"orderCommitDate"));
+		if("all".equals(category1)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1(pageRequest, buyerId, category2, category3, category4, category5);
+		}else if("all".equals(category2)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC2(pageRequest, buyerId, category1, category3, category4, category5);
+		}else if("all".equals(category3)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC3(pageRequest, buyerId, category1, category2, category4, category5);
+		}else if("all".equals(category1) && "all".equals(category2)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC2(pageRequest, buyerId, category3, category4, category5);
+		}else if("all".equals(category1) && "all".equals(category3)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC3(pageRequest, buyerId, category2, category4, category5);
+		}else if("all".equals(category2) && "all".equals(category3)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC2AndC3(pageRequest, buyerId, category1, category4, category5);
+		}else if("all".equals(category1) && "all".equals(category2) && "all".equals(category3)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC2AndC3(pageRequest, buyerId, category4, category5);
+		}else {
+			orderList = projectOrderRepository.selectOrderForBuyer(pageRequest, buyerId, category1, category2, category3, category4, category5);
+		}
+		
 //		 // 엔티티 잘 받아 오는지 확인
 		for(ProjectOrdersEntity entity : orderList) {
 			System.out.println("entity : " + entity);
@@ -147,19 +220,16 @@ public class OrderServiceImpl implements OrderService {
 								entity.getOrderDetail().getOrderDate(),
 								entity.getOrderDetail().getCompletionDate()));
 			}
-			
 		}
 		// 엔티티에서 DTO로 잘 데이터 넘겼는지 확인
 		for (ProjectOrdersResponse.BuyerResponse resp : requestOrderList) {
 			System.out.println("resp : " + resp);
 		}
-
-		
 		return requestOrderList;
 	}
 
 	@Override
-	public List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId) {
+	public List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId, int pageNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,6 +3,7 @@ package com.multi.metahouse.domain.entity.project.jpadto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Map;
 
 import com.multi.metahouse.domain.entity.order.ProjectOrdersEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
@@ -29,6 +30,7 @@ public class ProjectOrdersResponse {
 		private String totalPrice;
 		private String packageType;
 		private OrderedProjectDto project;
+//		private Map<String,Integer> statusCount;
 		
 		public BuyerResponse(ProjectOrdersEntity order, String totalPrice, String packageType, LocalDateTime orderDate, LocalDateTime completionDate) {
 			this.orderId = order.getOrderId();
@@ -42,6 +44,8 @@ public class ProjectOrdersResponse {
 			this.packageType = packageType;
 			this.orderDate = (orderDate!=null)? orderDate:LocalDateTime.of(9999,12,31,23,59,59,0);
 			this.completionDate = (completionDate!=null)? completionDate:LocalDateTime.of(9999,12,31,23,59,59,0);
+			
+			
 		}
 	}
 	

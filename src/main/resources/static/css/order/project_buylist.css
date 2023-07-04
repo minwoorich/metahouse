@@ -147,7 +147,7 @@ select {
 }
 
 .search-box:hover {
-	cursor: text;
+	cursor: pointer;
 	background-color: rgba(141,114,225,0.1);
 	transition: 0.5s;
 }
@@ -168,6 +168,9 @@ select {
 	background-size: 12px;
 }
   
+ .project-search-bar:hover{
+ 	cursor: text;
+ }
 .category04 {
 	display: flex;
 	flex-direction: row;
@@ -187,7 +190,7 @@ select {
 .project-search-form-row02 {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: end;
 	margin-bottom: 50px;
 }
 
@@ -199,7 +202,7 @@ select {
 
 .search-button {
 	width: 80px;
-	height: 50px;
+	height: 40px;
 	padding-inline: 5px;
 }
 
@@ -252,6 +255,7 @@ select {
 	padding: 30px;
 	border: 1px solid var( --bright-purple);
 	border-radius: 8px;
+	margin-bottom : 30px;
 }
 
 .project-body-card:not(:last-child) {
@@ -297,7 +301,7 @@ select {
 	width:auto;
 	display: flex;
 	flex-direction: row;
-	/* justify-content: space-between; */
+	justify-content: space-between;
 }
 
 .project-body-tag-img {
@@ -315,9 +319,10 @@ select {
 }
 
 .project-body-tag-info {
-	width:auto;
+	width:400px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 }
 
 .project-body-tag-info-row01 {
@@ -393,6 +398,10 @@ button:active {
 
 .project-body-tip li {
 	list-style: disc;
+}
+
+.pagination li{
+	background-color: rgba(141,114,225,0.3);
 }
 
 /* 뷰에서 생략 */

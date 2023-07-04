@@ -14,5 +14,4 @@ public interface OrderDAO {
 	public int insertOrderOption(SelectedAddOptionDTO option);
 	
 	/* ------------------------- 민우 영역 --------------------------- */
-	List<ProjectOrdersEntity> findAllProjectOrders(String buyerId);
 }
