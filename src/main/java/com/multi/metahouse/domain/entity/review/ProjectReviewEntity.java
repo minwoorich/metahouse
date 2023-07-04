@@ -31,12 +31,17 @@ import com.multi.metahouse.domain.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "project_review")
 public class ProjectReviewEntity {
@@ -56,23 +61,15 @@ public class ProjectReviewEntity {
 	private LocalDateTime reviewDate;
 	/////////////////////////////////////
 	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "project_order_id")
-//	private ProjectOrdersEntity projectOrderId;
-//	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "writer_id")
-//	private User writerId;
-//	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "project_id")
-//	private ProjectEntity projectId;
 	
-	//////////////////////////////////////////////////////////////
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "projectReviewId")
+	/////자식 훔쳐보기///////////////////////////////////////////
+	//양방향
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "projectReviewId" )
 	private ProjectReviewCommentEntity reviewCommentEntity; 
 	
+	//단방향
 	@Builder.Default
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "projectReviewId")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "project_review_id", referencedColumnName = "project_review_id")
 	List<ProjectReviewContentsEntity> reviewContentsEntityList = new ArrayList<>();
 }

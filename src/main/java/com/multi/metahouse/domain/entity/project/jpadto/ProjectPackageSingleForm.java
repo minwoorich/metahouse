@@ -8,9 +8,10 @@ import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageSingleEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,6 +32,16 @@ public class ProjectPackageSingleForm implements ProjectPackageForm{
 				.pkgDescription(pkg_description)
 				.revision(Integer.parseInt(revision))
 				.workdays(Integer.parseInt(workdays))
+				.build();
+	}
+	
+	public ProjectPackageSingleForm fromEntity(ProjectPackageSingleEntity entity) {
+		return ProjectPackageSingleForm.builder()
+				.add_option_id(entity.getProjectPackageSingleId().intValue())
+				.pkg_description(entity.getPkgDescription())
+				.price(entity.getPrice()+"")
+				.revision(entity.getRevision()+"")
+				.workdays(entity.getWorkdays()+"")
 				.build();
 	}
 }

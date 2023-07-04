@@ -44,12 +44,19 @@ public class ProjectOrdersEntity {
 	private String request;
 	private int orderPrice;
 
-	///// ONE_TO_MANY/////////자식 훔쳐보기/////////////////////////////////////////
+	///////////////////////////부모 참조하기//////////////////
+	//단방향
+	@ManyToOne
+	@JoinColumn(name="project_id")
+	ProjectEntity projectId;
+	
+	//////////////자식 참조하기/////////////////////////////////////////
+	//양방향
 	@Builder.Default
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "orderId")
 	private ProjectOrdersDetailEntity orderDetail = new ProjectOrdersDetailEntity();
 
+	//양방향
 	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
@@ -57,14 +64,10 @@ public class ProjectOrdersEntity {
 	
 	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
+	@JoinColumn(name = "project_order_id", referencedColumnName = "order_id")
 	private List<ProjectReviewEntity> reviewList = new ArrayList<>();
 	
 
-	/////MANY_TO_ONE//////////부모 훔쳐보기///////////////////////////////////////
-	@ManyToOne
-	@JoinColumn(name = "project_id")
-	private ProjectEntity projectId;
 	
 
 }

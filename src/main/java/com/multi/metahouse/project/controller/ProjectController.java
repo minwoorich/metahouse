@@ -122,6 +122,10 @@ public class ProjectController {
 		if(session.getAttribute("loginUser")!=null) {
 			User user = (User)session.getAttribute("loginUser");
 			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
+			for(ProjectListDTO project : projectList) {
+				System.out.println("리스트--------"+project);				
+			}
+
 			model.addAttribute("projectList", projectList);
 			
 			return "project/project_product_list";
@@ -132,10 +136,7 @@ public class ProjectController {
 
 	@PostMapping("project/delete-product")
 	public String deleteProduct(Long project_id) {
-		System.out.println("전달받은 id값 : " + project_id);
-		System.out.println("프로젝트 삭제");
 		projectService.deleteProject(project_id);
-		System.out.println();
 		return "redirect:/project/my-products";
 	}
 
@@ -149,7 +150,7 @@ public class ProjectController {
 	// 패키지 + 추가옵션 설정하는 페이지 반환
 	@GetMapping("project/forms/packages")
 	public String writePakcageForm(HttpSession session) {
-		System.out.println("session : " + session.getAttribute("projectForm"));
+//		System.out.println("session : " + session.getAttribute("projectForm"));
 		return "project/projectform02";
 	}
 
@@ -177,7 +178,7 @@ public class ProjectController {
 
 		// 세션 저장
 		session.setAttribute("projectForm", projectForm);
-		System.out.println("-------------projectForm.description : " + projectForm.getDescription());
+//		System.out.println("-------------projectForm.description : " + projectForm.getDescription());
 		return "/metahaus/project/forms/packages";
 	}
 
@@ -199,8 +200,6 @@ public class ProjectController {
 	public String saveIntoSessionAjax(@RequestBody ProjectPackageTripleForm projectPackageTripleForm,
 			HttpSession session) {
 
-		// 세션 초기화(projectPackageTripleForm 데이터 세션에서 삭제)
-//		session.removeAttribute("projectPackageTripleForm");
 		// 세션 저장
 		session.setAttribute("projectPackageTripleForm", projectPackageTripleForm);
 
@@ -239,13 +238,7 @@ public class ProjectController {
 			List<MultipartFile> detailImages = projectForm.getDetailImages(); // 상세이미지들 업로드
 			contentsList = fileService.uploadFiles(detailImages, path);
 		}
-		System.out.println("projectFormDto : " + projectForm);
-		System.out.println("packageFormDto : " + packageFormDto);
-		System.out.println("thumbnailPath : " + thumbnailPath);
-		for (ProjectContentsDTO dto : contentsList) {
-			System.out.println("content : " + dto);
-		}
-
+		
 		// 서비스 호출
 		projectService.insertProjectInfo(projectForm, packageFormDto, thumbnailPath, contentsList);
 

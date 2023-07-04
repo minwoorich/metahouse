@@ -14,12 +14,17 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString(exclude = "projectId")
 @Entity
 @Table(name="add_option")
 public class AddOptionEntity {
@@ -32,7 +37,8 @@ public class AddOptionEntity {
 	private int addOptionPrice;
 	private String addOptionDescription;
 	
-	///////////////외래키////////////////////////////////
+	///////////////부모 참조////////////////////////////////
+	//양방향
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="project_id")
 	private ProjectEntity projectId;

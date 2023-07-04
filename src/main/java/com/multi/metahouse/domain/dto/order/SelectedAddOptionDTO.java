@@ -15,5 +15,4 @@ public class SelectedAddOptionDTO {
 	private String order_id;
 	private String add_option_id;
 	private String count;
-
 }
