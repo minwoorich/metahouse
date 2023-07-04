@@ -1,12 +1,14 @@
 package com.multi.metahouse.user.repository.dao;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.multi.metahouse.domain.dto.search.UserSearchResultDTO;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.user.repository.jpa.UserRepository;
 
@@ -14,11 +16,13 @@ import com.multi.metahouse.user.repository.jpa.UserRepository;
 @Repository
 public class UserDAOImpl implements UserDAO {
 	UserRepository repository;
+	SqlSession ss;
 	
 	@Autowired
-	public UserDAOImpl(UserRepository repository) {
+	public UserDAOImpl(UserRepository repository , SqlSession ss) {
 		super();
 		this.repository = repository;
+		this.ss = ss;
 	}
 
 	@Override
@@ -61,5 +65,21 @@ public class UserDAOImpl implements UserDAO {
 	public User read(String userId) {
 		return repository.findByUserId(userId);
 	}
+
+	@Override
+	public Page<User> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
+	}
+
+	@Override
+	public List<User> findByUserIdLike(String keyword) {
+		return repository.findByUserIdLike(keyword);
+	}
+
+	@Override
+	public int user_update(UserSearchResultDTO user) {
+		return ss.update("com.multi.metahouse.member.updateUser", user);
+	}
+	
 
 }

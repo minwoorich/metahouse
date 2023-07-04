@@ -29,13 +29,10 @@ public class UserSearchResultDTO {
 	private String password;
 	private String phone_number;
 	private String gender;
-	@JsonFormat(pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date birth;
+	private String birth;
 	private String self_introduction;
-	@JsonFormat(pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date create_date;
-	@JsonFormat(pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date last_login_date;
+	private String create_date;
+	private String last_login_date;
 	private String user_grade;
 	private int mk_agree;
 	private int point;
