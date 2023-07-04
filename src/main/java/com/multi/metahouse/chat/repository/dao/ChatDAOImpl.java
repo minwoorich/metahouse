@@ -1,14 +1,14 @@
 package com.multi.metahouse.chat.repository.dao;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
@@ -24,10 +24,19 @@ public class ChatDAOImpl implements ChatDAO {
     
 	/* 채팅방 생성 */
     @Override
-    public void insertChatroom(ChatroomDTO chatroomDTO) {
+    public void createChatroom(String user_1_id, String user_2_id) {
+    	ChatroomDTO chatroomDTO = new ChatroomDTO(user_1_id, user_2_id);
+    	chatroomDTO.setOpen_date(new Date());
         sqlSession.insert("insertChatroom", chatroomDTO);
     }
-
+    
+	/* 채팅방 중복 체크 */
+    @Override
+    public int checkChatroom(String user_1_id, String user_2_id) {
+    	ChatroomDTO chatroomDTO = new ChatroomDTO(user_1_id, user_2_id);
+    	return sqlSession.selectOne("checkChatroom", chatroomDTO);
+    }
+    
     /* 채팅방 삭제 */
     @Override
     public void deleteChatroom(String targetId) {
@@ -64,6 +73,22 @@ public class ChatDAOImpl implements ChatDAO {
 	@Override
 	public int insertMessage(ChatMsgDTO chatMsgDTO) {
 		return sqlSession.insert("insertChatMsg", chatMsgDTO);
+	}
+	
+	@Override
+	public int insertMessageFile(ChatMsgFileDTO chatMsgFileDTO) {
+		return sqlSession.insert("insertChatFileMsg", chatMsgFileDTO);
+	}
+	
+	@Override
+	public int updateLastChat(ChatMsgDTO chatMsgDTO) {
+		return sqlSession.update("updateLastChat", chatMsgDTO);
+	}
+	
+	/* message_id 얻기 위한 메소드 */
+	@Override
+	public int getLastInsertID() {
+		return sqlSession.selectOne("getLastInsertID");
 	}
     
 }

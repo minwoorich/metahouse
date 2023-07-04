@@ -56,7 +56,7 @@
 			 <tr th:each="project, i:${projectlist}"  th:if="${i.index%4==0}">
 				<!-- Product1 -->
 					<td th:if="${i.index < i.size}" >
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projectlist[i.index].projectId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${projectlist[i.index].thumbnail != null}"
 									 th:src="@{/upload/project_thumbnail_img/}+${projectlist[i.index].thumbnail}"/>
@@ -75,9 +75,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${projectlist[i.index].title}" 
-									th:href="@{/project/detail(projectNum=${projectlist[i.index].projectId})}" 
-									class="product_title"></a>
+								<a th:text="${projectlist[i.index].title}" class="product_title"></a>
 								<span th:text="${projectlist[i.index].creatorId}" class="product_seller"></span> 
 <!-- 								<span th:text="${projectlist[i.index].price}+원" class="product_price"></span>
  -->							</div>
@@ -85,7 +83,7 @@
 					</td>
 				<!-- Product2 -->
 					<td th:if="${i.index < i.size}" >
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projectlist[i.index+1].projectId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${projectlist[i.index+1].thumbnail != null}"
 									 th:src="@{/upload/project_thumbnail_img/}+${projectlist[i.index+1].thumbnail}"/>
@@ -104,9 +102,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${projectlist[i.index+1].title}" 
-									th:href="@{/project/detail(projectNum=${projectlist[i.index+1].projectId})}" 
-									class="product_title"></a>
+								<a th:text="${projectlist[i.index+1].title}" class="product_title"></a>
 								<span th:text="${projectlist[i.index+1].creatorId}" class="product_seller"></span> 
 								<!-- <span th:text="${projectlist[i.index+1].price}+원" class="product_price"></span> -->
 							</div>
@@ -114,7 +110,7 @@
 					</td>
 				<!-- Product3 -->
 		 			<td th:if="${i.index < i.size}" >
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projectlist[i.index+2].projectId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${projectlist[i.index+2].thumbnail != null}"
 									 th:src="@{/upload/project_thumbnail_img/}+${projectlist[i.index+2].thumbnail}"/>
@@ -133,9 +129,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${projectlist[i.index+2].title}" 
-									th:href="@{/project/detail(projectNum=${projectlist[i.index+2].projectId})}" 
-									class="product_title"></a>
+								<a th:text="${projectlist[i.index+2].title}" class="product_title"></a>
 								<span th:text="${projectlist[i.index+2].creatorId}" class="product_seller"></span> 
 								<!-- <span th:text="${projectlist[i.index+2].price}+원" class="product_price"></span> -->
 							</div>
@@ -143,7 +137,7 @@
 					</td>
 				<!-- Product4 -->
 					 <td th:if="${i.index < i.size}" >
-						<div class="product">
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projectlist[i.index+3].projectId})}'|">
 							<div class="product_img_cover">
 								<img class="product_img" th:if="${projectlist[i.index+3].thumbnail != null}"
 									 th:src="@{/upload/project_thumbnail_img/}+${projectlist[i.index+3].thumbnail}"/>
@@ -162,9 +156,7 @@
 									</div>
 									<span>&ensp;(37)</span>
 								</div>								
-								<a th:text="${projectlist[i.index+3].title}" 
-									th:href="@{/project/detail(projectNum=${projectlist[i.index+3].projectId})}" 
-									class="product_title"></a>
+								<a th:text="${projectlist[i.index+3].title}" class="product_title"></a>
 								<span th:text="${projectlist[i.index+3].creatorId}" class="product_seller"></span> 
 								<!-- <span th:text="${projectlist[i.index+3].price}+원" class="product_price"></span> -->
 							</div>
@@ -175,7 +167,7 @@
 			</table>
 			
 			<!-- 페이지 번호 -->
-<!--			<div class="page_wrap">
+<!--		<div class="page_wrap">
 				<div class="page_nation" th:with="start=${(pjPage.number/maxPage)*maxPage + 1},
 					 end=(${(pjPage.totalPages == 0) ? 1 : (start + (maxPage - 1) < pjPage.totalPages ? start + (maxPage - 1) : pjPage.totalPages)}),
 					 nowPage=${pjPage.number+1}">

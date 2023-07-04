@@ -23,12 +23,14 @@ import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectOrdersResponse;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.order.service.OrderService;
+import com.multi.metahouse.point.service.PointService;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
 
 	OrderService orderService;
+	PointService pointService;
 
 	@Autowired
 	public OrderController(OrderService orderService) {
@@ -37,24 +39,25 @@ public class OrderController {
 	}
 
 	// project 구매 관리
-	@GetMapping("/project/buylist")
-	public String projectBuylist(Model model, HttpSession session) {
-		try {
-			if(session.getAttribute("loginUser")!=null) {
-				User user = (User)session.getAttribute("loginUser");
-				List<ProjectOrdersResponse.BuyerResponse> orderList = orderService.selectOrderListForBuyerByUserId(user.getUserId());
-				model.addAttribute("orderList",orderList);
-				return "order/project_buylist";
-			}else {
+		@GetMapping("/project/buylist")
+		public String projectBuylist(Model model, HttpSession session) {
+			try {
+				if(session.getAttribute("loginUser")!=null) {
+					User user = (User)session.getAttribute("loginUser");
+					List<ProjectOrdersResponse.BuyerResponse> orderList = orderService.selectOrderListForBuyerByUserId(user.getUserId());
+					model.addAttribute("orderList",orderList);
+					return "order/project_buylist";
+				}else {
+					return "redirect:/login";
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("/project/buylist/ -> 에러발생");
+				e.printStackTrace();
 				return "redirect:/login";
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("/project/buylist/ -> 에러발생");
-			e.printStackTrace();
-			return "redirect:/login";
 		}
-	}
+
 
 	// project 판매 관리
 	@GetMapping("/project/saleslist")
@@ -79,34 +82,47 @@ public class OrderController {
 		return null;
 	}
 
-/*----------------------------------- OSE ------------------------------------*/
+	/*----------------------------------- OSE ------------------------------------*/
 //	ajax-asset 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/asset")
 	@ResponseBody
-	public void orderA(@RequestBody AssetOrdersDTO assetOrder) {
+	public void orderA(@RequestBody ObjectNode saveObj, HttpSession session)
+			throws JsonProcessingException, IllegalArgumentException {
+		User loginUser = (User) session.getAttribute("loginUser");
+		ObjectMapper mapper = new ObjectMapper();
+		AssetOrdersDTO assetOrder = mapper.treeToValue(saveObj.get("assetOrder"), AssetOrdersDTO.class);
+		int consumeAmount = mapper.treeToValue(saveObj.get("consumeAmount"), Integer.TYPE);
 		System.out.println(assetOrder);
-		orderService.orderA(assetOrder);
+		System.out.println(consumeAmount);
+		orderService.orderA(assetOrder, loginUser, consumeAmount);
 	}
-	
+
 //	ajax-project 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/project")
 	@ResponseBody
-	public void orderP(@RequestBody ObjectNode saveObj) throws JsonProcessingException, IllegalArgumentException {
-		 ObjectMapper mapper = new ObjectMapper();
-		 ProjectOrdersDTO projectOrder = mapper.treeToValue(saveObj.get("projectOrder"), ProjectOrdersDTO.class);
-		 List<SelectedAddOptionDTO> options = new ArrayList<SelectedAddOptionDTO>();
-		 JsonNode JsonOptions = saveObj.get("options");
-		 
-		 for(int i=0; i<JsonOptions.size(); i++){
-				JsonNode json = mapper.createObjectNode();
-				json = JsonOptions.get(i);
-				SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
-				options.add(option);
-			}
-		 int result = orderService.orderP(projectOrder, options);
-		 
-		 System.out.println("주문내역"+projectOrder);
-		 System.out.println("추가옵션"+options);
-		 System.out.println("생성결과"+result);
+	public void orderP(@RequestBody ObjectNode saveObj, HttpSession session)
+			throws JsonProcessingException, IllegalArgumentException {
+		User loginUser = (User) session.getAttribute("loginUser");
+		ObjectMapper mapper = new ObjectMapper();
+		int consumeAmount = mapper.treeToValue(saveObj.get("consumeAmount"), Integer.TYPE);
+		ProjectOrdersDTO projectOrder = mapper.treeToValue(saveObj.get("projectOrder"), ProjectOrdersDTO.class);
+		List<SelectedAddOptionDTO> options = new ArrayList<SelectedAddOptionDTO>();
+		JsonNode JsonOptions = saveObj.get("options");
+
+		for (int i = 0; i < JsonOptions.size(); i++) {
+			JsonNode json = mapper.createObjectNode();
+			json = JsonOptions.get(i);
+			SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
+			options.add(option);
+		}
+		// int result = orderService.orderP(projectOrder, options, loginUser,
+		// consumeAmount);
+
+		System.out.println("주문내역" + projectOrder);
+		System.out.println("추가옵션" + options);
+		System.out.println("구매자" + loginUser);
+		System.out.println("결제금액" + consumeAmount);
+		// System.out.println("결과" + result);
+
 	}
 }

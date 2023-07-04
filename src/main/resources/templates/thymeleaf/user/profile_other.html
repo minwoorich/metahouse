@@ -158,7 +158,7 @@
 									</div>
 									<div class="item-desc-warp">
 										<span th:text="${asset.title}" class="myfont-3"></span><br/>
-										<span th:text="${asset.description}" class="myfont-2"></span><br/>
+										<span th:utext="${asset.description}" class="myfont-2"></span><br/>
 										<span th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}" class="myfont-1"></span><br/>
 										<span class="myfont-3">
 											<span th:text="${'★ '+asset.average_reviews}">★ 4.8 </span><br/>
@@ -189,15 +189,15 @@
 						<div class="item-warp">
 							<div class="item-img-warp">
 								<img width=100% height=100%
-									th:src="@{/upload/project_thumbnail_img/}+${project.main_img}"></img>
+									th:src="@{/upload/project_thumbnail_img/}+${project.project_thumbnail_img}"></img>
 							</div>
 							<div class="item-desc-warp">
 								<span th:text="${project.title}" class="myfont-3"></span><br/>
-								<span th:text="${project.description}" class="myfont-2"></span><br/>
+								<span th:utext="${project.description}" class="myfont-2"></span><br/>
 								<span th:text="${#numbers.formatInteger(project.price, 1, 'COMMA') + '원'}" class="myfont-1"></span><br/>
 								<span class="myfont-3">
 									<span th:text="${'★ '+project.average_reviews}"></span><br/>
-									| [[${asset.review_count}]]개의 평가
+									| [[${project.review_count}]]개의 평가
 								</span>
 							</div>
 						</div>

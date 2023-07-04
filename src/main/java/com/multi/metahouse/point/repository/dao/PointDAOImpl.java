@@ -77,7 +77,7 @@ public class PointDAOImpl implements PointDAO {
 		ConsumedPointInfo consumedPointInfo = new ConsumedPointInfo();
 		consumedPointInfo.setUserId(loginUser.getUserId());
 		consumedPointInfo.setConsumingPoint(consumeAmount);
-		consumedPointInfo.setConsumeInfo("/* 이 부분에 사용처를 저장해주세요! */");
+		consumedPointInfo.setConsumeInfo(consumeInfo);
 		consumedPointInfo.setRemainingPoint(loginUser.getPoint() - consumeAmount);
 		consumedPointInfo.setConsumeDate(date);
 		

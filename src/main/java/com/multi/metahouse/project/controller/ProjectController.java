@@ -3,7 +3,6 @@ package com.multi.metahouse.project.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +24,6 @@ import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
-import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 //import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
@@ -35,20 +33,23 @@ import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageTripleForm
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.project.service.ProjectFileUploadLogicService;
 import com.multi.metahouse.project.service.ProjectService;
+import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 public class ProjectController {
 	ProjectFileUploadLogicService fileService;
 	ProjectService projectService;
 	ResourceLoader resourceLoader;
+	ReviewService reviewService;
 
 	@Autowired
 	public ProjectController(ProjectFileUploadLogicService fileService, ProjectService projectService,
-			ResourceLoader resourceLoader) {
+			ResourceLoader resourceLoader, ReviewService reviewService) {
 		super();
 		this.fileService = fileService;
 		this.projectService = projectService;
 		this.resourceLoader = resourceLoader;
+		this.reviewService = reviewService;
 	}
 
 	/*------------------------------------- 승언님 파트 ------------------------------------ */

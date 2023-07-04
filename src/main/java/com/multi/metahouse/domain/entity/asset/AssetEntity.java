@@ -43,7 +43,7 @@ public class AssetEntity {
     @Column(name="category2_as")
     private String category2;
     private String description;
-    private String price;
+    private int price;
     private String mainImg;
     @CreationTimestamp
     private LocalDateTime assetDate;

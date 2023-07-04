@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.metahouse.domain.dao.ReviewDAO">
+    <!-- 주어진 리뷰 정보를 데이터베이스에 저장하는 쿼리 -->
+    <insert id="saveReview" parameterType="com.multi.metahouse.domain.dto.review.ReviewDTO">
+        INSERT INTO reviews VALUES (#{review_id}, #{writer_id}, #{order_tag}, #{rating}, #{review_text}, #{review_date})
+    </insert>
+   
+   <!-- 주어진 리뷰 정보를 이용하여 데이터베이스의 리뷰를 업데이트하는 쿼리 -->
+    <update id="updateReview" parameterType="com.multi.metahouse.domain.dto.review.ReviewDTO">
+        UPDATE reviews SET writer_id = #{writer_id}, order_tag = #{order_tag}, rating = #{rating},
+        review_text = #{review_text}, review_date = #{review_date}
+        WHERE review_id = #{review_id}
+    </update>
+    
+    <!-- 주어진 리뷰 ID에 해당하는 리뷰를 데이터베이스에서 삭제하는 쿼리 -->
+    <delete id="deleteReview" parameterType="int">
+        DELETE FROM reviews WHERE review_id = #{reviewId}
+    </delete>
+    
+    <!-- 주어진 리뷰 ID에 해당하는 리뷰를 데이터베이스에서 가져오는 쿼리 -->
+    <select id="getReviewById" resultType="com.multi.metahouse.domain.dto.review.ReviewDTO" parameterType="int">
+        SELECT * FROM reviews WHERE review_id = #{reviewId}
+    </select>
+    
+    <!-- 모든 리뷰를 데이터베이스에서 가져오는 쿼리 -->
+    <select id="getAllReviews" resultType="com.multi.metahouse.domain.dto.review.ReviewDTO">
+        SELECT * FROM reviews
+    </select>
+    <!-- 필요한 추가적인 SQL 매핑을 작성할 수 있습니다. -->
+    
+    <!-- OSE -->
+    <!-- 에셋 별 리뷰를 가져오는 쿼리 -->
+    <resultMap type="assetreview" id="assetReview">
+        <id column="asset_review_id" property="asset_review_id"/>
+        <result column="asset_order_id" property="asset_order_id"/>
+        <result column="writer_id" property="writer_id"/>
+        <result column="asset_id" property="asset_id"/>
+        <result column="rating" property="rating"/>
+        <result column="review_text" property="review_text"/>
+        <result column="review_date" property="review_date"/>
+        <result column="asset_review_comment_id" property="reviewComment.review_comment_id"/>
+        <result column="comment_writer_id" property="reviewComment.writer_id"/>
+        <result column="review_id" property="reviewComment.review_id"/>
+        <result column="comment_text" property="reviewComment.comment_text" />
+        <result column="comment_date" property="reviewComment.comment_date" />
+	</resultMap>
+    <select id="getAllReviewsByAid" parameterType="String" resultMap="assetReview">
+        SELECT a.* , c.*
+		FROM asset_review a
+ 		left outer join asset_review_comment c on a.asset_review_id = c.asset_review_id 
+        WHERE a.asset_id = #{asset_id}
+    </select>
+    <select id="getAllAreviewImgByRewviewid" resultType="reviewImg">
+    	SELECT review_contents_id, asset_review_id as review_id, review_store_filename, review_img_no 
+		FROM metahaus.asset_review_contents
+		WHERE asset_review_id = #{asset_review_id};
+    </select>
+    
+    <!-- 프로젝트 별 리뷰를 가져오는 쿼리 -->
+    <resultMap type="projectreview" id="projectReview">
+        <id column="project_review_id" property="project_review_id"/>
+        <result column="project_order_id" property="project_order_id"/>
+        <result column="writer_id" property="writer_id"/>
+        <result column="project_id" property="project_id"/>
+        <result column="rating" property="rating"/>
+        <result column="review_text" property="review_text"/>
+        <result column="review_date" property="review_date"/>
+        <result column="project_review_comment_id" property="reviewComment.review_comment_id"/>
+        <result column="comment_writer_id" property="reviewComment.writer_id"/>
+        <result column="review_id" property="reviewComment.review_id"/>
+        <result column="comment_text" property="reviewComment.comment_text" />
+        <result column="comment_date" property="reviewComment.comment_date" />
+	</resultMap>
+    <select id="getAllReviewsByPJTid" parameterType="Long" resultMap="projectReview">
+        SELECT r.* , c.*
+		FROM project_review r
+ 		left outer join project_review_comment c on r.project_review_id = c.project_review_id 
+        WHERE r.project_id = #{project_id}
+    </select>
+    <select id="getAllPreviewImgByRewviewid" resultType="reviewImg">
+    	SELECT review_contents_id, project_review_id as review_id, review_store_filename, review_img_no 
+		FROM metahaus.project_review_contents
+		WHERE project_review_id = #{project_review_id};
+    </select> 
+</mapper>
