@@ -60,40 +60,42 @@
 				</div>
 			</div>
 		</div>
-		<div class="project-search-form">
+		<form class="project-search-form"
+			th:action="@{/order/project/buylist/category}" method="get">
+			<!-- 페이지 초기 번호 =0 전달 -->
+			<input name="pageNo" value="0" type="hidden">
 			<div class="project-search-form-row01">
-				<select class="search-box category01">
+				<select name="category1" class="search-box category01">
 					<option value="all">전체 플랫폼</option>
 					<option value="로블록스">로블록스</option>
 					<option value="제페토">제페토</option>
 					<option value="마인크랜프트">마인크랜프트</option>
-					<option value="더 샌드박스">더 샌드박스</option>
+					<option value="샌드박스">더 샌드박스</option>
 					<option value="게더타운">게더타운</option>
 					<option value="기타">기타</option>
-				</select> <select class="search-box category02">
+				</select> <select name="category2" class="search-box category02">
 					<option value="all">전체 서비스</option>
-					<option value="맵">맵</option>
-					<option value="에셋">에셋</option>
-					<option value="기획서">기획서</option>
+					<option value="메타버스맵">메타버스 맵</option>
+					<option value="메타버스에셋">메타버스 에셋</option>
+					<option value="홍보/이벤트">홍보/이벤트</option>
+					<option value="기획/구축">기획/구축</option>
 					<option value="기타">기타</option>
-				</select> <select class="search-box category03">
-					<option value="basic">BASIC</option>
-					<option value="economy">ECONOMY</option>
-					<option value="premium">PREMIUN</option>
 				</select>
 
 				<div class="category04">
-					<input type="date" class="search-box startdate">
-					<div>~</div>
-					<input type="date" class="search-box enddate">
+					<input required="required" name="category4" type="datetime-local"
+						value="" class="search-box startdate">
+					<div style="margin-inline: 10px;">~</div>
+					<input required="required" name="category5" type="datetime-local"
+						class="search-box enddate">
 				</div>
 			</div>
 			<div class="project-search-form-row02">
 				<!-- input type="text" class="search-box project-search-bar"
 					placeholder="검색어를 입력하세요"> -->
-				<button type="button" onclick="" class="search-button button--small">조회</button>
+				<button type="submit" class="search-button button--small">조회</button>
 			</div>
-		</div>
+		</form>
 		<div class="project-body-form-empty deactivate">
 			<span>주문 기간 내에 구매 내역이 없습니다.</span> <span>주문 기간을 변경하여 확인해보세요.</span> <span>(기본
 				조회 기간 : 1년)</span>
@@ -107,13 +109,14 @@
 							<span style="font-size: 16px; font-weight: bold;">주문 대기중</span>
 							<div>
 								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
 									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
 									th:text="${order.packageType}"></span> <span
 									style="font-size: 12px; color: var(--gray);">|</span> <span
-									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">주문
-									대기중</span> <span style="font-size: 12px; color: var(--gray);">|</span>
-								<span style="font-size: 12px; color: var(--gray);">주문일시</span>
-								<span style="font-size: 12px; color: var(--bright-purple);"
+									style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
 									th:text="${order.orderCommitDate}"></span>
 							</div>
 						</div>
@@ -124,6 +127,9 @@
 							</div>
 							<div class="project-body-tag-info">
 								<div class="project-body-tag-info-row01">
+									<div
+										style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+										th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></div>
 									<span style="font-size: 16px; color: var(--gray);"
 										th:text="'#'+${order.orderId}"></span> <span
 										th:text="${order.project.title}"></span>
@@ -134,7 +140,8 @@
 								</div>
 								<div class="project-body-tag-info-row03">
 									<div>
-										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+										<span>Creator</span><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span>
 									</div>
 									<button type="button"
 										class="project-body-button button--xsmall">문의하기</button>
@@ -153,13 +160,14 @@
 								취소</span>
 							<div>
 								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
 									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
 									th:text="${order.packageType}"></span> <span
 									style="font-size: 12px; color: var(--gray);">|</span> <span
-									style="font-size: 12px; color: var(--red); font-weight: bold;">주문
-									취소</span> <span style="font-size: 12px; color: var(--gray);">|</span>
-								<span style="font-size: 12px; color: var(--gray);">주문일시</span>
-								<span style="font-size: 12px; color: var(--bright-purple);"
+									style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
 									th:text="${order.orderCommitDate}"></span>
 							</div>
 						</div>
@@ -180,7 +188,8 @@
 								</div>
 								<div class="project-body-tag-info-row03">
 									<div>
-										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+										<span>Creator</span><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span>
 									</div>
 									<button type="button"
 										class="project-body-button button--xsmall">문의하기</button>
@@ -196,13 +205,14 @@
 							<span style="font-size: 16px; font-weight: bold;">진행 중</span>
 							<div>
 								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
 									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
 									th:text="${order.packageType}"></span> <span
 									style="font-size: 12px; color: var(--gray);">|</span> <span
-									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">진행
-									중</span> <span style="font-size: 12px; color: var(--gray);">|</span>
-								<span style="font-size: 12px; color: var(--gray);">주문시작</span>
-								<span style="font-size: 12px; color: var(--bright-purple);"
+									style="font-size: 12px; color: var(--gray);">주문시작</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
 									th:text="${order.orderDate}"></span>
 							</div>
 						</div>
@@ -213,6 +223,7 @@
 							</div>
 							<div class="project-body-tag-info">
 								<div class="project-body-tag-info-row01">
+									
 									<span style="font-size: 16px; color: var(--gray);"
 										th:text="'#'+${order.orderId}"></span> <span
 										th:text="${order.project.title}"></span>
@@ -223,7 +234,8 @@
 								</div>
 								<div class="project-body-tag-info-row03">
 									<div>
-										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+										<span>Creator</span><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span>
 									</div>
 									<button type="button"
 										class="project-body-button button--xsmall">문의하기</button>
@@ -231,15 +243,20 @@
 							</div>
 						</div>
 					</div>
-					<div class="project-body-download">
+					<form class="project-body-download" 
+						th:action="@{/order/project/buylist/update.do}"
+						method="post">
+						<input name="orderStatus" type="hidden" th:value="${order.orderStatus}"/>
+						<input name="orderId" type="hidden" th:value="${order.orderId}"/>
 						<div class="project-body-download-text">
 							<span>작업물을 성공적으로 전달받으셨다면<br /> 구매 확정 버튼을 눌러 진행 상태를
 								변경해주세요!
 							</span>
 						</div>
 						<!-- <button type="button">다운로드 기간만료</button> -->
-						<button type="button">구매 확정</button>
-					</div>
+						
+						<button type="submit">구매 확정</button>
+					</form>
 				</li>
 				<!-- 구매 확정 - 리뷰작성 전 -->
 				<li class="project-body-card" th:case="구매확정">
@@ -248,13 +265,14 @@
 							<span style="font-size: 16px; font-weight: bold;">구매 확정</span>
 							<div>
 								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
 									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
 									th:text="${order.packageType}"></span> <span
 									style="font-size: 12px; color: var(--gray);">|</span> <span
-									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">구매
-									확정</span> <span style="font-size: 12px; color: var(--gray);">|</span>
-								<span style="font-size: 12px; color: var(--gray);">주문시작</span>
-								<span style="font-size: 12px; color: var(--bright-purple);"
+									style="font-size: 12px; color: var(--gray);">주문시작</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
 									th:text="${order.orderDate}"></span> <span
 									style="font-size: 12px; color: var(--gray); margin-inline: 10px;">|</span>
 								<span
@@ -270,17 +288,19 @@
 							</div>
 							<div class="project-body-tag-info">
 								<div class="project-body-tag-info-row01">
+									
 									<span style="font-size: 16px; color: var(--gray);"
 										th:text="'#'+${order.orderId}"></span> <span
 										th:text="${order.project.title}"></span>
 								</div>
 								<div class="project-body-tag-info-row02">
-									<span style="font-size: 22px; font-weight: bold;"
-										th:text="${order.totalPrice}+'원'"></span>
+									<div style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></div>
 								</div>
 								<div class="project-body-tag-info-row03">
 									<div>
-										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+										<span>Creator</span><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span>
 									</div>
 									<button type="button"
 										class="project-body-button button--xsmall">문의하기</button>
@@ -363,12 +383,12 @@
 				묻는 질문 - 구매 및 영수증] </span> 항목을 참고해주세요.
 		</div>
 		<ul class="pagination">
-		<li><a th:href="@{/order/project/buylist(pageNo=${'0'})}">1</a></li>
-		<li class="active"><a th:href="@{/order/project/buylist(pageNo=${'1'})}">2</a></li>
-		<li><a th:href="@{/order/project/buylist(pageNo=${'2'})}">3</a></li>
-		<li><a th:href="@{/order/project/buylist(pageNo=${'3'})}">4</a></li>
-		<li><a th:href="@{/order/project/buylist(pageNo=${'4'})}">5</a></li>
-	</ul>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'0'})}">1</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'1'})}">2</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'2'})}">3</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'3'})}">4</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'4'})}">5</a></li>
+		</ul>
 	</div>
 </body>
 </html>

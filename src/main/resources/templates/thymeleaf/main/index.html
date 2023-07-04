@@ -215,8 +215,8 @@
 							th:onclick="|location.href='@{/project/detail(projectNum=${project.project_id})}'|">
 							<div class="item-img-warp"></div>
 							<div class="item-desc-warp">
-								<span th:text="${project.title}" class="myfont-3">메타버스틱스1</span>
-								<span th:utext="${project.description}" class="myfont-2"></span>
+								<span th:text="${project.creator_id}" class="myfont-3"></span>
+								<span th:utext="${project.title}" class="myfont-2"></span>
 								<span th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}"
 									class="myfont-1">85,000원~</span>
 								<span class="myfont-3">
@@ -262,9 +262,8 @@
 										th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"></img>
 								</div>
 								<div class="item-desc-warp">
-									<span th:text="${asset.title}" class="myfont-3">메타버스틱스1</span> <span
-										th:text="${asset.description}" class="myfont-2">당신만의
-										메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span> <span
+									<span th:text="${asset.seller_id}" class="myfont-3">메타버스틱스1</span> <span
+										th:text="${asset.title}" class="myfont-2"></span> <span
 										th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}"
 										class="myfont-1">85,000원~</span> <span class="myfont-3"><span
 										th:text="${'★ '+asset.average_reviews}">★ 4.8</span> |

@@ -1,4 +1,4 @@
-package com.multi.metahouse.domain.entity.project.jpadto;
+package com.multi.metahouse.domain.entity.order.dtoforjpa;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +18,7 @@ public class ProjectOrdersResponse {
 	static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yy.MM.dd hh:mm");
 	@Getter
 	@ToString
-	public static class BuyerResponse{
+	public static class Response{
 		private Long orderId;
 		private String buyerId;
 		private String sellerId;
@@ -30,9 +30,8 @@ public class ProjectOrdersResponse {
 		private String totalPrice;
 		private String packageType;
 		private OrderedProjectDto project;
-//		private Map<String,Integer> statusCount;
 		
-		public BuyerResponse(ProjectOrdersEntity order, String totalPrice, String packageType, LocalDateTime orderDate, LocalDateTime completionDate) {
+		public Response(ProjectOrdersEntity order, String totalPrice, String packageType, LocalDateTime orderDate, LocalDateTime completionDate) {
 			this.orderId = order.getOrderId();
 			this.buyerId = order.getBuyerId();
 			this.sellerId = new OrderedProjectDto(order.getProjectId()).getCreatorId();
@@ -49,30 +48,30 @@ public class ProjectOrdersResponse {
 		}
 	}
 	
-	@Getter
-	@ToString
-	public static class SellerResponse{
-		private Long orderId;
-		private String buyerId;
-		private String sellerId;
-		private String orderStatus;
-		private LocalDateTime orderCommitDate;
-		private String request;
-		private String totalPrice;
-		private String packageType;
-		private OrderedProjectDto project;
-		
-		
-		public SellerResponse(ProjectOrdersEntity order) {
-			this.orderId = order.getOrderId();
-			this.buyerId = order.getBuyerId();
-			this.sellerId = new OrderedProjectDto(order.getProjectId()).getCreatorId();
-			this.orderStatus = order.getOrderStatus();
-			this.orderCommitDate = order.getOrderCommitDate();
-			this.request = order.getRequest();
-			this.project = new OrderedProjectDto(order.getProjectId());
-		}
-	}
+//	@Getter
+//	@ToString
+//	public static class SellerResponse{
+//		private Long orderId;
+//		private String buyerId;
+//		private String sellerId;
+//		private String orderStatus;
+//		private LocalDateTime orderCommitDate;
+//		private String request;
+//		private String totalPrice;
+//		private String packageType;
+//		private OrderedProjectDto project;
+//		
+//		
+//		public SellerResponse(ProjectOrdersEntity order) {
+//			this.orderId = order.getOrderId();
+//			this.buyerId = order.getBuyerId();
+//			this.sellerId = new OrderedProjectDto(order.getProjectId()).getCreatorId();
+//			this.orderStatus = order.getOrderStatus();
+//			this.orderCommitDate = order.getOrderCommitDate();
+//			this.request = order.getRequest();
+//			this.project = new OrderedProjectDto(order.getProjectId());
+//		}
+//	}
 	
 	@Getter
 	@ToString
