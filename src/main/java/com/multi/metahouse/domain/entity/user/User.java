@@ -54,6 +54,8 @@ public class User {
 	private boolean mkAgree;
 	private int point;
 	private String thumbnailStoreFilename;
+	private String socialLoginId;
+	private String socialName;
 	
 //	@OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
 //	private List<ProjectEntity> projectEntityList = new ArrayList<>();

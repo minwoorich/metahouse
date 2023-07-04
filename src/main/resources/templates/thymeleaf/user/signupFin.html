@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/nonsideLayout}">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원가입 화면:가입완료</title>
+
+<style>
+.main {
+	margin: 3rem;
+	padding: 4rem;
+	border-radius: 14px;
+	box-shadow: 0 0 5px 5px rgb(202, 208, 252);
+	border-radius: 14px;
+	min-height: 70vh;
+}
+
+.signup-success{
+	text-align: center;
+	font-size: 24px;
+	padding: 20px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	color: #6C4AB6;
+	
+}
+
+.profile-user {
+	width: 500px;
+	height: 200px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.profile-user-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.success-msg {
+	text-align: center;
+	margin-top: 20px;
+	
+}
+
+.myBtn {
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.button--large{
+	width: 250px;
+}
+
+</style>
+</head>
+
+<body>
+	<div class="container" layout:fragment="content">
+		<div class="main">
+			<div class="signup-success">회원가입 완료</div>
+			<div class="welcome">
+				<div class="profile-user">
+					<img alt="profile_img" th:src="@{/images/METAHAUS.gif}"
+						class="profile-user-img">
+				</div>
+				<div class="success-msg">가입완료! 가입을 환영합니다.</div>
+			</div>
+
+			<hr />
+
+			<div class="myBtn">
+				<div>
+					<button class="button--large" type="button" onclick="location.href='/metahaus/main/index'">홈페이지
+						바로가기</button>
+				</div>
+				<div>
+					<button class="button--large" type="button" data-toggle="modal"
+						data-target="#exampleModal" data-whatever="@mdo" onclick="location.href='/metahaus/login'">로그인 하러가기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
