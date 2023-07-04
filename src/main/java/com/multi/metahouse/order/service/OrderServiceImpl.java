@@ -41,12 +41,12 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	public int orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount) {
 		int resultA = dao.insertOrderA(assetOrder);
-		//포인트 결제 내역생성
+		// 포인트 결제 내역생성
 		String consumeInfo = "Asset";
 		consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
 		pointDao.consumePoint(loginUser, consumeAmount);
 		pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
-		return resultA; 
+		return resultA;
 
 	}
 
@@ -77,7 +77,6 @@ public class OrderServiceImpl implements OrderService {
 
 	/*---------------------- 민우 영역 ----------------------------- */
 
-	
 	private String getTotalPrice(ProjectOrdersEntity entity) {
 		int optionPriceSum = 0;
 		if (entity.getProjectId().getAddOptionEntityList() != null) {
@@ -116,120 +115,98 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 	}
-	
+
 	@Override
-	public List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(String buyerId,int pageNo){
-		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"orderCommitDate"));
+	public List<ProjectOrdersResponse.Response> selectOrderList(String buyerId, int pageNo) {
+		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "orderCommitDate"));
 		List<ProjectOrdersEntity> orderList = projectOrderRepository.findAllByBuyerId(pageRequest, buyerId);
-		
-		List<ProjectOrdersResponse.BuyerResponse> requestOrderList = new ArrayList<>();
-		
+
+		List<ProjectOrdersResponse.Response> requestOrderList = new ArrayList<>();
+
 		for (ProjectOrdersEntity entity : orderList) {
-			if("주문대기중".equals(entity.getOrderStatus()) || "주문취소".equals(entity.getOrderStatus())) {
-				requestOrderList.add(
-						new ProjectOrdersResponse.BuyerResponse(
-								entity, 
-								getTotalPrice(entity), 
-								getPackageType(entity),
-								null,
-								null));
-			}else if("진행중".equals(entity.getOrderStatus())){
-				requestOrderList.add(
-						new ProjectOrdersResponse.BuyerResponse(
-								entity, 
-								getTotalPrice(entity), 
-								getPackageType(entity),
-								entity.getOrderDetail().getOrderDate(),
-								null));
-			}else {//"구매확정"
-				
-				requestOrderList.add(
-						new ProjectOrdersResponse.BuyerResponse(
-								entity, 
-								getTotalPrice(entity), 
-								getPackageType(entity),
-								entity.getOrderDetail().getOrderDate(),
-								entity.getOrderDetail().getCompletionDate()));
+			if ("주문대기중".equals(entity.getOrderStatus()) || "주문취소".equals(entity.getOrderStatus())) {
+				requestOrderList.add(new ProjectOrdersResponse.Response(entity, getTotalPrice(entity),
+						getPackageType(entity), null, null));
+			} else if ("진행중".equals(entity.getOrderStatus())) {
+				requestOrderList.add(new ProjectOrdersResponse.Response(entity, getTotalPrice(entity),
+						getPackageType(entity), entity.getOrderDetail().getOrderDate(), null));
+			} else {// "구매확정"
+
+				requestOrderList
+						.add(new ProjectOrdersResponse.Response(entity, getTotalPrice(entity), getPackageType(entity),
+								entity.getOrderDetail().getOrderDate(), entity.getOrderDetail().getCompletionDate()));
 			}
 		}
-		
+
 		return requestOrderList;
 	}
 
 	@Override
-	public List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(
-			String buyerId,
-			String category1,
-			String category2,
-			LocalDateTime category4, 
-			LocalDateTime category5, int pageNo) {
+	public List<ProjectOrdersResponse.Response> selectOrderList(String buyerId, String category1, String category2,
+			LocalDateTime category4, LocalDateTime category5, int pageNo) {
 		List<ProjectOrdersEntity> orderList = null;
-		
-		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"orderCommitDate"));
-		if("all".equals(category1) && !"all".equals(category1) ) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1(pageRequest, buyerId, category2,  category4, category5);
-		}else if(!"all".equals(category1) && "all".equals(category2)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC2(pageRequest, buyerId, category1, category4, category5);
-		}else if("all".equals(category1) && "all".equals(category2)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC2(pageRequest, buyerId, category4, category5);
-		}else {
-			orderList = projectOrderRepository.selectOrderForBuyer(pageRequest, buyerId, category1, category2, category4, category5);
+
+		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "orderCommitDate"));
+		if ("all".equals(category1) && !"all".equals(category1)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1(pageRequest, buyerId, category2, category4,
+					category5);
+		} else if (!"all".equals(category1) && "all".equals(category2)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC2(pageRequest, buyerId, category1, category4,
+					category5);
+		} else if ("all".equals(category1) && "all".equals(category2)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC2(pageRequest, buyerId, category4,
+					category5);
+		} else {
+			orderList = projectOrderRepository.selectOrderForBuyer(pageRequest, buyerId, category1, category2,
+					category4, category5);
 		}
-		
+
 //		 // 엔티티 잘 받아 오는지 확인
-		for(ProjectOrdersEntity entity : orderList) {
+		for (ProjectOrdersEntity entity : orderList) {
 			System.out.println("entity : " + entity);
 			System.out.println("");
 		}
 
-		List<ProjectOrdersResponse.BuyerResponse> requestOrderList = new ArrayList<>();
-	
+		List<ProjectOrdersResponse.Response> requestOrderList = new ArrayList<>();
+
 		for (ProjectOrdersEntity entity : orderList) {
-			if("주문대기중".equals(entity.getOrderStatus()) || "주문취소".equals(entity.getOrderStatus())) {
-				requestOrderList.add(
-						new ProjectOrdersResponse.BuyerResponse(
-								entity, 
-								getTotalPrice(entity), 
-								getPackageType(entity),
-								null,
-								null));
-			}else if("진행중".equals(entity.getOrderStatus())){
-				requestOrderList.add(
-						new ProjectOrdersResponse.BuyerResponse(
-								entity, 
-								getTotalPrice(entity), 
-								getPackageType(entity),
-								entity.getOrderDetail().getOrderDate(),
-								null));
-			}else {//"구매확정"
-				requestOrderList.add(
-						new ProjectOrdersResponse.BuyerResponse(
-								entity, 
-								getTotalPrice(entity), 
-								getPackageType(entity),
-								entity.getOrderDetail().getOrderDate(),
-								entity.getOrderDetail().getCompletionDate()));
+			if ("주문대기중".equals(entity.getOrderStatus()) || "주문취소".equals(entity.getOrderStatus())) {
+				requestOrderList.add(new ProjectOrdersResponse.Response(entity, getTotalPrice(entity),
+						getPackageType(entity), null, null));
+			} else if ("진행중".equals(entity.getOrderStatus())) {
+				requestOrderList.add(new ProjectOrdersResponse.Response(entity, getTotalPrice(entity),
+						getPackageType(entity), entity.getOrderDetail().getOrderDate(), null));
+			} else {// "구매확정"
+				requestOrderList
+						.add(new ProjectOrdersResponse.Response(entity, getTotalPrice(entity), getPackageType(entity),
+								entity.getOrderDetail().getOrderDate(), entity.getOrderDetail().getCompletionDate()));
 			}
 		}
-		
+
 		return requestOrderList;
 	}
 
+	// 구매확정 업데이트
 	@Override
-	public List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId, int pageNo) {
-		
-		return null;
-	}
-
-	@Override @Transactional
+	@Transactional
 	public void updateOrder(ProjectOrdersConfirmUpdateDTO updatedData) {
+
+		ProjectOrdersEntity orderEntity = projectOrderRepository.findById(updatedData.getOrderId())
+				.orElseThrow(() -> new RuntimeException());
 		
-		ProjectOrdersEntity orderEntity =  projectOrderRepository.findById(updatedData.getOrderId()).orElseThrow(() 
-				-> new RuntimeException());
-		orderEntity.getOrderDetail().setCompletionDate(LocalDateTime.now());
-		orderEntity.setOrderStatus(updatedData.getOrderStatus());
+		if("진행중".equals(updatedData.getOrderStatus())) {
+			orderEntity.getOrderDetail().setCompletionDate(LocalDateTime.now());
+			orderEntity.setOrderStatus("구매확정");
+		}else {
+			if("accept".equals(updatedData.getAcceptanceValue())){
+				orderEntity.getOrderDetail().setOrderDate(LocalDateTime.now());
+				orderEntity.setOrderStatus("진행중");
+			}else {
+				orderEntity.setOrderStatus("주문취소");
+			}
+		}
+		
 		System.out.println("orderEntity 써비스단!!!" + orderEntity);
 	}
-
 
 }

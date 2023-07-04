@@ -15,4 +15,6 @@ public class ProjectOrdersConfirmUpdateDTO {
 //	private LocalDateTime completion_date;
 	private Long orderId;
 	private String orderStatus;
+	private String acceptanceValue;
+	private String orderDate;
 }

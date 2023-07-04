@@ -18,10 +18,10 @@ public interface OrderService {
 	
 	/* ------------------- 민우-------------- */
 	// 페이징 처리된 주문 불러오기 (구매자화면)
-	List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(
+	List<ProjectOrdersResponse.Response> selectOrderList(
 			String buyerId, int pageNo);
 	// 카테고리별 주문 불러오기 (구매자 화면)
-	List<ProjectOrdersResponse.BuyerResponse> selectOrderListForBuyer(
+	List<ProjectOrdersResponse.Response> selectOrderList(
 			String buyerId, 
 			String category1, 
 			String category2, 
@@ -29,8 +29,6 @@ public interface OrderService {
 			LocalDateTime category5, 
 			int pageNo);
 
-	// 페이징 처리된 주문 불러오기 (판매자 화면)
-	List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId, int pageNo);
 	// 구매확정 누르면 해당 주문에 대한 DB 업데이트
 	void updateOrder(ProjectOrdersConfirmUpdateDTO updatedData);
 }
