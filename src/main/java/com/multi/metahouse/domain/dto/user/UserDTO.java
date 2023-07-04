@@ -38,6 +38,8 @@ public class UserDTO {
 	private int mkAgree;
 	private int point;
 	private String thumbnailStoreFilename;
+	private String socialLoginId;
+	private String socialName;
 	
 	
 }

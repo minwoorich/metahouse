@@ -1,7 +1,9 @@
 package com.multi.metahouse.user.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,14 +11,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
 import com.multi.metahouse.domain.dto.user.OtherProfileInfoDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
@@ -24,23 +31,34 @@ import com.multi.metahouse.domain.entity.portfolio.Portfolio;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.portfolio.service.PortfolioService;
+import com.multi.metahouse.user.service.GoogleService;
+import com.multi.metahouse.user.service.KakaoService;
+import com.multi.metahouse.user.service.NaverService;
 import com.multi.metahouse.user.service.UserFileUploadLogicService;
 import com.multi.metahouse.user.service.UserService;
 
 @Controller
 public class UserController {
 	UserService service;
+	NaverService naverService;
+	KakaoService kakaoService;
+	GoogleService googleService;
 	PortfolioService portfolioservice;
 	ResourceLoader resourceLoader;
 	UserFileUploadLogicService fileuploadservice;
 	
 	@Autowired
-	public UserController(UserService service, ResourceLoader resourceLoader, UserFileUploadLogicService fileuploadservice, PortfolioService portfolioservice) {
+	public UserController(UserService service, NaverService naverService, KakaoService kakaoService,
+			GoogleService googleService, PortfolioService portfolioservice, ResourceLoader resourceLoader,
+			UserFileUploadLogicService fileuploadservice) {
 		super();
 		this.service = service;
+		this.naverService = naverService;
+		this.kakaoService = kakaoService;
+		this.googleService = googleService;
+		this.portfolioservice = portfolioservice;
 		this.resourceLoader = resourceLoader;
 		this.fileuploadservice = fileuploadservice;
-		this.portfolioservice = portfolioservice;
 	}
 	
 	//로그인 페이지
@@ -48,7 +66,7 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
-	
+
 	//로그인 기능
 	@PostMapping("login")
 	public ModelAndView login(String userId, String password, HttpServletRequest request) {
@@ -91,10 +109,20 @@ public class UserController {
 	
 	//회원가입 기능
 	@PostMapping("signup")
-	public String signup(User user) {
+	public String signup(User user, HttpSession session) {
 		service.insert(user);
 		System.out.println(user);
-		return "user/login";
+		
+		if(session != null) {
+			session.invalidate();
+		}
+		
+		return "user/signupFin";
+	}
+	
+	@GetMapping("signupFin")
+	public String signupFin() {
+		return "user/signupFin";
 	}
 	
 	@GetMapping("mypage/setting")
@@ -118,7 +146,6 @@ public class UserController {
 		
 		return "redirect:profile";
 	}
-	
 	
 	@GetMapping("mypage/delete_account")
 	public String deleteAccount() {
@@ -175,4 +202,106 @@ public class UserController {
 		profileOther.addObject("otherProfileInfo", otherProfileInfo);
 		return profileOther;
 	}
+	
+	
+	//NAVER 로그인
+	@RequestMapping(value = "/signnaver", method = RequestMethod.GET)
+	public String naverLogin(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state, Model model, HttpSession session) throws IOException {
+		//System.out.println(code);
+		//System.out.println(state);
+		String view = "";
+		
+		//Access Token 생성
+		OAuth2AccessToken oauthToken;
+		oauthToken = naverService.getAccessToken(code, state);
+		//System.out.println(oauthToken);
+		
+		//2. 로그인 사용자 정보 읽기
+		String jsonUserInfo = naverService.getUserProfile(oauthToken);
+		//System.out.println(jsonUserInfo);
+		
+		HashMap<String, String> userInfo = naverService.getUserInfo(jsonUserInfo);
+		String naverLoginId = userInfo.get("id");
+		
+		User loginUser = service.socialLogin(naverLoginId, "naver");
+		
+		if(loginUser != null && loginUser.getSocialLoginId().equals(naverLoginId)) {
+			session.setAttribute("loginUser", loginUser);
+			view = "main/index";
+		} else {
+			model.addAttribute("nickname", userInfo.get("nickname"));
+			model.addAttribute("email", userInfo.get("email"));
+			model.addAttribute("id", userInfo.get("id"));
+			model.addAttribute("gender", userInfo.get("gender"));
+			model.addAttribute("socialName", "naver");
+			model.addAttribute("mobile", userInfo.get("mobile"));
+			model.addAttribute("birth", userInfo.get("birth"));
+			
+			view = "user/SNSsignup";
+			
+		}
+		
+		return view;
+	}
+	
+	// 카카오 로그인
+	@RequestMapping(value = "/signkakao", method = RequestMethod.GET)
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model,
+			HttpSession session) throws Exception {
+		String view = "";
+		String access_Token = kakaoService.getAccessToken(code);
+		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+		String kakaoLoginId = (String) userInfo.get("id");
+
+		System.out.println(kakaoLoginId);
+		
+		User loginUser = service.socialLogin(kakaoLoginId, "kakao");
+		//만약 카카오 로그인하는데 DB에 KaKao 토큰이 있을때
+		if (loginUser != null && loginUser.getSocialLoginId().equals(kakaoLoginId)) {
+			session.setAttribute("loginUser", loginUser);
+			view = "main/index";
+		} else {
+			//만약 카카오 로그인하는데 토근을 호출하고 KaKao 토큰번호가 DB에 없을떄
+			model.addAttribute("nickname", userInfo.get("nickname"));
+			model.addAttribute("email", userInfo.get("email"));
+			model.addAttribute("id", userInfo.get("id"));
+			model.addAttribute("gender", (String)userInfo.get("gender"));
+			model.addAttribute("socialName", "kakao");
+			model.addAttribute("mobile", null);
+			model.addAttribute("birth", null);
+			
+			view = "user/SNSsignup";
+			
+		}
+		return view;
+
+	}
+	
+	// 구글 로그인
+	@GetMapping(value = "/signgoogle", produces = "application/json")
+	public String googleLogin(@RequestParam String code, Model model, HttpSession session) {
+		String view = "";
+		HashMap<String, String> userInfo =  googleService.socialLogin(code);
+		String googleId = userInfo.get("id");
+		System.out.println(googleId);
+		
+		User loginUser = service.socialLogin(googleId, "google");
+		if (loginUser != null && loginUser.getSocialLoginId().equals(googleId)) {
+			session.setAttribute("loginUser", loginUser);
+			view = "main/index";
+		} else {
+			//만약 카카오 로그인하는데 토근을 호출하고 KaKao 토큰번호가 DB에 없을떄
+			model.addAttribute("nickname", userInfo.get("nickname"));
+			model.addAttribute("email", userInfo.get("email"));
+			model.addAttribute("id", userInfo.get("id"));
+			model.addAttribute("gender", null);
+			model.addAttribute("socialName", "google");
+			model.addAttribute("mobile", null);
+			model.addAttribute("birth", null);
+			view = "user/SNSsignup";
+			
+		}
+		return view;
+	}
+	
 }
