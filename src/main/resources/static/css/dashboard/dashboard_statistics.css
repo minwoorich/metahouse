@@ -1,13 +1,13 @@
 /* row 설정 (overriding) */
-/* .row {
+ .row {
 	display: flex;
     justify-content: center;
-} */
+}
 
 /* card 클래스 설정 (overriding) */
-/* .card {
+.card {
 	width: 450px;
-} */
+}
 
 .paging-wrap{
     margin: 15px auto;
