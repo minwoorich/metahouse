@@ -7,9 +7,19 @@ $(document).ready(function(){
 	let ws = null;
 	// Controller에 전송할 JSON
 	var mydata = {};
+	// 채팅 스크롤 관련
+	var scrChatBody = $(".chat-body__chat-section");
 	// 메시지 첨부 파일 관련 List
 	let filelist = [];
 	let filenamelist = [];
+	// JSON 텍스트 메시지 저장 용도
+	let resmsg = "";
+	// 메시지 출력 item 저장 용도
+	let item = "";
+	// 파일 저장 용도
+	let file_url = "";
+	// 파일 개수 count 용도
+	let file_count = 0;
 	
 	// 채팅방 목록 onClick eventListener
 	$(".chatroom-card").on("click", function(){
@@ -61,44 +71,102 @@ $(document).ready(function(){
 					console.log("open중인 web 소켓이 이미 존재합니다.");
 				}
 				
+				// Server에 메시지 존재할 경우 수신
 				ws.onmessage = function(msg){
-					let resmsg = JSON.parse(msg.data);
-					let msgcss = "";
-					
-					if(resmsg.writer_id==loginUser){
-						// 내 채팅
-						msgblkcss = "class='chat-block chat-block--send'";
-						msgcss = "class='chat-block__message chat-block__message--send'";
-					}else{
-						// 상대방 채팅
-						msgblkcss = "class='chat-block chat-block--reception'";
-						msgcss = "class='chat-block__message chat-block__message--reception'";
-					}
-					// 메시지 객체에 저장된 실제 데이터 꺼내기
-					let item = '<div ' + msgblkcss + '><div ' + msgcss + '><div class="chat-block__message-text">';
-						item += resmsg.message_content;
-						item += '</div><div class="chat-block__message-files"></div></div><div class="chat-block__timestamp"><div class="chat-block__timestamp-date">';
+					// String Type의 메시지를 수신한 경우 (JSON String)
+					if(typeof msg.data === "string"){
+						console.log("텍스트 메시지를 받았습니다.");
+						
+						resmsg = JSON.parse(msg.data);
+						
+						let msgcss = "";
+						let msgblkcss = "";
+						
+						if(resmsg.writer_id==loginUser){
+							// 내 채팅
+							msgblkcss = "class='chat-block chat-block--send'";
+							msgcss = "class='chat-block__message chat-block__message--send'";
+						}else{
+							// 상대방 채팅
+							msgblkcss = "class='chat-block chat-block--reception'";
+							msgcss = "class='chat-block__message chat-block__message--reception'";
+						}
+						
+						// 일반 텍스트 메시지인 경우
+						if(resmsg.message_type === "Text"){ 
+							console.log("일반 텍스트 메시지입니다.");
+							
+							// 메시지 객체에 저장된 실제 데이터 꺼내기
+							item = '<div ' + msgblkcss + '><div ' + msgcss + '><div class="chat-block__message-text">';
+							item += resmsg.message_content;
+							item += '</div><div class="chat-block__message-files"></div></div><div class="chat-block__timestamp"><div class="chat-block__timestamp-date">';
+							item += resmsg.write_time.substr(2, 8).replaceAll("-", ".");
+							item += '</div><div class="chat-block__timestamp-time">';
+							item += resmsg.write_time.substr(11, 5);
+							item += '</div></div></div>';
+							
+							$(".chat-body__chat-section").append(item);
+						
+						// 파일이 첨부된 메시지인 경우
+						}else{	
+							console.log("파일이 첨부된 텍스트 메시지입니다. tot_file_count : " + resmsg.filenamelist.length);
+							
+							item = '<div ' + msgblkcss + '><div ' + msgcss + '><div class="chat-block__message-text">';
+							item += resmsg.message_content;
+							item += '</div>';
+							
+							file_count = 0; // 파일 개수 count
+						}
+					// Binary Type 의 메시지를 수신한 경우 1 (File 전송 - 해당 메시지의 마지막 파일을 수신한 경우)
+					}else if (msg.data instanceof Blob && (file_count+1) == resmsg.filenamelist.length){
+						console.log("마지막 바이너리 메시지를 받았습니다. file_count : " + file_count);
+						
+						file_url = URL.createObjectURL(new Blob([msg.data]));
+						
+						item += '<div class="chat-block__message-files">';
+						item += '<div class="message-file">';
+						item += '<img class="file_img" src="'+ file_url + '"/>';
+						item += '<span>'+resmsg.filenamelist[file_count]+'</span>';
+						item += '</div>';
+						item += '<div class="chat-block__timestamp"><div class="chat-block__timestamp-date">';
 						item += resmsg.write_time.substr(2, 8).replaceAll("-", ".");
 						item += '</div><div class="chat-block__timestamp-time">';
 						item += resmsg.write_time.substr(11, 5);
 						item += '</div></div></div>';
 						
-					$(".chat-body__chat-section").append(item);
-
+						$(".chat-body__chat-section").append(item);
+					
+					// Binary Type 의 메시지를 수신한 경우 2 (File 전송)
+					}else{
+						console.log("바이너리 메시지를 받았습니다. file_count : " + file_count);
+						
+						file_url = URL.createObjectURL(new Blob([msg.data]));
+						
+						item += '<div class="chat-block__message-files">';
+						item += '<div class="message-file">';
+						item += '<img class="file_img" src="'+ file_url + '"/>';
+						item += '<span>'+resmsg.filenamelist[file_count]+'</span>';
+						item += '</div>';
+						
+						file_count++;
+					}
+						
 					// 최근 메시지 변경
 					chatroom = "chatroom" + chatroomId;
 					$("#"+chatroom).find(".last-chat").text(resmsg.message_content);
 					
+					/* 채팅 스크롤 항상 아래로 */
+					scrChatBody.scrollTop(scrChatBody[0].scrollHeight);
 				}
 				
 				/* 채팅 스크롤 항상 아래로 */
-				let scrChatBody = $(".chat-body__chat-section");
 				scrChatBody.scrollTop(scrChatBody[0].scrollHeight);
-			}
 			
-		})
+			} /* End of Success Fn */
+			
+		}) /* End of Ajax */
 		
-	})
+	}) /* End of Chatroom Click Event Fn */
 	
 	// 채팅 전송 이벤트 (버튼 클릭)
 	$(".send-button").on("click", function(){
@@ -139,12 +207,23 @@ $(document).ready(function(){
 		
 	})
 	
+	/* 파일 첨부 메시지의 동적 태그에 download function 이벤트 추가 */
+	$(document).on('click', '.file_img', function(){
+		console.log("파일을 다운로드합니다.");
+		console.log($(this));
+		const aTag = document.createElement('a');
+		document.body.appendChild(aTag);
+		aTag.download = $(this).next("span").text();
+		aTag.href = $(this).attr("src");
+		aTag.click();
+	})
+	
 	/* 일반 메시지 전송 메소드 */
 	function sendMsg(){
 		console.log("일반 메시지");
 		let msg = $(".chat-footer-row01").val();
 		 
-		// 서버로 보낼 메시지를 만들기
+		// 일반 메시지 JSON 정의
 		mydata.message_type = "Text";
 		mydata.writer_id = loginUser;
 		mydata.chatroom_id = chatroomId;
@@ -161,12 +240,13 @@ $(document).ready(function(){
 		
 		/* 최근 채팅내역 변경 로직 추가 필요 (필요!) */
 	}
-	
+
 	/* 파일 첨부 메시지 전송 메소드 */
 	function sendMsgWithFiles(){
 		// 파일 첨부 메시지
 		console.log("파일 첨부 메시지");
 		
+		// 파일 첨부 메시지 JSON 정의
 		mydata.message_type = "File";
 		mydata.writer_id = loginUser;
 		mydata.chatroom_id = chatroomId;
@@ -195,59 +275,4 @@ $(document).ready(function(){
 		filenamelist = [];
 	}
 
-
-	/* 프로필 Elements 작성 메소드 */
-	function createProfileElement(targetProfile){
-		addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
-		addPro += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
-		
-		return addPro;
-	}
-
-	/* 채팅메시지 Elements 작성 메소드 */
-	function createChatElement(chatMsg, loginUser){
-		myChatEle = '';
-		
-		for(let i=0; i<chatMsg.length; i++){
-			if(loginUser == chatMsg[i].writer_id){
-				// 내 채팅
-				myChatEle += '<div class="chat-block chat-block--send">' +
-		                     '<div class="chat-block__message chat-block__message--send">' +
-		                     '<div class="chat-block__message-text">' +
-		                     	chatMsg[i].message_content +
-		            		 '</div><div class="chat-block__message-files"></div></div>' + 
-		        			 '<div class="chat-block__timestamp">' +
-		            		 '<div class="chat-block__timestamp-date">' +
-		            		 	chatMsg[i].write_time.substr(2, 8).replaceAll("-", ".") +
-		        			 '</div><div class="chat-block__timestamp-time">' +
-		        			 	chatMsg[i].write_time.substr(11, 5) +
-		        			 '</div></div></div>';
-			}else{
-				// 상대방 채팅
-				myChatEle += '<div class="chat-block chat-block--reception">' + 
-	        				 '<div class="chat-block__message chat-block__message--reception">' +
-	            			 '<div class="chat-block__message-text">' +
-	            			 	chatMsg[i].message_content +
-	            			 '</div><div class="chat-block__message-files"></div></div>' +
-	        				 '<div class="chat-block__timestamp">' +
-				             '<div class="chat-block__timestamp-date">' + 
-				              	chatMsg[i].write_time.substr(2, 8).replaceAll("-", ".") +
-				             '</div><div class="chat-block__timestamp-time">' +
-				             	chatMsg[i].write_time.substr(11, 5) +
-				             '</div></div></div>';
-			}
-		}
-		
-		return myChatEle;
-	}
-	
-	function getFileNameFromBlob(blob) {
-		if (blob instanceof Blob && blob.name) {
-			// 파일 타입이 Blob 타입이 맞는지, Blob 파일이 name 속성을 갖는지 체크
-			return blob.name;
-		}
-		
-		// 파일 이름 확인 불가능할 경우
-		return null;
-	}
-})
+}) /* End of Ready Fn */
