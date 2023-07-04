@@ -62,3 +62,20 @@ function colorChange(index) {
             break;
     }
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var leftHalf = document.querySelector('.left-half');
+    var rightHalf = document.querySelector('.right-half');
+
+    leftHalf.addEventListener('click', function() {
+      window.location.href = leftHalf.href;
+    });
+
+    rightHalf.addEventListener('click', function() {
+      window.location.href = rightHalf.href;
+    });
+  });
+
+

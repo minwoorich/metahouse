@@ -3,20 +3,15 @@ package com.multi.metahouse.project.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.server.ServerEndpoint;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
-import com.multi.metahouse.domain.dto.user.UserDTO;
 import com.multi.metahouse.domain.entity.project.AddOptionEntity;
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
@@ -50,14 +45,13 @@ public class ProjectServiceImpl implements ProjectService {
 		// 프로젝트 엔티티
 		ProjectEntity projectEntity = ProjectEntity.builder()
 				.creatorId(projectFormDto.getCreator_id())
-//				.creatorId(new UserDTO().toEntityOnlyId(projectFormDto.getCreator_id()))
 				.title(projectFormDto.getTitle())
 				.description(projectFormDto.getDescription())
 				.category1(projectFormDto.getCategory1())
 				.category2Pj(projectFormDto.getCategory2_pj())
 				.thumbnail(thumbnailPath)
 				.build();
-		System.out.println("컨텐츠 리스트 : " + projectEntity.getProjectContentsEntityList());
+
 
 		// 싱글 패키지 엔티티
 		if (packageFormDto instanceof ProjectPackageSingleForm) {
@@ -124,6 +118,17 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectListDTO> selectListByUserId(String userId) {
 		//DAO 호출해서 Entity리스트 받아옴
 		List<ProjectEntity> entityList = projectDao.selectListByUserId(userId);
+		for(ProjectEntity entity : entityList) {
+			if(entity.getSingleEntity() != null) {
+//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));				
+				System.out.println("서비스--------entity : " + entity.getSingleEntity()+",project_id : " + entity.getProjectId());
+			}else if (entity.getTripleEntity() != null){
+//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));
+				System.out.println("서비스--------entity : " + entity.getTripleEntity()+",project_id : " + entity.getProjectId());
+			}else {
+				System.out.println("널이야ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+			}
+		}
 		//반환할 빈 DTO리스트 생성. 
 		List<ProjectListDTO> dtoList =  new ArrayList<>();
 		
@@ -139,7 +144,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 /*------------------------------------------ OSE -------------------------------------------*/
 
-	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
+	// 프로젝트 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
 	public Page<ProjectEntity> list(String category1, String category2, int pageNo) {
 		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC, "projectDate"));

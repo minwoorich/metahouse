@@ -52,30 +52,30 @@
 
 			<div id="price_summary">
 				<div class="data distance">
-					<span>상품금액</span><span class="price_data"><span th:text="${asset.price}"></span> 원</span>
+					<span>상품금액</span><span class="price_data"><span th:text="${#numbers.formatInteger(asset.price, 3, 'COMMA')}"></span> 원</span>
 				</div>
 				<div class="data distance,">
 					<span>수수료</span><span class="price_data">0원</span>
 				</div>
 				<div class="data distance">
 					<span class="total_price">최종결제 금액</span>
-					<span class="price_data total_price"><span th:text="${asset.price}"></span> 원</span>
+					<span class="price_data total_price"><span th:text="${#numbers.formatInteger(asset.price, 3, 'COMMA')}" id="consumeAmount"></span> 원</span>
 				</div>
 				<hr class="myhr"/>
-				<div id="Uid" hidden="" th:value="${userId}"></div>
+				<div id="Uid" hidden="" th:value="${userInfo.userId}"></div>
 				<div class="data distance">
-					<span>보유 포인트</span><span class="price_data">100,000원</span>
+					<span>보유 포인트</span><span class="price_data" th:text="${#numbers.formatInteger(userInfo.point, 3, 'COMMA')}+'원'"></span>
 				</div>
 				<div class="data distance">
 					<span>결제 후 포인트</span><span class="price_data">70,000원</span>
 				</div>
 				<div class="data distance">
-					<span>*잔액이 부족합니다.</span><a class="price_data">충전하기</a>
+					<span>*잔액이 부족합니다.</span><a class="price_data" th:href="@{/point/charge}">충전하기</a>
 				</div>
 				<hr class="myhr"/>
 				<p>*결제는 메타포인트만 가능합니다.</p>
 				<div id="btn">
-					<button class="button--large myBtn">구매하기</button>
+					<button class="button--large myBtn AssetBtn">구매하기</button>
 				</div>
 			</div>
 		</div>

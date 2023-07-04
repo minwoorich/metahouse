@@ -165,7 +165,7 @@ button {
     width: auto;
     height: 220px;
     padding-block: 30px;
-    border-bottom: 1px solid var(--light-gray);
+    /* border-bottom: 1px solid var(--light-gray); */
 }
 
 .asset-product-card:first-child {

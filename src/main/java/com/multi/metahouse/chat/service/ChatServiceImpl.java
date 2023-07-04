@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.metahouse.chat.repository.dao.ChatDAO;
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
+import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
 import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 
@@ -25,9 +28,19 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public void createChatroom(ChatroomDTO chatroomDTO) {
-		// TODO Auto-generated method stub
-
+	public void createChatroom(String user_1_id, String user_2_id) {
+		// 채팅방 중복 체크
+		int check = dao.checkChatroom(user_1_id, user_2_id);
+		System.out.println("check : " + check);
+		if(check == 0) {
+			// 매치되는 값이 없음
+			dao.createChatroom(user_1_id, user_2_id);
+			
+		}else {
+			System.out.println("채팅방이 중복되었습니다!!! 채팅방을 생성하지 않습니다!!!");
+			
+		}
+		
 	}
 
 	@Override
@@ -97,10 +110,22 @@ public class ChatServiceImpl implements ChatService {
 
 	/* 채팅 메시지 저장 */
 	@Override
+	@Transactional
 	public int insertMessage(ChatMsgDTO chatMsgDTO) {
-		return dao.insertMessage(chatMsgDTO);
+		dao.insertMessage(chatMsgDTO);
+		return dao.updateLastChat(chatMsgDTO);
 	}
 	
+	/* 채팅 메시지 파일 저장 */
+	@Override
+	public int insertMessageFile(ChatMsgFileDTO chatMsgFileDTO) {
+		return dao.insertMessageFile(chatMsgFileDTO);
+	}
 	
+	/* message_id 얻기 위한 메소드 */
+	@Override
+	public int getLastInsertID() {
+		return dao.getLastInsertID();
+	}
 	
 }

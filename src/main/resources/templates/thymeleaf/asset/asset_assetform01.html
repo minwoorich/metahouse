@@ -44,7 +44,7 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title"
-							style="font-weight: bold; font-size: 24px;">서비스 등록 취소</h4>
+							style="font-weight: bold; font-size: 24px;">상품 등록 취소</h4>
 					</div>
 					<div class="modal-body" style="font-weight: 500; font-size: 16px;">
 						<p>
@@ -147,7 +147,7 @@
 				enctype="multipart/form-data">
 				<!-- 세션에 저장된 유저의 id를 projectDto에 저장 -->
 				<input id="user_id" type="hidden" name="user_id"
-					th:value="${session.user_id}" />
+					th:value="${session.loginUser.userId}" />
 
 				<div class="form-wrapper">
 					<!-- 진행 상태 바 -->
@@ -233,7 +233,7 @@
 							<div class="form-item-title" style="width: 114px !important;">
 								<span>상품 설명</span> <span>*</span>
 							</div>
-							<textarea name="description" class="form-item-description"
+							<textarea class="form-item-description"
 								id="form-editor" maxlength="1500"></textarea>
 							
 						</div>

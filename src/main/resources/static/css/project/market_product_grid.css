@@ -31,6 +31,7 @@ td {
 
 .product {
 	margin-bottom: 3em;
+	cursor: pointer;
 }
 
 /* product img */
@@ -54,6 +55,7 @@ td {
 }
 
 .product_title {
+	display: block;
 	margin-bottom: 0.5rem;
 	margin-left: 1rem;
 	font-size: 12pt;

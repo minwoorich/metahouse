@@ -25,12 +25,17 @@ import com.multi.metahouse.domain.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.Setter;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString(exclude = "projectReviewId")
 @Entity
 @Table(name = "project_review_comment")
 public class ProjectReviewCommentEntity {
@@ -38,19 +43,17 @@ public class ProjectReviewCommentEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="project_review_comment_id")
 	private Long projectReviewCommentId;
-//	private String commentWriterId;
+//	@Column(name="project_review_id")
+//	private Long projectReviewId;
+	private String commentWriterId;
 	private String commentText;
 	@CreationTimestamp
 	private LocalDateTime commentDate;
 	
-	///////////////외래키//////////////
-	@OneToOne(fetch = FetchType.EAGER)
+	////////////////부모 참조////////////////////
+	//양방향
+	@OneToOne
 	@JoinColumn(name = "project_review_id")
 	private ProjectReviewEntity projectReviewId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "comment_writer_id")
-	private User commentWriterId;
-	
 	
 }

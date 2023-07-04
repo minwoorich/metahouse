@@ -65,9 +65,21 @@ td {
 	height: 50px;
 	border: none;
 }
+/* 리뷰 종합 섹션 */
+.review_summary{
+	display: flex;
+}
+.review_avg{
+	margin-right: 1rem;
+	font-size: 1.6rem;
+}
+.review_title{
+	margin: 1rem 0;
+	font-size: 14pt;
+	font: bold;
+}
 /* 별점 */
 .reviewer_star_rating {
-	width: 100%;
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-end;
@@ -88,7 +100,7 @@ td {
 	color: #fff58c;
 	padding: 0;
 	position: absolute;
-	z-index: 1;
+	z-index: 0;
 	display: flex;
 	top: 0;
 	left: 0;
@@ -100,7 +112,39 @@ td {
 	z-index: 0;
 	padding: 0;
 }
+/* 고객 리뷰 섹션 */
+.review-wrap{
+	margin: 1rem 0;
+	padding: 1rem;
+	border-radius: 6px;
+	background-color: rgba(223,224,255,0.4);
+}
+.review_info_wrap{
+	display: flex;
+}
+/* 댓글 답글 */
+.speech-bubble {
+	margin: 1rem 0 0 1rem;
+	padding: 1rem;	
+	position: relative;
+	border-radius: 0.4em;
+	background: rgba(187,152,205,0.4);
+}
 
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 0.563em solid transparent;
+	border-right-color: rgba(187,152,205,0.4);
+	border-left: 0;
+	border-top: 0;
+	margin-top: -2em;
+	margin-left: -0.562em;
+}
 /* 신고 섹션 */
 #report {
 	margin: 1.5rem 0;
@@ -165,6 +209,7 @@ td {
 	align-items: center;
 	border-top: 1px solid;
 	border-bottom: 1px solid;
+	cursor: pointer;
 }
 
 #seller_img_box {

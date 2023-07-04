@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 
 
 @Service

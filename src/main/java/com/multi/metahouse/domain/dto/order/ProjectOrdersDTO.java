@@ -15,9 +15,9 @@ public class ProjectOrdersDTO {
 	private String order_id;
 	private String project_id;
 	private String buyer_id;
-	private String project_option_id;
 	private String pre_order_status;
 	private String order_commit_date; 
 	private String request;
+	private String order_price;
 
 }

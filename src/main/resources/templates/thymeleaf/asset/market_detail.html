@@ -22,17 +22,17 @@
 				<div id="main_photo_box">
  					<img th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}" alt="photo" id="photo">
  				</div>
-				<ul id="gallery" th:if="${assetImgs != null}">
+				<ul id="gallery" th:if="${assetImgs.size > 0}">
 					<li>
 	 					<img th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}" alt="photo" id="photo">
 					</li>
 					<li th:each="assetImgs, i:${assetImgs}">
-						<img th:src="@{/upload/asset_thumbnail_img/}+${assetImgs.asset_detail_img_store_filename}" alt="thumbnail">
+						<img th:src="@{/upload/asset_optional_img/}+${assetImgs.asset_detail_img_store_filename}" alt="thumbnail">
 					</li>
 				</ul>
 			</div>
 			<div class="sub_title" id="product_explain">에셋 설명</div>
-			<div class="sub_content" th:text="${asset.description}"></div>
+			<div class="sub_content" th:utext="${asset.description}"></div>
 			<div class="sub_title">가격</div>
 			<div class="sub_content" th:text="${asset.price}+원"></div>
 			
@@ -47,71 +47,105 @@
             	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
             </div>
             
-            <!-- 리뷰 -->
+           <!-- 리뷰 -->
             <div class="sub_title">에셋 평가</div>
-            <div class="sub_content">
+            <div class="sub_content" th:if="${assetReviews.size > 0}">
             	<!-- 종합리뷰 -->
 	            <div class="review_summary">
-	            	<div class="review_avg">4.0</div>
+	            	<div class="review_avg" th:text="${#numbers.formatDecimal(#aggregates.sum(assetReviews.![rating])*1.0/#lists.size(assetReviews), 1, 1)}">
+	            	</div>
 	            	<div>
 						<!-- 별점 -->
 						<div class="reviewer_star_rating">
 							<div class="star-ratings">
-								<div class="star-ratings-fill space-x-2 text-lg"
-								    :style="{ width: ratingToPercent + '%' }">
-									<span>★</span><span>★</span><span>★</span><span>★</span>
+								<div class="star-ratings-fill space-x-2 text-lg" 
+									th:style="${'width:'+(#aggregates.sum(assetReviews.![rating])*1.0/#lists.size(assetReviews))*20+'%'}">
+									★★★★★
 								</div>
 								<div class="star-ratings-base space-x-2 text-lg">
-									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									★★★★★
 								</div>
 							</div>
 						</div>
 	            		<!-- 리뷰갯수 -->
-						<div>서비스 후기 N개</div>
+						<div th:text="${#lists.size(assetReviews)+'개의 에셋 후기'}"></div>
 	            	</div>
 	            </div>
 	            <hr/>
-				<div class="review_title">포토후기</div>
+	            <!-- 리뷰 이미지 -->
 				<div>
-					<div class="review_photos" style="background-color: pink;">
-						<img alt="리뷰이미지" src="#" class="review_photo">
+					<div class="review_title">포토 후기</div>				
+					<div class="banner-slider-wrap">
+						<th:block>
+							<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+							<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>		
+						</th:block>
+						<div class="slider-outter">
+							<div index="0" class="banner-slider-list">
+							<th:block th:each="review : ${assetReviews}" th:if="${review.reviewImg!=null}">
+								<div th:each="reviewImg : ${review.reviewImg}" class="banner-slider-item">
+									<div class="review_photos item-img-warp" >
+										<img  width=100% height=100% alt="리뷰이미지" th:src="@{/upload/review/asset/}+${reviewImg.review_store_filename}"	
+										 class="review_photo" style="background-color: pink;">
+									</div>
+								</div>
+							</th:block>
+							</div>
+						</div>
 					</div>
 				</div>
-				
-				<div class="review_title">등록리뷰</div>
-				<div class="review-wrap">
-					<div class="reviewer">김**(kim9*****)</div>
+	
+				<div class="review_title">에셋 후기</div>
+				<!-- 개인 리뷰 -->
+				<div class="review-wrap" th:each="review : ${assetReviews}">
+					<div class="reviewer" th:text="${review.writer_id}"></div>
 					<div class="review_info_wrap">
-						<!-- 별점 -->
+						<!-- 개인리뷰 별점 -->
 						<div class="reviewer_star_rating">
 							<div class="star-ratings">
 								<div class="star-ratings-fill space-x-2 text-lg"
-									    :style="{ width: ratingToPercent + '%' }">
-										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									 :style="{ width: ratingToPercent + '%' }">
+									<th:block th:each="num : ${#numbers.sequence(0,review.rating-1)}">
+										<span>★</span>
+									</th:block>
 								</div>
 								<div class="star-ratings-base space-x-2 text-lg">
 									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 								</div>
 							</div>
 						</div>
-						<!-- 리뷰점수 -->
-						<div>&ensp;5.0&ensp;</div>
-						<!-- 리뷰등록일자 -->
-						<div class="reviewer">|&ensp;2023.06.21</div>
+						<!-- 개인 리뷰점수 -->
+						<div th:text="'&ensp;'+${#numbers.formatDecimal(review.rating,1,1)}+'&ensp;'"></div>
+						<!-- 개인 리뷰등록일자 -->
+						<div class="reviewer" th:text="'|&ensp;'+${#dates.format(review.review_date,'yyyy.MM.dd')}"></div>
+					</div>
+					<!-- 개인 리뷰 이미지 -->
+					<div index="0" class="banner-slider-list">
+						<div class="banner-slider-item" th:if="${review.reviewImg!=null}" 
+							th:each="reviewImg : ${review.reviewImg}">
+							<div class="review_photos item-img-warp" >
+								<img  width=100% height=100% alt="리뷰이미지" class="review_photo" 
+									th:src="@{/upload/review/project/}+${reviewImg.review_store_filename}">
+							</div>
+						</div>
 					</div>
 					<br/>
-					<div class="review_content">상담 친절하게 잘해주셔요 결과물도 만족합니다~!</div>
-				</div>
-				<div class="review-wrap">
-					<div class="reviewer">김**(kim9*****)</div>
-					<div class="reviewer">2023-06-21</div><br/>
-					<div class="review_content">대표님 후기작성해주셨네요~~ 감사합니다 ㅎㅎ
-사업 진행하시다가 홈페이지관련 및 다른업무가 생기더라도
-유앤준을 찾아주시면
-성심성의껏 답변드려서 도움드리도록 노력하겠습니다 감사합니다.</div>
-				</div>
-				            
+					<!-- 개인 리뷰 내용 -->
+					<div class="review_content" th:text="${review.review_text}"></div>
+					
+					<!-- 답글 섹션 -->
+					<div class="comment speech-bubble" th:if="${review.reviewComment!=null}">
+						<div>크리에이터<span th:text="'&ensp;|&ensp;'+${#dates.format(review.reviewComment.comment_date,'yyyy.MM.dd')}"></span></div><br>
+						<div th:text="${review.reviewComment.comment_text}"></div>
+					</div>
+				</div>				
             </div>
+            <!-- 리뷰없을 때 -->
+            <div class="sub_content" th:if="${assetReviews.size <= 0}">
+	            <div class="review_summary">
+					<div> 아직 등록된 리뷰가 없습니다.</div>
+	            </div>
+	        </div>
             
             <!-- 게시글 신고 -->
 			<div id="report">
@@ -131,7 +165,7 @@
 				<div class="product_info" id="product_price" th:text="${asset.price}+원"></div>
 			</div>
 			<!-- seller profile -->
-			<div id="seller_profile">
+			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${asset.seller_id})}'|">
 				<div id="seller_img_box">
 					<img alt="프로필 이미지" src="/metahaus/images/test_img.jpg" id="seller_img">
 				</div>
@@ -142,7 +176,8 @@
 			</div>
 			<!-- buy button -->
 			<div id="btn">
-				<button class="button--small btn_custom" id="ask">문의하기</button>
+				<button class="button--small btn_custom" id="ask" 
+					th:onclick="|location.href='@{/chat/create/chatroom(seller_id=${asset.seller_id})}'|">문의하기</button>
 				<button class="button--small btn_custom"
 					 th:onclick="|location.href='@{/asset/purchase(assetNum=${asset.asset_id})}'|">구매하기</button>
 			</div>

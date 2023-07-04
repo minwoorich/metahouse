@@ -1,0 +1,134 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/nonsideLayout}">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/search/search.css}" />
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>META HOUSE</title>
+</head>
+<body layout:fragment="content">
+
+      
+   
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#services">서비스</a></li>
+      <li><a data-toggle="tab" href="#experts">전문가</a></li>
+    </ul>
+    
+   
+
+    <div class="tab-content">
+    
+      <div id="services" class="tab-pane fade in active">
+       <div class="result-count">
+        <p>총 <span class="count">[[${#lists.size(serviceList)}]]</span>개의 검색 결과입니다.</p>
+      </div>
+        <div class="dropdown-wrapper">
+         <div class="dropdown-wrapper">
+  <select id="searchCategory" name="category" class="select">
+    <option th:selected="${filter.category} == ${'all'}" value="all">카테고리 선택하기</option>
+    <option th:selected="${filter.category} == ${'게더타운'}" value="게더타운">게더타운</option>
+    <option th:selected="${filter.category} == ${'마인크래프트'}" value="마인크래프트">마인크래프트</option>
+    <option th:selected="${filter.category} == ${'제페토'}" value="제페토">제페토</option>
+    <option th:selected="${filter.category} == ${'샌드박스'}" value="샌드박스">샌드박스</option>
+    <option th:selected="${filter.category} == ${'로블록스'}" value="로블록스">로블록스</option>
+  </select>
+</div>
+
+        <div class="dropdown-wrapper">
+  <select id="searchOption" name="option" class="select">
+    <option th:selected="${filter.option} == ${'all'}" value="all">카테고리 선택하기</option>
+    <option th:selected="${filter.option} == ${'aa'}" value="aa">메타에셋</option>
+    <option th:selected="${filter.option} == ${'pp'}" value="pp">메타긱스</option>
+ 
+  </select>
+</div>
+       
+        </div>
+        
+        <div class="row">
+          <div class="col-md-4" th:each="service : ${serviceList}">
+            <div class="card">
+              <div class="service-card-body">
+                <img width="100%" height="100%" th:src="@{/upload/asset_thumbnail_img/}+${service.img}" alt="프로필 이미지">
+                <h4 class="card-title">[[${service.title}]]</h4>
+                <p class="card-text">[[${service.descr}]]</p>
+                <p class="card-text">가격: $[[${service.price}]]</p>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <div class="pagination-wrapper">
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <!-- 추가적인 페이지 번호를 여기에 추가할 수 있습니다. -->
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div id="experts" class="tab-pane fade">
+       <div class="result-count">
+        <p>총 <span class="count">[[${#lists.size(userList)}]]</span>개의 검색 결과입니다.</p>
+      </div>
+        <div class="pro-row">
+           
+            <div th:each="user : ${userList}" class="expert-card">
+                <a href="expert-page.html?id=1">
+                  <div class="card">
+                    <img th:src="@{/upload/userThumbnail/}+${user.thumbnail_store_filename}" alt="프로필 이미지">
+                    <div class="pro-card-body">
+                      <h4 class="card-title">[[${user.user_name}]]</h4>
+                      <p class="card-text">[[${user.self_introduction}]]</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            
+             
+        </div>
+
+        <div class="pagination-wrapper">
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <!-- 추가적인 페이지 번호를 여기에 추가할 수 있습니다. -->
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  
+    
+	<script th:src="@{/js/search/search.js}"></script>
+</body>
+</html>

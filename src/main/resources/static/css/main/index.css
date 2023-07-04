@@ -159,6 +159,7 @@ body{
     flex-shrink:0;
     padding:2%;
     box-sizing: border-box;
+    cursor: pointer;
 }
 .banner-slider-item2{
     width: 50%;
@@ -201,6 +202,9 @@ body{
 }
 .banner-slider-item span{
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
@@ -368,3 +372,57 @@ body{
 }
 
 
+
+
+
+
+ .image-container2 {
+	    width: 360px;
+	    height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .image-container2 img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .left-half {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      
+    }
+    
+    .right-half {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .left-half:hover,
+    .right-half:hover {
+      opacity: 1;
+    }
+    
+    .tooltip2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      pointer-events: none;
+    }

@@ -37,8 +37,10 @@
 						<h2 style="color: white; margin-top: 54px;">
 							메타 마켓 No.1 메타하우스에서<br> 원하는 전문가를 찾아보세요!
 						</h2>
-						<input style="margin-top: 50px;" class="test2" type="text"
-							placeholder="검색어를 입력하세요.">
+						<form action="/metahaus/search/result" method="get">
+							<input name="keyword" style="margin-top: 50px;" class="test2" type="text"
+								placeholder="검색어를 입력하세요.">
+						</form>
 					</div>
 				</div>
 
@@ -92,18 +94,54 @@
 
 			<div class="image-grid">
 
-				<img src="/metahaus/images/Bondee.png" alt="Image 1"> <img
-					src="/metahaus/images/gather.png" alt="Image 2"> <img
-					src="/metahaus/images/minecraft.png" alt="Image 3"> <img
-					src="/metahaus/images/ZEPETO.png" alt="Image 4"> <img
-					src="/metahaus/images/thesendbox.png" alt="Image 5"> <img
-					src="/metahaus/images/ROBLOX.png" alt="Image 6">
+				<div class="image-container2">
+					<a th:href="@{/asset/main?pageNo=0}" class="left-half"> 
+					<span class="tooltip2">에셋이동</span>
+					</a>
+					<a th:href="@{/project/main?pageNo=0}" class="right-half"> 
+					<span class="tooltip2">긱스이동</span>
+					</a>
+					<img src="/metahaus/images/Bondee.png" alt="이미지">
+				</div>
+				
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=0&category1=게더타운}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/gather.png" alt="Image 2"> 
+				</div>
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=0&category1=마인크래프트}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/minecraft.png" alt="Image 3"></div>
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=0&category1=제페토}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/ZEPETO.png" alt="Image 4"></div> 
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=0&category1=더%20샌드박스}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/thesendbox.png" alt="Image 5"></div> 
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=0&category1=로블록스}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a href="www.daum.net" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/ROBLOX.png" alt="Image 6"></div>
+				
 			</div>
 		</div>
 	</section>
+	
 
-
-<hr/>
+	<hr />
 
 
 
@@ -125,20 +163,25 @@
 						<div class="banner-slider-item2" th:each="n:${reviewList}">
 							<div class="review-card">
 								<div class="card-header">
-									
-									
+
+
 									<div class="image-container">
-										<img th:if="${n.profile_img != null}" th:src="@{/upload/userthumbnail/}+${n.profile_img}" alt="profile" />
-										<img th:unless="${n.profile_img != null}" src="/metahaus/images/CSLEE.JPG" alt="profile" />
+										<img th:if="${n.profile_img != null}"
+											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
+											alt="profile" /> <img th:unless="${n.profile_img != null}"
+											src="/metahaus/images/CSLEE.JPG" alt="profile" />
 									</div>
-									
+
 									<div class="info-container">
-										<div class="star-rating"><span th:each="n:${#numbers.sequence(1,5)}" th:text="${(n-5)<=0 ? '★':'☆'}"></span>
+										<div class="star-rating">
+											<span th:each="n:${#numbers.sequence(1,5)}"
+												th:text="${(n-5)<=0 ? '★':'☆'}"></span>
 										</div>
 										<div class="date" th:text="${n.review_date}">2023-06-23</div>
 									</div>
 								</div>
-								<div class="review-content" th:text="${n.review_text}">이곳에 리뷰 내용을 작성하세요.</div>
+								<div class="review-content" th:text="${n.review_text}">이곳에
+									리뷰 내용을 작성하세요.</div>
 								<div class="work-date">작업일: 2023-06-21</div>
 							</div>
 
@@ -156,8 +199,9 @@
 		<div class="banner-wrap">
 
 			<div class="banner-title-wrap">
-				<span class="myfont-1">메타 긱스에서 당신의 프로젝트를 맡겨보세요!</span> <span
-					class="myfont-2 ml-auto">더보기</span>
+				<span class="myfont-1">메타 크리에이터에게 당신의 프로젝트를 맡겨보세요!</span>
+				<span class="myfont-2 ml-auto" style="cursor: pointer;"
+					th:onclick="|location.href='@{/project/main?pageNo=0}'|">더보기</span>
 			</div>
 
 			<div class="banner-slider-wrap">
@@ -167,16 +211,18 @@
 				<div class="slider-outter testtest">
 					<div index="0" class="banner-slider-list">
 
-						<div th:each="project:${projectList}" class="banner-slider-item">
+						<div th:each="project:${projectList}" class="banner-slider-item"
+							th:onclick="|location.href='@{/project/detail(projectNum=${project.project_id})}'|">
 							<div class="item-img-warp"></div>
 							<div class="item-desc-warp">
 								<span th:text="${project.title}" class="myfont-3">메타버스틱스1</span>
-								<span th:text="${project.description}" class="myfont-2">당신만의
-									메타버스 맵을 제작 해 드리겠습니다. 얼른 제안하세요!</span> <span
-									th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}"
-									class="myfont-1">85,000원~</span> <span class="myfont-3"><span
-									th:text="${'★ '+project.average_reviews}">★ 4.8 </span>|
-									[[${project.review_count}]]개의 평가</span>
+								<span th:utext="${project.description}" class="myfont-2"></span>
+								<span th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}"
+									class="myfont-1">85,000원~</span>
+								<span class="myfont-3">
+									<span th:text="${'★ '+project.average_reviews}">★ 4.8 </span>
+									| [[${project.review_count}]]개의 평가
+								</span>
 							</div>
 						</div>
 
@@ -197,8 +243,9 @@
 		<div class="banner-wrap">
 
 			<div class="banner-title-wrap">
-				<span class="myfont-1">메타 마켓에서 당신이 원하는 에셋을 가져가세요!</span> <span
-					class="myfont-2 ml-auto">더보기</span>
+				<span class="myfont-1">메타 마켓에서 당신이 원하는 에셋을 가져가세요!</span>
+				<span class="myfont-2 ml-auto" style="cursor: pointer;"
+					th:onclick="|location.href='@{/asset/main?pageNo=0}'|">더보기</span>
 			</div>
 
 			<div class="banner-slider-wrap">
@@ -209,7 +256,7 @@
 					<div index="0" class="banner-slider-list">
 
 						<div th:each="asset:${assetList}" class="banner-slider-item">
-							<div>
+							<div th:onclick="|location.href='@{/asset/detail(assetNum=${asset.asset_id})}'|">
 								<div class="item-img-warp">
 									<img width=100% height=100%
 										th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"></img>
@@ -238,7 +285,7 @@
 		</div>
 	</section>
 
-	
+
 	<section class="section-visual2">
 		<video src="/metahaus/images/banner-bottom-video.mp4" autoplay muted
 			loop></video>
