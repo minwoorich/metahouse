@@ -8,4 +8,5 @@ public interface UserDAO {
 	User update(User user);
 	void delete(String userId);
 	User read(String userId);
+	User socialLogin(String socialLoginId, String socialName);
 }

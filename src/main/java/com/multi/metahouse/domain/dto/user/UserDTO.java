@@ -18,10 +18,10 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Alias("member")
+@Alias("user")
 public class UserDTO {
 	@NonNull
-	private String userID;
+	private String userId;
 	private String email;
 	private String userName;
 	private String password;
@@ -38,6 +38,8 @@ public class UserDTO {
 	private int mkAgree;
 	private int point;
 	private String thumbnailStoreFilename;
+	private String socialLoginId;
+	private String socialName;
 	
 	
 }
