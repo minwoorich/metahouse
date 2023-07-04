@@ -1,6 +1,7 @@
 package com.multi.metahouse.project.repository.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
@@ -26,8 +27,10 @@ public interface ProjectDAO {
 	public List<ProjectDTO> findByCreatorId(String creatorId);
 	
 /*------------------------------- OSE -----------------------------*/
+	public List<ProjectDTO> Allproject(Integer page);
 	public ProjectDTO projectInfo(Long project_id);
 	public List<ProjectContentsDTO> projectImg(Long project_id);
 	public List<ProjectAddOption> projectOption(Long project_id);
+	public Map<String, Integer> projectReviewSummary(int project_id);
   
 }

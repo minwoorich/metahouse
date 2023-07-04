@@ -25,7 +25,7 @@ public interface ProjectService {
 	void deleteProject(Long projectId);
 
 /*------------------------------------- OSE ------------------------------------------------*/
-	public Page<ProjectEntity> list(String category1, String category2, int pageNo);
+	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2);
 	public ProjectDTO projectInfo(Long projectNum);
 	public List<ProjectContentsDTO> projectImg(Long projectNum);
 	public List<ProjectAddOption> projectOption(Long project_id);

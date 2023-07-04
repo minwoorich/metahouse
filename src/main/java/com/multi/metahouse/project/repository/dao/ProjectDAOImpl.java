@@ -1,6 +1,7 @@
 package com.multi.metahouse.project.repository.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 /*---------------------------- OSE -------------------------------*/
+	
+	@Override
+	public List<ProjectDTO> Allproject(Integer page) {
+		return session.selectList("com.multi.metahouse.project.allProject", page);
+	}
 	@Override
 	public ProjectDTO projectInfo(Long project_id) {
 		return session.selectOne("com.multi.metahouse.project.findProject", project_id);
@@ -74,6 +80,10 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public List<ProjectAddOption> projectOption(Long project_id) {
 		return session.selectList("com.multi.metahouse.project.findProjectOptioin", project_id);
+	}
+	@Override
+	public  Map<String, Integer> projectReviewSummary(int project_id) {
+		return session.selectOne("com.multi.metahouse.domain.dao.ReviewDAO.ProjectReviewSummarybyid", project_id);
 	}
 
 }

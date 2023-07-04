@@ -2,6 +2,7 @@ package com.multi.metahouse.project.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.websocket.server.ServerEndpoint;
 
@@ -30,6 +31,8 @@ import com.multi.metahouse.domain.entity.project.jpadto.ProjectPackageTripleForm
 import com.multi.metahouse.project.repository.dao.ProjectDAO;
 import com.multi.metahouse.project.repository.jpa.ProjectRepository;
 
+import ch.qos.logback.classic.pattern.Util;
+
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
@@ -42,21 +45,18 @@ public class ProjectServiceImpl implements ProjectService {
 		this.repository = repository;
 		this.projectDao = projectDao;
 	}
+
 ////////////////////민우 영역////////////////////////////////////////////////////////////////////////
 	@Override // 판매자가 본인의 서비스 프로젝트 등록
 	public void insertProjectInfo(ProjectFormDTO projectFormDto, ProjectPackageForm packageFormDto,
 			String thumbnailPath, List<ProjectContentsDTO> contentsList) {
-		
+
 		// 프로젝트 엔티티
-		ProjectEntity projectEntity = ProjectEntity.builder()
-				.creatorId(projectFormDto.getCreator_id())
+		ProjectEntity projectEntity = ProjectEntity.builder().creatorId(projectFormDto.getCreator_id())
 //				.creatorId(new UserDTO().toEntityOnlyId(projectFormDto.getCreator_id()))
-				.title(projectFormDto.getTitle())
-				.description(projectFormDto.getDescription())
-				.category1(projectFormDto.getCategory1())
-				.category2Pj(projectFormDto.getCategory2_pj())
-				.thumbnail(thumbnailPath)
-				.build();
+				.title(projectFormDto.getTitle()).description(projectFormDto.getDescription())
+				.category1(projectFormDto.getCategory1()).category2Pj(projectFormDto.getCategory2_pj())
+				.thumbnail(thumbnailPath).build();
 		System.out.println("컨텐츠 리스트 : " + projectEntity.getProjectContentsEntityList());
 
 		// 싱글 패키지 엔티티
@@ -113,61 +113,68 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectListDTO> selectAllProjects() {
 		List<ProjectEntity> entityList = projectDao.selectAllProjects();
 		List<ProjectListDTO> dto = new ArrayList<ProjectListDTO>();
-		for(ProjectEntity entity : entityList) {
+		for (ProjectEntity entity : entityList) {
 			dto.add((new ProjectListDTO()).fromEntity(entity));
 		}
-		
+
 		return dto;
 	}
-	
+
 	@Override // 유저 ID로 프로젝트 가져오기
 	public List<ProjectListDTO> selectListByUserId(String userId) {
-		//DAO 호출해서 Entity리스트 받아옴
+		// DAO 호출해서 Entity리스트 받아옴
 		List<ProjectEntity> entityList = projectDao.selectListByUserId(userId);
-		//반환할 빈 DTO리스트 생성. 
-		List<ProjectListDTO> dtoList =  new ArrayList<>();
-		
-		for(ProjectEntity entity : entityList) {
+		// 반환할 빈 DTO리스트 생성.
+		List<ProjectListDTO> dtoList = new ArrayList<>();
+
+		for (ProjectEntity entity : entityList) {
 			dtoList.add(new ProjectListDTO().fromEntity(entity));
 		}
 		return dtoList;
 	}
-	
+
 	@Override
 	public void deleteProject(Long projectId) {
 		projectDao.delete(projectId);
 	}
-/*------------------------------------------ OSE -------------------------------------------*/
+	/*------------------------------------------ OSE -------------------------------------------*/
 
-	// 프로젝트 상품리스트 출력: 카테로리 값 받아서 출력해주기
+	// 프로젝트 상품리스트 출력: 카테고리 값 받아서 출력해주기
 	@Override
-	public Page<ProjectEntity> list(String category1, String category2, int pageNo) {
-		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC, "projectDate"));
-		Page<ProjectEntity> projectlistPage = null;
-		if (category1 == null && category2 == null) {
-			projectlistPage = repository.findAll(pageRequest);
-		} else if (category1 != null && category2 == null) {
-			projectlistPage = repository.findByCategory1(category1, pageRequest);
-		} else {
-			projectlistPage = repository.findByCategory1AndCategory2Pj(category1, category2, pageRequest);
+	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2) {		
+		List<ProjectDTO> projectsInPage = (List<ProjectDTO>) projectDao.Allproject(currnetPage);
+		if(currnetPage != null) {
+			for (int i = 0; i < projectsInPage.size(); i++) {
+				int projectId = projectsInPage.get(i).getProject_id();
+				Map<String, Integer> reviewSummary = projectDao.projectReviewSummary(projectId);
+				/* java.lang.Long cannot be cast to java.lang.Integer 에러 발생 
+				 * : long 형(db 기준 number)을 바로 int로 변환하려고 하기 때문 */
+				int reviewCount = Integer.parseInt(String.valueOf(reviewSummary.get("Review_count")));
+				double reviewAvg = 0;
+				if (reviewCount > 0) {
+					reviewAvg = Double.parseDouble(String.valueOf(reviewSummary.get("Review_Avg")));
+				}
+				projectsInPage.get(i).setReview_count(reviewCount);
+				projectsInPage.get(i).setAverage_reviews(reviewAvg);
+				System.out.println(projectId + "=" + reviewSummary);
+			}
 		}
-
-		return projectlistPage;
+		return projectsInPage;
 	}
-	
 
 	@Override
 	public ProjectDTO projectInfo(Long projectNum) {
 		return projectDao.projectInfo(projectNum);
 	}
+
 	@Override
 	public List<ProjectContentsDTO> projectImg(Long projectNum) {
 		return projectDao.projectImg(projectNum);
 	}
+
 	@Override
 	public List<ProjectAddOption> projectOption(Long projectNum) {
 		return projectDao.projectOption(projectNum);
 	}
-	
 
 }
