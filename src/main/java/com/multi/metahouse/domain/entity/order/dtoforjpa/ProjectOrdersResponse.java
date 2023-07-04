@@ -1,4 +1,4 @@
-package com.multi.metahouse.domain.entity.project.jpadto;
+package com.multi.metahouse.domain.entity.order.dtoforjpa;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

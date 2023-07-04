@@ -13,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
 import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
+import com.multi.metahouse.domain.entity.order.ProjectOrdersDetailEntity;
 import com.multi.metahouse.domain.entity.order.ProjectOrdersEntity;
 import com.multi.metahouse.domain.entity.order.SelectedAddOptionEntity;
+import com.multi.metahouse.domain.entity.order.dtoforjpa.ProjectOrdersConfirmUpdateDTO;
+import com.multi.metahouse.domain.entity.order.dtoforjpa.ProjectOrdersResponse;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
-import com.multi.metahouse.domain.entity.project.jpadto.ProjectOrdersResponse;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.order.repository.dao.OrderDAO;
 import com.multi.metahouse.order.repository.jpa.ProjectOrdersRepository;
@@ -140,8 +142,7 @@ public class OrderServiceImpl implements OrderService {
 								entity.getOrderDetail().getOrderDate(),
 								null));
 			}else {//"구매확정"
-				System.out.println("------------------");
-				System.out.println("주문완료일시 : " + entity.getOrderDetail().getCompletionDate());
+				
 				requestOrderList.add(
 						new ProjectOrdersResponse.BuyerResponse(
 								entity, 
@@ -160,28 +161,19 @@ public class OrderServiceImpl implements OrderService {
 			String buyerId,
 			String category1,
 			String category2,
-			String category3, 
 			LocalDateTime category4, 
 			LocalDateTime category5, int pageNo) {
 		List<ProjectOrdersEntity> orderList = null;
 		
 		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC,"orderCommitDate"));
-		if("all".equals(category1)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1(pageRequest, buyerId, category2, category3, category4, category5);
-		}else if("all".equals(category2)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC2(pageRequest, buyerId, category1, category3, category4, category5);
-		}else if("all".equals(category3)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC3(pageRequest, buyerId, category1, category2, category4, category5);
+		if("all".equals(category1) && !"all".equals(category1) ) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1(pageRequest, buyerId, category2,  category4, category5);
+		}else if(!"all".equals(category1) && "all".equals(category2)) {
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC2(pageRequest, buyerId, category1, category4, category5);
 		}else if("all".equals(category1) && "all".equals(category2)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC2(pageRequest, buyerId, category3, category4, category5);
-		}else if("all".equals(category1) && "all".equals(category3)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC3(pageRequest, buyerId, category2, category4, category5);
-		}else if("all".equals(category2) && "all".equals(category3)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC2AndC3(pageRequest, buyerId, category1, category4, category5);
-		}else if("all".equals(category1) && "all".equals(category2) && "all".equals(category3)) {
-			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC2AndC3(pageRequest, buyerId, category4, category5);
+			orderList = projectOrderRepository.selectOrderForBuyerWithoutC1AndC2(pageRequest, buyerId, category4, category5);
 		}else {
-			orderList = projectOrderRepository.selectOrderForBuyer(pageRequest, buyerId, category1, category2, category3, category4, category5);
+			orderList = projectOrderRepository.selectOrderForBuyer(pageRequest, buyerId, category1, category2, category4, category5);
 		}
 		
 //		 // 엔티티 잘 받아 오는지 확인
@@ -210,8 +202,6 @@ public class OrderServiceImpl implements OrderService {
 								entity.getOrderDetail().getOrderDate(),
 								null));
 			}else {//"구매확정"
-				System.out.println("------------------");
-				System.out.println("주문완료일시 : " + entity.getOrderDetail().getCompletionDate());
 				requestOrderList.add(
 						new ProjectOrdersResponse.BuyerResponse(
 								entity, 
@@ -221,17 +211,24 @@ public class OrderServiceImpl implements OrderService {
 								entity.getOrderDetail().getCompletionDate()));
 			}
 		}
-		// 엔티티에서 DTO로 잘 데이터 넘겼는지 확인
-		for (ProjectOrdersResponse.BuyerResponse resp : requestOrderList) {
-			System.out.println("resp : " + resp);
-		}
+		
 		return requestOrderList;
 	}
 
 	@Override
 	public List<ProjectOrdersResponse.SellerResponse> selectOrderListForSellerByUserId(String sellerId, int pageNo) {
-		// TODO Auto-generated method stub
+		
 		return null;
+	}
+
+	@Override @Transactional
+	public void updateOrder(ProjectOrdersConfirmUpdateDTO updatedData) {
+		
+		ProjectOrdersEntity orderEntity =  projectOrderRepository.findById(updatedData.getOrderId()).orElseThrow(() 
+				-> new RuntimeException());
+		orderEntity.getOrderDetail().setCompletionDate(LocalDateTime.now());
+		orderEntity.setOrderStatus(updatedData.getOrderStatus());
+		System.out.println("orderEntity 써비스단!!!" + orderEntity);
 	}
 
 

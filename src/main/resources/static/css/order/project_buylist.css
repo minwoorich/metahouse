@@ -175,7 +175,7 @@ select {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	width: 280px;
+	width: fit-content;
 	align-items: center;
 }
 
@@ -184,6 +184,7 @@ select {
 }
 
 .category04 input {
+	width : 200px;
 	padding-left: 15px;
 }
 
@@ -302,6 +303,7 @@ select {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: end;
 }
 
 .project-body-tag-img {
@@ -343,7 +345,16 @@ select {
 	justify-content: space-between;
 	align-items: end;
 }
-
+.project-body-tag-info-row03 div span:nth-child(1){
+	font-size : 14px;
+	color:var(--gray);
+	font-weight: 500;
+}
+.project-body-tag-info-row03 div span:nth-child(2){
+	color:var(--bright-purple);
+	font-size : 18px;
+	font-weight: 500;
+}
 .project-body-button {
 	padding: 8px 20px;
 	font-size: 14px;

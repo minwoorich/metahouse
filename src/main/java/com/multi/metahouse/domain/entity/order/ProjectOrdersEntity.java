@@ -23,10 +23,15 @@ import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -68,7 +73,10 @@ public class ProjectOrdersEntity {
 	@JoinColumn(name = "project_order_id", referencedColumnName = "order_id")
 	private List<ProjectReviewEntity> reviewList = new ArrayList<>();
 	
-
+////////////////////////////////////////////////////////////////////////
+	public void update(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 	
 
 }
