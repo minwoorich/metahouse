@@ -12,6 +12,11 @@
     	INSERT INTO message
     	VALUES (null, #{writer_id}, #{chatroom_id}, #{write_time}, #{message_content}, #{message_type})
     </insert>
+    
+    <insert id="insertChatFileMsg" parameterType="chatmsgfile">
+    	INSERT INTO message_file
+    	VALUES (null, #{message_id}, #{file_origin_name}, #{file_store_name}, #{file_seq})
+    </insert>
 
     <update id="updateChatroom">
         UPDATE chatroom
@@ -62,6 +67,10 @@
 		FROM chatroom
 		where user_1_id = #{user_1_id}
 		and user_2_id = #{user_2_id}
+    </select>
+    
+    <select id="getLastInsertID" resultType="int">
+    	SELECT LAST_INSERT_ID()
     </select>
 
 </mapper>
