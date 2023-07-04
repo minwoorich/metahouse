@@ -16,4 +16,18 @@
         // 페이지 이동을 위한 추가적인 로직을 여기에 작성하세요.
         console.log('Go to page', page);
       });
-    });
+      
+      
+      
+});
+ 
+ function goLink(type , no){
+	 let link = "";
+	  if(type ==="a"){
+		  link = "/metahaus/asset/detail?assetNum="+no;
+	  }else{
+		 link =  "/project/detail?projectNum="+no;
+	  }
+	  
+	  location.href = link;
+ }

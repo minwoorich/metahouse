@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Alias("serviceSearchResult")
 public class ServiceSearchResultDTO {
+	String id;
+	String type;
 	String title;
 	int price;
 	String img;
