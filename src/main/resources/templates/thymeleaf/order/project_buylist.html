@@ -33,30 +33,29 @@
 						style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>주문 취소</span>
-						<p>1</p>
+						<p th:text=${orderCount.cancelled}></p>
 					</div>
 				</div>
 				<div class="project-body-box">
-					<i class="fa-solid fa-hourglass-start fa-2xl" style="color: #8d72e1;"></i>
+					<i class="fa-solid fa-hourglass-start fa-2xl"
+						style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>주문 대기중</span>
-						<p>1</p>
+						<p th:text=${orderCount.pending}></p>
 					</div>
 				</div>
 				<div class="project-body-box">
 					<i class="fa-solid fa-truck-fast fa-2xl" style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>진행 중</span>
-						<p>1</p>
+						<p th:text=${orderCount.proceeding}></p>
 					</div>
 				</div>
-				
-
 				<div class="project-body-box">
 					<i class="fa-solid fa-credit-card fa-2xl" style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>구매 확정</span>
-						<p>1</p>
+						<p th:text=${orderCount.completion}></p>
 					</div>
 				</div>
 			</div>
@@ -78,9 +77,9 @@
 					<option value="기획서">기획서</option>
 					<option value="기타">기타</option>
 				</select> <select class="search-box category03">
-					<option value="orderno">주문 번호</option>
-					<option value="productno">상품 번호</option>
-					<option value="nickname">닉네임</option>
+					<option value="basic">BASIC</option>
+					<option value="economy">ECONOMY</option>
+					<option value="premium">PREMIUN</option>
 				</select>
 
 				<div class="category04">
@@ -90,8 +89,8 @@
 				</div>
 			</div>
 			<div class="project-search-form-row02">
-				<input type="text" class="search-box project-search-bar"
-					placeholder="검색어를 입력하세요">
+				<!-- input type="text" class="search-box project-search-bar"
+					placeholder="검색어를 입력하세요"> -->
 				<button type="button" onclick="" class="search-button button--small">조회</button>
 			</div>
 		</div>
@@ -100,178 +99,207 @@
 				조회 기간 : 1년)</span>
 		</div>
 		<ul class="project-body-cardlist" th:each="order : ${orderList}">
-		<th:block th:switch="${order.orderStatus}">
-			<!-- 주문 대기중 -->
-			<li class="project-body-card" th:case="주문대기중">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">주문 대기중</span>
-						<div>
-							<span
-								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;" th:text="${order.packageType}"></span>
-							<span style="font-size: 12px; color: var(--gray);">|</span> <span
-								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">주문 대기중</span> <span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> <span
-								style="font-size: 12px; color: var(--bright-purple);" th:text="${order.orderCommitDate}"></span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);" th:text="'#'+${order.orderId}"></span>
-								<span th:text="${order.project.title}"></span>
+			<th:block th:switch="${order.orderStatus}">
+				<!-- 주문 대기중 -->
+				<li class="project-body-card" th:case="주문대기중">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
+							<span style="font-size: 16px; font-weight: bold;">주문 대기중</span>
+							<div>
+								<span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">주문
+									대기중</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+								<span style="font-size: 12px; color: var(--gray);">주문일시</span>
+								<span style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderCommitDate}"></span>
 							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;" th:text="${order.totalPrice}+'원'"></span>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
 							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
 								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<!-- 주문 취소 -->
-			<li class="project-body-card"
-				style="background-color: var(--light-gray);" th:case="주문취소">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold; color: var(--red);">주문 취소</span>
-						<div>
-							<span
-								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;" th:text="${order.packageType}"></span>
-							<span style="font-size: 12px; color: var(--gray);">|</span> <span
-								style="font-size: 12px; color: var(--red); font-weight: bold;">주문
-								취소</span> <span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문일시</span> <span
-								style="font-size: 12px; color: var(--bright-purple);" th:text="${order.orderCommitDate}"></span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);" th:text="'#'+${order.orderId}"></span>
-								<span th:text="${order.project.title}"></span>
-							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;" th:text="${order.totalPrice}+'원'"></span>
-							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+								<div class="project-body-tag-info-row02">
+									<span style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></span>
 								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<!-- 진행 중 -->
-			<li class="project-body-card" th:case="진행중">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">진행 중</span>
-						<div>
-							<span
-								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;" th:text="${order.packageType}"></span>
-							<span style="font-size: 12px; color: var(--gray);">|</span> <span
-								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">진행
-								중</span> <span style="font-size: 12px; color: var(--gray);">|</span> <span
-								style="font-size: 12px; color: var(--gray);">주문시작</span> <span
-								style="font-size: 12px; color: var(--bright-purple);"  th:text="${order.orderDate}"></span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);" th:text="'#'+${order.orderId}"></span>
-								<span  th:text="${order.project.title}"></span>
-							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;" th:text="${order.totalPrice}+'원'"></span>
-							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+								<div class="project-body-tag-info-row03">
+									<div>
+										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+									</div>
+									<button type="button"
+										class="project-body-button button--xsmall">문의하기</button>
 								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="project-body-download">
-					<div class="project-body-download-text">
-						<span>작업물을 성공적으로 전달받으셨다면<br /> 구매 확정 버튼을 눌러 진행 상태를 변경해주세요!
-						</span>
-					</div>
-					<!-- <button type="button">다운로드 기간만료</button> -->
-					<button type="button">구매 확정</button>
-				</div>
-			</li>
-			<!-- 구매 확정 - 리뷰작성 전 -->
-			<li class="project-body-card" th:case="구매확정">
-				<div class="project-body-tag">
-					<div class="project-body-tag-row01">
-						<span style="font-size: 16px; font-weight: bold;">구매 확정</span>
-						<div>
+				</li>
+				<!-- 주문 취소 -->
+				<li class="project-body-card"
+					style="background-color: var(--light-gray);" th:case="주문취소">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
 							<span
-								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;" th:text="${order.packageType}"></span>
-							<span style="font-size: 12px; color: var(--gray);">|</span> <span
-								style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">구매
-								확정</span> <span style="font-size: 12px; color: var(--gray);">|</span>
-							<span style="font-size: 12px; color: var(--gray);">주문시작</span> <span
-								style="font-size: 12px; color: var(--bright-purple);" th:text="${order.orderDate}"></span> <span
-								style="font-size: 12px; color: var(--gray); margin-inline: 10px;">|</span>
-							<span
-								style="font-size: 12px; color: var(--gray); margin-right: 10px;">확정일시</span>
-							<span style="font-size: 12px; color: var(--bright-purple);" th:text="${order.completionDate}"></span>
-						</div>
-					</div>
-					<div class="project-body-tag-row02">
-						<div class="project-body-tag-img">
-							<img th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
-						</div>
-						<div class="project-body-tag-info">
-							<div class="project-body-tag-info-row01">
-								<span style="font-size: 16px; color: var(--gray);" th:text="'#'+${order.orderId}"></span>
-								<span th:text="${order.project.title}"></span>
+								style="font-size: 16px; font-weight: bold; color: var(--red);">주문
+								취소</span>
+							<div>
+								<span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--red); font-weight: bold;">주문
+									취소</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+								<span style="font-size: 12px; color: var(--gray);">주문일시</span>
+								<span style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderCommitDate}"></span>
 							</div>
-							<div class="project-body-tag-info-row02">
-								<span style="font-size: 22px; font-weight: bold;" th:text="${order.totalPrice}+'원'"></span>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
 							</div>
-							<div class="project-body-tag-info-row03">
-								<div>
-									<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
 								</div>
-								<button type="button" class="project-body-button button--xsmall">문의하기</button>
+								<div class="project-body-tag-info-row02">
+									<span style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></span>
+								</div>
+								<div class="project-body-tag-info-row03">
+									<div>
+										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+									</div>
+									<button type="button"
+										class="project-body-button button--xsmall">문의하기</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="project-body-download">
-					<div class="project-body-download-text">
-						<span>작업물은 마음에 드시나요?<br /> 지금 바로 서비스를 평가하러 가보세요!
-						</span>
+				</li>
+				<!-- 진행 중 -->
+				<li class="project-body-card" th:case="진행중">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
+							<span style="font-size: 16px; font-weight: bold;">진행 중</span>
+							<div>
+								<span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">진행
+									중</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+								<span style="font-size: 12px; color: var(--gray);">주문시작</span>
+								<span style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderDate}"></span>
+							</div>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
+							</div>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
+								</div>
+								<div class="project-body-tag-info-row02">
+									<span style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></span>
+								</div>
+								<div class="project-body-tag-info-row03">
+									<div>
+										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+									</div>
+									<button type="button"
+										class="project-body-button button--xsmall">문의하기</button>
+								</div>
+							</div>
+						</div>
 					</div>
-					<!-- <button type="button">다운로드 기간만료</button> -->
-					<button type="button">리뷰 작성</button>
-				</div>
-			</li>
+					<div class="project-body-download">
+						<div class="project-body-download-text">
+							<span>작업물을 성공적으로 전달받으셨다면<br /> 구매 확정 버튼을 눌러 진행 상태를
+								변경해주세요!
+							</span>
+						</div>
+						<!-- <button type="button">다운로드 기간만료</button> -->
+						<button type="button">구매 확정</button>
+					</div>
+				</li>
+				<!-- 구매 확정 - 리뷰작성 전 -->
+				<li class="project-body-card" th:case="구매확정">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
+							<span style="font-size: 16px; font-weight: bold;">구매 확정</span>
+							<div>
+								<span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;">구매
+									확정</span> <span style="font-size: 12px; color: var(--gray);">|</span>
+								<span style="font-size: 12px; color: var(--gray);">주문시작</span>
+								<span style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderDate}"></span> <span
+									style="font-size: 12px; color: var(--gray); margin-inline: 10px;">|</span>
+								<span
+									style="font-size: 12px; color: var(--gray); margin-right: 10px;">확정일시</span>
+								<span style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.completionDate}"></span>
+							</div>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
+							</div>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
+								</div>
+								<div class="project-body-tag-info-row02">
+									<span style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></span>
+								</div>
+								<div class="project-body-tag-info-row03">
+									<div>
+										<span style="margin-right: 6px;" th:text="${order.sellerId}"></span>
+									</div>
+									<button type="button"
+										class="project-body-button button--xsmall">문의하기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="project-body-download">
+						<div class="project-body-download-text">
+							<span>작업물은 마음에 드시나요?<br /> 지금 바로 서비스를 평가하러 가보세요!
+							</span>
+						</div>
+						<!-- <button type="button">다운로드 기간만료</button> -->
+						<button type="button">리뷰 작성</button>
+					</div>
+				</li>
 
-			<!-- 구매 확정 - 리뷰작성 후 -->
-			<!-- <li class="project-body-card">
+				<!-- 구매 확정 - 리뷰작성 후 -->
+				<!-- <li class="project-body-card">
 				<div class="project-body-tag">
 					<div class="project-body-tag-row01">
 						<span style="font-size: 16px; font-weight: bold;">구매 확정</span>
@@ -312,7 +340,6 @@
 						</div>
 					</div>
 				</div>
-
 			</li> -->
 			</th:block>
 		</ul>
@@ -335,6 +362,13 @@
 				style="font-weight: bold; color: var(--bright-purple);">[자주
 				묻는 질문 - 구매 및 영수증] </span> 항목을 참고해주세요.
 		</div>
+		<ul class="pagination">
+		<li><a th:href="@{/order/project/buylist(pageNo=${'0'})}">1</a></li>
+		<li class="active"><a th:href="@{/order/project/buylist(pageNo=${'1'})}">2</a></li>
+		<li><a th:href="@{/order/project/buylist(pageNo=${'2'})}">3</a></li>
+		<li><a th:href="@{/order/project/buylist(pageNo=${'3'})}">4</a></li>
+		<li><a th:href="@{/order/project/buylist(pageNo=${'4'})}">5</a></li>
+	</ul>
 	</div>
 </body>
 </html>

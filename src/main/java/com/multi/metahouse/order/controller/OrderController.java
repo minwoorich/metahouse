@@ -1,7 +1,9 @@
 package com.multi.metahouse.order.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,11 +42,36 @@ public class OrderController {
 
 	// project 구매 관리
 		@GetMapping("/project/buylist")
-		public String projectBuylist(Model model, HttpSession session) {
+		public String projectBuylist(Model model, HttpSession session, String pageNo) {
+			System.out.println("페이지 번호 : " + pageNo);
 			try {
 				if(session.getAttribute("loginUser")!=null) {
 					User user = (User)session.getAttribute("loginUser");
-					List<ProjectOrdersResponse.BuyerResponse> orderList = orderService.selectOrderListForBuyerByUserId(user.getUserId());
+					List<ProjectOrdersResponse.BuyerResponse> orderList = orderService.selectOrderListForBuyer(user.getUserId(), Integer.parseInt(pageNo));
+					//주문 상태별 개수 구해서 Map에 저장
+					if(orderList!=null) {
+						Map<String, Integer> orderCount = new HashMap<>();
+						int count1=0;
+						int count2=0;
+						int count3=0;
+						int count4=0;
+						for(ProjectOrdersResponse.BuyerResponse order : orderList) {
+							if("주문대기중".equals(order.getOrderStatus())) {
+								count1++;
+							}else if("주문취소".equals(order.getOrderStatus())) {
+								count2++;
+							}else if("진행중".equals(order.getOrderStatus())) {
+								count3++;
+							}else {
+								count4++;
+							}
+						}
+						orderCount.put("pending", count1);
+						orderCount.put("cancelled", count2);
+						orderCount.put("proceeding", count3);
+						orderCount.put("completion", count4);
+						model.addAttribute("orderCount",orderCount);
+					}
 					model.addAttribute("orderList",orderList);
 					return "order/project_buylist";
 				}else {

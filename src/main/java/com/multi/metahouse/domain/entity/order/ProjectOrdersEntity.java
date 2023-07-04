@@ -62,6 +62,7 @@ public class ProjectOrdersEntity {
 	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
 	private List<SelectedAddOptionEntity> selectedOptionList = new ArrayList<>();
 	
+	//단방향
 	@Builder.Default
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "project_order_id", referencedColumnName = "order_id")
