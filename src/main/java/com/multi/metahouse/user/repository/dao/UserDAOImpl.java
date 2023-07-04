@@ -29,6 +29,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User insert(User user) {
+		System.out.println("회원가입 진행중 - dao");
 		return repository.save(user);
 	}
 
@@ -60,6 +61,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User read(String userId) {
 		return repository.findByUserId(userId);
+	}
+
+	@Override
+	public User socialLogin(String socialLoginId, String socialName) {
+		return repository.findBySocialLoginIdAndSocialName(socialLoginId, socialName);
 	}
 
 }

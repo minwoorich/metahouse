@@ -12,4 +12,5 @@ public interface UserService {
 	void delete(String userId);
 	OtherProfileInfoDTO read(String userId);
 	User readUserInfo(String userId);
+	User socialLogin(String socialLoginId, String socialName);
 }
