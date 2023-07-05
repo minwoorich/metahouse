@@ -9,6 +9,16 @@
 	width: 450px;
 }
 
+.managementcard {
+	width: 100%;
+	margin: 20px;
+	border: 1px solid var(--medium-purple);
+	border-radius: 4px;
+	overflow: hidden;
+	box-shadow: 2px 2px 5px var(--light-purple);
+}
+
+
 .paging-wrap{
     margin: 15px auto;
     width: 90%;
