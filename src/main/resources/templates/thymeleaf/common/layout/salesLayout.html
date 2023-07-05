@@ -25,6 +25,9 @@
 			justify-content: center;
 			width: 100%;
 		}
+		.main{
+			min-height: 900px;
+		}
 	</style>
 	<title>Insert title here</title>
 </head>
@@ -33,10 +36,10 @@
 		<th:block th:replace="common/includes/header :: header"></th:block>
 	</div>
 	<div class="row">
-	 	<div class="col-sm-2">
+	 	<div class="col-sm-2 main">
 			<th:block th:replace="common/includes/salespage_menu :: menu"></th:block>
 	 	</div>
-	 	<div class="col-sm-6"> 
+	 	<div class="col-sm-6 main"> 
 	 		<th:block layout:fragment="content"></th:block>	
 	 	</div>
 	</div>

@@ -58,6 +58,12 @@
 		FROM metahaus.asset_review_contents
 		WHERE asset_review_id = #{asset_review_id};
     </select>
+    <select id="assetReviewSummarybyid" parameterType="String" resultType="list">
+    	SELECT COUNT(asset_review_id),
+			AVG(rating)
+		FROM asset_review
+		where asset_id = #{asset_id}
+    </select>
     
     <!-- 프로젝트 별 리뷰를 가져오는 쿼리 -->
     <resultMap type="projectreview" id="projectReview">
@@ -83,6 +89,12 @@
     <select id="getAllPreviewImgByRewviewid" resultType="reviewImg">
     	SELECT review_contents_id, project_review_id as review_id, review_store_filename, review_img_no 
 		FROM metahaus.project_review_contents
-		WHERE project_review_id = #{project_review_id};
+		WHERE project_review_id = #{project_review_id}
     </select> 
+    <select id="ProjectReviewSummarybyid" parameterType="int" resultType="map">
+    	SELECT COUNT(project_review_id) AS Review_count,
+			AVG(rating) AS Review_Avg
+		FROM project_review
+		where project_id = #{project_review_id}
+    </select>
 </mapper>

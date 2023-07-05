@@ -312,7 +312,7 @@ public class OrderController {
 //	ajax-asset 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/asset")
 	@ResponseBody
-	public void orderA(@RequestBody ObjectNode saveObj, HttpSession session)
+	public int orderA(@RequestBody ObjectNode saveObj, HttpSession session)
 			throws JsonProcessingException, IllegalArgumentException {
 		User loginUser = (User) session.getAttribute("loginUser");
 		ObjectMapper mapper = new ObjectMapper();
@@ -320,13 +320,14 @@ public class OrderController {
 		int consumeAmount = mapper.treeToValue(saveObj.get("consumeAmount"), Integer.TYPE);
 		System.out.println(assetOrder);
 		System.out.println(consumeAmount);
-		orderService.orderA(assetOrder, loginUser, consumeAmount);
+		int reseult = orderService.orderA(assetOrder, loginUser, consumeAmount);
+		return reseult;
 	}
 
 //	ajax-project 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/project")
 	@ResponseBody
-	public void orderP(@RequestBody ObjectNode saveObj, HttpSession session)
+	public int orderP(@RequestBody ObjectNode saveObj, HttpSession session)
 			throws JsonProcessingException, IllegalArgumentException {
 		User loginUser = (User) session.getAttribute("loginUser");
 		ObjectMapper mapper = new ObjectMapper();
@@ -341,14 +342,8 @@ public class OrderController {
 			SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
 			options.add(option);
 		}
-		// int result = orderService.orderP(projectOrder, options, loginUser,
-		// consumeAmount);
-
-		System.out.println("주문내역" + projectOrder);
-		System.out.println("추가옵션" + options);
-		System.out.println("구매자" + loginUser);
-		System.out.println("결제금액" + consumeAmount);
-		// System.out.println("결과" + result);
-
+		//내역 생성
+		int reseult = orderService.orderP(projectOrder, options, loginUser, consumeAmount);
+		return reseult;
 	}
 }

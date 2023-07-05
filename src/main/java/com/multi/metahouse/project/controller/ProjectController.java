@@ -8,13 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +23,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
+import com.multi.metahouse.domain.dto.project.ProjectPageDTO;
+import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 //import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
@@ -56,13 +58,17 @@ public class ProjectController {
 
 	// 프로젝트 마켓 상품목록 보기
 	@RequestMapping("project/main")
-	public String projectMarket(Model model, String pageNo, String category1, String category2) {
-		Page<ProjectEntity> projectlistPage = projectService.list(category1, category2, Integer.parseInt(pageNo));
-		List<ProjectEntity> projectlist = projectlistPage.getContent();
+	public String projectMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
+			@RequestParam(defaultValue = "Non") String category1,
+			@RequestParam(defaultValue = "Non") String category2) {
+		System.out.println(pageNo + category1 + category2);
+		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2);
+		System.out.println(projects);
+		int total = projectService.list(null, category1, category2).size();
+		System.out.println(total);
 
-		model.addAttribute("pjPage", projectlistPage);
-		model.addAttribute("projectlist", projectlist);
-		model.addAttribute("maxPage", 5);
+		model.addAttribute("projects", projects);
+		model.addAttribute("pageInfo", new ProjectPageDTO(total, pageNo, 16, 5));
 
 		return "project/main";
 	}
@@ -73,9 +79,12 @@ public class ProjectController {
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
+		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
+		
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);
+		model.addAttribute("projectReview", projectReview);
 
 		System.out.println(project);
 		System.out.println(projectImg);
