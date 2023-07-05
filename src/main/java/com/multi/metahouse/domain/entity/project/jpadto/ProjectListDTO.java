@@ -1,18 +1,8 @@
 package com.multi.metahouse.domain.entity.project.jpadto;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Entity;
 
-import com.multi.metahouse.domain.entity.project.AddOptionEntity;
-import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
-import com.multi.metahouse.domain.entity.project.ProjectPackageSingleEntity;
-import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
-import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,5 +39,4 @@ public class ProjectListDTO {
 				.thumbnail(entity.getThumbnail())
 				.build();
 	}
-	
 }

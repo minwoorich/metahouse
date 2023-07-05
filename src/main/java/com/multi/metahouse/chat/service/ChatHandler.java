@@ -27,6 +27,8 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.multi.metahouse.domain.dto.chat.ChatMsgDTO;
 import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
 
@@ -40,8 +42,14 @@ public class ChatHandler{
 	private static Set<Session> clientset = Collections.synchronizedSet(new HashSet<Session>());
 	
 	// Text 메시지 (JSON String) 임시 저장 변수 선언
-	private String fileUploadSessionMsg = "";
+	private String originJsonString = "";
 	
+	// Binary 메시지 임시 저장 변수 선언
+	private List<ByteBuffer> filelist = new ArrayList<>();
+	// ChatMsgDTO 에 들어갈 store_filenamelist
+	private List<String> store_filenamelist = new ArrayList<>();
+	
+	// service 메소드에 사용될 DTO 변수 저장
 	private ChatMsgDTO chatMsg = null;
 	private List<ChatMsgFileDTO> chatMsgFileList = new ArrayList<>();
 	
@@ -73,17 +81,17 @@ public class ChatHandler{
 	@OnMessage
 	public void onMessage(String msg, Session session) throws IOException {
 		System.out.println("텍스트 수신메세지:"+msg);
-		// JSON 형식 메시지 static 멤버변수에 저장
-		fileUploadSessionMsg = msg;
+		// JSON 형식 메시지 전역 멤버변수에 저장
+		originJsonString = msg;
 		
 		// 수신 메시지 DB에 저장
 		ObjectMapper objectMapper = new ObjectMapper();
 		chatMsg = objectMapper.readValue(msg, ChatMsgDTO.class);
 		
-		System.out.println("chatMsg : " + chatMsg);
+		//System.out.println("chatMsg : " + chatMsg);
 		
 		if(chatMsg.getMessage_type().equals("Text")) {
-			System.out.println("Text Only 메시지 수신됨.");
+			//System.out.println("Text Only 메시지 수신됨.");
 			
 			// 수신 메시지 DB에 저장
 			insertChatMsg(chatMsg);
@@ -95,8 +103,10 @@ public class ChatHandler{
 			}
 			
 		}else {
-			System.out.println("File 첨부 메시지 수신됨.");
+			//System.out.println("File 첨부 메시지 수신됨.");
+			// 신규 메시지 수신으로 인한 기존 데이터 비우기
 			fileIdx = 0;
+			filelist.clear();
 			chatMsgFileList.clear();
 		}
 		
@@ -104,6 +114,10 @@ public class ChatHandler{
 	
 	@OnMessage
 	public void onMessage(ByteBuffer msg, Session session) throws IOException {
+		//System.out.println("바이너리 수신메세지:"+msg);
+		// ArrayBuffer 형식 메시지 static 멤버변수에 저장
+		filelist.add(0, msg);
+				
 		// 첨부파일 절대 경로 지정
 		final String FILE_PATH = resourceLoader.getResource("classpath:static/upload").getFile().getAbsolutePath() 
 				+ File.separator + "chat" + File.separator + "attach";
@@ -159,14 +173,20 @@ public class ChatHandler{
  		if(fileIdx+1 == chatMsg.getFilenamelist().size()) {
  			insertChatMsgFile(chatMsg, chatMsgFileList);
  			
+ 			ObjectMapper mapper = new ObjectMapper();
+ 			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+ 			mapper.setDateFormat(new StdDateFormat().withColonInTimeZone(true));
+ 			String modifiedJsonString = mapper.writeValueAsString(chatMsg);
+ 			
  			//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
  			for(Session data:clientset) {
- 				System.out.println("전송메세지:"+fileUploadSessionMsg);
- 				data.getBasicRemote().sendText(fileUploadSessionMsg);
+ 				//System.out.println("전송메세지:"+modifiedJsonString);
+ 				data.getBasicRemote().sendText(modifiedJsonString);
  				// 클라이언트 단에 파일 전송
-// 				for(ByteBuffer file:filelist) {
-// 					data.getBasicRemote().sendBinary(data);
-// 				}
+ 				for(ByteBuffer arrayBuffer:filelist) {
+ 					//System.out.println("전송파일:"+arrayBuffer);
+ 					data.getBasicRemote().sendBinary(arrayBuffer);
+ 				}
  			}
  		}
  		

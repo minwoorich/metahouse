@@ -7,9 +7,11 @@ import com.multi.metahouse.domain.entity.project.ProjectEntity;
 import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -53,6 +55,26 @@ public class ProjectPackageTripleForm implements ProjectPackageForm{
 				.premiumPrice(premium_price)
 				.premiumRevision(Integer.parseInt(premium_revision))
 				.premiumWorkdays(Integer.parseInt(premium_workdays))
+				.build();
+	}
+	
+	public ProjectPackageTripleForm fromEntity(ProjectPackageTripleEntity entity) {
+		return ProjectPackageTripleForm.builder()
+				.basic_pkg_title(entity.getBasicPkgTitle())
+				.basic_pkg_description(entity.getBasicPkgDescription())
+				.basic_price(entity.getBasicPrice())
+				.basic_revision(entity.getBasicRevision()+"")
+				.basic_workdays(entity.getBasicWorkdays()+"")
+				.economy_pkg_title(entity.getEconomyPkgTitle())
+				.economy_pkg_description(entity.getEconomyPkgDescription())
+				.economy_price(entity.getEconomyPrice())
+				.economy_revision(entity.getEconomyRevision()+"")
+				.economy_workdays(entity.getEconomyWorkdays()+"")
+				.premium_pkg_title(entity.getPremiumPkgTitle())
+				.premium_pkg_description(entity.getPremiumPkgDescription())
+				.premium_price(entity.getPremiumPrice())
+				.premium_revision(entity.getPremiumRevision()+"")
+				.premium_workdays(entity.getPremiumWorkdays()+"")
 				.build();
 	}
 }

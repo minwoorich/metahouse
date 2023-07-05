@@ -19,7 +19,6 @@
 	color: #333;
 	background-color: #fff;
 	border-color: #ccc;
-	margin-top: 36px;
 	font-size: 16px;
 }
 
@@ -110,7 +109,7 @@
 }
 
 
-select {
+.select {
     margin-top: 4rem;
     width: 262px;
     padding: 8px;
@@ -121,4 +120,13 @@ select {
     border-radius: 4px;
     appearance: none;
     flex: 0 0 16em;
+}
+
+
+.searchimg {
+	    margin: 1rem auto;
+    width: 90%;
+    height: 23rem;
+    border-radius: 6px;
+    overflow: hidden;
 }

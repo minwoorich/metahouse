@@ -66,7 +66,7 @@ public class ChatDAOImpl implements ChatDAO {
 	/* 채팅 상대방의 프로필 호출 */
     public ChatProfileDTO getProfileById(String target) {
     	ChatProfileDTO targetProfile = sqlSession.selectOne("getChatProfileById", target);
-    	System.out.println("targetProfile:" + targetProfile);
+    	//System.out.println("targetProfile:" + targetProfile);
     	return targetProfile;
     }
 

@@ -5,20 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.websocket.server.ServerEndpoint;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
-import com.multi.metahouse.domain.dto.user.UserDTO;
 import com.multi.metahouse.domain.entity.project.AddOptionEntity;
 import com.multi.metahouse.domain.entity.project.ProjectContentsEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
@@ -53,12 +48,15 @@ public class ProjectServiceImpl implements ProjectService {
 			String thumbnailPath, List<ProjectContentsDTO> contentsList) {
 
 		// 프로젝트 엔티티
-		ProjectEntity projectEntity = ProjectEntity.builder().creatorId(projectFormDto.getCreator_id())
-//				.creatorId(new UserDTO().toEntityOnlyId(projectFormDto.getCreator_id()))
-				.title(projectFormDto.getTitle()).description(projectFormDto.getDescription())
-				.category1(projectFormDto.getCategory1()).category2Pj(projectFormDto.getCategory2_pj())
-				.thumbnail(thumbnailPath).build();
-		System.out.println("컨텐츠 리스트 : " + projectEntity.getProjectContentsEntityList());
+		ProjectEntity projectEntity = ProjectEntity.builder()
+				.creatorId(projectFormDto.getCreator_id())
+				.title(projectFormDto.getTitle())
+				.description(projectFormDto.getDescription())
+				.category1(projectFormDto.getCategory1())
+				.category2Pj(projectFormDto.getCategory2_pj())
+				.thumbnail(thumbnailPath)
+				.build();
+
 
 		// 싱글 패키지 엔티티
 		if (packageFormDto instanceof ProjectPackageSingleForm) {
@@ -125,10 +123,21 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectListDTO> selectListByUserId(String userId) {
 		// DAO 호출해서 Entity리스트 받아옴
 		List<ProjectEntity> entityList = projectDao.selectListByUserId(userId);
-		// 반환할 빈 DTO리스트 생성.
-		List<ProjectListDTO> dtoList = new ArrayList<>();
-
-		for (ProjectEntity entity : entityList) {
+		for(ProjectEntity entity : entityList) {
+			if(entity.getSingleEntity() != null) {
+//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));				
+				System.out.println("서비스--------entity : " + entity.getSingleEntity()+",project_id : " + entity.getProjectId());
+			}else if (entity.getTripleEntity() != null){
+//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));
+				System.out.println("서비스--------entity : " + entity.getTripleEntity()+",project_id : " + entity.getProjectId());
+			}else {
+				System.out.println("널이야ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+			}
+		}
+		//반환할 빈 DTO리스트 생성. 
+		List<ProjectListDTO> dtoList =  new ArrayList<>();
+		
+		for(ProjectEntity entity : entityList) {
 			dtoList.add(new ProjectListDTO().fromEntity(entity));
 		}
 		return dtoList;

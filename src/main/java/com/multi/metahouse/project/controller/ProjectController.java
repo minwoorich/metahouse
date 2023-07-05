@@ -3,13 +3,11 @@ package com.multi.metahouse.project.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +26,6 @@ import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.project.ProjectPageDTO;
 import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
-import com.multi.metahouse.domain.entity.project.ProjectPackageTripleEntity;
 //import com.multi.metahouse.domain.entity.project.jpadto.ProjectContentsDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectFormDTO;
 import com.multi.metahouse.domain.entity.project.jpadto.ProjectListDTO;
@@ -83,11 +80,15 @@ public class ProjectController {
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
 		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
-
+		
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);
 		model.addAttribute("projectReview", projectReview);
+
+		System.out.println(project);
+		System.out.println(projectImg);
+		System.out.println(projectOption);
 
 		return "project/market_detail";
 	}
@@ -103,12 +104,11 @@ public class ProjectController {
 		model.addAttribute("userInfo", userInfo);
 		return "order/project_purchase";
 	}
-
 	// ajax 프로젝트 구매하기-패키지정보
 	@PostMapping(value = "project/package/price", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String packData(Long projectNum) throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
+	public String packData(Long projectNum) throws JsonProcessingException{
+		ObjectMapper mapper = new ObjectMapper(); 
 		String jsonString = mapper.writeValueAsString(projectService.projectInfo(projectNum).getPjtTriple());
 		return jsonString;
 	}
@@ -128,26 +128,25 @@ public class ProjectController {
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// "판매 등록" 페이지 반환
 	@GetMapping("project/my-products")
-	public String showProductList(Model model, HttpSession session) {
-		if (session.getAttribute("loginUser") != null) {
-			User user = (User) session.getAttribute("loginUser");
+	public String showProductList(Model model,HttpSession session) {
+		if(session.getAttribute("loginUser")!=null) {
+			User user = (User)session.getAttribute("loginUser");
 			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
+			for(ProjectListDTO project : projectList) {
+				System.out.println("리스트--------"+project);				
+			}
+
 			model.addAttribute("projectList", projectList);
+			
 			return "project/project_product_list";
-		} else {
+		}else {
 			return "redirect:/login";
 		}
-
-//		List<ProjectListDTO> projectList = projectService.selectAllProjects();
-
 	}
 
 	@PostMapping("project/delete-product")
 	public String deleteProduct(Long project_id) {
-		System.out.println("전달받은 id값 : " + project_id);
-		System.out.println("프로젝트 삭제");
 		projectService.deleteProject(project_id);
-		System.out.println();
 		return "redirect:/project/my-products";
 	}
 
@@ -161,13 +160,12 @@ public class ProjectController {
 	// 패키지 + 추가옵션 설정하는 페이지 반환
 	@GetMapping("project/forms/packages")
 	public String writePakcageForm(HttpSession session) {
-		System.out.println("session : " + session.getAttribute("projectForm"));
+//		System.out.println("session : " + session.getAttribute("projectForm"));
 		return "project/projectform02";
 	}
 
 	@GetMapping("project/forms/preview")
 	public String getFormPreview(HttpSession session, Model model) {
-
 		// 세션에 삼단패키지가 들어갔는지 ,단일패키지가 들어갔는지
 		if (session.getAttribute("projectPackageTripleForm") == null) {
 			model.addAttribute("package", "single");
@@ -190,7 +188,7 @@ public class ProjectController {
 
 		// 세션 저장
 		session.setAttribute("projectForm", projectForm);
-
+//		System.out.println("-------------projectForm.description : " + projectForm.getDescription());
 		return "/metahaus/project/forms/packages";
 	}
 
@@ -212,8 +210,6 @@ public class ProjectController {
 	public String saveIntoSessionAjax(@RequestBody ProjectPackageTripleForm projectPackageTripleForm,
 			HttpSession session) {
 
-		// 세션 초기화(projectPackageTripleForm 데이터 세션에서 삭제)
-//		session.removeAttribute("projectPackageTripleForm");
 		// 세션 저장
 		session.setAttribute("projectPackageTripleForm", projectPackageTripleForm);
 
@@ -252,13 +248,7 @@ public class ProjectController {
 			List<MultipartFile> detailImages = projectForm.getDetailImages(); // 상세이미지들 업로드
 			contentsList = fileService.uploadFiles(detailImages, path);
 		}
-		System.out.println("projectFormDto : " + projectForm);
-		System.out.println("packageFormDto : " + packageFormDto);
-		System.out.println("thumbnailPath : " + thumbnailPath);
-		for (ProjectContentsDTO dto : contentsList) {
-			System.out.println("content : " + dto);
-		}
-
+		
 		// 서비스 호출
 		projectService.insertProjectInfo(projectForm, packageFormDto, thumbnailPath, contentsList);
 

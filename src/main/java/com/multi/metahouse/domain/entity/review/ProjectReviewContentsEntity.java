@@ -17,12 +17,17 @@ import com.multi.metahouse.domain.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "project_review_contents")
 public class ProjectReviewContentsEntity {
@@ -30,14 +35,8 @@ public class ProjectReviewContentsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="review_contents_id")
 	private Long reviewContentsId;
-//	@Column(name="project_review_id")
-//	private Long projectReviewId;
+	@Column(name="project_review_id")
+	private Long projectReviewId;
 	private String reviewStoreFilename;
 	private Long reviewImgNo;
-	
-	////////////////////외래키/////////////
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "project_review_id")
-	private ProjectReviewEntity projectReviewId;
-	
 }

@@ -21,6 +21,6 @@ public class ChatMsgDTO {
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private Date write_time;
 	private String message_content;
-	private List<String> filenamelist;
 	private String message_type;
+	private List<String> filenamelist;
 }

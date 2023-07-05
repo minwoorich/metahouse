@@ -1,8 +1,11 @@
 package com.multi.metahouse.order.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,21 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
 import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
+import com.multi.metahouse.domain.entity.order.dtoforjpa.ProjectOrdersConfirmUpdateDTO;
+import com.multi.metahouse.domain.entity.order.dtoforjpa.ProjectOrdersResponse;
 import com.multi.metahouse.domain.entity.user.User;
-import com.multi.metahouse.order.service.AssetCategoryService;
 import com.multi.metahouse.order.service.OrderService;
 import com.multi.metahouse.point.service.PointService;
 
@@ -32,27 +35,260 @@ import com.multi.metahouse.point.service.PointService;
 @RequestMapping("/order")
 public class OrderController {
 
-	AssetCategoryService service;
 	OrderService orderService;
 	PointService pointService;
 
 	@Autowired
-	public OrderController(AssetCategoryService service, OrderService orderService) {
+	public OrderController(OrderService orderService) {
 		super();
-		this.service = service;
 		this.orderService = orderService;
 	}
 
 	// project 구매 관리
 	@GetMapping("/project/buylist")
-	public String projectBuylist() {
-		return "order/project_buylist";
+	public String projectBuylist(Model model, HttpSession session, String pageNo) {
+
+		try {
+			if (session.getAttribute("loginUser") != null) {
+				User user = (User) session.getAttribute("loginUser");
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+						Integer.parseInt(pageNo));
+				for (ProjectOrdersResponse.Response order : orderList) {
+					System.out.println("order : " + order);
+				}
+
+				// 주문 상태별 개수 구해서 Map에 저장
+				if (orderList != null) {
+					Map<String, Integer> orderCount = new HashMap<>();
+					int count1 = 0;
+					int count2 = 0;
+					int count3 = 0;
+					int count4 = 0;
+					for (ProjectOrdersResponse.Response order : orderList) {
+						if ("주문대기중".equals(order.getOrderStatus())) {
+							count1++;
+						} else if ("주문취소".equals(order.getOrderStatus())) {
+							count2++;
+						} else if ("진행중".equals(order.getOrderStatus())) {
+							count3++;
+						} else {
+							count4++;
+						}
+					}
+					orderCount.put("pending", count1);
+					orderCount.put("cancelled", count2);
+					orderCount.put("proceeding", count3);
+					orderCount.put("completion", count4);
+					model.addAttribute("orderCount", orderCount);
+				}
+				model.addAttribute("orderList", orderList);
+				return "order/project_buylist";
+			} else {
+				return "redirect:/login";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("/project/buylist/ -> 에러발생");
+			e.printStackTrace();
+			return "redirect:/login";
+		}
+	}
+
+	// 프로젝트 주문 구매관리 - 카테고린
+	@GetMapping("/project/buylist/category")
+	public String projectBuylistCategory(Model model, HttpSession session, String pageNo, String category1,
+			String category2, String category4, String category5) {
+
+		try {
+			if (session.getAttribute("loginUser") != null) {
+				User user = (User) session.getAttribute("loginUser");
+
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+						category1, category2, LocalDateTime.parse(category4, DateTimeFormatter.ISO_DATE_TIME),
+						LocalDateTime.parse(category5, DateTimeFormatter.ISO_DATE_TIME), Integer.parseInt(pageNo));
+
+				// 주문 상태별 개수 구해서 Map에 저장
+				if (orderList != null) {
+					Map<String, Integer> orderCount = new HashMap<>();
+					int count1 = 0;
+					int count2 = 0;
+					int count3 = 0;
+					int count4 = 0;
+					for (ProjectOrdersResponse.Response order : orderList) {
+						if ("주문대기중".equals(order.getOrderStatus())) {
+							count1++;
+						} else if ("주문취소".equals(order.getOrderStatus())) {
+							count2++;
+						} else if ("진행중".equals(order.getOrderStatus())) {
+							count3++;
+						} else {
+							count4++;
+						}
+					}
+					orderCount.put("pending", count1);
+					orderCount.put("cancelled", count2);
+					orderCount.put("proceeding", count3);
+					orderCount.put("completion", count4);
+					model.addAttribute("orderCount", orderCount);
+				}
+				model.addAttribute("orderList", orderList);
+				return "order/project_buylist";
+			} else {
+				return "redirect:/login";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("/project/buylist/ -> 에러발생");
+			e.printStackTrace();
+			return "redirect:/login";
+		}
+	}
+
+	// project 주문 구매확정
+	@PostMapping("/project/buylist/update.do")
+	public String projectUpdate(HttpSession session, String orderStatus, String orderId) {
+		System.out.println("---------------오더 컨트롤러--------------");
+		System.out.println("orderStatus :  " + orderStatus + ", orderId : " + orderId);
+
+		String url = "";
+		if (session.getAttribute("loginUser") != null) {
+			ProjectOrdersConfirmUpdateDTO dto = ProjectOrdersConfirmUpdateDTO.builder()
+					.orderId(Long.parseLong(orderId))
+					.orderStatus(orderStatus).build();
+
+			// 업데이트 서비스 호출
+			orderService.updateOrder(dto);
+			url = "redirect:/order/project/buylist?pageNo=0";
+		} else {
+			url = "/login";
+		}
+
+		return url;
 	}
 
 	// project 판매 관리
 	@GetMapping("/project/saleslist")
-	public String projectSalelist() {
-		return "order/project_saleslist";
+	public String projectSalelist(Model model, HttpSession session, String pageNo) {
+		try {
+			if (session.getAttribute("loginUser") != null) {
+				User user = (User) session.getAttribute("loginUser");
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+						Integer.parseInt(pageNo));
+				for (ProjectOrdersResponse.Response order : orderList) {
+					System.out.println("order : " + order);
+				}
+
+				// 주문 상태별 개수 구해서 Map에 저장
+				if (orderList != null) {
+					Map<String, Integer> orderCount = new HashMap<>();
+					int count1 = 0;
+					int count2 = 0;
+					int count3 = 0;
+					int count4 = 0;
+					for (ProjectOrdersResponse.Response order : orderList) {
+						if ("주문대기중".equals(order.getOrderStatus())) {
+							count1++;
+						} else if ("주문취소".equals(order.getOrderStatus())) {
+							count2++;
+						} else if ("진행중".equals(order.getOrderStatus())) {
+							count3++;
+						} else {
+							count4++;
+						}
+					}
+					orderCount.put("pending", count1);
+					orderCount.put("cancelled", count2);
+					orderCount.put("proceeding", count3);
+					orderCount.put("completion", count4);
+					model.addAttribute("orderCount", orderCount);
+				}
+				model.addAttribute("orderList", orderList);
+				return "order/project_saleslist";
+			} else {
+				return "redirect:/login";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("/project/saleslist/ -> 에러발생");
+			e.printStackTrace();
+			return "redirect:/login";
+		}
+	}
+
+	// 프로젝트 주문 판매관리 - 카테고리
+	@GetMapping("/project/saleslist/category")
+	public String projectSalesListCategory(Model model, HttpSession session, String pageNo, String category1,
+			String category2, String category4, String category5) {
+
+		try {
+			if (session.getAttribute("loginUser") != null) {
+				User user = (User) session.getAttribute("loginUser");
+
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+						category1, category2, LocalDateTime.parse(category4, DateTimeFormatter.ISO_DATE_TIME),
+						LocalDateTime.parse(category5, DateTimeFormatter.ISO_DATE_TIME), Integer.parseInt(pageNo));
+
+				// 주문 상태별 개수 구해서 Map에 저장
+				if (orderList != null) {
+					Map<String, Integer> orderCount = new HashMap<>();
+					int count1 = 0;
+					int count2 = 0;
+					int count3 = 0;
+					int count4 = 0;
+					for (ProjectOrdersResponse.Response order : orderList) {
+						if ("주문대기중".equals(order.getOrderStatus())) {
+							count1++;
+						} else if ("주문취소".equals(order.getOrderStatus())) {
+							count2++;
+						} else if ("진행중".equals(order.getOrderStatus())) {
+							count3++;
+						} else {
+							count4++;
+						}
+					}
+					orderCount.put("pending", count1);
+					orderCount.put("cancelled", count2);
+					orderCount.put("proceeding", count3);
+					orderCount.put("completion", count4);
+					model.addAttribute("orderCount", orderCount);
+				}
+				model.addAttribute("orderList", orderList);
+				return "order/project_saleslist";
+			} else {
+				return "redirect:/login";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("/project/saleslist/ -> 에러발생");
+			e.printStackTrace();
+			return "redirect:/login";
+		}
+	}
+
+	// project 주문 - 판매관리 (주문 승인 or 주문 거절)
+	@PostMapping("/project/saleslist/update.do")
+	public String projectOrderAccept(HttpSession session, String orderStatus, String orderId, String acceptanceValue) {
+		System.out.println("---------------오더 컨트롤러--------------");
+		System.out.println("orderStatus :  " + orderStatus + ", orderId : " + orderId);
+
+		String url = "";
+		if (session.getAttribute("loginUser") != null) {
+			ProjectOrdersConfirmUpdateDTO dto = ProjectOrdersConfirmUpdateDTO.builder()
+					.orderId(Long.parseLong(orderId))
+					.orderStatus(orderStatus)
+					.acceptanceValue(acceptanceValue)
+					.build();
+			System.out.println("진행중 DTO : " + dto);
+
+			// 업데이트 서비스 호출
+			orderService.updateOrder(dto);
+
+			url = "redirect:/order/project/saleslist?pageNo=0";
+		} else {
+			url = "/login";
+		}
+
+		return url;
 	}
 
 	// asset 구매 관리

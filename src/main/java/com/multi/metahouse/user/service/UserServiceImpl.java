@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User insert(User user) {
 		user.setCreateDate(new Date());
+		System.out.println("회원가입 진행중 - service");
 		return userDao.insert(user);
 	}
 
@@ -73,4 +74,8 @@ public class UserServiceImpl implements UserService{
 		return userDao.read(userId);
 	}
 
+	@Override
+	public User socialLogin(String socialLoginId, String socialName) {
+		return userDao.socialLogin(socialLoginId, socialName);
+	}
 }
