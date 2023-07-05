@@ -46,8 +46,6 @@ public class ChatHandler{
 	
 	// Binary 메시지 임시 저장 변수 선언
 	private List<ByteBuffer> filelist = new ArrayList<>();
-	// ChatMsgDTO 에 들어갈 store_filenamelist
-	private List<String> store_filenamelist = new ArrayList<>();
 	
 	// service 메소드에 사용될 DTO 변수 저장
 	private ChatMsgDTO chatMsg = null;
@@ -184,7 +182,7 @@ public class ChatHandler{
  				data.getBasicRemote().sendText(modifiedJsonString);
  				// 클라이언트 단에 파일 전송
  				for(ByteBuffer arrayBuffer:filelist) {
- 					//System.out.println("전송파일:"+arrayBuffer);
+// 					System.out.println("전송파일:"+arrayBuffer);
  					data.getBasicRemote().sendBinary(arrayBuffer);
  				}
  			}

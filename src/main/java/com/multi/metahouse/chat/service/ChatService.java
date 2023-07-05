@@ -1,5 +1,7 @@
 package com.multi.metahouse.chat.service;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,8 @@ public interface ChatService {
     
     // 채팅 메시지 조회
     List<ChatMsgDTO> getChatMsgById(int chatroomId);
-
+    // 파일 첨부 메시지 파일 조회
+ 	List<ChatMsgFileDTO> getChatMsgFileById(int chatMsgId);
     
     // 채팅 메시지 저장
     int insertMessage(ChatMsgDTO chatMsgDTO);
@@ -33,6 +36,11 @@ public interface ChatService {
 	
 	// message_id 얻기 위한 메소드
 	int getLastInsertID();
+	
+	// 채팅방의 채팅 리스트를 받아서 실제 파일을 읽어 리스트로 반환하는 메소드
+	List<ByteBuffer> getFileListById(List<ChatMsgFileDTO> chatMsgFileList) throws IOException;
+	
+	
     
 }
 

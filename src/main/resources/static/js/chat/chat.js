@@ -49,11 +49,12 @@ $(document).ready(function(){
 				$(".chat-header").children("h1").text(targetProfile.user_name);
 				
 				// 채팅 요소 작성
-				let myChatEle = createChatElement(chatMsg, loginUser);
+				//let myChatEle = createChatElement(chatMsg, loginUser);
+				createChatElement(chatMsg, loginUser);
 				// 테스트 채팅 요소 삭제
 				$(".chat-body__chat-section").children().remove();
 				// 채팅 요소 추가
-				$(".chat-body__chat-section").append(myChatEle);
+				//$(".chat-body__chat-section").append(myChatEle);
 				
 				// 프로필 요소 작성
 				addPro = createProfileElement(targetProfile);
