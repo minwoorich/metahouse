@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.metahouse.asset.service.AssetService;
@@ -22,6 +23,8 @@ import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 import com.multi.metahouse.domain.dto.asset.AssetFormDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
+import com.multi.metahouse.domain.dto.project.ProjectPageDTO;
 import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.user.User;
@@ -124,15 +127,17 @@ public class AssetController {
 //	에셋마켓 전체 상품리스트 보기> 나중에 정렬 기준값도 받아와야하고(최신 등록순이 디폴트값 줄예정), 카테고리값도 받아와야됨
 //	 +리뷰 정보도,,,
 	@RequestMapping("asset/main")
-	public String assetMarket(Model model, String pageNo, String category1, String category2) {
+	public String assetMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
+			@RequestParam(defaultValue = "Non") String category1,
+			@RequestParam(defaultValue = "Non") String category2) {
+		
+		System.out.println(pageNo + category1 + category2);
+		List<AssetDTO> assetlist = service.list(pageNo, category1, category2);
+		int total = service.list(null, category1, category2).size();
 
-		Page<AssetEntity> assetlistPage = service.list(category1, category2, Integer.parseInt(pageNo));
-		List<AssetEntity> assetlist = assetlistPage.getContent();
-
-		model.addAttribute("aPage", assetlistPage);
 		model.addAttribute("assetlist", assetlist);
-		model.addAttribute("maxPage", 5);
-
+		model.addAttribute("pageInfo", new ProjectPageDTO(total, pageNo, 16, 5));
+		
 		return "asset/main";
 	}
 

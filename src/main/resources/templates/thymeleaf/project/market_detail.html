@@ -253,7 +253,8 @@
 			</div>
 			<!-- buy button -->
 			<div id="btn">
-				<button class="button--small btn_custom">문의하기</button>
+				<button class="button--small btn_custom"
+				th:onclick="|location.href='@{/chat/create/chatroom(seller_id=${pjtInfo.creator_id})}'|">문의하기</button>
 				<button class="button--small btn_custom"
 				th:onclick="|location.href='@{/project/purchase(projectNum=${pjtInfo.project_id})}'|">구매하기</button>
 			</div>
@@ -335,8 +336,8 @@
 			    $("#form_box")[0].reset();
     	  
     	        },   
-    	    error : function(e){  
-    	    	alert("error");  
+    	    error : function(){  
+    	    	alert("로그인 후 신고 가능합니다.");  
     	        }  
     	}); 
     }

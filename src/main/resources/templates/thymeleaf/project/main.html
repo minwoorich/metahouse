@@ -98,7 +98,7 @@
 									<span th:text="${projects[i.index].pjtSingle.price}+원" class="product_price"></span>
 								</th:block>
 								<th:block th:if="${projects[i.index].pjtTriple != null}">
-									<span th:text="${projects[i.index].pjtTriple.basic_price}+원+'~'" class="product_price"></span>
+									<span th:text="${projects[i.index].pjtTriple.basic_price}+원+'&ensp;부터'" class="product_price"></span>
 								</th:block> 
 							</div>
 						</div>
@@ -132,7 +132,7 @@
 									<span th:text="${projects[i.index+1].pjtSingle.price}+원" class="product_price"></span>
 								</th:block>
 								<th:block th:if="${projects[i.index+1].pjtTriple != null}">
-									<span th:text="${projects[i.index+1].pjtTriple.basic_price}+원+'~'" class="product_price"></span>
+									<span th:text="${projects[i.index+1].pjtTriple.basic_price}+원+'&ensp;부터'" class="product_price"></span>
 								</th:block>
 							</div>
 						</div>
@@ -166,7 +166,7 @@
 									<span th:text="${projects[i.index+2].pjtSingle.price}+원" class="product_price"></span>
 								</th:block>
 								<th:block th:if="${projects[i.index+2].pjtTriple != null}">
-									<span th:text="${projects[i.index+2].pjtTriple.basic_price}+원+'~'" class="product_price"></span>
+									<span th:text="${projects[i.index+2].pjtTriple.basic_price}+원+'&ensp;부터'" class="product_price"></span>
 								</th:block>
 							</div>
 						</div>
@@ -200,7 +200,7 @@
 									<span th:text="${projects[i.index+3].pjtSingle.price}+원" class="product_price"></span>
 								</th:block>
 								<th:block th:if="${projects[i.index+3].pjtTriple != null}">
-									<span th:text="${projects[i.index+3].pjtTriple.basic_price}+원+'~'" class="product_price"></span>
+									<span th:text="${projects[i.index+3].pjtTriple.basic_price}+원+'&ensp;부터'" class="product_price"></span>
 								</th:block>
 							</div>
 						</div>
@@ -212,7 +212,6 @@
 			<!-- 페이지 번호 -->
 			<!-- ProjectPageDTO(total=21, currentPage=1, totalPages=2, startPage=1, endPage=2, pagingCount=5) -->
 		<div class="page_wrap">
-		<div></div>
 				<div class="page_nation" th:with="start=${pageInfo.startPage}, end=${pageInfo.endPage},
 					 nowPage=${pageInfo.currentPage}">
 					<a class="arrow pprev" th:if="${start > 1}"  th:href="@{/project/main(pageNo=1, category1=${param.category1}, category2=${param.category2})}">&lang;&lang;</a>
