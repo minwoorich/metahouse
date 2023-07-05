@@ -30,6 +30,7 @@ import com.multi.metahouse.domain.entity.order.dtoforjpa.ProjectOrdersResponse;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.order.service.OrderService;
 import com.multi.metahouse.point.service.PointService;
+import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 @RequestMapping("/order")
@@ -37,28 +38,30 @@ public class OrderController {
 
 	OrderService orderService;
 	PointService pointService;
+	ReviewService reviewService;
 
 	@Autowired
-	public OrderController(OrderService orderService) {
+	public OrderController(OrderService orderService, PointService pointService, ReviewService reviewService) {
 		super();
 		this.orderService = orderService;
+		this.pointService = pointService;
+		this.reviewService = reviewService;
 	}
 
 	// project 구매 관리
 	@GetMapping("/project/buylist")
 	public String projectBuylist(Model model, HttpSession session, String pageNo) {
-
 		try {
 			if (session.getAttribute("loginUser") != null) {
 				User user = (User) session.getAttribute("loginUser");
-				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderListForBuyer(user.getUserId(),
 						Integer.parseInt(pageNo));
 				for (ProjectOrdersResponse.Response order : orderList) {
 					System.out.println("order : " + order);
 				}
 
 				// 주문 상태별 개수 구해서 Map에 저장
-				if (orderList != null) {
+				if (orderList != null && orderList.size()>0) {
 					Map<String, Integer> orderCount = new HashMap<>();
 					int count1 = 0;
 					int count2 = 0;
@@ -81,6 +84,17 @@ public class OrderController {
 					orderCount.put("completion", count4);
 					model.addAttribute("orderCount", orderCount);
 				}
+				
+				//리뷰 작성 여부
+				if (orderList != null && orderList.size()>0) {
+					for(ProjectOrdersResponse.Response order : orderList) {
+						Long reviewCheck = reviewService.countByOrderIdAndWriterId(order.getOrderId(), ((User)session.getAttribute("loginUser")).getUserId());
+//						System.out.println("reviewCheck : "+reviewCheck + ", orderId : " + order.getOrderId());
+						order.setReviewCheck(reviewCheck);
+					}
+				}
+				
+				
 				model.addAttribute("orderList", orderList);
 				return "order/project_buylist";
 			} else {
@@ -103,7 +117,7 @@ public class OrderController {
 			if (session.getAttribute("loginUser") != null) {
 				User user = (User) session.getAttribute("loginUser");
 
-				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderListForBuyer(user.getUserId(),
 						category1, category2, LocalDateTime.parse(category4, DateTimeFormatter.ISO_DATE_TIME),
 						LocalDateTime.parse(category5, DateTimeFormatter.ISO_DATE_TIME), Integer.parseInt(pageNo));
 
@@ -172,8 +186,9 @@ public class OrderController {
 		try {
 			if (session.getAttribute("loginUser") != null) {
 				User user = (User) session.getAttribute("loginUser");
-				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderListForSeller(user.getUserId(),
 						Integer.parseInt(pageNo));
+				
 				for (ProjectOrdersResponse.Response order : orderList) {
 					System.out.println("order : " + order);
 				}
@@ -224,7 +239,7 @@ public class OrderController {
 			if (session.getAttribute("loginUser") != null) {
 				User user = (User) session.getAttribute("loginUser");
 
-				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderList(user.getUserId(),
+				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderListForSeller(user.getUserId(),
 						category1, category2, LocalDateTime.parse(category4, DateTimeFormatter.ISO_DATE_TIME),
 						LocalDateTime.parse(category5, DateTimeFormatter.ISO_DATE_TIME), Integer.parseInt(pageNo));
 
