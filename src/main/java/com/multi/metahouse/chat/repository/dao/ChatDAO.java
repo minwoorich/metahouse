@@ -29,6 +29,9 @@ public interface ChatDAO {
     // 채팅 메시지 조회
     List<ChatMsgDTO> getChatMsgById(int chatroomId);
     
+    // 파일 첨부 메시지 조회
+    List<ChatMsgFileDTO> getChatMsgFileById(int chatMsgId);
+    
     // 채팅 상대방 프로필 조회
     ChatProfileDTO getProfileById(String target);
     
@@ -41,4 +44,5 @@ public interface ChatDAO {
 
 	/* message_id 얻기 위한 메소드 */
 	int getLastInsertID();
+
 }

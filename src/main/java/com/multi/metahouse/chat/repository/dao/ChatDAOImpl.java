@@ -56,11 +56,17 @@ public class ChatDAOImpl implements ChatDAO {
         return chatroom;
     }
     
-	/* 채팅방의 메시지 호출 */
+	/* 채팅방의 메시지 조회 */
     @Override
     public List<ChatMsgDTO> getChatMsgById(int chatroomId) {
     	List<ChatMsgDTO> chatMsgs = sqlSession.selectList("getChatMsgById", chatroomId);
         return chatMsgs;
+    }
+    
+	/* 파일 첨부 메시지 파일 조회 */
+    @Override
+    public List<ChatMsgFileDTO> getChatMsgFileById(int chatMsgId) {
+    	return sqlSession.selectList("getChatMsgFileById", chatMsgId);
     }
     
 	/* 채팅 상대방의 프로필 호출 */
