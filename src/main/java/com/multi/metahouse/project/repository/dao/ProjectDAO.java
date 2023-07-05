@@ -27,7 +27,7 @@ public interface ProjectDAO {
 	public List<ProjectDTO> findByCreatorId(String creatorId);
 	
 /*------------------------------- OSE -----------------------------*/
-	public List<ProjectDTO> Allproject(Integer page);
+	public List<ProjectDTO> Allproject(Map<String, Object> map);
 	public ProjectDTO projectInfo(Long project_id);
 	public List<ProjectContentsDTO> projectImg(Long project_id);
 	public List<ProjectAddOption> projectOption(Long project_id);

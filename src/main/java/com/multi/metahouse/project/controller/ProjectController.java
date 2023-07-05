@@ -61,15 +61,18 @@ public class ProjectController {
 
 	// 프로젝트 마켓 상품목록 보기
 	@RequestMapping("project/main")
-	public String projectMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo, String category1, String category2) {
+	public String projectMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
+			@RequestParam(defaultValue = "Non") String category1,
+			@RequestParam(defaultValue = "Non") String category2) {
+		System.out.println(pageNo + category1 + category2);
 		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2);
+		System.out.println(projects);
 		int total = projectService.list(null, category1, category2).size();
+		System.out.println(total);
+
 		model.addAttribute("projects", projects);
 		model.addAttribute("pageInfo", new ProjectPageDTO(total, pageNo, 16, 5));
-		
-		System.out.println(projects);
-		System.out.println(total);
-		
+
 		return "project/main";
 	}
 

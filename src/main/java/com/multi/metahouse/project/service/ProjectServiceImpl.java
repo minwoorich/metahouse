@@ -1,6 +1,7 @@
 package com.multi.metahouse.project.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -141,8 +142,15 @@ public class ProjectServiceImpl implements ProjectService {
 
 	// 프로젝트 상품리스트 출력: 카테고리 값 받아서 출력해주기
 	@Override
-	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2) {		
-		List<ProjectDTO> projectsInPage = (List<ProjectDTO>) projectDao.Allproject(currnetPage);
+	public List<ProjectDTO> list(Integer currnetPage, String category, String category2) {
+		Map<String, Object> condition = new HashMap<String, Object>();
+		Integer skip = currnetPage;
+		String category1 = category;
+		String category2pj = category2;
+		condition.put("skip", skip);
+		condition.put("category1", category1);
+		condition.put("category2_pj", category2pj);
+		List<ProjectDTO> projectsInPage = (List<ProjectDTO>) projectDao.Allproject(condition);
 		if(currnetPage != null) {
 			for (int i = 0; i < projectsInPage.size(); i++) {
 				int projectId = projectsInPage.get(i).getProject_id();
@@ -156,7 +164,6 @@ public class ProjectServiceImpl implements ProjectService {
 				}
 				projectsInPage.get(i).setReview_count(reviewCount);
 				projectsInPage.get(i).setAverage_reviews(reviewAvg);
-				System.out.println(projectId + "=" + reviewSummary);
 			}
 		}
 		return projectsInPage;
