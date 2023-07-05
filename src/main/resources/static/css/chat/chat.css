@@ -388,3 +388,12 @@
 	width: 100px;
 	height: 100px;	
 }
+
+.chat-block__message-files div{
+	font-size: 12px;
+	height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-bottom: 2px;
+}

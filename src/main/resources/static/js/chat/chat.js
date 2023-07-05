@@ -127,7 +127,7 @@ $(document).ready(function(){
 						item += '<div class="chat-block__message-files">';
 						item += '<div class="message-file">';
 						item += '<img class="file_img" src="'+ file_url + '"/>';
-						item += '<span>'+resmsg.filenamelist[file_count]+'</span>';
+						item += '<div>'+resmsg.filenamelist[file_count]+'</div>';
 						item += '</div>';
 						item += '<div class="chat-block__timestamp"><div class="chat-block__timestamp-date">';
 						item += resmsg.write_time.substr(2, 8).replaceAll("-", ".");
@@ -146,7 +146,7 @@ $(document).ready(function(){
 						item += '<div class="chat-block__message-files">';
 						item += '<div class="message-file">';
 						item += '<img class="file_img" src="'+ file_url + '"/>';
-						item += '<span>'+resmsg.filenamelist[file_count]+'</span>';
+						item += '<div>'+resmsg.filenamelist[file_count]+'</div>';
 						item += '</div>';
 						
 						file_count++;
@@ -214,7 +214,7 @@ $(document).ready(function(){
 		console.log($(this));
 		const aTag = document.createElement('a');
 		document.body.appendChild(aTag);
-		aTag.download = $(this).next("span").text();
+		aTag.download = $(this).next("div").text();
 		aTag.href = $(this).attr("src");
 		aTag.click();
 	})

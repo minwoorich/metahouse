@@ -8,6 +8,8 @@ function createProfileElement(targetProfile){
 
 /* 채팅메시지 Elements 작성 메소드 */
 function createChatElement(chatMsg, loginUser){
+	
+	
 	for(let i=0; i<chatMsg.length; i++){
 		// 파일 첨부 메시지여부 확인
 //		if(chatMsg[i].message_type === "File"){
@@ -45,24 +47,6 @@ function createChatElement(chatMsg, loginUser){
 				// 메시지의 파일 리스트 받아서 저장
 				let chatMsgFileList = jsonData.chatMsgFile;
 				let fileList = jsonData.fileList;
-//				let fileArrayBufferList = [];
-//				
-//				for(let i=0; i<fileList.length; i++){
-//					console.log("fileList[" + (i+1) + "] : " + fileList[i]);
-//					const uint8Array = Uint8Array.from(fileList[i]);
-//					
-//					fileArrayBufferList.push(uint8Array.buffer);
-//				}
-				
-//				console.log(fileArrayBufferList);
-				
-//				const arrayBufferList = fileList.map((byteBuffer) => {
-//					const uint8Array = new Uint8Array(byteBuffer);
-//					console.log("uint8Array : " + uint8Array);
-//					return uint8Array.buffer;
-//				});
-				
-//				console.log("checkpoint : " + arrayBufferList);
 				
 				const uint8ArrayList = fileList.map((base64String) => {
 					const binaryString = atob(base64String);
@@ -73,30 +57,15 @@ function createChatElement(chatMsg, loginUser){
 					return uint8Array;
 				});
 				
-//				console.log("checkpoint : " + uint8ArrayList[0]);
-				
-//				const uint8ArrayList = [];
-//				
-//				for(let i=0; i<fileList.length; i++){
-//					const binaryString = atob(fileList[i]);
-//					const uint8Array = new Uint8Array(binaryString.length);
-//					for(let j=0; j<binaryString.length; j++){
-//						uint8Array[j] = binaryString.charCodeAt(j);
-//					}
-//					uint8ArrayList.push(uint8Array);
-//				}
-				
-//				console.log(uint8ArrayList);
-//				console.log(arrayBufferList);
-				
 				for(let i=0; i<chatMsgFileList.length; i++){
 					console.log(chatMsgFileList[i]);
 					// 파일 이미지 생성
 					console.log("파일 이미지 생성");
-//					console.log(arrayBufferList[i]);
 					let fileURL = URL.createObjectURL(new Blob([uint8ArrayList.pop()]));
+					myChatEle += '<div class="message-file">';
 					myChatEle += '<img class="file_img" src="'+ fileURL + '"/>';
-					myChatEle += '<span>'+chatMsgFileList[i].file_origin_name+'</span>';
+					myChatEle += '<div>'+chatMsgFileList[i].file_origin_name+'</div>';
+					myChatEle += '</div>';
 				}
 				
 				myChatEle += '</div></div><div class="chat-block__timestamp">' +

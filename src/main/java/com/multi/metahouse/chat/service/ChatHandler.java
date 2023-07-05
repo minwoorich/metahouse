@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -57,6 +59,10 @@ public class ChatHandler{
 	private static ChatService service;
 	private static ResourceLoader resourceLoader;
 	
+	private static String FILE_PATH;
+	
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("application");
+	
 	public ChatHandler() {
 	}
 	
@@ -64,7 +70,7 @@ public class ChatHandler{
 	public ChatHandler(ChatService service, ResourceLoader resourceLoader, PlatformTransactionManager transactionManager) {
 		super();
 		this.service = service;
-		this.resourceLoader = resourceLoader;
+		this.resourceLoader = resourceLoader;	
 		this.transactionManager = transactionManager;
 	}
 
@@ -117,10 +123,13 @@ public class ChatHandler{
 		filelist.add(0, msg);
 				
 		// 첨부파일 절대 경로 지정
-		final String FILE_PATH = resourceLoader.getResource("classpath:static/upload").getFile().getAbsolutePath() 
-				+ File.separator + "chat" + File.separator + "attach";
+		//final String FILE_PATH = resourceLoader.getResource("classpath:static/upload").getFile().getAbsolutePath() 
+		//		+ File.separator + "chat" + File.separator + "attach";
+		
+		FILE_PATH = bundle.getString("file.directory");
 		
 		// 파일 디렉토리 생성 (없으면)
+		System.out.println(FILE_PATH);
 		File dir = new File(FILE_PATH);
         if(!dir.exists()) {
             dir.mkdirs();
