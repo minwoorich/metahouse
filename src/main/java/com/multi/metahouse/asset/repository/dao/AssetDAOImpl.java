@@ -1,6 +1,7 @@
 package com.multi.metahouse.asset.repository.dao;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
@@ -70,6 +71,15 @@ public class AssetDAOImpl implements AssetDAO {
 	
 /*------------------------------------------ OSE ---------------------------------------------*/
 
+	//에셋 상품 목록 조회
+	@Override
+	public List<AssetDTO> Allasset(Map<String, Object> condition) {
+		return sqlSession.selectList("com.multi.metahaus.asset.getAllAssets",condition);
+	}
+	@Override
+	public Map<String, Integer> assetReviewSummary(String assetId){
+		return sqlSession.selectOne("com.multi.metahouse.domain.dao.ReviewDAO.assetReviewSummarybyid", assetId);
+	}
 	//에셋 상품 정보+판매자 정보 조회
 	@Override
 	public AssetDTO assetInfo(String asset_id) {

@@ -40,32 +40,35 @@ public class OrderServiceImpl implements OrderService {
 		this.projectOrderRepository = projectOrderRepository;
 	}
 
+
 	@Override
 	@Transactional
 	public int orderA(AssetOrdersDTO assetOrder, User loginUser, int consumeAmount) {
-		int payment = loginUser.getPoint() - consumeAmount;
+		int payment = loginUser.getPoint()-consumeAmount;
 		int result = 0;
-		if (payment >= 0) {
-			// 에셋 주문내역 생성
+		if(payment>=0) {
+			//에셋 주문내역 생성
 			dao.insertOrderA(assetOrder);
+			System.out.println(dao.insertOrderA(assetOrder));
 			// 포인트 결제 내역생성
 			String consumeInfo = "Asset";
 			consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
 			pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
 			pointDao.consumePoint(loginUser, consumeAmount);
-
+			
 			result = 1;
 		}
 		return result;
 	}
 
+
 	@Override
 	@Transactional
 	public int orderP(ProjectOrdersDTO projectOrder, List<SelectedAddOptionDTO> options, User loginUser,
 			int consumeAmount) {
-		int payment = loginUser.getPoint() - consumeAmount;
+		int payment = loginUser.getPoint()-consumeAmount;
 		int result = 0;
-		if (payment >= 0) {
+		if(payment>=0) {
 			// 주문내역 생성
 			dao.insertOrderP(projectOrder);
 			// 옵션내역 생성
@@ -75,16 +78,16 @@ public class OrderServiceImpl implements OrderService {
 					dao.insertOrderOption(options.get(i));
 				}
 			}
-
+	
 			// 포인트 결제내역 생성
 			String consumeInfo = "PJT";
 			consumeInfo = consumeInfo.concat(projectOrder.getProject_id());
 			pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
 			pointDao.consumePoint(loginUser, consumeAmount);
-
+			
 			result = 1;
 		}
-
+		
 		return result;
 	}
 

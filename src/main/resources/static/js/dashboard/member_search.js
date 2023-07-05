@@ -34,13 +34,9 @@ $(document).ready(function(){
 	function createResult(data){
 		
 		userEditForm.user_id.value = data.userId;
-		userEditForm.email.value = data.email;
-		userEditForm.user_name.value = data.userName;
-		userEditForm.password.value = data.password;
-		userEditForm.phone_number.value = data.phoneNumber;
-		userEditForm.gender.value = data.gender;
-		userEditForm.birth.value = data.birth;
-		userEditForm.self_introduction.value = data.selfIntroduction;
+		userEditForm.user_grade.value = data.userGrade;
+		userEditForm.point.value = data.point;
+	
 		
 		let tr = document.createElement("tr");
 		

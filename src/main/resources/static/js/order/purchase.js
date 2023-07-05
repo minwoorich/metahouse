@@ -123,7 +123,7 @@ $(document).ready(function(){
     	$("#consumeP").append("<span>"+TP+"원</spna>");
     	if(balance<0){
     		$("#balance").children().remove();
-    		$("#balance").append("<span>*잔액이 부족합니다.</span><span class='price_data' th:href='@{/point/charge}'>충전하기</span>");
+    		$("#balance").append("<span>*잔액이 부족합니다.</span><a class='price_data' th:href='@{/point/charge}'>충전하기</a>");
     	}else{
     		$("#balance").children().remove();
     		$("#balance").append("<span>결제 후 포인트</span><span class='price_data'>"+balance+"</span>");

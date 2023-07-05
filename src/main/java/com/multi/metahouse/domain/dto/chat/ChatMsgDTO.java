@@ -22,5 +22,7 @@ public class ChatMsgDTO {
 	private Date write_time;
 	private String message_content;
 	private String message_type;
+	
+	
 	private List<String> filenamelist;
 }
