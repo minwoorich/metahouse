@@ -40,11 +40,14 @@ public class ProjectDTO {
 
 	// extra data
 	// 단일패키지 가격
-	private int price;
+	private Integer price;
 	// 리뷰갯수
 	private int review_count;
 	// 리뷰평균
 	private double average_reviews;
+	//
+	private Integer single_price;
+	private Integer triple_price;
 
 	public ProjectDTO(int project_id, String creator_id, String tag, String title, String description,
 			Timestamp project_date, int project_hits, String category1, String category2_pj, int price,

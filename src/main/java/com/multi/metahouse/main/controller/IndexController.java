@@ -39,6 +39,13 @@ public class IndexController {
 		
 		List<ProjectDTO> projectList = service.findTopNByProjectReviewAvgWithPrice(9);
 		projectList.forEach((e)->{
+		Integer sp = e.getSingle_price();
+		if( sp != null) {
+			e.setPrice(sp);
+		}else {
+			e.setPrice(e.getTriple_price());
+		}
+		
 		String previewText = "";
 		Document html = Jsoup.parse(e.getDescription());
 		Element element = html.select("p").first();
