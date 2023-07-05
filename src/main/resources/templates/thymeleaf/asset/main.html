@@ -9,17 +9,15 @@
 <link href="/metahaus/css/asset/market_nav.css" rel="stylesheet" type="text/css" />
 <link href="/metahaus/css/asset/market_page_bar.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-    function getURL() {
-    	var category2  = document.getElementById("category2_as");
-		var value = (category2.options[category2.selectedIndex].value);
-		var URL = window.location.href+"&category2="+value
+	function getURL() {
+		var category2_as = $("select[name=category2_as]").val();
 		var ctg = window.location.search.substr(1).includes('category1');
 		if(ctg){
-			
+			location.href='main?pageNo=1&category1='+$('#C1').text()+'&category2='+category2_as
 		}else{
 			alert("채널을 먼저 선택하세요")
 		}
-    }
+    } 
 </script>
 </head>
 <body>
@@ -30,9 +28,14 @@
 			<!-- category combo -->
 			<div class="selectBox">
 				<p>ASSET MARKET&ensp;
-					<span th:if="${param.category1!=null}" th:text="'&rang;&ensp;'+${param.category1}"></span>
+					<span th:if="${not #strings.isEmpty(param.category1)}">&rang;&ensp;
+						<span th:text="${param.category1}" id="C1"></span>
+					</span>
+					<span th:if="${not #strings.isEmpty(param.category2)}">&rang;&ensp;
+						<span th:text="${param.category2}" id="C2"></span>
+					</span>
 				</p>
-				<select id="category2_as" class="select" onchange="getURL();">
+				<select name="category2_as" class="select" onchange="getURL();">
 					<option disabled selected>카테고리 선택하기</option>
 					<option value="의류">의류</option>
 					<option value="악세사리">악세사리</option>
@@ -69,112 +72,120 @@
 			<tbody>
 			 <tr th:each="asset, i:${assetlist}"  th:if="${i.index%4==0}">
 				<!-- Product1 -->
-					<td th:if="${i.index < i.size}" >
-						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index].assetId})}'|">
+					<td>
+					<th:block th:if="${i.index < i.size}" >
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index].asset_id})}'|">
 							<div class="product_img_cover">
-								<img class="product_img" th:if="${assetlist[i.index].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index].mainImg}"/>
+								<img class="product_img" th:if="${assetlist[i.index].main_img != null}"
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index].main_img}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
 								<div class="reviewer_star_rating">
 									<div class="star-ratings">
-										<div class="star-ratings-fill space-x-2 text-lg"
-									    :style="{width: ratingToPercent + '%'}">
-											<span>★</span><span>★</span><span>★</span><span>★</span>
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+assetlist[i.index].average_reviews*20+'%'}">
+											★★★★★
 										</div>
 										<div class="star-ratings-base space-x-2 text-lg">
-											<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+											★★★★★
 										</div>
 									</div>
-									<span>&ensp;(37)</span>
+									<span th:text="'&ensp;('+${assetlist[i.index].Review_count}+')'"></span>
 								</div>								
 								<a th:text="${assetlist[i.index].title}" class="product_title"></a>
-								<span th:text="${assetlist[i.index].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index].seller_id}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index].price}+원" class="product_price"></span>
 							</div>
 						</div>
+					</th:block>
 					</td>
 				<!-- Product2 -->
-					<td th:if="${i.index+1 < i.size}">
-						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+1].assetId})}'|">
+					<td>
+					<th:block th:if="${i.index+1 < i.size}">
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+1].asset_id})}'|">
 							<div class="product_img_cover">
-								<img class="product_img" th:if="${assetlist[i.index+1].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+1].mainImg}"/>
+								<img class="product_img" th:if="${assetlist[i.index+1].main_img != null}"
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+1].main_img}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
 								<div class="reviewer_star_rating">
 									<div class="star-ratings">
-										<div class="star-ratings-fill space-x-2 text-lg"
-									    :style="{ width: ratingToPercent + '%' }">
-											<span>★</span><span>★</span><span>★</span><span>★</span>
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+assetlist[i.index+1].average_reviews*20+'%'}">
+											★★★★★
 										</div>
 										<div class="star-ratings-base space-x-2 text-lg">
-											<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+											★★★★★
 										</div>
 									</div>
-									<span>&ensp;(37)</span>
+									<span th:text="'&ensp;('+${assetlist[i.index+1].Review_count}+')'"></span>
 								</div>								
 								<a th:text="${assetlist[i.index+1].title}" class="product_title"></a>
-								<span th:text="${assetlist[i.index+1].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index+1].seller_id}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index+1].price}+원" class="product_price"></span>
 							</div>
 						</div>
+					</th:block>
 					</td>
 				<!-- Product3 -->
-					<td th:if="${i.index+2 < i.size}" >
-						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+2].assetId})}'|">
+					<td>
+					<th:block th:if="${i.index+2 < i.size}" >
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+2].asset_id})}'|">
 							<div class="product_img_cover">
-								<img class="product_img" th:if="${assetlist[i.index+2].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+2].mainImg}"/>
+								<img class="product_img" th:if="${assetlist[i.index+2].main_img != null}"
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+2].main_img}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
 								<div class="reviewer_star_rating">
 									<div class="star-ratings">
-										<div class="star-ratings-fill space-x-2 text-lg"
-									    :style="{ width: ratingToPercent + '%' }">
-											<span>★</span><span>★</span><span>★</span><span>★</span>
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+assetlist[i.index+2].average_reviews*20+'%'}">
+											★★★★★
 										</div>
 										<div class="star-ratings-base space-x-2 text-lg">
-											<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+											★★★★★
 										</div>
 									</div>
-									<span>&ensp;(37)</span>
-								</div>								
+									<span th:text="'&ensp;('+${assetlist[i.index+2].Review_count}+')'"></span>
+								</div>							
 								<a th:text="${assetlist[i.index+2].title}" class="product_title"></a>
-								<span th:text="${assetlist[i.index+2].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index+2].seller_id}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index+2].price}+원" class="product_price"></span>
 							</div>
 						</div>
+					</th:block>
 					</td>
 				<!-- Product4 -->
-					<td th:if="${i.index+3 < i.size}">
-						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+3].assetId})}'|">
+					<td>
+					<th:block th:if="${i.index+3 < i.size}">
+						<div class="product" th:onclick="|location.href='@{/asset/detail(assetNum=${assetlist[i.index+3].asset_id})}'|">
 							<div class="product_img_cover">
-								<img class="product_img" th:if="${assetlist[i.index+3].mainImg != null}"
-									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+3].mainImg}"/>
+								<img class="product_img" th:if="${assetlist[i.index+3].main_img != null}"
+									 th:src="@{/upload/asset_thumbnail_img/}+${assetlist[i.index+3].main_img}"/>
 							</div>
 							<div class="product_info">
 								<!-- 별점 -->
 								<div class="reviewer_star_rating">
 									<div class="star-ratings">
-										<div class="star-ratings-fill space-x-2 text-lg"
-									    :style="{ width: ratingToPercent + '%' }">
-											<span>★</span><span>★</span><span>★</span><span>★</span>
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+assetlist[i.index+3].average_reviews*20+'%'}">
+											★★★★★
 										</div>
 										<div class="star-ratings-base space-x-2 text-lg">
-											<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+											★★★★★
 										</div>
 									</div>
-									<span>&ensp;(37)</span>
-								</div>								
+									<span th:text="'&ensp;('+${assetlist[i.index+3].Review_count}+')'"></span>
+								</div>							
 								<a th:text="${assetlist[i.index+3].title}" class="product_title"></a>
-								<span th:text="${assetlist[i.index+3].sellerId}" class="product_seller"></span> 
+								<span th:text="${assetlist[i.index+3].seller_id}" class="product_seller"></span> 
 								<span th:text="${assetlist[i.index+3].price}+원" class="product_price"></span>
 							</div>
 						</div>
+					</th:block>
 					</td>
 			 </tr>
 			</tbody>
@@ -182,21 +193,20 @@
 			
 		<!-- 페이지 번호 -->
 		<div class="page_wrap">
-			<div class="page_nation" th:with="start=${(aPage.number/maxPage)*maxPage + 1},
-				 end=(${(aPage.totalPages == 0) ? 1 : (start + (maxPage - 1) < aPage.totalPages ? start + (maxPage - 1) : aPage.totalPages)}),
-				 nowPage=${aPage.number+1}">
-				<a class="arrow pprev" th:if="${start > 1}"  th:href="@{/asset/main?pageNo=0}">&lang;&lang;</a>
-				<a class="arrow prev" th:if="${start > 1}" th:href="@{/asset/main(pageNo=${start - maxPage -1})}">&lang;</a>
-				<th:block th:each= "page : ${#numbers.sequence(start, end)}">
-					<a th:if="${page != nowPage}" 
-					   th:href="@{/asset/main(pageNo = ${page -1})}"
-           			   th:text="${page}"></a>
-           			<a th:if="${page == nowPage}" th:text="${page}" class="active"></a>
-				</th:block>
-				<a class="arrow next" th:if="${end < aPage.totalPages}"  th:href="@{/asset/main(pageNo=${start + maxPage -1})}">&rang;</a>
-				<a class="arrow nnext" th:if="${end < aPage.totalPages}"  th:href="@{/asset/main(pageNo=${aPage.totalPages - 1})}">&rang;&rang;</a>
-			</div> 
-		</div>
+				<div class="page_nation" th:with="start=${pageInfo.startPage}, end=${pageInfo.endPage},
+					 nowPage=${pageInfo.currentPage}">
+					<a class="arrow pprev" th:if="${start > 1}"  th:href="@{/asset/main(pageNo=1, category1=${param.category1}, category2=${param.category2})}">&lang;&lang;</a>
+					<a class="arrow prev" th:if="${start > 1}" th:href="@{/asset/main(pageNo=nowPage-1, category1=${param.category1}, category2=${param.category2})}">&lang;</a>
+					<th:block th:each= "page : ${#numbers.sequence(start, end)}">
+						<a th:if="${page != nowPage}" 
+						   th:href="@{/asset/main(pageNo = ${page}, category1=${param.category1}, category2=${param.category2})}"
+	           			   th:text="${page}"></a>
+	           			<a th:if="${page == nowPage}" th:text="${page}" class="active"></a>
+					</th:block>
+					<a class="arrow next" th:if="${end < pageInfo.totalPages}"  th:href="@{/asset/main(pageNo=nowPage+1, category1=${param.category1}, category2=${param.category2})}">&rang;</a>
+					<a class="arrow nnext" th:if="${end < pageInfo.totalPages}"  th:href="@{/asset/main(pageNo=${pageInfo.totalPages}, category1=${param.category1}, category2=${param.category2})}">&rang;&rang;</a>
+				</div> 
+			</div>
 	</div>
 	</div><!-- layout:fragment -->	
 

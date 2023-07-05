@@ -66,7 +66,6 @@ public class ProjectDAOImpl implements ProjectDAO {
 	
 	@Override
 	public List<ProjectDTO> Allproject(Map<String, Object> condition) {
-		System.out.println(condition);
 		return session.selectList("com.multi.metahouse.project.allProject", condition);
 	}
 	@Override

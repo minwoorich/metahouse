@@ -1,7 +1,9 @@
 package com.multi.metahouse.asset.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 import com.multi.metahouse.domain.dto.asset.AssetFormDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.entity.asset.AssetContentEntity;
 import com.multi.metahouse.domain.entity.asset.AssetDetailImgEntity;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
@@ -105,23 +108,30 @@ public class AssetServiceImpl implements AssetService {
 
 
 	/*------------------------------------------- OSE ------------------------------------------*/
-	@Autowired
-	AssetRepository repositry;
-
 	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
-	public Page<AssetEntity> list(String category1, String category2, int pageNo) {
-		PageRequest pageRequest = PageRequest.of(pageNo, 16, Sort.by(Sort.Direction.DESC, "assetDate"));
-		Page<AssetEntity> assetlistPage = null;
-		if (category1 == null && category2 == null) {
-			assetlistPage = repositry.findAll(pageRequest);
-		} else if (category1 != null && category2 == null) {
-			assetlistPage = repositry.findByCategory1(category1, pageRequest);
-		} else {
-			assetlistPage = repositry.findByCategory1AndCategory2(category1, category2, pageRequest);
+	public List<AssetDTO> list(Integer currnetPage, String category, String category2) {
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition.put("skip", currnetPage);
+		condition.put("category1", category);
+		condition.put("category2_as", category2);
+		List<AssetDTO> assetsInPage = (List<AssetDTO>) dao.Allasset(condition);
+		if(currnetPage != null) {
+			for (int i = 0; i < assetsInPage.size(); i++) {
+				String assetId = assetsInPage.get(i).getAsset_id();
+				Map<String, Integer> reviewSummary = dao.assetReviewSummary(assetId);
+				/* java.lang.Long cannot be cast to java.lang.Integer 에러 발생 
+				 * : long 형(db 기준 number)을 바로 int로 변환하려고 하기 때문 */
+				int reviewCount = Integer.parseInt(String.valueOf(reviewSummary.get("Review_count")));
+				double reviewAvg = 0;
+				if (reviewCount > 0) {
+					reviewAvg = Double.parseDouble(String.valueOf(reviewSummary.get("Review_Avg")));
+				}
+				assetsInPage.get(i).setReview_count(reviewCount);
+				assetsInPage.get(i).setAverage_reviews(reviewAvg);
+			}
 		}
-
-		return assetlistPage;
+		return assetsInPage;
 	}
 
 	// 에셋 상품 정보+이미지+판매자 정보 조회

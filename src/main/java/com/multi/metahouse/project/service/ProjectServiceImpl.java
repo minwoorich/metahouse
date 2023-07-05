@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
@@ -151,14 +152,11 @@ public class ProjectServiceImpl implements ProjectService {
 
 	// 프로젝트 상품리스트 출력: 카테고리 값 받아서 출력해주기
 	@Override
-	public List<ProjectDTO> list(Integer currnetPage, String category, String category2) {
+	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2) {
 		Map<String, Object> condition = new HashMap<String, Object>();
-		Integer skip = currnetPage;
-		String category1 = category;
-		String category2pj = category2;
-		condition.put("skip", skip);
+		condition.put("skip", currnetPage);
 		condition.put("category1", category1);
-		condition.put("category2_pj", category2pj);
+		condition.put("category2_pj", category2);
 		List<ProjectDTO> projectsInPage = (List<ProjectDTO>) projectDao.Allproject(condition);
 		if(currnetPage != null) {
 			for (int i = 0; i < projectsInPage.size(); i++) {
