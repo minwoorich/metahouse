@@ -31,11 +31,13 @@ public class OrderServiceImpl implements OrderService {
 	ProjectOrdersRepository projectOrderRepository;
 
 	@Autowired
-	public OrderServiceImpl(OrderDAO dao, ProjectOrdersRepository projectOrderRepository) {
+	public OrderServiceImpl(OrderDAO dao, PointDAO pointDao, ProjectOrdersRepository projectOrderRepository) {
 		super();
 		this.dao = dao;
+		this.pointDao = pointDao;
 		this.projectOrderRepository = projectOrderRepository;
 	}
+
 
 	@Override
 	@Transactional
@@ -45,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
 		if(payment>=0) {
 			//에셋 주문내역 생성
 			dao.insertOrderA(assetOrder);
+			System.out.println(dao.insertOrderA(assetOrder));
 			// 포인트 결제 내역생성
 			String consumeInfo = "Asset";
 			consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
@@ -55,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return result;
 	}
+
 
 	@Override
 	@Transactional
