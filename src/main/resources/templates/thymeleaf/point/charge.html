@@ -13,41 +13,68 @@
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script>
-        var IMP = window.IMP; 
-        IMP.init("imp38164824"); 
-    
-    	var price = $("input[type=radio][name=point]:checked").val();
-    	var buyerName = "";
-    
-        function requestPay() {
-            alert(price);
-        	
-        	IMP.request_pay({
-                pg : 'kakaopay',
-                pay_method : 'kakaopay',
-                merchant_uid: "57008833-33004", 
-                name : 'point',
-                amount : 1004,
-                buyer_email : 'Iamport@chai.finance',
-                buyer_name : '포트원 기술지원팀',
-                buyer_tel : '010-1234-5678',
-                buyer_addr : '서울특별시 강남구 삼성동',
-                buyer_postcode : '123-456'
-            }, function (rsp) { // callback
-                //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-                if(rsp.success){
-                	alert('결제성공');
-                }else{
-                	alert('결제취소');
-                }
-            });
+    var IMP = window.IMP; 
+    IMP.init("imp38164824"); 
 
-        }
+    function requestPay() {
+    	var price = $("input[type=radio][name=point]:checked").val()*1;
+    	var buyerName = $("#pointOwner").text();
+    	var merchantCode = new Date().toLocaleDateString().split('. ').join('').replace('.','');
+    	if(price>0){
+	    	IMP.request_pay({
+	            pg : 'kakaopay',
+	            pay_method : 'kakaopay',
+	            merchant_uid: 'ORD'+merchantCode+'-'+Math.random().toString(36).substring(2, 12)+price, 
+	            name : 'MetaPoint',
+	            amount : price,
+	            buyer_email : 'test',
+	            buyer_name : buyerName,
+	            buyer_tel : 'test',
+	            buyer_addr : 'test',
+	            buyer_postcode : 'test'
+	        }, function (rsp) { // callback
+	            //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+	            var result = '';
+	            var msg = '';
+	            if(rsp.success){
+	            	result ='0';
+	            	msg = '결제가 완료되었습니다.';
+	            }else{
+	            	msg = '결제에 실패하였습니다.'
+	            }
+	        		
+	        	//포인트 충전내역 생성
+	        	if(result=='0'){
+	            	 $.ajax({
+	                     type : "POST",            // HTTP method type(GET, POST) 형식이다.
+	                     url : "/metahaus/point/charge.do", // 컨트롤러에서 대기중인 URL 주소이다.
+	                     data : {point : price},
+	                     dataType : 'text',
+	                     success : function(){
+	                    	 location.href = "/metahaus/point/charge.success";
+	                     },
+	                     error : function(XMLHttpRequest, textStatus, errorThrown){
+	                         msg = '결제에 실패하였습니다.'
+	                    	// 결제 취소 요청
+	                         cancelPayment(imp_uid);
+	                     }
+	                 });
+	        	}
+	        	
+	        	alert(msg);
+	        	
+	        });
+    	}else{
+    		alert("충전 금액을 먼저 선택해 주세요")
+    	}
+    }
+
     </script>
 </head>
 <body>
 	<div class="point-charge-section" layout:fragment="content">
 		<h3>내 포인트</h3>
+		<span id="pointOwner" hidden="" th:text="${session.loginUser?.userName}"></span> 
 		<div class="mypoint-info">
 			<div class="mypoint-label-div">
 				<span class="mypoint-label">보유 포인트</span> <span class="mypoint-count" th:text="${session.loginUser?.point}">  </span> 
@@ -60,17 +87,19 @@
 			<form action="/metahaus/point/charge.do">
 				<div class="point-charge-form-inner-radio">
 					<p>MetaPoint</p>
-					<input type="radio" id="point1" name="point" value="1000" ><label for="point1" class="box-radio-input"><span th:text="1000원"></span></label>
-					<input type="radio" id="point2" name="point" value="3000" ><label for="point2" class="box-radio-input"><span th:text="3000원"></span></label>
-					<input type="radio" id="point3" name="point" value="5000" ><label for="point3" class="box-radio-input"><span th:text="5000원"></span></label>
-					<input type="radio" id="point4" name="point" value="10000" ><label for="point4" class="box-radio-input"><span th:text="10000원"></span></label>
-					<input type="radio" id="point5" name="point" value="50000" ><label for="point5" class="box-radio-input"><span th:text="50000원"></span></label>
+					<p>*결제는 카카오페이로 진행됩니다.</p>
+					<div class="charge-form-radio-wrap">
+						<input type="radio" id="point1" name="point" value="1000" ><label for="point1" class="box-radio-input"><span th:text="1000원"></span></label>
+						<input type="radio" id="point2" name="point" value="3000" ><label for="point2" class="box-radio-input"><span th:text="3000원"></span></label>
+						<input type="radio" id="point3" name="point" value="5000" ><label for="point3" class="box-radio-input"><span th:text="5000원"></span></label>
+						<input type="radio" id="point4" name="point" value="10000" ><label for="point4" class="box-radio-input"><span th:text="10000원"></span></label>
+						<input type="radio" id="point5" name="point" value="50000" ><label for="point5" class="box-radio-input"><span th:text="50000원"></span></label>
+					</div>
 				</div>	
 				</br></br>
 				<div style="display: flex; justify-content: space-between">
 					<button class="button--small"  type="button" onclick="location.href='/metahaus/point/mypoint'"> 이전 </button>
-					<button type="button" onclick="requestPay()">결제하기</button>
-					<input type="submit" value="충전" class="button--small"/>
+					<button type="button" class="button--small" onclick="requestPay()">충전</button>
 				</div>
 				
 			</form>

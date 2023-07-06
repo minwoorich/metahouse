@@ -27,23 +27,30 @@
 	color: var(--medium-purple);
 	margin-bottom: 10px;
 }
+.charge-form-radio-wrap{
+	display: flex;
+    justify-content: space-evenly;
+    margin: 1.5rem 0 0.8rem 0;
+	
+}
 
 .point-charge-form-inner-radio input[type=radio]{
 	display: none;
 }
 
 .point-charge-form-inner-radio input[type=radio]+label{
-	display: inline-block;
+	display: inline-flex;
+    justify-content: space-evenly;
+	align-items: center;
     cursor: pointer;
-    height: 24px;
-    width: 90px;
-    border: 1px solid #333;
+    height: 36px;
+    width: 120px;
+    border: 1.5px solid #333;
+    border-radius: 4px;
     line-height: 24px;
     text-align: center;
     font-weight:bold;
-    font-size:13px;
-    
-    background-color: #fff;
+    font-size:14px;
     color: #333;
 }
 
