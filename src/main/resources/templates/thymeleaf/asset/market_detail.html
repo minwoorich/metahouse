@@ -7,6 +7,7 @@
 <title>Asset/detail</title>
 <link href="/metahaus/css/asset/market_product_detail.css" rel="stylesheet" type="text/css" />
 <link href="/metahaus/css/asset/market_product_detail_img.css" rel="stylesheet" type="text/css" />
+<link href="/metahaus/css/asset/report_modal.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div layout:fragment="content" class="content">	
@@ -16,6 +17,7 @@
 				<span th:text="${asset.category1}"></span>&ensp;&rang;&ensp;
 				<span th:text="${asset.category2_as}"></span>
 			</div><br>
+			<div id="productId" th:text="'Asset'+${asset.asset_id}" hidden=""></div>
 			<div id="main_title" th:text="${asset.title}"></div>
 			<!-- 이미지 갤러리 -->
 			<div id="photo_container">
@@ -150,7 +152,7 @@
             <!-- 게시글 신고 -->
 			<div id="report">
 				<img alt="신고아이콘" src="/metahaus/images/report_icon.png" id="report_img">
-				<a>&ensp;게시글 신고하기</a>
+				<a  href="javascript:openModal()">&ensp;게시글 신고하기</a>
 			</div>
 		</div>
 
@@ -182,9 +184,90 @@
 					 th:onclick="|location.href='@{/asset/purchase(assetNum=${asset.asset_id})}'|">구매하기</button>
 			</div>
 		</div>
+		
+		<!-- 신고하기 모달 -->
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<button class="close-button" onclick="closeModal()">X</button>
+				<h2 class="sub_title">게시글 신고하기</h2>
+				<div class="form-container">
+        		<form id="form_box">
+          			<label for="unresponsive">
+            			<input type="radio" id="unresponsive" name="report_reason" value="스팸홍보/도배글">
+            			스팸홍보/도배글 입니다.
+          			</label>
+			        <label for="inappropriate">
+			        	<input type="radio" id="inappropriate" name="report_reason" value="음란물">
+			        	음란물입니다.
+			        </label>
+			          <label for="external">
+			            <input type="radio" id="external" name="report_reason" value="불법정보를 포함">
+						불법정보를 포함하고 있습니다.
+			          </label>
+			          <label for="low-quality">
+			            <input type="radio" id="low-quality" name="report_reason" value="개인정보 노출 게시물">
+			           	 개인정보 노출 게시물 입니다.
+			          </label>
+			          <label for="delayed-delivery">
+			            <input type="radio" id="delayed-delivery" name="report_reason" value="불쾌한표현">
+			           	 불쾌한(욕설/생명경시/혐오/차별적) 표현입니다
+			          </label>
+			          <label for="other">
+			            <input type="radio" id="other" name="report_reason" value="other">
+			            <input type="text" id="other-reason" placeholder="기타 신고 사유를 입력해주세요."
+			            onfocus="this.placeholder=''" onblur="this.placeholder='기타 신고 사유를 입력해주세요.'">
+			          </label>
+			          <!-- 전송 버튼 -->
+			          <button type="button" class="submit-button " onclick="submitForm()">전송</button>
+		        </form>
+	      	</div>
+    	</div>
+  	</div><!-- 신고모달 끝 -->
+
 	<script src="/metahaus/js/asset/market_detail.js"></script>
+	<script>
+    var modal = document.getElementById("myModal");
+    // 모달 열기
+    function openModal() {
+    	modal.style.display = "block";
+    }
+    // 모달 닫기
+    function closeModal(){
+	    modal.style.display = 'none';
+	    $("#form_box")[0].reset();
+    }
+
+    // 신고 양식 전송
+    function submitForm() {
+    	var target = $("#productId").text();
+    	var reason = $('input[name=report_reason]:checked').val();
+		if(reason=="other"){
+			reason ='기타:'+$("#other-reason").val();
+      	}
+    	var param = {"report" :{
+    			 "report_target" : target, 
+    			 "report_reason" : reason
+	    	}
+    	}
+
+      $.ajax({      
+		  url : "/metahaus/report",      
+    	  type : "POST",  
+    	  data : JSON.stringify(param),
+    	  contentType: 'application/json',
+    	  success : function(data){   
+    	        alert(data);     
+				modal.style.display = 'none';
+			    $("#form_box")[0].reset();
+    	  
+    	        },   
+    	    error : function(){  
+    	    	alert("로그인 후 신고 가능합니다.");  
+    	        }  
+    	}); 
+    }
+  </script>
 	</div><!-- layout:fragment -->	
 	
-
 </body>
 </html>

@@ -5,7 +5,7 @@
 <mapper namespace="com.multi.metahouse.search">
 
   <sql id="field">
-    SELECT title, price, img, writer_id, rating, review_count, regdate, category, flag , descr
+    SELECT type, id, title, price, img, writer_id, rating, review_count, regdate, category, flag , descr
   </sql>
 
   <sql id="filter">
@@ -14,7 +14,7 @@
         category = #{category}
       </if>
       <if test="keyword != null">
-        AND (title LIKE CONCAT('%', #{keyword}, '%') OR writer_id LIKE CONCAT('%', #{keyword}, '%'))
+        AND (title LIKE CONCAT('%', #{keyword}, '%') OR writer_id = #{keyword} )
       </if>
     </where>
   </sql>
@@ -23,7 +23,10 @@
   <if test="option.equals('aa') or option.equals('all')">
       
       FROM (
-      SELECT a.title title, a.price price, a.main_img img, a.seller_id writer_id,
+      SELECT
+      'a' type,
+      a.asset_id id,
+       a.title title, a.price price, a.main_img img, a.seller_id writer_id,
       (SELECT AVG(ar.rating) FROM asset_review ar WHERE a.asset_id = ar.asset_id) rating,
       (SELECT COUNT(ar.rating) FROM asset_review ar WHERE a.asset_id = ar.asset_id) review_count,
       a.category1 category, a.asset_date regdate, 'a' flag , a.description descr
@@ -39,7 +42,9 @@
     <if test="option.equals('pp') or option.equals('all')">
       <include refid="field" />
       FROM (
-      SELECT p.title title,
+      SELECT 'p' type ,
+      p.project_id id,
+       p.title title,
       (SELECT ps.price FROM project_package_single ps WHERE p.project_id = ps.project_id) price,
       p.thumbnail img, p.creator_id writer_id,
       (SELECT AVG(pr.rating) FROM project_review pr WHERE p.project_id = pr.project_id) rating,
@@ -81,12 +86,12 @@
   
   <select id="searchUser" parameterType="String" resultType="user">
   	SELECT * FROM user
-	WHERE user_name LIKE CONCAT('%', #{keyword}, '%')
+	WHERE user_id LIKE CONCAT('%', #{keyword}, '%')
   </select>
   
   <select id ="searchUserCount" parameterType="String" resultType="int">
   	SELECT count(user_id) FROM user
-	WHERE user_name LIKE CONCAT('%', #{keyword}, '%')
+	WHERE user_id LIKE CONCAT('%', #{keyword}, '%')
   </select>
 
 </mapper>

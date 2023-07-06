@@ -21,7 +21,7 @@ public interface AssetService {
 	void deleteAssetByAssetId(String assetId);
 /*----------------------------------------------------*/
 	//에셋마켓 상품 전체보기
-	public Page<AssetEntity> list(String category1, String category2, int pageNo);
+	public List<AssetDTO>list(Integer currnetPage, String category, String category2);
 	//에셋마켓 특정상품보기
 	public AssetDTO assetInfo(String asset_id);
 	public List<AssetDetailImgDTO> assetImgInfo(String asset_id);

@@ -142,7 +142,7 @@
 					<tbody>
 						<tr class="cgInfo" th:each="cpi:${cgpilist}">
 							<td th:text="${cpi.paymentMethod}"></td>
-							<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd')}"></td>
+							<td th:text="${#dates.format(cpi.chargeDate, 'yyyy-MM-dd HH:mm')}"></td>
 							<td th:text="${cpi.chargingPoint + ' 포인트'}"></td>
 							<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
 						</tr>
@@ -178,7 +178,7 @@
 				<tbody>
 					<tr id="csInfoList" th:each="cpi:${cspilist}">
 						<td th:text="${cpi.consumeInfo}"></td>
-						<td th:text="${#dates.format(cpi.consumeDate, 'yyyy-MM-dd')}"></td>
+						<td th:text="${#dates.format(cpi.consumeDate, 'yyyy-MM-dd HH:mm')}"></td>
 						<td th:text="${cpi.consumingPoint + ' 포인트'}"></td>
 						<td th:text="${cpi.remainingPoint + ' 포인트'}"></td>
 					</tr>

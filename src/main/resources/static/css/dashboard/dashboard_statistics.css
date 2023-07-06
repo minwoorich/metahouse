@@ -1,12 +1,47 @@
 /* row 설정 (overriding) */
-.row {
+ .row {
 	display: flex;
-    /* justify-content: center; */
+    justify-content: center;
 }
 
 /* card 클래스 설정 (overriding) */
 .card {
 	width: 450px;
+}
+
+.managementcard {
+	width: 100%;
+	margin: 20px;
+	border: 1px solid var(--medium-purple);
+	border-radius: 4px;
+	overflow: hidden;
+	box-shadow: 2px 2px 5px var(--light-purple);
+}
+
+
+.paging-wrap{
+    margin: 15px auto;
+    width: 90%;
+    padding: 15px 20px;
+    display:flex;
+    justify-content: center;
+}
+
+#paging-btn-list{
+    display: flex;
+}
+#paging-btn-list .page-btn{
+   color:black;
+    font-size: 18px;
+    
+    padding: 0 10px;
+}
+#paging-btn-list .disabled{
+   color:#656565;
+}
+
+#paging-btn-list .current-page-btn a{
+   color: #116aff;
 }
 
 /* 미사용 CSS */

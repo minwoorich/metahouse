@@ -2,9 +2,12 @@ package com.multi.metahouse.review.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.multi.metahouse.domain.dto.review.ReviewCommentDTO;
 import com.multi.metahouse.review.repository.dao.ReviewCommentDAO;
 
+@Service
 public class ReviewCommentServiceImpl implements ReviewCommentService {
 
 	private ReviewCommentDAO reviewCommentdao;

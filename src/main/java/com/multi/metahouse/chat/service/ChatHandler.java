@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -46,8 +48,6 @@ public class ChatHandler{
 	
 	// Binary 메시지 임시 저장 변수 선언
 	private List<ByteBuffer> filelist = new ArrayList<>();
-	// ChatMsgDTO 에 들어갈 store_filenamelist
-	private List<String> store_filenamelist = new ArrayList<>();
 	
 	// service 메소드에 사용될 DTO 변수 저장
 	private ChatMsgDTO chatMsg = null;
@@ -59,6 +59,10 @@ public class ChatHandler{
 	private static ChatService service;
 	private static ResourceLoader resourceLoader;
 	
+	private static String FILE_PATH;
+	
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("application");
+	
 	public ChatHandler() {
 	}
 	
@@ -66,7 +70,7 @@ public class ChatHandler{
 	public ChatHandler(ChatService service, ResourceLoader resourceLoader, PlatformTransactionManager transactionManager) {
 		super();
 		this.service = service;
-		this.resourceLoader = resourceLoader;
+		this.resourceLoader = resourceLoader;	
 		this.transactionManager = transactionManager;
 	}
 
@@ -116,13 +120,16 @@ public class ChatHandler{
 	public void onMessage(ByteBuffer msg, Session session) throws IOException {
 		//System.out.println("바이너리 수신메세지:"+msg);
 		// ArrayBuffer 형식 메시지 static 멤버변수에 저장
-		filelist.add(0, msg);
+		filelist.add(msg);
 				
 		// 첨부파일 절대 경로 지정
-		final String FILE_PATH = resourceLoader.getResource("classpath:static/upload").getFile().getAbsolutePath() 
-				+ File.separator + "chat" + File.separator + "attach";
+		//final String FILE_PATH = resourceLoader.getResource("classpath:static/upload").getFile().getAbsolutePath() 
+		//		+ File.separator + "chat" + File.separator + "attach";
+		
+		FILE_PATH = bundle.getString("file.directory");
 		
 		// 파일 디렉토리 생성 (없으면)
+		System.out.println(FILE_PATH);
 		File dir = new File(FILE_PATH);
         if(!dir.exists()) {
             dir.mkdirs();
@@ -184,7 +191,7 @@ public class ChatHandler{
  				data.getBasicRemote().sendText(modifiedJsonString);
  				// 클라이언트 단에 파일 전송
  				for(ByteBuffer arrayBuffer:filelist) {
- 					//System.out.println("전송파일:"+arrayBuffer);
+// 					System.out.println("전송파일:"+arrayBuffer);
  					data.getBasicRemote().sendBinary(arrayBuffer);
  				}
  			}

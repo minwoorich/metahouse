@@ -1,25 +1,35 @@
 package com.multi.metahouse.review.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
 import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
 import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
-import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
+import com.multi.metahouse.domain.entity.review.ProjectReviewContentsEntity;
+import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
+import com.multi.metahouse.domain.entity.review.jpadto.ProjectReviewJpaDto;
+import com.multi.metahouse.domain.entity.review.jpadto.ProjectReviewJpaDto.ProjectReviewContents;
+import com.multi.metahouse.order.repository.dao.OrderDAO;
 import com.multi.metahouse.review.repository.dao.ReviewDAO;
+import com.multi.metahouse.review.repository.jpa.ProjectReviewRepository;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
 	private ReviewDAO reviewDAO;
+	private OrderDAO orderDAO;
 
 	@Autowired
-	public ReviewServiceImpl(ReviewDAO reviewDAO) {
+	public ReviewServiceImpl(ReviewDAO reviewDAO, OrderDAO orderDAO) {
+		super();
 		this.reviewDAO = reviewDAO;
+		this.orderDAO = orderDAO;
 	}
 
 	@Override
@@ -79,5 +89,27 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 				
 		return PJTreviews;
+	}
+	/*-------------------- 민우 영역 ------------------*/
+
+	@Override //리뷰저장
+	public void insertProjectReview(ProjectReviewJpaDto projectReviewDto) {
+//		1. reviewEntity에 자식빼고 나머지 필드에 값 저장
+		ProjectReviewEntity reviewEntity = projectReviewDto.toEntity();
+//		2. reviewEntity -> reviewContentsEntity필드에 값 저장
+		if(projectReviewDto.getContentsList()!=null && projectReviewDto.getContentsList().size() > 0 ) {
+			for(ProjectReviewJpaDto.ProjectReviewContents content : projectReviewDto.getContentsList()) {
+				ProjectReviewContentsEntity contentEntity = content.toEntity();
+				contentEntity.setProjectReviewId(reviewEntity);
+				reviewEntity.getReviewContentsEntityList().add(contentEntity);
+			}
+		}
+		reviewDAO.saveProjectReview(reviewEntity);
+	}
+
+	@Override //리뷰 개수 반환
+	public Long countByOrderIdAndWriterId(Long orderId, String writerId) {
+		
+		return reviewDAO.countByOrderIdAndWriterId(orderId, writerId);
 	}
 }

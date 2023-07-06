@@ -67,9 +67,8 @@ public class ProjectReviewEntity {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "projectReviewId" )
 	private ProjectReviewCommentEntity reviewCommentEntity; 
 	
-	//단방향
+	//양방향
 	@Builder.Default
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "project_review_id", referencedColumnName = "project_review_id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "projectReviewId")
 	List<ProjectReviewContentsEntity> reviewContentsEntityList = new ArrayList<>();
 }

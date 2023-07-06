@@ -45,15 +45,23 @@
 		WHERE user_2_id = #{user_1_id}
 		  and c.user_1_id = u.user_id;
     </select>
+    
     <select id="getChatroomById" resultType="chatroom">
     	SELECT * 
-		FROM chatroom c
+		FROM chatroom
 		WHERE chatroom_id = #{chatroomId}
     </select>
+    
     <select id="getChatMsgById" parameterType="int" resultType="chatmsg">
         SELECT *
-		FROM message m
+		FROM message
 		where chatroom_id = #{chatroomId}
+    </select>
+    
+    <select id="getChatMsgFileById" parameterType="int" resultType="chatmsgfile">
+        SELECT *
+		FROM message_file
+		where message_id = #{message_id}
     </select>
     
     <select id="getChatProfileById" parameterType="String" resultType="chatprofile">

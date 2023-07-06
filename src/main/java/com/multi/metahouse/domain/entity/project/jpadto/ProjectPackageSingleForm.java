@@ -20,7 +20,7 @@ public class ProjectPackageSingleForm implements ProjectPackageForm{
 	private int add_option_id;
 	private String pkg_title;
 	private String pkg_description;
-	private String price;
+	private int price;
 	private String revision;
 	private String workdays;
 	private List<ProjectAddOption> projectAddOptionList;
@@ -28,7 +28,7 @@ public class ProjectPackageSingleForm implements ProjectPackageForm{
 	public ProjectPackageSingleEntity toEntity() {
 		return ProjectPackageSingleEntity.builder()
 				.pkgTitle(pkg_title)
-				.price(Integer.parseInt(price))
+				.price(price)
 				.pkgDescription(pkg_description)
 				.revision(Integer.parseInt(revision))
 				.workdays(Integer.parseInt(workdays))
@@ -39,7 +39,7 @@ public class ProjectPackageSingleForm implements ProjectPackageForm{
 		return ProjectPackageSingleForm.builder()
 				.add_option_id(entity.getProjectPackageSingleId().intValue())
 				.pkg_description(entity.getPkgDescription())
-				.price(entity.getPrice()+"")
+				.price(entity.getPrice())
 				.revision(entity.getRevision()+"")
 				.workdays(entity.getWorkdays()+"")
 				.build();
