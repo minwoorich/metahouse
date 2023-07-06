@@ -11,15 +11,25 @@ import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
 import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
 import com.multi.metahouse.domain.dto.review.UnionReviewDTO;
+import com.multi.metahouse.domain.entity.review.ProjectReviewContentsEntity;
+import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
+import com.multi.metahouse.review.repository.jpa.ProjectReviewContentsRepository;
+import com.multi.metahouse.review.repository.jpa.ProjectReviewRepository;
 
 @Repository
 public class ReviewDAOImpl implements ReviewDAO {
 
 	SqlSession sqlSession;
-
+	ProjectReviewRepository projectReviewRepo;
+	ProjectReviewContentsRepository projectReviewContentsRepo;
+	
 	@Autowired
-	public ReviewDAOImpl(SqlSession sqlSession) {
+	public ReviewDAOImpl(SqlSession sqlSession, ProjectReviewRepository projectReviewRepo,
+			ProjectReviewContentsRepository projectReviewContentsRepo) {
+		super();
 		this.sqlSession = sqlSession;
+		this.projectReviewRepo = projectReviewRepo;
+		this.projectReviewContentsRepo = projectReviewContentsRepo;
 	}
 
 	@Override
@@ -85,5 +95,25 @@ public class ReviewDAOImpl implements ReviewDAO {
 		}
 		return reviewImgs;
 	}
+	/*---------------------------------- 민우 영역 -------------------------------------*/
+
+	@Override
+	public void saveProjectReview(ProjectReviewEntity projectReviewEntity) {
+		projectReviewRepo.save(projectReviewEntity);
+		
+	}
+
+	@Override
+	public void saveProjectReviewContents(ProjectReviewContentsEntity projectReviewContentsEntity) {
+		projectReviewContentsRepo.save(projectReviewContentsEntity);
+		
+	}
+
+	@Override
+	public Long countByOrderIdAndWriterId(Long orderId, String writerId) {
+		return projectReviewRepo.countByProjectOrderIdAndWriterId(orderId, writerId);
+	}
+
+	
 
 }

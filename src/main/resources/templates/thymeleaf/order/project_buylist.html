@@ -23,6 +23,47 @@
 </head>
 <body>
 	<div layout:fragment="content" class="main-content">
+		<div class="modal deactivate">
+			<div class="modal-content">
+				<form th:action="@{/review/project/write.do}"
+					enctype="multipart/form-data" method="post" id="review_form"
+					class="review-box">
+					<input name="orderId" id="modal-orderId" type="hidden" /> <input
+						name="projectId" id="modal-projectId" type="hidden" />
+					<div class="review-header">
+						<span>리뷰 작성</span> <span class="close-button">X</span>
+					</div>
+					<div class="star-rating">
+						<span>별점:</span>
+						<div class="stars">
+							<input checked="checked" type="radio" id="star1" name="rating"
+								value="1" /> <label for="star1"></label> <input type="radio"
+								id="star2" name="rating" value="2" /> <label for="star2"></label>
+							<input type="radio" id="star3" name="rating" value="3" /> <label
+								for="star3"></label> <input type="radio" id="star4"
+								name="rating" value="4" /> <label for="star4"></label> <input
+								type="radio" id="star5" name="rating" value="5" /> <label
+								for="star5"></label>
+
+						</div>
+					</div>
+					<textarea class="review-description" name="description"
+						placeholder="리뷰를 작성하세요" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '리뷰를 작성하세요'" maxlength="60" required></textarea>
+					<div class="review-buttons">
+						<div class="file-button">
+							<label class="file-attach-label" for="file_attach"><div>사진첨부</div></label>
+							<input class="file-name" placeholder="첨부파일" disabled="disabled">
+							<input name="images" style="display: none" type="file"
+								id="file_attach" multiple="multiple" />
+						</div>
+						<button type="submit" class="button--xsmall submit-review">리뷰
+							등록</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
 		<div class="project-body-title">
 			<span>구매 관리</span>
 		</div>
@@ -223,7 +264,7 @@
 							</div>
 							<div class="project-body-tag-info">
 								<div class="project-body-tag-info-row01">
-									
+
 									<span style="font-size: 16px; color: var(--gray);"
 										th:text="'#'+${order.orderId}"></span> <span
 										th:text="${order.project.title}"></span>
@@ -243,18 +284,18 @@
 							</div>
 						</div>
 					</div>
-					<form class="project-body-download" 
-						th:action="@{/order/project/buylist/update.do}"
-						method="post">
-						<input name="orderStatus" type="hidden" th:value="${order.orderStatus}"/>
-						<input name="orderId" type="hidden" th:value="${order.orderId}"/>
+					<form class="project-body-download"
+						th:action="@{/order/project/buylist/update.do}" method="post">
+						<input name="orderStatus" type="hidden"
+							th:value="${order.orderStatus}" /> <input name="orderId"
+							type="hidden" th:value="${order.orderId}" />
 						<div class="project-body-download-text">
 							<span>작업물을 성공적으로 전달받으셨다면<br /> 구매 확정 버튼을 눌러 진행 상태를
 								변경해주세요!
 							</span>
 						</div>
 						<!-- <button type="button">다운로드 기간만료</button> -->
-						
+
 						<button type="submit">구매 확정</button>
 					</form>
 				</li>
@@ -288,7 +329,7 @@
 							</div>
 							<div class="project-body-tag-info">
 								<div class="project-body-tag-info-row01">
-									
+
 									<span style="font-size: 16px; color: var(--gray);"
 										th:text="'#'+${order.orderId}"></span> <span
 										th:text="${order.project.title}"></span>
@@ -310,11 +351,21 @@
 					</div>
 					<div class="project-body-download">
 						<div class="project-body-download-text">
-							<span>작업물은 마음에 드시나요?<br /> 지금 바로 서비스를 평가하러 가보세요!
-							</span>
+						<th:block th:switch="${order.reviewCheck}">
+							<div th:case="${0}">작업물은 마음에 드시나요?<br/> 지금 바로 서비스를 평가하러 가보세요!
+							</div>
+							<div style="color:var(--bright-purple);font-weight: bold" th:case="${1}">소중한 리뷰 작성해주셔서 감사합니다 ♥<br/> 
+							</div>
+						</th:block>
 						</div>
-						<!-- <button type="button">다운로드 기간만료</button> -->
-						<button type="button">리뷰 작성</button>
+						<input class="orderIdForReview" type="hidden"
+							th:value="${order.orderId}"> <input
+							class="projectIdForReview" type="hidden"
+							th:value="${order.project.projectId}">
+						<th:block th:switch="${order.reviewCheck}">
+							<button th:case="${0}" class="write-review" type="button">리뷰 작성</button>
+							<button th:case="${1}"  disabled="disabled" class="write-review expired" type="button">리뷰 작성 완료</button>
+						</th:block>
 					</div>
 				</li>
 

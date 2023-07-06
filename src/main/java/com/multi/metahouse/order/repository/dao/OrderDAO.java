@@ -1,6 +1,7 @@
 package com.multi.metahouse.order.repository.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
@@ -14,4 +15,5 @@ public interface OrderDAO {
 	public int insertOrderOption(SelectedAddOptionDTO option);
 	
 	/* ------------------------- 민우 영역 --------------------------- */
+	Optional<ProjectOrdersEntity> selectOrderById(Long orderId);
 }

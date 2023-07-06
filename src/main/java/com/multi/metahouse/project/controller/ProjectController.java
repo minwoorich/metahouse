@@ -76,8 +76,10 @@ public class ProjectController {
 	// 프로젝트 상세보기
 	@RequestMapping("project/detail")
 	public String showProject(Model model, Long projectNum) {
+		
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
+		System.out.println("-----------"+projectImg);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
 		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
 		

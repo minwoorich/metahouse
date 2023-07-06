@@ -18,16 +18,28 @@ public interface OrderService {
 	
 	/* ------------------- 민우-------------- */
 	// 페이징 처리된 주문 불러오기 (구매자화면)
-	List<ProjectOrdersResponse.Response> selectOrderList(
+	List<ProjectOrdersResponse.Response> selectOrderListForBuyer(
 			String buyerId, int pageNo);
 	// 카테고리별 주문 불러오기 (구매자 화면)
-	List<ProjectOrdersResponse.Response> selectOrderList(
+	List<ProjectOrdersResponse.Response> selectOrderListForBuyer(
 			String buyerId, 
 			String category1, 
 			String category2, 
 			LocalDateTime category4, 
 			LocalDateTime category5, 
 			int pageNo);
+	
+	// 페이징 처리된 주문 불러오기 (판매자화면)
+		List<ProjectOrdersResponse.Response> selectOrderListForSeller(
+				String creatorId, int pageNo);
+		// 카테고리별 주문 불러오기 (판매자화면 화면)
+		List<ProjectOrdersResponse.Response> selectOrderListForSeller(
+				String creatorId, 
+				String category1, 
+				String category2, 
+				LocalDateTime category4, 
+				LocalDateTime category5, 
+				int pageNo);
 
 	// 구매확정 누르면 해당 주문에 대한 DB 업데이트
 	void updateOrder(ProjectOrdersConfirmUpdateDTO updatedData);
