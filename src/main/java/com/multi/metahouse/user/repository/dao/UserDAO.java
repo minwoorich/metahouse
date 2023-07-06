@@ -15,6 +15,7 @@ public interface UserDAO {
 	void delete(String userId);
 	User read(String userId);
 	User socialLogin(String socialLoginId, String socialName);
+	void updatePassword(String newPassword, String userId);
 	Page<User> findAll(Pageable pageable);
 	List<User> findByUserIdLike(String keyword);
 	int user_update(UserSearchResultDTO user);

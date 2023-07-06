@@ -1,26 +1,25 @@
 package com.multi.metahouse.chat.controller;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
+import com.multi.metahouse.chat.service.ChatService;
+import com.multi.metahouse.config.PropertyUtil;
+import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
+import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
+import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
+import com.multi.metahouse.domain.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.metahouse.chat.service.ChatService;
-import com.multi.metahouse.domain.dto.chat.ChatMsgFileDTO;
-import com.multi.metahouse.domain.dto.chat.ChatProfileDTO;
-import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
-import com.multi.metahouse.domain.entity.user.User;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/chat")
@@ -84,15 +83,29 @@ public class ChatController {
 	@ResponseBody
 	public Map<String, Object> loadChatFile(int chatMsgId) throws IOException{
 		Map<String, Object> chatMsgFileJSON = new HashMap<>();
+
 		List<ChatMsgFileDTO> chatMsgFileList = service.getChatMsgFileById(chatMsgId);
-		
 		chatMsgFileJSON.put("chatMsgFile", chatMsgFileList);
-		
-		List<ByteBuffer> fileList = service.getFileListById(chatMsgFileList);
-		
-		chatMsgFileJSON.put("fileList", fileList);
-		
+
 		return chatMsgFileJSON;
 	}
 	
+	@GetMapping(value = "/getURL", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String, Object> getURL(String fileStoreName) throws MalformedURLException{
+		Map<String, Object> urlJson = new HashMap<>();
+
+		String filePath = PropertyUtil.getProperty("file.directory");
+		System.out.println("filePath : " + filePath);
+
+		UrlResource resource = new UrlResource("file:" + filePath + fileStoreName);
+
+		System.out.println(resource);
+
+		urlJson.put("url", resource);
+
+		return urlJson;
+
+	}
+
 }
