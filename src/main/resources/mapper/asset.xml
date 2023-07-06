@@ -33,8 +33,21 @@
         SELECT * FROM assets WHERE asset_id = #{assetId}
     </select>
 
-    <select id="getAllAssets" resultType="com.multi.metahouse.domain.dto.asset.AssetDTO">
-        SELECT * FROM assets
+    <select id="getAllAssets" parameterType="hashMap" resultType="com.multi.metahouse.domain.dto.asset.AssetDTO">
+        SELECT a.* FROM assets a
+        <where>
+				<if test="category1 !='Non' and category2_as =='Non'">
+				a.category1 = #{category1}
+				</if>
+				<if test="category1 !='Non' and category2_as != 'Non'">
+				a.category1 = #{category1}
+			  		AND a.category2_as = #{category2_as}
+				</if>
+			</where>
+			ORDER BY a.asset_date DESC
+			<if test="skip != null">
+			limit ${(skip-1)*16},16
+			</if>
     </select>
 <!-- ******************************************************************************************************************** -->
 

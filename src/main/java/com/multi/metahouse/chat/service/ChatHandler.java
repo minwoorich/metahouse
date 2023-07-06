@@ -120,7 +120,7 @@ public class ChatHandler{
 	public void onMessage(ByteBuffer msg, Session session) throws IOException {
 		//System.out.println("바이너리 수신메세지:"+msg);
 		// ArrayBuffer 형식 메시지 static 멤버변수에 저장
-		filelist.add(0, msg);
+		filelist.add(msg);
 				
 		// 첨부파일 절대 경로 지정
 		//final String FILE_PATH = resourceLoader.getResource("classpath:static/upload").getFile().getAbsolutePath() 
