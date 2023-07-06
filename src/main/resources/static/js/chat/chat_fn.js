@@ -1,153 +1,3 @@
-$(document).ready(function(){
-
-
-/* 채팅메시지 Elements 작성 메소드 */
-// function createChatElement11(chatMsg, loginUser){
-
-// 	for(let i=0; i<chatMsg.length; i++){
-// 		$.ajax({
-// 			url:"/metahaus/chat/load/chatFile",
-// 			type:"get",
-// 			data:{
-// 				"chatMsgId" : chatMsg[i].message_id
-// 			},
-// 			dataType:"json",
-// 			success:function(jsonData){
-// 				console.log(jsonData);
-				
-// 				myChatEle = '';
-				
-// 				let chatSideDiv = "";
-// 				let messageFileDiv = "";
-				
-// 				// 메시지 발신인 체크
-// 				if(loginUser == chatMsg[i].writer_id){
-// 					// 내 채팅
-// 					chatSideDiv = '<div class="chat-block chat-block--send">' +
-// 		            			  '<div class="chat-block__message chat-block__message--send">';
-// 				}else{
-// 					// 상대방 채팅
-// 					chatSideDiv = '<div class="chat-block chat-block--reception">' + 
-// 					 			  '<div class="chat-block__message chat-block__message--reception">';
-// 				}
-				
-// 				myChatEle += chatSideDiv + 
-// 							 '<div class="chat-block__message-text">' + chatMsg[i].message_content + '</div>' + 
-// 							 '<div class="chat-block__message-files">';
-				
-// 				// 메시지의 파일 리스트 받아서 저장
-// 				let filePath = jsonData.filePath;
-// 				let chatMsgFileList = jsonData.chatMsgFile;
-
-// 				for(let i=0; i<chatMsgFileList.length; i++){
-// 					console.log(chatMsgFileList[i]);
-// 					// 파일 이미지 생성
-// 					console.log("파일 이미지 생성");
-// 					myChatEle += '<div class="message-file">';
-// 					myChatEle += '<img class="file_img" src="/chatFileImg/'+ chatMsgFileList[i].file_store_name + '"/>';
-// 					myChatEle += '<div>'+chatMsgFileList[i].file_origin_name+'</div>';
-// 					myChatEle += '</div>';
-// 				}
-				
-// 				myChatEle += '</div></div><div class="chat-block__timestamp">' +
-//                              '<div class="chat-block__timestamp-date">' +
-//                               chatMsg[i].write_time.substr(2, 8).replaceAll("-", ".") +
-//                              '</div><div class="chat-block__timestamp-time">' +
-//                               chatMsg[i].write_time.substr(11, 5) +
-//                              '</div></div></div>';
-				
-// 				console.log("파일 이미지 생성 후 element : " + myChatEle);
-				
-// 				$(".chat-body__chat-section").append(myChatEle);
-// 			}
-			
-// 		})
-// 	}
-
-// }
-
-
-/*
-    $.ajax({
-		url:"/metahaus/chat/load/chatFile",
-		type:"get",
-		data:{
-			"chatMsgId" : chatMsg.message_id
-		},
-		dataType:"json",
-		success:function(jsonData){
-			console.log(jsonData);
-			
-			// 메시지의 파일 리스트 받아서 저장
-			filePath = jsonData.filePath;
-			chatMsgFileList = jsonData.chatMsgFile;
-
-				// 메시지 발신인 체크
-				if(loginUser == chatMsg.writer_id){
-					// 내 채팅
-					chatSideDiv = '<div class="chat-block chat-block--send">' +
-								'<div class="chat-block__message chat-block__message--send">';
-				}else{
-					// 상대방 채팅
-					chatSideDiv = '<div class="chat-block chat-block--reception">' +
-								'<div class="chat-block__message chat-block__message--reception">';
-				}
-			
-				myChatEle += chatSideDiv +
-							'<div class="chat-block__message-text">' + chatMsg.message_content + '</div>' +
-							'<div class="chat-block__message-files">';
-
-			// 파일 첨부 메시지일 경우
-			if(chatMsgFileList.length !== 0){
-				console.log("null 통과");
-
-				const files = await Promise.all(
-					chatMsgFileList.map(async (file) => {
-					  const fileElement = await getURL(file.file_store_name);
-					  return (
-						'<div class="message-file">' +
-							fileElement +
-						'<div>' +
-							file.file_origin_name +
-						"</div></div>"
-					  );
-					})
-				  );
-		  
-				  myChatEle += files.join("");
-				}
-				// for(let i=0; i<chatMsgFileList.length; i++){
-				// 	// 파일 이미지 생성
-				// 	console.log("파일 이미지 생성");
-
-				// 	myChatEle += '<div class="message-file">';
-					
-				// 	myChatEle += await getURL(chatMsgFileList[i].file_store_name);
-					
-				// 	myChatEle += '<div>'+chatMsgFileList[i].file_origin_name+'</div>';
-				// 	myChatEle += '</div>';
-				// }
-			
-
-			myChatEle += '</div></div><div class="chat-block__timestamp">' +
-						'<div class="chat-block__timestamp-date">' +
-						chatMsg.write_time.substr(2, 8).replaceAll("-", ".") +
-						'</div><div class="chat-block__timestamp-time">' +
-						chatMsg.write_time.substr(11, 5) +
-						'</div></div></div>';
-
-			$(".chat-body__chat-section").append(myChatEle);
-		}
-		
-	})
-
-}
-*/
-	
-
-	
-})
-
 async function createChatElement(chatMsg, loginUser){
 	console.log("현재 메시지 : " + chatMsg.message_id);
 
@@ -222,19 +72,21 @@ async function createChatElement(chatMsg, loginUser){
 					chatMsg.write_time.substr(11, 5) +
 					'</div></div></div>';
 
-		$(".chat-body__chat-section").append(myChatEle);
+		// $(".chat-body__chat-section").append(myChatEle);
 
 
 	} catch (error) {
 		console.error("Error during AJAX request:", error);
 	} finally{
-
+		return myChatEle;
 	}
 }
 
 async function getURL(file_store_name){
 
 	let retEle = "";
+
+	// retEle += '<img class="file_img" src="/metahaus/upload/'+ file_store_name + '"/>';
 
 	try{
 		const url = "/metahaus/chat/getURL";
