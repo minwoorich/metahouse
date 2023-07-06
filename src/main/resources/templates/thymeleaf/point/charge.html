@@ -7,6 +7,43 @@
 	
 	<link rel="stylesheet" type="text/css" href="/metahaus/css/point/point.css" />
 	<link rel="stylesheet" type="text/css" href="/metahaus/css/point/charge.css" />
+<!-- 아임포트 라이브러리-->
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        var IMP = window.IMP; 
+        IMP.init("imp38164824"); 
+    
+    	var price = $("input[type=radio][name=point]:checked").val();
+    	var buyerName = "";
+    
+        function requestPay() {
+            alert(price);
+        	
+        	IMP.request_pay({
+                pg : 'kakaopay',
+                pay_method : 'kakaopay',
+                merchant_uid: "57008833-33004", 
+                name : 'point',
+                amount : 1004,
+                buyer_email : 'Iamport@chai.finance',
+                buyer_name : '포트원 기술지원팀',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+                //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+                if(rsp.success){
+                	alert('결제성공');
+                }else{
+                	alert('결제취소');
+                }
+            });
+
+        }
+    </script>
 </head>
 <body>
 	<div class="point-charge-section" layout:fragment="content">
@@ -31,8 +68,9 @@
 				</div>	
 				</br></br>
 				<div style="display: flex; justify-content: space-between">
-					<input type="submit" value="충전" class="button--small"/>
 					<button class="button--small"  type="button" onclick="location.href='/metahaus/point/mypoint'"> 이전 </button>
+					<button type="button" onclick="requestPay()">결제하기</button>
+					<input type="submit" value="충전" class="button--small"/>
 				</div>
 				
 			</form>
