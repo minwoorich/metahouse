@@ -8,18 +8,15 @@ import com.multi.metahouse.domain.dto.chat.ChatroomDTO;
 import com.multi.metahouse.domain.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,23 +84,9 @@ public class ChatController {
 	public Map<String, Object> loadChatFile(int chatMsgId) throws IOException{
 		Map<String, Object> chatMsgFileJSON = new HashMap<>();
 
-		// String filePath = PropertyUtil.getProperty("file.directory");
-		// System.out.println("filePath : " + filePath);
-
 		List<ChatMsgFileDTO> chatMsgFileList = service.getChatMsgFileById(chatMsgId);
 		chatMsgFileJSON.put("chatMsgFile", chatMsgFileList);
 
-		// List<UrlResource> resourceList = new ArrayList<>();
-		// for (int i=0; i<chatMsgFileList.size(); i++){
-		// 	resourceList.add(new UrlResource("file:" + filePath + chatMsgFileList.get(i).getFile_store_name()));
-		// }
-
-		// System.out.println(resourceList);
-
-		/* 파일 직접 전송하는 로직 (사용하지 않음) */
-//		List<ByteBuffer> fileList = service.getFileListById(chatMsgFileList);
-//		chatMsgFileJSON.put("fileList", fileList);
-		
 		return chatMsgFileJSON;
 	}
 	
