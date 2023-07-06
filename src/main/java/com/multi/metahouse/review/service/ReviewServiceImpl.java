@@ -1,7 +1,6 @@
 package com.multi.metahouse.review.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +10,14 @@ import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
 import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
 import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
+import com.multi.metahouse.domain.entity.review.AssetReviewContentsEntity;
+import com.multi.metahouse.domain.entity.review.AssetReviewEntity;
 import com.multi.metahouse.domain.entity.review.ProjectReviewContentsEntity;
 import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
+import com.multi.metahouse.domain.entity.review.jpadto.AssetReviewJpaDto;
 import com.multi.metahouse.domain.entity.review.jpadto.ProjectReviewJpaDto;
-import com.multi.metahouse.domain.entity.review.jpadto.ProjectReviewJpaDto.ProjectReviewContents;
 import com.multi.metahouse.order.repository.dao.OrderDAO;
 import com.multi.metahouse.review.repository.dao.ReviewDAO;
-import com.multi.metahouse.review.repository.jpa.ProjectReviewRepository;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -92,7 +92,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	/*-------------------- 민우 영역 ------------------*/
 
-	@Override //리뷰저장
+	@Override //프로젝트 리뷰저장
 	public void insertProjectReview(ProjectReviewJpaDto projectReviewDto) {
 //		1. reviewEntity에 자식빼고 나머지 필드에 값 저장
 		ProjectReviewEntity reviewEntity = projectReviewDto.toEntity();
@@ -107,9 +107,30 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewDAO.saveProjectReview(reviewEntity);
 	}
 
-	@Override //리뷰 개수 반환
+	@Override //프로젝트 리뷰 개수 반환
 	public Long countByOrderIdAndWriterId(Long orderId, String writerId) {
 		
 		return reviewDAO.countByOrderIdAndWriterId(orderId, writerId);
+	}
+
+	@Override //에셋 리뷰 저장
+	public void insertAssetReview(AssetReviewJpaDto assetReviewDto) {
+//		1. reviewEntity에 자식빼고 나머지 필드에 값 저장
+		AssetReviewEntity reviewEntity = assetReviewDto.toEntity();
+//		2. reviewEntity -> reviewContentsEntity필드에 값 저장
+		if(assetReviewDto.getContentsList()!=null && assetReviewDto.getContentsList().size() > 0 ) {
+			for(AssetReviewJpaDto.AssetReviewContents content : assetReviewDto.getContentsList()) {
+				AssetReviewContentsEntity contentEntity = content.toEntity();
+				contentEntity.setAssetReviewId(reviewEntity);
+				reviewEntity.getReviewContentsEntityList().add(contentEntity);
+			}
+		}
+		reviewDAO.saveAssetReview(reviewEntity);
+		
+	}
+
+	@Override //에셋 리뷰 개수
+	public Long countAssetReviewByOrderIdAndWriterId(Long orderId, String writerId) {
+		return reviewDAO.countAssetReviewByOrderIdAndWriterId(orderId, writerId);
 	}
 }

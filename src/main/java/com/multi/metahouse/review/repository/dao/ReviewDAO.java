@@ -7,6 +7,7 @@ import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
 import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
 import com.multi.metahouse.domain.dto.review.UnionReviewDTO;
+import com.multi.metahouse.domain.entity.review.AssetReviewEntity;
 import com.multi.metahouse.domain.entity.review.ProjectReviewContentsEntity;
 import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
 
@@ -30,6 +31,9 @@ public interface ReviewDAO {
 	void saveProjectReview(ProjectReviewEntity projectReviewEntity);
 	void saveProjectReviewContents(ProjectReviewContentsEntity projectReviewContentsEntity);
 	Long countByOrderIdAndWriterId(Long orderId, String writerId ); 
+	
+	void saveAssetReview(AssetReviewEntity assetReviewEntity);
+	Long countAssetReviewByOrderIdAndWriterId(Long orderId, String writerId );
 	
 }
 

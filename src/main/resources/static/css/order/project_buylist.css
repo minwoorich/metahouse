@@ -263,7 +263,7 @@ select {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .search-box {
@@ -518,7 +518,7 @@ button:active {
 }
 
 /* 다운로드 버튼 기본값 (다운로드 가능) */
-.write-review {
+.write-review, .confirm-order{
 	width: 200px;
 	height: 50px;
 	color: white;

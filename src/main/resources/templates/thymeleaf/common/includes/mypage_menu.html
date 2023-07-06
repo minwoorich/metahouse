@@ -24,8 +24,8 @@
 			<div class="menu_list_title">에셋</div>
 			<ul class="menu_ul">
 				<li class="menu_li"><a href="/metahaus/asset/my-products">나의 상품목록</a></li>
-				<li class="menu_li"><a href="/metahaus/order/asset/buylist">구매관리</a></li>
-				<li class="menu_li"><a href="/metahaus/order/asset/saleslist">판매관리</a></li>
+				<li class="menu_li"><a th:href="@{/order/asset/buylist(pageNo=${'0'})}">구매관리</a></li>
+				<li class="menu_li"><a th:href="@{/order/asset/saleslist(pageNo=${'0'})}">판매관리</a></li>
 			</ul>
 		</div>
 	</div>

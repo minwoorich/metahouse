@@ -110,7 +110,7 @@
 					<option value="all">전체 플랫폼</option>
 					<option value="로블록스">로블록스</option>
 					<option value="제페토">제페토</option>
-					<option value="마인크랜프트">마인크랜프트</option>
+					<option value="마인크래프트">마인크래프트</option>
 					<option value="샌드박스">더 샌드박스</option>
 					<option value="게더타운">게더타운</option>
 					<option value="기타">기타</option>
@@ -125,7 +125,7 @@
 
 				<div class="category04">
 					<input required="required" name="category4" type="datetime-local"
-						value="" class="search-box startdate">
+						 class="search-box startdate">
 					<div style="margin-inline: 10px;">~</div>
 					<input required="required" name="category5" type="datetime-local"
 						class="search-box enddate">
@@ -137,11 +137,11 @@
 				<button type="submit" class="search-button button--small">조회</button>
 			</div>
 		</form>
-		<div class="project-body-form-empty deactivate">
+		<ul class="project-body-cardlist" th:each="order : ${orderList}">
+			<div th:if="${#lists.size(orderList) == 0 or list == null}" class="asset-body-form-empty">
 			<span>주문 기간 내에 구매 내역이 없습니다.</span> <span>주문 기간을 변경하여 확인해보세요.</span> <span>(기본
 				조회 기간 : 1년)</span>
-		</div>
-		<ul class="project-body-cardlist" th:each="order : ${orderList}">
+			</div>
 			<th:block th:switch="${order.orderStatus}">
 				<!-- 주문 대기중 -->
 				<li class="project-body-card" th:case="주문대기중">
@@ -294,9 +294,7 @@
 								변경해주세요!
 							</span>
 						</div>
-						<!-- <button type="button">다운로드 기간만료</button> -->
-
-						<button type="submit">구매 확정</button>
+						<button class="confirm-order" type="submit">구매 확정</button>
 					</form>
 				</li>
 				<!-- 구매 확정 - 리뷰작성 전 -->
@@ -354,7 +352,7 @@
 						<th:block th:switch="${order.reviewCheck}">
 							<div th:case="${0}">작업물은 마음에 드시나요?<br/> 지금 바로 서비스를 평가하러 가보세요!
 							</div>
-							<div style="color:var(--bright-purple);font-weight: bold" th:case="${1}">소중한 리뷰 작성해주셔서 감사합니다 ♥<br/> 
+							<div style="color:var(--bright-purple);font-weight:bold;padding-left:60px;" th:case="${1}">소중한 리뷰 작성해주셔서 감사합니다 ♥<br/> 
 							</div>
 						</th:block>
 						</div>

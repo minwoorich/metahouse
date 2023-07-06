@@ -69,7 +69,7 @@ $(document).ready(function(){
 	    		success : function(data) {
 	    			if(data==1){
 		    			alert("구매가 완료되었습니다.");
-		    			location.href = "/metahaus/order/asset/buylist";
+		    			location.href = "/metahaus/order/asset/buylist?pageNo=0";
 	    			}else{
 						alert("결제에 실패했습니다. 잔액을 확인해주세요");
 	    			}
