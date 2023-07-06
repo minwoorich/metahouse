@@ -50,7 +50,9 @@ $(document).ready(function(){
 				
 				// 채팅 요소 작성
 				//let myChatEle = createChatElement(chatMsg, loginUser);
-				createChatElement(chatMsg, loginUser);
+				for(let i=0; i<chatMsg.length; i++){
+					createChatElement(chatMsg[i], loginUser);
+				}
 				// 테스트 채팅 요소 삭제
 				$(".chat-body__chat-section").children().remove();
 				// 채팅 요소 추가
@@ -93,6 +95,8 @@ $(document).ready(function(){
 							msgcss = "class='chat-block__message chat-block__message--reception'";
 						}
 						
+
+						
 						// 일반 텍스트 메시지인 경우
 						if(resmsg.message_type === "Text"){ 
 							console.log("일반 텍스트 메시지입니다.");
@@ -115,7 +119,7 @@ $(document).ready(function(){
 							item = '<div ' + msgblkcss + '><div ' + msgcss + '><div class="chat-block__message-text">';
 							item += resmsg.message_content;
 							item += '</div>';
-							
+							item += '<div class="chat-block__message-files">';
 							file_count = 0; // 파일 개수 count
 						}
 					// Binary Type 의 메시지를 수신한 경우 1 (File 전송 - 해당 메시지의 마지막 파일을 수신한 경우)
@@ -124,16 +128,15 @@ $(document).ready(function(){
 						
 						file_url = URL.createObjectURL(new Blob([msg.data]));
 						
-						item += '<div class="chat-block__message-files">';
 						item += '<div class="message-file">';
 						item += '<img class="file_img" src="'+ file_url + '"/>';
 						item += '<div>'+resmsg.filenamelist[file_count]+'</div>';
-						item += '</div>';
+						item += '</div></div></div>';
 						item += '<div class="chat-block__timestamp"><div class="chat-block__timestamp-date">';
 						item += resmsg.write_time.substr(2, 8).replaceAll("-", ".");
 						item += '</div><div class="chat-block__timestamp-time">';
 						item += resmsg.write_time.substr(11, 5);
-						item += '</div></div></div>';
+						item += '</div></div>';
 						
 						$(".chat-body__chat-section").append(item);
 					
@@ -143,7 +146,6 @@ $(document).ready(function(){
 						
 						file_url = URL.createObjectURL(new Blob([msg.data]));
 						
-						item += '<div class="chat-block__message-files">';
 						item += '<div class="message-file">';
 						item += '<img class="file_img" src="'+ file_url + '"/>';
 						item += '<div>'+resmsg.filenamelist[file_count]+'</div>';

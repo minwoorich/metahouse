@@ -30,16 +30,21 @@
         <result column="category2_pj" property="category2_pj"/>
         <result column="average_reviews" property="average_reviews" />
         <result column="review_count" property="review_count" />
-        <result column="price" property="price" />
+        <result column="single_price" property="single_price" />
+        <result column="triple_price" property="triple_price" />
 	</resultMap>
 	
     <select id="findOrderByReviewRating" parameterType="int" resultMap="projectWithReviewAvg">
     	SELECT a.*, 
 		count(r.project_review_id) review_count,
-		 AVG(r.rating) AS average_reviews,
-		(select ps.price from project_package_single ps where a.project_id = ps.project_id) price
+		AVG(r.rating) AS average_reviews,
+        s.price single_price,
+        t.basic_price triple_price
+		
 		FROM project a
 		LEFT JOIN project_review r ON a.project_id = r.project_id
+        left outer join project_package_single s on a.project_id = s.project_id
+		left outer join project_package_triple t on a.project_id = t.project_id
 		GROUP BY a.project_id
 		order by average_reviews desc
 		limit #{limit}
@@ -96,6 +101,31 @@
         <result column="thumbnail_store_filename" property="creator.thumbnailStoreFilename" />
 	</resultMap>
 
+    <select id="allProject" parameterType="hashMap" resultMap="projectInfo">
+    	select p.*, 
+    		   s.pkg_title, s.pkg_description, s.price, s.revision, s.workdays,
+    		   t.basic_pkg_title, t.basic_pkg_description, t.basic_revision, t.basic_price, t.basic_workdays,
+    		   t.economy_pkg_title, t.economy_pkg_description, t.economy_revision, t.economy_price, t.economy_workdays, 
+    		   t.premium_pkg_title, t.premium_pkg_description, t.premium_revision, t.premium_price, t.premium_workdays,
+    		   u.user_name, u.thumbnail_store_filename
+    	from project p 
+    		left outer join project_package_single s on p.project_id = s.project_id
+			left outer join project_package_triple t on p.project_id = t.project_id
+			left outer join user u on p.creator_id = u.user_id
+			<where>
+				<if test="category1 !='Non' and category2_pj =='Non'">
+				p.category1 = #{category1}
+				</if>
+				<if test="category1 !='Non' and category2_pj != 'Non'">
+				p.category1 = #{category1}
+			  		AND p.category2_pj = #{category2_pj}
+				</if>
+			</where>
+			ORDER BY project_date DESC
+			<if test="skip != null">
+			limit ${(skip-1)*16},16
+			</if>
+    </select>
     <select id="findProject" parameterType="Long" resultMap="projectInfo">
     	select p.*, 
     		   s.pkg_title, s.pkg_description, s.price, s.revision, s.workdays,
