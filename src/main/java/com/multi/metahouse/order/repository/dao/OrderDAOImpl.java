@@ -1,6 +1,7 @@
 package com.multi.metahouse.order.repository.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,8 @@ public class OrderDAOImpl implements OrderDAO {
 	
 
 	/* ---------------------------------- 민우 영역 ------------------------------------- */
-	
+	@Override
+	public Optional<ProjectOrdersEntity> selectOrderById(Long orderId) {
+		return projectOrderRepository.findById(orderId);
+	}
 }

@@ -27,7 +27,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "projectReviewId")
 @Entity
 @Table(name = "project_review_contents")
 public class ProjectReviewContentsEntity {
@@ -35,8 +35,14 @@ public class ProjectReviewContentsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="review_contents_id")
 	private Long reviewContentsId;
-	@Column(name="project_review_id")
-	private Long projectReviewId;
+//	@Column(name="project_review_id")
+//	private Long projectReviewId;
 	private String reviewStoreFilename;
 	private Long reviewImgNo;
+	
+	////부모 참조/////////////////////////
+	//양방향
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "project_review_id")
+	private ProjectReviewEntity projectReviewId;
 }
