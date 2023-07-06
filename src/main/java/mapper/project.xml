@@ -23,7 +23,7 @@
         <result column="tag" property="tag"/>
         <result column="title" property="title"/>
         <result column="description" property="description"/>
-        <result column="project_thumbnail_img" property="project_thumbnail_img"/>
+        <result column="thumbnail" property="project_thumbnail_img"/>
         <result column="project_date" property="project_date"/>
         <result column="project_hit" property="project_hit"/>
         <result column="category1" property="category1"/>

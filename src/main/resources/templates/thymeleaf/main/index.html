@@ -213,7 +213,9 @@
 
 						<div th:each="project:${projectList}" class="banner-slider-item"
 							th:onclick="|location.href='@{/project/detail(projectNum=${project.project_id})}'|">
-							<div class="item-img-warp"></div>
+							<div class="item-img-warp">
+							<img width=100% height=100%
+										th:src="@{/upload/project_thumbnail_img/}+${project.project_thumbnail_img}"></img></div>
 							<div class="item-desc-warp">
 								<span th:text="${project.creator_id}" class="myfont-3"></span>
 								<span th:utext="${project.title}" class="myfont-2"></span>
