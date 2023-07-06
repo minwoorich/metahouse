@@ -5,13 +5,8 @@
 <mapper namespace="com.multi.metahouse.member">
 	<update id="updateUser" parameterType="user">
 		update user
-		set email = #{email},
-			user_name = #{user_name},
-			password = #{password},
-			phone_number = #{phone_number},
-			gender = #{gender},
-			birth = #{birth},
-			self_introduction = #{self_introduction}
+		set user_grade = #{user_grade},
+			point = #{point}
 			
 			where user_id = #{user_id}
 	</update>
