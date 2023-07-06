@@ -247,20 +247,7 @@
 							</div>
 						</div>
 					</div>
-					<form class="project-body-download"
-						th:action="@{/order/project/buylist/update.do}" method="post">
-						<input name="orderStatus" type="hidden"
-							th:value="${order.orderStatus}" /> <input name="orderId"
-							type="hidden" th:value="${order.orderId}" />
-						<div class="project-body-download-text">
-							<span>작업물을 성공적으로 전달받으셨다면<br /> 구매 확정 버튼을 눌러 진행 상태를
-								변경해주세요!
-							</span>
-						</div>
-						<!-- <button type="button">다운로드 기간만료</button> -->
-
-						<button type="submit">구매 확정</button>
-					</form>
+					
 				</li>
 				<!-- 구매 확정 - 리뷰작성 전 -->
 				<li class="project-body-card" th:case="구매확정">
@@ -311,14 +298,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="project-body-download">
-						<div class="project-body-download-text">
-							<span>작업물은 마음에 드시나요?<br /> 지금 바로 서비스를 평가하러 가보세요!
-							</span>
-						</div>
-						<!-- <button type="button">다운로드 기간만료</button> -->
-						<button type="button">리뷰 작성</button>
-					</div>
+					
 				</li>
 
 				<!-- 구매 확정 - 리뷰작성 후 -->

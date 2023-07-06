@@ -244,7 +244,7 @@ $(document).ready(function () {
     	}else{// 전부 채워넣은경우 -> 데이터 전송
     		let myformdata = new FormData($("#form")[0]);
     		// 보낼 데이터들
-    		let userId = $("#creator_id").val();// [추후수정] 수정될 수 있음
+    		let userId = $("#creator_id").val();
     		let title = $("#title").val();
     		let category1 = $("#category1").val();
     		let category2_pj = $("#category2_pj").val();

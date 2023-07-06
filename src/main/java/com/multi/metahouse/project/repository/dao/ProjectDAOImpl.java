@@ -74,7 +74,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 	@Override
 	public List<ProjectContentsDTO> projectImg(Long project_id) {
-		return session.selectList("com.multi.metahouse.project.findProjectImg", project_id);
+		List<ProjectContentsDTO> list = session.selectList("com.multi.metahouse.project.findProjectImg", project_id);
+		System.out.println("다오오오오오오 : 	" + list);
+//		return session.selectList("com.multi.metahouse.project.findProjectImg", project_id);
+		
+		return list;
 	}
 	@Override
 	public List<ProjectAddOption> projectOption(Long project_id) {
