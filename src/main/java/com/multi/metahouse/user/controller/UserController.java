@@ -88,8 +88,16 @@ public class UserController {
 		return login;
 	}
 	
+	
+	//로그아웃 기능
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
+		User userInfo = (User) session.getAttribute("loginUser");
+		
+		if(userInfo.getSocialName() == "kakao") {
+			kakaoService.logout((String)session.getAttribute("access_token"));
+		}
+		
 		if(session != null) {
 			session.invalidate();
 		}
@@ -114,7 +122,7 @@ public class UserController {
 		System.out.println(user);
 		
 		if(session != null) {
-			session.invalidate();
+			session.invalidate();	
 		}
 		
 		return "user/signupFin";
@@ -147,6 +155,32 @@ public class UserController {
 		return "redirect:profile";
 	}
 	
+	@GetMapping("mypage/update_password")
+	public String updatePassword() {
+		return "user/update_password";
+	}
+	
+	@PostMapping("mypage/update_password")
+	public String updatePassword(String new_password, HttpSession session) {
+		System.out.println(new_password);
+		String userId = ((User)session.getAttribute("loginUser")).getUserId();
+		
+		service.updatePassword(new_password, userId);
+		
+		
+		if(session != null) {
+			User userInfo = (User) session.getAttribute("loginUser");
+			if(userInfo.getSocialName() == "kakao") {
+				kakaoService.logout((String)session.getAttribute("access_token"));
+				session.invalidate();
+			}else {
+				session.invalidate();
+			}
+		}
+		return "user/login";
+	}
+	
+	
 	@GetMapping("mypage/delete_account")
 	public String deleteAccount() {
 		return "user/delete_account";
@@ -166,7 +200,17 @@ public class UserController {
 		
 		if(password.equals(loginUserPw)) {
 			returnMsg = "success";
+			if(userInfo.getSocialName().equals("kakao")) {
+				kakaoService.unlink((String)session.getAttribute("access_token"));
+				
+			}else if(userInfo.getSocialName().equals("naver")) {
+				if(session.getAttribute("access_token") != null) {
+					naverService.unlink((String)session.getAttribute("access_token"));
+				}
+			}
+			
 			service.delete(userId);
+			
 			
 			if(session != null) {
 				session.invalidate();
@@ -215,6 +259,8 @@ public class UserController {
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverService.getAccessToken(code, state);
 		//System.out.println(oauthToken);
+		String access_token = oauthToken.getAccessToken();
+		session.setAttribute("access_token", access_token);
 		
 		//2. 로그인 사용자 정보 읽기
 		String jsonUserInfo = naverService.getUserProfile(oauthToken);
@@ -258,6 +304,7 @@ public class UserController {
 		User loginUser = service.socialLogin(kakaoLoginId, "kakao");
 		//만약 카카오 로그인하는데 DB에 KaKao 토큰이 있을때
 		if (loginUser != null && loginUser.getSocialLoginId().equals(kakaoLoginId)) {
+			session.setAttribute("access_token", access_Token);
 			session.setAttribute("loginUser", loginUser);
 			view = "main/index";
 		} else {
@@ -299,9 +346,7 @@ public class UserController {
 			model.addAttribute("mobile", null);
 			model.addAttribute("birth", null);
 			view = "user/SNSsignup";
-			
 		}
 		return view;
 	}
-	
 }

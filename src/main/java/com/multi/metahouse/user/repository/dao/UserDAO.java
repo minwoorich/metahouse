@@ -9,4 +9,5 @@ public interface UserDAO {
 	void delete(String userId);
 	User read(String userId);
 	User socialLogin(String socialLoginId, String socialName);
+	void updatePassword(String newPassword, String userId);
 }

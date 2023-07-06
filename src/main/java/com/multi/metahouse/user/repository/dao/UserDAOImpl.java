@@ -68,4 +68,12 @@ public class UserDAOImpl implements UserDAO {
 		return repository.findBySocialLoginIdAndSocialName(socialLoginId, socialName);
 	}
 
+	@Override
+	public void updatePassword(String newPassword, String userId) {
+		User table = repository.findById(userId).orElseThrow(() -> new RuntimeException());
+		table.setPassword(newPassword);
+		
+		repository.save(table);
+	}
+
 }

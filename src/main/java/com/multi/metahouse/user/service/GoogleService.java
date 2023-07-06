@@ -28,12 +28,15 @@ public class GoogleService {
         System.out.println("userResourceNode = " + userResourceNode);
         
         String id = userResourceNode.get("id").asText();
-        String email = userResourceNode.get("email").asText();
-        String nickname = userResourceNode.get("name").asText();
-        
         userInfo.put("id", id);
+        String email = userResourceNode.get("email").asText();
         userInfo.put("email", email);
-        userInfo.put("nickname", nickname);
+        
+        if(userResourceNode.get("name") != null) {
+        	String nickname = userResourceNode.get("name").asText();
+        	userInfo.put("nickname", nickname);
+        }
+ 
         
         return userInfo;
     }

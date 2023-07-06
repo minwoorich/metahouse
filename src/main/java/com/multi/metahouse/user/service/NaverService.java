@@ -1,6 +1,10 @@
 package com.multi.metahouse.user.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
@@ -100,4 +104,29 @@ public class NaverService {
 		
 		return response.getBody();
 	}
+	
+	public void unlink(String access_Token) {
+		String reqURL = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&access_token=" + access_Token + "&service_provider=NAVER";
+	    try {
+	        URL url = new URL(reqURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        
+	        int responseCode = conn.getResponseCode();
+	        System.out.println("responseCode : " + responseCode);
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String result = "";
+	        String line = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+	        System.out.println(result);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 }

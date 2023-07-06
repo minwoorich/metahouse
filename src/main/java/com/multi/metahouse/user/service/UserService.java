@@ -13,4 +13,5 @@ public interface UserService {
 	OtherProfileInfoDTO read(String userId);
 	User readUserInfo(String userId);
 	User socialLogin(String socialLoginId, String socialName);
+	void updatePassword(String newPassword, String userId);
 }
