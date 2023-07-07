@@ -33,11 +33,15 @@
 					</li>
 				</ul>
 			</div>
-			<div class="sub_title" id="product_explain">에셋 설명</div>
+			<div id="select_product_box2">
+			<div class="sub_title" id="product_explain">에셋 설명 :</div>
 			<div class="sub_content" th:utext="${asset.description}"></div>
-			<div class="sub_title">가격</div>
+			</div>
+			<div id="select_product_box2">
+			<div class="sub_title">가격 :</div>
 			<div class="sub_content" th:text="${asset.price}+원"></div>
-			
+			</div>
+			<div id="select_product_box2">
 			<!-- 취소 및 환불 규정 -->
             <div class="sub_title">취소 및 환불 규정</div>
             <div class="sub_content">
@@ -47,6 +51,7 @@
             	2. 판매자 책임 사유<br/>
             	&ensp;1) 판매자의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제한 금액에 대하여 전액 환불이 가능합니다.
             	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
+            </div>
             </div>
             
            <!-- 리뷰 -->
