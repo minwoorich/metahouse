@@ -91,6 +91,7 @@ public class AssetController {
 		// 파일업로드
 		String storeAttachFileName = attachfileuploadservice.uploadFile(assetFormDto.getAttach_file(),
 				attachFileUploadPath);
+		System.out.println("'에셋 컨트롤러' 파일 이름 : " + storeAttachFileName);
 		String storeThumbnailFileName = assetfileuploadservice.uploadFile(assetFormDto.getThumbnail(),
 				thumbnNailFileUploadPath);
 		List<AssetDetailImgDTO> storeOptionalFileNameList = assetfileuploadservice

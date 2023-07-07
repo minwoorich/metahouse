@@ -49,7 +49,6 @@ public class ProjectOrdersResponse {
 			this.packageType = packageType;
 			this.orderDate = (orderDate!=null)? orderDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")):LocalDateTime.of(9999,12,31,23,59,59,0).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			this.completionDate = (completionDate!=null)? completionDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")):LocalDateTime.of(9999,12,31,23,59,59,0).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-			
 		}
 	}
 	
