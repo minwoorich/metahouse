@@ -3,6 +3,8 @@ package com.multi.metahouse.project.repository.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Pageable;
+
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
@@ -14,7 +16,7 @@ public interface ProjectDAO {
 	
 	List<ProjectEntity> selectAllProjects();
 	
-	List<ProjectEntity> selectListByUserId(String userId);
+	List<ProjectEntity> selectListByUserId(Pageable pageable, String userId);
 	
 	void delete(Long project_id);
 	

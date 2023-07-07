@@ -17,13 +17,13 @@
 			</ul>
 			<div class="menu_list_title">크리에이터</div>
 			<ul class="menu_ul">
-				<li class="menu_li"><a href="/metahaus/project/my-products">나의 서비스목록</a></li>
+				<li class="menu_li"><a th:href="@{/project/my-products(pageNo=${'0'})}">프로젝트 등록</a></li>
 				<li class="menu_li"><a th:href="@{/order/project/buylist(pageNo=${'0'})}">구매관리</a></li>
 				<li class="menu_li"><a th:href="@{/order/project/saleslist(pageNo=${'0'})}">판매관리</a></li>
 			</ul>
 			<div class="menu_list_title">에셋</div>
 			<ul class="menu_ul">
-				<li class="menu_li"><a href="/metahaus/asset/my-products">나의 상품목록</a></li>
+				<li class="menu_li"><a th:href="@{/asset/my-products(pageNo=${'0'})}">에셋 등록</a></li>
 				<li class="menu_li"><a th:href="@{/order/asset/buylist(pageNo=${'0'})}">구매관리</a></li>
 				<li class="menu_li"><a th:href="@{/order/asset/saleslist(pageNo=${'0'})}">판매관리</a></li>
 			</ul>

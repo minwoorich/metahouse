@@ -79,7 +79,7 @@ public class ProjectController {
 		
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
-		System.out.println("-----------"+projectImg);
+
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
 		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
 		User userInfo = (User) session.getAttribute("loginUser");
@@ -88,8 +88,6 @@ public class ProjectController {
 		model.addAttribute("projectOption", projectOption);
 		model.addAttribute("projectReview", projectReview);
 
-		System.out.println(project);
-		System.out.println(projectOption);
 
 		return "project/market_detail";
 	}
@@ -129,14 +127,11 @@ public class ProjectController {
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// "판매 등록" 페이지 반환
 	@GetMapping("project/my-products")
-	public String showProductList(Model model,HttpSession session) {
+	public String showProductList(Model model,HttpSession session, String pageNo) {
 		if(session.getAttribute("loginUser")!=null) {
 			User user = (User)session.getAttribute("loginUser");
-			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
-			for(ProjectListDTO project : projectList) {
-				System.out.println("리스트--------"+project);				
-			}
-
+			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId(), Integer.parseInt(pageNo));
+			
 			model.addAttribute("projectList", projectList);
 			
 			return "project/project_product_list";

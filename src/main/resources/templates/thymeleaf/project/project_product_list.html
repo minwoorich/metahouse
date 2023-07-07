@@ -56,39 +56,7 @@
 			</div>
 		</div>
 		<div class="project-product-wrapper">
-			<h1 class="mypage-title">내 서비스 목록</h1>
-			<!-- <div class="project-search-form">
-				<div class="project-search-form-row01">
-					<select class="search-box category01">
-						<option value="all">전체 상품</option>
-						<option value="맵">맵</option>
-						<option value="에셋">에셋</option>
-						<option value="기획서">기획서</option>
-					</select> <select class="search-box category02">
-						<option value="all">전체 메타버스</option>
-						<option value="로블록스">로블록스</option>
-						<option value="제페토">제페토</option>
-						<option value="마인크랜프트">마인크랜프트</option>
-						<option value="더 샌드박스">더 샌드박스</option>
-						<option value="게더타운">게더타운</option>
-					</select> <select class="search-box category03">
-						<option value="productno">서비스 번호</option>
-						<option value="nickname">가격</option>
-					</select>
-
-					<div class="category04">
-						<input type="date" class="search-box startdate">
-						<div>~</div>
-						<input type="date" class="search-box enddate">
-					</div>
-				</div>
-				<div class="project-search-form-row02">
-					<input type="text" class="search-box project-search-bar"
-						placeholder="검색어를 입력하세요">
-					<button type="button" onclick=""
-						class="search-button button--small">조회</button>
-				</div>
-			</div> -->
+			<h1 class="mypage-title">프로젝트 등록</h1>
 			<ul class="project-product-list" th:each="project : ${projectList}">
 				<li class="project-product-card">
 					<div class="project-product-image">
@@ -106,9 +74,8 @@
 								<i class="fa-regular fa-ellipsis-vertical fa-xl"
 									style="color: #000000;"></i>
 								<ul class="project-product-option-dropdown">
-									<!-- <li><button>수정 하기</button></li> -->
 									<li>
-										<form  class="deleteForm" 
+										<form class="deleteForm" 
 												th:action="@{/project/delete-product}" method="post">
 											<input name="project_id" th:value="${project.project_id}" type="hidden"/>
 											<button type="submit" data-toggle="modal"
@@ -129,16 +96,25 @@
 					</div>
 				</li>
 			</ul>
-			<div class="project-product-add">
+			<div class="project-product-add" onclick="location.href='/metahaus/project/forms/descriptions'">
 				<div class="project-product-add-text">
-					<button type="button"
-						onclick="location.href='/metahaus/project/forms/descriptions'">
+					<button type="button">
 						<i class="fa-light fa-circle-plus fa-2xl"
 							style="color: #ffffff; font-size: 70px;"></i>
 					</button>
 				</div>
 			</div>
+			<div style=" width:100%; display: flex;flex-direction: column; align-items: center">
+				<ul class="pagination">
+					<li><a th:href="@{/project/my-products(pageNo=${'0'})}">1</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'1'})}">2</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'2'})}">3</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'3'})}">4</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'4'})}">5</a></li>
+				</ul>
+			</div>
 		</div>
+		
 	</main>
 
 </body>

@@ -58,7 +58,7 @@ public class AssetOrdersResponse {
 	    	this.title = entity.getTitle();
 	    	this.category1 = entity.getCategory1();
 	    	this.category2 = entity.getCategory2();
-	    	this.price = Integer.toString(entity.getPrice());
+	    	this.price = String.format("%,d",entity.getPrice());
 	    	this.mainImg = entity.getMainImg();
 	    }
 	}

@@ -37,11 +37,4 @@ $(document).ready(function(){
 		window.localStorage.clear();
 		window.location.href="/metahaus/project/forms";
 	});
-	
-	
-	
-					
-	
-	
-	
 });
