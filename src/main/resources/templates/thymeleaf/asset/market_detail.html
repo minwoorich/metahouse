@@ -78,10 +78,8 @@
 				<div>
 					<div class="review_title">포토 후기</div>				
 					<div class="banner-slider-wrap">
-						<th:block>
 							<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
 							<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>		
-						</th:block>
 						<div class="slider-outter">
 							<div index="0" class="banner-slider-list">
 							<th:block th:each="review : ${assetReviews}" th:if="${review.reviewImg!=null}">
