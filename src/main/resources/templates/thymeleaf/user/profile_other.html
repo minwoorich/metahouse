@@ -104,8 +104,8 @@
 		<div th:if="${portfolioList != null}">
 			<div class="info_card_view">
 				<div class="banner-slider-wrap">
-	       			<div th:if="${#arrays.isEmpty(portfolioList) != true}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
-	       			<div th:if="${#arrays.isEmpty(portfolioList) != true}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+	       			<div th:if="${#arrays.length(portfolioList) > 3}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+	       			<div th:if="${#arrays.length(portfolioList) > 3}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
 	       			<div class="slider-outter">
 						<div index="0" class="banner-slider-list">
 							<div class="banner-slider-item" th:each="portfolio:${portfolioList}">
@@ -145,8 +145,8 @@
 	<div class="profile_view_area">
 		<div th:if="${otherProfileInfo.assetInfo != null}">
 			<div class="banner-slider-wrap">
-				<div th:if="${#arrays.isEmpty(otherProfileInfo.assetInfo) != true}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
-				<div th:if="${#arrays.isEmpty(otherProfileInfo.assetInfo) != true}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+				<div th:if="${#arrays.length(otherProfileInfo.assetInfo) > 4}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+				<div th:if="${#arrays.length(otherProfileInfo.assetInfo) > 4}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
 				<div class="slider-outter">
 					<div index="0" class="banner-slider-list">
 						<div th:each="asset:${otherProfileInfo.assetInfo}" class="banner-slider-item2">
@@ -181,8 +181,8 @@
 	</div>
 	<div class="profile_view_area">
 		<div class="banner-slider-wrap">
-			<div th:if="${#arrays.isEmpty(otherProfileInfo.projectInfo) != true}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
-			<div th:if="${#arrays.isEmpty(otherProfileInfo.projectInfo) != true}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+			<div th:if="${#arrays.length(otherProfileInfo.projectInfo) > 4}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+			<div th:if="${#arrays.length(otherProfileInfo.projectInfo) > 4}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
 			<div class="slider-outter">
 				<div index="0" class="banner-slider-list">
 					<div th:each="project:${otherProfileInfo.projectInfo}" class="banner-slider-item2">
