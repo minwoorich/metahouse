@@ -105,7 +105,9 @@
 					</div>
 					<div class="header-button">
 						<div class="chat-button-cover">
-							<div class="chat-button">전문가에게 문의남기기</div>
+							<a th:href="@{/chat/create/chatroom(seller_id=${portfolioInfo.portfolio.userId})}">
+								<div class="chat-button">전문가에게 문의남기기</div>
+							</a>
 						</div>
 					</div>
 				</div>

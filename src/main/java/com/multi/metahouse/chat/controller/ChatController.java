@@ -55,12 +55,17 @@ public class ChatController {
 	@GetMapping("/create/chatroom")
 	public String createChatroom(HttpSession session, String seller_id) {
 		User loginUser = (User)session.getAttribute("loginUser");
-		String user_1_id = loginUser.getUserId();
-		String user_2_id = seller_id;
 		
-		service.createChatroom(user_1_id, user_2_id);
-		
-		return "redirect:/chat/";
+		if(loginUser != null) {
+			String user_1_id = loginUser.getUserId();
+			String user_2_id = seller_id;
+			
+			service.createChatroom(user_1_id, user_2_id);
+			
+			return "redirect:/chat/";
+		}else {
+			return "redirect:/login";
+		}
 	}
 	
 	/* 채팅방 메시지, 상대방 프로필 조회 */

@@ -90,7 +90,9 @@
 					</div>
 				</div>
 				<div class="profile_chat_button_cover">
-					<div class="profile_chat_button">1대1 채팅하기</div>
+					<a th:href="@{/chat/create/chatroom(seller_id=${otherProfileInfo.userInfo.userId})}">
+						<div class="profile_chat_button">1대1 채팅하기</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -185,20 +187,22 @@
 			<div class="slider-outter">
 				<div index="0" class="banner-slider-list">
 					<div th:each="project:${otherProfileInfo.projectInfo}" class="banner-slider-item2">
-						<div class="item-warp">
-							<div class="item-img-warp">
-								<img width=100% height=100%
-									th:src="@{/upload/project_thumbnail_img/}+${project.project_thumbnail_img}"></img>
-							</div>
-							<div class="item-desc-warp">
-								<div th:text="${project.title}" class="myfont-2"></div>
-								<div th:text="${#numbers.formatInteger(project.price, 1, 'COMMA') + '원'}" class="myfont-1"></div>
-								<div class="myfont-3">
-									<span th:text="${'★ '+project.average_reviews}"></span><br/>
-									| [[${project.review_count}]]개의 평가
+						<a th:href="@{/project/detail(projectNum=${project.project_id})}">
+							<div class="item-warp">
+								<div class="item-img-warp">
+									<img width=100% height=100%
+										th:src="@{/upload/project_thumbnail_img/}+${project.project_thumbnail_img}"></img>
+								</div>
+								<div class="item-desc-warp">
+									<div th:text="${project.title}" class="myfont-2"></div>
+									<div th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}" class="myfont-1"></div>
+									<div class="myfont-3">
+										<span th:text="${'★ '+project.average_reviews}"></span><br/>
+										| [[${project.review_count}]]개의 평가
+									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
 				</div>
 			</div>

@@ -8,6 +8,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.TextNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -25,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.user.OtherProfileInfoDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.portfolio.Portfolio;
@@ -258,6 +263,19 @@ public class UserController {
 		ModelAndView profileOther = new ModelAndView("user/profile_other");
 		List<PortfolioDTO> portfolioList = portfolioservice.selectPortfolioList(userId);
 		OtherProfileInfoDTO otherProfileInfo = service.read(userId);
+		List<ProjectDTO> projectInfo = otherProfileInfo.getProjectInfo();
+		
+		projectInfo.forEach((e)->{
+		Integer sp = e.getSingle_price();
+			if( sp != null) {
+				e.setPrice(sp);
+			}else {
+				e.setPrice(e.getTriple_price());
+			}
+	        
+		});
+		
+		otherProfileInfo.setProjectInfo(projectInfo);
 		
 		System.out.println(portfolioList);
 		System.out.println(otherProfileInfo);
