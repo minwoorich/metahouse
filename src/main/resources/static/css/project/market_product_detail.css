@@ -145,6 +145,19 @@ td {
 	margin-top: -2em;
 	margin-left: -0.562em;
 }
+/* 답글 등록 */
+#commentText{
+	width: 70%;
+	height: 2rem;
+	border: 1px solid;
+	border-radius: 4px; 
+}
+#writeComment{
+	width: 20%;
+	height: 2rem;
+	background-color: purple;
+	border-radius: 4px; 
+}
 /* 신고 섹션 */
 #report {
 	margin: 1.5rem 0;
@@ -248,3 +261,4 @@ td {
 	height: 40px;
 	font-size: 10px;
 }
+

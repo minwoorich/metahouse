@@ -100,7 +100,6 @@
 				<div class="review_title">에셋 후기</div>
 				<!-- 개인 리뷰 -->
 				<div class="review-wrap" th:each="review : ${assetReviews}">
-					<div id="A-review-id" hidden="" th:text="${review.asset_review_id}"></div>
 					<div class="reviewer" th:text="${review.writer_id}"></div>
 					<div class="review_info_wrap">
 						<!-- 개인리뷰 별점 -->
@@ -143,7 +142,9 @@
 					</div>
 					<div class="comment speech-bubble" th:if="${review.reviewComment==null}">
 						<div>크리에이터</div><br>
-						<input type="text" id="commentText"/><button type="button" onclick="writeComment()">답글쓰기</button>
+						<input id="A-review-id" type="hidden"  th:value="${review.asset_review_id}"/>
+						<input type="text" id="commentText"/>
+						<button type="button" id="writeComment">답글쓰기</button>
 					</div>
 				</div>				
             </div>

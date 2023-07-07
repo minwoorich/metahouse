@@ -9,8 +9,8 @@ for ( var i = 0; i < thumbnail.length; i++ )
   });
 
 //리뷰 답글 달기
-function writeComment() {
-	var reviewId = $("#P-review-id").text();
+$("#writeComment").on("click", function(){
+	var reviewId = $(this).siblings("#P-review-id").val();
 	var commentWriter = $('.seller_id').text();
 	var commentText = $('#commentText').val();
 
@@ -24,21 +24,24 @@ function writeComment() {
 	if(commentText===''){
 		alert("내용을 입력해주세요")
 	}else{
-		
-	  $.ajax({      
-		  url : "/metahaus/reviewComment",      
-		  type : "POST",  
-		  data : JSON.stringify(param),
-		  contentType: 'application/json',
-		  success : function(){   
-		        alert("작성이 완료되었습니다.");     
-		        },   
-		    error : function(){  
-		    	alert("error");  
-		        }  
-		}); 
+		var con = confirm("작성하신 후 수정/삭제가 불가합니다. 등록하시겠습니까?")
+		if(con){
+		  $.ajax({      
+			  url : "/metahaus/reviewComment",      
+			  type : "POST",  
+			  data : JSON.stringify(param),
+			  contentType: 'application/json',
+			  success : function(){   
+			        alert("작성이 완료되었습니다.");
+			  		window.location.reload()       
+			        },   
+			    error : function(){  
+			    	alert("error");  
+			        }  
+			}); 
+		}
 	}
-}
+});
 //리뷰 이미지 넘기기였나..?
 let test = document.querySelector("#color-test");
 function next(el) {

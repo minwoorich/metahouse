@@ -76,7 +76,7 @@
         <result column="review_text" property="review_text"/>
         <result column="review_date" property="review_date"/>
         <result column="project_review_comment_id" property="reviewComment.review_comment_id"/>
-        <result column="comment_writer_id" property="reviewComment.writer_id"/>
+        <result column="comment_writer_id" property="reviewComment.comment_writer_id"/>
         <result column="review_id" property="reviewComment.review_id"/>
         <result column="comment_text" property="reviewComment.comment_text" />
         <result column="comment_date" property="reviewComment.comment_date" />
