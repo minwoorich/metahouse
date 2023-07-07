@@ -28,7 +28,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-item"><a class="nav-link custom-primary" href="#"><span>알림</span> </a></li>
                     <li class="nav-item"><a class="nav-link custom-primary" href="http://localhost:8088/metahaus/chat/"><span>메세지</span> </a></li>
-                    <li th:if="${session.loginUser != null}" class="nav-item"><a class="nav-link custom-primary" href="http://localhost:8088/metahaus/mypage/profile">마이메타<span></span> </a></li>
+                    <li th:if="${session.loginUser != null}" class="nav-item"><a class="nav-link custom-primary" href="http://localhost:8088/metahaus/mypage/profile"><span>마이메타</span> </a></li>
                     <li th:if="${session.loginUser == null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/login}"><span>로그인</span> </a></li>
                     <li th:unless="${session.loginUser == null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/logout}"><span>로그아웃</span> </a></li>
                 </ul>
@@ -42,13 +42,13 @@
                 </div>
             </div>
         </div>
-        <ul class="nav navbar-nav">
-            <ul class="nav navbar-nav">
+        
+            <ul class="nav navbar-nav1">
                 <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/main/index}" data-tooltip="홈으로 돌아가기">홈</a></li>
                 <li class="nav-item"><a class="nav-link custom-primary" data-tooltip="메타에셋을 구매 판매 하세요~" th:href="@{/asset/main?pageNo=1}">에셋마켓</a></li>
                 <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/project/main(pageNo=1)}" data-tooltip="메타마켓에서 메타버스를 창조하세요~">크리에이터마켓</a></li>
             </ul>
-        </ul>
+        
     </div>
     <script th:inline="javascript" type="text/javascript" src="/metahaus/js/common/header.js"></script>
 </header>
