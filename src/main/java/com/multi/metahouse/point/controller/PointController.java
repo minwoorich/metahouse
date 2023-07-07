@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,12 +73,17 @@ public class PointController {
 		return "point/charge";
 	}
 	
-	@GetMapping("/charge.do")
-	public String pointCharge(HttpSession session, int point) {
+	@RequestMapping("/charge.do")
+	@ResponseBody
+	public void pointCharge(HttpSession session, int point) {
 		User loginUser = (User)session.getAttribute("loginUser");
 		
 		service.chargePoint(loginUser, point);
 		
+	}
+
+	@GetMapping("/charge.success")
+	public String successCharge() {
 		return "point/charge_success";
 	}
 }

@@ -73,6 +73,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
+	public void updatePassword(String newPassword, String userId) {
+		User table = repository.findById(userId).orElseThrow(() -> new RuntimeException());
+		table.setPassword(newPassword);
+		
+		repository.save(table);
+	}
+
 	public Page<User> findAll(Pageable pageable) {
 		return repository.findAll(pageable);
 	}
@@ -85,6 +92,19 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int user_update(UserSearchResultDTO user) {
 		return ss.update("com.multi.metahouse.member.updateUser", user);
+	}
+
+	@Override
+	public boolean idcheck(String userId) {
+		boolean result = false;
+		User user = repository.findByUserId(userId);
+		System.out.println(user);
+		
+		if(user != null) {
+			result = true;
+		}
+		
+		return result;
 	}
 	
 

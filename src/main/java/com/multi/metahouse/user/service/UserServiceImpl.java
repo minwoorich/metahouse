@@ -78,4 +78,15 @@ public class UserServiceImpl implements UserService{
 	public User socialLogin(String socialLoginId, String socialName) {
 		return userDao.socialLogin(socialLoginId, socialName);
 	}
+
+	@Override
+	public void updatePassword(String newPassword, String userId) {
+		userDao.updatePassword(newPassword, userId);
+		
+	}
+
+	@Override
+	public boolean idcheck(String userId) {
+		return userDao.idcheck(userId);
+	}
 }

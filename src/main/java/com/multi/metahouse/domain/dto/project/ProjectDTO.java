@@ -3,6 +3,8 @@ package com.multi.metahouse.domain.dto.project;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import org.apache.ibatis.type.Alias;
 
 import com.multi.metahouse.domain.dto.user.UserDTO;
@@ -24,6 +26,7 @@ public class ProjectDTO {
 	private String tag;
 	private String title;
 	private String description;
+	@Column(name = "thumbnail")
 	private String project_thumbnail_img;
 	private Timestamp project_date;
 	private int project_hits;

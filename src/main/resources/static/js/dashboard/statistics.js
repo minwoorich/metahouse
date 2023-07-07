@@ -5,7 +5,7 @@ $(document).ready(function(){
 		labels : [ '마인크래프트', '제페토', '로블록스', '게더타운', '더샌더박스',],
 		datasets : [ {
 			label : 'Dataset 1',
-			data : [ 40, 20, 15, 15, 5,  ],
+			data : [ 97, 73, 64, 69, 32,  ],
 			backgroundColor : [ 'rgb(255, 99, 132)', 'rgb(54, 162, 235)',
 					'rgb(255, 205, 86)', 'rgb(55, 235, 31)', 'rgb(21, 205, 86)',
 					 ]
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		labels : [ '마인크래프트', '제페토', '로블록스', '게더타운', '더샌더박스',],
 		datasets : [ {
 			label : 'Dataset 1',
-			data : [ 40, 20, 15, 15, 5,   ],
+			data : [ 109, 98, 80, 74, 66,   ],
 			backgroundColor : [ 'rgb(255, 99, 132)', 'rgb(54, 162, 235)',
 					'rgb(255, 205, 86)', 'rgb(55, 235, 31)', 'rgb(21, 205, 86)',
 					 ]

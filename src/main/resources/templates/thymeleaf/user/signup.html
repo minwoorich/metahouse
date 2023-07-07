@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
 <script type="text/javascript">
 	$(document).ready(function(){
+		let idIsVaild = false;
+		let passwordIsVaild = false;
+		
+		let allVaild = false;
 		
 		$("#allcheck").on("click", function(){
 			if($("#allcheck").is(":checked")){
@@ -84,8 +88,13 @@
 	    		}
 	    	});
 	    	
+	    	if(idIsVaild == true && passwordIsVaild == true && isValid == true){
+	    		allVaild = true
+	    	}else{
+	    		allVaild = false;
+	    	}
 	    	
-	    	if(isValid){
+	    	if(allVaild){
 	    		return true;
 	    	}else{
 	    		$('html, body').animate({ scrollTop: 0 }, "0.5s");
@@ -99,6 +108,58 @@
 			     $('.essential_gender').prop('checked',false);
 			     $(this).prop('checked',true);
 			}
+		});
+		
+		$("#userId").on("change", function() {
+			//alert("change동작");
+			$(".id-alert-msg1, .id-alert-msg").remove();
+			$("#userId").removeClass('alert-style2 alert-style');
+			
+			querydata = {"userId":$("#userId").val()}
+			$.ajax({
+				url:"/metahaus/idcheck",
+				type:"get",
+				data:querydata,
+				dataType: "text",
+				success:function(resultdata){
+					console.log(resultdata);
+					
+					if(resultdata === "사용가능아이디"){
+						idAlertMsg = $("<div>사용이 가능한 아이디입니다.</div>").attr("class", "id-alert-msg1");
+						$("#userId").parent().append(idAlertMsg);
+						$("#userId").addClass('alert-style2');
+						idIsVaild = true;
+					}else{
+						idAlertMsg = $("<div>사용이 불가능한 아이디입니다.</div>").attr("class", "id-alert-msg");
+						$("#userId").parent().append(idAlertMsg);
+						$("#userId").addClass('alert-style');
+						idIsVaild = false;
+					}
+				},
+				error:error_run
+			});
+		});
+		
+		function error_run(obj, msg, statusMsg){
+			alert("오류발생====>"+obj+","+msg+","+statusMsg)
+		}
+		
+		$("#password_check").on("change", function() {
+			$(".pass-alert-msg1, .pass-alert-msg").remove();
+			$("#password_check").removeClass('alert-style2 alert-style');
+			
+			if($("#password_check").val() === $("#password").val()){
+				idAlertMsg = $("<div>비밀번호가 일치합니다.</div>").attr("class", "pass-alert-msg1");
+				$("#password_check").parent().append(idAlertMsg);
+				$("#password_check").addClass('alert-style2');
+				passwordIsVaild = true;
+			}else{
+				idAlertMsg = $("<div>비밀번호가 일치하지 않습니다.</div>").attr("class", "pass-alert-msg");
+				$("#password_check").parent().append(idAlertMsg);
+				$("#password_check").addClass('alert-style');
+				passwordIsVaild = false;
+			}
+			
 		});
 		
 	});
@@ -117,7 +178,7 @@
 					<form action="/metahaus/signup" method="POST">
 						<div class="column_cover">
 							<p class="signup_column_title">아이디<span style="color:red;">*</span></p>
-							<input type="text" placeholder="아이디를 입력해 주세요." class="signup_write_column essential" name="userId">
+							<input type="text" placeholder="아이디를 입력해 주세요." class="signup_write_column" name="userId" id="userId">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">이름<span style="color:red;">*</span></p>
@@ -129,11 +190,11 @@
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">비밀번호<span style="color:red;">*</span></p>
-							<input type="password" placeholder="비밀번호를 입력해 주세요." class="signup_write_column essential" name="password">
+							<input type="password" placeholder="비밀번호를 입력해 주세요." class="signup_write_column essential" name="password" id="password">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">비밀번호확인<span style="color:red;">*</span></p>
-							<input type="password" placeholder="비밀번호를 다시 입력해 주세요." class="signup_write_column essential">
+							<input type="password" placeholder="비밀번호를 다시 입력해 주세요." class="signup_write_column" id="password_check">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">전화번호<span style="color:red;">*</span></p>

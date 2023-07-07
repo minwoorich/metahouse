@@ -188,18 +188,7 @@ body{
     height: 100%;
     border-radius: 5px;
 }
-.testtest .banner-slider-item:nth-child(odd) .item-img-warp{
-    
-        background-image: url("/metahaus/images/1.JPG");
-        background-size: cover; 이미지를 요소에 맞게 조절
-        background-position: center; 이미지를 가운데로 정렬
-    
-}
-.testtest .banner-slider-item:nth-child(even) .item-img-warp{
-    background-image: url("/metahaus/images/2.JPG");
-        background-size: cover; 이미지를 요소에 맞게 조절
-        background-position: center; 이미지를 가운데로 정렬
-}
+
 .banner-slider-item span{
     display: block;
     white-space: nowrap;
