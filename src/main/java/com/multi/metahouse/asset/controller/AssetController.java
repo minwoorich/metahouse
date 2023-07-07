@@ -104,11 +104,11 @@ public class AssetController {
 	}
 
 	@GetMapping("asset/my-products")
-	public String assetProductList(HttpSession session, Model model) {
+	public String assetProductList(HttpSession session, Model model, String pageNo) {
 		if (session.getAttribute("loginUser") != null) {
 			User user = (User) session.getAttribute("loginUser");
 
-			List<AssetDTO> assetList = service.selectAssetListBySellerId(user.getUserId());
+			List<AssetDTO> assetList = service.selectAssetListBySellerId(user.getUserId(), Integer.parseInt(pageNo));
 			model.addAttribute("assetList", assetList);
 
 			return "asset/asset_product_list";

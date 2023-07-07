@@ -3,6 +3,8 @@ package com.multi.metahouse.asset.repository.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Pageable;
+
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
@@ -16,7 +18,7 @@ public interface AssetDAO {
 	void insert(AssetContentEntity assetContentEntity);
 	
 	//에셋 불러오기(sellerId)
-	List<AssetEntity> selectAssetListBySellerId(String sellerId);
+	List<AssetEntity> selectAssetListBySellerId(Pageable pageable , String sellerId);
 	
 	//에셋 삭제
 	void deleteAssetByAssetId(String assetId);

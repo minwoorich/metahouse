@@ -121,9 +121,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override // 유저 ID로 프로젝트 가져오기
-	public List<ProjectListDTO> selectListByUserId(String userId) {
+	public List<ProjectListDTO> selectListByUserId(String userId, int pageNo) {
 		// DAO 호출해서 Entity리스트 받아옴
-		List<ProjectEntity> entityList = projectDao.selectListByUserId(userId);
+		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "projectDate"));
+		List<ProjectEntity> entityList = projectDao.selectListByUserId(pageRequest,userId);
+		
 		for(ProjectEntity entity : entityList) {
 			if(entity.getSingleEntity() != null) {
 //				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));				

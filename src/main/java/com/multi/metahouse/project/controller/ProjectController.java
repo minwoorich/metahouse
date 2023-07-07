@@ -127,13 +127,11 @@ public class ProjectController {
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// "판매 등록" 페이지 반환
 	@GetMapping("project/my-products")
-	public String showProductList(Model model,HttpSession session) {
+	public String showProductList(Model model,HttpSession session, String pageNo) {
 		if(session.getAttribute("loginUser")!=null) {
 			User user = (User)session.getAttribute("loginUser");
-			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
-			for(ProjectListDTO project : projectList) {
-				System.out.println("리스트--------"+project);				
-			}
+			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId(), Integer.parseInt(pageNo));
+			
 
 			model.addAttribute("projectList", projectList);
 			

@@ -76,8 +76,9 @@ public class AssetServiceImpl implements AssetService {
 	}
 	
 	@Override
-	public List<AssetDTO> selectAssetListBySellerId(String sellerId) {
-		List<AssetEntity> entityList =  dao.selectAssetListBySellerId(sellerId);
+	public List<AssetDTO> selectAssetListBySellerId(String sellerId, int pageNo) {
+		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "assetDate"));
+		List<AssetEntity> entityList =  dao.selectAssetListBySellerId(pageRequest, sellerId);
 		List<AssetDTO> dtoList = new ArrayList<>();
 		
 		for(AssetEntity entity : entityList) {
