@@ -144,11 +144,12 @@ public class AssetController {
 
 //	특정 에셋상품보기
 	@RequestMapping("asset/detail")
-	public String showAsset(Model model, String assetNum) {
+	public String showAsset(Model model, String assetNum, HttpSession session) {
 		AssetDTO asset = service.assetInfo(assetNum);
 		List<AssetDetailImgDTO> assetImgs = service.assetImgInfo(assetNum);
 		List<AssetContentDTO> assetContents = service.assetContentInfo(assetNum);
 		List<AssetReviewDTO> assetReviews = reviewService.getAllReviewsByAid(assetNum);
+		User userInfo = (User) session.getAttribute("loginUser");
 		model.addAttribute("asset", asset);
 		model.addAttribute("assetImgs", assetImgs);
 		model.addAttribute("assetContents", assetContents);
