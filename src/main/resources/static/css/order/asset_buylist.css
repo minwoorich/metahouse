@@ -430,31 +430,38 @@ select {
 }
 
 .asset-body-tag-img {
-	width: 180px;
-	height: 120px;
+	width: fit-content;
+	height: 140px;
+	object-fit: cover;
 	border-radius: 8px;
 	overflow: hidden;
 }
 
 .asset-body-tag-img img {
-	width: 100%;
-	height: 120px;
-	object-fit: cover;
+	width: 230px;
+	height: 100%;
 	box-sizing: border-box;
 }
 
 .asset-body-tag-info {
+	width: 400px;
+	height: 140px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 }
 
 .asset-body-tag-info-row01 {
+	height: 110px;
 	margin-bottom: 10px;
 	margin-right: 30px;
 }
 
 .asset-body-tag-info-row02 {
 	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .asset-body-tag-info-row03 {
@@ -465,7 +472,9 @@ select {
 }
 
 .asset-body-button {
-	padding: 8px 20px;
+	padding-left:15px;
+	padding-right:20px;
+	padding-block : 8px;
 	font-size: 14px;
 }
 
@@ -473,18 +482,18 @@ button:active {
 	box-shadow: none;
 }
 
-.asset-body-download {
+.asset-body-review {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items : center;
 	padding: 20px;
-	margin-top: 30px;
+	margin-top: 20px;
 	background-color: rgba(141,114,225,0.1);
 	border-radius: 8px;
 }
 
-/* 다운로드 버튼 기본값 (다운로드 가능) */
+/* 리뷰 작성 버튼 기본값 (다운로드 가능) */
 .write-review {
 	width: 200px;
 	height: 50px;
@@ -501,7 +510,7 @@ button:active {
 	box-shadow: none;
 }
 
-/* 다운로드 기간 만료 */
+/* 리뷰 작성 완료 */
 .expired {
 	background-color: var(--light-gray);
 	color: var(--gray);

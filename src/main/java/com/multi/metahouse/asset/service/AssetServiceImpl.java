@@ -105,6 +105,8 @@ public class AssetServiceImpl implements AssetService {
 		dao.deleteAssetImgByAssetId(assetId);
 		dao.deleteAssetByAssetId(assetId);
 	}
+	
+	
 
 
 	/*------------------------------------------- OSE ------------------------------------------*/
@@ -151,4 +153,6 @@ public class AssetServiceImpl implements AssetService {
 	public List<AssetContentDTO> assetContentInfo(String asset_id) {
 		return dao.assetContentInfo(asset_id);
 	}
+
+	
 }

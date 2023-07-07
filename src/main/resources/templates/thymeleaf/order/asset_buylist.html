@@ -146,14 +146,19 @@
 									<span>Seller</span><span style="margin-left: 6px;"
 										th:text="${order.asset.sellerId}"></span>
 								</div>
-								<button type="button"
-									class="asset-body-button button--xsmall">문의하기</button>
+								<form th:action="@{/order/asset/buylist/download}" method="get">
+								<input name="assetId" type="hidden" th:value="${order.asset.assetId}"/>
+								<button type="submit" 
+									class="asset-body-button button--xsmall">
+									<i class="fa-regular fa-arrow-down-to-line fa-lg" style="color: #ffffff;"></i>
+									다운로드</button>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="asset-body-download">
-					<div class="asset-body-download-text">
+				<div class="asset-body-review">
+					<div class="asset-body-review-text">
 					<th:block th:switch="${order.reviewCheck}">
 						<div th:case="${0}">작업물은 마음에 드시나요?<br/> 지금 바로 서비스를 평가하러 가보세요!
 						</div>

@@ -74,7 +74,7 @@
 						style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>주문 취소</span>
-						<p th:text=${orderCount.cancelled}></p>
+						<p th:text=${orderCount?.cancelled}></p>
 					</div>
 				</div>
 				<div class="project-body-box">
@@ -82,21 +82,21 @@
 						style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>주문 대기중</span>
-						<p th:text=${orderCount.pending}></p>
+						<p th:text=${orderCount?.pending}></p>
 					</div>
 				</div>
 				<div class="project-body-box">
 					<i class="fa-solid fa-truck-fast fa-2xl" style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>진행 중</span>
-						<p th:text=${orderCount.proceeding}></p>
+						<p th:text=${orderCount?.proceeding}></p>
 					</div>
 				</div>
 				<div class="project-body-box">
 					<i class="fa-solid fa-credit-card fa-2xl" style="color: #8d72e1;"></i>
 					<div class="project-body-box-text">
 						<span>구매 확정</span>
-						<p th:text=${orderCount.completion}></p>
+						<p th:text=${orderCount?.completion}></p>
 					</div>
 				</div>
 			</div>
@@ -138,10 +138,6 @@
 			</div>
 		</form>
 		<ul class="project-body-cardlist" th:each="order : ${orderList}">
-			<div th:if="${#lists.size(orderList) == 0 or list == null}" class="asset-body-form-empty">
-			<span>주문 기간 내에 구매 내역이 없습니다.</span> <span>주문 기간을 변경하여 확인해보세요.</span> <span>(기본
-				조회 기간 : 1년)</span>
-			</div>
 			<th:block th:switch="${order.orderStatus}">
 				<!-- 주문 대기중 -->
 				<li class="project-body-card" th:case="주문대기중">
