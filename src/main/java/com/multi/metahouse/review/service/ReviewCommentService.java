@@ -5,14 +5,13 @@ import java.util.List;
 import com.multi.metahouse.domain.dto.review.ReviewCommentDTO;
 
 public interface ReviewCommentService {
+	public void saveReviewComment(ReviewCommentDTO reviewComment, String tag) ;
 
-ReviewCommentDTO getReviewCommentById(int reviewCommentId);
-    
-    List<ReviewCommentDTO> getReviewCommentsByReviewId(int reviewId);
+	public void updateReviewComment(ReviewCommentDTO reviewComment);
 
-    void addReviewComment(ReviewCommentDTO reviewComment);
+	public void deleteReviewComment(int reviewCommentId);
 
-    void updateReviewComment(ReviewCommentDTO reviewComment);
+	public ReviewCommentDTO getReviewCommentById(int reviewCommentId);
 
-    void deleteReviewComment(int reviewCommentId);
+	public List<ReviewCommentDTO> getReviewCommentsByReviewId(int reviewId);
 }

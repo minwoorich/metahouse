@@ -544,23 +544,38 @@ a:hover{
 .myfont-1{
     font-size: 24px;
     font-weight: bold;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display:inline-block;
 }
 .myfont-2{
     font-size: 18px;
-    margin: 10px 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display:inline-block;
 }
 .myfont-3{
-    margin: 10px 0;
     font-size: 14px;
     color:rgb(158, 158, 158);
     font-weight: bold;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display:inline-block;
 }
 
 .banner-slider-item2 a{
+	width: 100%;
 	color: black;
 }
 
 .item-warp{
+	width: 100%;
 	padding: 12px;
 	border: 1px solid #8D72E1;
 	border-radius: 6px;
