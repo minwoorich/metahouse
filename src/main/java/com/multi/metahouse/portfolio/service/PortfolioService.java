@@ -10,6 +10,7 @@ import com.multi.metahouse.domain.dto.portfolio.PortfolioPointImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioStyleImgDTO;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioUpdateDTO;
 import com.multi.metahouse.domain.entity.portfolio.Portfolio;
+import com.multi.metahouse.domain.entity.portfolio.PortfolioAttachFile;
 import com.multi.metahouse.domain.entity.user.User;
 
 public interface PortfolioService {
@@ -24,4 +25,6 @@ public interface PortfolioService {
 	List<PortfolioDTO> selectPortfolioList(PortfolioDTO dto);
 	
 	void update(PortfolioUpdateDTO portfolioUpdateDTO);
+	
+	PortfolioAttachFile getFile(PortfolioAttachFile attachfile);
 }

@@ -40,33 +40,37 @@ public class PortfolioServiceImpl implements PortfolioService {
 		dao.insert(portfolioDto);
 		String portfolioLastIndexId = dao.selectLastIndexId();
 		
-		for (int i = 0; i < contentImgDto.size(); i++) {
-			PortfolioContentImgDTO dto = contentImgDto.get(i);
-
-			dto.setPortfolio_id(portfolioLastIndexId);	
+		if(contentImgDto != null) {
+			for (int i = 0; i < contentImgDto.size(); i++) {
+				PortfolioContentImgDTO dto = contentImgDto.get(i);
+				dto.setPortfolio_id(portfolioLastIndexId);	
+			}
+			dao.insertContentImg(contentImgDto);
 		}
-		dao.insertContentImg(contentImgDto);
 		
-		for (int i = 0; i < pointImgDto.size(); i++) {
-			PortfolioPointImgDTO dto = pointImgDto.get(i);
-
-			dto.setPortfolio_id(portfolioLastIndexId);		
+		if(pointImgDto != null) {
+			for (int i = 0; i < pointImgDto.size(); i++) {
+				PortfolioPointImgDTO dto = pointImgDto.get(i);
+				dto.setPortfolio_id(portfolioLastIndexId);		
+			}
+			dao.insertPointImg(pointImgDto);
 		}
-		dao.insertPointImg(pointImgDto);
 		
-		for (int i = 0; i < styleImgDto.size(); i++) {
-			PortfolioStyleImgDTO dto = styleImgDto.get(i);
-
-			dto.setPortfolio_id(portfolioLastIndexId);		
+		if(styleImgDto != null) {
+			for (int i = 0; i < styleImgDto.size(); i++) {
+				PortfolioStyleImgDTO dto = styleImgDto.get(i);
+				dto.setPortfolio_id(portfolioLastIndexId);		
+			}
+			dao.insertStyleImg(styleImgDto);
 		}
-		dao.insertStyleImg(styleImgDto);
 		
-		for (int i = 0; i < attachFileDto.size(); i++) {
-			PortfolioAttachFileDTO dto = attachFileDto.get(i);
-
-			dto.setPortfolio_id(portfolioLastIndexId);		
+		if(attachFileDto != null) {
+			for (int i = 0; i < attachFileDto.size(); i++) {
+				PortfolioAttachFileDTO dto = attachFileDto.get(i);
+				dto.setPortfolio_id(portfolioLastIndexId);		
+			}
+			dao.insertAttachFile(attachFileDto);
 		}
-		dao.insertAttachFile(attachFileDto);
 
 	}
 
@@ -119,17 +123,24 @@ public class PortfolioServiceImpl implements PortfolioService {
 		dao.deleteStyleImg(portfolioId);
 		dao.deleteAttachFile(portfolioId);
 
-		for(int i=0; i<contentImgList.size(); i++) {
-			contentImgList.get(i).setPortfolioId(portfolioId);
+		if(contentImgList != null) {
+			for(int i=0; i<contentImgList.size(); i++) {
+				contentImgList.get(i).setPortfolioId(portfolioId);
+			}
 		}
 		
-		for(int i=0; i<pointImgList.size(); i++) {
-			pointImgList.get(i).setPortfolioId(portfolioId);
+		if(pointImgList != null) {
+			for(int i=0; i<pointImgList.size(); i++) {
+				pointImgList.get(i).setPortfolioId(portfolioId);
+			}
 		}
 		
-		for(int i=0; i<styleImgList.size(); i++) {
-			styleImgList.get(i).setPortfolioId(portfolioId);
+		if(styleImgList != null) {
+			for(int i=0; i<styleImgList.size(); i++) {
+				styleImgList.get(i).setPortfolioId(portfolioId);
+			}
 		}
+		
 		if(attachFileList != null) {
 			for(int i=0; i<attachFileList.size(); i++) {
 				attachFileList.get(i).setPortfolioId(portfolioId);
@@ -137,13 +148,26 @@ public class PortfolioServiceImpl implements PortfolioService {
 		}
 		
 		dao.updatePortfolio(portfolioUpdateDTO.getPortfolioDto());
-		dao.updateContentImg(contentImgList);
-		dao.updatePointImg(pointImgList);
-		dao.updateStyleImg(styleImgList);
+		if(contentImgList != null) {
+			dao.updateContentImg(contentImgList);
+		}
+		
+		if(pointImgList != null) {
+			dao.updatePointImg(pointImgList);
+		}
+		
+		if(styleImgList != null) {
+			dao.updateStyleImg(styleImgList);
+		}
 		
 		if(attachFileList != null) {
 			dao.updateAttachFile(attachFileList);
 		}
 
  	}
+
+	@Override
+	public PortfolioAttachFile getFile(PortfolioAttachFile attachfile) {
+		return dao.getFile(attachfile);
+	}
 }

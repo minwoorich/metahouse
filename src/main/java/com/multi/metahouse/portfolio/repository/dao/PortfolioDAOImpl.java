@@ -207,4 +207,12 @@ public class PortfolioDAOImpl implements PortfolioDAO {
 		styleImgRepository.saveAll(styleImgList);
 		
 	}
+
+	@Override
+	public PortfolioAttachFile getFile(PortfolioAttachFile attachFile) {
+		// TODO Auto-generated method stub
+		return attachFileRepository.findByAttachFileIdAndPortfolioIdAndAttachFileno(attachFile.getAttachFileId(),
+																					attachFile.getPortfolioId(),
+																					attachFile.getAttachFileno());
+	}
 }

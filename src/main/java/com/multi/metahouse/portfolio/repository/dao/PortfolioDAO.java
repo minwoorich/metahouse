@@ -42,4 +42,6 @@ public interface PortfolioDAO {
 	void updateContentImg(List<PortfolioContentImg> contentImgList);
 	void updatePointImg(List<PortfolioPointImg> pointImgList);
 	void updateStyleImg(List<PortfolioStyleImg> styleImgList);
+	
+	PortfolioAttachFile getFile(PortfolioAttachFile attachFile);
 }

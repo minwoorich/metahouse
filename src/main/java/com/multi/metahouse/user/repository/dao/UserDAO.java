@@ -19,4 +19,5 @@ public interface UserDAO {
 	Page<User> findAll(Pageable pageable);
 	List<User> findByUserIdLike(String keyword);
 	int user_update(UserSearchResultDTO user);
+	boolean idcheck(String userId);
 }
