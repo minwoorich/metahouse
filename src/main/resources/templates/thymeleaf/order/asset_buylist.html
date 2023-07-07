@@ -106,10 +106,6 @@
 		</form>
 		
 		<ul class="asset-body-cardlist" th:each="order : ${orderList}">
-			<div th:if="${#lists.size(orderList) == 0 or list == null}" class="asset-body-form-empty">
-			<span>주문 기간 내에 구매 내역이 없습니다.</span> <span>주문 기간을 변경하여 확인해보세요.</span> <span>(기본
-				조회 기간 : 1년)</span>
-			</div>
 			<!-- 구매완료 -->
 			<li class="asset-body-card">
 				<div class="asset-body-tag">

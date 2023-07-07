@@ -38,7 +38,7 @@ public class IndexController {
 		List<AssetDTO> assetList = service.findTopNByAssetReviewAvg(9);
 		
 		List<ProjectDTO> projectList = service.findTopNByProjectReviewAvgWithPrice(9);
-		System.out.println(projectList+"=====================================");
+//		System.out.println(projectList+"=====================================");
 		projectList.forEach((e)->{
 		Integer sp = e.getSingle_price();
 		if( sp != null) {
@@ -66,9 +66,9 @@ public class IndexController {
 		
 		List<UnionReviewDTO> reviewList = service.findOrderByDate(9);
 		
-		reviewList.forEach((r)->{
-			System.out.println(r);
-		});
+//		reviewList.forEach((r)->{
+//			System.out.println(r);
+//		});
 		
 		 
 		model.addAttribute("projectList",projectList);
