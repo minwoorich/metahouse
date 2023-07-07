@@ -157,13 +157,12 @@
 											th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"></img>
 									</div>
 									<div class="item-desc-warp">
-										<span th:text="${asset.title}" class="myfont-3"></span><br/>
-										<span th:utext="${asset.description}" class="myfont-2"></span><br/>
-										<span th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}" class="myfont-1"></span><br/>
-										<span class="myfont-3">
+										<div th:text="${asset.title}" class="myfont-2"></div>
+										<div th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}" class="myfont-1"></div>
+										<div class="myfont-3">
 											<span th:text="${'★ '+asset.average_reviews}">★ 4.8 </span><br/>
 											| [[${asset.review_count}]]개의 평가
-										</span>
+										</div>
 									</div>
 								</div>
 							</a>
@@ -192,13 +191,12 @@
 									th:src="@{/upload/project_thumbnail_img/}+${project.project_thumbnail_img}"></img>
 							</div>
 							<div class="item-desc-warp">
-								<span th:text="${project.title}" class="myfont-3"></span><br/>
-								<span th:utext="${project.description}" class="myfont-2"></span><br/>
-								<span th:text="${#numbers.formatInteger(project.price, 1, 'COMMA') + '원'}" class="myfont-1"></span><br/>
-								<span class="myfont-3">
+								<div th:text="${project.title}" class="myfont-2"></div>
+								<div th:text="${#numbers.formatInteger(project.price, 1, 'COMMA') + '원'}" class="myfont-1"></div>
+								<div class="myfont-3">
 									<span th:text="${'★ '+project.average_reviews}"></span><br/>
 									| [[${project.review_count}]]개의 평가
-								</span>
+								</div>
 							</div>
 						</div>
 					</div>
