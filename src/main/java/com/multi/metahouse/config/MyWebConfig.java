@@ -22,7 +22,7 @@ public class MyWebConfig implements WebMvcConfigurer{
 				.order(1)// -> 1번으로 등록된 인터셉터가 먼저 실행되고, 2번이 실행되도록 순서를 정의
 				.addPathPatterns("/**") //인터셉트에 추가할 경로 작성 list로 주거나, string으로 나열가능
 				.excludePathPatterns("/login", "/join", "/signup", "/main/index", "/asset/main", "/asset/detail", "/project/main", "/project/detail",
-						"/user/profile", "/user/portfolio", "/css/**", "/js/**", "/images/**", "/upload/**","/search/**");//인터셉트 제외할 경로 작성
+						"/user/profile", "/user/portfolio", "/idcheck", "/css/**", "/js/**", "/images/**", "/upload/**","/search/**");//인터셉트 제외할 경로 작성
 	}
 	//다음 실행될 인터셉터는 .order에서 순위만 변경해서 그대로 작성하면된다.
 
@@ -37,7 +37,8 @@ public class MyWebConfig implements WebMvcConfigurer{
 				.addResourceLocations("classpath:/static/"); //파일은 /를 3개주고 들어감. 마지막에 반드시 /붙이기
 		
 		registry.addResourceHandler("/upload/**")
-			 	.addResourceLocations("file:///D:/javaweb/metahaus/upload/");
+				.addResourceLocations("file:///C:/javaweb/metahaus/upload/");
+			 	//.addResourceLocations("file:///D:/javaweb/metahaus/upload/");
 		
 	}
 	

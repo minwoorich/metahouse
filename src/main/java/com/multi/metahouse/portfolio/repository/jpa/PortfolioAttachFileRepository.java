@@ -11,4 +11,5 @@ import com.multi.metahouse.domain.entity.portfolio.PortfolioContentImg;
 public interface PortfolioAttachFileRepository extends JpaRepository<PortfolioAttachFile, String>{
 	List<PortfolioAttachFile> findByPortfolioId(String portfolioId);
 	void deleteByPortfolioId(String portfolioId);
+	PortfolioAttachFile findByAttachFileIdAndPortfolioIdAndAttachFileno(String attachFileId, String portfolioId, String attachFileno);
 }

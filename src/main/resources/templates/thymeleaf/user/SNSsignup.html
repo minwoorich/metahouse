@@ -8,100 +8,161 @@
 <link rel="stylesheet" href="/metahaus/css/user/signup.css">
 <link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
 <script type="text/javascript">
-	$(document).ready(function(){
+$(document).ready(function(){
+	let idIsVaild = false;
+	let passwordIsVaild = false;
+	
+	let allVaild = false;
+	
+	$("#allcheck").on("click", function(){
+		if($("#allcheck").is(":checked")){
+			$(".chk").prop("checked", true);
+		}else{
+			$(".chk").prop("checked", false);
+		}
+	});
+	
+	$(".chk").on("click", function(){
+		var total_chk_num = $(".chk").length;
+		var checked = $(".chk:checked").length;
 		
-		$("#allcheck").on("click", function(){
-			if($("#allcheck").is(":checked")){
-				$(".chk").prop("checked", true);
-			}else{
-				$(".chk").prop("checked", false);
-			}
-		});
+		if(total_chk_num != checked){
+			$("#allcheck").prop("checked", false);
+		}else{
+			$("#allcheck").prop("checked", true);
+		}
+	});
+	
+	$("#signup_submit").on("click", function(){
+		let isValid = true;
+    	//alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
+    	$('.alert-msg').remove();
+    	$('.essential').each(function() {
+			  if ($(this).val().trim() === '') {
+				  alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
+			//	  alert("test")
+				//  alert($(this).val())
+				  $(this).parent().append(alertMsg);
+				  $(this).addClass('alert-style');
+				  isValid=false;
+			  }else{
+				  $(this).removeClass('alert-style');
+			  }
+    	});
+    	
+    	$('.essential_chk').each(function(){
+    		if (!$(this).prop('checked')){
+    			if($(this).next().is('label')){
+    				$(this).parent().next(".alert-style-chk").remove();
+    				$(this).next().addClass('alert-style-chk');
+    			}else{
+    				$(this).siblings('label').addClass('alert-style-chk');
+    			}
+    			isValid=false;
+    		}else{
+    			if($(this).next().is('label')){
+    				$(this).next().removeClass('alert-style-chk');
+    			}else{
+    				$(this).siblings('label').removeClass('alert-style-chk');
+    			}
+    		}
+    	});
+    	var count = 0;
+    	$('.essential_gender').each(function(){
+    		if (!$(this).prop('checked')){
+    			if($(this).next().is('label')){
+    				$(this).next().addClass('alert-style-chk');
+    			}else{
+    				$(this).siblings('label').addClass('alert-style-chk');
+    			}
+    			count++;
+    			if(count===2){
+    				isValid=false;
+    			}
+    		}else{
+    			if($(this).next().is('label')){
+    				$(this).next().removeClass('alert-style-chk');
+    			}else{
+    				$(this).siblings('label').removeClass('alert-style-chk');
+    			}
+    		}
+    	});
+    	
+    	if(idIsVaild == true && passwordIsVaild == true && isValid == true){
+    		allVaild = true
+    	}else{
+    		allVaild = false;
+    	}
+    	
+    	if(allVaild){
+    		return true;
+    	}else{
+    		$('html, body').animate({ scrollTop: 0 }, "0.5s");
+    		alert("필수 입력사항은 모두 입력해주세요.")
+    		return false;
+    	}
+	});
+	
+	$('.essential_gender').on('click', function(){
+		if($(this).prop('checked')){
+		     $('.essential_gender').prop('checked',false);
+		     $(this).prop('checked',true);
+		}
+	});
+	
+	$("#userId").on("change", function() {
+		//alert("change동작");
+		$(".id-alert-msg1, .id-alert-msg").remove();
+		$("#userId").removeClass('alert-style2 alert-style');
 		
-		$(".chk").on("click", function(){
-			var total_chk_num = $(".chk").length;
-			var checked = $(".chk:checked").length;
-			
-			if(total_chk_num != checked){
-				$("#allcheck").prop("checked", false);
-			}else{
-				$("#allcheck").prop("checked", true);
-			}
+		querydata = {"userId":$("#userId").val()}
+		$.ajax({
+			url:"/metahaus/idcheck",
+			type:"get",
+			data:querydata,
+			dataType: "text",
+			success:function(resultdata){
+				console.log(resultdata);
+				
+				if(resultdata === "사용가능아이디"){
+					idAlertMsg = $("<div>사용이 가능한 아이디입니다.</div>").attr("class", "id-alert-msg1");
+					$("#userId").parent().append(idAlertMsg);
+					$("#userId").addClass('alert-style2');
+					idIsVaild = true;
+				}else{
+					idAlertMsg = $("<div>사용이 불가능한 아이디입니다.</div>").attr("class", "id-alert-msg");
+					$("#userId").parent().append(idAlertMsg);
+					$("#userId").addClass('alert-style');
+					idIsVaild = false;
+				}
+			},
+			error:error_run
 		});
+	});
+	
+	function error_run(obj, msg, statusMsg){
+		alert("오류발생====>"+obj+","+msg+","+statusMsg)
+	}
+	
+	$("#password_check").on("change", function() {
+		$(".pass-alert-msg1, .pass-alert-msg").remove();
+		$("#password_check").removeClass('alert-style2 alert-style');
 		
-		$("#signup_submit").on("click", function(){
-			let isValid = true;
-	    	//alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
-	    	$('.alert-msg').remove();
-	    	$('.essential').each(function() {
-				  if ($(this).val().trim() === '') {
-					  alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
-				//	  alert("test")
-					//  alert($(this).val())
-					  $(this).parent().append(alertMsg);
-					  $(this).addClass('alert-style');
-					  isValid=false;
-				  }else{
-					  $(this).removeClass('alert-style');
-				  }
-	    	});
-	    	
-	    	$('.essential_chk').each(function(){
-	    		if (!$(this).prop('checked')){
-	    			if($(this).next().is('label')){
-	    				$(this).parent().next(".alert-style-chk").remove();
-	    				$(this).next().addClass('alert-style-chk');
-	    			}else{
-	    				$(this).siblings('label').addClass('alert-style-chk');
-	    			}
-	    			isValid=false;
-	    		}else{
-	    			if($(this).next().is('label')){
-	    				$(this).next().removeClass('alert-style-chk');
-	    			}else{
-	    				$(this).siblings('label').removeClass('alert-style-chk');
-	    			}
-	    		}
-	    	});
-	    	var count = 0;
-	    	$('.essential_gender').each(function(){
-	    		if (!$(this).prop('checked')){
-	    			if($(this).next().is('label')){
-	    				$(this).next().addClass('alert-style-chk');
-	    			}else{
-	    				$(this).siblings('label').addClass('alert-style-chk');
-	    			}
-	    			count++;
-	    			if(count===2){
-	    				isValid=false;
-	    			}
-	    		}else{
-	    			if($(this).next().is('label')){
-	    				$(this).next().removeClass('alert-style-chk');
-	    			}else{
-	    				$(this).siblings('label').removeClass('alert-style-chk');
-	    			}
-	    		}
-	    	});
-	    	
-	    	
-	    	if(isValid){
-	    		return true;
-	    	}else{
-	    		$('html, body').animate({ scrollTop: 0 }, "0.5s");
-	    		alert("필수 입력사항은 모두 입력해주세요.")
-	    		return false;
-	    	}
-		});
-		
-		$('.essential_gender').on('click', function(){
-			if($(this).prop('checked')){
-			     $('.essential_gender').prop('checked',false);
-			     $(this).prop('checked',true);
-			}
-		});
+		if($("#password_check").val() === $("#password").val()){
+			idAlertMsg = $("<div>비밀번호가 일치합니다.</div>").attr("class", "pass-alert-msg1");
+			$("#password_check").parent().append(idAlertMsg);
+			$("#password_check").addClass('alert-style2');
+			passwordIsVaild = true;
+		}else{
+			idAlertMsg = $("<div>비밀번호가 일치하지 않습니다.</div>").attr("class", "pass-alert-msg");
+			$("#password_check").parent().append(idAlertMsg);
+			$("#password_check").addClass('alert-style');
+			passwordIsVaild = false;
+		}
 		
 	});
+	
+});
 </script>
 </head>
 	<body>
@@ -119,7 +180,7 @@
 					<input type="hidden" th:value="${socialName}" name="socialName">
 					<div class="column_cover">
 							<p class="signup_column_title">아이디<span style="color:red;">*</span></p>
-							<input type="text" placeholder="아이디를 입력해 주세요." class="signup_write_column essential" name="userId">
+							<input type="text" placeholder="아이디를 입력해 주세요." class="signup_write_column" name="userId" id="userId">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">이름<span style="color:red;">*</span></p>
@@ -131,11 +192,11 @@
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">비밀번호<span style="color:red;">*</span></p>
-							<input type="password" placeholder="비밀번호를 입력해 주세요." class="signup_write_column essential" name="password">
+							<input type="password" placeholder="비밀번호를 입력해 주세요." class="signup_write_column essential" name="password" id="password">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">비밀번호확인<span style="color:red;">*</span></p>
-							<input type="password" placeholder="비밀번호를 다시 입력해 주세요." class="signup_write_column essential">
+							<input type="password" placeholder="비밀번호를 다시 입력해 주세요." class="signup_write_column" id="password_check">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">전화번호<span style="color:red;">*</span></p>
