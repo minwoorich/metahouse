@@ -121,7 +121,7 @@ public class AssetController {
 	public String deleteProduct(String asset_id) {
 		service.deleteAssetByAssetId(asset_id);
 
-		return "redirect:/asset/my-products";
+		return "redirect:/asset/my-products?pageNo=0";
 	}
 	
 /*---------------------------------- OSE ---------------------------------------------*/

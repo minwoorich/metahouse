@@ -95,7 +95,6 @@ public class OrderController {
 				orderCount.put("cancelled", count2);
 				orderCount.put("proceeding", count3);
 				orderCount.put("completion", count4);
-				System.out.println("프로젝트 구매관리 orderCount : " + orderCount);
 				model.addAttribute("orderCount", orderCount);
 				
 				
