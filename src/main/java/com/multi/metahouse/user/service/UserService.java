@@ -14,4 +14,5 @@ public interface UserService {
 	User readUserInfo(String userId);
 	User socialLogin(String socialLoginId, String socialName);
 	void updatePassword(String newPassword, String userId);
+	boolean idcheck(String userId);
 }

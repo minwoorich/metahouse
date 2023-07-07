@@ -118,6 +118,8 @@ public class UserController {
 	//회원가입 기능
 	@PostMapping("signup")
 	public String signup(User user, HttpSession session) {
+		user.setUserGrade("Normal");
+		
 		service.insert(user);
 		System.out.println(user);
 		
@@ -126,6 +128,24 @@ public class UserController {
 		}
 		
 		return "user/signupFin";
+	}
+	
+	//내가 지금 인터셉터를 걸었기 때문에 인터셉터로 안걸릴 링크로 이것도 같이 추가해줘야함!!!!!!!
+	@RequestMapping(value = "/idcheck", produces = "application/text;charset=utf-8", method = RequestMethod.GET)
+	@ResponseBody 
+	public String idCheck(String userId) {
+		//System.out.println(userId);
+		String msg ="";
+		boolean check = service.idcheck(userId);
+		if(!check) {
+			//기존 DB에 저장되어 있지 않은 아이디
+			msg = "사용가능아이디";
+		}else {
+			//기존 DB에 저장되어 있는 아이디
+			msg = "사용불가능아이디";
+		}
+		System.out.println(msg);
+		return msg; // 서버에서 텍스트만 보내주겠다는 뜻 (데이터 통신) application/text
 	}
 	
 	@GetMapping("signupFin")

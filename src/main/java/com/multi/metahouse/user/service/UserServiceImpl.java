@@ -84,4 +84,9 @@ public class UserServiceImpl implements UserService{
 		userDao.updatePassword(newPassword, userId);
 		
 	}
+
+	@Override
+	public boolean idcheck(String userId) {
+		return userDao.idcheck(userId);
+	}
 }

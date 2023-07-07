@@ -93,6 +93,19 @@ public class UserDAOImpl implements UserDAO {
 	public int user_update(UserSearchResultDTO user) {
 		return ss.update("com.multi.metahouse.member.updateUser", user);
 	}
+
+	@Override
+	public boolean idcheck(String userId) {
+		boolean result = false;
+		User user = repository.findByUserId(userId);
+		System.out.println(user);
+		
+		if(user != null) {
+			result = true;
+		}
+		
+		return result;
+	}
 	
 
 }

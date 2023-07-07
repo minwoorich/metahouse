@@ -151,6 +151,17 @@ a:hover{
    	background-color: white;
 }
 
+.main-content-text2{
+	width: 100%;
+	border-radius: 6px;
+    border: 1px solid #8D72E1;
+   	margin: 12px;
+   	box-shadow: 3px 5px 5px rgb(163, 163, 163);
+   	display: flex;
+   	padding: 20px;
+   	background-color: white;
+}
+
 .main-ct-title{
 	width: 19%;
 	color: #8D72E1;
