@@ -132,7 +132,6 @@ public class ProjectController {
 			User user = (User)session.getAttribute("loginUser");
 			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId(), Integer.parseInt(pageNo));
 			
-
 			model.addAttribute("projectList", projectList);
 			
 			return "project/project_product_list";

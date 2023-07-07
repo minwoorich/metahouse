@@ -126,17 +126,6 @@ public class ProjectServiceImpl implements ProjectService {
 		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "projectDate"));
 		List<ProjectEntity> entityList = projectDao.selectListByUserId(pageRequest,userId);
 		
-		for(ProjectEntity entity : entityList) {
-			if(entity.getSingleEntity() != null) {
-//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));				
-				System.out.println("서비스--------entity : " + entity.getSingleEntity()+",project_id : " + entity.getProjectId());
-			}else if (entity.getTripleEntity() != null){
-//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));
-				System.out.println("서비스--------entity : " + entity.getTripleEntity()+",project_id : " + entity.getProjectId());
-			}else {
-				System.out.println("널이야ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
-			}
-		}
 		//반환할 빈 DTO리스트 생성. 
 		List<ProjectListDTO> dtoList =  new ArrayList<>();
 		

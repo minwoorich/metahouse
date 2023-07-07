@@ -16,7 +16,7 @@ public class ProjectListDTO {
 	private Long project_id;
 	private String creator_id;
 	private String title;
-	private int min_price;
+	private String min_price;
 	private String category1;
 	private String category2_pj;
 	private String thumbnail;
@@ -24,9 +24,10 @@ public class ProjectListDTO {
 	public ProjectListDTO fromEntity(ProjectEntity entity) {
 		
 		if(entity.getSingleEntity() != null) {
-			min_price = entity.getSingleEntity().getPrice();
+			min_price = String.format("%,d", entity.getSingleEntity().getPrice());
 		}else {
-			min_price = entity.getTripleEntity().getBasicPrice();
+			min_price = String.format("%,d", entity.getTripleEntity().getBasicPrice());
+					
 		}
 		
 		return ProjectListDTO.builder()

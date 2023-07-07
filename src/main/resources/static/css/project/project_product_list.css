@@ -247,9 +247,7 @@ button {
     box-shadow: var(--shade-dropdown);
 }
 
-.project-product-option ul > :not(:last-child) {
-    margin-bottom: 10px;
-}
+
 
 .project-product-option ul > li {
     color: black;
@@ -259,17 +257,13 @@ button {
     height: fit-content;
 }
 
-.project-product-option ul > li > form{
-	width : fit-content;
+.deleteForm{
+	width : 65px;
 }
 
 .project-product-option ul > li:hover {
     font-weight: bold;
     color: black;
-}
-.project-product-option ul > li > button {
-    width: 100%;
-    width: 90px;
 }
 
 .project-product-title {
