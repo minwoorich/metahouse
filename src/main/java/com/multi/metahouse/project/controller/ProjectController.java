@@ -89,7 +89,6 @@ public class ProjectController {
 		model.addAttribute("projectReview", projectReview);
 
 		System.out.println(project);
-		System.out.println(projectImg.get(0).getProjectStoreFilename());
 		System.out.println(projectOption);
 
 		return "project/market_detail";

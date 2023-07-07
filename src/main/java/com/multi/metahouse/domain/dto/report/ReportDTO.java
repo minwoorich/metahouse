@@ -12,8 +12,10 @@ import lombok.NoArgsConstructor;
 @Alias("report")
 public class ReportDTO {
 	private int report_no;
-	private String state, user_id;
-	private String report_target;
+	private String state;
+	private String user_id;
+	private String report_location;
+	private String report_target_id;
 	private String report_reason;
 	private String report_datetime;
 }
