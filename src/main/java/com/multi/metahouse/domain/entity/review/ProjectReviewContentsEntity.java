@@ -35,8 +35,6 @@ public class ProjectReviewContentsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="review_contents_id")
 	private Long reviewContentsId;
-//	@Column(name="project_review_id")
-//	private Long projectReviewId;
 	private String reviewStoreFilename;
 	private Long reviewImgNo;
 	

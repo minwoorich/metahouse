@@ -11,8 +11,11 @@ import com.multi.metahouse.domain.dto.review.ProjectReviewDTO;
 import com.multi.metahouse.domain.dto.review.ReviewContentsDTO;
 import com.multi.metahouse.domain.dto.review.ReviewDTO;
 import com.multi.metahouse.domain.dto.review.UnionReviewDTO;
+import com.multi.metahouse.domain.entity.review.AssetReviewEntity;
 import com.multi.metahouse.domain.entity.review.ProjectReviewContentsEntity;
 import com.multi.metahouse.domain.entity.review.ProjectReviewEntity;
+import com.multi.metahouse.review.repository.jpa.AssetReviewContentsRepository;
+import com.multi.metahouse.review.repository.jpa.AssetReviewRepository;
 import com.multi.metahouse.review.repository.jpa.ProjectReviewContentsRepository;
 import com.multi.metahouse.review.repository.jpa.ProjectReviewRepository;
 
@@ -22,14 +25,19 @@ public class ReviewDAOImpl implements ReviewDAO {
 	SqlSession sqlSession;
 	ProjectReviewRepository projectReviewRepo;
 	ProjectReviewContentsRepository projectReviewContentsRepo;
+	AssetReviewRepository assetReviewRepository;
+	AssetReviewContentsRepository assetReviewContentsRepository;
 	
 	@Autowired
 	public ReviewDAOImpl(SqlSession sqlSession, ProjectReviewRepository projectReviewRepo,
-			ProjectReviewContentsRepository projectReviewContentsRepo) {
+			ProjectReviewContentsRepository projectReviewContentsRepo, AssetReviewRepository assetReviewRepository,
+			AssetReviewContentsRepository assetReviewContentsRepository) {
 		super();
 		this.sqlSession = sqlSession;
 		this.projectReviewRepo = projectReviewRepo;
 		this.projectReviewContentsRepo = projectReviewContentsRepo;
+		this.assetReviewRepository = assetReviewRepository;
+		this.assetReviewContentsRepository = assetReviewContentsRepository;
 	}
 
 	@Override
@@ -112,6 +120,17 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public Long countByOrderIdAndWriterId(Long orderId, String writerId) {
 		return projectReviewRepo.countByProjectOrderIdAndWriterId(orderId, writerId);
+	}
+
+	@Override
+	public void saveAssetReview(AssetReviewEntity assetReviewEntity) {
+		assetReviewRepository.save(assetReviewEntity);
+		
+	}
+
+	@Override
+	public Long countAssetReviewByOrderIdAndWriterId(Long orderId, String writerId) {
+		return assetReviewRepository.countByAssetOrderIdAndWriterId(orderId, writerId);
 	}
 
 	
