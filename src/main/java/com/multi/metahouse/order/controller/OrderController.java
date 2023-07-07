@@ -293,7 +293,7 @@ public class OrderController {
 		}
 	}
 
-	// project 주문 - 판매관리 (주문 승인 or 주문 거절)
+	// 프로젝트 주문 - 판매관리 (주문 승인 or 주문 거절)
 	@PostMapping("/project/saleslist/update.do")
 	public String projectOrderAccept(HttpSession session, String orderStatus, String orderId, String acceptanceValue) {
 
@@ -338,7 +338,7 @@ public class OrderController {
 		
 		
 		//3. 오리지날파일명에 한글이 있는 경우 처리해줘야함
-		String encodedFilename = UriUtils.encode("메타하우스_다운로드_01","UTF-8" );
+		String encodedFilename = UriUtils.encode("메타하우스_다운로드_01.jpeg","UTF-8" );
 		
 		
 		//4. 파일을 다운로드형식으로 응답하기 위한 응답헤더 세팅
