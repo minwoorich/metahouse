@@ -38,6 +38,7 @@
     -ms-flex-align: center;
     align-items: center;
     position: relative;
+    font-size: 25px;
 }
 
 .test{
@@ -414,4 +415,10 @@ body{
       font-weight: bold;
       font-size: 24px;
       pointer-events: none;
+    }
+
+    
+    .inputkeyword {
+    	margin-top: 50px;
+    	font-size: 40px;
     }

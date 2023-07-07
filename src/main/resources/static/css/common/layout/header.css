@@ -54,3 +54,12 @@
     opacity: 0.8;
     pointer-events: none; /* 말풍선이 마우스 이벤트를 가로채는 것을 방지 */
 }
+
+
+ul.navbar-nav1 {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽정렬 */
+  margin-top: 2%;
+  font-weight: bold;/* 글씨 굵게 */
+  margin-left: 1%;
+}
