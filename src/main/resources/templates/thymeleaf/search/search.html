@@ -68,9 +68,10 @@
             <div  th:attr="onclick=|goLink('${service.type}', '${service.id}')|" style="cursor:pointer;" class="card">
               <div class="service-card-body">
                 <img class="searchimg"  width="100%" height="100%" th:src="@{/upload/asset_thumbnail_img/}+${service.img}" alt="프로필 이미지">
+                
+                <!-- <p class="card-text">[[${service.id}]]</p> -->
                 <h4 class="card-title">[[${service.title}]]</h4>
-                <p class="card-text">[[${service.descr}]]</p>
-                <p class="card-text">가격: $[[${service.price}]]</p>
+                <p class="card-text">가격: [[${service.price}]]</p>
               </div>
             </div>
           </div>
@@ -100,7 +101,7 @@
         <div class="pro-row">
            
             <div th:each="user : ${userList}" class="expert-card">
-                <a href="expert-page.html?id=1">
+                <a th:href="@{/user/profile(userId=${user.user_id})}">
                   <div class="card">
                     <img th:src="@{/upload/userThumbnail/}+${user.thumbnail_store_filename}" alt="프로필 이미지">
                     <div class="pro-card-body">

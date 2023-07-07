@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -121,7 +120,7 @@ public class AssetController {
 	public String deleteProduct(String asset_id) {
 		service.deleteAssetByAssetId(asset_id);
 
-		return "redirect:/asset/my-products";
+		return "redirect:/asset/my-products?pageNo=0";
 	}
 	
 /*---------------------------------- OSE ---------------------------------------------*/
