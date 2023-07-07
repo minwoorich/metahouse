@@ -106,11 +106,10 @@
 							</div>
 							<div class="asset-body-tag-info-row03">
 								<div>
-									<span>Buyer</span><span style="margin-left: 6px;"
-										th:text="${order.buyerId2}"></span>
+									<span>Buyer</span><a th:href="@{/user/profile(userId=${order.buyerId2})}"><span style="margin-left: 6px;"
+											th:text="${order.buyerId2}"></span></a>
 								</div>
-								<button type="button"
-									class="asset-body-button button--xsmall">문의하기</button>
+								
 							</div>
 						</div>
 					</div>

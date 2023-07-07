@@ -160,9 +160,6 @@ button {
     height: fit-content;
 }
 
-.project-product-list:hover {
-    cursor: pointer;
-}
 
 .project-product-card {
     display: flex;
@@ -190,6 +187,9 @@ button {
     border-radius: 6px;
     overflow: hidden;
     margin-right: 10px;
+}
+.project-product-image:hovers{
+	cursor:pointer
 }
 .project-product-image img {
     flex:1;

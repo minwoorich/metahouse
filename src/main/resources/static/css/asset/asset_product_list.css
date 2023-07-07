@@ -155,9 +155,6 @@ button {
     height: fit-content;
 }
 
-.asset-product-list:hover{
-    cursor: pointer;
-}
 
 .asset-product-card{
     display: flex;
@@ -186,6 +183,11 @@ button {
     overflow: hidden;
     margin-right: 20px;
 }
+
+.asset-product-image:hover{
+	cursor: pointer;
+}
+
 .asset-product-image img{
     flex:1;
     width:240px;
