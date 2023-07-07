@@ -75,14 +75,14 @@ public class ProjectController {
 
 	// 프로젝트 상세보기
 	@RequestMapping("project/detail")
-	public String showProject(Model model, Long projectNum) {
+	public String showProject(Model model, Long projectNum, HttpSession session) {
 		
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
 		System.out.println("-----------"+projectImg);
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
 		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
-		
+		User userInfo = (User) session.getAttribute("loginUser");
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);

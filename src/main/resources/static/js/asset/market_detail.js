@@ -9,10 +9,10 @@ for ( var i = 0; i < thumbnail.length; i++ )
   });
 
 //리뷰 답글 달기
-$("#writeComment").on("click", function(){
-	var reviewId = $(this).siblings("#A-review-id").val();
+$(".writeComment").on("click", function(){
+	var reviewId = $(this).siblings(".A-review-id").val();
 	var commentWriter = $('.seller_id').text();
-	var commentText = $('#commentText').val();
+	var commentText = $(this).siblings('.commentText').val();
 	var param = {"comment" :{
 			"review_id" : reviewId,
 			"comment_writer_id" : commentWriter, 
