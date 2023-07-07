@@ -18,7 +18,7 @@
 				<span th:text="${pjtInfo.category1}"></span>&ensp;&rang;&ensp;
 				<span th:text="${pjtInfo.category2_pj}"></span>
 			</div><br>
-			<div id="productId" th:text="'PJT'+${pjtInfo.project_id}" hidden=""></div>
+			<div id="productId" th:text="${pjtInfo.project_id}" hidden=""></div>
 			<div id="main_title" th:text="${pjtInfo.title}"></div>
 			<!-- 이미지 갤러리 -->
 			<div id="photo_container">
@@ -165,6 +165,7 @@
 				<div class="review_title">서비스 후기</div>
 				<!-- 개인 리뷰 -->
 				<div class="review-wrap" th:each="review : ${projectReview}">
+					<div id="P-review-id" hidden="" th:text="${review.project_review_id}"></div>
 					<div class="reviewer" th:text="${review.writer_id}"></div>
 					<div class="review_info_wrap">
 						<!-- 개인리뷰 별점 -->
@@ -204,6 +205,10 @@
 					<div class="comment speech-bubble" th:if="${review.reviewComment!=null}">
 						<div>크리에이터<span th:text="'&ensp;|&ensp;'+${#dates.format(review.reviewComment.comment_date,'yyyy.MM.dd')}"></span></div><br>
 						<div th:text="${review.reviewComment.comment_text}"></div>
+					</div>
+					<div class="comment speech-bubble" th:if="${review.reviewComment===null}">
+						<div>크리에이터</div><br>
+						<input type="text"/><button type="button">답글쓰기</button>
 					</div>
 				</div>				
             </div>
@@ -320,8 +325,9 @@
 			reason ='기타:'+$("#other-reason").val();
       	}
     	var param = {"report" :{
-    			 "report_target" : target, 
-    			 "report_reason" : reason
+    			"report_location" : 'PJT',
+				"report_target_id" : target, 
+    			"report_reason" : reason
 	    	}
     	}
 
