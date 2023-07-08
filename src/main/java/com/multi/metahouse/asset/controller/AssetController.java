@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,22 +16,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.multi.metahouse.asset.service.AssetFileUploadLogicService;
 import com.multi.metahouse.asset.service.AssetService;
 import com.multi.metahouse.asset.service.AttachFileUploadLogicService;
-import com.multi.metahouse.asset.service.AssetFileUploadLogicService;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 import com.multi.metahouse.domain.dto.asset.AssetFormDTO;
-import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.project.ProjectPageDTO;
 import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
-import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 public class AssetController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
 	AssetService service;
 	AssetFileUploadLogicService assetfileuploadservice;
 	AttachFileUploadLogicService attachfileuploadservice;
@@ -73,12 +75,9 @@ public class AssetController {
 
 	@GetMapping("asset/forms")
 	public String insertForm(HttpSession session) throws IOException {
-		String attachFileUploadPath = resourceLoader.getResource("classpath:static/upload/asset_attach_file").getFile()
-				.getAbsolutePath();
-		String thumbnNailFileUploadPath = resourceLoader.getResource("classpath:static/upload/asset_thumbnail_img")
-				.getFile().getAbsolutePath();
-		String optioinalFileUploadPath = resourceLoader.getResource("classpath:static/upload/asset_optional_img")
-				.getFile().getAbsolutePath();
+		String attachFileUploadPath = uploadPath+"asset_attach_file";
+		String thumbnNailFileUploadPath = uploadPath+"asset_thumbnail_img";
+		String optioinalFileUploadPath = uploadPath+"asset_optional_img";
 		AssetFormDTO assetFormDto = new AssetFormDTO();
 		// 세션에서 DTO 데이터 추출 및 미사용 세션 삭제
 		assetFormDto = (AssetFormDTO) session.getAttribute("assetForm");

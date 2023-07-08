@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,9 @@ import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 public class ReviewController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
 	ReviewService reviewService;
 	ProjectReviewFileUploadService projectReviewFileService;
 	AssetReviewFileUploadService assetReviewFileService;
@@ -47,11 +51,7 @@ public class ReviewController {
 			String description, 
 			List<MultipartFile> images) throws IOException {
 
-		String path = 
-				resourceLoader
-				.getResource("classpath:static/upload/review/project")
-				.getFile()
-				.getAbsolutePath();
+		String path = uploadPath+"review/project";
 		
 		List<ProjectReviewJpaDto.ProjectReviewContents> contentsList = new ArrayList<>();
 		//이미지경로 추출
@@ -82,11 +82,7 @@ public class ReviewController {
 			String description, 
 			List<MultipartFile> images) throws IOException {
 
-		String path = 
-				resourceLoader
-				.getResource("classpath:static/upload/review/asset")
-				.getFile()
-				.getAbsolutePath();
+		String path = uploadPath+"review/asset";
 		
 		List<AssetReviewJpaDto.AssetReviewContents> contentsList = new ArrayList<>();
 		//이미지경로 추출

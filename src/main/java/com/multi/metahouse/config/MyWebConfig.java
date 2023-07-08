@@ -39,7 +39,7 @@ public class MyWebConfig implements WebMvcConfigurer{
 		
 		registry.addResourceHandler("/upload/**")
 //				.addResourceLocations("file:///C:/javaweb/metahaus/upload/");
-				.addResourceLocations("file:/root/upload/");
+				.addResourceLocations("file:///root/upload/");
 			 	//.addResourceLocations("file:///D:/javaweb/metahaus/upload/");
 		
 	}

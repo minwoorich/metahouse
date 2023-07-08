@@ -11,7 +11,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +47,9 @@ import com.multi.metahouse.review.service.ReviewService;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-
+	@Value("${file.directory}")
+	private String uploadPath;
+	
 	OrderService orderService;
 	PointService pointService;
 	ReviewService reviewService;
@@ -322,21 +326,20 @@ public class OrderController {
 	public ResponseEntity<UrlResource> downloadFile(HttpSession session,
 			String assetId) throws MalformedURLException, FileNotFoundException{
 		
-		String fileUploadPath = "/root/upload/asset_attach_file/";
+		String fileUploadPath = uploadPath + "asset_attach_file/";
 		
 		//1. 파일을 다운로드 하기 위해 DB에 저장된 파일의 정보를 가져오기 - 다운로드 요청된 파일을 response해줌
 		List<AssetContentDTO> fileList = assetService.assetContentInfo(assetId);
 		String storeFileName = fileList.get(0).getAsset_store_filename();
-				
+		String ext = FilenameUtils.getExtension(storeFileName);
+		
 		//2. BoardFileDTO객체에서 다운로드 할 파일을 실제 객체로 변환
 		// URLResource resource = new URLResource("file:"+ 파일의 real-path")
 		// 업로드된 파일의 저장 위치와 실제 파일명을 연결해서 경로를 생성.
 		UrlResource resource = new UrlResource("file:" + fileUploadPath + storeFileName);
 		
-		
 		//3. 오리지날파일명에 한글이 있는 경우 처리해줘야함
-		String encodedFilename = UriUtils.encode("metahaus_attach_file.jpeg","UTF-8" );
-		
+		String encodedFilename = UriUtils.encode("metahaus_attach_file."+ext,"UTF-8" );
 		
 		//4. 파일을 다운로드형식으로 응답하기 위한 응답헤더 세팅
 		String mycontenttype = "attachment; filename=\""+encodedFilename+"\"";
