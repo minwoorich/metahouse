@@ -1,6 +1,9 @@
 package com.multi.metahouse.asset.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,11 +116,13 @@ public class AssetServiceImpl implements AssetService {
 	/*------------------------------------------- OSE ------------------------------------------*/
 	// 에셋마켓 상품리스트 출력: 카테로리 값 받아서 출력해주기
 	@Override
-	public List<AssetDTO> list(Integer currnetPage, String category, String category2) {
+	public List<AssetDTO> list(Integer currnetPage, String category, String category2, String sort) {
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("skip", currnetPage);
 		condition.put("category1", category);
 		condition.put("category2_as", category2);
+		condition.put("sort", sort);
+		System.out.println(condition);
 		List<AssetDTO> assetsInPage = (List<AssetDTO>) dao.Allasset(condition);
 		if(currnetPage != null) {
 			for (int i = 0; i < assetsInPage.size(); i++) {
@@ -132,6 +137,19 @@ public class AssetServiceImpl implements AssetService {
 				}
 				assetsInPage.get(i).setReview_count(reviewCount);
 				assetsInPage.get(i).setAverage_reviews(reviewAvg);
+			}
+			
+			if(sort=="popularity") {
+				Comparator<AssetDTO> cp = new Comparator<AssetDTO>() {
+
+					@Override
+					public int compare(AssetDTO o1, AssetDTO o2) {
+						int a = o1.getReview_count();
+						int b = o2.getReview_count();
+						return 1;
+					}
+				};
+				Collections.sort(assetsInPage, cp);
 			}
 		}
 		return assetsInPage;

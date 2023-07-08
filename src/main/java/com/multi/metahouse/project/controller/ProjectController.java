@@ -60,11 +60,12 @@ public class ProjectController {
 	@RequestMapping("project/main")
 	public String projectMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
 			@RequestParam(defaultValue = "Non") String category1,
-			@RequestParam(defaultValue = "Non") String category2) {
+			@RequestParam(defaultValue = "Non") String category2,
+			@RequestParam(defaultValue = "Recent") String sort) {
 		System.out.println(pageNo + category1 + category2);
-		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2);
+		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2, sort);
 		System.out.println(projects);
-		int total = projectService.list(null, category1, category2).size();
+		int total = projectService.list(null, category1, category2, sort).size();
 		System.out.println(total);
 
 		model.addAttribute("projects", projects);

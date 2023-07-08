@@ -44,7 +44,11 @@
 			  		AND a.category2_as = #{category2_as}
 				</if>
 			</where>
-			ORDER BY a.asset_date DESC
+			<trim prefix="ORDER BY">
+            	<if test="sort == 'Recent'">  a.asset_date DESC</if>
+                <if test="sort == 'lowprice'">  a.price ASC </if>                       
+                <if test="sort == 'highprice'">  a.price DESC </if>                       
+            </trim>
 			<if test="skip != null">
 			limit ${(skip-1)*16},16
 			</if>

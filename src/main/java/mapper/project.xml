@@ -125,7 +125,9 @@
 			  		AND p.category2_pj = #{category2_pj}
 				</if>
 			</where>
-			ORDER BY project_date DESC
+			<trim prefix="ORDER BY">
+            	<if test="sort == 'Recent'">  project_date DESC</if>
+			</trim>
 			<if test="skip != null">
 			limit ${(skip-1)*16},16
 			</if>
