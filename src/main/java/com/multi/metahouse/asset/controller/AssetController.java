@@ -129,11 +129,11 @@ public class AssetController {
 	@RequestMapping("asset/main")
 	public String assetMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
 			@RequestParam(defaultValue = "Non") String category1,
-			@RequestParam(defaultValue = "Non") String category2) {
+			@RequestParam(defaultValue = "Non") String category2,
+			@RequestParam(defaultValue = "Recent") String sort) {
 		
-		System.out.println(pageNo + category1 + category2);
-		List<AssetDTO> assetlist = service.list(pageNo, category1, category2);
-		int total = service.list(null, category1, category2).size();
+		List<AssetDTO> assetlist = service.list(pageNo, category1, category2, sort);
+		int total = service.list(null, category1, category2, sort).size();
 
 		model.addAttribute("assetlist", assetlist);
 		model.addAttribute("pageInfo", new ProjectPageDTO(total, pageNo, 16, 5));
