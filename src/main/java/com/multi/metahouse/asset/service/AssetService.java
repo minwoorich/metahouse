@@ -15,13 +15,13 @@ public interface AssetService {
 	void insert(String storeAttachFileName, String storeThumbnailFileName, List<AssetDetailImgDTO> storeOptionalFileNameList, AssetFormDTO assetFormDto);
 	
 	//나의 에셋 전체보기
-	List<AssetDTO> selectAssetListBySellerId(String sellerId);
+	List<AssetDTO> selectAssetListBySellerId(String sellerId, int pageNo);
 	
 	//에셋 삭제
 	void deleteAssetByAssetId(String assetId);
 /*----------------------------------------------------*/
 	//에셋마켓 상품 전체보기
-	public List<AssetDTO>list(Integer currnetPage, String category, String category2);
+	public List<AssetDTO>list(Integer currnetPage, String category, String category2, String sort);
 	//에셋마켓 특정상품보기
 	public AssetDTO assetInfo(String asset_id);
 	public List<AssetDetailImgDTO> assetImgInfo(String asset_id);

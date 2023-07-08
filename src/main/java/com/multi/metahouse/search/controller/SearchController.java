@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.multi.metahouse.domain.dto.search.SearchFilter;
 import com.multi.metahouse.domain.dto.search.ServiceSearchResultDTO;
-import com.multi.metahouse.domain.dto.user.UserDTO;
+import com.multi.metahouse.domain.dto.search.UserSearchResultDTO;
 import com.multi.metahouse.search.service.SearchService;
 
 import lombok.NoArgsConstructor;
@@ -39,7 +39,8 @@ public class SearchController {
 		
 		
 		List<ServiceSearchResultDTO> serviceList = service.searchByFilter(filter);
-		List<UserDTO> userList = service.searchUserByKeyword(filter.getKeyword());
+		List<UserSearchResultDTO> userList = service.searchUserByKeyword(filter.getKeyword());
+		System.out.println("userList : " + userList);
 		
 		
 		model.addAttribute("serviceList",serviceList);

@@ -76,7 +76,7 @@
 					<option value="all">전체 플랫폼</option>
 					<option value="로블록스">로블록스</option>
 					<option value="제페토">제페토</option>
-					<option value="더 샌드박스">더샌드박스</option>
+					<option value="샌드박스">더샌드박스</option>
 					<option value="게더타운">게더타운</option>
 					<option value="마인크래프트">마인크래프트</option>
 					<option value="기타">기타</option>
@@ -106,10 +106,6 @@
 		</form>
 		
 		<ul class="asset-body-cardlist" th:each="order : ${orderList}">
-			<div th:if="${#lists.size(orderList) == 0 or list == null}" class="asset-body-form-empty">
-			<span>주문 기간 내에 구매 내역이 없습니다.</span> <span>주문 기간을 변경하여 확인해보세요.</span> <span>(기본
-				조회 기간 : 1년)</span>
-			</div>
 			<!-- 구매완료 -->
 			<li class="asset-body-card">
 				<div class="asset-body-tag">
@@ -143,8 +139,8 @@
 							</div>
 							<div class="asset-body-tag-info-row03">
 								<div>
-									<span>Seller</span><span style="margin-left: 6px;"
-										th:text="${order.asset.sellerId}"></span>
+									<span>Seller</span><a th:href="@{/user/profile(userId=${order.asset.sellerId})}"><span style="margin-left: 6px;"
+										th:text="${order.asset.sellerId}"></span></a>
 								</div>
 								<form th:action="@{/order/asset/buylist/download}" method="get">
 								<input name="assetId" type="hidden" th:value="${order.asset.assetId}"/>

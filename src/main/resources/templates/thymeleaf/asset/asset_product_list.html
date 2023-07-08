@@ -50,48 +50,13 @@
 					<div class="modal-footer">
 						<button type="button" class="button--xsmall delete" data-dismiss="modal">네
 							삭제하겠습니다</button>
-						<!-- <button>네, 삭제 하겠습니다</button> 빨간 글씨 버전-->
 					</div>
 				</div>
 
 			</div>
 		</div>
 		<div class="asset-product-wrapper">
-			<h1 class="mypage-title">내 상품 목록</h1>
-			<!-- <div class="asset-search-form">
-				<div class="asset-search-form-row01">
-					<select class="search-box category01">
-						<option value="로블록스">로블록스</option>
-						<option value="제페토">제페토</option>
-						<option value="더샌드박스">더샌드박스</option>
-						<option value="게더타운">게더타운</option>
-						<option value="마인크래프트">마인크래프트</option>
-						<option value="기타">기타</option>
-					</select> 
-					<select class="search-box category02">
-						<option value="의류">의류</option>
-						<option value="악세사리">악세사리</option>
-						<option value="무기">무기</option>
-						<option value="기타">기타</option>	
-					</select>
-					 <select class="search-box category03">
-						<option value="productno">상품 번호</option>
-						<option value="nickname">가격</option>
-					</select>
-
-					<div class="category04">
-						<input type="date" class="search-box startdate">
-						<div>~</div>
-						<input type="date" class="search-box enddate">
-					</div>
-				</div>
-				<div class="asset-search-form-row02">
-					<input type="text" class="search-box asset-search-bar"
-						placeholder="검색어를 입력하세요">
-					<button type="button" onclick=""
-						class="search-button button--small">조회</button>
-				</div>
-			</div> -->
+			<h1 class="mypage-title">에셋 등록</h1>
 			<ul class="asset-product-list" th:each="asset : ${assetList}">
 				<li onclick="" class="asset-product-card">
 					<div class="asset-product-image">
@@ -129,13 +94,22 @@
 					</div>
 				</li>
 			</ul>
-			<div class="asset-product-add">
+			<div class="asset-product-add" onclick="location.href='/metahaus/asset/forms/descriptions'">
 				<div class="asset-product-add-text">
-					<button type="button" onclick="location.href='/metahaus/asset/forms/descriptions'">
+					<button type="button">
 						<i class="fa-light fa-circle-plus fa-2xl"
 							style="color: #ffffff; font-size: 70px;"></i>
 					</button>
 				</div>
+			</div>
+			<div style=" width:100%; display: flex;flex-direction: column; align-items: center">
+				<ul class="pagination">
+					<li><a th:href="@{/asset/my-products(pageNo=${'0'})}">1</a></li>
+					<li><a th:href="@{/asset/my-products(pageNo=${'1'})}">2</a></li>
+					<li><a th:href="@{/asset/my-products(pageNo=${'2'})}">3</a></li>
+					<li><a th:href="@{/asset/my-products(pageNo=${'3'})}">4</a></li>
+					<li><a th:href="@{/asset/my-products(pageNo=${'4'})}">5</a></li>
+				</ul>
 			</div>
 		</div>
 	</main>

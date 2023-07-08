@@ -60,11 +60,12 @@ public class ProjectController {
 	@RequestMapping("project/main")
 	public String projectMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
 			@RequestParam(defaultValue = "Non") String category1,
-			@RequestParam(defaultValue = "Non") String category2) {
+			@RequestParam(defaultValue = "Non") String category2,
+			@RequestParam(defaultValue = "Recent") String sort) {
 		System.out.println(pageNo + category1 + category2);
-		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2);
+		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2, sort);
 		System.out.println(projects);
-		int total = projectService.list(null, category1, category2).size();
+		int total = projectService.list(null, category1, category2, sort).size();
 		System.out.println(total);
 
 		model.addAttribute("projects", projects);
@@ -75,21 +76,19 @@ public class ProjectController {
 
 	// 프로젝트 상세보기
 	@RequestMapping("project/detail")
-	public String showProject(Model model, Long projectNum) {
+	public String showProject(Model model, Long projectNum, HttpSession session) {
 		
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
-		System.out.println("-----------"+projectImg);
+
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
 		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
-		
+		User userInfo = (User) session.getAttribute("loginUser");
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);
 		model.addAttribute("projectReview", projectReview);
 
-		System.out.println(project);
-		System.out.println(projectOption);
 
 		return "project/market_detail";
 	}
@@ -129,14 +128,11 @@ public class ProjectController {
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// "판매 등록" 페이지 반환
 	@GetMapping("project/my-products")
-	public String showProductList(Model model,HttpSession session) {
+	public String showProductList(Model model,HttpSession session, String pageNo) {
 		if(session.getAttribute("loginUser")!=null) {
 			User user = (User)session.getAttribute("loginUser");
-			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
-			for(ProjectListDTO project : projectList) {
-				System.out.println("리스트--------"+project);				
-			}
-
+			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId(), Integer.parseInt(pageNo));
+			
 			model.addAttribute("projectList", projectList);
 			
 			return "project/project_product_list";
@@ -253,7 +249,7 @@ public class ProjectController {
 		// 서비스 호출
 		projectService.insertProjectInfo(projectForm, packageFormDto, thumbnailPath, contentsList);
 
-		return "redirect:/project/my-products";
+		return "redirect:/project/my-products?pageNo=0";
 	}
 
 	//////////////////// 승민님 파트//////////////////////////

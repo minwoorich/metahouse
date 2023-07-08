@@ -288,6 +288,9 @@ $(document).ready(function () {
     	
   	});
     
+    //모달의 취소 버튼 누른경우
+    
+    
     // textarea에 값을 입력하면 alert-style 사라짐
     $("textarea").on("input",function(){
     	if($(this).val()!==""){

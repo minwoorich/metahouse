@@ -146,10 +146,20 @@
 				</div>
 				<div class="data distance" id="balance">
 					<th:block th:if="${pjtInfo.pjtSingle != null}">
-					<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtSingle.price}+'원'"></span>
+						<th:block th:if="${userInfo.point-pjtInfo.pjtSingle.price>=0}">
+						<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtSingle.price}+'원'"></span>
+						</th:block>
+						<th:block th:if="${userInfo.point-pjtInfo.pjtSingle.price<0}">
+						<span>*잔액이 부족합니다.</span><a class='price_data' href='/metahaus/point/charge'>충전하기</a>
+						</th:block>
 					</th:block>
 					<th:block th:if="${pjtInfo.pjtTriple != null}">
-					<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtTriple.basic_price}+'원'"></span>
+						<th:block th:if="${userInfo.point-pjtInfo.pjtTriple.basic_price>=0}">
+						<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtTriple.basic_price}+'원'"></span>
+						</th:block>
+						<th:block th:if="${userInfo.point-pjtInfo.pjtTriple.basic_price<0}">
+						<span>*잔액이 부족합니다.</span><a class='price_data' href='/metahaus/point/charge'>충전하기</a>
+						</th:block>
 					</th:block>
 				</div>
 

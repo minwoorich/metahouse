@@ -55,9 +55,13 @@
     	SELECT a.*, 
 		count(r.project_review_id) review_count,
 		AVG(r.rating) AS average_reviews,
-		(select ps.price from project_package_single ps where a.project_id = ps.project_id) price
+        s.price single_price,
+        t.basic_price triple_price
+		
 		FROM project a
 		LEFT JOIN project_review r ON a.project_id = r.project_id
+        left outer join project_package_single s on a.project_id = s.project_id
+		left outer join project_package_triple t on a.project_id = t.project_id
 		WHERE creator_id=#{creator_id}
 		GROUP BY a.project_id
 		order by average_reviews desc
@@ -121,7 +125,9 @@
 			  		AND p.category2_pj = #{category2_pj}
 				</if>
 			</where>
-			ORDER BY project_date DESC
+			<trim prefix="ORDER BY">
+            	<if test="sort == 'Recent'">  project_date DESC</if>
+			</trim>
 			<if test="skip != null">
 			limit ${(skip-1)*16},16
 			</if>

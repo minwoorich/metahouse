@@ -84,10 +84,8 @@
 				<div>
 					<div class="review_title">포토 후기</div>				
 					<div class="banner-slider-wrap">
-						<th:block>
 							<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
 							<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>		
-						</th:block>
 						<div class="slider-outter">
 							<div index="0" class="banner-slider-list">
 							<th:block th:each="review : ${assetReviews}" th:if="${review.reviewImg!=null}">
@@ -146,11 +144,11 @@
 						<div>크리에이터<span th:text="'&ensp;|&ensp;'+${#dates.format(review.reviewComment.comment_date,'yyyy.MM.dd')}"></span></div><br>
 						<div th:text="${review.reviewComment.comment_text}"></div>
 					</div>
-					<div class="comment speech-bubble" th:if="${review.reviewComment==null}">
+					<div class="comment speech-bubble" th:if="${review.reviewComment==null && session.loginUser?.userId==asset.seller_id}">
 						<div>크리에이터</div><br>
-						<input id="A-review-id" type="hidden"  th:value="${review.asset_review_id}"/>
-						<input type="text" id="commentText"/>
-						<button type="button" id="writeComment">답글쓰기</button>
+						<input class="A-review-id" type="hidden"  th:value="${review.asset_review_id}"/>
+						<input type="text" class="commentText" placeholder="답글을 작성해 주세요"/>
+						<button type="button" class="writeComment">답글쓰기</button>
 					</div>
 				</div>				
             </div>
@@ -162,7 +160,7 @@
 	        </div>
             
             <!-- 게시글 신고 -->
-			<div id="report">
+			<div id="report" th:if="${session.loginUser != null}">
 				<img alt="신고아이콘" src="/metahaus/images/report_icon.png" id="report_img">
 				<a  href="javascript:openModal()">&ensp;게시글 신고하기</a>
 			</div>
