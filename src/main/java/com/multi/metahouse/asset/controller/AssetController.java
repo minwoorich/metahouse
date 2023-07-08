@@ -98,7 +98,7 @@ public class AssetController {
 		// 서비스 호출 (insert 작업)
 		service.insert(storeAttachFileName, storeThumbnailFileName, storeOptionalFileNameList, assetFormDto);
 		// List<MultipartFile> imageList = session.getAttribute("imageList");
-		return "redirect:/asset/my-products";
+		return "redirect:/asset/my-products?pageNo=0";
 	}
 
 	@GetMapping("asset/my-products")
