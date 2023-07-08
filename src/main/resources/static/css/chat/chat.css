@@ -5,6 +5,7 @@
 	flex-direction: row;
 	min-width: 100%;
 	height: 900px;
+
 }
 
 /* 채팅 왼쪽 사이드 바 */
@@ -25,7 +26,7 @@
 	height: 100px;
 	border-bottom: 1px solid rgb(141, 114, 225, 0.1);
 	padding-inline: 20px;
-	background-color: white;
+	background-color: rgb(141, 114, 225,0);
 }
 
 .chat-search-bar {
@@ -57,6 +58,7 @@
 .chatroom-list {
 	display: flex;
 	flex-direction: column;
+	box-shadow: 23px 0px 28px #C4B0FF;
 }
 
 .chatroom-card {
@@ -123,7 +125,9 @@
 .chat-header {
 	width: 100%;
 	height: 100px;
-	border-bottom: 1px solid rgb(141, 114, 225, 0.1);
+	border-top: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
 }
 
 .chat-body {
@@ -134,6 +138,10 @@
 	width: 100%;
 	flex: 1;
 	height: 600px; /* 수정된 높이 */
+	    border-bottom: 3px solid rgb(141, 114, 225, 0.1);
+    border-top: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
 }
 
 .chat-body__chat-section {
@@ -159,7 +167,8 @@
 .chat-body__profile-section {
 	width: 300px;
 	height: inherit;
-	border-left: 1px solid rgb(141, 114, 225, 0.1);
+	border-left: 3px solid rgb(141, 114, 225, 0.1);
+	margin-top: 2%;
 	
 }
 
@@ -171,8 +180,11 @@
 	max-height: 300px;
 	width: 100%;
 	height: fit-content;
-	border-top: 1px solid rgb(141, 114, 225, 0.1);
+	
 	padding: 20px;
+	border-bottom: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
 }
  
 
@@ -186,6 +198,10 @@
 	border: 1px solid rgb(108, 74, 182, 0.1);
 	border-radius: 8px;
 	margin-bottom: 20px;
+	    border-top: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
+    border-bottom: 3px solid rgb(141, 114, 225, 0.1);
 }
 
 
@@ -247,7 +263,7 @@
     
 .chat_body_profile-info {
 	margin-top: 30px;
-	margin-left: 120px;
+	margin-left: 64px;
 }
 
 .chatroom-card:hover {

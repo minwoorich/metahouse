@@ -33,6 +33,7 @@
 					</li>
 				</ul>
 			</div>
+			<div class="select_product_bigbox">
 			<div id="select_product_box2">
 			<div class="sub_title" id="product_explain">에셋 설명 :</div>
 			<div class="sub_content" th:utext="${asset.description}"></div>
@@ -53,7 +54,7 @@
             	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
             </div>
             </div>
-            
+            </div>
            <!-- 리뷰 -->
             <div class="sub_title">에셋 평가</div>
             <div class="sub_content" th:if="${assetReviews.size > 0}">
