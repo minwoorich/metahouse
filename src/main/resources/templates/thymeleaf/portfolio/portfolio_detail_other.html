@@ -129,8 +129,8 @@
 				<th:block th:if="${#arrays.isEmpty(portfolioInfo.contentImgList) != true}">
 				<div class="main-content-img">
 					<div class="banner-slider-wrap">
-            			<div th:if="${#arrays.length(portfolioInfo.contentImgList) == '1'}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
-            			<div th:if="${#arrays.length(portfolioInfo.contentImgList) == '1'}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+            			<div th:if="${#arrays.length(portfolioInfo.contentImgList) > 1}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+            			<div th:if="${#arrays.length(portfolioInfo.contentImgList) > 1}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
             			<div class="slider-outter">
 			                <div index="0" class="banner-slider-list">
 			                    <div class="banner-slider-item" th:each="contentImg:${portfolioInfo.contentImgList}">
@@ -165,8 +165,8 @@
 				<th:block th:if="${#arrays.isEmpty(portfolioInfo.PointImgList) != true}">
 				<div class="main-content-img">
 					<div class="banner-slider-wrap">
-            			<div th:if="${#arrays.length(portfolioInfo.PointImgList) == '1'}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
-            			<div th:if="${#arrays.length(portfolioInfo.PointImgList) == '1'}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+            			<div th:if="${#arrays.length(portfolioInfo.PointImgList) > 1}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+            			<div th:if="${#arrays.length(portfolioInfo.PointImgList) > 1}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
             			<div class="slider-outter">
 			                <div index="0" class="banner-slider-list">
 			                    <div class="banner-slider-item" th:each="pointImg:${portfolioInfo.PointImgList}">
@@ -198,8 +198,8 @@
 				<th:block th:if="${#arrays.isEmpty(portfolioInfo.StyleImgList) != true}">
 				<div class="main-content-img">
 					<div class="banner-slider-wrap">
-            			<div th:if="${#arrays.length(portfolioInfo.StyleImgList) == '1'}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
-            			<div th:if="${#arrays.length(portfolioInfo.StyleImgList) == '1'}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+            			<div th:if="${#arrays.length(portfolioInfo.StyleImgList) > 1}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+            			<div th:if="${#arrays.length(portfolioInfo.StyleImgList) > 1}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
             			<div class="slider-outter">
 			                <div index="0" class="banner-slider-list">
 			                    <div class="banner-slider-item" th:each="styleImg:${portfolioInfo.StyleImgList}">
