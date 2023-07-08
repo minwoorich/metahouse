@@ -133,7 +133,6 @@ public class AssetController {
 			@RequestParam(defaultValue = "Non") String category2,
 			@RequestParam(defaultValue = "Recent") String sort) {
 		
-		System.out.println(sort);
 		List<AssetDTO> assetlist = service.list(pageNo, category1, category2, sort);
 		int total = service.list(null, category1, category2, sort).size();
 

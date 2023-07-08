@@ -149,7 +149,7 @@ public class AssetServiceImpl implements AssetService {
 						return 1;
 					}
 				};
-				Collections.sort(assetsInPage, cp);;
+				Collections.sort(assetsInPage, cp);
 			}
 		}
 		return assetsInPage;
