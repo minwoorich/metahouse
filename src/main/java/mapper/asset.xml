@@ -77,7 +77,7 @@
         where a.asset_id = #{asset_id}
     </select>
     <select id="AssetImgs" parameterType="string" resultType="com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO">
-        select * from  ASSET_DETAIL_IMG
+        select * from  asset_detail_img
         where asset_id= #{assetId}
     </select>
     <select id="AssetContents" parameterType="string" resultType="com.multi.metahouse.domain.dto.asset.AssetContentDTO">

@@ -26,8 +26,8 @@
             </div>
             <div class="col-md-6">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-item"><a class="nav-link custom-primary" href="#"><span>알림</span> </a></li>
-                    <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/chat}"><span>메세지</span> </a></li>
+                    <li th:if="${session.loginUser != null}" class="nav-item" style="margin-right:10px;"><a class="nav-link custom-primary"><span th:text="${session.loginUser.userName} +'님 안녕하세요'"></span> </a></li>
+                    <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/chat/}"><span>메세지</span> </a></li>
                     <li th:if="${session.loginUser != null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/mypage/profile}"><span>마이메타</span> </a></li>
                     <li th:if="${session.loginUser == null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/login}"><span>로그인</span> </a></li>
                     <li th:unless="${session.loginUser == null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/logout}"><span>로그아웃</span> </a></li>

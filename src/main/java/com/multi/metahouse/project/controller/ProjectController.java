@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,9 @@ import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 public class ProjectController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
 	ProjectFileUploadLogicService fileService;
 	ProjectService projectService;
 	ResourceLoader resourceLoader;
@@ -225,8 +229,9 @@ public class ProjectController {
 
 		/////////////////// DTO에서 이미지 파일 추출 및 업로드//////////////////////// //
 //		  썸네일 추출 & 업로드 & DTO의 thumbnailPath 세팅 
-		String path = resourceLoader.getResource("classpath:static/upload/project_thumbnail_img").getFile()
-				.getAbsolutePath();
+//		String path = resourceLoader.getResource(uploadPath + "project_thumbnail_img").getFile()
+//				.getAbsolutePath();
+		String path = uploadPath + "project_thumbnail_img";
 		MultipartFile thumbnail = projectForm.getThumbnail();
 		String thumbnailPath = fileService.uploadFile(thumbnail, path);
 
