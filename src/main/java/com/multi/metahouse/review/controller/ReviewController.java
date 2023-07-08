@@ -68,7 +68,7 @@ public class ReviewController {
 						.contentsList(contentsList)
 						.build();
 		reviewService.insertProjectReview(review);
-		String url = "redirect:/order/project/buylist?pageNo=0";
+		String url = "redirect:/project/detail?projecttNum="+projectId;
 		
 		return url;
 	}
@@ -103,7 +103,7 @@ public class ReviewController {
 						.contentsList(contentsList)
 						.build();
 		reviewService.insertAssetReview(review);
-		String url = "redirect:/order/asset/buylist?pageNo=0";
+		String url = "redirect:/asset/detail?assetNum="+assetId;
 		
 		return url;
 	}
