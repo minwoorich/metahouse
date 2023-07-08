@@ -192,12 +192,26 @@ td {
 	border-radius: 8px;
 }
 
+.select_product_box2 {
+	top: 12rem;
+	border-radius: 8px;
+	box-shadow: 1px 1px 12px #C4B0FF;
+}
 /* 선택상품 사이드바 img,제목,날짜 가격 */
 #select_product {
 	margin: 5% auto;
 	display: flex;
 	flex-direction: column;
 	width: 80%;
+}
+.select_product_bigbox {
+	box-shadow: 0px 0px 2px #C4B0FF;
+	padding-block-start: 1px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-block-end: 97px;
+        margin-left: -9%;
+    margin-right: -7%;
 }
 
 #represent_img {
