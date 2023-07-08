@@ -11,6 +11,7 @@ import javax.print.attribute.standard.Severity;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -52,6 +53,9 @@ import com.multi.metahouse.user.service.UserService;
 
 @Controller
 public class PortfolioController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
 	PortfolioService service;
 	UserService userService;
 	MainImgUploadLogicService mainImgUploadService;
@@ -128,7 +132,7 @@ public class PortfolioController {
 		
 		//main_img 저장
 		MultipartFile multipartMainImg = portfoliodto.getMultipartMainImg();
-		String mainImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/mainImg").getFile().getAbsolutePath();
+		String mainImgPath = uploadPath + "portfolio" + File.separator + "mainImg";
 		String mainImgStoreFilename = mainImgUploadService.uploadFile(multipartMainImg, mainImgPath);
 		portfoliodto.setMain_img_store_filename(mainImgStoreFilename);
 		
@@ -136,7 +140,7 @@ public class PortfolioController {
 		List<PortfolioContentImgDTO> portfolioContentDtoList = null;
 		if(portfoliodto.getPortfolioPjContentImg() != null) {
 			List<MultipartFile> portfolioPjContentImg = portfoliodto.getPortfolioPjContentImg();
-			String contentImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/contentImg").getFile().getAbsolutePath();
+			String contentImgPath = uploadPath + "portfolio" + File.separator + "contentImg";
 			portfolioContentDtoList = pjContentFileUploadService.uploadFiles(portfolioPjContentImg, contentImgPath);
 		}
 		
@@ -144,7 +148,7 @@ public class PortfolioController {
 		List<PortfolioPointImgDTO> portfolioPointDtoList = null;
 		if(portfoliodto.getPortfolioPjPointImg() != null) {
 			List<MultipartFile> portfolioPjPointImg = portfoliodto.getPortfolioPjPointImg();
-			String pointImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/pointImg").getFile().getAbsolutePath();
+			String pointImgPath = uploadPath + "portfolio" + File.separator + "pointImg";
 			portfolioPointDtoList = pjPointFileUploadService.uploadFiles(portfolioPjPointImg, pointImgPath);
 		}
 		
@@ -152,7 +156,7 @@ public class PortfolioController {
 		List<PortfolioStyleImgDTO> portfolioStyleDtoList = null;
 		if(portfoliodto.getPortfolioPjStyleImg() != null) {
 			List<MultipartFile> portfolioPjStyleImg = portfoliodto.getPortfolioPjStyleImg();
-			String styleImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/styleImg").getFile().getAbsolutePath();
+			String styleImgPath = uploadPath + "portfolio" + File.separator + "styleImg";
 			portfolioStyleDtoList = pjStyleFileUploadService.uploadFiles(portfolioPjStyleImg, styleImgPath);
 		}
 		
@@ -160,7 +164,7 @@ public class PortfolioController {
 		List<PortfolioAttachFileDTO> portfolioAttachFileDtoList = null;
 		if(portfoliodto.getPortfolioAttachFile() != null) {
 			List<MultipartFile> portfolioAttachFile = portfoliodto.getPortfolioAttachFile();
-			String attachFilePath = resourceLoader.getResource("classpath:static/upload/portfolio/attachFile").getFile().getAbsolutePath();
+			String attachFilePath = uploadPath + "portfolio" + File.separator + "attachFile";
 			portfolioAttachFileDtoList = attachFileUploadService.uploadFiles(portfolioAttachFile, attachFilePath);
 		}
 		
@@ -187,7 +191,7 @@ public class PortfolioController {
 		
 		if(portfoliodto.getMultipartMainImg() != null) {
 			MultipartFile multipartMainImg = portfoliodto.getMultipartMainImg();
-			String mainImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/mainImg").getFile().getAbsolutePath();
+			String mainImgPath = uploadPath + "portfolio" + File.separator + "mainImg";
 			String mainImgStoreFilename = mainImgUploadService.uploadFile(multipartMainImg, mainImgPath);
 			portfoliodto.setMain_img_store_filename(mainImgStoreFilename);
 		}
@@ -196,7 +200,7 @@ public class PortfolioController {
 		List<PortfolioContentImg> portfolioContentList = null;
 		if(portfoliodto.getPortfolioPjContentImg() != null) {
 			List<MultipartFile> portfolioPjContentImg = portfoliodto.getPortfolioPjContentImg();
-			String contentImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/contentImg").getFile().getAbsolutePath();
+			String contentImgPath = uploadPath + "portfolio" + File.separator + "contentImg";
 			portfolioContentList = pjContentFileUploadService.entityUploadFiles(portfolioPjContentImg, contentImgPath);
 		}
 		
@@ -204,7 +208,7 @@ public class PortfolioController {
 		List<PortfolioPointImg> portfolioPointList = null;
 		if(portfoliodto.getPortfolioPjPointImg() != null) {
 			List<MultipartFile> portfolioPjPointImg = portfoliodto.getPortfolioPjPointImg();
-			String pointImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/pointImg").getFile().getAbsolutePath();
+			String pointImgPath = uploadPath + "portfolio" + File.separator + "pointImg";
 			portfolioPointList = pjPointFileUploadService.entityUploadFiles(portfolioPjPointImg, pointImgPath);
 		}
 		
@@ -212,7 +216,7 @@ public class PortfolioController {
 		List<PortfolioStyleImg> portfolioStyleList = null;
 		if(portfoliodto.getPortfolioPjStyleImg() != null) {
 			List<MultipartFile> portfolioPjStyleImg = portfoliodto.getPortfolioPjStyleImg();
-			String styleImgPath = resourceLoader.getResource("classpath:static/upload/portfolio/styleImg").getFile().getAbsolutePath();
+			String styleImgPath = uploadPath + "portfolio" + File.separator + "styleImg";
 			portfolioStyleList = pjStyleFileUploadService.entityUploadFiles(portfolioPjStyleImg, styleImgPath);
 		}
 		
@@ -220,7 +224,7 @@ public class PortfolioController {
 		List<PortfolioAttachFile> portfolioAttachFileList = null;
 		if(portfoliodto.getPortfolioAttachFile() != null) {
 			List<MultipartFile> portfolioAttachFile = portfoliodto.getPortfolioAttachFile();
-			String attachFilePath = resourceLoader.getResource("classpath:static/upload/portfolio/attachFile").getFile().getAbsolutePath();
+			String attachFilePath = uploadPath + "portfolio" + File.separator + "attachFile";
 			portfolioAttachFileList = attachFileUploadService.entityUploadFiles(portfolioAttachFile, attachFilePath);
 		}
 		
@@ -249,7 +253,7 @@ public class PortfolioController {
 		
 		PortfolioAttachFile selectfileInfo =service.getFile(new PortfolioAttachFile(attachFileId, portfolioId, "", "", attachFileno));
 		System.out.println(selectfileInfo);
-		String attachFilePath = resourceLoader.getResource("classpath:static/upload/portfolio/attachFile").getFile().getAbsolutePath();
+		String attachFilePath = uploadPath + "portfolio" + File.separator + "attachFile";
 		System.out.println(attachFilePath);
 		
 		UrlResource resource = new UrlResource("file:"+ attachFilePath + File.separator + selectfileInfo.getAttachStoreFilename());
