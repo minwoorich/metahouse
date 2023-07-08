@@ -335,7 +335,7 @@ public class OrderController {
 		UrlResource resource = new UrlResource("file:" + fileUploadPath + storeFileName);
 
 		// 3. 오리지날파일명에 한글이 있는 경우 처리해줘야함
-		String encodedFilename = UriUtils.encode("metahaus_attach_file." + ext, "UTF-8");
+		String encodedFilename = UriUtils.encode("download." + ext, "UTF-8");
 
 		// 4. 파일을 다운로드형식으로 응답하기 위한 응답헤더 세팅
 		String mycontenttype = "attachment; filename=\"" + encodedFilename + "\"";
