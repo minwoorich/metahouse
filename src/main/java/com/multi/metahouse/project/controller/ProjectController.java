@@ -249,7 +249,7 @@ public class ProjectController {
 		// 서비스 호출
 		projectService.insertProjectInfo(projectForm, packageFormDto, thumbnailPath, contentsList);
 
-		return "redirect:/project/my-products";
+		return "redirect:/project/my-products?pageNo=0";
 	}
 
 	//////////////////// 승민님 파트//////////////////////////
