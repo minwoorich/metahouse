@@ -38,7 +38,8 @@ public class MyWebConfig implements WebMvcConfigurer{
 				.addResourceLocations("classpath:/static/"); //파일은 /를 3개주고 들어감. 마지막에 반드시 /붙이기
 		
 		registry.addResourceHandler("/upload/**")
-				.addResourceLocations("file:///C:/javaweb/metahaus/upload/");
+//				.addResourceLocations("file:///C:/javaweb/metahaus/upload/");
+				.addResourceLocations("file:/root/upload/");
 			 	//.addResourceLocations("file:///D:/javaweb/metahaus/upload/");
 		
 	}

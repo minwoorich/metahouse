@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.multi</groupId>
-	<artifactId>metahouse</artifactId>
+	<artifactId>metahaus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>metahouse</name>
+	<name>metahaus</name>
 	<description>MetaHouse Spring Boot Project</description>
 	<packaging>war</packaging>
 	<properties>
