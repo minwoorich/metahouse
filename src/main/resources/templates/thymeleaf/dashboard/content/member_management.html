@@ -4,44 +4,44 @@
 	layout:decorate="~{dashboard/layout/dashboardLayout}">
 	
 <th:block layout:fragment="css">
-	<link rel="stylesheet" th:href="@{/css/dashboard/dashboard_statistics.css}" />
+	<!-- <link rel="stylesheet" th:href="@{/css/dashboard/dashboard_statistics.css}" /> -->
 </th:block>
 <th:block layout:fragment="js">
-	<!-- <script type="text/javascript" th:src=@{/js/dashboard/statistics.js}></script> -->
+	<script type="text/javascript" th:src=@{/js/dashboard/member_management.js}></script>
 </th:block>
 <body>
 	<div class="content" layout:fragment="content">
 		<h1>회원정보조회</h1>
 		<div class="row">
 			<div class="col">
-				<div class="card">
+				<div class="card card-main">
 					<div class="card-body">
 						<h5 class="card-title">전체 회원 목록</h5>
-						<table class="table">
+						<table class="table member-table">
 							<thead>
 								<tr>
-									<th>아이디</th>
-									<th>이메일</th>
-									<th>이름</th>
-									<th>전화번호</th>
-									<th>성별</th>
-									<th>생년월일</th>
-									<th>가입일자</th>
-									<th>등급</th>
-									<th>포인트</th>
+									<th class="memberlist memberlist-id">아이디</th>
+									<th class="memberlist memberlist-email">이메일</th>
+									<th class="memberlist memberlist-name">이름</th>
+									<th class="memberlist memberlist-tel">전화번호</th>
+									<th class="memberlist memberlist-gen">성별</th>
+									<th class="memberlist memberlist-birth">생년월일</th>
+									<th class="memberlist memberlist-signdate">가입일자</th>
+									<th class="memberlist memberlist-grade">등급</th>
+									<th class="memberlist memberlist-point">포인트</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="user : ${userList}">
-									<td>[[${user.userId}]]</td>
-									<td>[[${user.email}]]</td>
-									<td>[[${user.userName}]]</td>
-									<td>[[${user.phoneNumber}]]</td>
-									<td>[[${user.gender}]]</td>
-									<td>[[${user.birth}]]</td>
-									<td>[[${user.createDate}]]</td>
-									<td>[[${user.userGrade}]]</td>
-									<td>[[${user.point}]]</td>
+								<tr class="memberlist" th:each="user : ${userList}">
+									<td class="memberlist memberlist-id">[[${user.userId}]]</td>
+									<td class="memberlist memberlist-email">[[${user.email}]]</td>
+									<td class="memberlist memberlist-name">[[${user.userName}]]</td>
+									<td class="memberlist memberlist-tel">[[${user.phoneNumber}]]</td>
+									<td class="memberlist memberlist memberlist-gen">[[${user.gender}]]</td>
+									<td class="memberlist memberlist-birth">[[${user.birth}]]</td>
+									<td class="memberlist memberlist-signdate">[[${#dates.format(user.createDate, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+									<td class="memberlist memberlist-grade">[[${user.userGrade}]]</td>
+									<td class="memberlist memberlist-point">[[${user.point}]]</td>
 								</tr>
 							</tbody>
 						</table>
@@ -71,9 +71,10 @@
 				</div>
 			</div>
 		</div>
+		<!-- 
 		<div class="row">
 			<div class="col col-left">
-				<div class="card">
+				<div class="card card-sub">
 					<div class="card-body">
 						<h5 class="card-title">제재중인 회원</h5>
 						<table class="table">
@@ -100,7 +101,7 @@
 				</div>
 			</div>
 			<div class="col col-right">
-				<div class="card">
+				<div class="card card-sub">
 					<div class="card-body">
 						<h5 class="card-title">신규 회원</h5>
 						<table class="table">
@@ -125,6 +126,7 @@
 				</div>
 			</div>
 		</div>
+		 -->
 	</div>
 </body>
 </html>
