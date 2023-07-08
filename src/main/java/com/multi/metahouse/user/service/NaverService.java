@@ -33,7 +33,7 @@ public class NaverService {
 	//state: 애플리케이션이 생성한 상태 토큰
 	private final static String CLIENT_ID = "nvU8irdTypPGRr1XQ35g";
 	private final static String CLIENT_SECRET = "JHGPQWc1At";
-	private final static String REDIRECT_URI = "http://localhost:8088/metahaus/signnaver";
+	private final static String REDIRECT_URI = "http://101.101.210.168:8088/metahaus/signnaver"; // local에서 확인시, 101.101.210.168 -> localhost로 변경
 	
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
