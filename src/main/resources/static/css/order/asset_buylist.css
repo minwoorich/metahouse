@@ -76,7 +76,7 @@ select {
 .close-button {
 	cursor: pointer;
 }
-
+/* 
 .star-rating {
 	margin-top: 10px;
 	display: flex;
@@ -104,6 +104,35 @@ select {
 
 .star-rating input[type="radio"]:checked ~ label:before {
 	color: #FFD700;
+} */
+.star-rating {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.star-rating .stars {
+	display: inline-block;
+    color: #FFD700;
+}
+
+.star-rating input[type="radio"] {
+	display: none;
+}
+
+.star-rating label {
+	font-size: 25px;
+	color: #FFD700;
+	cursor: pointer;
+}
+
+.star-rating label:before {
+	content: "\2605";
+	display: inline-block;
+}
+
+.star-rating input[type="radio"]:checked ~ label:before {
+	color:var(--gray);
 }
 
 .review-button {
