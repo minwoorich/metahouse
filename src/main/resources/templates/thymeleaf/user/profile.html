@@ -67,7 +67,7 @@
 			<div class="profile_img">
 				<div class="profile_img_view">
 					<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
-						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
+						 th:src="|/metahaus/static/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
 					
 					<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
 						 src="/metahaus/images/test_img.jpg">

@@ -107,6 +107,7 @@
 .search_cb {
 	width: 100px;
 	height: 40px;
+	appearance: auto;
 }
 
 /*------------- form 하위 span 요소 간 margin 설정 시작 --------------*/

@@ -4,7 +4,7 @@
 	layout:decorate="~{dashboard/layout/dashboardLayout}">
 <th:block layout:fragment="css">
 	<link rel="stylesheet"
-		th:href="@{/css/thymeleaf/dashboard_member_update.css}" />
+		th:href="@{/css/thymeleaf/dashboard_member_search.css}" />
 </th:block>
 <th:block layout:fragment="js">
 	<script type="text/javascript" th:src=@{/js/dashboard/member_search.js}></script>
@@ -61,43 +61,20 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">회원정보수정</h5>
-						<!-- 
-						<div class="form-item texttype">
-							<div class="form-item-column01">
-								<div class="form-item-title">
-									<span>제목</span> <span>*</span>
-								</div>
-								<textarea class="form-item-description" type="text"
-									maxlength="30" placeholder="제목을 입력하세요" value="" name=""
-									required onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '제목을 입력하세요'"></textarea>
-							</div>
-							<div class="form-item-column02">
-								<div class="form-item-counter">
-									<span class="counter">0</span> <span>/</span> <span>30</span>
-								</div>
-							</div>
-						</div>
-						 -->
 						<div class="form">
 							<div class="form-wrapper">
 								<div class="update_form">
 									<form name="userEditForm" action="/metahaus/dashboard/member/update" method="post">
-										<div class="form-item-column01">
-											<!-- <div class="form-item-title">
-												<span>제목</span> <span>*</span>
-											</div>
-											<textarea class="form-item-description" type="text"
-												maxlength="30" placeholder="제목을 입력하세요" value="" name=""
-												required onfocus="this.placeholder = ''"
-												onblur="this.placeholder = '제목을 입력하세요'"></textarea> -->
-										</div>
 										<input name="user_id" type="hidden" />
-										<span>등급</span><span><input name="user_grade" type="text" /></span><br /> 
-										<span>포인트</span><span><input name="point" type="text" /></span><br />
-										
-										
-										<button class="btn btn-primary">수정하기</button>
+										<div class="form-input-line">
+											<span>등급</span><span><input name="user_grade" type="text" /></span>
+										</div>
+										<div class="form-input-line">
+											<span>포인트</span><span><input name="point" type="text" /></span>
+										</div>
+										<div class="form-submit-button">
+											<button class="btn btn-primary">수정하기</button>
+										</div>										
 									</form>
 								</div>
 							</div>
