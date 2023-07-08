@@ -13,6 +13,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,10 @@ import com.multi.metahouse.user.service.UserService;
 
 @Controller
 public class UserController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
+	
 	UserService service;
 	NaverService naverService;
 	KakaoService kakaoService;
@@ -166,7 +171,7 @@ public class UserController {
 	@PostMapping("mypage/setting")
 	public String setting(@RequestPart(value = "multipartfile") MultipartFile multipartfile, User user, HttpSession session) throws IOException {
 		
-		String path = resourceLoader.getResource("classpath:static/upload/userThumbnail").getFile().getAbsolutePath();
+		String path = uploadPath + "userThumbnail";
 		String thumbnailStoreFilename = fileuploadservice.uploadFile(multipartfile, path);
 		user.setThumbnailStoreFilename(thumbnailStoreFilename);
 		System.out.println(user.getThumbnailStoreFilename());
