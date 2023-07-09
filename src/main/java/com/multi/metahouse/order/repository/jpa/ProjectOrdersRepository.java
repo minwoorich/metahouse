@@ -47,6 +47,8 @@ public interface ProjectOrdersRepository extends JpaRepository<ProjectOrdersEnti
 			@Param("category5") LocalDateTime category5);
 
 ///////////////////////판매자용//////////////////////////////
+	
+	ProjectOrdersEntity findByOrderId(Long orderId);
 
 	@Query(value = "SELECT ord FROM ProjectOrdersEntity ord "+
 			"INNER JOIN ord.projectId project " + 

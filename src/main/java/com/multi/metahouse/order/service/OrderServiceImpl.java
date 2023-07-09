@@ -3,6 +3,7 @@ package com.multi.metahouse.order.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.multi.metahouse.asset.repository.dao.AssetDAO;
 import com.multi.metahouse.domain.dto.order.AssetOrdersDTO;
 import com.multi.metahouse.domain.dto.order.ProjectOrdersDTO;
 import com.multi.metahouse.domain.dto.order.SelectedAddOptionDTO;
@@ -18,33 +20,43 @@ import com.multi.metahouse.domain.entity.order.ProjectOrdersDetailEntity;
 import com.multi.metahouse.domain.entity.order.ProjectOrdersEntity;
 import com.multi.metahouse.domain.entity.order.SelectedAddOptionEntity;
 import com.multi.metahouse.domain.entity.order.dtoforjpa.AssetOrdersResponse;
-import com.multi.metahouse.domain.entity.order.dtoforjpa.AssetOrdersResponse.Response;
 import com.multi.metahouse.domain.entity.order.dtoforjpa.ProjectOrdersConfirmUpdateDTO;
 import com.multi.metahouse.domain.entity.order.dtoforjpa.ProjectOrdersResponse;
+import com.multi.metahouse.domain.entity.project.AddOptionEntity;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.order.repository.dao.OrderDAO;
 import com.multi.metahouse.order.repository.jpa.AssetOrdersRepository;
 import com.multi.metahouse.order.repository.jpa.ProjectOrdersRepository;
 import com.multi.metahouse.point.repository.dao.PointDAO;
+import com.multi.metahouse.project.repository.dao.ProjectDAO;
 import com.multi.metahouse.review.repository.dao.ReviewDAO;
+import com.multi.metahouse.user.repository.dao.UserDAO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+	
 	OrderDAO dao;
+	AssetDAO assetDao;
+	ProjectDAO projectDao;
 	PointDAO pointDao;
 	ReviewDAO reviewDao;
 	ProjectOrdersRepository projectOrderRepository;
 	AssetOrdersRepository assetOrderRepository;
+	UserDAO userDao;
 
 	@Autowired
-	public OrderServiceImpl(OrderDAO dao, PointDAO pointDao, ReviewDAO reviewDao,
-			ProjectOrdersRepository projectOrderRepository, AssetOrdersRepository assetOrderRepository) {
+	public OrderServiceImpl(OrderDAO dao, AssetDAO assetDao, ProjectDAO projectDao, PointDAO pointDao,
+			ReviewDAO reviewDao, ProjectOrdersRepository projectOrderRepository,
+			AssetOrdersRepository assetOrderRepository, UserDAO userDao) {
 		super();
 		this.dao = dao;
+		this.assetDao = assetDao;
+		this.projectDao = projectDao;
 		this.pointDao = pointDao;
 		this.reviewDao = reviewDao;
 		this.projectOrderRepository = projectOrderRepository;
 		this.assetOrderRepository = assetOrderRepository;
+		this.userDao = userDao;
 	}
 
 	@Override
@@ -55,12 +67,20 @@ public class OrderServiceImpl implements OrderService {
 		if (payment >= 0) {
 			// 에셋 주문내역 생성
 			dao.insertOrderA(assetOrder);
+			//에셋id를 통해 에셋 판매자 정보(User엔티티) 가져오기
+			String sellerId = assetDao.assetInfo(assetOrder.getAsset_id()).getSeller_id();
+			User user =userDao.read(sellerId);
+			
 			// 포인트 결제 내역생성
 			String consumeInfo = "Asset";
 			consumeInfo = consumeInfo.concat(assetOrder.getAsset_id());
 			pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
 			pointDao.consumePoint(loginUser, consumeAmount);
-
+			
+			//판매자에게 돈 보내주기, 판매내역 수정
+			pointDao.createChargedPointInfo(user, consumeAmount);
+			pointDao.chargePoint(user, consumeAmount);
+			
 			result = 1;
 		}
 		return result;
@@ -82,12 +102,14 @@ public class OrderServiceImpl implements OrderService {
 					dao.insertOrderOption(options.get(i));
 				}
 			}
-
+			
+			
 			// 포인트 결제내역 생성
 			String consumeInfo = "PJT";
 			consumeInfo = consumeInfo.concat(projectOrder.getProject_id());
 			pointDao.createConsumedPointInfo(loginUser, consumeAmount, consumeInfo);
 			pointDao.consumePoint(loginUser, consumeAmount);
+			
 
 			result = 1;
 		}
@@ -274,8 +296,44 @@ public class OrderServiceImpl implements OrderService {
 		if ("진행중".equals(updatedData.getOrderStatus())) {
 			orderEntity.getOrderDetail().setCompletionDate(LocalDateTime.now());
 			orderEntity.setOrderStatus("구매확정");
+			
+			//판매자 구매내역 업데이트
+			// 0. 판매자 정보 가져오기
+			Long orderId = updatedData.getOrderId();
+			ProjectOrdersEntity order = projectOrderRepository.findByOrderId(orderId);
+			String sellerId = projectDao.projectInfo(order.getProjectId().getProjectId()).getCreator_id();
+			
+			// 1. orderPrice가져오기
+			int orderPrice = order.getOrderPrice();
+			
+			// 2. selectedAddOption 에서 optionId 추출
+			List<SelectedAddOptionEntity> selectedOptionList = order.getSelectedOptionList();
+			//선택된 옵션
+			List<Integer> optionPriceList = 
+					selectedOptionList.stream()
+						.map(selected -> selected.getAddOptionId().getAddOptionPrice())
+						.collect(Collectors.toList());
+			// 선택된 옵션의 구매수량
+			List<String> selectedOptionCountList =  selectedOptionList.stream()
+				.map(selected -> selected.getCount())
+				.collect(Collectors.toList());
+			
+			// 3. optionId 가격 가져오기 + 옵션가격 x 옵션개수 
+			int totalOptionPrice = 0;
+			for(int i =0; i<selectedOptionList.size();i++) {
+				totalOptionPrice += optionPriceList.get(i) * Integer.parseInt(selectedOptionCountList.get(i));
+			}
+			// 4. 옵션 총 가격 + 구매한 패키지 가격
+			User user = userDao.read(sellerId);
+			int totalPrice = totalOptionPrice + orderPrice;
+			
+			//5. 판매한 가격 만큼 판매자 보유 포인트 및 포인트 내역 업데이트
+			pointDao.createChargedPointInfo(user, totalPrice);
+			pointDao.chargePoint(user, totalPrice);
+			
 		} else {
-			if ("accept".equals(updatedData.getAcceptanceValue())) {
+			//주문을 승인한경우
+			if ("accept".equals(updatedData.getAcceptanceValue())) {	
 				// 부모 채우기
 				orderEntity.setOrderStatus("진행중");
 				// 자식 채우기
@@ -287,6 +345,39 @@ public class OrderServiceImpl implements OrderService {
 
 			} else {
 				orderEntity.setOrderStatus("주문취소");
+				//주문 취소 됐을때 구매자한테 환불
+				// 0. 구매자 정보 가져오기
+				Long orderId = updatedData.getOrderId();
+				ProjectOrdersEntity order = projectOrderRepository.findByOrderId(orderId);
+				String buyerId = order.getBuyerId();
+				
+				// 1. orderPrice가져오기
+				int orderPrice = order.getOrderPrice();
+				
+				// 2. selectedAddOption 에서 optionId 추출
+				List<SelectedAddOptionEntity> selectedOptionList = order.getSelectedOptionList();
+				//선택된 옵션
+				List<Integer> optionPriceList = 
+						selectedOptionList.stream()
+							.map(selected -> selected.getAddOptionId().getAddOptionPrice())
+							.collect(Collectors.toList());
+				// 선택된 옵션의 구매수량
+				List<String> selectedOptionCountList =  selectedOptionList.stream()
+					.map(selected -> selected.getCount())
+					.collect(Collectors.toList());
+				
+				// 3. optionId 가격 가져오기 + 옵션가격 x 옵션개수 
+				int totalOptionPrice = 0;
+				for(int i =0; i<selectedOptionList.size();i++) {
+					totalOptionPrice += optionPriceList.get(i) * Integer.parseInt(selectedOptionCountList.get(i));
+				}
+				// 4. 옵션 총 가격 + 구매한 패키지 가격
+				User user = userDao.read(buyerId);
+				int totalPrice = totalOptionPrice + orderPrice;
+				
+				//5. 판매한 가격 만큼 판매자 보유 포인트 및 포인트 내역 업데이트
+				pointDao.createChargedPointInfo(user, totalPrice);
+				pointDao.chargePoint(user, totalPrice);
 			}
 		}
 	}

@@ -188,6 +188,7 @@ public class OrderController {
 					.orderStatus(orderStatus).build();
 
 			// 업데이트 서비스 호출
+//			String userId = ((User)session.getAttribute("loginUser")).getUserId();
 			orderService.updateOrder(dto);
 			url = "redirect:/order/project/buylist?pageNo=0";
 		} else {
@@ -303,9 +304,10 @@ public class OrderController {
 		if (session.getAttribute("loginUser") != null) {
 			ProjectOrdersConfirmUpdateDTO dto = ProjectOrdersConfirmUpdateDTO.builder().orderId(Long.parseLong(orderId))
 					.orderStatus(orderStatus).acceptanceValue(acceptanceValue).build();
-			System.out.println("진행중 DTO : " + dto);
+			
 
 			// 업데이트 서비스 호출
+			String userId = ((User)session.getAttribute("loginUser")).getUserId();
 			orderService.updateOrder(dto);
 
 			url = "redirect:/order/project/saleslist?pageNo=0";
