@@ -34,26 +34,26 @@
 				</ul>
 			</div>
 			<div class="select_product_bigbox">
-			<div id="select_product_box2">
-			<div class="sub_title" id="product_explain">에셋 설명 :</div>
-			<div class="sub_content" th:utext="${asset.description}"></div>
-			</div>
-			<div id="select_product_box2">
-			<div class="sub_title">가격 :</div>
-			<div class="sub_content" th:text="${asset.price}+원"></div>
-			</div>
-			<div id="select_product_box2">
-			<!-- 취소 및 환불 규정 -->
-            <div class="sub_title">취소 및 환불 규정</div>
-            <div class="sub_content">
-            	1. 기본 환불 규정<br/>
-            	&ensp;1) 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.<br/>
-            	&ensp;2) 작업이 완료된 이후 또는 자료, 프로그램 등 서비스가 제공된 이후에는 환불이 불가합니다.<br/><br/>
-            	2. 판매자 책임 사유<br/>
-            	&ensp;1) 판매자의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제한 금액에 대하여 전액 환불이 가능합니다.
-            	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
-            </div>
-            </div>
+				<div class="select_product_box2">
+					<div class="sub_title" id="product_explain">에셋 설명 :</div>
+					<div class="sub_content" th:utext="${asset.description}"></div>
+				</div>
+				<div class="select_product_box2">
+					<div class="sub_title">가격 :</div>
+					<div class="sub_content" th:text="${asset.price}+원"></div>
+				</div>
+				<div class="select_product_box2">
+					<!-- 취소 및 환불 규정 -->
+		            <div class="sub_title">취소 및 환불 규정</div>
+		            <div class="sub_content">
+		            	1. 기본 환불 규정<br/>
+		            	&ensp;1) 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.<br/>
+		            	&ensp;2) 작업이 완료된 이후 또는 자료, 프로그램 등 서비스가 제공된 이후에는 환불이 불가합니다.<br/><br/>
+		            	2. 판매자 책임 사유<br/>
+		            	&ensp;1) 판매자의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제한 금액에 대하여 전액 환불이 가능합니다.
+		            	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
+		            </div>
+	            </div>
             </div>
            <!-- 리뷰 -->
             <div class="sub_title">에셋 평가</div>
@@ -131,7 +131,7 @@
 							th:each="reviewImg : ${review.reviewImg}">
 							<div class="review_photos item-img-warp" >
 								<img  width=100% height=100% alt="리뷰이미지" class="review_photo" 
-									th:src="@{/upload/review/project/}+${reviewImg.review_store_filename}">
+									th:src="@{/upload/review/asset/}+${reviewImg.review_store_filename}">
 							</div>
 						</div>
 					</div>
@@ -173,13 +173,16 @@
 	 		<img th:if="${asset.main_img != null}" id="represent_img"
 					th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"/>
 				<div class="product_title" th:text="${asset.title}"></div>
-				<div class="product_info" id="product_date" th:text="'작성일자: '+${asset.asset_date}"></div>
+				<div class="product_info" id="product_date" th:text="'작성일자: '+${#dates.format(asset.asset_date,'yyyy.MM.dd')}"></div>
 				<div class="product_info" id="product_price" th:text="${asset.price}+원"></div>
 			</div>
 			<!-- seller profile -->
 			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${asset.seller_id})}'|">
 				<div id="seller_img_box">
-					<img alt="프로필 이미지" src="/metahaus/images/test_img.jpg" id="seller_img">
+					<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
+						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
+					<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
+						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div id="seller_info">
 					<div class="seller_name" th:text="${asset.userName.userName}"></div>
@@ -224,7 +227,7 @@
 			          </label>
 			          <label for="other">
 			            <input type="radio" id="other" name="report_reason" value="other">
-			            <input type="text" id="other-reason" placeholder="기타 신고 사유를 입력해주세요."
+			            <input type="text" id="other-reason" placeholder="기타 신고 사유를 입력해주세요.(최대 100자)" maxlength="100"
 			            onfocus="this.placeholder=''" onblur="this.placeholder='기타 신고 사유를 입력해주세요.'">
 			          </label>
 			          <!-- 전송 버튼 -->
