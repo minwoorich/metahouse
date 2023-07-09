@@ -126,6 +126,7 @@
 </div>
 </div>
            <!-- 리뷰 -->
+           <br/>
             <div class="sub_title">서비스 평가</div>
             <div class="sub_content" th:if="${projectReview.size > 0}">
             	<!-- 종합리뷰 -->
@@ -255,17 +256,14 @@
 			<!-- seller profile -->
 			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${pjtInfo.creator_id})}'|">
 				<div id="seller_img_box">
-					<th:block th:if="${pjtInfo.creator.thumbnailStoreFilename !=null}">
-					<img alt="프로필 이미지" th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.creator.thumbnailStoreFilename}" id="seller_img">
-					</th:block>
-					<th:block th:if="${pjtInfo.creator.thumbnailStoreFilename == null}">
-					<img alt="프로필 이미지" src="/metahaus/images/test_img.jpg" id="seller_img">
-					</th:block>
+					<img th:if="${session.loginUser?.thumbnailStoreFilename != null}" 
+						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser?.thumbnailStoreFilename}|">
+					<img th:unless="${session.loginUser?.thumbnailStoreFilename != null}" 
+						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div id="seller_info">
-					<div class="seller_name" th:text="${pjtInfo.creator_id}">
+					<div class="seller_name" th:text="${pjtInfo.creator_id}"></div>
 					<div class="seller_name" th:text="${pjtInfo.creator.userName}"></div>
-					</div>
 				</div>
 			</div>
 			<!-- buy button -->
