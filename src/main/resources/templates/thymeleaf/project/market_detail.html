@@ -256,9 +256,9 @@
 			<!-- seller profile -->
 			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${pjtInfo.creator_id})}'|">
 				<div id="seller_img_box">
-					<img th:if="${pjtInfo.creator.thumbnailStoreFilename != null}" 
+					<img th:if="${pjtInfo.creator.thumbnailStoreFilename != null}" id="seller_img"
 						 th:src="'/metahaus/upload/userThumbnail/'+${pjtInfo.creator.thumbnailStoreFilename}">
-					<img th:unless="${pjtInfo.creator.thumbnailStoreFilename != null}" 
+					<img th:unless="${pjtInfo.creator.thumbnailStoreFilename != null}" id="seller_img"
 						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div id="seller_info">
