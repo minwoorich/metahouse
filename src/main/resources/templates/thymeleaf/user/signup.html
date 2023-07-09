@@ -178,7 +178,7 @@
 					<form action="/metahaus/signup" method="POST">
 						<div class="column_cover">
 							<p class="signup_column_title">아이디<span style="color:red;">*</span></p>
-							<input type="text" placeholder="아이디를 입력해 주세요." class="signup_write_column" name="userId" id="userId">
+							<input maxlength="20" type="text" placeholder="아이디를 입력해 주세요." class="signup_write_column" name="userId" id="userId">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">이름<span style="color:red;">*</span></p>
@@ -186,15 +186,15 @@
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">이메일<span style="color:red;">*</span></p>
-							<input type="text" placeholder="이메일을 입력해 주세요." class="signup_write_column essential" name="email">
+							<input type="email" placeholder="이메일을 입력해 주세요." class="signup_write_column essential" name="email">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">비밀번호<span style="color:red;">*</span></p>
-							<input type="password" placeholder="비밀번호를 입력해 주세요." class="signup_write_column essential" name="password" id="password">
+							<input maxlength="20" type="password" placeholder="비밀번호를 입력해 주세요." class="signup_write_column essential" name="password" id="password">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">비밀번호확인<span style="color:red;">*</span></p>
-							<input type="password" placeholder="비밀번호를 다시 입력해 주세요." class="signup_write_column" id="password_check">
+							<input maxlength="20" type="password" placeholder="비밀번호를 다시 입력해 주세요." class="signup_write_column" id="password_check">
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">전화번호<span style="color:red;">*</span></p>
@@ -213,7 +213,7 @@
 						</div>
 						<div class="column_cover">
 							<p class="signup_column_title">자기소개</p>
-							<input type="text" placeholder="자기소개를 입력해 주세요." class="signup_write_column" name="selfIntroduction">
+							<input maxlength="500" type="text" placeholder="자기소개를 입력해 주세요." class="signup_write_column" name="selfIntroduction">
 						</div>
 						<div class="signup_check_box">
 							<p><input type="checkbox" id="allcheck"> <label for="all">모두 동의합니다.</label></p>

@@ -64,7 +64,7 @@
         </div>
         
         <div class="row">
-          <div class="col-md-4" th:each="service : ${serviceList}">
+          <div class="col-md-2" th:each="service : ${serviceList}">
             <div  th:attr="onclick=|goLink('${service.type}', '${service.id}')|" style="cursor:pointer;" class="card">
               <div class="service-card-body" th:switch="${service.type}">
                 <img th:case="a" class="searchimg"  width="100%" height="100%" th:src="@{/upload/asset_thumbnail_img/}+${service.img}" alt="에셋썸네일">
