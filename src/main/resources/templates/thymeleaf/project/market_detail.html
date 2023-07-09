@@ -257,7 +257,7 @@
 			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${pjtInfo.creator_id})}'|">
 				<div id="seller_img_box">
 					<img th:if="${session.loginUser?.thumbnailStoreFilename != null}" 
-						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser?.thumbnailStoreFilename}|">
+						 th:src="'/metahaus/upload/userThumbnail/'+${session.loginUser?.thumbnailStoreFilename}">
 					<img th:unless="${session.loginUser?.thumbnailStoreFilename != null}" 
 						 src="/metahaus/images/test_img.jpg">
 				</div>

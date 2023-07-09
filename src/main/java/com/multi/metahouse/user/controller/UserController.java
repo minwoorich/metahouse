@@ -316,7 +316,7 @@ public class UserController {
 		
 		if(loginUser != null && loginUser.getSocialLoginId().equals(naverLoginId)) {
 			session.setAttribute("loginUser", loginUser);
-			view = "main/index";
+			view = "redirect:main/index";
 		} else {
 			model.addAttribute("nickname", userInfo.get("nickname"));
 			model.addAttribute("email", userInfo.get("email"));
@@ -349,7 +349,7 @@ public class UserController {
 		if (loginUser != null && loginUser.getSocialLoginId().equals(kakaoLoginId)) {
 			session.setAttribute("access_token", access_Token);
 			session.setAttribute("loginUser", loginUser);
-			view = "main/index";
+			view = "redirect:main/index";
 		} else {
 			//만약 카카오 로그인하는데 토근을 호출하고 KaKao 토큰번호가 DB에 없을떄
 			model.addAttribute("nickname", userInfo.get("nickname"));
@@ -378,7 +378,7 @@ public class UserController {
 		User loginUser = service.socialLogin(googleId, "google");
 		if (loginUser != null && loginUser.getSocialLoginId().equals(googleId)) {
 			session.setAttribute("loginUser", loginUser);
-			view = "main/index";
+			view = "redirect:main/index";
 		} else {
 			//만약 카카오 로그인하는데 토근을 호출하고 KaKao 토큰번호가 DB에 없을떄
 			model.addAttribute("nickname", userInfo.get("nickname"));
