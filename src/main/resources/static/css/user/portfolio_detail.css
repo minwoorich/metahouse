@@ -8,6 +8,14 @@ a:hover{
 	text-decoration: none;
 }
 
+pre{
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+    white-space: pre-wrap;
+    background-color: white;
+}
+
 .content-cover{
 	width:100%;
 	background-color:#FAFAFC;
