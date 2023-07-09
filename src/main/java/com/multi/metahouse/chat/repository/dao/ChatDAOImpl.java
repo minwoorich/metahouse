@@ -33,6 +33,8 @@ public class ChatDAOImpl implements ChatDAO {
         LocalDate localDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
 		Date date = Date.valueOf(localDate);
 
+        System.out.println("date = " + date);
+
     	chatroomDTO.setOpen_date(date);
         sqlSession.insert("insertChatroom", chatroomDTO);
     }
