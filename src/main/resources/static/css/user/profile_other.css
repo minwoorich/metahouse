@@ -18,6 +18,7 @@ pre{
 	overflow: auto;
     white-space: pre-wrap;
     background-color: white;
+    text-align: justify;
 }
 
 .profile_page_title{
