@@ -37,4 +37,9 @@ $(document).ready(function(){
 		window.localStorage.clear();
 		window.location.href="/metahaus/project/forms";
 	});
+    // '취소' 누른다음 취소 누른경우 -> 로컬스토리지 비워줌
+    $(".cancel-modal").on("click", function(){
+    	window.localStorage.clear();
+    	window.location.href='/metahaus/project/my-products?pageNo=0';
+    });
 });
