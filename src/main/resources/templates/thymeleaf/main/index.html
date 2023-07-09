@@ -198,11 +198,11 @@
 											<div class="review-info--row02">
 												<div class="review-rating">
 												<th:block th:switch="${n.rating}">
-													<div class="stars" th:case="${n.rating == '5'}" th:text="${'★★★★★'}"></div>
-													<div class="stars" th:case="${n.rating == '4'}" th:text="${'★★★★☆'}"></div>
-													<div class="stars" th:case="${n.rating == '3'}" th:text="${'★★★☆☆'}"></div>
-													<div class="stars" th:case="${n.rating == '2'}" th:text="${'★★☆☆☆'}"></div>
-													<div class="stars" th:case="${n.rating == '1'}" th:text="${'★☆☆☆☆'}"></div>
+													<div class="stars" th:case="5" th:text="${'★★★★★'}"></div>
+													<div class="stars" th:case="4" th:text="${'★★★★☆'}"></div>
+													<div class="stars" th:case="3"th:text="${'★★★☆☆'}"></div>
+													<div class="stars" th:case="2" th:text="${'★★☆☆☆'}"></div>
+													<div class="stars" th:case="1"" th:text="${'★☆☆☆☆'}"></div>
 												</th:block>
 													<!-- <div class="stars" th:each="n:${#numbers.sequence(1,5)}"
 												th:text="${(n-5)<=0 ? '★':'☆'}"></div> -->
