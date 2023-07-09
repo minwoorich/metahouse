@@ -70,7 +70,7 @@ public class IndexController {
 //			System.out.println(r);
 //		});
 		
-		 
+		System.out.println(projectList);
 		model.addAttribute("projectList",projectList);
 		model.addAttribute("assetList",assetList);
 		model.addAttribute("reviewList",reviewList);
