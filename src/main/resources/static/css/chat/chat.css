@@ -262,8 +262,13 @@
     
     
 .chat_body_profile-info {
-	margin-top: 30px;
-	margin-left: 64px;
+    font-size: 14px;
+    margin-top: 30px;
+    margin-left: 10px;
+    text-align: left;
+    margin-right: 10px;
+    white-space: break-spaces;
+    word-break: keep-all;
 }
 
 .chatroom-card:hover {
