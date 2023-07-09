@@ -63,7 +63,7 @@ $(document).ready(function(){
 			chatElements.forEach((ele) => $(".chat-body__chat-section").append(ele));
 		
 			// 프로필 요소 작성
-			addPro = createProfileElement(targetProfile);
+			addPro = createProfileElement(targetProfile, targetProfile);
 		
 			// 기존 프로필 요소 삭제
 			$(".chat_body_profile-img").remove();
@@ -163,6 +163,7 @@ $(document).ready(function(){
 				// 최근 메시지 변경
 				chatroom = "chatroom" + chatroomId;
 				$("#"+chatroom).find(".last-chat").text(resmsg.message_content);
+				$("#"+chatroom).find(".last-date").text(resmsg.write_time.substr(2, 8));
 				
 				/* 채팅 스크롤 항상 아래로 */
 				scrChatBody.scrollTop(scrChatBody[0].scrollHeight);
