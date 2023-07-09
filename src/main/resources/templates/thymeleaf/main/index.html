@@ -161,27 +161,6 @@
 				<div class="slider-outter">
 					<div index="0" class="banner-slider-list">
 						<div class="banner-slider-item2" th:each="n:${reviewList}">
-							<!-- <div class="review-card">
-								<div class="card-header">
-									<div class="image-container">
-										<img th:if="${n.profile_img != null}"
-											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
-											alt="profile" /> <img th:unless="${n.profile_img != null}"
-											src="/metahaus/images/CSLEE.JPG" alt="profile" />
-									</div>
-
-									<div class="info-container">
-										<div class="star-rating">
-											<span th:each="n:${#numbers.sequence(1,5)}"
-												th:text="${(n-5)<=0 ? '★':'☆'}"></span>
-										</div>
-										<div class="date" th:text="${n.review_date}">2023-06-23</div>
-									</div>
-								</div>
-								<div class="review-content" th:text="${n.review_text}">이곳에
-									리뷰 내용을 작성하세요.</div>
-								<div class="work-date">작업일: 2023-06-21</div>
-							</div> -->
 							<th:block th:if="${n.review_type == 'a'}">
 							<a th:href="@{/asset/detail(assetNum=${n.product_id})}" style="display: flex" class="review-card">
 								<div classs="review-card--contents">
@@ -190,7 +169,7 @@
 											<img th:if="${n.profile_img != null}"
 											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
 											alt="profile" /> <img th:unless="${n.profile_img != null}"
-											src="/metahaus/static/images/CSLEE.JPG" alt="profile" />
+											src="/metahaus/static/images/test_img.jpg" alt="profile" />
 											
 										</div>
 										<div class="review-header--info">
@@ -204,8 +183,6 @@
 													<div class="stars" th:case="2" th:text="${'★★☆☆☆'}"></div>
 													<div class="stars" th:case="1" th:text="${'★☆☆☆☆'}"></div>
 												</th:block>
-													<!-- <div class="stars" th:each="n:${#numbers.sequence(1,5)}"
-												th:text="${(n-5)<=0 ? '★':'☆'}"></div> -->
 													<div style="color:var(--gray);font-weight: bold; margin-inline:8px;">|</div>
 												</div>
 												<div class="review-date" th:text="${n.review_date}"></div>
@@ -230,16 +207,17 @@
 											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
 											alt="profile" /> <img th:unless="${n.profile_img != null}"
 											src="/metahaus/static/images/test_img.jpg" alt="profile" />
-											<!-- <img src="/metahaus/static/images/test_images/test01.jpeg" alt="profile" /> -->
 										</div>
 										<div class="review-header--info">
 											<div class="review-info--row01" th:text="${n.writer_id}"></div>
 											<div class="review-info--row02">
-												<div class="review-rating">
-													<div class="stars" th:each="n:${#numbers.sequence(1,5)}"
-												th:text="${(n-5)<=0 ? '★':'☆'}"></div>
-													<div style="color:var(--gray);font-weight: bold; margin-inline:8px;">|</div>
-												</div>
+												<th:block th:switch="${n.rating}">
+													<div class="stars" th:case="5" th:text="${'★★★★★'}"></div>
+													<div class="stars" th:case="4" th:text="${'★★★★☆'}"></div>
+													<div class="stars" th:case="3" th:text="${'★★★☆☆'}"></div>
+													<div class="stars" th:case="2" th:text="${'★★☆☆☆'}"></div>
+													<div class="stars" th:case="1" th:text="${'★☆☆☆☆'}"></div>
+												</th:block>
 												<div class="review-date" th:text="${n.review_date}"></div>
 											</div>
 										</div>
