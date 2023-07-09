@@ -20,7 +20,6 @@
 }
 
 .sub_title {
-	margin-top: 95px;
 	font-size: 16pt;
 	font-weight: bold;
 	margin-left:2%;
@@ -190,8 +189,9 @@ td {
 	border-radius: 8px;
 }
 
-#select_product_box2 {
-	top: 12rem;
+.select_product_box2 {
+	margin-top: 2rem;
+	padding: 1rem;
 	border-radius: 8px;
 	box-shadow: 1px 1px 12px #C4B0FF;
 	
