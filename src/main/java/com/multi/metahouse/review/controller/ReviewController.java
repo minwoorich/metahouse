@@ -68,7 +68,7 @@ public class ReviewController {
 						.contentsList(contentsList)
 						.build();
 		reviewService.insertProjectReview(review);
-		String url = "redirect:/project/detail?projecttNum="+projectId;
+		String url = "redirect:/project/detail?projectNum="+projectId;
 		
 		return url;
 	}
