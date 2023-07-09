@@ -126,7 +126,7 @@
 				<div class="image-container2">
 				<a th:href="@{/asset/main?pageNo=1&category1=더%20샌드박스}" class="left-half"> <span
 						class="tooltip2">에셋이동</span>
-					</a> <a th:href="@{/project/main?pageNo=1&category1=더%20샌드박스}" class="right-half"> <span
+					</a> <a th:href="@{/project/main?pageNo=1&category1=샌드박스}" class="right-half"> <span
 						class="tooltip2">긱스이동</span>
 					</a><img src="/metahaus/images/thesendbox.png" alt="Image 5"></div> 
 				<div class="image-container2">
@@ -167,9 +167,9 @@
 									<div class="review-header">
 										<div class="review-header--image">
 											<img th:if="${n.profile_img != null}"
-											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
+											th:src="'/metahaus/upload/userThumbnail/'+${n.profile_img}"
 											alt="profile" /> <img th:unless="${n.profile_img != null}"
-											src="/metahaus/static/images/test_img.jpg" alt="profile" />
+											src="/metahaus/images/test_img.jpg" alt="profile" />
 											
 										</div>
 										<div class="review-header--info">
@@ -204,9 +204,9 @@
 									<div class="review-header">
 										<div class="review-header--image">
 											<img th:if="${n.profile_img != null}"
-											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
+											th:src="'/metahaus/upload/userThumbnail/'+${n.profile_img}"
 											alt="profile" /> <img th:unless="${n.profile_img != null}"
-											src="/metahaus/static/images/test_img.jpg" alt="profile" />
+											src="/metahaus/images/test_img.jpg" alt="profile" />
 										</div>
 										<div class="review-header--info">
 											<div class="review-info--row01" th:text="${n.writer_id}"></div>
