@@ -148,6 +148,7 @@ public class AssetController {
 		List<AssetContentDTO> assetContents = service.assetContentInfo(assetNum);
 		List<AssetReviewDTO> assetReviews = reviewService.getAllReviewsByAid(assetNum);
 		User userInfo = (User) session.getAttribute("loginUser");
+
 		model.addAttribute("asset", asset);
 		model.addAttribute("assetImgs", assetImgs);
 		model.addAttribute("assetContents", assetContents);
