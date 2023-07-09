@@ -61,6 +61,7 @@ public class ProjectDTO {
 		this.tag = tag;
 		this.title = title;
 		this.description = description;
+		this.project_thumbnail_img = project_thumbnail_img;
 		this.project_date = project_date;
 		this.project_hits = project_hits;
 		this.category1 = category1;
