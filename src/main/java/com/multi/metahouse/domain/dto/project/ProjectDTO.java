@@ -52,7 +52,7 @@ public class ProjectDTO {
 	private Integer single_price;
 	private Integer triple_price;
 
-	public ProjectDTO(int project_id, String creator_id, String tag, String title, String description,
+	public ProjectDTO(int project_id, String creator_id, String tag, String title, String description, String project_thumbnail_img,
 			Timestamp project_date, int project_hits, String category1, String category2_pj, int price,
 			int review_count, double average_reviews) {
 		super();
