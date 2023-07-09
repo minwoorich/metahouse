@@ -138,7 +138,7 @@ public class ProjectController {
 	@PostMapping("project/delete-product")
 	public String deleteProduct(Long project_id) {
 		projectService.deleteProject(project_id);
-		return "redirect:/project/my-products";
+		return "redirect:/project/my-products?pageNo=0";
 	}
 
 	// 프로젝트 설명 입력하는 페이지 반환
