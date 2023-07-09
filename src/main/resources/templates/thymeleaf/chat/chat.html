@@ -39,7 +39,7 @@
 					<li th:each="chatroom:${chatrooms}" th:if="${chatrooms != null}"
 						th:id="'chatroom'+${chatroom.chatroom_id}" class="chatroom-card">
 						<div class="chatroom-card__profile-image">
-							<img th:if="${session.loginUser.thumbnailStoreFilename != null}"
+							<img th:if="${profiles[chatroomStat.index].thumbnail_store_filename != null}"
 								 th:src="'/metahaus/upload/userThumbnail/'+ ${profiles[chatroomStat.index].thumbnail_store_filename}" />
 							<img th:unless="${session.loginUser.thumbnailStoreFilename != null}"
 								 src="/metahaus/images/test_img.jpg">
