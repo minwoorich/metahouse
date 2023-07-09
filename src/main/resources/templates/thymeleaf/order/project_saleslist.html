@@ -147,8 +147,9 @@
 										<button type="submit" name=acceptanceValue value="accept">승인</button>
 										<button type="submit" name="acceptanceValue" calue="deny">거절</button>
 									</form>
-									<button type="button"
-										class="project-body-button button--xsmall">1:1 채팅</button>
+									<input type="hidden" name="seller_id" th:value="${order.buyersId}" />
+										<button type="submit" 
+											class="project-body-button button--xsmall">1:1채팅</button>
 								</div>
 							</div>
 						</div>
@@ -236,14 +237,16 @@
 									<span style="font-size: 22px; font-weight: bold;"
 										th:text="${order.totalPrice}+'원'"></span>
 								</div>
-								<div class="project-body-tag-info-row03">
+								<form class="project-body-tag-info-row03" th:action="@{/chat/create/chatroom}"
+											method="get">
 									<div>
 										<span>Buyer</span><a th:href="@{/user/profile(userId=${order.buyerId})}"><span style="margin-left: 6px;"
 											th:text="${order.buyerId}"></span></a>
 									</div>
-									<button type="button"
-										class="project-body-button button--xsmall">1:1 채팅</button>
-								</div>
+									<input type="hidden" name="seller_id" th:value="${order.buyerId}" />
+										<button type="submit" 
+											class="project-body-button button--xsmall">1:1채팅</button>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -287,14 +290,16 @@
 									<div style="font-size: 22px; font-weight: bold;"
 										th:text="${order.totalPrice}+'원'"></div>
 								</div>
-								<div class="project-body-tag-info-row03">
+								<form class="project-body-tag-info-row03" th:action="@{/chat/create/chatroom}"
+											method="get">
 									<div>
 										<span>Buyer</span><a th:href="@{/user/profile(userId=${order.buyerId})}"><span style="margin-left: 6px;"
 											th:text="${order.buyerId}"></span></a>
 									</div>
-									<button type="button"
-										class="project-body-button button--xsmall">1:1 채팅</button>
-								</div>
+									<input type="hidden" name="seller_id" th:value="${order.buyerId}" />
+										<button type="submit" 
+											class="project-body-button button--xsmall">1:1채팅</button>
+								</form>
 							</div>
 						</div>
 					</div>
