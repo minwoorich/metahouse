@@ -200,9 +200,9 @@
 												<th:block th:switch="${n.rating}">
 													<div class="stars" th:case="5" th:text="${'★★★★★'}"></div>
 													<div class="stars" th:case="4" th:text="${'★★★★☆'}"></div>
-													<div class="stars" th:case="3"th:text="${'★★★☆☆'}"></div>
+													<div class="stars" th:case="3" th:text="${'★★★☆☆'}"></div>
 													<div class="stars" th:case="2" th:text="${'★★☆☆☆'}"></div>
-													<div class="stars" th:case="1"" th:text="${'★☆☆☆☆'}"></div>
+													<div class="stars" th:case="1" th:text="${'★☆☆☆☆'}"></div>
 												</th:block>
 													<!-- <div class="stars" th:each="n:${#numbers.sequence(1,5)}"
 												th:text="${(n-5)<=0 ? '★':'☆'}"></div> -->
@@ -226,11 +226,11 @@
 								<div classs="review-card--contents">
 									<div class="review-header">
 										<div class="review-header--image">
-											<!-- <img th:if="${n.profile_img != null}"
+											<img th:if="${n.profile_img != null}"
 											th:src="@{/upload/userthumbnail/}+${n.profile_img}"
 											alt="profile" /> <img th:unless="${n.profile_img != null}"
-											src="/metahaus/static/images/CSLEE.JPG" alt="profile" /> -->
-											<img src="/metahaus/static/images/test_images/test01.jpeg" alt="profile" />
+											src="/metahaus/static/images/test_img.jpg" alt="profile" />
+											<!-- <img src="/metahaus/static/images/test_images/test01.jpeg" alt="profile" /> -->
 										</div>
 										<div class="review-header--info">
 											<div class="review-info--row01" th:text="${n.writer_id}"></div>
