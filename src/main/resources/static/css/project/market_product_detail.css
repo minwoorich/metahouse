@@ -20,7 +20,6 @@
 }
 
 .sub_title {
-	margin-top: 25px;
 	font-size: 16pt;
 	font-weight: bold;
 }
@@ -193,7 +192,9 @@ td {
 }
 
 .select_product_box2 {
-	top: 12rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	padding: 1rem;	
 	border-radius: 8px;
 	box-shadow: 1px 1px 12px #C4B0FF;
 }
@@ -209,7 +210,7 @@ td {
 	padding-block-start: 1px;
     padding-left: 22px;
     padding-right: 22px;
-    padding-block-end: 97px;
+    padding-block-end: 10px;
         margin-left: -9%;
     margin-right: -7%;
 }

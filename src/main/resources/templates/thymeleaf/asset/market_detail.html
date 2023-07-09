@@ -173,20 +173,20 @@
 	 		<img th:if="${asset.main_img != null}" id="represent_img"
 					th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"/>
 				<div class="product_title" th:text="${asset.title}"></div>
-				<div class="product_info" id="product_date" th:text="'작성일자: '+${#dates.format(asset.asset_date,'yyyy.MM.dd')}"></div>
+				<div class="product_info" id="product_date" th:text="'작성일자: '+${asset.asset_date}"></div>
 				<div class="product_info" id="product_price" th:text="${asset.price}+원"></div>
 			</div>
 			<!-- seller profile -->
 			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${asset.seller_id})}'|">
 				<div id="seller_img_box">
-					<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
-						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
-					<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
+					<img th:if="${session.loginUser?.thumbnailStoreFilename != null}" 
+						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser?.thumbnailStoreFilename}|">
+					<img th:unless="${session.loginUser?.thumbnailStoreFilename != null}" 
 						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div id="seller_info">
-					<div class="seller_name" th:text="${asset.userName.userName}"></div>
 					<div class="seller_id" th:text="${asset.seller_id}"></div>
+					<div class="seller_name" th:text="${asset.userName.userName}"></div>
 				</div>
 			</div>
 			<!-- buy button -->
