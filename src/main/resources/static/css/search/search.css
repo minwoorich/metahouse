@@ -80,7 +80,7 @@
 	color: white;
 }
 
-.pagination a:hover:not (.active ) {
+.pagination a:hover:not(.active ) {
 	background-color: #ddd;
 }
 
@@ -124,7 +124,7 @@
 
 
 .searchimg {
-	    margin: 1rem auto;
+	margin: 1rem auto;
     width: 90%;
     height: 23rem;
     border-radius: 6px;
