@@ -71,10 +71,6 @@ async function createChatElement(chatMsg, loginUser){
 					'</div><div class="chat-block__timestamp-time">' +
 					chatMsg.write_time.substr(11, 5) +
 					'</div></div></div>';
-
-		// $(".chat-body__chat-section").append(myChatEle);
-
-
 	} catch (error) {
 		console.error("Error during AJAX request:", error);
 	} finally{
@@ -85,8 +81,6 @@ async function createChatElement(chatMsg, loginUser){
 async function getURL(file_store_name){
 
 	let retEle = "";
-
-	// retEle += '<img class="file_img" src="/metahaus/upload/'+ file_store_name + '"/>';
 
 	try{
 		const url = "/metahaus/chat/getURL";
@@ -99,14 +93,6 @@ async function getURL(file_store_name){
 		});
 
 		const jsonData = await response.json();
-
-		// const fileURL = await jsonData.url.file;
-		// console.log("jsonData.url : " + jsonData.url);
-		// console.log("fileURL : " + fileURL);
-
-		// retEle += '<img class="file_img" src="'+ fileURL + '"/>';
-
-		// const fileURL = await jsonData.url.file;
 
 		retEle += '<img class="file_img" src="/metahaus/upload/'+ file_store_name + '"/>';
 
@@ -123,9 +109,16 @@ async function getURL(file_store_name){
 }
 
 /* 프로필 Elements 작성 메소드 */
-function createProfileElement(targetProfile){
-	addPro =  '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
-	addPro += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
+function createProfileElement(targetProfile, targetProfile){
+	let addPro = "";
+
+	if(targetProfile.thumbnail_store_filename !== null){
+		addPro = '<img class="chat_body_profile-img" src="/metahaus/images/test_images/test01.jpeg">';
+	}else{
+		addPro = '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/' + targetProfile.thumbnail_store_filename + '">';
+	}
+
+	addPro += '<div class="chat_body_profile-info">' + targetProfile.self_introduction+'</div>';
 	
 	return addPro;
 }
