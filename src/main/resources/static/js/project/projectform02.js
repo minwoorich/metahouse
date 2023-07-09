@@ -428,6 +428,12 @@ $(document).ready(function(){
     	}
     });
     
+ // '취소' 누른다음 취소 누른경우 -> 로컬스토리지 비워줌
+    $(".cancel-modal").on("click", function(){
+    	window.localStorage.clear();
+    	location.href='/metahaus/project/my-products?pageNo=0';
+    });
+    
     //다시 값을 입력하면 alert-style 사라짐
     $("textarea").on("input",function(){
     	if($(this).val()!==""){
