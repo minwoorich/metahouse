@@ -145,14 +145,14 @@
 				<!-- 작성한 글 출력 -->
 				<div class="main-content-text">
 					<div class="main-ct-title">프로젝트 내용</div>
-					<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjContent}]]</div>
+					<div class="main-ct-content"><pre>[[${portfolioInfo.portfolio.portfolioPjContent}]]</pre></div>
 				</div>
 				</th:block>
 				<th:block th:unless="${#arrays.isEmpty(portfolioInfo.contentImgList) != true}">
 					<!-- 작성한 글 출력 -->
 					<div class="main-content-text2">
 						<div class="main-ct-title">프로젝트 내용</div>
-						<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjContent}]]</div>
+						<div class="main-ct-content"><pre>[[${portfolioInfo.portfolio.portfolioPjContent}]]</pre></div>
 					</div>
 				</th:block>
 			</div>
@@ -181,13 +181,13 @@
 				<!-- 작성한 글 출력 -->
 				<div class="main-content-text">
 					<div class="main-ct-title">프로젝트 특징</div>
-					<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjPoint}]]</div>
+					<div class="main-ct-content"><pre>[[${portfolioInfo.portfolio.portfolioPjPoint}]]</pre></div>
 				</div>
 				</th:block>
 				<th:block th:unless="${#arrays.isEmpty(portfolioInfo.PointImgList) != true}">
 					<div class="main-content-text2">
 						<div class="main-ct-title">프로젝트 특징</div>
-						<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjPoint}]]</div>
+						<div class="main-ct-content"><pre>[[${portfolioInfo.portfolio.portfolioPjPoint}]]</pre></div>
 					</div>
 				</th:block>
 			</div>
@@ -214,14 +214,14 @@
 				<!-- 작성한 글 출력 -->
 				<div class="main-content-text">
 					<div class="main-ct-title">프로젝트 스타일</div>
-					<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjStyle}]]</div>
+					<div class="main-ct-content"><pre>[[${portfolioInfo.portfolio.portfolioPjStyle}]]</pre></div>
 				</div>
 				</th:block>
 				<th:block th:unless="${#arrays.isEmpty(portfolioInfo.StyleImgList) != true}">
 					<!-- 작성한 글 출력 -->
 					<div class="main-content-text2">
 						<div class="main-ct-title">프로젝트 스타일</div>
-						<div class="main-ct-content">[[${portfolioInfo.portfolio.portfolioPjStyle}]]</div>
+						<div class="main-ct-content"><pre>[[${portfolioInfo.portfolio.portfolioPjStyle}]]</pre></div>
 					</div>
 				</th:block>
 			</div>
