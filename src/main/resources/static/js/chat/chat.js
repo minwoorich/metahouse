@@ -238,7 +238,7 @@ $(document).ready(function(){
 		mydata.writer_id = loginUser;
 		mydata.chatroom_id = chatroomId;
 		mydata.message_content = msg;
-		mydata.write_time = new Date();
+		mydata.write_time = new Date(new Date().getTime() + KR_TIME_DIFF);
 		
 		let sendMsg = JSON.stringify(mydata); // json 문자열로 변환
 		console.log("sendMsg : " + sendMsg);
