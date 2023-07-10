@@ -7,6 +7,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="/metahaus/css/point/point.css" />
 	<link rel="stylesheet" type="text/css" href="/metahaus/css/point/charge.css" />
+	<script type="text/javascript" src="/metahaus/js/point/charge.js"></script>
 <!-- 아임포트 라이브러리-->
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -89,11 +90,15 @@
 					<p>MetaPoint</p>
 					<p>*결제는 카카오페이로 진행됩니다.</p>
 					<div class="charge-form-radio-wrap">
-						<input type="radio" id="point1" name="point" value="1000" ><label for="point1" class="box-radio-input"><span th:text="1000원"></span></label>
-						<input type="radio" id="point2" name="point" value="3000" ><label for="point2" class="box-radio-input"><span th:text="3000원"></span></label>
-						<input type="radio" id="point3" name="point" value="5000" ><label for="point3" class="box-radio-input"><span th:text="5000원"></span></label>
-						<input type="radio" id="point4" name="point" value="10000" ><label for="point4" class="box-radio-input"><span th:text="10000원"></span></label>
-						<input type="radio" id="point5" name="point" value="50000" ><label for="point5" class="box-radio-input"><span th:text="50000원"></span></label>
+						<input type="radio" id="1000_point" name="point" value="1000" ><label for="1000_point" class="box-radio-input"><span th:text="1000원"></span></label>
+						<input type="radio" id="3000_point" name="point" value="3000" ><label for="3000_point" class="box-radio-input"><span th:text="3000원"></span></label>
+						<input type="radio" id="5000_point" name="point" value="5000" ><label for="5000_point" class="box-radio-input"><span th:text="5000원"></span></label>
+						<input type="radio" id="10000_point" name="point" value="10000" ><label for="10000_point" class="box-radio-input"><span th:text="10000원"></span></label>
+						<input type="radio" id="50000_point" name="point" value="50000" ><label for="50000_point" class="box-radio-input"><span th:text="50000원"></span></label>
+						<input type="radio" id="input_point" name="point"><label for="input_point" class="box-radio-input"><span th:text="'직접 입력'"></span></label>
+						<div id="selected_point_div" style="display: none;">
+							<input type="text" id="selected_point" name="selected_point" placeholder="포인트를 입력해주세요">
+						</div>
 					</div>
 				</div>	
 				</br></br>
@@ -101,7 +106,6 @@
 					<button class="button--small"  type="button" onclick="location.href='/metahaus/point/mypoint'"> 이전 </button>
 					<button type="button" class="button--small" onclick="requestPay()">충전</button>
 				</div>
-				
 			</form>
 			
 			

@@ -20,6 +20,8 @@ $(document).ready(function(){
 	let fileUrl = "";
 	// 파일 개수 count 용도
 	let fileCount = 0;
+	// KST 설정
+	const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
 	
 	// 채팅방 목록 onClick eventListener
 	$(".chatroom-card").on("click", async function(){
@@ -148,6 +150,8 @@ $(document).ready(function(){
 				// 최근 메시지 변경
 				chatroom = "chatroom" + chatroomId;
 				$("#"+chatroom).find(".last-chat").text(resMsg.message_content);
+				$("#"+chatroom).find(".last-date").text(resMsg.write_time.substr(2, 8));
+				
 				/* 채팅 스크롤 항상 아래로 */
 				scrollChatBody.scrollTop(scrollChatBody[0].scrollHeight);
 			}
@@ -210,7 +214,7 @@ $(document).ready(function(){
 		chatMsgData.writer_id = loginUser;
 		chatMsgData.chatroom_id = chatroomId;
 		chatMsgData.message_content = msg;
-		chatMsgData.write_time = new Date();
+		chatMsgData.write_time = new Date(new Date().getTime() + KR_TIME_DIFF);
 		
 		let sendMsg = JSON.stringify(chatMsgData); // json 문자열로 변환
 		console.log("sendMsg : " + sendMsg);
@@ -232,9 +236,9 @@ $(document).ready(function(){
 		chatMsgData.message_type = "File";
 		chatMsgData.writer_id = loginUser;
 		chatMsgData.chatroom_id = chatroomId;
-		chatMsgData.write_time = new Date();
+		chatMsgData.write_time = new Date(new Date().getTime() + KR_TIME_DIFF);
 		chatMsgData.message_content = $(".chat-footer-row01").val();
-		chatMsgData.filenameList = filenameList;
+		chatMsgData.filenamelist = filenamelist;
 		
 		let sendMsg = JSON.stringify(chatMsgData);
 		websocket.send(sendMsg);

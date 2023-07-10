@@ -64,13 +64,14 @@
         </div>
         
         <div class="row">
-          <div class="col-md-4" th:each="service : ${serviceList}">
+          <div class="col-md-2" th:each="service : ${serviceList}">
             <div  th:attr="onclick=|goLink('${service.type}', '${service.id}')|" style="cursor:pointer;" class="card">
-              <div class="service-card-body">
-                <img class="searchimg"  width="100%" height="100%" th:src="@{/upload/asset_thumbnail_img/}+${service.img}" alt="프로필 이미지">
+              <div class="service-card-body" th:switch="${service.type}">
+                <img th:case="a" class="searchimg"  width="100%" height="100%" th:src="@{/upload/asset_thumbnail_img/}+${service.img}" alt="에셋썸네일">
+                <img th:case="p" class="searchimg"  width="100%" height="100%" th:src="@{/upload/project_thumbnail_img/}+${service.img}" alt="프로젝트썸네일">
+                <!-- <p class="card-text">[[${service.id}]]</p> -->
                 <h4 class="card-title">[[${service.title}]]</h4>
-                <p class="card-text">[[${service.descr}]]</p>
-                <p class="card-text">가격: $[[${service.price}]]</p>
+                <p class="card-text">가격: [[${service.price}]]</p>
               </div>
             </div>
           </div>
@@ -100,9 +101,10 @@
         <div class="pro-row">
            
             <div th:each="user : ${userList}" class="expert-card">
-                <a href="expert-page.html?id=1">
+                <a th:href="@{/user/profile(userId=${user.user_id})}">
                   <div class="card">
-                    <img th:src="@{/upload/userThumbnail/}+${user.thumbnail_store_filename}" alt="프로필 이미지">
+                    <img th:if="${user.thumbnail_store_filename != null}" th:src="'/metahaus/upload/userThumbnail/'+${user.thumbnail_store_filename}" alt="프로필 이미지">
+                    <img th:unless="${user.thumbnail_store_filename != null}" src="/metahaus/images/test_img.jpg" alt="기본 프로필 이미지">
                     <div class="pro-card-body">
                       <h4 class="card-title">[[${user.user_name}]]</h4>
                       <p class="card-text">[[${user.self_introduction}]]</p>

@@ -11,20 +11,18 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="/metahaus/css/order/asset_buylist.css" />
+<link rel="stylesheet" href="/metahaus/css/order/asset_buylist.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js%22%3E"></script>
 <!-- 내 js코드 -->
-<script type="text/javascript"
-	src="/metahaus/js/order/asset_buylist.js"></script>
+<script type="text/javascript" src="/metahaus/js/order/asset_buylist.js"></script>
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/123626a3b2.js"
-    crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div layout:fragment="content" class="main-content">
-	<div class="modal deactivate">
+		<div class="modal deactivate">
 			<div class="modal-content">
 				<form th:action="@{/review/asset/write.do}"
 					enctype="multipart/form-data" method="post" id="review_form"
@@ -34,23 +32,23 @@
 					<div class="review-header">
 						<span>리뷰 작성</span> <span class="close-button">X</span>
 					</div>
+
 					<div class="star-rating">
 						<span>별점:</span>
 						<div class="stars">
-							<input checked="checked" type="radio" id="star1" name="rating"
-								value="1" /> <label for="star1"></label> <input type="radio"
-								id="star2" name="rating" value="2" /> <label for="star2"></label>
-							<input type="radio" id="star3" name="rating" value="3" /> <label
-								for="star3"></label> <input type="radio" id="star4"
-								name="rating" value="4" /> <label for="star4"></label> <input
-								type="radio" id="star5" name="rating" value="5" /> <label
-								for="star5"></label>
-
+							<label for="star1"></label> <input checked="checked" type="radio"
+								id="star1" name="rating" value="1" /> <label for="star2"></label>
+							<input type="radio" id="star2" name="rating" value="2" /> <label
+								for="star3"></label> <input type="radio" id="star3"
+								name="rating" value="3" /> <label for="star4"></label> <input
+								type="radio" id="star4" name="rating" value="4" /> <label
+								for="star5"></label> <input type="radio" id="star5"
+								name="rating" value="5" />
 						</div>
 					</div>
 					<textarea class="review-description" name="description"
 						placeholder="리뷰를 작성하세요" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '리뷰를 작성하세요'" maxlength="60" required></textarea>
+						onblur="this.placeholder = '리뷰를 작성하세요'" maxlength="200" required></textarea>
 					<div class="review-buttons">
 						<div class="file-button">
 							<label class="file-attach-label" for="file_attach"><div>사진첨부</div></label>
@@ -67,8 +65,8 @@
 		<div class="asset-body-title">
 			<span>구매 관리</span>
 		</div>
-		<form  class="asset-search-form" 
-		th:action="@{/order/asset/buylist/category}" method="get">
+		<form class="asset-search-form"
+			th:action="@{/order/asset/buylist/category}" method="get">
 			<!-- 페이지 초기 번호 =0 전달 -->
 			<input name="pageNo" value="0" type="hidden">
 			<div class="asset-search-form-row01">
@@ -76,19 +74,17 @@
 					<option value="all">전체 플랫폼</option>
 					<option value="로블록스">로블록스</option>
 					<option value="제페토">제페토</option>
-					<option value="더 샌드박스">더샌드박스</option>
+					<option value="샌드박스">더샌드박스</option>
 					<option value="게더타운">게더타운</option>
 					<option value="마인크래프트">마인크래프트</option>
 					<option value="기타">기타</option>
-				</select> 
-				
-				<select name="category2" class="search-box category02">
+				</select> <select name="category2" class="search-box category02">
 					<option value="all">전체 상품</option>
 					<option value="의류">의류</option>
 					<option value="악세사리">악세사리</option>
 					<option value="무기">무기</option>
-					<option value="기타">기타</option>	
-				</select> 
+					<option value="기타">기타</option>
+				</select>
 
 				<div class="category04">
 					<input required="required" name="category4" type="date"
@@ -101,15 +97,11 @@
 			<div class="asset-search-form-row02">
 				<!-- <input type="text" class="search-box asset-search-bar"
 					placeholder="검색어를 입력하세요"> -->
-				<button type="submit"  class="search-button button--small">조회</button>
+				<button type="submit" class="search-button button--small">조회</button>
 			</div>
 		</form>
-		
+
 		<ul class="asset-body-cardlist" th:each="order : ${orderList}">
-			<div th:if="${#lists.size(orderList) == 0 or list == null}" class="asset-body-form-empty">
-			<span>주문 기간 내에 구매 내역이 없습니다.</span> <span>주문 기간을 변경하여 확인해보세요.</span> <span>(기본
-				조회 기간 : 1년)</span>
-			</div>
 			<!-- 구매완료 -->
 			<li class="asset-body-card">
 				<div class="asset-body-tag">
@@ -117,12 +109,12 @@
 						<span style="font-size: 16px; font-weight: bold;">구매 완료</span>
 						<div>
 							<span
-								style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+								style="margin-right: 6px; margin-bottom: 4px; color: var(- -gray); font-size: 12px; font-weight: 500;"
 								th:text="${order.asset.category1}+' > ' + ${order.asset.category2}"></span>
-							<span style="font-size: 12px; color: var(--gray);">|</span> <span
-								style="font-size: 12px; color: var(--gray);">구매일자</span> <span
-								style="font-size: 12px; color: var(--bright-purple);"
-								th:text="${order.assetOrderDate}"></span> 
+							<span style="font-size: 12px; color: var(- -gray);">|</span> <span
+								style="font-size: 12px; color: var(- -gray);">구매일자</span> <span
+								style="font-size: 12px; color: var(- -bright-purple);"
+								th:text="${order.assetOrderDate}"></span>
 						</div>
 					</div>
 					<div class="asset-body-tag-row02">
@@ -133,7 +125,7 @@
 						<div class="asset-body-tag-info">
 							<div class="asset-body-tag-info-row01">
 
-								<span style="font-size: 16px; color: var(--gray);"
+								<span style="font-size: 16px; color: var(- -gray);"
 									th:text="'#'+${order.orderId}"></span> <span
 									th:text="${order.asset.title}"></span>
 							</div>
@@ -143,15 +135,17 @@
 							</div>
 							<div class="asset-body-tag-info-row03">
 								<div>
-									<span>Seller</span><span style="margin-left: 6px;"
-										th:text="${order.asset.sellerId}"></span>
+									<span>Seller</span><a
+										th:href="@{/user/profile(userId=${order.asset.sellerId})}"><span
+										style="margin-left: 6px;" th:text="${order.asset.sellerId}"></span></a>
 								</div>
 								<form th:action="@{/order/asset/buylist/download}" method="get">
-								<input name="assetId" type="hidden" th:value="${order.asset.assetId}"/>
-								<button type="submit" 
-									class="asset-body-button button--xsmall">
-									<i class="fa-regular fa-arrow-down-to-line fa-lg" style="color: #ffffff;"></i>
-									다운로드</button>
+									<input name="assetId" type="hidden"
+										th:value="${order.asset.assetId}" />
+									<button type="submit" class="asset-body-button button--xsmall">
+										<i class="fa-regular fa-arrow-down-to-line fa-lg"
+											style="color: #ffffff;"></i> 다운로드
+									</button>
 								</form>
 							</div>
 						</div>
@@ -159,27 +153,33 @@
 				</div>
 				<div class="asset-body-review">
 					<div class="asset-body-review-text">
-					<th:block th:switch="${order.reviewCheck}">
-						<div th:case="${0}">작업물은 마음에 드시나요?<br/> 지금 바로 서비스를 평가하러 가보세요!
-						</div>
-						<div style="color:var(--bright-purple);font-weight:bold;padding-left:60px;" th:case="${1}">소중한 리뷰 작성해주셔서 감사합니다 ♥<br/> 
-						</div>
-					</th:block>
+						<th:block th:switch="${order.reviewCheck}">
+							<div th:case="${0}">
+								작업물은 마음에 드시나요?<br /> 지금 바로 서비스를 평가하러 가보세요!
+							</div>
+							<div
+								style="color: var(- -bright-purple); font-weight: bold; padding-left: 60px;"
+								th:case="${1}">
+								소중한 리뷰 작성해주셔서 감사합니다 ♥<br />
+							</div>
+						</th:block>
 					</div>
 					<input class="orderIdForReview" type="hidden"
 						th:value="${order.orderId}"> <input
 						class="assetIdForReview" type="hidden"
 						th:value="${order.asset.assetId}">
 					<th:block th:switch="${order.reviewCheck}">
-						<button th:case="${0}" class="write-review" type="button">리뷰 작성</button>
-						<button th:case="${1}"  disabled="disabled" class="write-review expired" type="button">리뷰 작성 완료</button>
+						<button th:case="${0}" class="write-review" type="button">리뷰
+							작성</button>
+						<button th:case="${1}" disabled="disabled"
+							class="write-review expired" type="button">리뷰 작성 완료</button>
 					</th:block>
 				</div>
 			</li>
 		</ul>
 		<div class="asset-body-tip" style="line-height: 160%;">
 			<p
-				style="font-size: 20px; font-weight: bold; color: var(--bright-purple);">꼭
+				style="font-size: 20px; font-weight: bold; color: var(- -bright-purple);">꼭
 				확인해주세요!</p>
 			<br />
 			<ul>
@@ -193,7 +193,7 @@
 					받으실 수 없습니다.</li>
 			</ul>
 			<br /> 자세한 내용은 <span
-				style="font-weight: bold; color: var(--bright-purple);">[자주
+				style="font-weight: bold; color: var(- -bright-purple);">[자주
 				묻는 질문 - 구매 및 영수증] </span> 항목을 참고해주세요.
 		</div>
 		<ul class="pagination">

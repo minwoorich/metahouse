@@ -11,7 +11,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -45,13 +47,14 @@ import com.multi.metahouse.review.service.ReviewService;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
+	@Value("${file.directory}")
+	private String uploadPath;
 
 	OrderService orderService;
 	PointService pointService;
 	ReviewService reviewService;
 	AssetService assetService;
 	AttachFileUploadLogicService fileService;
-	
 
 	@Autowired
 	public OrderController(OrderService orderService, PointService pointService, ReviewService reviewService,
@@ -72,7 +75,6 @@ public class OrderController {
 				User user = (User) session.getAttribute("loginUser");
 				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderListForBuyer(user.getUserId(),
 						Integer.parseInt(pageNo));
-				
 
 //				주문 상태별 개수 구해서 Map에 저장
 				Map<String, Integer> orderCount = new HashMap<>();
@@ -95,14 +97,13 @@ public class OrderController {
 				orderCount.put("cancelled", count2);
 				orderCount.put("proceeding", count3);
 				orderCount.put("completion", count4);
-				System.out.println("프로젝트 구매관리 orderCount : " + orderCount);
 				model.addAttribute("orderCount", orderCount);
-				
-				
-				//리뷰 작성 여부
-				if (orderList != null && orderList.size()>0) {
-					for(ProjectOrdersResponse.Response order : orderList) {
-						Long reviewCheck = reviewService.countByOrderIdAndWriterId(order.getOrderId(), ((User)session.getAttribute("loginUser")).getUserId());
+
+				// 리뷰 작성 여부
+				if (orderList != null && orderList.size() > 0) {
+					for (ProjectOrdersResponse.Response order : orderList) {
+						Long reviewCheck = reviewService.countByOrderIdAndWriterId(order.getOrderId(),
+								((User) session.getAttribute("loginUser")).getUserId());
 //						System.out.println("reviewCheck : "+reviewCheck + ", orderId : " + order.getOrderId());
 						order.setReviewCheck(reviewCheck);
 					}
@@ -155,11 +156,12 @@ public class OrderController {
 				orderCount.put("proceeding", count3);
 				orderCount.put("completion", count4);
 				model.addAttribute("orderCount", orderCount);
-				
-				//리뷰 작성 여부
-				if (orderList != null && orderList.size()>0) {
-					for(ProjectOrdersResponse.Response order : orderList) {
-						Long reviewCheck = reviewService.countByOrderIdAndWriterId(order.getOrderId(), ((User)session.getAttribute("loginUser")).getUserId());
+
+				// 리뷰 작성 여부
+				if (orderList != null && orderList.size() > 0) {
+					for (ProjectOrdersResponse.Response order : orderList) {
+						Long reviewCheck = reviewService.countByOrderIdAndWriterId(order.getOrderId(),
+								((User) session.getAttribute("loginUser")).getUserId());
 //						System.out.println("reviewCheck : "+reviewCheck + ", orderId : " + order.getOrderId());
 						order.setReviewCheck(reviewCheck);
 					}
@@ -182,11 +184,11 @@ public class OrderController {
 	public String projectUpdate(HttpSession session, String orderStatus, String orderId) {
 		String url = "";
 		if (session.getAttribute("loginUser") != null) {
-			ProjectOrdersConfirmUpdateDTO dto = ProjectOrdersConfirmUpdateDTO.builder()
-					.orderId(Long.parseLong(orderId))
+			ProjectOrdersConfirmUpdateDTO dto = ProjectOrdersConfirmUpdateDTO.builder().orderId(Long.parseLong(orderId))
 					.orderStatus(orderStatus).build();
 
 			// 업데이트 서비스 호출
+//			String userId = ((User)session.getAttribute("loginUser")).getUserId();
 			orderService.updateOrder(dto);
 			url = "redirect:/order/project/buylist?pageNo=0";
 		} else {
@@ -204,7 +206,7 @@ public class OrderController {
 				User user = (User) session.getAttribute("loginUser");
 				List<ProjectOrdersResponse.Response> orderList = orderService.selectOrderListForSeller(user.getUserId(),
 						Integer.parseInt(pageNo));
-				
+
 				for (ProjectOrdersResponse.Response order : orderList) {
 					System.out.println("order : " + order);
 				}
@@ -231,7 +233,7 @@ public class OrderController {
 				orderCount.put("proceeding", count3);
 				orderCount.put("completion", count4);
 				model.addAttribute("orderCount", orderCount);
-				
+
 				model.addAttribute("orderList", orderList);
 				return "order/project_saleslist";
 			} else {
@@ -280,7 +282,7 @@ public class OrderController {
 				orderCount.put("proceeding", count3);
 				orderCount.put("completion", count4);
 				model.addAttribute("orderCount", orderCount);
-				
+
 				model.addAttribute("orderList", orderList);
 				return "order/project_saleslist";
 			} else {
@@ -294,20 +296,18 @@ public class OrderController {
 		}
 	}
 
-	// project 주문 - 판매관리 (주문 승인 or 주문 거절)
+	// 프로젝트 주문 - 판매관리 (주문 승인 or 주문 거절)
 	@PostMapping("/project/saleslist/update.do")
 	public String projectOrderAccept(HttpSession session, String orderStatus, String orderId, String acceptanceValue) {
 
 		String url = "";
 		if (session.getAttribute("loginUser") != null) {
-			ProjectOrdersConfirmUpdateDTO dto = ProjectOrdersConfirmUpdateDTO.builder()
-					.orderId(Long.parseLong(orderId))
-					.orderStatus(orderStatus)
-					.acceptanceValue(acceptanceValue)
-					.build();
-			System.out.println("진행중 DTO : " + dto);
+			ProjectOrdersConfirmUpdateDTO dto = ProjectOrdersConfirmUpdateDTO.builder().orderId(Long.parseLong(orderId))
+					.orderStatus(orderStatus).acceptanceValue(acceptanceValue).build();
+			
 
 			// 업데이트 서비스 호출
+			String userId = ((User)session.getAttribute("loginUser")).getUserId();
 			orderService.updateOrder(dto);
 
 			url = "redirect:/order/project/saleslist?pageNo=0";
@@ -318,56 +318,50 @@ public class OrderController {
 		return url;
 	}
 //////////에셋 파트//////////////////////////////////////
-	
+
 	@RequestMapping("/asset/buylist/download")
-	public ResponseEntity<UrlResource> downloadFile(HttpSession session,
-			String assetId) throws MalformedURLException, FileNotFoundException{
-		
-		String fileUploadPath = "C:/Users/minwo/Desktop/test_images/";
-		
-		System.out.println("오더 컨트롤러 assetId : " + assetId);
-		//1. 파일을 다운로드 하기 위해 DB에 저장된 파일의 정보를 가져오기 - 다운로드 요청된 파일을 response해줌
+	public ResponseEntity<UrlResource> downloadFile(HttpSession session, String assetId)
+			throws MalformedURLException, FileNotFoundException {
+
+		String fileUploadPath = uploadPath + "asset_attach_file/";
+
+		// 1. 파일을 다운로드 하기 위해 DB에 저장된 파일의 정보를 가져오기 - 다운로드 요청된 파일을 response해줌
 		List<AssetContentDTO> fileList = assetService.assetContentInfo(assetId);
-		System.out.println("오더 컨트롤러 fileList : " + fileList);
 		String storeFileName = fileList.get(0).getAsset_store_filename();
-		System.out.println("저장된 파일 이름 : " + storeFileName);
-				
-		//2. BoardFileDTO객체에서 다운로드 할 파일을 실제 객체로 변환
+		int pos = storeFileName.lastIndexOf(".");
+		String ext = storeFileName.substring(pos + 1);
+
+		// 2. BoardFileDTO객체에서 다운로드 할 파일을 실제 객체로 변환
 		// URLResource resource = new URLResource("file:"+ 파일의 real-path")
 		// 업로드된 파일의 저장 위치와 실제 파일명을 연결해서 경로를 생성.
-		UrlResource resource = new UrlResource("file:" + fileUploadPath + "test01.jpeg");
-		
-		
-		//3. 오리지날파일명에 한글이 있는 경우 처리해줘야함
-		String encodedFilename = UriUtils.encode("메타하우스_다운로드_01","UTF-8" );
-		
-		
-		//4. 파일을 다운로드형식으로 응답하기 위한 응답헤더 세팅
-		String mycontenttype = "attachment; filename=\""+encodedFilename+"\"";
+		UrlResource resource = new UrlResource("file:" + fileUploadPath + storeFileName);
 
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, mycontenttype)
-				.body(resource);
-		
+		// 3. 오리지날파일명에 한글이 있는 경우 처리해줘야함
+		String encodedFilename = UriUtils.encode("MetahausDownload." + ext, "UTF-8");
+
+		// 4. 파일을 다운로드형식으로 응답하기 위한 응답헤더 세팅
+		String mycontenttype = "attachment; filename=\"" + encodedFilename + "\"";
+
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, mycontenttype).body(resource);
+
 	}
-	
+
 	// asset 구매 관리 - 첫 화면(카테고리X)
 	@GetMapping("/asset/buylist")
 	public String assetBuylist(Model model, HttpSession session, String pageNo) {
 		try {
 			if (session.getAttribute("loginUser") != null) {
-				//회원 정보
+				// 회원 정보
 				User user = (User) session.getAttribute("loginUser");
-				//주문 정보
-				List<AssetOrdersResponse.Response> orderList = 
-						orderService.selectAssetOrderListForBuyer(
-								user.getUserId(),
-						Integer.parseInt(pageNo));
-				
-				//리뷰 작성 여부
-				if (orderList != null && orderList.size()>0) {
-					for(AssetOrdersResponse.Response order : orderList) {
-						Long reviewCheck = reviewService.countAssetReviewByOrderIdAndWriterId(order.getOrderId(), ((User)session.getAttribute("loginUser")).getUserId());
+				// 주문 정보
+				List<AssetOrdersResponse.Response> orderList = orderService
+						.selectAssetOrderListForBuyer(user.getUserId(), Integer.parseInt(pageNo));
+
+				// 리뷰 작성 여부
+				if (orderList != null && orderList.size() > 0) {
+					for (AssetOrdersResponse.Response order : orderList) {
+						Long reviewCheck = reviewService.countAssetReviewByOrderIdAndWriterId(order.getOrderId(),
+								((User) session.getAttribute("loginUser")).getUserId());
 						System.out.println("에셋 리뷰 체크 : " + reviewCheck);
 						order.setReviewCheck(reviewCheck);
 					}
@@ -390,25 +384,26 @@ public class OrderController {
 	public String assetBuylistCategory(Model model, HttpSession session, String pageNo, String category1,
 			String category2, String category4, String category5) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	
+
 		try {
 			if (session.getAttribute("loginUser") != null) {
 				User user = (User) session.getAttribute("loginUser");
-				category4 +=" 00:00:00";
-				category5 +=" 00:00:00";
-				List<AssetOrdersResponse.Response> orderList = orderService.selectAssetOrderListForBuyer(user.getUserId(),
-						category1, category2, LocalDateTime.parse(category4, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-						LocalDateTime.parse(category5, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), Integer.parseInt(pageNo));
+				category4 += " 00:00:00";
+				category5 += " 00:00:00";
+				List<AssetOrdersResponse.Response> orderList = orderService.selectAssetOrderListForBuyer(
+						user.getUserId(), category1, category2,
+						LocalDateTime.parse(category4, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+						LocalDateTime.parse(category5, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+						Integer.parseInt(pageNo));
 
-				
-				//리뷰 작성 여부
-				if (orderList != null && orderList.size()>0) {
-					for(AssetOrdersResponse.Response order : orderList) {
-						Long reviewCheck = reviewService.countAssetReviewByOrderIdAndWriterId(order.getOrderId(), ((User)session.getAttribute("loginUser")).getUserId());
+				// 리뷰 작성 여부
+				if (orderList != null && orderList.size() > 0) {
+					for (AssetOrdersResponse.Response order : orderList) {
+						Long reviewCheck = reviewService.countAssetReviewByOrderIdAndWriterId(order.getOrderId(),
+								((User) session.getAttribute("loginUser")).getUserId());
 						order.setReviewCheck(reviewCheck);
 					}
 				}
-				System.out.println("오더 컨트롤러 orderList : " + orderList);
 				model.addAttribute("orderList", orderList);
 				return "order/asset_buylist";
 			} else {
@@ -428,12 +423,8 @@ public class OrderController {
 		try {
 			if (session.getAttribute("loginUser") != null) {
 				User user = (User) session.getAttribute("loginUser");
-				List<AssetOrdersResponse.Response> orderList = orderService.selectAssetOrderListForSeller(user.getUserId(),
-						Integer.parseInt(pageNo));
-				
-				for (AssetOrdersResponse.Response order : orderList) {
-					System.out.println("order : " + order);
-				}
+				List<AssetOrdersResponse.Response> orderList = orderService
+						.selectAssetOrderListForSeller(user.getUserId(), Integer.parseInt(pageNo));
 
 				model.addAttribute("orderList", orderList);
 				return "order/asset_saleslist";
@@ -453,15 +444,17 @@ public class OrderController {
 	public String assetSalesCategory(Model model, HttpSession session, String pageNo, String category1,
 			String category2, String category4, String category5) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	
+
 		try {
 			if (session.getAttribute("loginUser") != null) {
 				User user = (User) session.getAttribute("loginUser");
-				category4 +=" 00:00:00";
-				category5 +=" 00:00:00";
-				List<AssetOrdersResponse.Response> orderList = orderService.selectAssetOrderListForSeller(user.getUserId(),
-						category1, category2, LocalDateTime.parse(category4, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-						LocalDateTime.parse(category5, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), Integer.parseInt(pageNo));
+				category4 += " 00:00:00";
+				category5 += " 00:00:00";
+				List<AssetOrdersResponse.Response> orderList = orderService.selectAssetOrderListForSeller(
+						user.getUserId(), category1, category2,
+						LocalDateTime.parse(category4, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+						LocalDateTime.parse(category5, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+						Integer.parseInt(pageNo));
 
 				model.addAttribute("orderList", orderList);
 				return "order/asset_saleslist";
@@ -475,7 +468,7 @@ public class OrderController {
 			return "redirect:/login";
 		}
 	}
-	
+
 	/*----------------------------------- OSE ------------------------------------*/
 //	ajax-asset 구매완료(구매 정보 저장하기)
 	@RequestMapping(value = "/asset")
@@ -510,7 +503,7 @@ public class OrderController {
 			SelectedAddOptionDTO option = mapper.treeToValue(json, SelectedAddOptionDTO.class);
 			options.add(option);
 		}
-		//내역 생성
+		// 내역 생성
 		int reseult = orderService.orderP(projectOrder, options, loginUser, consumeAmount);
 		return reseult;
 	}

@@ -3,10 +3,12 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.multi.metahouse.domain.entity.order.ProjectOrdersEntity;
 import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +17,7 @@ import com.multi.metahouse.domain.entity.project.ProjectEntity;
 
 public interface ProjectRepository extends JpaRepository<ProjectEntity, Long>{
 //	/* --------------------------------------민우-------------------------------------- */
-	
+	List<ProjectEntity> findByCreatorId(Pageable pageable, String buyerId);
 	
 	/* ------------------------------------창훈님--------------------------------------- */
 

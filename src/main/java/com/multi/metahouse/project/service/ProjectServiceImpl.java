@@ -1,6 +1,8 @@
 package com.multi.metahouse.project.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
 import com.multi.metahouse.domain.dto.project.ProjectContentsDTO;
 import com.multi.metahouse.domain.dto.project.ProjectDTO;
@@ -121,20 +124,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override // 유저 ID로 프로젝트 가져오기
-	public List<ProjectListDTO> selectListByUserId(String userId) {
+	public List<ProjectListDTO> selectListByUserId(String userId, int pageNo) {
 		// DAO 호출해서 Entity리스트 받아옴
-		List<ProjectEntity> entityList = projectDao.selectListByUserId(userId);
-		for(ProjectEntity entity : entityList) {
-			if(entity.getSingleEntity() != null) {
-//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));				
-				System.out.println("서비스--------entity : " + entity.getSingleEntity()+",project_id : " + entity.getProjectId());
-			}else if (entity.getTripleEntity() != null){
-//				System.out.println("서비스ㅡㅡㅡㅡㅡㅡentity : "+ new ProjectJpaDTO(entity));
-				System.out.println("서비스--------entity : " + entity.getTripleEntity()+",project_id : " + entity.getProjectId());
-			}else {
-				System.out.println("널이야ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
-			}
-		}
+		PageRequest pageRequest = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "projectDate"));
+		List<ProjectEntity> entityList = projectDao.selectListByUserId(pageRequest,userId);
+		
 		//반환할 빈 DTO리스트 생성. 
 		List<ProjectListDTO> dtoList =  new ArrayList<>();
 		
@@ -152,7 +146,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	// 프로젝트 상품리스트 출력: 카테고리 값 받아서 출력해주기
 	@Override
-	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2) {
+	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2, String sort) {
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("skip", currnetPage);
 		condition.put("category1", category1);
@@ -171,6 +165,40 @@ public class ProjectServiceImpl implements ProjectService {
 				}
 				projectsInPage.get(i).setReview_count(reviewCount);
 				projectsInPage.get(i).setAverage_reviews(reviewAvg);
+				System.out.println(projectsInPage.get(i).getReview_count());
+				//가격 정렬을 위한 세팅
+				int price = 0;
+				if(projectsInPage.get(i).getPjtSingle()!=null) {
+					price = projectsInPage.get(i).getPjtSingle().getPrice();
+				}else {
+					price = projectsInPage.get(i).getPjtTriple().getBasic_price();
+				}
+				projectsInPage.get(i).setPrice(price);
+			}
+			if(sort.contains("popularity")) {
+				Comparator<ProjectDTO> cp = new Comparator<ProjectDTO>() {
+					@Override
+					public int compare(ProjectDTO o1, ProjectDTO o2) {
+						int a = o1.getReview_count();
+						int b = o2.getReview_count();
+						return b-a;
+					}
+				};
+				Collections.sort(projectsInPage, cp);
+			}else if(sort.contains("price")) { //가격 정렬
+				Comparator<ProjectDTO> cp = new Comparator<ProjectDTO>() {
+					@Override
+					public int compare(ProjectDTO o1, ProjectDTO o2) {
+						int a = o1.getPrice();
+						int b = o2.getPrice();
+						if(sort.contains("low")) {//오름차순
+							return a-b;
+						}else {//내림차순
+							return b-a;
+						}
+					}
+				};
+				Collections.sort(projectsInPage, cp);
 			}
 		}
 		return projectsInPage;

@@ -58,13 +58,17 @@
 			<thead>
 				<tr>
 					<th colspan="4" class="sort">
-						<a class="sort_tag">최근 등록순</a>
+						<a class="sort_tag"
+							th:href="@{/asset/main?pageNo=1(category1=${param.category1},category2=${param.category2},sort=Recent)}">최근 등록순</a>
 						<span>|</span>
-						<a class="sort_tag">가격 낮은순</a>
+						<a class="sort_tag"
+							th:href="@{/asset/main?pageNo=1(category1=${param.category1}, category2=${param.category2}, sort=lowprice)}">가격 낮은순</a>
 						<span>|</span>
-						<a class="sort_tag">가격 높은순</a>
+						<a class="sort_tag"
+							th:href="@{/asset/main?pageNo=1(category1=${param.category1}, category2=${param.category2}, sort=highprice)}">가격 높은순</a>
 						<span>|</span>
-						<a class="sort_tag">인기순</a>
+						<a class="sort_tag"
+							th:href="@{/asset/main?pageNo=1(category1=${param.category1}, category2=${param.category2}, sort=popularity)}">인기순</a>
 					</th>
 				</tr>
 			</thead>
@@ -195,16 +199,16 @@
 		<div class="page_wrap">
 				<div class="page_nation" th:with="start=${pageInfo.startPage}, end=${pageInfo.endPage},
 					 nowPage=${pageInfo.currentPage}">
-					<a class="arrow pprev" th:if="${start > 1}"  th:href="@{/asset/main(pageNo=1, category1=${param.category1}, category2=${param.category2})}">&lang;&lang;</a>
-					<a class="arrow prev" th:if="${start > 1}" th:href="@{/asset/main(pageNo=nowPage-1, category1=${param.category1}, category2=${param.category2})}">&lang;</a>
+					<a class="arrow pprev" th:if="${start > 1}"  th:href="@{/asset/main(pageNo=1, category1=${param.category1}, category2=${param.category2},sort=${param.sort})}">&lang;&lang;</a>
+					<a class="arrow prev" th:if="${start > 1}" th:href="@{/asset/main(pageNo=nowPage-1, category1=${param.category1}, category2=${param.category2},sort=${param.sort})}">&lang;</a>
 					<th:block th:each= "page : ${#numbers.sequence(start, end)}">
 						<a th:if="${page != nowPage}" 
-						   th:href="@{/asset/main(pageNo = ${page}, category1=${param.category1}, category2=${param.category2})}"
+						   th:href="@{/asset/main(pageNo = ${page}, category1=${param.category1}, category2=${param.category2},sort=${param.sort})}"
 	           			   th:text="${page}"></a>
 	           			<a th:if="${page == nowPage}" th:text="${page}" class="active"></a>
 					</th:block>
-					<a class="arrow next" th:if="${end < pageInfo.totalPages}"  th:href="@{/asset/main(pageNo=nowPage+1, category1=${param.category1}, category2=${param.category2})}">&rang;</a>
-					<a class="arrow nnext" th:if="${end < pageInfo.totalPages}"  th:href="@{/asset/main(pageNo=${pageInfo.totalPages}, category1=${param.category1}, category2=${param.category2})}">&rang;&rang;</a>
+					<a class="arrow next" th:if="${end < pageInfo.totalPages}"  th:href="@{/asset/main(pageNo=nowPage+1, category1=${param.category1}, category2=${param.category2},sort=${param.sort})}">&rang;</a>
+					<a class="arrow nnext" th:if="${end < pageInfo.totalPages}"  th:href="@{/asset/main(pageNo=${pageInfo.totalPages}, category1=${param.category1}, category2=${param.category2},sort=${param.sort})}">&rang;&rang;</a>
 				</div> 
 			</div>
 	</div>

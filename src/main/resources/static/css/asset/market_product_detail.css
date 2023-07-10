@@ -20,9 +20,9 @@
 }
 
 .sub_title {
-	margin-top: 25px;
 	font-size: 16pt;
 	font-weight: bold;
+	margin-left:2%;
 }
 
 .sub_content {
@@ -145,6 +145,23 @@ td {
 	margin-top: -2em;
 	margin-left: -0.562em;
 }
+/* 답글 등록 */
+.commentText {
+	margin-right: 1rem;
+	width: 70%;
+	height: 2rem;
+	border: none;
+	border-bottom: solid black 1.5px;
+}
+
+.writeComment {
+	width: 20%;
+	height: 2rem;
+	background-color: transparent;
+	color: black;
+	border: 1.5px solid;
+	border-radius: 4px;
+}
 /* 신고 섹션 */
 #report {
 	margin: 1.5rem 0;
@@ -171,6 +188,16 @@ td {
 	box-shadow: 1px 1px 12px #C4B0FF;
 	border-radius: 8px;
 }
+
+.select_product_box2 {
+	margin-top: 2rem;
+	padding: 1rem;
+	border-radius: 8px;
+	box-shadow: 1px 1px 12px #C4B0FF;
+	
+	
+}
+
 
 /* 선택상품 사이드바 img,제목,날짜 가격 */
 #select_product {
@@ -248,4 +275,13 @@ td {
 	width: 95px;
 	height: 40px;
 	font-size: 10px;
+}
+
+.select_product_bigbox {
+	margin-bottom: 2rem;
+	box-shadow: 0px 0px 2px #C4B0FF;
+	padding-block-start: 1px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-block-end: 40px;
 }

@@ -20,12 +20,12 @@ public interface ProjectService {
 	// 전체 프로젝트 출력
 	List<ProjectListDTO> selectAllProjects();
 	// 유저 아이디로 프로젝트 출력
-	List<ProjectListDTO> selectListByUserId(String userId);
+	List<ProjectListDTO> selectListByUserId(String userId, int pageNo);
 	// 아이디로 프로젝트 삭제
 	void deleteProject(Long projectId);
 
 /*------------------------------------- OSE ------------------------------------------------*/
-	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2);
+	public List<ProjectDTO> list(Integer currnetPage, String category1, String category2, String sort);
 	public ProjectDTO projectInfo(Long projectNum);
 	public List<ProjectContentsDTO> projectImg(Long projectNum);
 	public List<ProjectAddOption> projectOption(Long project_id);

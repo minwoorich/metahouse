@@ -30,7 +30,7 @@
 					이번 달 총 수입
 				</span>
 				<span class="sales-revenue-price">
-					900,000원
+					0원
 				</span>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
 					<option value="all">전체 플랫폼</option>
 					<option value="로블록스">로블록스</option>
 					<option value="제페토">제페토</option>
-					<option value="더 샌드박스">더샌드박스</option>
+					<option value="샌드박스">더샌드박스</option>
 					<option value="게더타운">게더타운</option>
 					<option value="마인크래프트">마인크래프트</option>
 					<option value="기타">기타</option>
@@ -106,11 +106,10 @@
 							</div>
 							<div class="asset-body-tag-info-row03">
 								<div>
-									<span>Buyer</span><span style="margin-left: 6px;"
-										th:text="${order.buyerId2}"></span>
+									<span>Buyer</span><a th:href="@{/user/profile(userId=${order.buyerId2})}"><span style="margin-left: 6px;"
+											th:text="${order.buyerId2}"></span></a>
 								</div>
-								<button type="button"
-									class="asset-body-button button--xsmall">문의하기</button>
+								
 							</div>
 						</div>
 					</div>

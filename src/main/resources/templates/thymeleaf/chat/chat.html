@@ -30,7 +30,7 @@
 						onblur="this.placeholder = '키워드를 입력하세요'" />
 					<button class="chat-search-button" type="button">
 						<i class="fa-regular fa-magnifying-glass fa-xl"
-							style="color: #aaaaaa;"></i>
+							style="color: #aaaaaa; background-color: #f3f1fc;"></i>
 					</button>
 				</div>
 				<div class="chatroom-list-container">
@@ -38,7 +38,16 @@
 						<li th:each="chatroom:${chatrooms}" th:if="${chatrooms != null}"
 							th:id="'chatroom'+${chatroom.chatroom_id}" class="chatroom-card">
 							<div class="chatroom-card__profile-image">
-								<img th:src="'/metahaus/static/upload/userThumbnail/'+ ${profiles[chatroomStat.index].thumbnail_store_filename}"/>
+                <img th:if="${profiles[chatroomStat.index].thumbnail_store_filename != null}"
+                   th:src="'/metahaus/upload/userThumbnail/'+ ${profiles[chatroomStat.index].thumbnail_store_filename}" />
+                <img th:unless="${session.loginUser.thumbnailStoreFilename != null}"
+                   src="/metahaus/images/test_img.jpg">
+              </div>
+              <div class="chatroom-card__info">
+                <div th:class="'chatroom-card__info-row01'">
+                  <input type="hidden" th:id="loginUser" th:value="${loginUser.userId}"/>
+                  <span class="username" th:text="${chatroom.user_2_name}"></span>
+                  <span class="last-date" th:text="${chatroom.last_chat_time}"></span>
 							</div>
 							<div class="chatroom-card__info">
 								<div th:class="'chatroom-card__info-row01'">

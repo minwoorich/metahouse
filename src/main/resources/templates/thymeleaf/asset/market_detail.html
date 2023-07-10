@@ -33,22 +33,28 @@
 					</li>
 				</ul>
 			</div>
-			<div class="sub_title" id="product_explain">에셋 설명</div>
-			<div class="sub_content" th:utext="${asset.description}"></div>
-			<div class="sub_title">가격</div>
-			<div class="sub_content" th:text="${asset.price}+원"></div>
-			
-			<!-- 취소 및 환불 규정 -->
-            <div class="sub_title">취소 및 환불 규정</div>
-            <div class="sub_content">
-            	1. 기본 환불 규정<br/>
-            	&ensp;1) 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.<br/>
-            	&ensp;2) 작업이 완료된 이후 또는 자료, 프로그램 등 서비스가 제공된 이후에는 환불이 불가합니다.<br/><br/>
-            	2. 판매자 책임 사유<br/>
-            	&ensp;1) 판매자의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제한 금액에 대하여 전액 환불이 가능합니다.
-            	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
+			<div class="select_product_bigbox">
+				<div class="select_product_box2">
+					<div class="sub_title" id="product_explain">에셋 설명 :</div>
+					<div class="sub_content" th:utext="${asset.description}"></div>
+				</div>
+				<div class="select_product_box2">
+					<div class="sub_title">가격 :</div>
+					<div class="sub_content" th:text="${asset.price}+원"></div>
+				</div>
+				<div class="select_product_box2">
+					<!-- 취소 및 환불 규정 -->
+		            <div class="sub_title">취소 및 환불 규정</div>
+		            <div class="sub_content">
+		            	1. 기본 환불 규정<br/>
+		            	&ensp;1) 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.<br/>
+		            	&ensp;2) 작업이 완료된 이후 또는 자료, 프로그램 등 서비스가 제공된 이후에는 환불이 불가합니다.<br/><br/>
+		            	2. 판매자 책임 사유<br/>
+		            	&ensp;1) 판매자의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제한 금액에 대하여 전액 환불이 가능합니다.
+		            	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
+		            </div>
+	            </div>
             </div>
-            
            <!-- 리뷰 -->
             <div class="sub_title">에셋 평가</div>
             <div class="sub_content" th:if="${assetReviews.size > 0}">
@@ -78,10 +84,8 @@
 				<div>
 					<div class="review_title">포토 후기</div>				
 					<div class="banner-slider-wrap">
-						<th:block>
 							<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
 							<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>		
-						</th:block>
 						<div class="slider-outter">
 							<div index="0" class="banner-slider-list">
 							<th:block th:each="review : ${assetReviews}" th:if="${review.reviewImg!=null}">
@@ -127,7 +131,7 @@
 							th:each="reviewImg : ${review.reviewImg}">
 							<div class="review_photos item-img-warp" >
 								<img  width=100% height=100% alt="리뷰이미지" class="review_photo" 
-									th:src="@{/upload/review/project/}+${reviewImg.review_store_filename}">
+									th:src="@{/upload/review/asset/}+${reviewImg.review_store_filename}">
 							</div>
 						</div>
 					</div>
@@ -140,11 +144,11 @@
 						<div>크리에이터<span th:text="'&ensp;|&ensp;'+${#dates.format(review.reviewComment.comment_date,'yyyy.MM.dd')}"></span></div><br>
 						<div th:text="${review.reviewComment.comment_text}"></div>
 					</div>
-					<div class="comment speech-bubble" th:if="${review.reviewComment==null}">
+					<div class="comment speech-bubble" th:if="${review.reviewComment==null && session.loginUser?.userId==asset.seller_id}">
 						<div>크리에이터</div><br>
-						<input id="A-review-id" type="hidden"  th:value="${review.asset_review_id}"/>
-						<input type="text" id="commentText"/>
-						<button type="button" id="writeComment">답글쓰기</button>
+						<input class="A-review-id" type="hidden"  th:value="${review.asset_review_id}"/>
+						<input type="text" class="commentText" placeholder="답글을 작성해 주세요"/>
+						<button type="button" class="writeComment">답글쓰기</button>
 					</div>
 				</div>				
             </div>
@@ -156,7 +160,7 @@
 	        </div>
             
             <!-- 게시글 신고 -->
-			<div id="report">
+			<div id="report" th:if="${session.loginUser != null}">
 				<img alt="신고아이콘" src="/metahaus/images/report_icon.png" id="report_img">
 				<a  href="javascript:openModal()">&ensp;게시글 신고하기</a>
 			</div>
@@ -169,17 +173,20 @@
 	 		<img th:if="${asset.main_img != null}" id="represent_img"
 					th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"/>
 				<div class="product_title" th:text="${asset.title}"></div>
-				<div class="product_info" id="product_date" th:text="'작성일자: '+${asset.asset_date}"></div>
+				<div class="product_info" id="product_date" th:text="'작성일자: '+${#strings.substring(asset.asset_date,0,10)}"></div>
 				<div class="product_info" id="product_price" th:text="${asset.price}+원"></div>
 			</div>
 			<!-- seller profile -->
 			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${asset.seller_id})}'|">
 				<div id="seller_img_box">
-					<img alt="프로필 이미지" src="/metahaus/images/test_img.jpg" id="seller_img">
+					<img th:if="${asset.userName.thumbnailStoreFilename != null}" id="seller_img"
+						 th:src="'/metahaus/upload/userThumbnail/'+${asset.userName.thumbnailStoreFilename}">
+					<img th:unless="${asset.userName.thumbnailStoreFilename != null}" id="seller_img"
+						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div id="seller_info">
-					<div class="seller_name" th:text="${asset.userName.userName}"></div>
 					<div class="seller_id" th:text="${asset.seller_id}"></div>
+					<div class="seller_name" th:text="${asset.userName.userName}"></div>
 				</div>
 			</div>
 			<!-- buy button -->
@@ -220,7 +227,7 @@
 			          </label>
 			          <label for="other">
 			            <input type="radio" id="other" name="report_reason" value="other">
-			            <input type="text" id="other-reason" placeholder="기타 신고 사유를 입력해주세요."
+			            <input type="text" id="other-reason" placeholder="기타 신고 사유를 입력해주세요.(최대 100자)" maxlength="100"
 			            onfocus="this.placeholder=''" onblur="this.placeholder='기타 신고 사유를 입력해주세요.'">
 			          </label>
 			          <!-- 전송 버튼 -->

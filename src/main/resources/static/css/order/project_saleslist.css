@@ -377,12 +377,12 @@ select {
 	justify-content: space-between;
 	align-items: end;
 }
-.project-body-tag-info-row03 div span:nth-child(1){
+.project-body-tag-info-row03 div span{
 	font-size : 14px;
 	color:var(--gray);
 	font-weight: 500;
 }
-.project-body-tag-info-row03 div span:nth-child(2){
+.project-body-tag-info-row03 div a span{
 	color:var(--bright-purple);
 	font-size : 18px;
 	font-weight: 500;

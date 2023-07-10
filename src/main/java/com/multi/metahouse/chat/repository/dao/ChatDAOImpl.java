@@ -1,6 +1,8 @@
 package com.multi.metahouse.chat.repository.dao;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,7 +28,13 @@ public class ChatDAOImpl implements ChatDAO {
     @Override
     public void createChatroom(String user_1_id, String user_2_id) {
     	ChatroomDTO chatroomDTO = new ChatroomDTO(user_1_id, user_2_id);
-    	chatroomDTO.setOpen_date(new Date());
+
+        LocalDate localDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
+		Date date = Date.valueOf(localDate);
+
+        System.out.println("date = " + date);
+
+    	chatroomDTO.setOpen_date(date);
         sqlSession.insert("insertChatroom", chatroomDTO);
     }
     

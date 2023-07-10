@@ -8,7 +8,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.TextNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.multi.metahouse.domain.dto.portfolio.PortfolioDTO;
+import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.user.OtherProfileInfoDTO;
 import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.portfolio.Portfolio;
@@ -39,6 +45,10 @@ import com.multi.metahouse.user.service.UserService;
 
 @Controller
 public class UserController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
+	
 	UserService service;
 	NaverService naverService;
 	KakaoService kakaoService;
@@ -161,7 +171,7 @@ public class UserController {
 	@PostMapping("mypage/setting")
 	public String setting(@RequestPart(value = "multipartfile") MultipartFile multipartfile, User user, HttpSession session) throws IOException {
 		
-		String path = resourceLoader.getResource("classpath:static/upload/userThumbnail").getFile().getAbsolutePath();
+		String path = uploadPath + "userThumbnail";
 		String thumbnailStoreFilename = fileuploadservice.uploadFile(multipartfile, path);
 		user.setThumbnailStoreFilename(thumbnailStoreFilename);
 		System.out.println(user.getThumbnailStoreFilename());
@@ -258,6 +268,19 @@ public class UserController {
 		ModelAndView profileOther = new ModelAndView("user/profile_other");
 		List<PortfolioDTO> portfolioList = portfolioservice.selectPortfolioList(userId);
 		OtherProfileInfoDTO otherProfileInfo = service.read(userId);
+		List<ProjectDTO> projectInfo = otherProfileInfo.getProjectInfo();
+		
+		projectInfo.forEach((e)->{
+		Integer sp = e.getSingle_price();
+			if( sp != null) {
+				e.setPrice(sp);
+			}else {
+				e.setPrice(e.getTriple_price());
+			}
+	        
+		});
+		
+		otherProfileInfo.setProjectInfo(projectInfo);
 		
 		System.out.println(portfolioList);
 		System.out.println(otherProfileInfo);
@@ -293,7 +316,7 @@ public class UserController {
 		
 		if(loginUser != null && loginUser.getSocialLoginId().equals(naverLoginId)) {
 			session.setAttribute("loginUser", loginUser);
-			view = "main/index";
+			view = "redirect:main/index";
 		} else {
 			model.addAttribute("nickname", userInfo.get("nickname"));
 			model.addAttribute("email", userInfo.get("email"));
@@ -326,7 +349,7 @@ public class UserController {
 		if (loginUser != null && loginUser.getSocialLoginId().equals(kakaoLoginId)) {
 			session.setAttribute("access_token", access_Token);
 			session.setAttribute("loginUser", loginUser);
-			view = "main/index";
+			view = "redirect:main/index";
 		} else {
 			//만약 카카오 로그인하는데 토근을 호출하고 KaKao 토큰번호가 DB에 없을떄
 			model.addAttribute("nickname", userInfo.get("nickname"));
@@ -355,7 +378,7 @@ public class UserController {
 		User loginUser = service.socialLogin(googleId, "google");
 		if (loginUser != null && loginUser.getSocialLoginId().equals(googleId)) {
 			session.setAttribute("loginUser", loginUser);
-			view = "main/index";
+			view = "redirect:main/index";
 		} else {
 			//만약 카카오 로그인하는데 토근을 호출하고 KaKao 토큰번호가 DB에 없을떄
 			model.addAttribute("nickname", userInfo.get("nickname"));

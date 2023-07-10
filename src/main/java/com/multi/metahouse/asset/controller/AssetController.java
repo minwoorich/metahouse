@@ -6,8 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,22 +16,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.multi.metahouse.asset.service.AssetFileUploadLogicService;
 import com.multi.metahouse.asset.service.AssetService;
 import com.multi.metahouse.asset.service.AttachFileUploadLogicService;
-import com.multi.metahouse.asset.service.AssetFileUploadLogicService;
 import com.multi.metahouse.domain.dto.asset.AssetContentDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDTO;
 import com.multi.metahouse.domain.dto.asset.AssetDetailImgDTO;
 import com.multi.metahouse.domain.dto.asset.AssetFormDTO;
-import com.multi.metahouse.domain.dto.project.ProjectDTO;
 import com.multi.metahouse.domain.dto.project.ProjectPageDTO;
 import com.multi.metahouse.domain.dto.review.AssetReviewDTO;
-import com.multi.metahouse.domain.entity.asset.AssetEntity;
 import com.multi.metahouse.domain.entity.user.User;
 import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 public class AssetController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
 	AssetService service;
 	AssetFileUploadLogicService assetfileuploadservice;
 	AttachFileUploadLogicService attachfileuploadservice;
@@ -74,12 +75,9 @@ public class AssetController {
 
 	@GetMapping("asset/forms")
 	public String insertForm(HttpSession session) throws IOException {
-		String attachFileUploadPath = resourceLoader.getResource("classpath:static/upload/asset_attach_file").getFile()
-				.getAbsolutePath();
-		String thumbnNailFileUploadPath = resourceLoader.getResource("classpath:static/upload/asset_thumbnail_img")
-				.getFile().getAbsolutePath();
-		String optioinalFileUploadPath = resourceLoader.getResource("classpath:static/upload/asset_optional_img")
-				.getFile().getAbsolutePath();
+		String attachFileUploadPath = uploadPath+"asset_attach_file";
+		String thumbnNailFileUploadPath = uploadPath+"asset_thumbnail_img";
+		String optioinalFileUploadPath = uploadPath+"asset_optional_img";
 		AssetFormDTO assetFormDto = new AssetFormDTO();
 		// 세션에서 DTO 데이터 추출 및 미사용 세션 삭제
 		assetFormDto = (AssetFormDTO) session.getAttribute("assetForm");
@@ -100,15 +98,15 @@ public class AssetController {
 		// 서비스 호출 (insert 작업)
 		service.insert(storeAttachFileName, storeThumbnailFileName, storeOptionalFileNameList, assetFormDto);
 		// List<MultipartFile> imageList = session.getAttribute("imageList");
-		return "redirect:/asset/my-products";
+		return "redirect:/asset/my-products?pageNo=0";
 	}
 
 	@GetMapping("asset/my-products")
-	public String assetProductList(HttpSession session, Model model) {
+	public String assetProductList(HttpSession session, Model model, String pageNo) {
 		if (session.getAttribute("loginUser") != null) {
 			User user = (User) session.getAttribute("loginUser");
 
-			List<AssetDTO> assetList = service.selectAssetListBySellerId(user.getUserId());
+			List<AssetDTO> assetList = service.selectAssetListBySellerId(user.getUserId(), Integer.parseInt(pageNo));
 			model.addAttribute("assetList", assetList);
 
 			return "asset/asset_product_list";
@@ -121,7 +119,7 @@ public class AssetController {
 	public String deleteProduct(String asset_id) {
 		service.deleteAssetByAssetId(asset_id);
 
-		return "redirect:/asset/my-products";
+		return "redirect:/asset/my-products?pageNo=0";
 	}
 	
 /*---------------------------------- OSE ---------------------------------------------*/
@@ -130,11 +128,11 @@ public class AssetController {
 	@RequestMapping("asset/main")
 	public String assetMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
 			@RequestParam(defaultValue = "Non") String category1,
-			@RequestParam(defaultValue = "Non") String category2) {
+			@RequestParam(defaultValue = "Non") String category2,
+			@RequestParam(defaultValue = "Recent") String sort) {
 		
-		System.out.println(pageNo + category1 + category2);
-		List<AssetDTO> assetlist = service.list(pageNo, category1, category2);
-		int total = service.list(null, category1, category2).size();
+		List<AssetDTO> assetlist = service.list(pageNo, category1, category2, sort);
+		int total = service.list(null, category1, category2, sort).size();
 
 		model.addAttribute("assetlist", assetlist);
 		model.addAttribute("pageInfo", new ProjectPageDTO(total, pageNo, 16, 5));
@@ -144,11 +142,13 @@ public class AssetController {
 
 //	특정 에셋상품보기
 	@RequestMapping("asset/detail")
-	public String showAsset(Model model, String assetNum) {
+	public String showAsset(Model model, String assetNum, HttpSession session) {
 		AssetDTO asset = service.assetInfo(assetNum);
 		List<AssetDetailImgDTO> assetImgs = service.assetImgInfo(assetNum);
 		List<AssetContentDTO> assetContents = service.assetContentInfo(assetNum);
 		List<AssetReviewDTO> assetReviews = reviewService.getAllReviewsByAid(assetNum);
+		User userInfo = (User) session.getAttribute("loginUser");
+
 		model.addAttribute("asset", asset);
 		model.addAttribute("assetImgs", assetImgs);
 		model.addAttribute("assetContents", assetContents);

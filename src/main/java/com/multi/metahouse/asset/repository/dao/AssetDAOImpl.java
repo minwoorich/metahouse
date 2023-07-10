@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.asset.repository.jpa.AssetContentRepository;
@@ -47,8 +48,8 @@ public class AssetDAOImpl implements AssetDAO {
 	}
 	
 	@Override
-	public List<AssetEntity> selectAssetListBySellerId(String sellerId) {
-		return repository.findBySellerId(sellerId);
+	public List<AssetEntity> selectAssetListBySellerId(Pageable pageable ,String sellerId) {
+		return repository.findBySellerId(pageable, sellerId);
 	}
 	
 	@Override

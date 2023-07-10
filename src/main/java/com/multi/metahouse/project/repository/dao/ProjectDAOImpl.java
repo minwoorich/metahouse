@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.multi.metahouse.domain.dto.project.ProjectAddOption;
@@ -35,8 +36,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 	
 	@Override
-	public List<ProjectEntity> selectListByUserId(String userId) {
-		return projectRepo.findByCreatorId(userId);
+	public List<ProjectEntity> selectListByUserId(Pageable pageable,String userId) {
+		return projectRepo.findByCreatorId(pageable,userId);
 	}
 	
 	@Override

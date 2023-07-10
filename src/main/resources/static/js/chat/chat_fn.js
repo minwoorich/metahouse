@@ -67,7 +67,6 @@ async function createChatElement(chatMsg, loginUser){
 					'</div><div class="chat-block__timestamp-time">' +
 					chatMsg.write_time.substr(11, 5) +
 					'</div></div></div>';
-
 	} catch (error) {
 		/*console.error("Error during AJAX request:", error);*/
 		alert("에러!");
@@ -108,8 +107,15 @@ async function getURL(file_store_name){
  *  프로필 Elements 작성 메소드 
  */
 function createProfileElement(targetProfile){
-	profile =  '<img class="chat_body_profile-img" src="/metahaus/static/upload/userThumbnail/'+ targetProfile.thumbnail_store_filename + '">';
-	profile += '<div class="chat_body_profile-info">'+targetProfile.self_introduction+'</div>';
+	let profile = "";
+
+	if(targetProfile.thumbnail_store_filename !== null){
+		profile = '<img class="chat_body_profile-img" src="/metahaus/images/test_images/test01.jpeg">';
+	}else{
+		profile = '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/' + targetProfile.thumbnail_store_filename + '">';
+	}
+
+	profile += '<div class="chat_body_profile-info">' + targetProfile.self_introduction+'</div>';
 	
 	return profile;
 }

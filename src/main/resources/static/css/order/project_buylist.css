@@ -79,6 +79,7 @@ select {
 
 .star-rating .stars {
 	display: inline-block;
+    color: #FFD700;
 }
 
 .star-rating input[type="radio"] {
@@ -87,7 +88,7 @@ select {
 
 .star-rating label {
 	font-size: 25px;
-	color: var(--gray);
+	color: #FFD700;
 	cursor: pointer;
 }
 
@@ -97,7 +98,7 @@ select {
 }
 
 .star-rating input[type="radio"]:checked ~ label:before {
-	color: #FFD700;
+	color:var(--gray);
 }
 
 .review-button {
@@ -481,13 +482,13 @@ select {
 	align-items: end;
 }
 
-.project-body-tag-info-row03 div span:nth-child(1) {
+.project-body-tag-info-row03 div span{
 	font-size: 14px;
 	color: var(--gray);
 	font-weight: 500;
 }
 
-.project-body-tag-info-row03 div span:nth-child(2) {
+.project-body-tag-info-row03 div a span {
 	color: var(--bright-purple);
 	font-size: 18px;
 	font-weight: 500;

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,9 @@ import com.multi.metahouse.review.service.ReviewService;
 
 @Controller
 public class ProjectController {
+	@Value("${file.directory}")
+	private String uploadPath;
+	
 	ProjectFileUploadLogicService fileService;
 	ProjectService projectService;
 	ResourceLoader resourceLoader;
@@ -60,11 +64,12 @@ public class ProjectController {
 	@RequestMapping("project/main")
 	public String projectMarket(Model model, @RequestParam(defaultValue = "1") Integer pageNo,
 			@RequestParam(defaultValue = "Non") String category1,
-			@RequestParam(defaultValue = "Non") String category2) {
+			@RequestParam(defaultValue = "Non") String category2,
+			@RequestParam(defaultValue = "Recent") String sort) {
 		System.out.println(pageNo + category1 + category2);
-		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2);
+		List<ProjectDTO> projects = projectService.list(pageNo, category1, category2, sort);
 		System.out.println(projects);
-		int total = projectService.list(null, category1, category2).size();
+		int total = projectService.list(null, category1, category2, sort).size();
 		System.out.println(total);
 
 		model.addAttribute("projects", projects);
@@ -75,21 +80,19 @@ public class ProjectController {
 
 	// 프로젝트 상세보기
 	@RequestMapping("project/detail")
-	public String showProject(Model model, Long projectNum) {
+	public String showProject(Model model, Long projectNum, HttpSession session) {
 		
 		ProjectDTO project = projectService.projectInfo(projectNum);
 		List<ProjectContentsDTO> projectImg = projectService.projectImg(projectNum);
-		System.out.println("-----------"+projectImg);
+
 		List<ProjectAddOption> projectOption = projectService.projectOption(projectNum);
 		List<ProjectReviewDTO> projectReview = reviewService.getAllReviewsByPJTid(projectNum);
-		
+		User userInfo = (User) session.getAttribute("loginUser");
 		model.addAttribute("pjtInfo", project);
 		model.addAttribute("projectImg", projectImg);
 		model.addAttribute("projectOption", projectOption);
 		model.addAttribute("projectReview", projectReview);
 
-		System.out.println(project);
-		System.out.println(projectOption);
 
 		return "project/market_detail";
 	}
@@ -114,29 +117,16 @@ public class ProjectController {
 		return jsonString;
 	}
 
-	// 프로젝트 구인 상품목록 보기
-	@RequestMapping("project/main2")
-	public String gigs2() {
-		return "project/z_project2_main";
-	}
-
-	// 프로젝트 구인 상세페이지
-	@RequestMapping("project/detail2")
-	public String showGigs2() {
-		return "project/z_project2_detail";
-	}
+	
 
 	/*----------------------------------------- 민우님 파트 -------------------------------------------*/
 	// "판매 등록" 페이지 반환
 	@GetMapping("project/my-products")
-	public String showProductList(Model model,HttpSession session) {
+	public String showProductList(Model model,HttpSession session, String pageNo) {
 		if(session.getAttribute("loginUser")!=null) {
 			User user = (User)session.getAttribute("loginUser");
-			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId());
-			for(ProjectListDTO project : projectList) {
-				System.out.println("리스트--------"+project);				
-			}
-
+			List<ProjectListDTO> projectList = projectService.selectListByUserId(user.getUserId(), Integer.parseInt(pageNo));
+			
 			model.addAttribute("projectList", projectList);
 			
 			return "project/project_product_list";
@@ -148,7 +138,7 @@ public class ProjectController {
 	@PostMapping("project/delete-product")
 	public String deleteProduct(Long project_id) {
 		projectService.deleteProject(project_id);
-		return "redirect:/project/my-products";
+		return "redirect:/project/my-products?pageNo=0";
 	}
 
 	// 프로젝트 설명 입력하는 페이지 반환
@@ -239,8 +229,9 @@ public class ProjectController {
 
 		/////////////////// DTO에서 이미지 파일 추출 및 업로드//////////////////////// //
 //		  썸네일 추출 & 업로드 & DTO의 thumbnailPath 세팅 
-		String path = resourceLoader.getResource("classpath:static/upload/project_thumbnail_img").getFile()
-				.getAbsolutePath();
+//		String path = resourceLoader.getResource(uploadPath + "project_thumbnail_img").getFile()
+//				.getAbsolutePath();
+		String path = uploadPath + "project_thumbnail_img";
 		MultipartFile thumbnail = projectForm.getThumbnail();
 		String thumbnailPath = fileService.uploadFile(thumbnail, path);
 
@@ -253,7 +244,7 @@ public class ProjectController {
 		// 서비스 호출
 		projectService.insertProjectInfo(projectForm, packageFormDto, thumbnailPath, contentsList);
 
-		return "redirect:/project/my-products";
+		return "redirect:/project/my-products?pageNo=0";
 	}
 
 	//////////////////// 승민님 파트//////////////////////////

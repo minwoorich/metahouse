@@ -35,11 +35,16 @@
 				</ul>
 			</div>
 			<!-- 컨텐츠 설명 -->
+			<div class="select_product_bigbox">
+			<div class="select_product_box2">
 			<div class="sub_title" id="product_explain">서비스 설명</div>
 			<div class="sub_content" th:utext="${pjtInfo.description}"></div>
+			</div>
 			<!-- 가격 -->
+			
 			<div class="sub_title" id="price_explain">가격 정보</div>
 			<div class="sub_content">
+			
 				<!-- 단일 패키지 -->
 				<table class="price_table" id="one-level-price" 
 						th:if="${pjtInfo.pjtSingle != null}">
@@ -89,11 +94,14 @@
 					</tr>
 				</table> <!-- 3단 패키지 -->
 			</div>
-			<!-- 추가옵션 -->
+			<!-- 추가옵션 --><div class="select_product_box2">
 			<div class="sub_title">추가옵션</div>
 			<div class="sub_content">
+			</div>
+			
 				<table th:if="${projectOption.size > 0}">
 					<tr class="product_option" th:each="option : ${projectOption}">
+						
 						<td th:text="'&diams;&ensp;'+${option.add_option_name}"></td>
 						<td th:text="${option.add_option_description}"></td>
 						<td th:text="${option.add_option_price}+'원 추가'"></td>
@@ -104,8 +112,10 @@
 				</div>
 			</div>
             <!-- 취소 및 환불 규정 -->
+            <div class="select_product_box2">
             <div class="sub_title">취소 및 환불 규정</div>
             <div class="sub_content">
+            
             	1. 기본 환불 규정<br/>
             	&ensp;1) 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.<br/>
             	&ensp;2) 작업이 완료된 이후 또는 자료, 프로그램 등 서비스가 제공된 이후에는 환불이 불가합니다.<br/><br/>
@@ -113,8 +123,10 @@
             	&ensp;1) 판매자의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제한 금액에 대하여 전액 환불이 가능합니다.
             	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
             </div>
-
+</div>
+</div>
            <!-- 리뷰 -->
+           <br/>
             <div class="sub_title">서비스 평가</div>
             <div class="sub_content" th:if="${projectReview.size > 0}">
             	<!-- 종합리뷰 -->
@@ -205,11 +217,11 @@
 						<div>크리에이터<span th:text="'&ensp;|&ensp;'+${#dates.format(review.reviewComment.comment_date,'yyyy.MM.dd')}"></span></div><br>
 						<div th:text="${review.reviewComment.comment_text}"></div>
 					</div>
-					<div class="comment speech-bubble" th:if="${review.reviewComment==null}">
+					<div class="comment speech-bubble" th:if="${review.reviewComment==null && session.loginUser?.userId==pjtInfo.creator_id}">
 						<div>크리에이터</div><br>
-						<input id="P-review-id" type="hidden"  th:value="${review.project_review_id}"/>
-						<input type="text" id="commentText"/>
-						<button type="button" id="writeComment">답글쓰기</button>
+						<input class="P-review-id" type="hidden"  th:value="${review.project_review_id}"/>
+						<input type="text" class="commentText" placeholder="답글을 작성해주세요"/>
+						<button type="button" class="writeComment">답글쓰기</button>
 					</div>
 				</div>				
             </div>
@@ -221,7 +233,7 @@
 	        </div>
 	           
             <!-- 게시글 신고 -->
-            <div id="report">
+            <div id="report" th:if="${session.loginUser != null}">
 				<img alt="신고아이콘" src="/metahaus/images/report_icon.png" id="report_img">
 				<a href="javascript:openModal()">&ensp;게시글 신고하기</a>
 			</div>
@@ -244,17 +256,14 @@
 			<!-- seller profile -->
 			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${pjtInfo.creator_id})}'|">
 				<div id="seller_img_box">
-					<th:block th:if="${pjtInfo.creator.thumbnailStoreFilename !=null}">
-					<img alt="프로필 이미지" th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.creator.thumbnailStoreFilename}" id="seller_img">
-					</th:block>
-					<th:block th:if="${pjtInfo.creator.thumbnailStoreFilename == null}">
-					<img alt="프로필 이미지" src="/metahaus/images/test_img.jpg" id="seller_img">
-					</th:block>
+					<img th:if="${pjtInfo.creator.thumbnailStoreFilename != null}" id="seller_img"
+						 th:src="'/metahaus/upload/userThumbnail/'+${pjtInfo.creator.thumbnailStoreFilename}">
+					<img th:unless="${pjtInfo.creator.thumbnailStoreFilename != null}" id="seller_img"
+						 src="/metahaus/images/test_img.jpg">
 				</div>
 				<div id="seller_info">
-					<div class="seller_name" th:text="${pjtInfo.creator_id}">
+					<div class="seller_name" th:text="${pjtInfo.creator_id}"></div>
 					<div class="seller_name" th:text="${pjtInfo.creator.userName}"></div>
-					</div>
 				</div>
 			</div>
 			<!-- buy button -->
