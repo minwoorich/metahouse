@@ -242,6 +242,8 @@ public class UserController {
 				}
 			}
 			
+			service.delete(userId);
+			
 			if(session != null) {
 				session.invalidate();
 			}
