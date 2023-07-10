@@ -23,6 +23,5 @@ public class ChatMsgDTO {
 	private String message_content;
 	private String message_type;
 	
-	
 	private List<String> filenameList;
 }
