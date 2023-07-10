@@ -392,4 +392,15 @@ public class UserController {
 		}
 		return view;
 	}
+	
+	/* 관리자의 계정 삭제 요청 */
+	@GetMapping
+	public void deleteAccount(String userId) {
+		// target 체크
+		System.out.println("deleteAccount() 실행");
+		System.out.println("target 'userId' : " + userId);
+		
+		service.delete(userId);
+		
+	}
 }

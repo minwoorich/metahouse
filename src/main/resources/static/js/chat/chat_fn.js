@@ -2,7 +2,7 @@ async function createChatElement(chatMsg, loginUser){
 	console.log("현재 메시지 : " + chatMsg.message_id);
 
 	// 채팅 메시지 요소
-	let myChatEle = '';
+	let chatElement = '';
 
 	// 채팅 Side 관련 요소
 	let chatSideDiv = "";
@@ -24,8 +24,6 @@ async function createChatElement(chatMsg, loginUser){
 		dataType: "json"
 		});
 
-		console.log(jsonData);
-			
 		// 메시지의 파일 리스트 받아서 저장
 		filePath = jsonData.filePath;
 		chatMsgFileList = jsonData.chatMsgFile;
@@ -41,14 +39,12 @@ async function createChatElement(chatMsg, loginUser){
 							'<div class="chat-block__message chat-block__message--reception">';
 			}
 		
-			myChatEle += chatSideDiv +
+			chatElement += chatSideDiv +
 						'<div class="chat-block__message-text">' + chatMsg.message_content + '</div>' +
 						'<div class="chat-block__message-files">';
 
 		// 파일 첨부 메시지일 경우
-		if(chatMsgFileList.length !== 0){
-			console.log("null 통과");
-
+		if(chatMsgFileList.length > 0){
 			const files = await Promise.all(
 				chatMsgFileList.map(async (file) => {
 					const fileElement = await getURL(file.file_store_name);
@@ -62,25 +58,26 @@ async function createChatElement(chatMsg, loginUser){
 				})
 			);
 		
-			myChatEle += files.join("");
+			chatElement += files.join("");
 		}
 
-		myChatEle += '</div></div><div class="chat-block__timestamp">' +
+		chatElement += '</div></div><div class="chat-block__timestamp">' +
 					'<div class="chat-block__timestamp-date">' +
 					chatMsg.write_time.substr(2, 8).replaceAll("-", ".") +
 					'</div><div class="chat-block__timestamp-time">' +
 					chatMsg.write_time.substr(11, 5) +
 					'</div></div></div>';
 	} catch (error) {
-		console.error("Error during AJAX request:", error);
+		/*console.error("Error during AJAX request:", error);*/
+		alert("에러!");
 	} finally{
-		return myChatEle;
+		return chatElement;
 	}
 }
 
 async function getURL(file_store_name){
 
-	let retEle = "";
+	let returnElement = "";
 
 	try{
 		const url = "/metahaus/chat/getURL";
@@ -94,38 +91,41 @@ async function getURL(file_store_name){
 
 		const jsonData = await response.json();
 
-		retEle += '<img class="file_img" src="/metahaus/upload/'+ file_store_name + '"/>';
+		returnElement += '<img class="file_img" src="/metahaus/upload/'+ file_store_name + '"/>';
 
 	} catch (error){
-		console.error("Error", error);
+		/*console.error("Error", error);*/
+		alert("에러!");
 
 	} finally{
-
-		console.log("retEle : " +retEle);
-
-		return retEle;
+		return returnElement;
 	}
 
 }
 
-/* 프로필 Elements 작성 메소드 */
-function createProfileElement(targetProfile, targetProfile){
-	let addPro = "";
+/*
+ *  프로필 Elements 작성 메소드 
+ */
+function createProfileElement(targetProfile){
+	let profile = "";
 
 	if(targetProfile.thumbnail_store_filename !== null){
-		addPro = '<img class="chat_body_profile-img" src="/metahaus/images/test_images/test01.jpeg">';
+		profile = '<img class="chat_body_profile-img" src="/metahaus/images/test_images/test01.jpeg">';
 	}else{
-		addPro = '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/' + targetProfile.thumbnail_store_filename + '">';
+		profile = '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/' + targetProfile.thumbnail_store_filename + '">';
 	}
 
-	addPro += '<div class="chat_body_profile-info">' + targetProfile.self_introduction+'</div>';
+	profile += '<div class="chat_body_profile-info">' + targetProfile.self_introduction+'</div>';
 	
-	return addPro;
+	return profile;
 }
 
+/*
+ * Blob 타입 확인 메소드
+ */
 function getFileNameFromBlob(blob) {
+	// 파일 타입이 Blob 타입이 맞는지, Blob 파일이 name 속성을 갖는지 체크
 	if (blob instanceof Blob && blob.name) {
-		// 파일 타입이 Blob 타입이 맞는지, Blob 파일이 name 속성을 갖는지 체크
 		return blob.name;
 	}
 	

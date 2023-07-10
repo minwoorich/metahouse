@@ -14,8 +14,9 @@
     flex-direction: column;
 }
 
-.form-item-column01{
-    display: flex;
+/* .form-item-column01{} */
+.form-input-line{
+    display: flex;	
     flex-direction: row;
     margin-bottom: 15px;
 }
