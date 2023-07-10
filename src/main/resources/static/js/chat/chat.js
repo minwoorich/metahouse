@@ -237,7 +237,7 @@ $(document).ready(function(){
 		chatMsgData.chatroom_id = chatroomId;
 		chatMsgData.write_time = new Date(new Date().getTime() + KR_TIME_DIFF);
 		chatMsgData.message_content = $(".chat-footer-row01").val();
-		chatMsgData.filenamelist = filenamelist;
+		chatMsgData.filenameList = filenameList;
 		
 		let sendMsg = JSON.stringify(chatMsgData);
 		websocket.send(sendMsg);
