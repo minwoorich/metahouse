@@ -28,7 +28,8 @@ public class PointServiceImpl implements PointService {
 	@Override
 	@Transactional
 	public void chargePoint(User loginUser, int chargeAmount) {
-		dao.createChargedPointInfo(loginUser, chargeAmount);
+		String Method = "Metapoint";
+		dao.createChargedPointInfo(loginUser, chargeAmount, Method);
 		dao.chargePoint(loginUser, chargeAmount);
 	}
 

@@ -14,7 +14,7 @@ public interface PointDAO {
 	// 멤버의 포인트 충전하기
 	public void chargePoint(User loginUser, int chargeAmount);
 	// 포인트 충전내역 생성하기
-	public void createChargedPointInfo(User loginUser, int chargeAmount);
+	public void createChargedPointInfo(User loginUser, int chargeAmount,  String Method);
 	// 포인트 사용하기
 	public void consumePoint(User loginUser, int consumeAmount);
 	// 포인트 사용내역 생성하기

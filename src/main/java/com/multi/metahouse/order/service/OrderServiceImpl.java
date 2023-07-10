@@ -78,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
 			pointDao.consumePoint(loginUser, consumeAmount);
 			
 			//판매자에게 돈 보내주기, 판매내역 수정
-			pointDao.createChargedPointInfo(user, consumeAmount);
+			pointDao.createChargedPointInfo(user, consumeAmount, consumeInfo);
 			pointDao.chargePoint(user, consumeAmount);
 			
 			result = 1;
@@ -327,8 +327,12 @@ public class OrderServiceImpl implements OrderService {
 			User user = userDao.read(sellerId);
 			int totalPrice = totalOptionPrice + orderPrice;
 			
-			//5. 판매한 가격 만큼 판매자 보유 포인트 및 포인트 내역 업데이트
-			pointDao.createChargedPointInfo(user, totalPrice);
+			// 5. 충전 내용
+			String Method = "PJT";
+			Method = Method.concat(Long.toString(order.getProjectId().getProjectId()));
+			
+			//6. 판매한 가격 만큼 판매자 보유 포인트 및 포인트 내역 업데이트
+			pointDao.createChargedPointInfo(user, totalPrice, Method);
 			pointDao.chargePoint(user, totalPrice);
 			
 		} else {
@@ -375,8 +379,12 @@ public class OrderServiceImpl implements OrderService {
 				User user = userDao.read(buyerId);
 				int totalPrice = totalOptionPrice + orderPrice;
 				
-				//5. 판매한 가격 만큼 판매자 보유 포인트 및 포인트 내역 업데이트
-				pointDao.createChargedPointInfo(user, totalPrice);
+				// 5. 충전 내용
+				String Method = "승인거절 PJT";
+				Method = Method.concat(Long.toString(order.getProjectId().getProjectId()));
+				
+				//6. 판매한 가격 만큼 판매자 보유 포인트 및 포인트 내역 업데이트
+				pointDao.createChargedPointInfo(user, totalPrice, Method);
 				pointDao.chargePoint(user, totalPrice);
 			}
 		}
