@@ -65,8 +65,7 @@ $(document).ready(function(){
 			const profile = createProfileElement(targetProfile);
 		
 			// 기존 프로필 요소 삭제
-			$(".chat_body_profile-img").remove();
-			$(".chat_body_profile-info").remove();
+			$(".chat_body_profile-img_div").remove();
 		
 			// 프로필 요소 추가
 			$(".chat-body__profile-section").append(profile);
