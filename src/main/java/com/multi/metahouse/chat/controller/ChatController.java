@@ -90,13 +90,13 @@ public class ChatController {
 		return chatMsgFileJSON;
 	}
 	
+	/* 서버의 실제 파일 경로를 URL로 반환 */
 	@GetMapping(value = "/getURL", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String, Object> getURL(String fileStoreName) throws MalformedURLException{
 		Map<String, Object> urlJson = new HashMap<>();
 
 		String filePath = PropertyUtil.getProperty("file.directory");
-		System.out.println("filePath : " + filePath);
 
 		UrlResource resource = new UrlResource("file:" + filePath + fileStoreName);
 

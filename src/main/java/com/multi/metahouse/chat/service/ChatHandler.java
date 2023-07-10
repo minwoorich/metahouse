@@ -78,13 +78,12 @@ public class ChatHandler{
 	public void onOpen(Session client) {
 		if(!clientset.contains(client)) {
 			clientset.add(client);
-			System.out.println("클라이언트가 접속했습니다:"+client);
+			System.out.println("클라이언트가 접속했습니다:" + client);
 		}
 	}
 	
 	@OnMessage
 	public void onMessage(String msg, Session session) throws IOException {
-		System.out.println("텍스트 수신메세지:"+msg);
 		// JSON 형식 메시지 전역 멤버변수에 저장
 		originJsonString = msg;
 		
@@ -92,22 +91,17 @@ public class ChatHandler{
 		ObjectMapper objectMapper = new ObjectMapper();
 		chatMsg = objectMapper.readValue(msg, ChatMsgDTO.class);
 		
-		//System.out.println("chatMsg : " + chatMsg);
-		
 		if(chatMsg.getMessage_type().equals("Text")) {
-			//System.out.println("Text Only 메시지 수신됨.");
-			
 			// 수신 메시지 DB에 저장
 			insertChatMsg(chatMsg);
 			
 			//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
 			for(Session data:clientset) {
-				System.out.println("전송메세지:"+msg);
+				System.out.println("전송메세지:" + msg);
 				data.getBasicRemote().sendText(msg);
 			}
 			
 		}else {
-			//System.out.println("File 첨부 메시지 수신됨.");
 			// 신규 메시지 수신으로 인한 기존 데이터 비우기
 			fileIdx = 0;
 			filelist.clear();
@@ -118,14 +112,9 @@ public class ChatHandler{
 	
 	@OnMessage
 	public void onMessage(ByteBuffer msg, Session session) throws IOException {
-		//System.out.println("바이너리 수신메세지:"+msg);
 		// ArrayBuffer 형식 메시지 static 멤버변수에 저장
 		filelist.add(msg);
 				
-		// 첨부파일 절대 경로 지정
-		//final String FILE_PATH = resourceLoader.getResource("classpath:static/upload").getFile().getAbsolutePath() 
-		//		+ File.separator + "chat" + File.separator + "attach";
-		
 		FILE_PATH = bundle.getString("file.directory");
 		
 		// 파일 디렉토리 생성 (없으면)
@@ -136,13 +125,13 @@ public class ChatHandler{
         }
 		
         // 실제 파일 확장자 추출
-        int pos = chatMsg.getFilenamelist().get(fileIdx).lastIndexOf(".");
-        String ext = chatMsg.getFilenamelist().get(fileIdx).substring(pos+1);
+        int pos = chatMsg.getFilenameList().get(fileIdx).lastIndexOf(".");
+        String ext = chatMsg.getFilenameList().get(fileIdx).substring(pos + 1);
 		String filename = UUID.randomUUID().toString() + "." + ext;
 		
 		// DTO 저장
 		ChatMsgFileDTO file = new ChatMsgFileDTO();
-		file.setFile_origin_name(chatMsg.getFilenamelist().get(fileIdx));
+		file.setFile_origin_name(chatMsg.getFilenameList().get(fileIdx));
 		file.setFile_store_name(filename);
 		file.setFile_seq(fileIdx);
 		
@@ -177,7 +166,7 @@ public class ChatHandler{
         msg.position(0); //파일을 저장하면서 position값이 변경되었으므로 0으로 초기화한다.
         
         // 파일 정보 DB 저장
- 		if(fileIdx+1 == chatMsg.getFilenamelist().size()) {
+ 		if(fileIdx + 1 == chatMsg.getFilenameList().size()) {
  			insertChatMsgFile(chatMsg, chatMsgFileList);
  			
  			ObjectMapper mapper = new ObjectMapper();
@@ -187,11 +176,9 @@ public class ChatHandler{
  			
  			//웹소켓에 접속한 모든 웹소켓클라이언트에게 메세지를 전송
  			for(Session data:clientset) {
- 				//System.out.println("전송메세지:"+modifiedJsonString);
  				data.getBasicRemote().sendText(modifiedJsonString);
  				// 클라이언트 단에 파일 전송
  				for(ByteBuffer arrayBuffer:filelist) {
-// 					System.out.println("전송파일:"+arrayBuffer);
  					data.getBasicRemote().sendBinary(arrayBuffer);
  				}
  			}
