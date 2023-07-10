@@ -29,17 +29,11 @@
 						<li th:each="chatroom:${chatrooms}" th:if="${chatrooms != null}"
 							th:id="'chatroom'+${chatroom.chatroom_id}" class="chatroom-card">
 							<div class="chatroom-card__profile-image">
-                <img th:if="${profiles[chatroomStat.index].thumbnail_store_filename != null}"
-                   th:src="'/metahaus/upload/userThumbnail/'+ ${profiles[chatroomStat.index].thumbnail_store_filename}" />
-                <img th:unless="${session.loginUser.thumbnailStoreFilename != null}"
-                   src="/metahaus/images/test_img.jpg">
-              </div>
-              <div class="chatroom-card__info">
-                <div th:class="'chatroom-card__info-row01'">
-                  <input type="hidden" th:id="loginUser" th:value="${loginUser.userId}"/>
-                  <span class="username" th:text="${chatroom.user_2_name}"></span>
-                  <span class="last-date" th:text="${chatroom.last_chat_time}"></span>
-							</div>
+                				<img th:if="${profiles[chatroomStat.index].thumbnail_store_filename != null}"
+                   					 th:src="'/metahaus/upload/userThumbnail/'+ ${profiles[chatroomStat.index].thumbnail_store_filename}" />
+                				<img th:unless="${session.loginUser.thumbnailStoreFilename != null}"
+                   					 src="/metahaus/images/test_img.jpg">
+              				</div>
 							<div class="chatroom-card__info">
 								<div th:class="'chatroom-card__info-row01'">
 									<input type="hidden" th:id="loginUser" th:value="${loginUser.userId}"/>
