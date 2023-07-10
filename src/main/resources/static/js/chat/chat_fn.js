@@ -109,8 +109,8 @@ async function getURL(file_store_name){
 function createProfileElement(targetProfile){
 	let profile = "";
 
-	if(targetProfile.thumbnail_store_filename !== null){
-		profile = '<img class="chat_body_profile-img" src="/metahaus/images/test_images/test01.jpeg">';
+	if(targetProfile.thumbnail_store_filename === null){
+		profile = '<img class="chat_body_profile-img" src="/metahaus/images/test_img.jpg">';
 	}else{
 		profile = '<img class="chat_body_profile-img" src="/metahaus/upload/userThumbnail/' + targetProfile.thumbnail_store_filename + '">';
 	}
