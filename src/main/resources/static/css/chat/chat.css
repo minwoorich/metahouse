@@ -251,13 +251,15 @@
         /* 원하는 스타일 속성을 추가로 설정하세요 */
 }
 
+.chat_body_profile-img_div{
+	text-align: center;
+}
+
 .chat-body__profile-section img{
 	border-radius: 999px;
-	width: 65px;
-    height: 65px;
+	width: 120px;
+    height: 120px;
     object-fit: cover;
-    margin-left: 120px;
-    margin-top: 70px;
 }
     
     
