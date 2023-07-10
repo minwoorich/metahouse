@@ -48,14 +48,14 @@ public class PointDAOImpl implements PointDAO {
 	
 	// User 충전 내역 업데이트
 	@Override
-	public void createChargedPointInfo(User loginUser, int chargeAmount) {
+	public void createChargedPointInfo(User loginUser, int chargeAmount, String Method) {
 		LocalDate localDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
 		Date date = Date.valueOf(localDate);
 		
 		ChargedPointInfo chargedPointInfo = new ChargedPointInfo();
 		chargedPointInfo.setUserId(loginUser.getUserId());
 		chargedPointInfo.setChargingPoint(chargeAmount);
-		chargedPointInfo.setPaymentMethod("metapoint");
+		chargedPointInfo.setPaymentMethod(Method);
 		chargedPointInfo.setRemainingPoint(loginUser.getPoint() + chargeAmount);
 		chargedPointInfo.setChargeDate(date);
 		
