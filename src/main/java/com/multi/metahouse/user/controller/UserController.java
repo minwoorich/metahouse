@@ -230,17 +230,19 @@ public class UserController {
 		
 		if(password.equals(loginUserPw)) {
 			returnMsg = "success";
-			if(userInfo.getSocialName().equals("kakao")) {
-				kakaoService.unlink((String)session.getAttribute("access_token"));
-				
-			}else if(userInfo.getSocialName().equals("naver")) {
-				if(session.getAttribute("access_token") != null) {
-					naverService.unlink((String)session.getAttribute("access_token"));
+			
+			if(userInfo.getSocialName() != null) {
+				if(userInfo.getSocialName().equals("kakao")) {
+					kakaoService.unlink((String)session.getAttribute("access_token"));
+					
+				}else if(userInfo.getSocialName().equals("naver")) {
+					if(session.getAttribute("access_token") != null) {
+						naverService.unlink((String)session.getAttribute("access_token"));
+					}
 				}
 			}
 			
 			service.delete(userId);
-			
 			
 			if(session != null) {
 				session.invalidate();
