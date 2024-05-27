@@ -18,14 +18,14 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white)
 
 
 ### **[Back-end]**   
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![SpringBoot](https://img.shields.io/badge/SpringBoot-%6DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![Thymeleaf](https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white)
-![CentOS](https://img.shields.io/badge/CentOS-%262577.svg?style=for-the-badge&logo=CentOS&logoColor=white)
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 
 ### **[DB]**
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
@@ -137,9 +137,9 @@
 
 - 첫 프로젝트 경험을 기반으로 팀원들과의 소통을 충분히 하기위해 노력하였다. 팀원들 역시 프로젝트에 적극적이라 다양한 의견 제시와 충분한 회의를 할 수 있다. 또한 팀원들 간의 적극적인 지식 공유와 아끼지 않는 칭찬으로 즐거운 협업의 분위기가 조성되어 즐거운 프로젝트를 할 수 있어 좋았다.
 
-**첫 배포 경험**
+**좋았던 팀 웍**
 
-- 네이버 클라우드를 통해서 배포하는 과정에 직접 참여할 수는 없었지만, 프로젝트가 배포되는 과정을 보고, 경험할 수 있어서 좋았다.
+- 팀원 중 한 분이 수업을 전혀 따라오지 못 해서 프로젝트에서 자신이 맡은 파트를 전혀 수행하지 못 하고 있었다. 하지만 우리 팀은 그 분을 배제하고 프로젝트를 진행한 것이 아닌 최대한 그 분의 역량을 팀에 기여할 수 있도록 개발 대신 데이터 수집과 발표 자료를 제작하고 편집하는 임무를 부여해주었다. 비록 개발적인 부분에서는 그 분의 기여도가 높진 않았으나 프로젝트가 성공적으로 완료된 것에 있어서는 제 몫을 톡톡히 했다고 생각한다.  
 </details>
 
 <details>
@@ -152,11 +152,11 @@
 
 **아쉬운 페이징 처리 기능**
 
-- JPA를 활용하여 페이징 처리를 하여고 하였지만, 결국 JPA 사용법을 익히지 못해 JPA를 사용하지 않고 페이징을 구현하는 방향으로 전환하였다. 때문에 시간이 촉박해져 페이징 기능을 구현하기는 하였지만, 효율이 좋은 코드가 아닌 것 같아 개선이 필요하다고 생각했다.
+- JPA를 활용하여 페이징 처리를 하려 했지만, 결국 JPA 사용법을 익히지 못해 JPA를 사용하지 않고 페이징을 구현하는 방향으로 전환하였다. 때문에 시간이 촉박해져 페이징 기능을 구현하기는 하였지만, 효율이 좋은 코드가 아닌 것 같아 개선이 필요하다고 생각했다.
 
 **낮은 인프라 이해도**
 
-- 짧은 수업으로는 클라우드 리눅스 등의 지식을 필요로하는 인프라를 이해할 수 없었다. 배포를 진행하는 과정은 본 것은 좋은 경험이었지만, 나는 배포가 어떻게 이루어지는건지 전혀 이해하지 못해서 이후 추가적인 학습을 계획하게되었다.
+- 짧은 수업으로는 클라우드 리눅스 등의 지식을 필요로하는 인프라를 제대로 이해할 수 없었다. 배포를 진행하는 과정은 본 것은 좋은 경험이었지만 부족한 지식을 채우기 위해 이후 추가적인 학습을 계획하게되었다.
 </details>
 
 
