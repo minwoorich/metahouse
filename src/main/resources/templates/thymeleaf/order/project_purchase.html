@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/nonsideLayout}">
+<head>
+<meta charset="UTF-8">
+<title>결제하기</title>
+<link href="/metahaus/css/order/purchase.css" rel="stylesheet" type="text/css">
+<script src="https://kit.fontawesome.com/123626a3b2.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<div layout:fragment="content" class="content">
+		<p id="title">결제하기</p>
+		<div id="main-view">
+			<div id="purchase_summary">
+				<div id="product_info">
+					<div class="product_basic_info">
+						<div id="product_img_box">
+							<img alt="상품대표이미지" th:src="@{/upload/project_thumbnail_img/}+${pjtInfo.project_thumbnail_img}" id="product_img">
+						</div>
+						<div>
+							<p class="sub_title" id="Aid_pj" th:value="${pjtInfo.project_id}">상품명</p>
+							<p class="data" th:text="${pjtInfo.title}"></p>
+							<p class="sub_title">판매자</p>
+							<span class="data" th:text="${pjtInfo.creator_id}"></span>
+							<span class="data" th:text="'('+${pjtInfo.creator.userName}+')'"></span>
+						</div>
+					</div>
+					<form>
+						<div class="wrap">
+							<p class="sub_title">기본항목</p>
+							<div th:if="${pjtInfo.pjtSingle != null}">
+								<span class="data">패키지 선택&ensp;</span>
+							    <select name="price_package" id="tp">
+							       	<option th:value="${pjtInfo.pjtSingle.price}" selected>BASIC</option>
+							    </select>
+							    <div class="price_package_info_box data">
+							    	<div class="price_package_info" th:utext="'제목<br/><br/>'+${pjtInfo.pjtSingle.pkg_title}"></div>
+							    	<div class="price_package_info" id="price_package_explain" th:utext="'설명<br/><br/>'+${pjtInfo.pjtSingle.pkg_description}"></div>
+							    	<div class="price_package_info" th:utext="'작업일<br/><br/>'+${pjtInfo.pjtSingle.workdays}+'일'"></div>
+							    	<div class="price_package_info" th:utext="'가격<br/><br/>'+${pjtInfo.pjtSingle.price}+'원'"></div>
+							    </div>
+							</div>
+							<div th:if="${pjtInfo.pjtTriple != null}">
+								<span class="data">패키지 선택&ensp;</span>
+							    <select name="price_package" id="tp">
+							       	<option th:value="${pjtInfo.pjtTriple.basic_price}" selected>BASIC</option>
+							       	<option th:value="${pjtInfo.pjtTriple.economy_price}">ECONOMY</option>
+							       	<option th:value="${pjtInfo.pjtTriple.premium_price}">PREMIUM</option>
+							    </select>
+							    <div class="price_package_info_box data" id="priceData">
+							    	<div class="price_package_info" th:utext="'제목<br/><br/>'+${pjtInfo.pjtTriple.basic_pkg_title}"></div>
+							    	<div class="price_package_info" id="price_package_explain" th:utext="'설명<br/><br/>'+${pjtInfo.pjtTriple.basic_pkg_description}"></div>
+							    	<div class="price_package_info" th:utext="'작업일<br/><br/>'+${pjtInfo.pjtTriple.basic_workdays}+'일'"></div>
+							    	<div class="price_package_info" th:utext="'가격<br/><br/>'+${pjtInfo.pjtTriple.basic_price}+'원'"></div>
+							    </div>
+							</div>
+						</div>
+						<div class="wrap" th:if="${projectOption.size > 0}">
+							<p class="sub_title">옵션항목</p>
+					        <div class="option data">
+					        	<div class="">선택</div>
+					        	<div class="option_item">제목</div>
+					        	<div class="option_item">설명</div>
+					        	<div class="option_item">가격</div>
+					        	<div class="updown option_item">수량</div>
+					        </div>
+					        <div class="option data" th:each="option, optionStat:${projectOption}">
+					        	<input class="option_chk" type='checkbox' name='add_option' 
+					        			th:value="${option.add_option_id}" th:id="'ADid'+${optionStat.index}"/>
+					        	<div class="option_item" th:text="${option.add_option_name}"></div>
+					        	<div class="option_item" th:text="${option.add_option_description}"></div>
+					        	<div class="option_item" th:text="${option.add_option_price}+'원'"
+					        		th:value="${option.add_option_price}"  th:id="'P'+${optionStat.index}"></div>
+					        	<div class="updown option_item">
+					        		<button type ="button" class="down">-</button>
+					        		<input type="text" placeholder="0" readonly="readonly" 
+					        				class="updown_display" th:id="'count'+${optionStat.index}">
+					        		<button type ="button" class="up">+</button>
+					        	</div>
+					        </div>
+						</div>
+				    </form>
+				    <div class="wrap">
+						<p class="sub_title">요청사항</p>
+						<div class="data request_form">
+							<textarea placeholder="의뢰내용을 간략히 작성해주세요"  maxlength="100" required="required" class="request"></textarea>
+							<div class="request-counter">
+								<span class="counter">0</span> <span>/</span> <span>100</span>
+							</div>
+						</div>
+				    </div>
+				</div>
+				<div class="policy_term wrap">
+					<div class="policy_term_title">개인정보 제공 동의</div><br/>
+					<div class="policy_term_content">
+							MetaHaus회원 계정으로 제공하는 상품 및 서비스를 구매하고자 할 경우,
+							거래 당사자간 원활한 의사소통 및 상담 등 거래이행을 위하여 필요한 최소한의 개인정보를 아래와 같이 제공하고 있습니다.
+							<br><br>
+							1. 개인정보를 제공받는 자 : 상품 및 서비스 판매자<br>
+							2. 제공하는 개인정보 항목 : 이름, 아이디, 상품 구매정보,결제수단<br>
+							3. 개인정보를 제공받는 자의 이용목적 : 판매자와 구매자의 원활한 거래 진행,
+							 본인의사의 확인, 고객상담 및 불만처리/부정이용 방지 등의 고객관리, 물품배송, 
+							 새로운 상품/서비스 정보와 고지사항의 안내, 상품/서비스 구매에 따른 혜택 제공,
+							  서비스 개선·통계·분석<br>
+							4. 개인정보를 제공받는 자의 개인정보 보유 및 이용기간 :
+							 개인정보 이용목적 달성 시까지 보존합니다. 단, 관계 법령의 규정에 의하여 일정 기간 보존이 필요한 경우에는
+							  해당 기간만큼 보관 후 삭제합니다.<br>
+							위 개인정보 제공 동의를 거부할 권리가 있으나, 거부 시 페이를 이용한 상품 및 디지털 콘텐츠 구매가 불가능합니다.
+							 그 밖의 내용은 페이 가맹점의 자체 이용약관 및 개인정보처리방침에 따릅니다.
+					</div><br/>
+					<div class="policy_term_ck">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</div>
+				</div>
+			</div>
+
+			<div id="price_summary">
+				<div class="data distance">
+					<span>상품금액</span>
+					<span class="price_data" id="select_price" th:if="${pjtInfo.pjtSingle != null}">
+						<span th:value="${pjtInfo.pjtSingle.price}" th:text="${pjtInfo.pjtSingle.price}+'원'"></span>
+					</span>
+					<span class="price_data" id="select_price" th:if="${pjtInfo.pjtTriple != null}">
+						<span th:value="${pjtInfo.pjtTriple.basic_price}" th:text="${pjtInfo.pjtTriple.basic_price}+'원'"></span>
+					</span>
+				</div>
+				<div class="data distance,">
+					<span>추가금액</span>
+					<span class="price_data" id="price_totalOption">
+						<span>0원</span>
+					</span>
+				</div>
+				<div class="data distance">
+					<span class="total_price">최종결제 금액</span>
+					<span class="price_data total_price" id="consumeP" th:if="${pjtInfo.pjtSingle != null}">
+						<span th:value="${pjtInfo.pjtSingle.price}" th:text="${pjtInfo.pjtSingle.price}+'원'"></span>
+					</span>
+					<span class="price_data total_price" id="consumeP" th:if="${pjtInfo.pjtTriple != null}">
+						<span th:value="${pjtInfo.pjtTriple.basic_price}" th:text="${pjtInfo.pjtTriple.basic_price}+'원'"></span>
+					</span>
+				</div>
+				<hr/>
+				<div id="U_id" hidden="" th:value="${userInfo.userId}"></div>
+				<div class="data distance">
+					<span>보유 포인트</span><span class="price_data" id="myPoint" th:text="${userInfo.point}+'원'"></span>
+				</div>
+				<div class="data distance" id="balance">
+					<th:block th:if="${pjtInfo.pjtSingle != null}">
+						<th:block th:if="${userInfo.point-pjtInfo.pjtSingle.price>=0}">
+						<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtSingle.price}+'원'"></span>
+						</th:block>
+						<th:block th:if="${userInfo.point-pjtInfo.pjtSingle.price<0}">
+						<span>*잔액이 부족합니다.</span><a class='price_data' href='/metahaus/point/charge'>충전하기</a>
+						</th:block>
+					</th:block>
+					<th:block th:if="${pjtInfo.pjtTriple != null}">
+						<th:block th:if="${userInfo.point-pjtInfo.pjtTriple.basic_price>=0}">
+						<span>결제 후 포인트</span><span class="price_data" th:text="${userInfo.point-pjtInfo.pjtTriple.basic_price}+'원'"></span>
+						</th:block>
+						<th:block th:if="${userInfo.point-pjtInfo.pjtTriple.basic_price<0}">
+						<span>*잔액이 부족합니다.</span><a class='price_data' href='/metahaus/point/charge'>충전하기</a>
+						</th:block>
+					</th:block>
+				</div>
+
+				<hr/>
+				<p>*결제는 메타포인트만 가능합니다.</p>
+				<div id="btn">
+					<button class="button--large myBtn PjtBtn">구매하기</button>
+				</div>
+			</div>
+		</div>
+	
+		<script src="/metahaus/js/order/purchase.js"></script>
+
+	</div><!-- layout:fragment -->
+	
+</body>
+</html>

@@ -1,0 +1,416 @@
+@charset "UTF-8";
+
+*{
+	box-sizing: border-box;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+pre{
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+    white-space: pre-wrap;
+    background-color: white;
+    text-align: justify;
+}
+
+.content-cover{
+	width:100%;
+	background-color:#FAFAFC;
+	padding: 20px;
+}
+
+.header{
+	display: flex;
+	height: 400px;
+}
+
+.content-header-cover{
+	width: 50%;
+	height: 100%;
+}
+.header-info{
+	height: 40%;
+}
+.header-button{
+	height: 60%;
+}
+
+.main-img-cover{
+	height:100%;
+	border-radius: 6px;
+	overflow: hidden;
+	border: solid 1px #8D72E1;
+	align-content: center;
+	margin-right: 12px;
+	display: flex;
+	justify-content: flex-start;
+	align-content: flex-end;
+}
+.main-img-cover img{
+	width: 100%;
+	height: 100%;
+}
+
+
+.content-header{
+	width:100%;
+	padding: 0px 6px;
+}
+
+.subtitle{
+	margin-left: 12px;
+	font-weight: bold;
+	color: #8D72E1;
+}
+
+.ch-profile-cover{
+	width: 80%;
+	display: flex;
+	line-height: 48px;
+	margin: 10px 10px 10px 0px;
+}
+
+.ch-profile{
+	width: 48px;
+	height: 48px;
+	overflow: hidden;
+	border-radius: 50%;
+	margin-right: 10px;
+	border: solid 1px #8D72E1;
+}
+
+.ch-profile img{
+	width: 100%;
+	height: 100%;
+}
+
+.ch-expert{
+	font-size: 18px;
+	
+	
+}
+
+.chat-button {
+	width: 100%;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	border-radius:6px;
+	background-color: #8D72E1;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.chat-button:hover{
+	background-color: #6C4AB6;
+	transition: 0.5s;
+}
+
+.chat-button-cover{
+	height: 100%;
+	display: flex;
+	align-items: flex-end;
+}
+
+.chat-button-cover a{
+	width: 100%;
+	padding: 0px 6px;
+	margin: 0px 6px;
+}
+
+.ch-category{
+	color: #8D9EFF;
+	padding: 6px 6px 6px 6px;
+}
+
+.ch-title{
+	font-weight: bolder;
+	font-size: 32px;
+	margin: 6px;
+}
+
+.content-cover hr{
+	background: #8D72E1;
+	height: 1px;
+}
+
+.ch-content-cover{
+	display: flex;
+	padding: 10px 6px;
+}
+
+.ch-name{
+	padding-right: 10px;
+	font-weight: bold; 
+	color: #8D72E1;
+}
+
+.main-content{
+	display: flex;
+	margin-bottom: 50px;
+}
+
+.main-content-img{
+	width: 25%;
+}
+
+.main-content-text{
+	width: 75%;
+	border-radius: 6px;
+    border: 1px solid #8D72E1;
+   	margin: 12px;
+   	box-shadow: 3px 5px 5px rgb(163, 163, 163);
+   	display: flex;
+   	padding: 20px;
+   	background-color: white;
+}
+
+.main-content-text2{
+	width: 100%;
+	height: 200px;
+	border-radius: 6px;
+    border: 1px solid #8D72E1;
+   	margin: 12px;
+   	box-shadow: 3px 5px 5px rgb(163, 163, 163);
+   	display: flex;
+   	padding: 20px;
+   	background-color: white;
+}
+
+.main-ct-title{
+	width: 19%;
+	color: #8D72E1;
+	font-weight: bold;
+}
+.main-ct-content{
+	width: 80%;
+}
+
+/* 슬라이더 아이템 리스트 */
+.banner-slider-list{
+    position: relative;
+    display: flex;
+    padding: 6px;
+    left:0;
+    transition: left 1s;
+}
+
+/* 슬라이더 아이템 */
+.banner-slider-item{
+    width: 100%;
+    flex-shrink:0;
+    padding: 6px;
+}
+
+.banner-slider-portfolio{
+	width : 33.3333%;
+    flex-shrink:0;
+    padding: 6px;
+    border-radius: 6px;
+    margin-left: 1%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.banner-slider-portfolio:first-child{
+	margin-left: 0px;
+}
+
+
+.item-img-warp{
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.item-img-warp img{
+	width: 100%;
+	height: 100%;
+}
+
+.slider-outter{
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.banner-slider-item span{
+    display: block;
+}
+
+
+/* 슬라이더 버튼 */
+.btn-shape{
+    position: absolute;
+    top:58%;
+    left: 7%;
+    transform: translate(-100%,-150%);
+
+    z-index: 2;
+    align-self: center;
+    cursor: pointer;
+    color: rgb(174, 174, 174);
+    
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+
+    border-radius: 50%;
+    box-shadow: 3px 5px 5px rgb(163, 163, 163);
+}
+
+.btn-shape2{
+    position: absolute;
+    top:50%;
+    transform: translate(-100%,-150%);
+
+    z-index: 2;
+    align-self: center;
+    cursor: pointer;
+    color: rgb(174, 174, 174);
+    
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+
+    border-radius: 50%;
+    box-shadow: 3px 5px 5px rgb(163, 163, 163);
+}
+
+.nextbtn{
+    left:93%;
+    transform: translate(0%,-150%);
+}
+
+.another-portfolio .nextbtn{
+    left:100%;
+    transform: translate(0%,-150%);
+}
+
+.banner-slider-wrap{
+    position: relative;
+}
+
+.download-cover{
+	margin: 12px;
+	padding: 20px;
+	border: solid 1px #8D72E1;
+	border-radius: 6px;
+	display: flex;
+	background-color: white;
+	box-shadow: 3px 5px 5px rgb(163, 163, 163);
+}
+
+.download-cover a{
+	padding-right: 10px;
+}
+
+.banner-slider-portfolio hr{
+	margin: 10px 0px;
+}
+
+.portfolio_info_text{
+	padding: 3px;
+	color: white;
+	font-size: 14px;
+}
+
+.button_area{
+	display: flex;
+	justify-content: center;
+}
+
+.update_delete_button{
+	width: 10%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 6px;
+	margin: 0px 30px;
+	border: none;
+	background-color: #8D72E1;
+	cursor: pointer;
+}
+
+.update_delete_button a{
+	color: white;
+	text-decoration: none;
+}
+
+.update_delete_button:hover{
+	background-color: #6C4AB6;
+	transition: 0.5s;
+	width: 12%;
+}
+
+
+/* 다른 포트폴리오 출력 */
+.portfolio_info_card{
+	width: 220px;
+	height: 330px;
+	background-color: #8D72E1;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 6px;
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	cursor: pointer;
+	text-decoration: none;
+}
+.portfolio_info_card:hover{
+	background-color: #6C4AB6;
+	transition: 0.5s;
+	width: 230px;
+	height: 345px;
+}
+
+.portfolio_info_img{
+	/* width: 180px;
+	height: 190px; */
+	width: 100%;
+	height: 60%;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.portfolio_info_img>img{
+	width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.portfolio_info_card>hr{
+	margin: 8px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.portfolio_content_preview{
+	height: 35%;
+}
+
+.portfolio_info_text{
+	height:20%;
+	font-size: 13px;
+	color: white;
+	text-align: center;
+}
+
+.portfolio_info_etc{
+	height: 80%;
+	display:flex;
+	align-items: flex-end;
+}
+
+.portfolio_info_etc div{
+	font-size: 12px;
+	color: white;
+}

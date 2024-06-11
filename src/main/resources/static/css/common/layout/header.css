@@ -1,0 +1,72 @@
+.custom-primary {
+    color: black;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+}
+.navbar-right {
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.custom-primary:hover {
+    color: #6C4AB6;
+}
+
+.input-group {
+    margin-left: -180px;
+    margin-top: 60px;
+    
+}
+.form-control {
+    border-radius: 30px;
+    width: 80%;  /* 가로 크기 조절 */
+    height: 50px;  /* 세로 크기 조절 */
+}
+
+.btn-default {
+    border-radius: 30px;
+    width: 90%;  /* 가로 크기 조절 */
+    height: 50px;  /* 세로 크기 조절 */
+}
+.nav.navbar-nav {
+    font-weight: bold;
+}
+.custom-primaryimg {
+    margin-top: 5%;
+    margin-left: -23%;
+}
+
+.nav-link.custom-primary {
+    position: relative; /* child elements를 absolute로 위치를 잡기 위해 */
+}
+
+.nav-link.custom-primary:hover::after {
+    content: attr(data-tooltip);  /* 말풍선에 표시할 텍스트를 data-tooltip 속성 값으로 설정 */
+    position: absolute;
+    bottom: 50px; /* 말풍선 위치 조정 */
+    left: 0;
+    width: 400px; /* 말풍선의 너비 */
+    padding: 10px; /* 말풍선 내부의 패딩 */
+    background-color: white; /* 말풍선의 배경색 */
+    color: 6C4AB6; /* 텍스트 색 */
+    border-radius: 5px; /* 말풍선의 모서리 둥글게 */
+    text-align: center;
+    opacity: 0.8;
+    pointer-events: none; /* 말풍선이 마우스 이벤트를 가로채는 것을 방지 */
+}
+
+
+ul.navbar-nav1 {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽정렬 */
+  margin-top: 2%;
+  font-weight: bold;/* 글씨 굵게 */
+  margin-left: 1%;
+}
+
+
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+    z-index: 2;
+    margin-left: -1px;
+    border-radius: 4%;
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.metahouse.portfolio">
+
+	<!-- INSERT-START -->
+	<insert id="insertPortfolio" parameterType="portfolio">
+        INSERT INTO portfolio VALUES (null, #{user_id}, #{category1}, #{category2}, #{portfolio_title}, #{portfolio_pj_start_day}, #{portfolio_pj_end_day},
+         #{main_img_store_filename}, #{portfolio_pj_content}, #{portfolio_pj_point}, #{portfolio_pj_style}, sysdate(), #{nop})
+    </insert>
+    
+    <select id="selectPortfolioId" resultType="String">
+    	select last_insert_id()
+    </select>
+    
+    <insert id="insertContentImg" parameterType="java.util.List">
+    	insert into portfolio_content_img values
+    	<foreach collection="list" item="file" separator=",">
+			(null, #{file.portfolio_id}, #{file.pj_img_store_filename}, #{file.pj_img_fileno})
+    	</foreach>
+    </insert>
+    
+    <insert id="insertPointImg" parameterType="java.util.List">
+    	insert into portfolio_point_img values
+    	<foreach collection="list" item="file" separator=",">
+			(null, #{file.portfolio_id}, #{file.point_img_store_filename}, #{file.point_img_fileno})
+    	</foreach>
+    </insert>
+    
+    <insert id="insertStyleImg" parameterType="java.util.List">
+    	insert into portfolio_style_img values
+    	<foreach collection="list" item="file" separator=",">
+			(null, #{file.portfolio_id}, #{file.style_img_store_filename}, #{file.style_img_fileno})
+    	</foreach>
+    </insert>
+    
+    <insert id="insertAttachFile" parameterType="java.util.List">
+    	insert into portfolio_attach_file values
+    	<foreach collection="list" item="file" separator=",">
+			(null, #{file.portfolio_id}, #{file.attach_filename}, #{file.attach_store_filename}, #{file.attach_fileno})
+    	</foreach>
+    </insert>
+    <!-- INSERT-END -->
+	
+	<!-- SELECT -->
+	<select id="selectPortfolio" parameterType="String" resultType="portfolio">
+		select portfolio_id, category1, category2, portfolio_title, portfolio_pj_start_day, portfolio_pj_end_day, main_img_store_filename, nop
+		from portfolio
+		where user_id = #{user_id}
+	</select>
+    
+    <select id="selectPortfolio2" parameterType="portfolio" resultType="portfolio">
+		select portfolio_id, category1, category2, portfolio_title, portfolio_pj_start_day, portfolio_pj_end_day, main_img_store_filename, nop
+		from portfolio
+		where (not portfolio_id = #{portfolio_id}) and user_id = #{user_id}
+	</select>
+    
+</mapper>

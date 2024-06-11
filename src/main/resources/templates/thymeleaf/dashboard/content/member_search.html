@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashboard/layout/dashboardLayout}">
+<th:block layout:fragment="css">
+	<link rel="stylesheet"
+		th:href="@{/css/thymeleaf/dashboard_member_search.css}" />
+</th:block>
+<th:block layout:fragment="js">
+	<script type="text/javascript" th:src=@{/js/dashboard/member_search.js}></script>
+</th:block>
+<body>
+	<div class="content" layout:fragment="content">
+		<h1>회원정보수정</h1>
+		
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">회원조회</h5>
+						<div class="search_form">
+							
+								<span> <select class="search_cb">
+										<option value="아이디" selected="selected">아이디</option>
+										<option value="이메일">이메일</option>
+										<option value="이름">이름</option>
+								</select>
+								</span> <span> <input id="search_input" type="text"
+									autocomplete="off" placeholder=" 회원아이디 혹은 회원이름을 검색해주세요.">
+								</span> <span> <i id="search_btn"
+									class="fa-regular fa-magnifying-glass fa-2xl"></i>
+								</span>
+							
+						</div>
+						<div class="search_result">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>아이디</th>
+										<th>이메일</th>
+										<th>이름</th>
+										<th>전화번호</th>
+										<th>성별</th>
+										<th>생년월일</th>
+										<th>가입일자</th>
+										<th>등급</th>
+										<th>포인트</th>
+									</tr>
+								</thead>
+								<tbody id="searchResult">
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">회원정보수정</h5>
+						<div class="form">
+							<div class="form-wrapper">
+								<div class="update_form">
+									<form name="userEditForm" action="/metahaus/dashboard/member/update" method="post">
+										<input name="user_id" type="hidden" />
+										<div class="form-input-line">
+											<span>등급</span><span><input name="user_grade" type="text" /></span>
+										</div>
+										<div class="form-input-line">
+											<span>포인트</span><span><input name="point" type="text" /></span>
+										</div>
+										<div class="form-submit-button">
+											<button class="btn btn-primary">수정하기</button>
+										</div>										
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</body>
+</html>

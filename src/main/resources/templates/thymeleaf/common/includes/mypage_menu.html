@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/metahaus/css/common/menu/menu.css">
+</head>
+<body>
+	<div class="sidebar" th:fragment="menu">
+		<div class="menu_list">
+			<div class="menu_title">마이 페이지</div>
+			<div class="menu_list_title">내 정보 관리</div>
+			<ul class="menu_ul">
+				<li class="menu_li"><a href="/metahaus/mypage/profile">프로필</a></li>
+				<li class="menu_li"><a href="/metahaus/point/mypoint">내 포인트</a></li>
+				<li class="menu_li"><a href="/metahaus/mypage/setting">설정</a></li>
+			</ul>
+			<div class="menu_list_title">크리에이터</div>
+			<ul class="menu_ul">
+				<li class="menu_li"><a th:href="@{/project/my-products(pageNo=${'0'})}">프로젝트 등록</a></li>
+				<li class="menu_li"><a th:href="@{/order/project/buylist(pageNo=${'0'})}">구매관리</a></li>
+				<li class="menu_li"><a th:href="@{/order/project/saleslist(pageNo=${'0'})}">판매관리</a></li>
+			</ul>
+			<div class="menu_list_title">에셋</div>
+			<ul class="menu_ul">
+				<li class="menu_li"><a th:href="@{/asset/my-products(pageNo=${'0'})}">에셋 등록</a></li>
+				<li class="menu_li"><a th:href="@{/order/asset/buylist(pageNo=${'0'})}">구매관리</a></li>
+				<li class="menu_li"><a th:href="@{/order/asset/saleslist(pageNo=${'0'})}">판매관리</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

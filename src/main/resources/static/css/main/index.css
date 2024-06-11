@@ -1,0 +1,509 @@
+.item-img-warp{
+    background-color: #6C4AB6;
+}
+
+
+.section-visual {
+    height: 400px;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    border-radius: 0px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    border-bottom: 2px solid #c9c9c9;
+}
+.inner-test{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 50px 0px;
+}
+.test2{
+    padding-left: 30px;
+    border-radius: 100px;
+    border: none;
+    background-color: #ffffff;
+    width: 500px;
+    height: 60px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.test{
+    width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    grid-gap: 40px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.section-visual .inner {
+    position: relative;
+    z-index: 1; /* .inner를 MP4 동영상 위로 올림 */
+}
+
+.section-visual .chat-box input[type="text"] {
+    width: 100%;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid white;
+    opacity: 50%;
+    border-radius: 30px;
+}
+.chat-box input{
+ 
+ margin-right: 100px;
+ 
+}
+.section-visual video {
+    border-radius: 2%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-visual2 video {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+/* 배너 영역 */
+#banner-section{
+    width: 1200px;
+    
+    margin: 0 auto;
+}
+
+
+/* 타이틀 */
+.banner-title-wrap{
+    display: flex;
+    padding:25px;
+    margin-top: 6%;
+}
+
+/*폰트 */
+.myfont-1{
+    font-size: 24px;
+    font-weight: bold;
+}
+.myfont-2{
+    font-size: 18px;
+    margin: 10px 0;
+}
+.myfont-3{
+    margin: 10px 0;
+    font-size: 14px;
+    color:rgb(158, 158, 158);
+    font-weight: bold;
+}
+.myfont-4{
+    font-size: 16px;
+}
+
+.myfont-5{
+    font-size: 16px;
+}
+
+.ml-auto{
+    margin-left: auto;
+}
+
+.banner-slider-wrap{
+    height: 100%;
+    position: relative;
+}
+.slider-outter{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 슬라이더 아이템 리스트 */
+.banner-slider-list{
+    position: relative;
+    display: flex;
+    padding: 0 1%;
+    left:0;
+    transition: left 1s;
+    height: 100%;
+}
+
+/* 슬라이더 아이템 */
+.banner-slider-item{
+    width: 25%;
+    flex-shrink:0;
+    padding:2%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.banner-slider-item2{
+    width: 50%;
+    flex-shrink:0;
+    padding:2%;
+    box-sizing: border-box;
+}
+.banner-slider-item3{
+    width: 100%;
+    flex-shrink:0;
+    padding:2%;
+    box-sizing: border-box;
+}
+.item-img-warp{
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+}
+.item-img-warp img{
+	width:100%;
+	height:100%;
+	border-radius: 5px;
+}
+.item-img-warp2{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.banner-slider-item span{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* 슬라이더 버튼 */
+.btn-shape{
+    position: absolute;
+    top:50%;
+    transform: translate(-100%,-150%);
+    
+    z-index: 2;
+    align-self: center;
+    cursor: pointer;
+    color: rgb(174, 174, 174);
+    
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+
+    border-radius: 50%;
+    box-shadow: 3px 5px 5px rgb(163, 163, 163);
+}
+
+.btn-shape2{
+    position: absolute;
+    top:50%;
+    transform: translate(-50%,-50%);
+
+    z-index: 2;
+    align-self: center;
+    cursor: pointer;
+    color: white;
+    
+    opacity: 70%;
+    width: 30px;
+    height: 30px;
+    line-height: 50px;
+    text-align: center;
+
+    border-radius: 50%;
+  
+}
+
+.nextbtn{
+    left:100%;
+    transform: translate(0%,-150%);
+}
+.nextbtn2{
+    left:100%;
+}
+.test2::placeholder {
+    font-size: 20px; /* 텍스트 크기 조절 */
+    text-indent: 20px; /* 오른쪽으로 10px만큼 이동 */
+    
+    /* 다른 스타일 속성들을 추가로 지정할 수 있습니다 */
+  }
+  .item-img-warp2 img {
+    border-radius: 2%;
+  }
+
+
+
+
+
+
+/* 게임 List */
+ 
+
+.image-grid-container {
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    overflow: auto;
+    margin-bottom: 0px; /* 아래로 내리고 싶은 크기를 원하는 값으로 수정하세요 */
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 350px); /* 2개의 열을 가로 200px 크기로 반복 */
+    grid-template-rows: repeat(2, 200px); /* 3개의 행을 세로 200px 크기로 반복 */
+    grid-gap: 30px; /* 이미지 사이의 간격을 조정할 수 있습니다. 필요에 따라 조정하세요. */
+}
+
+.image-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.1s ease-in-out;
+}
+
+.image-grid img:hover {
+    transform: scale(0.9); /* 확대할 크기를 원하는 값으로 수정하세요 */
+}
+
+.game-list {
+    font-size: 24px; /* 폰트 크기를 원하는 크기로 수정하세요 */
+    padding:30px;
+    font-weight: bold;
+    
+    text-align: right;
+}
+
+.mata-game-list {
+    margin-top: 100px; /* 위쪽 마진을 원하는 크기로 수정하세요 */
+    position: relative; /* 부모 요소를 상대적으로 위치시킴 */
+ 
+}
+
+
+/* 민우가 만든 리뷰카드 */
+.review-card {
+  width: 550px;
+  height:fit-content;
+  padding: 20px 40px;
+  box-shadow: 4px 4px 12px 0px #C4B0FF;
+  color:black;
+}
+.review-card:hover {
+	text-decoration: none;
+	cursor: pointer;
+	color:black;
+	transform: scale(1.1);
+}
+
+.review-card--contents{
+	display:flex;
+	flex-direction:column;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+.review-header{
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 20px;
+}
+.review-header--image{
+	width:50px;
+	height: 50px;
+	object-fit:cover;
+	border-radius: 999px;
+	margin-right: 15px;
+}
+.review-header--image img{
+	width: 100%;
+	height: 100%;
+	border-radius: 999px;
+}
+.review-header--info{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.review-info--row01{
+	font-size: 14px;
+	color : var(--bright-purple);
+	font-weight: 500;
+}
+.review-info--row02{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	
+}
+.review-rating{
+	display:flex;
+	flex-direction: row;
+	font-size: 12px;
+}
+.stars{
+	color:#FFCD1B;
+}
+.score{
+	font-weight: bold;
+}
+.review-date{
+	color:var(--gray);
+	font-weight: 500;
+	font-size: 12px;
+}
+.review-body{
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom:10px;
+}
+.review-product-title{
+	display: flex;
+	flex-direction: row;
+}
+.review-product--col{
+	font-size: 14px;
+	font-weight: 500;
+	color:var(--gray);
+}
+/* ------------------------------- */
+/* 리뷰 파트 */
+
+.review-card {
+  width: 530px;
+  padding: 20px 40px;
+  box-shadow: 4px 4px 12px 0px #C4B0FF;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.image-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+}
+
+.info-container {
+  flex-grow: 1;
+  margin-left: 10px;
+  text-align: right;
+}
+
+.star-rating {
+  font-size: 28px;
+  color: #FFD700;
+}
+
+.date {
+  font-size: 14px;
+  color: #999;
+}
+
+.review-content {
+    margin-bottom: 48px;
+    margin-left: 2%;
+    font-size: 18px;
+    margin-top: 5%;
+}
+
+.work-date {
+  font-size: 12px;
+  color: #666;
+}
+
+
+
+
+
+
+ .image-container2 {
+	    width: 360px;
+	    height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .image-container2 img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .left-half {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      
+    }
+    
+    .right-half {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .left-half:hover,
+    .right-half:hover {
+      opacity: 1;
+    }
+    
+    .tooltip2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      pointer-events: none;
+    }
+
+    
+    .inputkeyword {
+    	margin-top: 50px;
+    	font-size: 40px;
+    }

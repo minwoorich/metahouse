@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/salesLayout}">
+<head>
+<meta charset="UTF-8">
+<title>Asset/detail</title>
+<link href="/metahaus/css/asset/market_product_detail.css" rel="stylesheet" type="text/css" />
+<link href="/metahaus/css/asset/market_product_detail_img.css" rel="stylesheet" type="text/css" />
+<link href="/metahaus/css/asset/report_modal.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div layout:fragment="content" class="content">	
+		<!-- product detail -->
+		<div id="product_detail">
+			<div>ASSET&ensp;&rang;&ensp;
+				<span th:text="${asset.category1}"></span>&ensp;&rang;&ensp;
+				<span th:text="${asset.category2_as}"></span>
+			</div><br>
+			<div id="productId" th:text="${asset.asset_id}" hidden=""></div>
+			<div id="main_title" th:text="${asset.title}"></div>
+			<!-- 이미지 갤러리 -->
+			<div id="photo_container">
+				<div id="main_photo_box">
+ 					<img th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}" alt="photo" id="photo">
+ 				</div>
+				<ul id="gallery" th:if="${assetImgs.size > 0}">
+					<li>
+	 					<img th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}" alt="photo" id="photo">
+					</li>
+					<li th:each="assetImgs, i:${assetImgs}">
+						<img th:src="@{/upload/asset_optional_img/}+${assetImgs.asset_detail_img_store_filename}" alt="thumbnail">
+					</li>
+				</ul>
+			</div>
+			<div class="select_product_bigbox">
+				<div class="select_product_box2">
+					<div class="sub_title" id="product_explain">에셋 설명 :</div>
+					<div class="sub_content" th:utext="${asset.description}"></div>
+				</div>
+				<div class="select_product_box2">
+					<div class="sub_title">가격 :</div>
+					<div class="sub_content" th:text="${asset.price}+원"></div>
+				</div>
+				<div class="select_product_box2">
+					<!-- 취소 및 환불 규정 -->
+		            <div class="sub_title">취소 및 환불 규정</div>
+		            <div class="sub_content">
+		            	1. 기본 환불 규정<br/>
+		            	&ensp;1) 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.<br/>
+		            	&ensp;2) 작업이 완료된 이후 또는 자료, 프로그램 등 서비스가 제공된 이후에는 환불이 불가합니다.<br/><br/>
+		            	2. 판매자 책임 사유<br/>
+		            	&ensp;1) 판매자의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제한 금액에 대하여 전액 환불이 가능합니다.
+		            	<br/><br/>&lowast;추가 관련 규정은 당사 홈페이지의 최소 및 환불관련 규정을 참고해 주십시오.
+		            </div>
+	            </div>
+            </div>
+           <!-- 리뷰 -->
+            <div class="sub_title">에셋 평가</div>
+            <div class="sub_content" th:if="${assetReviews.size > 0}">
+            	<!-- 종합리뷰 -->
+	            <div class="review_summary">
+	            	<div class="review_avg" th:text="${#numbers.formatDecimal(#aggregates.sum(assetReviews.![rating])*1.0/#lists.size(assetReviews), 1, 1)}">
+	            	</div>
+	            	<div>
+						<!-- 별점 -->
+						<div class="reviewer_star_rating">
+							<div class="star-ratings">
+								<div class="star-ratings-fill space-x-2 text-lg" 
+									th:style="${'width:'+(#aggregates.sum(assetReviews.![rating])*1.0/#lists.size(assetReviews))*20+'%'}">
+									★★★★★
+								</div>
+								<div class="star-ratings-base space-x-2 text-lg">
+									★★★★★
+								</div>
+							</div>
+						</div>
+	            		<!-- 리뷰갯수 -->
+						<div th:text="${#lists.size(assetReviews)+'개의 에셋 후기'}"></div>
+	            	</div>
+	            </div>
+	            <hr/>
+	            <!-- 리뷰 이미지 -->
+				<div>
+					<div class="review_title">포토 후기</div>				
+					<div class="banner-slider-wrap">
+							<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+							<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>		
+						<div class="slider-outter">
+							<div index="0" class="banner-slider-list">
+							<th:block th:each="review : ${assetReviews}" th:if="${review.reviewImg!=null}">
+								<div th:each="reviewImg : ${review.reviewImg}" class="banner-slider-item">
+									<div class="review_photos item-img-warp" >
+										<img  width=100% height=100% alt="리뷰이미지" th:src="@{/upload/review/asset/}+${reviewImg.review_store_filename}"	
+										 class="review_photo" style="background-color: pink;">
+									</div>
+								</div>
+							</th:block>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div class="review_title">에셋 후기</div>
+				<!-- 개인 리뷰 -->
+				<div class="review-wrap" th:each="review : ${assetReviews}">
+					<div class="reviewer" th:text="${review.writer_id}"></div>
+					<div class="review_info_wrap">
+						<!-- 개인리뷰 별점 -->
+						<div class="reviewer_star_rating">
+							<div class="star-ratings">
+								<div class="star-ratings-fill space-x-2 text-lg"
+									 :style="{ width: ratingToPercent + '%' }">
+									<th:block th:each="num : ${#numbers.sequence(0,review.rating-1)}">
+										<span>★</span>
+									</th:block>
+								</div>
+								<div class="star-ratings-base space-x-2 text-lg">
+									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+								</div>
+							</div>
+						</div>
+						<!-- 개인 리뷰점수 -->
+						<div th:text="'&ensp;'+${#numbers.formatDecimal(review.rating,1,1)}+'&ensp;'"></div>
+						<!-- 개인 리뷰등록일자 -->
+						<div class="reviewer" th:text="'|&ensp;'+${#dates.format(review.review_date,'yyyy.MM.dd')}"></div>
+					</div>
+					<!-- 개인 리뷰 이미지 -->
+					<div index="0" class="banner-slider-list">
+						<div class="banner-slider-item" th:if="${review.reviewImg!=null}" 
+							th:each="reviewImg : ${review.reviewImg}">
+							<div class="review_photos item-img-warp" >
+								<img  width=100% height=100% alt="리뷰이미지" class="review_photo" 
+									th:src="@{/upload/review/asset/}+${reviewImg.review_store_filename}">
+							</div>
+						</div>
+					</div>
+					<br/>
+					<!-- 개인 리뷰 내용 -->
+					<div class="review_content" th:text="${review.review_text}"></div>
+					
+					<!-- 답글 섹션 -->
+					<div class="comment speech-bubble" th:if="${review.reviewComment!=null}">
+						<div>크리에이터<span th:text="'&ensp;|&ensp;'+${#dates.format(review.reviewComment.comment_date,'yyyy.MM.dd')}"></span></div><br>
+						<div th:text="${review.reviewComment.comment_text}"></div>
+					</div>
+					<div class="comment speech-bubble" th:if="${review.reviewComment==null && session.loginUser?.userId==asset.seller_id}">
+						<div>크리에이터</div><br>
+						<input class="A-review-id" type="hidden"  th:value="${review.asset_review_id}"/>
+						<input type="text" class="commentText" placeholder="답글을 작성해 주세요"/>
+						<button type="button" class="writeComment">답글쓰기</button>
+					</div>
+				</div>				
+            </div>
+            <!-- 리뷰없을 때 -->
+            <div class="sub_content" th:if="${assetReviews.size <= 0}">
+	            <div class="review_summary">
+					<div> 아직 등록된 리뷰가 없습니다.</div>
+	            </div>
+	        </div>
+            
+            <!-- 게시글 신고 -->
+			<div id="report" th:if="${session.loginUser != null}">
+				<img alt="신고아이콘" src="/metahaus/images/report_icon.png" id="report_img">
+				<a  href="javascript:openModal()">&ensp;게시글 신고하기</a>
+			</div>
+		</div>
+
+		<!-- select_product_box -->
+		<div id="select_product_box">
+			<!-- select product -->
+			<div id="select_product">
+	 		<img th:if="${asset.main_img != null}" id="represent_img"
+					th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"/>
+				<div class="product_title" th:text="${asset.title}"></div>
+				<div class="product_info" id="product_date" th:text="'작성일자: '+${#strings.substring(asset.asset_date,0,10)}"></div>
+				<div class="product_info" id="product_price" th:text="${asset.price}+원"></div>
+			</div>
+			<!-- seller profile -->
+			<div id="seller_profile" th:onclick="|location.href='@{/user/profile(userId=${asset.seller_id})}'|">
+				<div id="seller_img_box">
+					<img th:if="${asset.userName.thumbnailStoreFilename != null}" id="seller_img"
+						 th:src="'/metahaus/upload/userThumbnail/'+${asset.userName.thumbnailStoreFilename}">
+					<img th:unless="${asset.userName.thumbnailStoreFilename != null}" id="seller_img"
+						 src="/metahaus/images/test_img.jpg">
+				</div>
+				<div id="seller_info">
+					<div class="seller_id" th:text="${asset.seller_id}"></div>
+					<div class="seller_name" th:text="${asset.userName.userName}"></div>
+				</div>
+			</div>
+			<!-- buy button -->
+			<div id="btn">
+				<button class="button--small btn_custom" id="ask" 
+					th:onclick="|location.href='@{/chat/create/chatroom(seller_id=${asset.seller_id})}'|">문의하기</button>
+				<button class="button--small btn_custom"
+					 th:onclick="|location.href='@{/asset/purchase(assetNum=${asset.asset_id})}'|">구매하기</button>
+			</div>
+		</div>
+		
+		<!-- 신고하기 모달 -->
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<button class="close-button" onclick="closeModal()">X</button>
+				<h2 class="sub_title">게시글 신고하기</h2>
+				<div class="form-container">
+        		<form id="form_box">
+          			<label for="unresponsive">
+            			<input type="radio" id="unresponsive" name="report_reason" value="스팸홍보/도배글">
+            			스팸홍보/도배글 입니다.
+          			</label>
+			        <label for="inappropriate">
+			        	<input type="radio" id="inappropriate" name="report_reason" value="음란물">
+			        	음란물입니다.
+			        </label>
+			          <label for="external">
+			            <input type="radio" id="external" name="report_reason" value="불법정보를 포함">
+						불법정보를 포함하고 있습니다.
+			          </label>
+			          <label for="low-quality">
+			            <input type="radio" id="low-quality" name="report_reason" value="개인정보 노출 게시물">
+			           	 개인정보 노출 게시물 입니다.
+			          </label>
+			          <label for="delayed-delivery">
+			            <input type="radio" id="delayed-delivery" name="report_reason" value="불쾌한표현">
+			           	 불쾌한(욕설/생명경시/혐오/차별적) 표현입니다
+			          </label>
+			          <label for="other">
+			            <input type="radio" id="other" name="report_reason" value="other">
+			            <input type="text" id="other-reason" placeholder="기타 신고 사유를 입력해주세요.(최대 100자)" maxlength="100"
+			            onfocus="this.placeholder=''" onblur="this.placeholder='기타 신고 사유를 입력해주세요.'">
+			          </label>
+			          <!-- 전송 버튼 -->
+			          <button type="button" class="submit-button " onclick="submitForm()">전송</button>
+		        </form>
+	      	</div>
+    	</div>
+  	</div><!-- 신고모달 끝 -->
+
+	<script src="/metahaus/js/asset/market_detail.js"></script>
+	<script>
+    var modal = document.getElementById("myModal");
+    // 모달 열기
+    function openModal() {
+    	modal.style.display = "block";
+    }
+    // 모달 닫기
+    function closeModal(){
+	    modal.style.display = 'none';
+	    $("#form_box")[0].reset();
+    }
+
+    // 신고 양식 전송
+    function submitForm() {
+    	var target = $("#productId").text();
+    	var reason = $('input[name=report_reason]:checked').val();
+		if(reason=="other"){
+			reason ='기타:'+$("#other-reason").val();
+      	}
+    	var param = {"report" :{
+    			"report_location" : 'Asset',
+    			"report_target_id" : target, 
+    			"report_reason" : reason
+	    	}
+    	}
+
+      $.ajax({      
+		  url : "/metahaus/report",      
+    	  type : "POST",  
+    	  data : JSON.stringify(param),
+    	  contentType: 'application/json',
+    	  success : function(data){   
+    	        alert(data);     
+				modal.style.display = 'none';
+			    $("#form_box")[0].reset();
+    	  
+    	        },   
+    	    error : function(){  
+    	    	alert("로그인 후 신고 가능합니다.");  
+    	        }  
+    	}); 
+    }
+  </script>
+	</div><!-- layout:fragment -->	
+	
+</body>
+</html>

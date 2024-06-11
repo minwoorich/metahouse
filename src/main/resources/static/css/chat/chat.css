@@ -1,0 +1,423 @@
+@charset "UTF-8";
+/* 채팅 페이지 컨테이너 */
+.chat-container {
+	display: flex;
+	flex-direction: row;
+	min-width: 100%;
+	height: 900px;
+
+}
+
+/* 채팅 왼쪽 사이드 바 */
+.chat-left-sidebar {
+	width: 300px;
+	height: 100%;
+	border: 1px solid rgb(141, 114, 225, 0.1);
+	background-color: rgb(141, 114, 225, 0.1);
+}
+
+/* 왼쪽 사이드바 - 채팅 검색칸 */
+.chat-search {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid rgb(141, 114, 225, 0.1);
+	padding-inline: 20px;
+	background-color: rgb(141, 114, 225,0);
+}
+
+.chat-search-bar {
+	border: 1px solid rgb(141, 114, 225, 0.1);
+	border-radius: 8px;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+/* 왼쪽 사이드바 - 채팅 목록 */
+.chatroom-list-container {
+	width: 100%;
+	height: 800px;
+	overflow-y: auto;
+}
+
+.chatroom-list-container::-webkit-scrollbar {
+	width: 5px
+}
+
+.chatroom-list-container::-webkit-scrollbar-thumb {
+	background-color: var(--light-purple); /* rgb(141,158,255) */
+}
+
+.chatroom-list-container::-webkit-scrollbar-track {
+	background-color: rgba(141, 158, 255, 0.2);
+}
+
+.chatroom-list {
+	display: flex;
+	flex-direction: column;
+	box-shadow: 23px 0px 28px #C4B0FF;
+}
+
+.chatroom-card {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 120px;
+	border-bottom: 1px solid rgb(141, 114, 225, 0.1);
+	padding: 20px;
+}
+.chatroom-card:hover {
+	cursor:pointer;
+}
+
+.chatroom-card__profile-image {
+	width: 65px;
+	height: 65px;
+	border-radius: 999px;
+	overflow: hidden;
+	margin-right: 10px;
+}
+
+.chatroom-card__profile-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.chatroom-card__info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.chatroom-card__info-row01 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.username {
+	font-weight: bold;
+}
+
+.last-date {
+	color: var(--gray);
+}
+
+.chatroom-card__info-row02 {
+	
+}
+/* 채팅 메인 영역 */
+.chat-main {
+	width: 100%;
+	height: 100%;
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid rgb(141, 114, 225, 0.1);
+}
+
+.chat-header {
+	width: 100%;
+	height: 100px;
+	border-top: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
+}
+
+.chat-body {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	box-sizing: border-box;
+	width: 100%;
+	flex: 1;
+	height: 600px; /* 수정된 높이 */
+	    border-bottom: 3px solid rgb(141, 114, 225, 0.1);
+    border-top: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
+}
+
+.chat-body__chat-section {
+	flex: 1;
+	height: inherit;
+	overflow-y: auto; /* 세로 스크롤 추가 */
+	margin: 20px;
+}
+
+.chat-body__chat-section::-webkit-scrollbar {
+  width: 5px; /* 스크롤 바의 너비 */
+}
+
+.chat-body__chat-section::-webkit-scrollbar-thumb {
+  background-color: var(--bright-purple); /* 스크롤 바 색상 */
+}
+
+.chat-body__chat-section::-webkit-scrollbar-track {
+  background-color: rgba(141, 158, 255, 0.2); /* 스크롤 바 트랙 색상 */
+}
+
+
+.chat-body__profile-section {
+	width: 300px;
+	height: inherit;
+	border-left: 3px solid rgb(141, 114, 225, 0.1);
+	margin-top: 2%;
+	
+}
+
+/* 채팅 푸터 영역*/
+.chat-footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-height: 300px;
+	width: 100%;
+	height: fit-content;
+	
+	padding: 20px;
+	border-bottom: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
+}
+ 
+
+
+/* 메시지 입력칸 */
+.chat-footer input {
+	padding-inline: 20px;
+	padding-block: 10px;
+	width: 100%;
+	height: 60px;
+	border: 1px solid rgb(108, 74, 182, 0.1);
+	border-radius: 8px;
+	margin-bottom: 20px;
+	    border-top: 3px solid rgb(141, 114, 225, 0.1);
+    border-left: 3px solid rgb(141, 114, 225, 0.1);
+    border-right: 3px solid rgb(141, 114, 225, 0.1);
+    border-bottom: 3px solid rgb(141, 114, 225, 0.1);
+}
+
+
+/* 채팅 버튼 모음 */
+.chat-footer-row02 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* 기능 버튼들 */
+.chat-functional-buttons {
+	display: flex;
+	width: fit-content;
+	height: fit-content;
+	flex-direction: row;
+	align-items: center;
+}
+
+.functional-button {
+	margin-right: 30px;
+	color: var(--gray);
+}
+
+/* 전송 버튼 */
+.send-button {
+	font-size:16px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 10px;
+	width: 66px;
+	height: 37px;
+	background: var(--bright-purple);
+	box-shadow: var(--shade-button);
+	border-radius: 6px;
+}
+
+
+.chat-header h1 {
+        font-size: 30px;
+        color: #333;
+        margin-left: 20px; /* 원하는 픽셀 값으로 조정하세요 */
+        margin-top: 30px;
+        /* 원하는 스타일 속성을 추가로 설정하세요 */
+}
+
+.chat_body_profile-img_div{
+	text-align: center;
+	margin-top: 50px;
+}
+
+.chat-body__profile-section img{
+	border-radius: 999px;
+	width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+    
+    
+.chat_body_profile-info {
+    font-size: 14px;
+    margin-top: 30px;
+    margin-left: 30px;
+    text-align: left;
+    margin-right: 30px;
+    white-space: break-spaces;
+    word-break: keep-all;
+}
+
+.chatroom-card:hover {
+	background-color: white;
+} 
+    
+    
+    
+		/* 채팅 블록 영역 */
+        .chat-block{
+            display: flex;
+            align-items: end;
+            width: 665px;
+            height: fit-content;
+        }
+        .chat-block:not(:last-child){
+            margin-bottom: 30px;
+        }
+        .chat-block--send{
+            flex-direction: row-reverse;
+        }
+        .chat-block--reception{
+            flex-direction: row;
+        }
+
+        /* 채팅 메시지 박스 */
+        .chat-block__message{
+            display: flex;
+            max-width: 70%;
+            width: fit-content;
+            height: fit-content;
+            padding: 15px 20px;
+        }
+        .chat-block__message--reception{
+            flex-direction: column;
+            background-color: var(--medium-purple-1);
+            border-radius: 0px 10px 10px 10px;
+            margin-right: 10px;
+        }
+        .chat-block__message--send{
+            flex-direction: column;
+            background-color: var(--chat-yellow-5);
+            border-radius: 10px 0px 10px 10px;
+            margin-left: 10px;
+        }
+        
+        /* 일반 메시지, 첨부파일 */
+        .chat-block__message-files{
+            display: flex;
+            width: fit-content;
+            margin-top:10px;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        .message-file{
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+        
+        .message-file img{
+            border-radius: 6px;
+            /* border: 2px solid var(--light-purple); */
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .message-file span{
+            font-size: 12px;
+        }
+
+        /* 기능 메시지 */
+        .chat-block__message--functional{
+            width: 300px;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px 10px 10px 10px;
+            border : 1.5px solid var(--light-purple);
+            padding: 20px;
+        }
+        
+        .functional-send{
+            margin-left:10px;
+        }
+        
+        .functional-reception{
+            margin-right:10px;
+        }
+        
+        .chat-block__message--functional > :not(:last-child){
+            margin-bottom:10px;
+        }
+        
+        /* 채팅 타임 스탬프 */
+        .chat-block__timestamp{
+            display: flex;
+            flex-direction: column;
+            color: var(--gray);
+        }
+        
+        .chat-block__timestamp-date{
+            color: inherit;
+            font-size: 14px;
+        }
+        
+        .chat-block__timestamp-time{
+            color: inherit;
+            font-size: 12px;
+        }
+
+/*
+	테스트 코드
+ */ 
+
+.chat-functional-buttons label{
+	font-weight: inherit;
+	cursor:pointer;
+}
+
+/* 파일 필드 숨기기 */
+.chat-functional-buttons input[type="file"] {  
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+
+.file_img{
+	width: 100px;
+	height: 100px;	
+}
+
+.chat-block__message-files div{
+	font-size: 12px;
+	height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-bottom: 2px;
+}

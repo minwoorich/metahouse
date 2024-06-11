@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 부트스트랩 CSS 파일 로드 -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="common/layout/header.css">
+    
+    
+    <title>Document</title>
+    
+    
+</head>
+<body>
+      
+           <header class="container-fluid gradient-bg" style="border-bottom: 1px solid #6C4AB6;">
+           
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a th:href="@{/main/index}">
+                    <img src="/metahaus/images/METAHAUS.gif" alt="META HOUSE" class="custom-primaryimg">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav navbar-nav navbar-right">
+                    <li th:if="${session.loginUser != null}" class="nav-item" style="margin-right:10px;"><a class="nav-link custom-primary"><span th:text="${session.loginUser.userName} +'님 안녕하세요'"></span> </a></li>
+                    <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/chat/}"><span>메세지</span> </a></li>
+                    <li th:if="${session.loginUser != null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/mypage/profile}"><span>마이메타</span> </a></li>
+                    <li th:if="${session.loginUser == null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/login}"><span>로그인</span> </a></li>
+                    <li th:unless="${session.loginUser == null}" class="nav-item"><a class="nav-link custom-primary" th:href="@{/logout}"><span>로그아웃</span> </a></li>
+                </ul>
+                <div class="input-group">
+                <form id="searchForm" method="get" action="/metahaus/search/result">
+                    <input id="keywordInput" name="keyword" type="text" class="form-control" placeholder="서비스 또는 전문가를 검색해보세요.">
+                </form>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+            <ul class="nav navbar-nav1">
+                <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/main/index}" data-tooltip="홈으로 돌아가기">홈</a></li>
+                <li class="nav-item"><a class="nav-link custom-primary" data-tooltip="메타에셋을 구매 판매 하세요~" th:href="@{/asset/main?pageNo=1}">에셋마켓</a></li>
+                <li class="nav-item"><a class="nav-link custom-primary" th:href="@{/project/main(pageNo=1)}" data-tooltip="메타마켓에서 메타버스를 창조하세요~">크리에이터마켓</a></li>
+            </ul>
+        
+    </div>
+    <script th:inline="javascript" type="text/javascript" src="/metahaus/js/common/header.js"></script>
+</header>
+	
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

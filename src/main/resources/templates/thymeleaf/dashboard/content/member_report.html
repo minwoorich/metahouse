@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashboard/layout/dashboardLayout}">
+<th:block layout:fragment="css">
+	<!-- <link rel="stylesheet" th:href="@{/css/thymeleaf/dashboard_statistics.css}" /> -->
+</th:block>
+<th:block layout:fragment="js">
+	<!-- <script type="text/javascript" th:src=@{/js/dashboard/statistics.js}></script> -->
+</th:block>
+<body>
+	<div class="content" layout:fragment="content">
+		<h1>신고접수</h1>
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">유저 신고 접수 목록</h5>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>신고번호</th>
+									<th>처리상태</th>
+									<th>신고자</th>
+									<th>신고 대상 유저</th>
+									<th>신고 사유 (상세보기로 넘길 예정)</th>
+									<th>접수 시간</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>rep001011321</td>
+									<td>진행중</td>
+									<td>신고자</td>
+									<td>신고대상</td>
+									<td>부적절한 게시글 작성</td>
+									<td>2023/06/01 14:23:01</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

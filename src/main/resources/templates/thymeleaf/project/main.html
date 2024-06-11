@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/salesLayout}">
+<head>
+<meta charset="UTF-8">
+<title>Project/Main</title>
+<link href="/metahaus/css/project/market_product_grid.css" rel="stylesheet" type="text/css" />
+<link href="/metahaus/css/project/market_nav.css" rel="stylesheet" type="text/css" />
+<link href="/metahaus/css/project/market_page_bar.css" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript">
+	function getURL() {
+		var category2_pj = $("select[name=category2_pj]").val();
+		var ctg = window.location.search.substr(1).includes('category1');
+		if(ctg){
+			location.href='main?pageNo=1&category1='+$('#C1').text()+'&category2='+category2_pj
+		}else{
+			alert("채널을 먼저 선택하세요")
+		}
+    } 
+</script>
+</head>
+<body>
+	<div layout:fragment="content">
+	<!-- Main view -->
+	<div class="view">
+		<nav>
+			<!-- category combo -->
+			<div class="selectBox">
+				<p>PROJECT MARKET&ensp;
+					<span th:if="${not #strings.isEmpty(param.category1)}">&rang;&ensp;
+						<span th:text="${param.category1}" id="C1"></span>
+					</span>
+					<span th:if="${not #strings.isEmpty(param.category2)}">&rang;&ensp;
+						<span th:text="${param.category2}" id="C2"></span>
+					</span>
+				</p>
+				<select name="category2_pj" class="select" onchange=getURL()>
+					<option disabled selected="selected">카테고리 선택하기</option>
+					<option value="메타버스맵">메타버스 맵</option>
+					<option value="메타버스에셋">메타버스 에셋</option>
+					<option value="홍보/이벤트">홍보/이벤트</option>
+					<option value="기획/구축">기획/구축</option>
+				</select>
+				<span class="icoArrow"></span>
+			</div>	
+			<!-- search bar -->
+			<div class="search_bar">
+				<input type="text" placeholder="search" class="search_content">
+				<button type="submit" class="search_btn">
+					<img src="/metahaus/images/search_icon.png" class="btn_image">
+				</button>
+			</div>
+		</nav>
+
+		<!-- Product grid -->
+			<table class="products">
+				<thead>
+					<tr>
+						<th colspan="4" class="sort_pj">
+							<a class="sort_pj_tag"
+								th:href="@{/project/main?pageNo=1(category1=${param.category1}, category2=${param.category2}, sort=recent)}">최근 등록순</a>
+							<span>|</span>
+							<a class="sort_pj_tag"
+								th:href="@{/project/main?pageNo=1(category1=${param.category1}, category2=${param.category2}, sort=lowprice)}">가격 낮은순</a>
+							<span>|</span>
+							<a class="sort_pj_tag"
+								th:href="@{/project/main?pageNo=1(category1=${param.category1}, category2=${param.category2}, sort=highprice)}">가격 높은순</a>
+							<span>|</span>
+							<a class="sort_pj_tag"
+								th:href="@{/project/main?pageNo=1(category1=${param.category1}, category2=${param.category2}, sort=popularity)}">인기순</a>
+						</th>
+					</tr>
+				</thead>			
+			<tbody>
+			 <tr th:each="project, i:${projects}"  th:if="${i.index%4==0}">
+				<!-- Product1 -->
+					<td>
+					<th:block th:if="${i.index < i.size}">
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projects[i.index].project_id})}'|">
+							<div class="product_img_cover">
+								<img class="product_img" th:if="${projects[i.index].project_thumbnail_img != null}"
+									 th:src="@{/upload/project_thumbnail_img/}+${projects[i.index].project_thumbnail_img}"/>
+							</div>
+							<div class="product_info">
+								<!-- 별점 -->
+								<div class="reviewer_star_rating">
+									<div class="star-ratings">
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+projects[i.index].average_reviews*20+'%'}">
+											★★★★★
+										</div>
+										<div class="star-ratings-base space-x-2 text-lg">
+											★★★★★
+										</div>
+									</div>
+									<span th:text="'&ensp;('+${projects[i.index].Review_count}+')'"></span>
+								</div>								
+								<a th:text="${projects[i.index].title}" class="product_title"></a>
+								<span th:text="${projects[i.index].creator_id}" class="product_seller"></span>
+								<span th:text="${#numbers.formatInteger(projects[i.index].price, 3, 'COMMA')}+원+'&ensp;~'" class="product_price"></span>
+							</div>
+						</div>
+					</th:block>
+					</td>
+				<!-- Product2 -->
+					<td>
+					<th:block th:if="${i.index+1 < i.size}">
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projects[i.index+1].project_id})}'|">
+							<div class="product_img_cover">
+								<img class="product_img" th:if="${projects[i.index+1].project_thumbnail_img != null}"
+									 th:src="@{/upload/project_thumbnail_img/}+${projects[i.index+1].project_thumbnail_img}"/>
+							</div>
+							<div class="product_info">
+								<!-- 별점 -->
+								<div class="reviewer_star_rating">
+									<div class="star-ratings">
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+projects[i.index+1].average_reviews*20+'%'}">
+											★★★★★
+										</div>
+										<div class="star-ratings-base space-x-2 text-lg">
+											★★★★★
+										</div>
+									</div>
+									<span th:text="'&ensp;('+${projects[i.index+1].Review_count}+')'"></span>
+								</div>								
+								<a th:text="${projects[i.index+1].title}" class="product_title"></a>
+								<span th:text="${projects[i.index+1].creator_id}" class="product_seller"></span> 
+								<span th:text="${#numbers.formatInteger(projects[i.index+1].price, 3, 'COMMA')}+원+'&ensp;~'" class="product_price"></span>
+							</div>
+						</div>
+					</th:block>
+					</td>
+				<!-- Product3 -->
+		 			<td>
+		 			<th:block th:if="${i.index +2< i.size}" >
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projects[i.index+2].project_id})}'|">
+							<div class="product_img_cover">
+								<img class="product_img" th:if="${projects[i.index+2].project_thumbnail_img != null}"
+									 th:src="@{/upload/project_thumbnail_img/}+${projects[i.index+2].project_thumbnail_img}"/>
+							</div>
+							<div class="product_info">
+								<!-- 별점 -->
+								<div class="reviewer_star_rating">
+									<div class="star-ratings">
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+projects[i.index+2].average_reviews*20+'%'}">
+											★★★★★
+										</div>
+										<div class="star-ratings-base space-x-2 text-lg">
+											★★★★★
+										</div>
+									</div>
+									<span th:text="'&ensp;('+${projects[i.index+2].Review_count}+')'"></span>
+								</div>								
+								<a th:text="${projects[i.index+2].title}" class="product_title"></a>
+								<span th:text="${projects[i.index+2].creator_id}" class="product_seller"></span>
+								<span th:text="${#numbers.formatInteger(projects[i.index+2].price, 3, 'COMMA')}+원+'&ensp;~'" class="product_price"></span>
+							</div>
+						</div>
+		 			</th:block>
+					</td>
+				<!-- Product4 -->
+					 <td>
+					 <th:block th:if="${i.index +3< i.size}" >
+						<div class="product" th:onclick="|location.href='@{/project/detail(projectNum=${projects[i.index+3].project_id})}'|">
+							<div class="product_img_cover">
+								<img class="product_img" th:if="${projects[i.index+3].project_thumbnail_img != null}"
+									 th:src="@{/upload/project_thumbnail_img/}+${projects[i.index+3].project_thumbnail_img}"/>
+							</div>
+							<div class="product_info">
+								<!-- 별점 -->
+								<div class="reviewer_star_rating">
+									<div class="star-ratings">
+										<div class="star-ratings-fill space-x-2 text-lg" 
+											th:style="${'width:'+projects[i.index+3].average_reviews*20+'%'}">
+											★★★★★
+										</div>
+										<div class="star-ratings-base space-x-2 text-lg">
+											★★★★★
+										</div>
+									</div>
+									<span th:text="'&ensp;('+${projects[i.index+3].Review_count}+')'"></span>
+								</div>								
+								<a th:text="${projects[i.index+3].title}" class="product_title"></a>
+								<span th:text="${projects[i.index+3].creator_id}" class="product_seller"></span> 
+								<span th:text="${#numbers.formatInteger(projects[i.index+3].price, 3, 'COMMA')}+원+'&ensp;~'" class="product_price"></span>
+							</div>
+						</div>
+					 </th:block>
+					</td>
+				 </tr>
+			</tbody>
+			</table>
+			<!-- 페이지 번호 -->
+			<!-- ProjectPageDTO(total=21, currentPage=1, totalPages=2, startPage=1, endPage=2, pagingCount=5) -->
+		<div class="page_wrap">
+				<div class="page_nation" th:with="start=${pageInfo.startPage}, end=${pageInfo.endPage},
+					 nowPage=${pageInfo.currentPage}">
+					<a class="arrow pprev" th:if="${start > 1}"  th:href="@{/project/main(pageNo=1, category1=${param.category1}, category2=${param.category2}, sort=${param.sort})}">&lang;&lang;</a>
+					<a class="arrow prev" th:if="${start > 1}" th:href="@{/project/main(pageNo=nowPage-1, category1=${param.category1}, category2=${param.category2}, sort=${param.sort})}">&lang;</a>
+					<th:block th:each= "page : ${#numbers.sequence(start, end)}">
+						<a th:if="${page != nowPage}" 
+						   th:href="@{/project/main(pageNo = ${page}, category1=${param.category1}, category2=${param.category2}, sort=${param.sort})}"
+	           			   th:text="${page}"></a>
+	           			<a th:if="${page == nowPage}" th:text="${page}" class="active"></a>
+					</th:block>
+					<a class="arrow next" th:if="${end < pageInfo.totalPages}"  th:href="@{/project/main(pageNo=nowPage+1, category1=${param.category1}, category2=${param.category2}, sort=${param.sort})}">&rang;</a>
+					<a class="arrow nnext" th:if="${end < pageInfo.totalPages}"  th:href="@{/project/main(pageNo=${pageInfo.totalPages}, category1=${param.category1}, category2=${param.category2}, sort=${param.sort})}">&rang;&rang;</a>
+				</div> 
+			</div>
+		</div>
+
+	</div><!-- layout:fragment -->	
+</body>
+</html>

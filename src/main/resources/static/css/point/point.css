@@ -1,0 +1,117 @@
+.mypoint-section {
+	padding: 35px;
+}
+
+.mypoint-section h3 {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	margin-top: 50px;
+	color: var(--medium-purple);
+}
+
+.mypoint-info {
+	width: 725px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.mypoint-info div {
+	text-align: center;
+}
+
+.mypoint-button-div {
+	width: 725px;
+	padding-top: 10px; 
+	display : flex;
+	justify-content: center;
+}
+
+.button--small {
+	padding: 5px 10px;
+	font-weight: bold; font-size : 18px;
+	background: var(--medium-purple);
+	font-size: 18px;
+}
+
+.mypoint-label-div {
+	display: inline-block;
+	border: 1px solid var(--medium-purple);
+	border-radius: 4px;
+	white-space:nowrap;
+}
+
+.mypoint-label {
+	font-weight: bold;
+	font-size: 18px;
+	display: inline-block;
+	padding: 8px;
+	color: white;
+	background-color: var(--medium-purple);
+	border: 1px solid #ccc;
+	
+	border-collapse: collapse;
+	border-style: hidden;
+	box-shadow: 0 0 0 1px var(--medium-purple);
+}
+
+.mypoint-count {
+	font-size: 18px;
+	display: inline-block;
+	width: 110px;
+	text-align: center;
+}
+
+.mypoint-history {
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.mypoint-history table {
+	width: 725px;
+	border: 1px solid black;
+	border-radius: 4px;
+	border-collapse: collapse;
+	border-style: hidden;
+	box-shadow: 0 0 0 1px var(--medium-purple);
+	table-layout: fixed;
+	word-break: break-all;
+}
+
+.mypoint-history th, .mypoint-history td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	font-size: 18px;
+	word-break: keep-all;
+}
+
+.mypoint-history th {
+	background-color: var(--medium-purple);
+	text-align: center;
+	color: white;
+}
+
+/* 날짜 데이터 중앙 정렬 */
+.mypoint-history td:nth-child(1), td:nth-child(2) {
+	text-align: center;
+}
+
+/* 금액 우측 정렬 */
+.mypoint-history td:nth-child(3), td:nth-child(4) {
+	text-align: right;
+}
+
+.mypoint-description p {
+	font-size: 18px;
+}
+
+.cg-pageNo, .cs-pageNo{
+	cursor: pointer;
+}
+
+.cg-paging-div, .cs-paging-div {
+	width:725px;
+}

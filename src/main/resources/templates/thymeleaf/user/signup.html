@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/nonsideLayout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/metahaus/css/user/signup.css">
+<link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
+<script type="text/javascript">
+	$(document).ready(function(){
+		let idIsVaild = false;
+		let passwordIsVaild = false;
+		
+		let allVaild = false;
+		
+		$("#allcheck").on("click", function(){
+			if($("#allcheck").is(":checked")){
+				$(".chk").prop("checked", true);
+			}else{
+				$(".chk").prop("checked", false);
+			}
+		});
+		
+		$(".chk").on("click", function(){
+			var total_chk_num = $(".chk").length;
+			var checked = $(".chk:checked").length;
+			
+			if(total_chk_num != checked){
+				$("#allcheck").prop("checked", false);
+			}else{
+				$("#allcheck").prop("checked", true);
+			}
+		});
+		
+		$("#signup_submit").on("click", function(){
+			let isValid = true;
+	    	//alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
+	    	$('.alert-msg').remove();
+	    	$('.essential').each(function() {
+				  if ($(this).val().trim() === '') {
+					  alertMsg = $("<div>항목을 채워주세요</div>").attr("class", "alert-msg");
+				//	  alert("test")
+					//  alert($(this).val())
+					  $(this).parent().append(alertMsg);
+					  $(this).addClass('alert-style');
+					  isValid=false;
+				  }else{
+					  $(this).removeClass('alert-style');
+				  }
+	    	});
+	    	
+	    	$('.essential_chk').each(function(){
+	    		if (!$(this).prop('checked')){
+	    			if($(this).next().is('label')){
+	    				$(this).parent().next(".alert-style-chk").remove();
+	    				$(this).next().addClass('alert-style-chk');
+	    			}else{
+	    				$(this).siblings('label').addClass('alert-style-chk');
+	    			}
+	    			isValid=false;
+	    		}else{
+	    			if($(this).next().is('label')){
+	    				$(this).next().removeClass('alert-style-chk');
+	    			}else{
+	    				$(this).siblings('label').removeClass('alert-style-chk');
+	    			}
+	    		}
+	    	});
+	    	var count = 0;
+	    	$('.essential_gender').each(function(){
+	    		if (!$(this).prop('checked')){
+	    			if($(this).next().is('label')){
+	    				$(this).next().addClass('alert-style-chk');
+	    			}else{
+	    				$(this).siblings('label').addClass('alert-style-chk');
+	    			}
+	    			count++;
+	    			if(count===2){
+	    				isValid=false;
+	    			}
+	    		}else{
+	    			if($(this).next().is('label')){
+	    				$(this).next().removeClass('alert-style-chk');
+	    			}else{
+	    				$(this).siblings('label').removeClass('alert-style-chk');
+	    			}
+	    		}
+	    	});
+	    	
+	    	if(idIsVaild == true && passwordIsVaild == true && isValid == true){
+	    		allVaild = true
+	    	}else{
+	    		allVaild = false;
+	    	}
+	    	
+	    	if(allVaild){
+	    		return true;
+	    	}else{
+	    		$('html, body').animate({ scrollTop: 0 }, "0.5s");
+	    		alert("필수 입력사항은 모두 입력해주세요.")
+	    		return false;
+	    	}
+		});
+		
+		$('.essential_gender').on('click', function(){
+			if($(this).prop('checked')){
+			     $('.essential_gender').prop('checked',false);
+			     $(this).prop('checked',true);
+			}
+		});
+		
+		$("#userId").on("change", function() {
+			//alert("change동작");
+			$(".id-alert-msg1, .id-alert-msg").remove();
+			$("#userId").removeClass('alert-style2 alert-style');
+			
+			querydata = {"userId":$("#userId").val()}
+			$.ajax({
+				url:"/metahaus/idcheck",
+				type:"get",
+				data:querydata,
+				dataType: "text",
+				success:function(resultdata){
+					console.log(resultdata);
+					
+					if(resultdata === "사용가능아이디"){
+						idAlertMsg = $("<div>사용이 가능한 아이디입니다.</div>").attr("class", "id-alert-msg1");
+						$("#userId").parent().append(idAlertMsg);
+						$("#userId").addClass('alert-style2');
+						idIsVaild = true;
+					}else{
+						idAlertMsg = $("<div>사용이 불가능한 아이디입니다.</div>").attr("class", "id-alert-msg");
+						$("#userId").parent().append(idAlertMsg);
+						$("#userId").addClass('alert-style');
+						idIsVaild = false;
+					}
+				},
+				error:error_run
+			});
+		});
+		
+		function error_run(obj, msg, statusMsg){
+			alert("오류발생====>"+obj+","+msg+","+statusMsg)
+		}
+		
+		$("#password_check").on("change", function() {
+			$(".pass-alert-msg1, .pass-alert-msg").remove();
+			$("#password_check").removeClass('alert-style2 alert-style');
+			
+			if($("#password_check").val() === $("#password").val()){
+				idAlertMsg = $("<div>비밀번호가 일치합니다.</div>").attr("class", "pass-alert-msg1");
+				$("#password_check").parent().append(idAlertMsg);
+				$("#password_check").addClass('alert-style2');
+				passwordIsVaild = true;
+			}else{
+				idAlertMsg = $("<div>비밀번호가 일치하지 않습니다.</div>").attr("class", "pass-alert-msg");
+				$("#password_check").parent().append(idAlertMsg);
+				$("#password_check").addClass('alert-style');
+				passwordIsVaild = false;
+			}
+			
+		});
+		
+	});
+</script>
+</head>
+	<body>
+		<div layout:fragment="content" class="signup_container">
+			<div class="signup_logo">
+				metahouse
+			</div>
+			<div class="signup_content">
+				<div class="signup_desc">
+					<p>딱 이것만 체크하면 가입완료!</p> 
+				</div>
+				<div class="signup_column_box">
+					<form action="/metahaus/signup" method="POST">
+						<div class="column_cover">
+							<p class="signup_column_title">아이디<span style="color:red;">*</span></p>
+							<input maxlength="20" type="text" placeholder="아이디를 입력해 주세요." class="signup_write_column" name="userId" id="userId">
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">이름<span style="color:red;">*</span></p>
+							<input type="text" placeholder="이름을 입력해 주세요." class="signup_write_column essential" name="userName">
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">이메일<span style="color:red;">*</span></p>
+							<input type="email" placeholder="이메일을 입력해 주세요." class="signup_write_column essential" name="email">
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">비밀번호<span style="color:red;">*</span></p>
+							<input maxlength="20" type="password" placeholder="비밀번호를 입력해 주세요." class="signup_write_column essential" name="password" id="password">
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">비밀번호확인<span style="color:red;">*</span></p>
+							<input maxlength="20" type="password" placeholder="비밀번호를 다시 입력해 주세요." class="signup_write_column" id="password_check">
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">전화번호<span style="color:red;">*</span></p>
+							<input type="text" placeholder="전화번호를 입력해 주세요." class="signup_write_column essential" name="phoneNumber">
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">생년월일<span style="color:red;">*</span></p>
+							<input type="text" placeholder="생년월일을 입력해 주세요." class="signup_write_column essential" name="birth">
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">성별<span style="color:red;">*</span></p>
+							<div class="checkbox_cover">
+								<input type="checkbox" class="signup_chk_column essential_gender" name="gender" value="남"><label>남</label>
+								<input type="checkbox" class="signup_chk_column essential_gender" name="gender" value="여"><label>여</label>
+							</div>
+						</div>
+						<div class="column_cover">
+							<p class="signup_column_title">자기소개</p>
+							<input maxlength="500" type="text" placeholder="자기소개를 입력해 주세요." class="signup_write_column" name="selfIntroduction">
+						</div>
+						<div class="signup_check_box">
+							<p><input type="checkbox" id="allcheck"> <label for="all">모두 동의합니다.</label></p>
+							<hr class="signup_check_box_hr">
+							<p class="single_check">
+								<input type="checkbox" class="chk essential_chk">
+								<label> 만 14세 이상입니다.(필수)</label>
+							</p>
+							<p class="single_check">
+								<input type="checkbox" class="chk essential_chk">
+								<label> 서비스 이용약관에 동의합니다.(필수)</label>
+							</p>
+	  						<p class="single_check">
+	  							<input type="checkbox" class="chk essential_chk"> 
+	  							<label> 개인정보 수집/이용에 동의합니다.(필수)</label>
+	  						</p>
+	   						<p class="single_check">
+	   							<input type="checkbox" class="chk" name="mkAgree">
+	   							<label> 마케팅 수신/홍보 목적의 개인정보 수집 및 이용에 동의합니다.</label>
+	   						</p>
+						</div>
+						
+						<button id="signup_submit">버튼만 누르면 가입완료!</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,351 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/mainlayout}">
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/metahaus/css/main/index.css" />
+<link rel="stylesheet" type="text/css"
+	href="/metahaus/css/common/layout/header.css" />
+<link rel="stylesheet" type="text/css"
+	href="/metahaus/css/common/layout/footer.css" />
+
+<title>META HAUS</title>
+
+</head>
+
+<body layout:fragment="content">
+
+
+
+	<section id="color-test"
+		style="background-color: #6C4AB6; transition: .5s;"
+		class="section-visual">
+		<div class="inner-test">
+			<div class="test">
+				<div>
+					<div style="margin: 0 auto; width: fit-content;">
+						<h2 style="color: white; margin-top: 54px;">
+							메타 마켓 No.1 메타하우스에서<br> 원하는 전문가를 찾아보세요!
+						</h2>
+						<form action="/metahaus/search/result" method="get">
+							<input name="keyword"  style="margin-top: 50px;" class="test2" type="text"
+								placeholder="검색어를 입력하세요.">
+						</form>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+				<div>
+					<div class="banner-slider-wrap">
+						<div class="btn-shape2 prebtn" onclick='pre(this)'>◀</div>
+						<div class="btn-shape2 nextbtn2" onclick='next(this)'>▶</div>
+
+						<div class="slider-outter">
+							<div index="0" class="banner-slider-list">
+
+								<div class="banner-slider-item3">
+									<div class="item-img-warp2">
+										<video width="100%" height="100%" autoplay loop muted>
+											<source src="/metahaus/images/banner-video1.mp4"
+												type="video/mp4">
+										</video>
+									</div>
+								</div>
+								<div class="banner-slider-item3">
+									<div class="item-img-warp2">
+										<video width="100%" height="100%" autoplay loop muted>
+											<source src="/metahaus/images/banner-video2.mp4"
+												type="video/mp4">
+										</video>
+									</div>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+
+
+
+
+	<section class="mata-game-list">
+
+		<div class="image-grid-container">
+
+			<div class="image-grid">
+
+				<div class="image-container2">
+					<a th:href="@{/asset/main?pageNo=1}" class="left-half"> 
+					<span class="tooltip2">에셋이동</span>
+					</a>
+					<a th:href="@{/project/main?pageNo=1}" class="right-half"> 
+					<span class="tooltip2">긱스이동</span>
+					</a>
+					<img src="/metahaus/images/Bondee.png" alt="이미지">
+				</div>
+				
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=1&category1=게더타운}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a th:href="@{/project/main?pageNo=1&category1=게더타운}" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/gather.png" alt="Image 2"> 
+				</div>
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=1&category1=마인크래프트}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a th:href="@{/project/main?pageNo=1&category1=마인크래프트}" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/minecraft.png" alt="Image 3"></div>
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=1&category1=제페토}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a th:href="@{/project/main?pageNo=1&category1=제페토}" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/ZEPETO.png" alt="Image 4"></div> 
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=1&category1=더%20샌드박스}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a th:href="@{/project/main?pageNo=1&category1=샌드박스}" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/thesendbox.png" alt="Image 5"></div> 
+				<div class="image-container2">
+				<a th:href="@{/asset/main?pageNo=1&category1=로블록스}" class="left-half"> <span
+						class="tooltip2">에셋이동</span>
+					</a> <a th:href="@{/project/main?pageNo=1&category1=로블록스}" class="right-half"> <span
+						class="tooltip2">긱스이동</span>
+					</a><img src="/metahaus/images/ROBLOX.png" alt="Image 6"></div>
+				
+			</div>
+		</div>
+	</section>
+	
+
+	<hr />
+
+
+
+
+	<section id="banner-section">
+		<div class="banner-wrap">
+
+			<div class="banner-title-wrap">
+				<span class="myfont-1">메타하우스를 이용한 회원들의 생생한 후기</span> <span
+					class="myfont-2 ml-auto"></span>
+			</div>
+
+			<div class="banner-slider-wrap">
+				<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+				<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+
+				<div class="slider-outter">
+					<div index="0" class="banner-slider-list">
+						<div class="banner-slider-item2" th:each="n:${reviewList}">
+							<th:block th:if="${n.review_type == 'a'}">
+							<a th:href="@{/asset/detail(assetNum=${n.product_id})}" style="display: flex" class="review-card">
+								<div classs="review-card--contents">
+									<div class="review-header">
+										<div class="review-header--image">
+											<img th:if="${n.profile_img != null}"
+											th:src="'/metahaus/upload/userThumbnail/'+${n.profile_img}"
+											alt="profile" /> <img th:unless="${n.profile_img != null}"
+											src="/metahaus/images/test_img.jpg" alt="profile" />
+											
+										</div>
+										<div class="review-header--info">
+											<div class="review-info--row01" th:text="${n.writer_id}"></div>
+											<div class="review-info--row02">
+												<div class="review-rating">
+												<th:block th:switch="${n.rating}">
+													<div class="stars" th:case="5" th:text="${'★★★★★'}"></div>
+													<div class="stars" th:case="4" th:text="${'★★★★☆'}"></div>
+													<div class="stars" th:case="3" th:text="${'★★★☆☆'}"></div>
+													<div class="stars" th:case="2" th:text="${'★★☆☆☆'}"></div>
+													<div class="stars" th:case="1" th:text="${'★☆☆☆☆'}"></div>
+												</th:block>
+													<div style="color:var(--gray);font-weight: bold; margin-inline:8px;">|</div>
+												</div>
+												<div class="review-date" th:text="${n.review_date}"></div>
+											</div>
+										</div>
+									</div>
+									<div class="review-body" th:text="${n.review_text}"></div>
+									<div class="review-product-title">
+										<div class="review-product--col">구매상품</div>
+										<div class="review-product--col" style="margin-inline:8px;">></div>
+										<div class="review-product--col" th:text="${n.title}"></div>
+									</div>
+								</div>
+							</a>
+							</th:block>
+							<th:block th:if="${n.review_type == 'p'}">
+							<a th:href="@{/project/detail(projectNum=${n.product_id})}" style="display: flex" class="review-card">
+								<div classs="review-card--contents">
+									<div class="review-header">
+										<div class="review-header--image">
+											<img th:if="${n.profile_img != null}"
+											th:src="'/metahaus/upload/userThumbnail/'+${n.profile_img}"
+											alt="profile" /> <img th:unless="${n.profile_img != null}"
+											src="/metahaus/images/test_img.jpg" alt="profile" />
+										</div>
+										<div class="review-header--info">
+											<div class="review-info--row01" th:text="${n.writer_id}"></div>
+											<div class="review-info--row02">
+												<th:block th:switch="${n.rating}">
+													<div class="stars" th:case="5" th:text="${'★★★★★'}"></div>
+													<div class="stars" th:case="4" th:text="${'★★★★☆'}"></div>
+													<div class="stars" th:case="3" th:text="${'★★★☆☆'}"></div>
+													<div class="stars" th:case="2" th:text="${'★★☆☆☆'}"></div>
+													<div class="stars" th:case="1" th:text="${'★☆☆☆☆'}"></div>
+												</th:block>
+												<div class="review-date" th:text="${n.review_date}"></div>
+											</div>
+										</div>
+									</div>
+									<div class="review-body" th:text="${n.review_text}"></div>
+									<div class="review-product-title">
+										<div class="review-product--col">구매상품</div>
+										<div class="review-product--col" style="margin-inline:8px;">></div>
+										<div class="review-product--col" th:text="${n.title}"></div>
+									</div>
+								</div>
+							</a>
+							</th:block>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<hr />
+
+	<section id="banner-section">
+		<div class="banner-wrap">
+
+			<div class="banner-title-wrap">
+				<span class="myfont-1">메타 크리에이터에게 당신의 프로젝트를 맡겨보세요!</span>
+				<span class="myfont-2 ml-auto" style="cursor: pointer;"
+					th:onclick="|location.href='@{/project/main?pageNo=0}'|"></span>
+			</div>
+
+			<div class="banner-slider-wrap">
+				<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+				<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+
+				<div class="slider-outter testtest">
+					<div index="0" class="banner-slider-list">
+
+						<div th:each="project:${projectList}" class="banner-slider-item"
+							th:onclick="|location.href='@{/project/detail(projectNum=${project.project_id})}'|">
+							<div class="item-img-warp">
+							<img width=100% height=100%
+										th:src="@{/upload/project_thumbnail_img/}+${project.project_thumbnail_img}"></img></div>
+							<div class="item-desc-warp">
+								<span th:text="${project.creator_id}" class="myfont-3"></span>
+								<span th:utext="${project.title}" class="myfont-2"></span>
+								<span th:text="${#numbers.formatInteger(project.price, 3, 'COMMA') + '원'}"
+									class="myfont-1">85,000원~</span>
+								<span class="myfont-3">
+									<span th:text="${'★ '+project.average_reviews}">★ 4.8 </span>
+									| [[${project.review_count}]]개의 평가
+								</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+		</div>
+	</section>
+
+	<hr />
+
+	<section id="banner-section">
+		<div class="banner-wrap">
+
+			<div class="banner-title-wrap">
+				<span class="myfont-1">메타 마켓에서 당신이 원하는 에셋을 가져가세요!</span>
+				<span class="myfont-2 ml-auto" style="cursor: pointer;"
+					th:onclick="|location.href='@{/asset/main?pageNo=0}'|"></span>
+			</div>
+
+			<div class="banner-slider-wrap">
+				<div class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+				<div class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+
+				<div class="slider-outter">
+					<div index="0" class="banner-slider-list">
+
+						<div th:each="asset:${assetList}" class="banner-slider-item">
+							<div th:onclick="|location.href='@{/asset/detail(assetNum=${asset.asset_id})}'|">
+								<div class="item-img-warp">
+									<img width=100% height=100%
+										th:src="@{/upload/asset_thumbnail_img/}+${asset.main_img}"></img>
+								</div>
+								<div class="item-desc-warp">
+									<span th:text="${asset.seller_id}" class="myfont-3">메타버스틱스1</span> <span
+										th:text="${asset.title}" class="myfont-2"></span> <span
+										th:text="${#numbers.formatInteger(asset.price, 1, 'COMMA') + '원'}"
+										class="myfont-1">85,000원~</span> <span class="myfont-3"><span
+										th:text="${'★ '+asset.average_reviews}">★ 4.8</span> |
+										[[${asset.review_count}]]개의 평가</span>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+		</div>
+	</section>
+
+
+	<section class="section-visual2">
+		<video src="/metahaus/images/banner-bottom-video.mp4" autoplay muted
+			loop></video>
+	</section>
+
+
+
+
+	<script src="/metahaus/js/main/main.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap//js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

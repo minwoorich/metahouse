@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+.point-charge-section{
+	padding: 35px;
+}
+
+.point-charge-section h3{
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	margin-top: 50px;
+	color: var(--medium-purple);
+}
+
+.point-charge-form-inner-radio{
+	border: 1px solid black;
+	border-radius: 4px;
+	border-collapse: collapse;
+	border-style: hidden;
+	box-shadow: 0 0 0 1px var(--medium-purple);
+	
+	padding: 10px;
+}
+.point-charge-form-inner-radio p {
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--medium-purple);
+	margin-bottom: 10px;
+}
+.charge-form-radio-wrap{
+	display: flex;
+    justify-content: space-evenly;
+    margin: 1.5rem 0 0.8rem 0;
+	
+}
+
+.point-charge-form-inner-radio input[type=radio]{
+	display: none;
+}
+
+.point-charge-form-inner-radio input[type=radio]+label{
+	display: inline-flex;
+    justify-content: space-evenly;
+	align-items: center;
+    cursor: pointer;
+    height: 36px;
+    width: 120px;
+    border: 1.5px solid #333;
+    border-radius: 4px;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:14px;
+    color: #333;
+}
+
+.point-charge-form-inner-radio input[type=radio]:checked + label{
+    background-color: #333;
+    color: #fff;
+}
+
+#selected_point_div{
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    justify-content: center;
+}

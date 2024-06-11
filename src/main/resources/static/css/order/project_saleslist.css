@@ -1,0 +1,453 @@
+@charset "UTF-8";
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+ul {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	vertical-align: baseline;
+	list-style: none;
+}
+
+select {
+	background-color: white;
+	-webkit-appearance:none;
+	padding-left: 15px;
+}
+
+.main-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.project-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.project-body-title {
+	width: 720px;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+}
+
+.project-body-title span {
+	font-size: 22px;
+	font-weight: bold;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+
+.project-body-box-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    width: 720px;
+    height: fit-content;
+    background-color: rgba(141, 114, 225, 0.5);
+    border-radius: 8px;
+ }
+
+.project-body-box {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	width: 150px;
+	height: 150px;
+	padding-inline: 20px;
+	background-color: #FFFFFF;
+	border: 2px solid #8D72E1;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 8px;
+	transition: 0.5s;
+}
+
+.project-body-box:hover {
+	cursor: pointer;
+	border: 2px solid var(--light-purple);
+	transition: 0.5s;
+}
+
+.project-body-box-text {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+}
+
+.project-body-box span {
+	font-size: 14px;
+}
+
+.project-body-box p {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.project-body-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 10px;
+    width: 720px;
+    margin-top: 30px;
+    border: 1px solid var(--bright-purple);
+    border-radius:  8px;
+}
+
+.project-search-form {
+	display: flex;
+	flex-direction: column;
+	width: 720px;
+	height: fit-content;
+}
+
+.project-search-form-row01 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.search-box {
+	border: 1px solid var(--bright-purple);
+	border-radius: 6px;
+	background: #FFFFFF;
+	width: 130px;
+	height: 50px;
+	transition: 0.5s;
+}
+
+.search-box:hover {
+	cursor: pointer;
+	background-color: rgba(141,114,225,0.1);
+	transition: 0.5s;
+}
+
+.project-search-form-row01 select:nth-child(1) {
+	background: url("/metahaus/images/caret-down-solid.svg") no-repeat 100px center;
+	background-size: 12px;
+}
+
+.project-search-form-row01 select:nth-child(2) {
+	background: url("/metahaus/images/caret-down-solid.svg") no-repeat 120px center;
+	background-size: 12px;
+	width: 150px;
+}
+
+.project-search-form-row01 select:nth-child(3) {
+	background: url("/metahaus/images/caret-down-solid.svg") no-repeat 100px center;
+	background-size: 12px;
+}
+  
+ .project-search-bar:hover{
+ 	cursor: text;
+ }
+.category04 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: fit-content;
+	align-items: center;
+}
+
+.category04 div {
+	font-weight: bold;
+}
+
+.category04 input {
+	width : 200px;
+	padding-left: 15px;
+}
+
+.project-search-form-row02 {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	margin-bottom: 50px;
+}
+
+.project-search-bar {
+	width: 620px;
+	height: 50px;
+	padding-left: 20px;
+}
+
+.search-button {
+	width: 80px;
+	height: 40px;
+	padding-inline: 5px;
+}
+
+.project-body-form-empty {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 30px 0px;
+	width: 720px;
+	height: fit-content;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background-color: #FFFFFF;
+	border: 1px solid var(--bright-purple);
+	border-radius: 8px;
+}
+
+.project-body-form-empty span {
+	margin-bottom: 20px;
+}
+
+.project-body-buttom-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	width: 100%;
+	height: 125px;
+	background-color: var( --light-blue);
+	border-radius: 8px;
+}
+
+/* project cardlist */
+.project-body-cardlist {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	width: 720px;
+}
+
+.project-body-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: auto;
+	height: fit-content;
+	padding: 30px;
+	border: 1px solid var( --bright-purple);
+	border-radius: 8px;
+	margin-bottom : 30px;
+}
+
+.project-body-card:not(:last-child) {
+	margin-bottom: 30px;
+}
+
+.project-body-tag {
+	display: flex;
+	flex-direction: column;
+	width: auto;
+	box-sizing: border-box;
+}
+
+.project-body-tag-row01 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
+
+
+
+.project-body-tag-row01 div {
+	display: flex;
+	flex-direction: row;
+}
+
+.project-body-tag-row01 div span:nth-child(2) {
+	margin-inline: 10px;
+}
+
+.project-body-tag-row01 div span:nth-child(3) {
+	margin-right: 10px;
+}
+
+.project-body-tag-row01 div span:nth-child(4) {
+	margin-right: 10px;
+}
+
+.project-body-tag-row01 div span:nth-child(5) {
+	margin-right: 10px;
+}
+
+.project-body-tag-row02 {
+	width:auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: end;
+}
+
+.project-body-tag-row03-form{
+	width:90px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+} 
+.project-body-tag-row03-form button{
+	font-size: 16px;
+	font-weight: bold;
+	padding:6px;
+	border-radius: 4px;
+	transition:0.5s;
+}
+
+.project-body-tag-row03-form button:hover{
+	background-color: var(--light-gray);
+	transition:0.5s;
+}
+
+.project-body-tag-row03-form button:first-child{
+	color:blue;
+}
+.project-body-tag-row03-form button:last-child{
+	color:red;
+}
+
+
+.project-body-tag-img {
+	width: fit-content;
+	height: 140px;
+	object-fit: cover;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.project-body-tag-img img {
+	width: 230px;
+	height:100%;
+	box-sizing: border-box;
+}
+
+.project-body-tag-info {
+	width:400px;
+	height:140px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.project-body-tag-info-row01 {
+	height:110px;
+	margin-bottom: 10px;
+	margin-right: 30px;
+}
+
+.project-body-tag-info-row02 {
+	/* margin-bottom: 10px; */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.project-body-tag-info-row03 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: end;
+}
+.project-body-tag-info-row03 div span{
+	font-size : 14px;
+	color:var(--gray);
+	font-weight: 500;
+}
+.project-body-tag-info-row03 div a span{
+	color:var(--bright-purple);
+	font-size : 18px;
+	font-weight: 500;
+}
+.project-body-button {
+	padding: 8px 20px;
+	font-size: 14px;
+}
+
+button:active {
+	box-shadow: none;
+}
+
+.project-body-download {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 20px;
+	margin-top: 30px;
+	background-color: rgba(141,114,225,0.1);
+	border-radius: 8px;
+}
+
+/* 다운로드 버튼 기본값 (다운로드 가능) */
+.project-body-download button {
+	width: 200px;
+	height: 50px;
+	color: white;
+	font-weight: bold;
+	border: none;
+	outline: none;
+	background-color: var(--bright-purple);
+	border-radius: 8px;
+	box-shadow: var(--shade-button);
+}
+
+.project-body-download button:active {
+	box-shadow: none;
+}
+
+/* 다운로드 기간 만료 */
+.expired {
+	background-color: var(--light-gray);
+	color: var(--gray);
+}
+
+.project-body-tip {
+	width: 720px;
+	height: fit-content;
+	padding: 30px 40px;
+	background-color: rgba(141,114,225,0.3);
+	margin-top: 50px;
+	margin-bottom: 50px;
+	border-radius: 8px;
+}
+
+.project-body-tip li {
+	list-style: disc;
+}
+
+.pagination li{
+	background-color: rgba(141,114,225,0.3);
+}
+
+/* 뷰에서 생략 */
+.deactivate {
+	display: none;
+}

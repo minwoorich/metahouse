@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/mypageLayout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/metahaus/css/market/page_bar.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/metahaus/css/user/profile.css">
+<script type="text/javascript">
+	function next(el){
+	    let list = el.parentNode.querySelector(".banner-slider-list");
+	
+	    let listSize = list.offsetWidth;
+	    let itemSize = list.firstElementChild.offsetWidth;
+	    let countOfView = parseInt(listSize/itemSize);
+	
+	
+	
+	    let index = Number(list.getAttribute("index"));
+	    let itemCount = list.childElementCount;
+	
+	    if(index+countOfView >= itemCount){
+	        return;
+	    }
+	    index++;
+	    list.setAttribute("index",index);
+	    
+	    
+	    list.style.left = -itemSize*index+"px";
+	
+	}
+	
+	function pre(el){
+	    let list = el.parentNode.querySelector(".banner-slider-list");
+	
+	    let listSize = list.offsetWidth;
+	    let itemSize = list.firstElementChild.offsetWidth;
+	    let countOfView = parseInt(listSize/itemSize);
+	
+	
+	
+	    let index = Number(list.getAttribute("index"));
+	    let itemCount = list.childElementCount;
+	
+	    if(index<=0){
+	        list.style.left = 0;
+	        list.setAttribute("index",0);
+	        return;
+	    }
+	    index--;
+	    list.setAttribute("index",index);
+	    
+	    list.style.left = -itemSize*index+"px";
+	}
+
+</script>
+</head>
+
+<body>
+<div layout:fragment="content" class="profile_page_css">
+	<div class="profile_page_title">
+		내 정보
+	</div>
+	<div class="profile_area">
+		<div class="profile_img_area">
+			<div class="profile_img">
+				<div class="profile_img_view">
+					<img th:if="${session.loginUser.thumbnailStoreFilename != null}" 
+						 th:src="|/metahaus/upload/userThumbnail/${session.loginUser.thumbnailStoreFilename}|">
+					
+					<img th:unless="${session.loginUser.thumbnailStoreFilename != null}" 
+						 src="/metahaus/images/test_img.jpg">
+				</div>
+				<div class="profile_user_name">
+					[[${session.loginUser.userName}]]
+				</div>
+			</div>
+		</div>
+		<div class="profile_info">
+			<div class="profile_info_intro">
+				<pre>[[${session.loginUser.selfIntroduction}]]</pre>
+			</div>
+			<div class="profile_info_etc">	
+				<div class="profile_info_etc_title">email</div><div class="profile_info_etc_content">[[${session.loginUser.email}]]</div>
+			</div>
+			<div class="profile_info_etc">
+				<div class="profile_info_etc_title">phone</div><div class="profile_info_etc_content">[[${session.loginUser.phoneNumber}]]</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="profile_page_title">
+		포트폴리오
+	</div>
+	<div class="profile_view_area">
+		<div class="info_card_view">
+			<div class="banner-slider-wrap">
+       			<div th:if="${#arrays.length(portfolioList) > 3}" class="btn-shape prebtn" onclick='pre(this)'>◀</div>
+       			<div th:if="${#arrays.length(portfolioList) > 3}" class="btn-shape nextbtn" onclick='next(this)'>▶</div>
+       			<div class="slider-outter">
+					<div index="0" class="banner-slider-list">
+						<div class="banner-slider-item" th:each="portfolio:${portfolioList}">
+							<a th:href="@{/mypage/portfolio(portfolioId=${portfolio.portfolio_id})}">
+								<div class="portfolio_info_card">
+									<div class="portfolio_info_img">
+										<img th:src="|/metahaus/upload/portfolio/mainImg/${portfolio.main_img_store_filename}|" alt="대표 사진">
+									</div>
+									<hr>
+									<div class="portfolio_content_preview">
+										<div class="portfolio_info_text">
+											[[${portfolio.portfolio_title}]]
+										</div>
+										<div class="portfolio_info_etc">
+											<div>
+												카테고리: [[${portfolio.category1}]] > [[${portfolio.category2}]] <br/>
+												기간: [[${portfolio.portfolio_pj_start_day}]]~[[${portfolio.portfolio_pj_end_day}]] <br/>
+												참여인원: [[${portfolio.nop}]]
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="button_cover">
+			<div class="create_portfolio_button" onclick="location.href='/metahaus/mypage/create_portfolio'">
+				포트폴리오 작성하기
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/nonsideLayout}">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 민우's style css [무조건 맨위에 와야함]-->
+<link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
+<!-- 부트스트랩 css -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+<!-- 페이지 전용 css -->
+<link rel="stylesheet" href="/metahaus/css/project/projectform03.css">
+
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+<!-- 제이쿼리 js -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 내 js코드 -->
+<script src="/metahaus/js/project/projectform03.js"></script>
+<title>크리에이터-판매등록03</title>
+</head>
+
+<body>
+	<!-- 내가 설정한 body -->
+	<main layout:fragment="content" class="minwoo_body">
+		<div class="minwoo_container">
+			<!-- 취소 Modal -->
+			<div id="cancel" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title"
+								style="font-weight: bold; font-size: 24px;">서비스 등록 취소</h4>
+						</div>
+						<div class="modal-body" style="font-weight: 500; font-size: 16px;">
+							<p>
+								지금 취소하시면 현재까지 작성하신 모든 내용이 초기화 됩니다.<br />
+								<br />그래도 취소 하시겠습니까?
+							</p>
+						</div>
+						<div class="modal-footer">
+							<!-- <button onclick="location.href='/metahaus/project/my-products?pageNo=0'" type="button" class="button--xsmall" data-dismiss="modal">취소하기</button> -->
+							<button type="button" class="cancel-modal button--xsmall" data-dismiss="modal">취소하기</button>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- form -->
+			<div class="form">
+				<div class="form-wrapper">
+					<!-- 진행 상태 바 -->
+					<div class="progress-bar">
+						<div class="progress-bar-wrapper">
+							<!-- 1.서비스 설정 -->
+							<div class="progress-bar-item ">
+								<i class="fa-sharp fa-regular fa-circle-1 fa-2xl"
+									style="color: #aaaaaa;"></i> <span class="progress-bar-text">서비스
+									설정</span>
+							</div>
+							<!-- 첫번째 화살표 -->
+							<i class="fa-solid fa-chevron-right fa-xl"
+								style="color: var(--gray)"></i>
+							<!-- 2. 가격설정 -->
+							<div class="progress-bar-item ">
+								<i class="fa-sharp fa-regular fa-circle-2 fa-2xl"
+									style="color: #aaaaaa;"></i> <span class="progress-bar-text">가격
+									설정</span>
+							</div>
+							<!-- 두번째 화살표 -->
+							<i class="fa-solid fa-chevron-right fa-xl"
+								style="color: var(--gray)"></i>
+							<!-- 3. 서비스 등록 -->
+							<div class="progress-bar-item current">
+								<i class="fa-sharp fa-circle-3 fa-2xl"></i> <span
+									class="progress-bar-text">서비스 등록</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- 제목 입력-->
+					<div class="form-item texttype">
+						<div class="miwnoo_label">제목</div>
+						<div class="form-item-column01">
+							<div class="form-item-description">
+								<span th:text="${session.projectForm.title}"></span>
+							</div>
+						</div>
+					</div>
+					<!-- 카테고리 선택 -->
+					<div class="form-item selecttype">
+						<div class="miwnoo_label">카테고리</div>
+						<div class="form-item-column01">
+							<div class="form-item-description">
+								<span th:text="${session.projectForm.category1}"></span>
+								<span style="margin-inline: 10px;font-weight:bold;">></span>
+								<span th:text="${session.projectForm.category2_pj}" ></span>
+							</div>
+						</div>
+
+					</div>
+					<!-- 서비스 설명 입력 -->
+					<div class="form-item texttype">
+						<div class="miwnoo_label">서비스 설명</div>
+						<div class="form-item-column01">
+							<div class="form-item-description">
+								<div th:utext="${session.projectForm.description}"></div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 대표 사진 첨부 -->
+					<div class="form-item filetype">
+						<!-- **
+                        empty : 아직 아무 사진도 등록 안한 경우
+                        full : max까지 전부 등록 경우-->
+						<div class="form-item-column01">
+							<div class="form-item-file">
+								<!-- 미리보기 이미지-->
+								<div class="miwnoo_label">대표 사진</div>
+								<div class="image-frame">
+									<img id="thumbnail-img" src="" alt="대표 사진">
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- 상세 사진 첨부 -->
+					<div class="form-item filetype">
+						<div class="form-item-column01">
+							<div class="form-item-file">
+								<div class="miwnoo_label">상세 사진</div>
+								<div class="form-item-images-wrapper">
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<!-- 단일 패키지 -->
+					<div th:if="${package == 'single'}" class="single-package">
+						<!-- 패키지 2열 - 실제 작성할 입력 칸 -->
+						<div class="single-package-row02">
+							<div class="single-package-wrapper">
+								<!-- 패키지 타입 => BASIC -->
+								<div class="single-package-type">
+									<span>BASIC</span>
+								</div>
+								<!-- 제목(BASIC)  -->
+								<div class="miwnoo_label">패키지 제목</div>
+								<div class="single-package-title">
+									<div class="single-package-title-col01">
+										<span th:text="${session.projectPackageSingleForm?.pkg_title}"></span>
+									</div>
+								</div>
+
+								<!-- 설명(BASIC) -->
+								<div class="miwnoo_label">패키지 설명</div>
+								<div class="single-package-description">
+									<div class="single-package-description-col01">
+										<span th:text="${session.projectPackageSingleForm?.pkg_description}">가장 싼 패키지 입니다</span>
+									</div>
+								</div>
+
+								<!-- 수정횟수(BASIC) -->
+								<div class="miwnoo_label">수정 횟수</div>
+								<div class="single-package-revision">
+									<div class="single-package-revision-col01">
+										<span th:text="${session.projectPackageSingleForm?.revision}">5</span><span>회</span>
+									</div>
+								</div>
+
+								<!-- 작업일(BASIC) -->
+								<div class="miwnoo_label">작업일</div>
+								<div class="single-package-date">
+									<div class="single-package-date-col01">
+										<span th:text="${session.projectPackageSingleForm?.workdays}">12</span><span>일</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 단일패키지 끝 -->
+
+					<!-- 3단 패키지 -->
+					<div th:if="${package == 'triple'}" class="triple-package activate">
+						<!-- 패키지 1열 - 작성할 카테고리 -->
+						<div class="triple-package-row01">
+							<div class="triple-package-row-wrapper">
+								<!-- 패키지 1열 1행 -->
+								<div class="triple-package-row01-col01">
+									<span>제목</span>
+								</div>
+								<!-- 패키지 1열 2행 -->
+								<div class="triple-package-row01-col02">
+									<span>설명</span>
+								</div>
+								<!-- 패키지 1열 3행 -->
+								<div class="triple-package-row01-col03">
+									<span>수정</span>
+								</div>
+								<!-- 패키지 1열 4행 -->
+								<div class="triple-package-row01-col04">
+									<span>작업일</span>
+								</div>
+							</div>
+
+						</div>
+						<!-- 패키지 2열 - 실제 작성할 입력 칸 -->
+						<div class="triple-package-row02">
+							<div class="triple-package-wrapper">
+								<!-- 패키지 타입 => BASIC -->
+								<div class="triple-package-type">
+									<span>BASIC</span>
+								</div>
+								<!-- 제목(BASIC)  -->
+								<div class="triple-package-title">
+									<div class="triple-package-title-col01">
+										<textarea readonly th:text="${session.projectPackageTripleForm?.basic_pkg_title}"></textarea>
+									</div>
+								</div>
+
+								<!-- 설명(BASIC) -->
+								<div class="triple-package-description">
+									<div class="triple-package-description-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.basic_pkg_description}" readonly></textarea>
+									</div>
+								</div>
+
+								<!-- 수정횟수(BASIC) -->
+								<div class="triple-package-revision">
+									<div class="triple-package-revision-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.basic_revision}+'회'" readonly></textarea>
+									</div>
+								</div>
+
+								<!-- 작업일(BASIC) -->
+								<div class="triple-package-date">
+									<div class="triple-package-date-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.basic_workdays}+'일'" readonly></textarea>
+									</div>
+								</div>
+							</div>
+							<!-- 패키지 타입 => ECONOMY -->
+							<div class="triple-package-wrapper">
+								<div class="triple-package-type">
+									<span>ECONOMY</span>
+								</div>
+								<!-- 제목(ECONOMY)  -->
+								<div class="triple-package-title">
+									<div class="triple-package-title-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.economy_pkg_title}" readonly></textarea>
+									</div>
+								</div>
+
+								<!-- 설명(ECONOMY) -->
+								<div class="triple-package-description">
+									<div class="triple-package-description-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.economy_pkg_description}" readonly></textarea>
+									</div>
+								</div>
+								<!-- 수정횟수(ECONOMY) -->
+								<div class="triple-package-revision">
+									<div class="triple-package-revision-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.economy_revision}+'회'" readonly></textarea>
+									</div>
+								</div>
+
+								<!-- 작업일(ECONOMY) -->
+								<div class="triple-package-date">
+									<div class="triple-package-date-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.economy_workdays}+'일'" readonly></textarea>
+									</div>
+								</div>
+							</div>
+							<!-- 패키지 타입 => PREMIUM -->
+							<div class="triple-package-wrapper">
+								<div class="triple-package-type">
+									<span>PREMIUM</span>
+								</div>
+								<!-- 제목(PREMIUM)  -->
+								<div class="triple-package-title">
+									<div class="triple-package-title-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.premium_pkg_title}" readonly></textarea>
+									</div>
+								</div>
+
+								<!-- 설명(PREMIUM) -->
+								<div class="triple-package-description">
+									<div class="triple-package-description-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.premium_pkg_description}" readonly></textarea>
+									</div>
+								</div>
+
+								<!-- 수정횟수(PREMIUM) -->
+								<div class="triple-package-revision">
+									<div class="triple-package-revision-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.premium_revision}+'회'" readonly></textarea>
+									</div>
+								</div>
+
+								<!-- 작업일(PREMIUM) -->
+								<div class="triple-package-date">
+									<div class="triple-package-date-col01">
+										<textarea th:text="${session.projectPackageTripleForm?.premium_workdays}+'일'" readonly></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 3단 패키지 끝 -->
+
+					<!-- 추가 옵션 -->
+					<div class="add-option">
+						<div class="options-wrapper">
+							<div class="miwnoo_label">추가 옵션</div>
+							<div class="add-option-row02">
+								<!-- 옵션이 선택된 된 후 -->
+								<div th:each="option : ${optionList}" class="option-box selected" >
+									<div class="option-box-col01">
+										<span style="font-weight: bold" th:text="${option.add_option_name}"></span>
+									</div>
+									<div class="option-box-col02">
+									<span style="margin-right:100px;" th:text="${option.add_option_description}"></span>
+										<input readonly th:value="${option.add_option_price}" /> <span>원 추가</span>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 버튼 파트 -->
+					<div class="form-buttons last">
+						<!-- 
+                            first : 첫째장
+                            last : 마지막장 -->
+						<button type="button"
+							onclick="location.href='/metahaus/project/project-form-02'"
+							value="prev" class="form-buttons-prev button--small">이전</button>
+						<div>
+							<button type="button" data-toggle='modal' data-target='#cancel'
+								value="cancel" class="form-buttons-cancel">취소</button>
+							<button type="button"  value="next"
+								class="form-buttons-submit button--small">등록</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+</body>
+
+</html>

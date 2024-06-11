@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/mypageLayout}">
+<head>
+<meta charset="UTF-8">
+<title>크리에이터 - 구매관리</title>
+<link rel="stylesheet" href="/metahaus/css/common/style.css">
+<link rel="stylesheet" href="/metahaus/css/common/buttons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/metahaus/css/order/project_buylist.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js%22%3E"></script>
+<!-- 내 js코드 -->
+<script type="text/javascript"
+	src="/metahaus/js/order/project_buylist.js"></script>
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div layout:fragment="content" class="main-content">
+		<div class="modal deactivate">
+			<div class="modal-content">
+				<form th:action="@{/review/project/write.do}"
+					enctype="multipart/form-data" method="post" id="review_form"
+					class="review-box">
+					<input name="orderId" id="modal-orderId" type="hidden" /> <input
+						name="projectId" id="modal-projectId" type="hidden" />
+					<div class="review-header">
+						<span>리뷰 작성</span> <span class="close-button">X</span>
+					</div>
+					<div class="star-rating">
+						<span>별점:</span>
+						<div class="stars">
+							<label for="star1"></label> <input checked="checked" type="radio"
+								id="star1" name="rating" value="1" /> <label for="star2"></label>
+							<input type="radio" id="star2" name="rating" value="2" /> <label
+								for="star3"></label> <input type="radio" id="star3"
+								name="rating" value="3" /> <label for="star4"></label> <input
+								type="radio" id="star4" name="rating" value="4" /> <label
+								for="star5"></label> <input type="radio" id="star5"
+								name="rating" value="5" />
+						</div>
+					</div>
+					<textarea class="review-description" name="description"
+						placeholder="리뷰를 작성하세요" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '리뷰를 작성하세요'" maxlength="200" required></textarea>
+					<div class="review-buttons">
+						<div class="file-button">
+							<label class="file-attach-label" for="file_attach"><div>사진첨부</div></label>
+							<input class="file-name" placeholder="첨부파일" disabled="disabled">
+							<input name="images" style="display: none" type="file"
+								id="file_attach" multiple="multiple" />
+						</div>
+						<button type="submit" class="button--xsmall submit-review">리뷰
+							등록</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="project-body-title">
+			<span>구매 관리</span>
+		</div>
+		<div class="project-body">
+			<div class="project-body-box-wrapper">
+				<div class="project-body-box">
+					<i class="fa-solid fa-circle-exclamation fa-2xl"
+						style="color: #8d72e1;"></i>
+					<div class="project-body-box-text">
+						<span>주문 취소</span>
+						<p th:text=${orderCount?.cancelled}></p>
+					</div>
+				</div>
+				<div class="project-body-box">
+					<i class="fa-solid fa-hourglass-start fa-2xl"
+						style="color: #8d72e1;"></i>
+					<div class="project-body-box-text">
+						<span>주문 대기중</span>
+						<p th:text=${orderCount?.pending}></p>
+					</div>
+				</div>
+				<div class="project-body-box">
+					<i class="fa-solid fa-truck-fast fa-2xl" style="color: #8d72e1;"></i>
+					<div class="project-body-box-text">
+						<span>진행 중</span>
+						<p th:text=${orderCount?.proceeding}></p>
+					</div>
+				</div>
+				<div class="project-body-box">
+					<i class="fa-solid fa-credit-card fa-2xl" style="color: #8d72e1;"></i>
+					<div class="project-body-box-text">
+						<span>구매 확정</span>
+						<p th:text=${orderCount?.completion}></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form class="project-search-form"
+			th:action="@{/order/project/buylist/category}" method="get">
+			<!-- 페이지 초기 번호 =0 전달 -->
+			<input name="pageNo" value="0" type="hidden">
+			<div class="project-search-form-row01">
+				<select name="category1" class="search-box category01">
+					<option value="all">전체 플랫폼</option>
+					<option value="로블록스">로블록스</option>
+					<option value="제페토">제페토</option>
+					<option value="마인크래프트">마인크래프트</option>
+					<option value="샌드박스">더 샌드박스</option>
+					<option value="게더타운">게더타운</option>
+					<option value="기타">기타</option>
+				</select> <select name="category2" class="search-box category02">
+					<option value="all">전체 서비스</option>
+					<option value="메타버스맵">메타버스 맵</option>
+					<option value="메타버스에셋">메타버스 에셋</option>
+					<option value="홍보/이벤트">홍보/이벤트</option>
+					<option value="기획/구축">기획/구축</option>
+					<option value="기타">기타</option>
+				</select>
+
+				<div class="category04">
+					<input required="required" name="category4" type="datetime-local"
+						 class="search-box startdate">
+					<div style="margin-inline: 10px;">~</div>
+					<input required="required" name="category5" type="datetime-local"
+						class="search-box enddate">
+				</div>
+			</div>
+			<div class="project-search-form-row02">
+				<!-- input type="text" class="search-box project-search-bar"
+					placeholder="검색어를 입력하세요"> -->
+				<button type="submit" class="search-button button--small">조회</button>
+			</div>
+		</form>
+		<ul class="project-body-cardlist" th:each="order : ${orderList}">
+			<th:block th:switch="${order.orderStatus}">
+				<!-- 주문 대기중 -->
+				<li class="project-body-card" th:case="주문대기중">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
+							<span style="font-size: 16px; font-weight: bold;">주문 대기중</span>
+							<div>
+								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderCommitDate}"></span>
+							</div>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
+							</div>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+									<div
+										style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+										th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></div>
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
+								</div>
+								<div class="project-body-tag-info-row02">
+									<span style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></span>
+								</div>
+								<form class="project-body-tag-info-row03" th:action="@{/chat/create/chatroom}"
+											method="get">
+									<div>
+										<span>Creator</span><a th:href="@{/user/profile(userId=${order.sellerId})}"><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span></a>
+									</div>
+									
+										<input type="hidden" name="seller_id" th:value="${order.sellerId}" />
+										<button type="submit" 
+											class="project-body-button button--xsmall">문의하기</button>
+									
+								</form>
+							</div>
+						</div>
+					</div>
+				</li>
+				<!-- 주문 취소 -->
+				<li class="project-body-card"
+					style="background-color: var(--light-gray);" th:case="주문취소">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
+							<span
+								style="font-size: 16px; font-weight: bold; color: var(--red);">주문
+								취소</span>
+							<div>
+								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--gray);">주문일시</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderCommitDate}"></span>
+							</div>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
+							</div>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
+								</div>
+								<div class="project-body-tag-info-row02">
+									<span style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></span>
+								</div>
+								<form class="project-body-tag-info-row03" th:action="@{/chat/create/chatroom}"
+											method="get">
+									<div>
+										<span>Creator</span><a th:href="@{/user/profile(userId=${order.sellerId})}"><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span></a>
+									</div>
+									<input type="hidden" name="seller_id" th:value="${order.sellerId}" />
+										<button type="submit" 
+											class="project-body-button button--xsmall">문의하기</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</li>
+				<!-- 진행 중 -->
+				<li class="project-body-card" th:case="진행중">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
+							<span style="font-size: 16px; font-weight: bold;">진행 중</span>
+							<div>
+								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--gray);">주문시작</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderDate}"></span>
+							</div>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
+							</div>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
+								</div>
+								<div class="project-body-tag-info-row02">
+									<span style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></span>
+								</div>
+								<form class="project-body-tag-info-row03" th:action="@{/chat/create/chatroom}"
+											method="get">
+									<div>
+										<span>Creator</span><a th:href="@{/user/profile(userId=${order.sellerId})}"><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span></a>
+									</div>
+									<input type="hidden" name="seller_id" th:value="${order.sellerId}" />
+										<button type="submit" 
+											class="project-body-button button--xsmall">문의하기</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<form class="project-body-download"
+						th:action="@{/order/project/buylist/update.do}" method="post">
+						<input name="orderStatus" type="hidden"
+							th:value="${order.orderStatus}" /> <input name="orderId"
+							type="hidden" th:value="${order.orderId}" />
+						<div class="project-body-download-text">
+							<span>작업물을 성공적으로 전달받으셨다면<br /> 구매 확정 버튼을 눌러 진행 상태를
+								변경해주세요!
+							</span>
+						</div>
+						<button class="confirm-order" type="submit">구매 확정</button>
+					</form>
+				</li>
+				<!-- 구매 확정 - 리뷰작성 전 -->
+				<li class="project-body-card" th:case="구매확정">
+					<div class="project-body-tag">
+						<div class="project-body-tag-row01">
+							<span style="font-size: 16px; font-weight: bold;">구매 확정</span>
+							<div>
+								<span
+									style="margin-right: 6px; margin-bottom: 4px; color: var(--gray); font-size: 12px; font-weight: 500;"
+									th:text="${order.project.category1}+' > ' + ${order.project.category2Pj}"></span>
+								<span style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--bright-purple); font-weight: bold;"
+									th:text="${order.packageType}"></span> <span
+									style="font-size: 12px; color: var(--gray);">|</span> <span
+									style="font-size: 12px; color: var(--gray);">주문시작</span> <span
+									style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.orderDate}"></span> <span
+									style="font-size: 12px; color: var(--gray); margin-inline: 10px;">|</span>
+								<span
+									style="font-size: 12px; color: var(--gray); margin-right: 10px;">확정일시</span>
+								<span style="font-size: 12px; color: var(--bright-purple);"
+									th:text="${order.completionDate}"></span>
+							</div>
+						</div>
+						<div class="project-body-tag-row02">
+							<div class="project-body-tag-img">
+								<img
+									th:src="@{/upload/project_thumbnail_img}+'/'+${order.project.thumbnail}" />
+							</div>
+							<div class="project-body-tag-info">
+								<div class="project-body-tag-info-row01">
+
+									<span style="font-size: 16px; color: var(--gray);"
+										th:text="'#'+${order.orderId}"></span> <span
+										th:text="${order.project.title}"></span>
+								</div>
+								<div class="project-body-tag-info-row02">
+									<div style="font-size: 22px; font-weight: bold;"
+										th:text="${order.totalPrice}+'원'"></div>
+								</div>
+								<form class="project-body-tag-info-row03" th:action="@{/chat/create/chatroom}"
+											method="get">
+									<div>
+										<span>Creator</span><a th:href="@{/user/profile(userId=${order.sellerId})}"><span style="margin-left: 6px;"
+											th:text="${order.sellerId}"></span></a>
+									</div>
+									<input type="hidden" name="seller_id" th:value="${order.sellerId}" />
+										<button type="submit" 
+											class="project-body-button button--xsmall">문의하기</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="project-body-download">
+						<div class="project-body-download-text">
+						<th:block th:switch="${order.reviewCheck}">
+							<div th:case="${0}">작업물은 마음에 드시나요?<br/> 지금 바로 서비스를 평가하러 가보세요!
+							</div>
+							<div style="color:var(--bright-purple);font-weight:bold;padding-left:60px;" th:case="${1}">소중한 리뷰 작성해주셔서 감사합니다 ♥<br/> 
+							</div>
+						</th:block>
+						</div>
+						<input class="orderIdForReview" type="hidden"
+							th:value="${order.orderId}"> <input
+							class="projectIdForReview" type="hidden"
+							th:value="${order.project.projectId}">
+						<th:block th:switch="${order.reviewCheck}">
+							<button th:case="${0}" class="write-review" type="button">리뷰 작성</button>
+							<button th:case="${1}"  disabled="disabled" class="write-review expired" type="button">리뷰 작성 완료</button>
+						</th:block>
+					</div>
+				</li>
+			</th:block>
+		</ul>
+		<div class="project-body-tip" style="line-height: 160%;">
+			<p
+				style="font-size: 20px; font-weight: bold; color: var(--bright-purple);">꼭
+				확인해주세요!</p>
+			<br />
+			<ul>
+				<li>주문 금액에 대한 세금계산서는 거래 주체인 전문가가 직접 발생하며, 세금계산서 발행 가능한 사업자 전문가의
+					서비스 구매 시에만 신청하실 수 있습니다.</li>
+				<li>수수료에 대한 세금계산서는 메타하우스에서 발행합니다.</li>
+				<li>세금계산서는 구매 확정일(거래 완료일) 기준으로 발행됩니다.</li>
+				<li>이벤트 쿠폰 사용 금액은 할인된 금액이기 때문에 세금계산서에 포함되지 않습니다.</li>
+				<li>거래명세서는 결제가 완료되었음을 증명하는 용도로만 활용 가능하며, 세무상의 지출증빙 요력이 없습니다.</li>
+				<li>현금영수증은 개인의 소득공제용으로만 사용 가능하며, 결제 당시 지출 증빙용으로 선택하셨더라도 매입세액공제를
+					받으실 수 없습니다.</li>
+			</ul>
+			<br /> 자세한 내용은 <span
+				style="font-weight: bold; color: var(--bright-purple);">[자주
+				묻는 질문 - 구매 및 영수증] </span> 항목을 참고해주세요.
+		</div>
+		<ul class="pagination">
+			<li><a th:href="@{/order/project/buylist(pageNo=${'0'})}">1</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'1'})}">2</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'2'})}">3</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'3'})}">4</a></li>
+			<li><a th:href="@{/order/project/buylist(pageNo=${'4'})}">5</a></li>
+		</ul>
+	</div>
+</body>
+</html>

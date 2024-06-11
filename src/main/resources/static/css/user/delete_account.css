@@ -1,0 +1,83 @@
+@charset "UTF-8";
+*{
+    box-sizing: border-box;
+}
+.membership_withdrawal{
+	padding: 10px;
+	
+}
+.membership_withdrawal_title{
+	padding-top: 30px;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.membership_withdrawal_box{
+	border: solid 1px rgba(0, 0, 0, 0.35);
+	border-radius: 6px;
+	padding: 40px;
+}
+
+.withdrawal_check_box_title{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.withdrawal_check_box>li{
+	padding: 5px;
+	list-style:none;
+	height: 34px;
+}
+
+
+.withdrawal_message{
+	background-color: rgba(48,52,65,0.08);
+	border: solid 1px white;
+	border-radius: 6px;
+	padding: 35px;
+}
+
+.withdrawal_message_detail_title{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+ .withdrawal_message_detail{
+ 	list-style:none;
+ }
+ 
+ .withdrawal_message_detail>li{
+ 	font-size: 14px;
+ 	margin-bottom: 5px;
+ }
+ 
+ .withdrawal_area{
+ 	text-align: center;
+ }
+ 
+ .withdrawal_agree_check{
+ 	margin-top: 20px;
+ }
+ 
+ .withdrawal_password_check{
+ 	width:300px;
+	height:40px;
+	margin: 10px;
+	margin-left: 0px;
+	padding-left: 10px;
+	border: solid 1px #8D72E1;
+	border-radius: 6px;
+ }
+ .withdrawal_button{
+ 	width:100px;
+	height:40px;
+	margin: 10px;
+	border: 1px solid #8D72E1;
+	border-radius: 6px;
+	background-color: #8D72E1;
+	font-size: 16px; 
+	color: white;
+ }

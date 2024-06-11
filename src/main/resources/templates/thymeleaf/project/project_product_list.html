@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/mypageLayout}">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 민우's style css [무조건 맨위에 와야함]-->
+<link rel="stylesheet" href="/metahaus/css/common/minwoo_style.css">
+
+<!-- 부트스트랩 css -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- 페이지 전용 css -->
+<link rel="stylesheet"
+	href="/metahaus/css/project/project_product_list.css">
+
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/123626a3b2.js"
+	crossorigin="anonymous"></script>
+<!-- 제이쿼리 js -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 내 js코드 -->
+<script src="/metahaus/js/project/project_product_list.js"></script>
+<title>크리에이터 - 서비스 관리</title>
+</head>
+
+<body>
+	<!-- 내가 설정한 body -->
+	<main layout:fragment="content" class="minwoo_body">
+		<!-- Modal -->
+		<div id="deleteProjectModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div  class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"
+							style="font-weight: bold; font-size: 24px;">프로젝트 등록 삭제</h4>
+					</div>
+					<div class="modal-body" style="font-weight: 600; font-size: 16px;">
+						<p>
+							정말 프로젝트를 삭제하시겠습니까?
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button--xsmall delete" data-dismiss="modal">네
+							삭제하겠습니다</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="project-product-wrapper">
+			<h1 class="mypage-title">프로젝트 등록</h1>
+			<ul class="project-product-list" th:each="project : ${projectList}">
+				<li class="project-product-card">
+					<div class="project-product-image">
+						<a th:href="@{/project/detail(projectNum=${project.project_id})}">
+							<img th:src="@{/upload/project_thumbnail_img/}+${project.thumbnail}" alt="썸네일"/>
+						</a>
+					</div>
+					<div class="project-product-contents">
+						<div class="project-product-contents-row01">
+							<div class="project-product-info">
+								<span th:text ="'#' + ${project.project_id} + ' | ' + ${project.category1} + ' > ' + ${project.category2_pj}"></span> 
+					
+							</div>
+							<div class="project-product-option">
+								<i class="fa-regular fa-ellipsis-vertical fa-xl"
+									style="color: #000000;"></i>
+								<ul class="project-product-option-dropdown">
+									<li>
+										<form class="deleteForm" 
+												th:action="@{/project/delete-product}" method="post">
+											<input name="project_id" th:value="${project.project_id}" type="hidden"/>
+											<button type="submit" data-toggle="modal"
+												data-target="#deleteProjectModal"><span>삭제 하기</span></button>
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="project-product-contents-row02">
+							<div class="project-product-title"><span th:text = "${project.title}"></span></div>
+							<div class="project-product-body">
+								<div class="project-product-body-price">
+									<span>금액</span> <span th:text = "${project.min_price} +' 원~'"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="project-product-add" onclick="location.href='/metahaus/project/forms/descriptions'">
+				<div class="project-product-add-text">
+					<button type="button">
+						<i class="fa-light fa-circle-plus fa-2xl"
+							style="color: #ffffff; font-size: 70px;"></i>
+					</button>
+				</div>
+			</div>
+			<div style=" width:100%; display: flex;flex-direction: column; align-items: center">
+				<ul class="pagination">
+					<li><a th:href="@{/project/my-products(pageNo=${'0'})}">1</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'1'})}">2</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'2'})}">3</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'3'})}">4</a></li>
+					<li><a th:href="@{/project/my-products(pageNo=${'4'})}">5</a></li>
+				</ul>
+			</div>
+		</div>
+		
+	</main>
+
+</body>
+
+</html>
